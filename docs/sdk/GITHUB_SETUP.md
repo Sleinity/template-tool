@@ -36,3 +36,7 @@ therefore never probes those external paths. Local renderer releases still run
 `pnpm test`, the strict diagnostic ZIP checks, and the full hash-gated fidelity
 commands. Portable CI is a distribution and contract gate, not a replacement
 for the private source-fidelity gate.
+
+The private release workflow publishes with its repository-scoped workflow
+token and pushes the Changesets package tags after publication. Those tags bind
+each immutable package version to the exact reviewed source commit.
