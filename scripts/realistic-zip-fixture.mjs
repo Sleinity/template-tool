@@ -47,13 +47,33 @@ export function strictRealisticZipRequested(argv = process.argv.slice(2)) {
   return argv.includes("--realistic-zip-strict");
 }
 
+export function portableTestsRequested(argv = process.argv.slice(2)) {
+  return argv.includes("--portable");
+}
+
 export async function selectLifecycleZipFixture({
   strict = false,
+  forceCompactFallback = false,
   env = process.env,
   defaultPath = DEFAULT_REALISTIC_ZIP_PATH,
 } = {}) {
   const configuredPath = env.TEMPLATE_PACKAGE_LIFECYCLE_ZIP;
   const sourcePath = configuredPath ?? defaultPath;
+
+  if (forceCompactFallback) {
+    if (strict) {
+      throw new Error(
+        "Portable lifecycle mode cannot be combined with strict realistic-ZIP mode.",
+      );
+    }
+    return {
+      kind: "fallback",
+      strict: false,
+      attemptedPath: "not-read-in-portable-mode",
+      reason:
+        "Portable test mode uses only the repository-contained compact lifecycle fixture.",
+    };
+  }
 
   try {
     if (!path.isAbsolute(sourcePath)) {

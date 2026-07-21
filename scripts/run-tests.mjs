@@ -5,9 +5,13 @@ import { pathToFileURL } from "node:url";
 import { build } from "vite";
 import {
   formatLifecycleFixtureReport,
+  portableTestsRequested,
   selectLifecycleZipFixture,
   strictRealisticZipRequested,
 } from "./realistic-zip-fixture.mjs";
+
+const portableTestMode = portableTestsRequested();
+globalThis.__templateToolPortableTests = portableTestMode;
 
 await import("./realistic-zip-fixture.test.mjs");
 await import("./fidelity/fidelity.test.mjs");
@@ -23,6 +27,7 @@ const outputDirectory = await mkdtemp(
 const strictRealisticZip = strictRealisticZipRequested();
 const lifecycleFixture = await selectLifecycleZipFixture({
   strict: strictRealisticZip,
+  forceCompactFallback: portableTestMode,
 });
 console.log(formatLifecycleFixtureReport(lifecycleFixture));
 globalThis.__templatePackageLifecycleFixtureMode = lifecycleFixture.kind;

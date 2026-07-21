@@ -46,16 +46,19 @@ development-era records must be cleared and re-imported from their ZIP package.
 ```bash
 pnpm dev
 pnpm test
+pnpm test:portable
 pnpm test:realistic-zip
 pnpm build
 pnpm fidelity:baseline
 pnpm fidelity:compare
 ```
 
-`pnpm test` remains portable: it uses the realistic lifecycle ZIP when the
-configured/default file is readable and otherwise reports that it used the
-compact fallback fixture. To prove the full lifecycle against a specific real
-package, use strict mode:
+`pnpm test` is the full local authority check. It verifies every registered,
+hash-gated real fidelity ZIP and uses the configured/default realistic lifecycle
+package. `pnpm test:portable` is the cloud-safe check: it deliberately avoids
+external fixture paths and uses only the repository-contained compact lifecycle
+fixture. To prove the full lifecycle against a specific real package, use strict
+mode:
 
 ```bash
 TEMPLATE_PACKAGE_LIFECYCLE_ZIP=/absolute/path/package.zip pnpm test:realistic-zip
