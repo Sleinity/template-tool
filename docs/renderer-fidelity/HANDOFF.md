@@ -24,6 +24,32 @@
   through the public workspace entry points while Studio-only panels remain
   private product code.
 
+### Current-run verification
+
+- Local initial commit: `46daac8` on `main`; 706 committed files and an 11.63
+  MiB Git object store.
+- A fresh clone under `/private/tmp` installed from the frozen lockfile and
+  passed `pnpm ci:portable` without local environment files, generated evidence,
+  external font directories, or the 31 GB fidelity workspace.
+- Portable CI passed unit tests, TypeScript, Studio production build, portable
+  realistic lifecycle, 140-document/284-link verification, all three SDK
+  builds and declaration checks, dependency boundaries, three packed-archive
+  inspections, and the minimal consumer build.
+- The strict local diagnostic ZIP and strict realistic ZIP gates passed before
+  the clean-clone run. `pnpm appearance:baseline` passed all 19 registered
+  fixtures deterministically.
+- Full renderer, scene, and settlement commands generated candidates only and
+  retain the documented historical/unapproved comparison states. Direct
+  pre-Git-backup comparison proves every approved file is byte-identical.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`, scene
+  4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+- Production output is 996.74 kB minified / 290.41 kB gzip JavaScript and
+  68.56 / 12.21 kB CSS. The existing large-chunk warning remains; SDK/test
+  tooling and generated fidelity material do not enter the Studio bundle.
+
 ### Authority and compatibility
 
 - Renderer, canonical scene, settlement, backend decisions, persistence, and

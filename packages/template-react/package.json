@@ -2,6 +2,12 @@
   "name": "@sleinity/template-react",
   "version": "0.1.0",
   "description": "UI-free React renderer integration for TemplatePackage applications.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleinity/template-tool.git",
+    "directory": "packages/template-react"
+  },
   "private": false,
   "type": "module",
   "sideEffects": false,

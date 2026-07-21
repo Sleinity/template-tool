@@ -25,6 +25,20 @@ renderer, scene, and settlement evidence remains in Git; generated candidates,
 captures, update evidence, and local archives are excluded. No reference update
 is authorized by the SDK extraction.
 
+The first local `main` snapshot is commit `46daac8` and contains 706 files in
+an 11.63 MiB Git object store. A fresh clone with no ignored local inputs
+installed from the frozen lockfile and passed the complete portable CI command,
+including Studio build, SDK builds/declarations, archive inspection, boundary
+checks, lifecycle tests, documentation links, and the minimal consumer build.
+Approved evidence is byte-identical to the pre-Git backup: renderer 96 files /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`, scene
+4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+Remote creation, first push, branch rules, collaborator invitation, and the
+first package publication remain external GitHub administration; no package
+has been published yet.
+
 ## Diagnostic authority tightening
 
 Accepted ADR 0073 corrects false Review findings without changing renderer pixels. Ordinary text now selects `text-dom` and cannot inherit primitive fallback reasons. A valid bundled SVG/vector asset may supply `asset-evidence` when source `renderMode` is omitted; explicit unsupported intent and missing/incompatible source remain unchanged.

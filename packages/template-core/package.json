@@ -2,6 +2,12 @@
   "name": "@sleinity/template-core",
   "version": "0.1.0",
   "description": "Framework-neutral TemplatePackage ZIP importer, validator, canonical scene, resolver, and field override API.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleinity/template-tool.git",
+    "directory": "packages/template-core"
+  },
   "private": false,
   "type": "module",
   "sideEffects": false,
