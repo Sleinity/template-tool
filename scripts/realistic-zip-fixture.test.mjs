@@ -6,6 +6,7 @@ import path from "node:path";
 import { strToU8, zipSync } from "fflate";
 import {
   formatLifecycleFixtureReport,
+  portableTestsRequested,
   selectLifecycleZipFixture,
   strictRealisticZipRequested,
 } from "./realistic-zip-fixture.mjs";
@@ -39,6 +40,22 @@ try {
   assert.equal(portableFallback.kind, "fallback");
   assert.match(formatLifecycleFixtureReport(portableFallback), /compact-fallback/);
 
+  const explicitlyPortable = await selectLifecycleZipFixture({
+    forceCompactFallback: true,
+    env: { TEMPLATE_PACKAGE_LIFECYCLE_ZIP: validPath },
+  });
+  assert.equal(explicitlyPortable.kind, "fallback");
+  assert.equal(explicitlyPortable.attemptedPath, "not-read-in-portable-mode");
+  assert.match(explicitlyPortable.reason, /repository-contained compact/);
+
+  await assert.rejects(
+    selectLifecycleZipFixture({
+      strict: true,
+      forceCompactFallback: true,
+    }),
+    /cannot be combined/,
+  );
+
   await assert.rejects(
     selectLifecycleZipFixture({
       strict: true,
@@ -66,6 +83,8 @@ try {
 
   assert.equal(strictRealisticZipRequested(["--realistic-zip-strict"]), true);
   assert.equal(strictRealisticZipRequested([]), false);
+  assert.equal(portableTestsRequested(["--portable"]), true);
+  assert.equal(portableTestsRequested([]), false);
 } finally {
   await rm(directory, { recursive: true, force: true });
 }

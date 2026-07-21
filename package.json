@@ -10,6 +10,7 @@
     "prebuild": "pnpm packages:build",
     "build": "tsc -b && vite build",
     "test": "node scripts/run-tests.mjs",
+    "test:portable": "node scripts/run-tests.mjs --portable",
     "test:realistic-zip": "node scripts/run-tests.mjs --realistic-zip-strict",
     "test:diagnostic-zips": "node scripts/run-diagnostic-zips.mjs",
     "fidelity:baseline": "node scripts/fidelity/cli.mjs baseline",
@@ -66,7 +67,7 @@
     "sdk:verify": "pnpm packages:typecheck && pnpm packages:build && pnpm boundaries:check && pnpm packages:pack:check",
     "example:dev": "pnpm --filter @sleinity/template-minimal-renderer dev",
     "example:build": "pnpm --filter @sleinity/template-minimal-renderer build",
-    "ci:portable": "pnpm repository:audit && pnpm test && pnpm exec tsc -b --pretty false && pnpm build && pnpm test:realistic-zip && pnpm docs:verify && pnpm sdk:verify && pnpm example:build",
+    "ci:portable": "pnpm repository:audit && pnpm test:portable && pnpm exec tsc -b --pretty false && pnpm build && pnpm docs:verify && pnpm sdk:verify && pnpm example:build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm sdk:verify && changeset publish"

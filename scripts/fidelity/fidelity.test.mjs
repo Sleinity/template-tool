@@ -30,6 +30,8 @@ function png(width, height, color = [0, 0, 0, 255]) {
 
 const manifest = loadManifest();
 assert.equal(manifest.fixtures.length, 19, "Registered fixture manifest should contain nineteen exact fixtures.");
+const portableTestMode = globalThis.__templateToolPortableTests === true;
+if (!portableTestMode) {
 for (const fixture of manifest.fixtures) assert.equal(verifyFixture(manifest, fixture).fixture.id, fixture.id, `Fixture hash and metadata should verify for ${fixture.id}.`);
 const cropFixture = manifest.fixtures.find((fixture) => fixture.id === "deal-of-the-week-banner-crop");
 assert.ok(cropFixture?.cropEvidence, "The real CROP fixture must retain exact source evidence.");
@@ -160,6 +162,7 @@ assert.deepEqual(
   [120, 48, 84, 24],
   "The independent-corner fixture must retain its exact corner geometry.",
 );
+}
 
 const duplicate = structuredClone(manifest);
 duplicate.fixtures.push(structuredClone(duplicate.fixtures[0]));

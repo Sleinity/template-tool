@@ -30,3 +30,9 @@ expected paths. Real template ZIPs and managed font binaries are not part of the
 published package. A new machine sets `TEMPLATE_PACKAGE_FIXTURE_DIR`,
 `RENDERER_FIDELITY_FONT_DIR`, and `INTER_TIGHT_FIDELITY_FONT_PATH` only when it
 is authorized to run the private full-fidelity gate.
+
+GitHub Actions runs `pnpm ci:portable`, which selects `pnpm test:portable` and
+therefore never probes those external paths. Local renderer releases still run
+`pnpm test`, the strict diagnostic ZIP checks, and the full hash-gated fidelity
+commands. Portable CI is a distribution and contract gate, not a replacement
+for the private source-fidelity gate.
