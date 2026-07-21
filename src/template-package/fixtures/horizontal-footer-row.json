@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.horizontal-footer",
+  "name": "Horizontal Footer Row",
+  "canvas": { "width": 1080, "height": 1920 },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root", "name": "Frame", "type": "FRAME", "parentId": null, "children": ["footer"],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1920 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1920 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 1920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "footer": {
+      "id": "footer", "name": "Footer Row", "type": "FRAME", "parentId": "root", "children": ["brand", "date"],
+      "bounds": { "absolute": { "x": 0, "y": 1544, "width": 1080, "height": 112 }, "relative": { "x": 0, "y": 1544, "width": 1080, "height": 112 } },
+      "positioning": { "mode": "ABSOLUTE" },
+      "layout": { "mode": "HORIZONTAL", "wrap": false, "gap": 40, "padding": { "top": 40, "right": 40, "bottom": 40, "left": 40 }, "primaryAlignment": "SPACE_BETWEEN", "counterAlignment": "CENTER", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 112 } },
+      "appearance": { "opacity": 1, "fills": [{ "type": "SOLID", "color": { "r": 0.91, "g": 0.95, "b": 0.23, "a": 1 } }], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "brand": {
+      "id": "brand", "name": "Brand", "type": "TEXT", "parentId": "footer", "children": [],
+      "bounds": { "absolute": { "x": 40, "y": 1584, "width": 260, "height": 32 }, "relative": { "x": 0, "y": 0, "width": 260, "height": 32 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": false },
+      "sizing": { "horizontal": { "mode": "HUG" }, "vertical": { "mode": "HUG" } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null },
+      "text": { "content": "Yourbrand", "style": { "fontFamily": "Rethink Sans", "fontSize": 32, "fontWeight": 600, "lineHeight": 32 } }
+    },
+    "date": {
+      "id": "date", "name": "field:text:endDate", "type": "TEXT", "parentId": "footer", "children": [],
+      "bounds": { "absolute": { "x": 840, "y": 1584, "width": 200, "height": 32 }, "relative": { "x": 800, "y": 0, "width": 200, "height": 32 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": false },
+      "sizing": { "horizontal": { "mode": "HUG" }, "vertical": { "mode": "HUG" } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null },
+      "text": { "content": "Ends 04/16", "style": { "fontFamily": "Rethink Sans", "fontSize": 32, "fontWeight": 600, "lineHeight": 32, "textAlignHorizontal": "RIGHT" } }
+    }
+  },
+  "editableFields": [{ "id": "endDate", "type": "text", "nodeId": "date", "property": "text.content", "defaultValue": "Ends 04/16" }],
+  "assets": {},
+  "motion": {
+    "format": "figma-motion",
+    "raw": { "nodes": [{ "node": "footer", "fields": [] }] },
+    "linking": { "status": "pass", "matchedNodeIds": ["footer"], "missingNodeIds": [], "extraPackageNodeIds": ["root", "brand", "date"] }
+  }
+}

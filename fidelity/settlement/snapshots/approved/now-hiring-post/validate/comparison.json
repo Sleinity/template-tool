@@ -1,0 +1,117 @@
+{
+  "comparison": {
+    "equivalentWithinTolerance": true,
+    "fixture": {
+      "id": "now-hiring-post",
+      "zipSha256": "14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b"
+    },
+    "nodeResults": [
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "387:340",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "387:341",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "387:336",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:25",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:26",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:23",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:24",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:27",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:22",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:21",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      }
+    ],
+    "schemaVersion": "settlement-comparison-v1",
+    "summary": {
+      "contract-gap": 0,
+      "current-runtime-compatibility": 0,
+      "dependency-gap": 0,
+      "environment-variance": 0,
+      "exact": 1,
+      "likely-future-renderer-bug": 0,
+      "measurement-gap": 0,
+      "unsupported-preserved": 0,
+      "within-tolerance": 9
+    },
+    "surface": "validate",
+    "tolerances": {
+      "geometry": 0.25,
+      "text": 0.5
+    }
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2570689,
+      "canvas": {
+        "height": 1350,
+        "width": 1000
+      },
+      "embeddedPreviewSha256": "3c05ee9b335a996ebd35f600e32f461f6aea126cd4f0e79ef6bea805ed981970",
+      "filename": "template-package-now-hiring-post.zip",
+      "id": "now-hiring-post",
+      "packageVersion": "1.0",
+      "rootNodeId": "387:340",
+      "zipSha256": "14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "settlement-comparison-snapshot-v1"
+}

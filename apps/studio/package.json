@@ -1,0 +1,16 @@
+{
+  "name": "@sleinity/template-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --dir ../.. dev",
+    "build": "pnpm --dir ../.. build",
+    "test": "pnpm --dir ../.. test"
+  },
+  "dependencies": {
+    "@sleinity/template-browser": "workspace:*",
+    "@sleinity/template-core": "workspace:*",
+    "@sleinity/template-react": "workspace:*"
+  }
+}

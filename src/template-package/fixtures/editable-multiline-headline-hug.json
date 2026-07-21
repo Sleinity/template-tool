@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.multiline-hug",
+  "name": "Editable Multiline Headline",
+  "canvas": { "width": 1080, "height": 1920 },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root", "name": "Frame", "type": "FRAME", "parentId": null, "children": ["copy"],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1920 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1920 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "VERTICAL", "wrap": false, "gap": 24, "padding": { "top": 80, "right": 80, "bottom": 80, "left": 80 }, "primaryAlignment": "MAX", "counterAlignment": "STRETCH", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 1920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "copy": {
+      "id": "copy", "name": "field:textarea:headline", "type": "TEXT", "parentId": "root", "children": [],
+      "bounds": { "absolute": { "x": 80, "y": 1530, "width": 920, "height": 230 }, "relative": { "x": 0, "y": 1450, "width": 920, "height": 230 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": false },
+      "sizing": { "horizontal": { "mode": "FILL" }, "vertical": { "mode": "HUG", "min": 104, "max": 420 } },
+      "appearance": { "opacity": 1, "fills": [{ "type": "SOLID", "color": { "r": 0.12, "g": 0.18, "b": 0.19, "a": 1 } }], "strokes": [], "effects": [], "borderRadius": null },
+      "text": { "content": "A headline\non two lines.", "style": { "fontFamily": "Rethink Sans", "fontSize": 96, "fontWeight": 600, "lineHeight": 110, "textAutoResize": "HEIGHT" } }
+    }
+  },
+  "editableFields": [{ "id": "headline", "type": "textarea", "nodeId": "copy", "property": "text.content", "defaultValue": "A headline\non two lines.", "label": "Headline" }],
+  "assets": {}
+}

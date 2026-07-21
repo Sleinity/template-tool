@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2342981,
+      "canvas": {
+        "height": 1080,
+        "width": 1920
+      },
+      "embeddedPreviewSha256": "af060eebfd42fbb544b675f9d5ae1a4fef06d09e9defb5abc1502dffcdd89954",
+      "filename": "template-package-deal-of-the-week-banner.zip",
+      "id": "deal-of-the-week-banner",
+      "packageVersion": "1.0",
+      "rootNodeId": "346:34",
+      "zipSha256": "b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b"
+    },
+    "scenarioId": null,
+    "surface": "editor"
+  },
+  "schemaVersion": "settlement-trace-snapshot-v1",
+  "trace": {
+    "fixture": {
+      "id": "deal-of-the-week-banner",
+      "zipSha256": "b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b"
+    },
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 36,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodes": [
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:34",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:35",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:36",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:37",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:38",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:39",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:40",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:41",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:42",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:43",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:44",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:45",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:46",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:47",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:48",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:49",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:50",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:51",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:52",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:53",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:54",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:55",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "346:56",
+        "unresolved": []
+      }
+    ],
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "settlement-trace-v1",
+    "stable": true,
+    "surface": "editor",
+    "unresolvedDependencies": []
+  }
+}

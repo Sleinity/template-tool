@@ -1,0 +1,110 @@
+{
+  "comparison": {
+    "equivalentWithinTolerance": true,
+    "fixture": {
+      "id": "optimized-for-template-export",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "nodeResults": [
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "378:19",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:20",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:27",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:22",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:21",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:25",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:26",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:23",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "378:24",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      }
+    ],
+    "schemaVersion": "settlement-comparison-v1",
+    "summary": {
+      "contract-gap": 0,
+      "current-runtime-compatibility": 0,
+      "dependency-gap": 0,
+      "environment-variance": 0,
+      "exact": 1,
+      "likely-future-renderer-bug": 0,
+      "measurement-gap": 0,
+      "unsupported-preserved": 0,
+      "within-tolerance": 8
+    },
+    "surface": "validate",
+    "tolerances": {
+      "geometry": 0.25,
+      "text": 0.5
+    }
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2509168,
+      "canvas": {
+        "height": 1350,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11",
+      "filename": "template-package-optimized-for-template-export.zip",
+      "id": "optimized-for-template-export",
+      "packageVersion": "1.0",
+      "rootNodeId": "378:19",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "settlement-comparison-snapshot-v1"
+}

@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2570689,
+      "canvas": {
+        "height": 1350,
+        "width": 1000
+      },
+      "embeddedPreviewSha256": "3c05ee9b335a996ebd35f600e32f461f6aea126cd4f0e79ef6bea805ed981970",
+      "filename": "template-package-now-hiring-post.zip",
+      "id": "now-hiring-post",
+      "packageVersion": "1.0",
+      "rootNodeId": "387:340",
+      "zipSha256": "14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b"
+    },
+    "scenarioId": null,
+    "surface": "png-export"
+  },
+  "schemaVersion": "settlement-trace-snapshot-v1",
+  "trace": {
+    "fixture": {
+      "id": "now-hiring-post",
+      "zipSha256": "14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b"
+    },
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 19,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodes": [
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "387:340",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "387:341",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "387:336",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:25",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:26",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:23",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:24",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:27",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:22",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:21",
+        "unresolved": []
+      }
+    ],
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "settlement-trace-v1",
+    "stable": true,
+    "surface": "png-export",
+    "unresolvedDependencies": []
+  }
+}

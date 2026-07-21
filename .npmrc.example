@@ -1,0 +1,6 @@
+@sleinity:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+always-auth=true
+
+# Copy to a user-level ~/.npmrc or inject NODE_AUTH_TOKEN in CI. Never commit a
+# personal access token or a real project .npmrc.

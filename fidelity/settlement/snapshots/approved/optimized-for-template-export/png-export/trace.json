@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2509168,
+      "canvas": {
+        "height": 1350,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11",
+      "filename": "template-package-optimized-for-template-export.zip",
+      "id": "optimized-for-template-export",
+      "packageVersion": "1.0",
+      "rootNodeId": "378:19",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "scenarioId": null,
+    "surface": "png-export"
+  },
+  "schemaVersion": "settlement-trace-snapshot-v1",
+  "trace": {
+    "fixture": {
+      "id": "optimized-for-template-export",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 18,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodes": [
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:19",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:20",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:27",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:22",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:21",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:25",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:26",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:23",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "378:24",
+        "unresolved": []
+      }
+    ],
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "settlement-trace-v1",
+    "stable": true,
+    "surface": "png-export",
+    "unresolvedDependencies": []
+  }
+}

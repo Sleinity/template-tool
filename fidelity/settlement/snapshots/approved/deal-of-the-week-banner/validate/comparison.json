@@ -1,0 +1,208 @@
+{
+  "comparison": {
+    "equivalentWithinTolerance": true,
+    "fixture": {
+      "id": "deal-of-the-week-banner",
+      "zipSha256": "b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b"
+    },
+    "nodeResults": [
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "346:34",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "346:35",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "346:36",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:37",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:38",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:39",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:40",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:41",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:42",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:43",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:44",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "346:45",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:46",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:47",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:48",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:49",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:50",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:51",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:52",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:53",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:54",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:55",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "346:56",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      }
+    ],
+    "schemaVersion": "settlement-comparison-v1",
+    "summary": {
+      "contract-gap": 0,
+      "current-runtime-compatibility": 0,
+      "dependency-gap": 0,
+      "environment-variance": 0,
+      "exact": 4,
+      "likely-future-renderer-bug": 0,
+      "measurement-gap": 0,
+      "unsupported-preserved": 0,
+      "within-tolerance": 19
+    },
+    "surface": "validate",
+    "tolerances": {
+      "geometry": 0.25,
+      "text": 0.5
+    }
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2342981,
+      "canvas": {
+        "height": 1080,
+        "width": 1920
+      },
+      "embeddedPreviewSha256": "af060eebfd42fbb544b675f9d5ae1a4fef06d09e9defb5abc1502dffcdd89954",
+      "filename": "template-package-deal-of-the-week-banner.zip",
+      "id": "deal-of-the-week-banner",
+      "packageVersion": "1.0",
+      "rootNodeId": "346:34",
+      "zipSha256": "b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "settlement-comparison-snapshot-v1"
+}

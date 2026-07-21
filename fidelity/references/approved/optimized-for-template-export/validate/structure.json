@@ -1,0 +1,987 @@
+{
+  "assetReadiness": {
+    "backgrounds": [
+      {
+        "ready": true,
+        "url": "blob:http://127.0.0.1:5174/b006adba-0744-498a-87f2-47613d437521"
+      }
+    ],
+    "images": []
+  },
+  "diagnostics": [
+    {
+      "code": "resolved-image-render-mode",
+      "message": "Applied image render mode object-fit-cover.",
+      "nodeId": "378:20",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 96px gap and MAX/CENTER alignment.",
+      "nodeId": "378:27",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Geist Mono 500 normal has no managed font asset attached.",
+      "nodeId": "378:22",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "378:22",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Geist Mono 500 normal has no managed font asset attached.",
+      "nodeId": "378:21",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied bottom text-box alignment.",
+      "nodeId": "378:21",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and MIN/MIN alignment.",
+      "nodeId": "378:25",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Inter Tight 700 normal has no managed font asset attached.",
+      "nodeId": "378:26",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "378:26",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and MAX/MAX alignment.",
+      "nodeId": "378:23",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Inter Tight 700 normal has no managed font asset attached.",
+      "nodeId": "378:24",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied bottom text-box alignment.",
+      "nodeId": "378:24",
+      "severity": "info"
+    }
+  ],
+  "fixtureHashes": {
+    "embeddedPreviewSha256": "04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11",
+    "modelSha256": "3b7e0f7090108a9f81c6bb168320c6a707d683461aa80a74d23745c011cefe6d",
+    "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+  },
+  "fixtureId": "optimized-for-template-export",
+  "fontReadiness": {
+    "fonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      }
+    ],
+    "status": "loaded"
+  },
+  "nodeCount": 9,
+  "nodes": [
+    {
+      "bounds": {
+        "height": 1350,
+        "width": 1080,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "378:19",
+        "data-package-node-name": "optimized-for-template-export",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1350,
+          "width": 1080,
+          "x": -20022,
+          "y": -16889
+        },
+        "relative": {
+          "height": 1350,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "378:19",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "optimized-for-template-export",
+      "order": 0,
+      "parentId": null,
+      "positioningRole": "ROOT",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1350,
+          "width": 1080,
+          "x": -20022,
+          "y": -16889
+        },
+        "relative": {
+          "height": 1350,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 800,
+        "width": 999.9999,
+        "x": 40.0001,
+        "y": 40.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-asset-source": "image",
+        "data-package-image-asset": "asset:image:ceab5479",
+        "data-package-image-crop-mode": "figmaImageTransform",
+        "data-package-image-intrinsic-size": "1125x750",
+        "data-package-image-object-position": "50.00000149011612% 50%",
+        "data-package-image-render-mode": "object-fit-cover",
+        "data-package-node-id": "378:20",
+        "data-package-node-name": "product-image",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-render-strategy": "asset",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-image-render-mode",
+          "message": "Applied image render mode object-fit-cover.",
+          "nodeId": "378:20",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 800,
+          "width": 1000,
+          "x": -19982,
+          "y": -16849
+        },
+        "relative": {
+          "height": 800,
+          "width": 1000,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "fallbackReason": "image asset missing",
+      "font": null,
+      "id": "378:20",
+      "imageAssetId": "asset:image:ceab5479",
+      "imageIntrinsicDimensions": {
+        "height": 750,
+        "width": 1125
+      },
+      "imagePlacement": {
+        "cropMode": "figmaImageTransform",
+        "fit": "cover",
+        "focalPoint": {
+          "x": 0.5000000149011612,
+          "y": 0.5
+        },
+        "objectPosition": "50.00000149011612% 50%",
+        "renderMode": "object-fit-cover",
+        "scaleMode": "FILL",
+        "transform": [
+          2.076315781820225,
+          0,
+          0,
+          1,
+          -0.5381579218496286,
+          0
+        ],
+        "zoom": 1.7302631515168543
+      },
+      "imageSlot": {
+        "height": 800,
+        "width": 999.9999,
+        "x": 40.0001,
+        "y": 40.0001
+      },
+      "layoutMode": "NONE",
+      "name": "product-image",
+      "order": 1,
+      "parentId": "378:19",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "fallback",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 800,
+          "width": 1000,
+          "x": -19982,
+          "y": -16849
+        },
+        "relative": {
+          "height": 800,
+          "width": 1000,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 322.9999,
+        "width": 999.9999,
+        "x": 40.0001,
+        "y": 987.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "378:27",
+        "data-package-node-name": "content-section",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 96px gap and MAX/CENTER alignment.",
+          "nodeId": "378:27",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 323,
+          "width": 1000,
+          "x": -19982,
+          "y": -15902
+        },
+        "relative": {
+          "height": 323,
+          "width": 1000,
+          "x": 40,
+          "y": 987
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "378:27",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "content-section",
+      "order": 2,
+      "parentId": "378:19",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 323,
+          "width": 1000,
+          "x": -19982,
+          "y": -15902
+        },
+        "relative": {
+          "height": 323,
+          "width": 1000,
+          "x": 40,
+          "y": 987
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 139.9998,
+        "width": 999.9999,
+        "x": 40.0001,
+        "y": 987.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Geist Mono",
+        "data-package-font-postscript": "GeistMono-Medium",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "378:22",
+        "data-package-node-name": "body-copy",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Geist Mono 500 normal has no managed font asset attached.",
+          "nodeId": "378:22",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "378:22",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 140,
+          "width": 1000,
+          "x": -19982,
+          "y": -15902
+        },
+        "relative": {
+          "height": 140,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Geist Mono\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Geist Mono",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 500
+      },
+      "id": "378:22",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "body-copy",
+      "order": 3,
+      "parentId": "378:27",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 140,
+          "width": 1000,
+          "x": -19982,
+          "y": -15902
+        },
+        "relative": {
+          "height": 140,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "67db0c9d127c8d7aec30fe8553f5408d9330a8cffe58dbb6e3e6055e61e0acf3",
+      "textMeasurement": {
+        "height": 139.9998,
+        "scrollHeight": 149,
+        "scrollWidth": 1000,
+        "width": 999.9999
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 86.9999,
+        "width": 999.9999,
+        "x": 40.0001,
+        "y": 1223
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Geist Mono",
+        "data-package-font-postscript": "GeistMono-Medium",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "378:21",
+        "data-package-node-name": "cta",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Geist Mono 500 normal has no managed font asset attached.",
+          "nodeId": "378:21",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied bottom text-box alignment.",
+          "nodeId": "378:21",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 87,
+          "width": 1000,
+          "x": -19982,
+          "y": -15666
+        },
+        "relative": {
+          "height": 87,
+          "width": 1000,
+          "x": 0,
+          "y": 236
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Geist Mono\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Geist Mono",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 500
+      },
+      "id": "378:21",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "cta",
+      "order": 4,
+      "parentId": "378:27",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 87,
+          "width": 1000,
+          "x": -19982,
+          "y": -15666
+        },
+        "relative": {
+          "height": 87,
+          "width": 1000,
+          "x": 0,
+          "y": 236
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "437491b7d626440330fe24b11bd0fa476ba4a79e1758dd852704751a6b4f0f93",
+      "textMeasurement": {
+        "height": 86.9999,
+        "scrollHeight": 87,
+        "scrollWidth": 1000,
+        "width": 999.9999
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 164,
+        "width": 431,
+        "x": 16,
+        "y": 16
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-node-id": "378:25",
+        "data-package-node-name": "headline-now-badge",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and MIN/MIN alignment.",
+          "nodeId": "378:25",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 164,
+          "width": 431,
+          "x": -20006,
+          "y": -16873
+        },
+        "relative": {
+          "height": 164,
+          "width": 431,
+          "x": 16,
+          "y": 16
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "378:25",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "headline-now-badge",
+      "order": 5,
+      "parentId": "378:19",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 164,
+          "width": 431,
+          "x": -20006,
+          "y": -16873
+        },
+        "relative": {
+          "height": 164,
+          "width": 431,
+          "x": 16,
+          "y": 16
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 116,
+        "width": 383,
+        "x": 40.0001,
+        "y": 40.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Inter Tight",
+        "data-package-font-postscript": "InterTight-Bold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "378:26",
+        "data-package-node-name": "headline-now",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Inter Tight 700 normal has no managed font asset attached.",
+          "nodeId": "378:26",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "378:26",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 116,
+          "width": 383,
+          "x": -19982,
+          "y": -16849
+        },
+        "relative": {
+          "height": 116,
+          "width": 383,
+          "x": 24,
+          "y": 24
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Inter Tight\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Inter Tight",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 700
+      },
+      "id": "378:26",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "headline-now",
+      "order": 6,
+      "parentId": "378:25",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 116,
+          "width": 383,
+          "x": -19982,
+          "y": -16849
+        },
+        "relative": {
+          "height": 116,
+          "width": 383,
+          "x": 24,
+          "y": 24
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "97bfc0d9913d2b682d4caa1c254298baec1acf51bc0d03a0e02da0cb97297afa",
+      "textMeasurement": {
+        "height": 116,
+        "scrollHeight": 155,
+        "scrollWidth": 383,
+        "width": 383
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 163.9998,
+        "width": 554,
+        "x": 510,
+        "y": 700.0002
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-node-id": "378:23",
+        "data-package-node-name": "headline-hiring-badge",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and MAX/MAX alignment.",
+          "nodeId": "378:23",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 164,
+          "width": 554,
+          "x": -19512,
+          "y": -16189
+        },
+        "relative": {
+          "height": 164,
+          "width": 554,
+          "x": 510,
+          "y": 700
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "378:23",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "headline-hiring-badge",
+      "order": 7,
+      "parentId": "378:19",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 164,
+          "width": 554,
+          "x": -19512,
+          "y": -16189
+        },
+        "relative": {
+          "height": 164,
+          "width": 554,
+          "x": 510,
+          "y": 700
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 115.9998,
+        "width": 506,
+        "x": 534,
+        "y": 724.0003
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Inter Tight",
+        "data-package-font-postscript": "InterTight-Bold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "378:24",
+        "data-package-node-name": "headline-hiring",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Inter Tight 700 normal has no managed font asset attached.",
+          "nodeId": "378:24",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied bottom text-box alignment.",
+          "nodeId": "378:24",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 116,
+          "width": 506,
+          "x": -19488,
+          "y": -16165
+        },
+        "relative": {
+          "height": 116,
+          "width": 506,
+          "x": 24,
+          "y": 24
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Inter Tight\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Inter Tight",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 700
+      },
+      "id": "378:24",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "headline-hiring",
+      "order": 8,
+      "parentId": "378:23",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 116,
+          "width": 506,
+          "x": -19488,
+          "y": -16165
+        },
+        "relative": {
+          "height": 116,
+          "width": 506,
+          "x": 24,
+          "y": 24
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "60e9b7cc09777cab3d8b2578aba1d38f1fb746dd28d93adf79d4f087ff40abec",
+      "textMeasurement": {
+        "height": 115.9998,
+        "scrollHeight": 137,
+        "scrollWidth": 506,
+        "width": 506
+      },
+      "transform": null,
+      "type": "TEXT"
+    }
+  ],
+  "orderedNodeIds": [
+    "378:19",
+    "378:20",
+    "378:27",
+    "378:22",
+    "378:21",
+    "378:25",
+    "378:26",
+    "378:23",
+    "378:24"
+  ],
+  "packageVersion": "1.0",
+  "rendererFallbacks": [
+    {
+      "id": "378:20",
+      "reason": "image asset missing"
+    }
+  ],
+  "rendererMode": "static",
+  "resolvedTreeVersion": "resolved-render-tree-v1",
+  "rootDimensions": {
+    "background": "rgba(125, 136, 29, 1)",
+    "height": 1350,
+    "width": 1080
+  },
+  "rootNodeId": "378:19",
+  "route": "/templates/new",
+  "schemaVersion": 1,
+  "surface": "validate",
+  "warnings": [
+    {
+      "code": "resolved-image-asset-missing",
+      "feature": "image",
+      "message": "Image asset \"asset:image:ceab5479\" has no renderable source.",
+      "nodeId": "378:20"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Geist Mono 500 normal has no managed font asset attached.",
+      "nodeId": "378:22"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Geist Mono 500 normal has no managed font asset attached.",
+      "nodeId": "378:21"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Inter Tight 700 normal has no managed font asset attached.",
+      "nodeId": "378:26"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Inter Tight 700 normal has no managed font asset attached.",
+      "nodeId": "378:24"
+    }
+  ]
+}

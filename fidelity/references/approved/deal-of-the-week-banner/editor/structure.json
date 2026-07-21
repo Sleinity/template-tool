@@ -1,0 +1,2335 @@
+{
+  "assetReadiness": {
+    "backgrounds": [
+      {
+        "ready": true,
+        "url": "blob:http://127.0.0.1:5174/b099a031-f519-4621-be4d-40abdfc59f33"
+      },
+      {
+        "ready": true,
+        "url": "blob:http://127.0.0.1:5174/b099a031-f519-4621-be4d-40abdfc59f33"
+      },
+      {
+        "ready": true,
+        "url": "blob:http://127.0.0.1:5174/b099a031-f519-4621-be4d-40abdfc59f33"
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "height": 32,
+        "ready": true,
+        "src": "blob:http://127.0.0.1:5174/2e30f35f-1677-410d-8aba-4d5ad8f05630",
+        "width": 126
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 0px gap and MIN/MIN alignment.",
+      "nodeId": "346:34",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 16px gap and CENTER/CENTER alignment.",
+      "nodeId": "346:37",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-image-render-mode",
+      "message": "Applied image render mode object-fit-cover.",
+      "nodeId": "346:38",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+      "nodeId": "346:39",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:40",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "346:40",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-image-render-mode",
+      "message": "Applied image render mode object-fit-cover.",
+      "nodeId": "346:41",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+      "nodeId": "346:42",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:43",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "346:43",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-image-render-mode",
+      "message": "Applied image render mode object-fit-cover.",
+      "nodeId": "346:44",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 0px gap and MIN/MIN alignment.",
+      "nodeId": "346:45",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and MIN/MIN alignment.",
+      "nodeId": "346:46",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:47",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied top text-box alignment.",
+      "nodeId": "346:47",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 0px gap and MAX/MAX alignment.",
+      "nodeId": "346:48",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 334px gap and CENTER/MAX alignment.",
+      "nodeId": "346:49",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+      "nodeId": "346:50",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:51",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "346:51",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 10px gap and MIN/MIN alignment.",
+      "nodeId": "346:52",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 64px gap and MIN/MAX alignment.",
+      "nodeId": "346:53",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-svg-viewbox-applied",
+      "message": "Applied SVG viewBox 0 0 126 32 with xMidYMid meet.",
+      "nodeId": "346:54",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied horizontal Auto Layout with 0px gap and MAX/MAX alignment.",
+      "nodeId": "346:55",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-font-missing",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:56",
+      "severity": "warning"
+    },
+    {
+      "code": "resolved-text-vertical-alignment",
+      "message": "Applied center text-box alignment.",
+      "nodeId": "346:56",
+      "severity": "info"
+    }
+  ],
+  "fixtureHashes": {
+    "embeddedPreviewSha256": "af060eebfd42fbb544b675f9d5ae1a4fef06d09e9defb5abc1502dffcdd89954",
+    "modelSha256": "7aee19dc2a917a6efb863c26d364a58ac317a4624aa0f1e565a63dde6693214d",
+    "zipSha256": "b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b"
+  },
+  "fixtureId": "deal-of-the-week-banner",
+  "fontReadiness": {
+    "fonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      }
+    ],
+    "status": "loaded"
+  },
+  "nodeCount": 23,
+  "nodes": [
+    {
+      "bounds": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-node-id": "346:34",
+        "data-package-node-name": "deal-of-the-week-banner",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 0px gap and MIN/MIN alignment.",
+          "nodeId": "346:34",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1920,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:34",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "deal-of-the-week-banner",
+      "order": 0,
+      "parentId": null,
+      "positioningRole": "ROOT",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1920,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1920,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 1080,
+        "width": 1080,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "346:35",
+        "data-package-node-name": "mask-group",
+        "data-package-node-type": "GROUP",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1080,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:35",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "mask-group",
+      "order": 1,
+      "parentId": "346:34",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1080,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "GROUP"
+    },
+    {
+      "bounds": {
+        "height": 1080,
+        "width": 1080,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-constraint-horizontal": "LEFT",
+        "data-package-constraint-horizontal-normalized": "LEFT",
+        "data-package-constraint-horizontal-offsets": "0,0",
+        "data-package-constraint-horizontal-raw": "MIN",
+        "data-package-constraint-resolution": "constraints",
+        "data-package-constraint-vertical": "TOP",
+        "data-package-constraint-vertical-normalized": "TOP",
+        "data-package-constraint-vertical-offsets": "0,0",
+        "data-package-constraint-vertical-raw": "MIN",
+        "data-package-node-id": "346:36",
+        "data-package-node-name": "background",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1080,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:36",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "background",
+      "order": 2,
+      "parentId": "346:35",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 1080,
+          "x": -13674,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 1407.9998,
+        "width": 640,
+        "x": 220,
+        "y": -164
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-constraint-horizontal": "CENTER",
+        "data-package-constraint-horizontal-normalized": "CENTER",
+        "data-package-constraint-horizontal-offsets": "220,220",
+        "data-package-constraint-horizontal-raw": "CENTER",
+        "data-package-constraint-resolution": "constraints",
+        "data-package-constraint-vertical": "CENTER",
+        "data-package-constraint-vertical-normalized": "CENTER",
+        "data-package-constraint-vertical-offsets": "-164,-164",
+        "data-package-constraint-vertical-raw": "CENTER",
+        "data-package-node-id": "346:37",
+        "data-package-node-name": "product-card",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 16px gap and CENTER/CENTER alignment.",
+          "nodeId": "346:37",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1408,
+          "width": 640,
+          "x": -13454,
+          "y": -16577
+        },
+        "relative": {
+          "height": 1408,
+          "width": 640,
+          "x": 220,
+          "y": -164
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:37",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "product-card",
+      "order": 3,
+      "parentId": "346:35",
+      "positioningRole": "ABSOLUTE",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1408,
+          "width": 640,
+          "x": -13454,
+          "y": -16577
+        },
+        "relative": {
+          "height": 1408,
+          "width": 640,
+          "x": 220,
+          "y": -164
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 240,
+        "width": 240,
+        "x": 420,
+        "y": -164
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-asset-source": "image",
+        "data-package-image-asset": "asset:image:ceab5479",
+        "data-package-image-crop-mode": "figmaImageTransform",
+        "data-package-image-intrinsic-size": "1125x750",
+        "data-package-image-object-position": "50.00000149011612% 50%",
+        "data-package-image-render-mode": "object-fit-cover",
+        "data-package-node-id": "346:38",
+        "data-package-node-name": "decorative-image-top",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-render-strategy": "asset",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-image-render-mode",
+          "message": "Applied image render mode object-fit-cover.",
+          "nodeId": "346:38",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -13254,
+          "y": -16577
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 200,
+          "y": 0
+        }
+      },
+      "fallbackReason": "image asset missing",
+      "font": null,
+      "id": "346:38",
+      "imageAssetId": "asset:image:ceab5479",
+      "imageIntrinsicDimensions": {
+        "height": 750,
+        "width": 1125
+      },
+      "imagePlacement": {
+        "cropMode": "figmaImageTransform",
+        "fit": "cover",
+        "focalPoint": {
+          "x": 0.5000000149011612,
+          "y": 0.5
+        },
+        "objectPosition": "50.00000149011612% 50%",
+        "renderMode": "object-fit-cover",
+        "scaleMode": "FILL",
+        "transform": [
+          2.076315781820225,
+          0,
+          0,
+          1,
+          -0.5381579218496286,
+          0
+        ],
+        "zoom": 1.3842105212134832
+      },
+      "imageSlot": {
+        "height": 240,
+        "width": 240,
+        "x": 420,
+        "y": -164
+      },
+      "layoutMode": "NONE",
+      "name": "decorative-image-top",
+      "order": 4,
+      "parentId": "346:37",
+      "positioningRole": "FLOW",
+      "renderStrategy": "fallback",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -13254,
+          "y": -16577
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 200,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 111.9999,
+        "width": 431.8438,
+        "x": 324.0781,
+        "y": 92
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "346:39",
+        "data-package-node-name": "badge-top",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+          "nodeId": "346:39",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 433,
+          "x": -13350.5,
+          "y": -16321
+        },
+        "relative": {
+          "height": 112,
+          "width": 433,
+          "x": 103.5,
+          "y": 256
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:39",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "badge-top",
+      "order": 5,
+      "parentId": "346:37",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 433,
+          "x": -13350.5,
+          "y": -16321
+        },
+        "relative": {
+          "height": 112,
+          "width": 433,
+          "x": 103.5,
+          "y": 256
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 47.9999,
+        "width": 335.8438,
+        "x": 372.0781,
+        "y": 124
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-field-marker": "field:text:title",
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Rethink Sans",
+        "data-package-font-postscript": "RethinkSans-SemiBold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "346:40",
+        "data-package-node-name": "field:text:title",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Rethink Sans 600 normal has no managed font asset attached.",
+          "nodeId": "346:40",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "346:40",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 337,
+          "x": -13302.5,
+          "y": -16289
+        },
+        "relative": {
+          "height": 48,
+          "width": 337,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Rethink Sans\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Rethink Sans",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 600
+      },
+      "id": "346:40",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "field:text:title",
+      "order": 6,
+      "parentId": "346:39",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 337,
+          "x": -13302.5,
+          "y": -16289
+        },
+        "relative": {
+          "height": 48,
+          "width": 337,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 1,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "91b398ce1acd9eee5c47c9147227b95fb93cec4ef89d4f6ff75fe199bf950c3e",
+      "textMeasurement": {
+        "height": 47.9999,
+        "scrollHeight": 55,
+        "scrollWidth": 336,
+        "width": 335.8438
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 639.9999,
+        "width": 640,
+        "x": 220,
+        "y": 219.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-asset-source": "image",
+        "data-package-image-asset": "asset:image:ceab5479",
+        "data-package-image-crop-mode": "figmaImageTransform",
+        "data-package-image-intrinsic-size": "1125x750",
+        "data-package-image-object-position": "50.00000149011612% 50%",
+        "data-package-image-render-mode": "object-fit-cover",
+        "data-package-node-id": "346:41",
+        "data-package-node-name": "product-image",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-render-strategy": "asset",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-image-render-mode",
+          "message": "Applied image render mode object-fit-cover.",
+          "nodeId": "346:41",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 640,
+          "width": 640,
+          "x": -13454,
+          "y": -16193
+        },
+        "relative": {
+          "height": 640,
+          "width": 640,
+          "x": 0,
+          "y": 384
+        }
+      },
+      "fallbackReason": "image asset missing",
+      "font": null,
+      "id": "346:41",
+      "imageAssetId": "asset:image:ceab5479",
+      "imageIntrinsicDimensions": {
+        "height": 750,
+        "width": 1125
+      },
+      "imagePlacement": {
+        "cropMode": "figmaImageTransform",
+        "fit": "cover",
+        "focalPoint": {
+          "x": 0.5000000149011612,
+          "y": 0.5
+        },
+        "objectPosition": "50.00000149011612% 50%",
+        "renderMode": "object-fit-cover",
+        "scaleMode": "FILL",
+        "transform": [
+          2.076315781820225,
+          0,
+          0,
+          1,
+          -0.5381579218496286,
+          0
+        ],
+        "zoom": 1.3842105212134832
+      },
+      "imageSlot": {
+        "height": 639.9999,
+        "width": 640,
+        "x": 220,
+        "y": 219.9999
+      },
+      "layoutMode": "NONE",
+      "name": "product-image",
+      "order": 7,
+      "parentId": "346:37",
+      "positioningRole": "FLOW",
+      "renderStrategy": "fallback",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 640,
+          "width": 640,
+          "x": -13454,
+          "y": -16193
+        },
+        "relative": {
+          "height": 640,
+          "width": 640,
+          "x": 0,
+          "y": 384
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 111.9999,
+        "width": 500.2031,
+        "x": 289.8906,
+        "y": 876.0001
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "346:42",
+        "data-package-node-name": "badge-bottom",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+          "nodeId": "346:42",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 502,
+          "x": -13385,
+          "y": -15537
+        },
+        "relative": {
+          "height": 112,
+          "width": 502,
+          "x": 69,
+          "y": 1040
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:42",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "badge-bottom",
+      "order": 8,
+      "parentId": "346:37",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 502,
+          "x": -13385,
+          "y": -15537
+        },
+        "relative": {
+          "height": 112,
+          "width": 502,
+          "x": 69,
+          "y": 1040
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 47.9999,
+        "width": 404.2031,
+        "x": 337.8907,
+        "y": 908.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-field-marker": "field:text:subtitle",
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Rethink Sans",
+        "data-package-font-postscript": "RethinkSans-SemiBold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "346:43",
+        "data-package-node-name": "field:text:subtitle",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Rethink Sans 600 normal has no managed font asset attached.",
+          "nodeId": "346:43",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "346:43",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 406,
+          "x": -13337,
+          "y": -15505
+        },
+        "relative": {
+          "height": 48,
+          "width": 406,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Rethink Sans\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Rethink Sans",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 600
+      },
+      "id": "346:43",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "field:text:subtitle",
+      "order": 9,
+      "parentId": "346:42",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 406,
+          "x": -13337,
+          "y": -15505
+        },
+        "relative": {
+          "height": 48,
+          "width": 406,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 1,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "a0a76a48afac27a91054ca8275595397dfda23d4c20a20012200869dc5c4a102",
+      "textMeasurement": {
+        "height": 47.9999,
+        "scrollHeight": 55,
+        "scrollWidth": 404,
+        "width": 404.2031
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 239.9998,
+        "width": 240,
+        "x": 420,
+        "y": 1004
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-asset-source": "image",
+        "data-package-image-asset": "asset:image:ceab5479",
+        "data-package-image-crop-mode": "figmaImageTransform",
+        "data-package-image-intrinsic-size": "1125x750",
+        "data-package-image-object-position": "50.00000149011612% 50%",
+        "data-package-image-render-mode": "object-fit-cover",
+        "data-package-node-id": "346:44",
+        "data-package-node-name": "decorative-image-bottom",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-render-strategy": "asset",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-image-render-mode",
+          "message": "Applied image render mode object-fit-cover.",
+          "nodeId": "346:44",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -13254,
+          "y": -15409
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 200,
+          "y": 1168
+        }
+      },
+      "fallbackReason": "image asset missing",
+      "font": null,
+      "id": "346:44",
+      "imageAssetId": "asset:image:ceab5479",
+      "imageIntrinsicDimensions": {
+        "height": 750,
+        "width": 1125
+      },
+      "imagePlacement": {
+        "cropMode": "figmaImageTransform",
+        "fit": "cover",
+        "focalPoint": {
+          "x": 0.5000000149011612,
+          "y": 0.5
+        },
+        "objectPosition": "50.00000149011612% 50%",
+        "renderMode": "object-fit-cover",
+        "scaleMode": "FILL",
+        "transform": [
+          2.076315781820225,
+          0,
+          0,
+          1,
+          -0.5381579218496286,
+          0
+        ],
+        "zoom": 1.3842105212134832
+      },
+      "imageSlot": {
+        "height": 239.9998,
+        "width": 240,
+        "x": 420,
+        "y": 1004
+      },
+      "layoutMode": "NONE",
+      "name": "decorative-image-bottom",
+      "order": 10,
+      "parentId": "346:37",
+      "positioningRole": "FLOW",
+      "renderStrategy": "fallback",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -13254,
+          "y": -15409
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 200,
+          "y": 1168
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 1080,
+        "width": 840,
+        "x": 1080,
+        "y": 0
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "346:45",
+        "data-package-node-name": "content-section",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 0px gap and MIN/MIN alignment.",
+          "nodeId": "346:45",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 840,
+          "x": -12594,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 840,
+          "x": 1080,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:45",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "content-section",
+      "order": 11,
+      "parentId": "346:34",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1080,
+          "width": 840,
+          "x": -12594,
+          "y": -16413
+        },
+        "relative": {
+          "height": 1080,
+          "width": 840,
+          "x": 1080,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "FIXED"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 776,
+        "width": 840,
+        "x": 1080,
+        "y": 0
+      },
+      "clipOrMaskStrategy": "live-containment",
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-clip-source": "live-containment",
+        "data-package-clips-content": "true",
+        "data-package-live-resize-containment": "clip",
+        "data-package-node-id": "346:46",
+        "data-package-node-name": "headline-section",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and MIN/MIN alignment.",
+          "nodeId": "346:46",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 776,
+          "width": 840,
+          "x": -12594,
+          "y": -16413
+        },
+        "relative": {
+          "height": 776,
+          "width": 840,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:46",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "headline-section",
+      "order": 12,
+      "parentId": "346:45",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 776,
+          "width": 840,
+          "x": -12594,
+          "y": -16413
+        },
+        "relative": {
+          "height": 776,
+          "width": 840,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 1,
+        "childHorizontal": "FIXED",
+        "childVertical": "FILL",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "FIXED"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 616,
+        "width": 759.9999,
+        "x": 1119.9999,
+        "y": 80.0001
+      },
+      "clipOrMaskStrategy": "css-overflow-hidden",
+      "dataAttributes": {
+        "data-package-field-marker": "field:textarea:headline",
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Rethink Sans",
+        "data-package-font-postscript": "RethinkSans-SemiBold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "346:47",
+        "data-package-node-name": "field:textarea:headline",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Rethink Sans 600 normal has no managed font asset attached.",
+          "nodeId": "346:47",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied top text-box alignment.",
+          "nodeId": "346:47",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 616,
+          "width": 760,
+          "x": -12554,
+          "y": -16333
+        },
+        "relative": {
+          "height": 616,
+          "width": 760,
+          "x": 40,
+          "y": 80
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Rethink Sans\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Rethink Sans",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 600
+      },
+      "id": "346:47",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "field:textarea:headline",
+      "order": 13,
+      "parentId": "346:46",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 616,
+          "width": 760,
+          "x": -12554,
+          "y": -16333
+        },
+        "relative": {
+          "height": 616,
+          "width": 760,
+          "x": 40,
+          "y": 80
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 1,
+        "childHorizontal": "FILL",
+        "childVertical": "FILL",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "28de13dd116c01648b2b0fb06888d288ad47ba934d7187bed65ebdd6f0005e6f",
+      "textMeasurement": {
+        "height": 616,
+        "scrollHeight": 616,
+        "scrollWidth": 760,
+        "width": 759.9999
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 192,
+        "width": 840,
+        "x": 1080,
+        "y": 776
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "346:48",
+        "data-package-node-name": "cta-section",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 0px gap and MAX/MAX alignment.",
+          "nodeId": "346:48",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 192,
+          "width": 840,
+          "x": -12594,
+          "y": -15637
+        },
+        "relative": {
+          "height": 192,
+          "width": 840,
+          "x": 0,
+          "y": 776
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:48",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "cta-section",
+      "order": 14,
+      "parentId": "346:45",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 192,
+          "width": 840,
+          "x": -12594,
+          "y": -15637
+        },
+        "relative": {
+          "height": 192,
+          "width": 840,
+          "x": 0,
+          "y": 776
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 111.9999,
+        "width": 759.9999,
+        "x": 1119.9999,
+        "y": 816.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "346:49",
+        "data-package-node-name": "shop-row",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 334px gap and CENTER/MAX alignment.",
+          "nodeId": "346:49",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 760,
+          "x": -12554,
+          "y": -15597
+        },
+        "relative": {
+          "height": 112,
+          "width": 760,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:49",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "shop-row",
+      "order": 15,
+      "parentId": "346:48",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 760,
+          "x": -12554,
+          "y": -15597
+        },
+        "relative": {
+          "height": 112,
+          "width": 760,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 111.9999,
+        "width": 303.1562,
+        "x": 1576.8437,
+        "y": 816.0001
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "346:50",
+        "data-package-node-name": "badge-top",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 10px gap and CENTER/CENTER alignment.",
+          "nodeId": "346:50",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 305,
+          "x": -12099,
+          "y": -15597
+        },
+        "relative": {
+          "height": 112,
+          "width": 305,
+          "x": 455,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:50",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "badge-top",
+      "order": 16,
+      "parentId": "346:49",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 305,
+          "x": -12099,
+          "y": -15597
+        },
+        "relative": {
+          "height": 112,
+          "width": 305,
+          "x": 455,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": "HUG",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 47.9999,
+        "width": 207.1562,
+        "x": 1624.8437,
+        "y": 848.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-field-marker": "field:text:cta",
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Rethink Sans",
+        "data-package-font-postscript": "RethinkSans-SemiBold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "346:51",
+        "data-package-node-name": "field:text:cta",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Rethink Sans 600 normal has no managed font asset attached.",
+          "nodeId": "346:51",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "346:51",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 209,
+          "x": -12051,
+          "y": -15565
+        },
+        "relative": {
+          "height": 48,
+          "width": 209,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Rethink Sans\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Rethink Sans",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 600
+      },
+      "id": "346:51",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "field:text:cta",
+      "order": 17,
+      "parentId": "346:50",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 48,
+          "width": 209,
+          "x": -12051,
+          "y": -15565
+        },
+        "relative": {
+          "height": 48,
+          "width": 209,
+          "x": 48,
+          "y": 32
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 1,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "8b9cb1b7a3fc77a60066a17199fa49c15775106dc0f92fecd3830fdd74ca947b",
+      "textMeasurement": {
+        "height": 47.9999,
+        "scrollHeight": 55,
+        "scrollWidth": 207,
+        "width": 207.1562
+      },
+      "transform": null,
+      "type": "TEXT"
+    },
+    {
+      "bounds": {
+        "height": 112.0001,
+        "width": 840,
+        "x": 1080,
+        "y": 967.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "346:52",
+        "data-package-node-name": "footer-bar",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 10px gap and MIN/MIN alignment.",
+          "nodeId": "346:52",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 840,
+          "x": -12594,
+          "y": -15445
+        },
+        "relative": {
+          "height": 112,
+          "width": 840,
+          "x": 0,
+          "y": 968
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:52",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "name": "footer-bar",
+      "order": 18,
+      "parentId": "346:45",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 112,
+          "width": 840,
+          "x": -12594,
+          "y": -15445
+        },
+        "relative": {
+          "height": 112,
+          "width": 840,
+          "x": 0,
+          "y": 968
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 759.9999,
+        "x": 1119.9999,
+        "y": 1007.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-node-id": "346:53",
+        "data-package-node-name": "footer-content",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 64px gap and MIN/MAX alignment.",
+          "nodeId": "346:53",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 760,
+          "x": -12554,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 760,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:53",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "footer-content",
+      "order": 19,
+      "parentId": "346:52",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 760,
+          "x": -12554,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 760,
+          "x": 40,
+          "y": 40
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 0,
+        "childHorizontal": "FILL",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "FIXED"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 125.9999,
+        "x": 1119.9999,
+        "y": 1007.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-asset-source": "vector",
+        "data-package-node-id": "346:54",
+        "data-package-node-name": "Vector",
+        "data-package-node-type": "VECTOR",
+        "data-package-render-strategy": "fallback",
+        "data-package-resolved-node": "true",
+        "data-package-vector-asset": "asset:svg:359845b7"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-svg-viewbox-applied",
+          "message": "Applied SVG viewBox 0 0 126 32 with xMidYMid meet.",
+          "nodeId": "346:54",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 125.92366790771484,
+          "x": -12554,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 125.92366790771484,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": "unsupported vector render mode",
+      "font": null,
+      "id": "346:54",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "Vector",
+      "order": 20,
+      "parentId": "346:53",
+      "positioningRole": "FLOW",
+      "renderStrategy": "fallback",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 125.92366790771484,
+          "x": -12554,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 125.92366790771484,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "VECTOR"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 570,
+        "x": 1309.9999,
+        "y": 1007.9999
+      },
+      "clipOrMaskStrategy": "live-containment",
+      "dataAttributes": {
+        "data-package-auto-layout-container": "HORIZONTAL",
+        "data-package-clip-source": "live-containment",
+        "data-package-clips-content": "true",
+        "data-package-live-resize-containment": "clip",
+        "data-package-node-id": "346:55",
+        "data-package-node-name": "cta-wrapper",
+        "data-package-node-type": "FRAME",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied horizontal Auto Layout with 0px gap and MAX/MAX alignment.",
+          "nodeId": "346:55",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 570.0763549804688,
+          "x": -12364.076171875,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 570.0763549804688,
+          "x": 189.923828125,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "346:55",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "HORIZONTAL",
+      "name": "cta-wrapper",
+      "order": 21,
+      "parentId": "346:53",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 32,
+          "width": 570.0763549804688,
+          "x": -12364.076171875,
+          "y": -15405
+        },
+        "relative": {
+          "height": 32,
+          "width": 570.0763549804688,
+          "x": 189.923828125,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "STRETCH",
+        "childGrow": 1,
+        "childHorizontal": "FILL",
+        "childVertical": "FILL",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "FIXED"
+      },
+      "textContentHash": null,
+      "textMeasurement": null,
+      "transform": null,
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 160.5937,
+        "x": 1719.4062,
+        "y": 1007.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-font-fallback": "sans-serif",
+        "data-package-font-family": "Rethink Sans",
+        "data-package-font-postscript": "RethinkSans-SemiBold",
+        "data-package-font-status": "fallback",
+        "data-package-leading-trim": "none",
+        "data-package-node-id": "346:56",
+        "data-package-node-name": "cta",
+        "data-package-node-type": "TEXT",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-font-missing",
+          "message": "Rethink Sans 600 normal has no managed font asset attached.",
+          "nodeId": "346:56",
+          "severity": "warning"
+        },
+        {
+          "code": "resolved-text-vertical-alignment",
+          "message": "Applied center text-box alignment.",
+          "nodeId": "346:56",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 22,
+          "width": 162,
+          "x": -11956,
+          "y": -15395
+        },
+        "relative": {
+          "height": 22,
+          "width": 162,
+          "x": 408.076171875,
+          "y": 10
+        }
+      },
+      "fallbackReason": null,
+      "font": {
+        "cssFamily": "\"Rethink Sans\", system-ui, sans-serif",
+        "fallbackFamily": "system-ui, sans-serif",
+        "family": "Rethink Sans",
+        "ready": true,
+        "status": "missing",
+        "style": "normal",
+        "weight": 600
+      },
+      "id": "346:56",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "name": "cta",
+      "order": 22,
+      "parentId": "346:55",
+      "positioningRole": "FLOW",
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 22,
+          "width": 162,
+          "x": -11956,
+          "y": -15395
+        },
+        "relative": {
+          "height": 22,
+          "width": 162,
+          "x": 408.076171875,
+          "y": 10
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "HUG",
+        "childVertical": "HUG",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": "6ed02fc1aac10f63a0ecb079852dacf80d5e8d66678e4a17f51d45efeef9e4c6",
+      "textMeasurement": {
+        "height": 32,
+        "scrollHeight": 37,
+        "scrollWidth": 161,
+        "width": 160.5937
+      },
+      "transform": null,
+      "type": "TEXT"
+    }
+  ],
+  "orderedNodeIds": [
+    "346:34",
+    "346:35",
+    "346:36",
+    "346:37",
+    "346:38",
+    "346:39",
+    "346:40",
+    "346:41",
+    "346:42",
+    "346:43",
+    "346:44",
+    "346:45",
+    "346:46",
+    "346:47",
+    "346:48",
+    "346:49",
+    "346:50",
+    "346:51",
+    "346:52",
+    "346:53",
+    "346:54",
+    "346:55",
+    "346:56"
+  ],
+  "packageVersion": "1.0",
+  "rendererFallbacks": [
+    {
+      "id": "346:38",
+      "reason": "image asset missing"
+    },
+    {
+      "id": "346:41",
+      "reason": "image asset missing"
+    },
+    {
+      "id": "346:44",
+      "reason": "image asset missing"
+    },
+    {
+      "id": "346:54",
+      "reason": "unsupported vector render mode"
+    }
+  ],
+  "rendererMode": "editor",
+  "resolvedTreeVersion": "resolved-render-tree-v1",
+  "rootDimensions": {
+    "background": "rgba(238, 231, 226, 1)",
+    "height": 1080,
+    "width": 1920
+  },
+  "rootNodeId": "346:34",
+  "route": "/drafts/draft%3A022cc607-a263-4aa2-8ab6-5722ca4f586f",
+  "schemaVersion": 1,
+  "surface": "editor",
+  "warnings": [
+    {
+      "code": "resolved-image-asset-missing",
+      "feature": "image",
+      "message": "Image asset \"asset:image:ceab5479\" has no renderable source.",
+      "nodeId": "346:38"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:40"
+    },
+    {
+      "code": "resolved-image-asset-missing",
+      "feature": "image",
+      "message": "Image asset \"asset:image:ceab5479\" has no renderable source.",
+      "nodeId": "346:41"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:43"
+    },
+    {
+      "code": "resolved-image-asset-missing",
+      "feature": "image",
+      "message": "Image asset \"asset:image:ceab5479\" has no renderable source.",
+      "nodeId": "346:44"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:47"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:51"
+    },
+    {
+      "code": "resolved-font-missing",
+      "feature": "font",
+      "message": "Rethink Sans 600 normal has no managed font asset attached.",
+      "nodeId": "346:56"
+    }
+  ]
+}

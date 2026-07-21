@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "fontDirectoryEnv": "RENDERER_FIDELITY_FONT_DIR",
+  "fonts": [
+    {
+      "id": "geist-mono-500-normal",
+      "family": "Geist Mono",
+      "weight": 500,
+      "style": "normal",
+      "sourcePath": "${RENDERER_FIDELITY_FONT_DIR}/geist-v1.7.2/GeistMono-Medium.ttf",
+      "defaultSourcePath": "/Users/niels/Documents/Codex/renderer-fidelity-fonts/geist-v1.7.2/GeistMono-Medium.ttf",
+      "byteSize": 149328,
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "source": "Official Vercel Geist v1.7.2 release asset",
+      "sourceUrl": "https://github.com/vercel/geist-font/releases/download/v1.7.2/geist-font-v1.7.2.zip",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "id": "inter-tight-700-normal",
+      "family": "Inter Tight",
+      "weight": 700,
+      "style": "normal",
+      "sourcePath": "${INTER_TIGHT_FIDELITY_FONT_PATH}",
+      "defaultSourcePath": "/Users/niels/Library/Fonts/InterTight-VariableFont_wght.ttf",
+      "byteSize": 580572,
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "source": "Locally installed Inter Tight variable font",
+      "sourceUrl": null,
+      "license": "Unverified in this run"
+    }
+  ]
+}

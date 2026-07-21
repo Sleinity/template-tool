@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "linear-gradient-supplementary-intake-evidence-v1",
+  "status": "paint-opacity-only-gate-open",
+  "auditDate": "2026-07-18",
+  "productionBehaviorChanged": false,
+  "registeredFixture": false,
+  "fixture": {
+    "path": "/Users/niels/Documents/Templates/template-package-gradient-test-3.zip",
+    "filename": "template-package-gradient-test-3.zip",
+    "byteSize": 611320,
+    "zipSha256": "d3904ce8b52c57111235482fecdd126a6ecf63ddbca1eb72a52e364dc927031b",
+    "entries": [
+      {
+        "path": "template.json",
+        "byteSize": 39231,
+        "sha256": "87295fc9534b9ef47d7ea607f2e527b5b5be5535b1ac80547e8fa8fae61bb8cd"
+      },
+      {
+        "path": "preview.png",
+        "byteSize": 571867,
+        "sha256": "1a1a4575d1309c33bd09e5030d9df055231af11a0d524173043eaf05648b0d79",
+        "width": 1000,
+        "height": 1500
+      }
+    ],
+    "packageId": "pkg_451_135_1784371485904",
+    "rootNodeId": "451:135",
+    "schemaVersion": "1.0",
+    "packageContract": "template-package-v1",
+    "exporterVersion": "0.6.0",
+    "exportedAt": "2026-07-18T10:44:45.883Z",
+    "nodeCount": 10,
+    "assetCount": 0,
+    "fontCount": 0,
+    "editableFieldCount": 0,
+    "gradientCount": 9
+  },
+  "selectedHandleEvidence": [
+    {
+      "path": "/Users/niels/Desktop/Screenshot 2026-07-18 at 12.45.39.png",
+      "byteSize": 661268,
+      "sha256": "c7e991d2c3095dc23f05833440e3139378597f8adb174a85b1613e84aadda5ce",
+      "width": 816,
+      "height": 1230,
+      "boundState": "gradient-test-2-node-451:175-554x240",
+      "observedThirdCenter": [396, 271.5698924731183],
+      "predictedThirdCenterAfterEndpointFit": [396.7431314509082, 271.50395961859005],
+      "thirdHandleErrorPixels": 0.7460505979055171
+    },
+    {
+      "path": "/Users/niels/Desktop/Screenshot 2026-07-18 at 12.43.47.png",
+      "byteSize": 662161,
+      "sha256": "c0dded805b00a88db724a35f10d88ea337aa9c5a5cc58e8436c5a3675bd7a88a",
+      "width": 818,
+      "height": 1224,
+      "boundState": "gradient-test-3-node-451:175-710x240",
+      "observedThirdCenter": [390.63157894736844, 269.61578947368423],
+      "predictedThirdCenterAfterEndpointFit": [391.57586839589254, 269.4489746276363],
+      "thirdHandleErrorPixels": 0.958910712973816
+    }
+  ],
+  "handleContract": {
+    "nodeId": "451:175",
+    "matrixDirection": "normalized-node-local-to-normalized-gradient",
+    "inverseCount": 1,
+    "startGradientCoordinate": [0, 0.5],
+    "endGradientCoordinate": [1, 0.5],
+    "thirdGradientCoordinate": [0, 1],
+    "derivedStartNormalized": [0.9999999569509116, 0.014040455049113387],
+    "derivedEndNormalized": [1.1664039265501814e-8, 0.9859595061661183],
+    "derivedThirdNormalized": [0.47344620853253455, -0.6366599814115601],
+    "finding": "selected-start-end-third-handles-agree-with-one-inverse-normalized-basis"
+  },
+  "resizeEvidence": {
+    "nodeId": "451:175",
+    "beforeZipSha256": "c2a41a23ed57651f50406bf645779191480eca38514c2a748cbe5b064ad6890a",
+    "afterZipSha256": "d3904ce8b52c57111235482fecdd126a6ecf63ddbca1eb72a52e364dc927031b",
+    "beforeBounds": { "width": 554, "height": 240 },
+    "afterBounds": { "width": 710, "height": 240 },
+    "stopsByteEquivalent": true,
+    "transformByteEquivalent": true,
+    "stopPositionsBeforeAfter": [0, 1],
+    "determinantBeforeAfter": 0.4301193591845731,
+    "normalizedCrossStateSampleMaxChannelDelta": 1,
+    "sourceModelMaxChannelError": 1,
+    "finding": "node-local-normalized-gradient-intent-remains-fixed-while-local-pixel-handles-scale-with-current-width"
+  },
+  "opacityCandidate": {
+    "nodeId": "454:30",
+    "nodeOpacity": 1,
+    "canonicalPaintOpacity": 1,
+    "rawPaintOpacity": 1,
+    "stopAlphas": [0.800000011920929, 0.800000011920929],
+    "stopAlphaSourceOverSampleMaxChannelError": 2,
+    "finding": "uniform-stop-alpha-not-paint-opacity"
+  },
+  "gateQuestions": {
+    "matrixDirection": "closed",
+    "oneInverseAxisDerivation": "closed",
+    "selectedStartEndThirdHandles": "closed",
+    "diagonalNonSquare": "closed",
+    "stopOrderingAndPositions": "closed",
+    "straightRgbIndependentAlpha": "closed",
+    "gradientLocalBeforeNodeRotation": "closed",
+    "independentCornerClipping": "closed",
+    "sameSemanticNodeResize": "closed",
+    "paintOpacityBelowOne": "open-raw-paint-opacity-remains-one",
+    "singularRuntimeOwner": "blocked-pending-final-source-property",
+    "crossSurfaceAuthority": "unverified-runtime-gradient-owner-absent"
+  },
+  "remainingGateEvidence": [
+    "one-isolated-gradient-with-raw-and-canonical-paint-opacity-below-one-node-opacity-one-and-stop-alphas-one"
+  ],
+  "decision": "result-b-keep-gate-open-on-paint-opacity-only"
+}

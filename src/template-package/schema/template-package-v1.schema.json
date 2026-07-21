@@ -1,0 +1,1281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.template-platform.dev/schema/template-package-v1.schema.json",
+  "title": "Template Package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packageId",
+    "name",
+    "canvas",
+    "rootNodeId",
+    "nodes",
+    "editableFields",
+    "assets"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "packageId": { "type": "string", "minLength": 1 },
+    "name": { "type": "string", "minLength": 1 },
+    "canvas": { "$ref": "#/$defs/canvas" },
+    "rootNodeId": { "type": "string", "minLength": 1 },
+    "nodes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/node" }
+    },
+    "editableFields": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/editableField" }
+    },
+    "assets": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/asset" }
+    },
+    "fontRequirements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fontRequirement" }
+    },
+    "motion": { "$ref": "#/$defs/motion" },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/packageDiagnostic" }
+    },
+    "referencePreview": { "$ref": "#/$defs/referencePreview" },
+    "source": { "$ref": "#/$defs/source" },
+    "rendererHints": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/rendererHint" }
+    },
+    "assetStrategy": { "$ref": "#/$defs/assetStrategy" },
+    "verification": { "$ref": "#/$defs/verification" },
+    "maskRelationships": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/maskRelationship" }
+    }
+  },
+  "$defs": {
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "background": {
+          "oneOf": [
+            { "type": "string" },
+            { "$ref": "#/$defs/color" },
+            { "type": "null" }
+          ]
+        },
+        "coordinateSpace": { "const": "figma" }
+      }
+    },
+    "rect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number", "minimum": 0 },
+        "height": { "type": "number", "minimum": 0 }
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["absolute", "relative"],
+      "properties": {
+        "absolute": { "$ref": "#/$defs/rect" },
+        "relative": { "$ref": "#/$defs/rect" }
+      }
+    },
+    "positioning": {
+      "oneOf": [
+        { "enum": ["ROOT", "FLOW", "ABSOLUTE"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": { "enum": ["ROOT", "FLOW", "ABSOLUTE"] },
+            "constraints": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "horizontal": { "type": "string" },
+                "vertical": { "type": "string" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "axisSizing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["FIXED", "HUG", "FILL"] },
+        "value": { "type": ["number", "null"], "minimum": 0 },
+        "min": { "type": ["number", "null"], "minimum": 0 },
+        "max": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "sizing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["horizontal", "vertical"],
+      "properties": {
+        "horizontal": { "$ref": "#/$defs/axisSizing" },
+        "vertical": { "$ref": "#/$defs/axisSizing" }
+      }
+    },
+    "padding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {
+        "top": { "type": "number" },
+        "right": { "type": "number" },
+        "bottom": { "type": "number" },
+        "left": { "type": "number" }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "wrap",
+        "gap",
+        "padding",
+        "primaryAlignment",
+        "counterAlignment",
+        "clipContent"
+      ],
+      "properties": {
+        "mode": { "enum": ["NONE", "HORIZONTAL", "VERTICAL"] },
+        "wrap": { "type": "boolean" },
+        "gap": { "type": "number" },
+        "rowGap": { "type": "number" },
+        "columnGap": { "type": "number" },
+        "padding": { "$ref": "#/$defs/padding" },
+        "primaryAlignment": { "enum": ["MIN", "CENTER", "MAX", "SPACE_BETWEEN"] },
+        "counterAlignment": { "enum": ["MIN", "CENTER", "MAX", "STRETCH", "BASELINE"] },
+        "clipContent": { "type": "boolean" }
+      }
+    },
+    "color": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["r", "g", "b", "a"],
+      "properties": {
+        "r": { "type": "number", "minimum": 0, "maximum": 1 },
+        "g": { "type": "number", "minimum": 0, "maximum": 1 },
+        "b": { "type": "number", "minimum": 0, "maximum": 1 },
+        "a": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "paint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "color"],
+          "properties": {
+            "type": { "const": "SOLID" },
+            "color": { "$ref": "#/$defs/color" },
+            "opacity": { "type": "number" },
+            "visible": { "type": "boolean" },
+            "blendMode": { "type": "string" },
+            "solidPaintSource": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["schemaVersion", "sourceIndex", "pairing", "canonicalPath", "rawFigmaPath", "sourceContract", "exporterCompatibility", "opacityDisposition", "serializedColorAlpha", "serializedPaintOpacity", "sourcePaintOpacity", "canonicalColorAlpha", "canonicalPaintOpacity", "effectiveOpacity", "effectiveOpacityRule", "equalityTolerance", "confidenceBasis", "normalizationRevision", "conflicts"],
+              "properties": {
+                "schemaVersion": { "const": "solid-paint-source-v1" },
+                "sourceIndex": { "type": "integer", "minimum": 0 },
+                "pairing": { "const": "source-index" },
+                "canonicalPath": { "type": "string", "minLength": 1 },
+                "rawFigmaPath": { "type": ["string", "null"] },
+                "sourceContract": { "const": "figma-plugin-api-solid-paint-rgb-opacity" },
+                "exporterCompatibility": { "enum": ["plugin-0.6.0-mirrored-color-alpha", "raw-figma-solid-paint"] },
+                "opacityDisposition": { "enum": ["raw-paint-opacity", "mirrored-compatibility-alias", "ambiguous-independent-values"] },
+                "serializedColorAlpha": { "type": "number", "minimum": 0, "maximum": 1 },
+                "serializedPaintOpacity": { "type": "number", "minimum": 0, "maximum": 1 },
+                "sourcePaintOpacity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+                "canonicalColorAlpha": { "type": "number", "minimum": 0, "maximum": 1 },
+                "canonicalPaintOpacity": { "type": "number", "minimum": 0, "maximum": 1 },
+                "effectiveOpacity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+                "effectiveOpacityRule": { "enum": ["paint-opacity-once", "preserve-separate-values"] },
+                "equalityTolerance": { "type": "number", "minimum": 0 },
+                "confidenceBasis": { "enum": ["raw-figma-solid-paint", "raw-figma-solid-paint-conflict", "figma-contract-plus-affected-exporter-equal-values", "affected-exporter-differing-values"] },
+                "normalizationRevision": { "const": "solid-paint-opacity-normalization-v1" },
+                "conflicts": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"] },
+            "stops": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["position", "color"],
+                "properties": {
+                  "position": { "type": "number" },
+                  "color": { "$ref": "#/$defs/color" }
+                }
+              }
+            },
+            "gradientStops": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["position", "color"],
+                "properties": {
+                  "position": { "type": "number" },
+                  "color": { "$ref": "#/$defs/color" }
+                }
+              }
+            },
+            "opacity": { "type": "number" },
+            "visible": { "type": "boolean" },
+            "blendMode": { "type": "string" },
+            "transform": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": "number" }
+              }
+            },
+            "gradientTransform": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": "number" }
+              }
+            },
+            "linearGradientSource": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["schemaVersion", "sourceIndex", "pairing", "canonicalPath", "rawFigmaPath", "stopsSource", "transformSource", "normalizationRevision", "conflicts"],
+              "properties": {
+                "schemaVersion": { "const": "linear-gradient-source-v1" },
+                "sourceIndex": { "type": "integer", "minimum": 0 },
+                "pairing": { "const": "source-index" },
+                "canonicalPath": { "type": "string", "minLength": 1 },
+                "rawFigmaPath": { "type": "string", "minLength": 1 },
+                "stopsSource": { "enum": ["canonical-gradientStops", "canonical-stops", "figma-raw-gradientStops", "figma-raw-stops", "missing"] },
+                "transformSource": { "enum": ["canonical-gradientTransform", "canonical-transform", "figma-raw-gradientTransform", "figma-raw-transform", "missing"] },
+                "normalizationRevision": { "const": "linear-gradient-normalization-v1" },
+                "conflicts": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "const": "IMAGE" },
+            "assetId": { "type": "string", "minLength": 1 },
+            "scaleMode": { "enum": ["FILL", "FIT", "CROP", "TILE"] },
+            "opacity": { "type": "number" },
+            "visible": { "type": "boolean" },
+            "blendMode": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "stroke": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["paint", "weight"],
+      "properties": {
+        "paint": { "$ref": "#/$defs/paint" },
+        "weight": { "type": "number", "minimum": 0 },
+        "align": { "enum": ["INSIDE", "OUTSIDE", "CENTER"] }
+      }
+    },
+    "effect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "color", "offset", "radius"],
+          "properties": {
+            "type": { "enum": ["DROP_SHADOW", "INNER_SHADOW"] },
+            "color": { "$ref": "#/$defs/color" },
+            "offset": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["x", "y"],
+              "properties": {
+                "x": { "type": "number" },
+                "y": { "type": "number" }
+              }
+            },
+            "radius": { "type": "number", "minimum": 0 },
+            "spread": { "type": "number" },
+            "visible": { "type": "boolean" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "radius"],
+          "properties": {
+            "type": { "enum": ["LAYER_BLUR", "BACKGROUND_BLUR"] },
+            "radius": { "type": "number", "minimum": 0 },
+            "visible": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "borderRadius": {
+      "oneOf": [
+        { "type": "number", "minimum": 0 },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["topLeft", "topRight", "bottomRight", "bottomLeft"],
+          "properties": {
+            "topLeft": { "type": "number", "minimum": 0 },
+            "topRight": { "type": "number", "minimum": 0 },
+            "bottomRight": { "type": "number", "minimum": 0 },
+            "bottomLeft": { "type": "number", "minimum": 0 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["opacity", "fills", "strokes", "effects"],
+      "properties": {
+        "visible": { "type": "boolean" },
+        "opacity": { "type": "number" },
+        "blendMode": { "type": "string" },
+        "fills": { "type": "array", "items": { "$ref": "#/$defs/paint" } },
+        "strokes": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/paint" },
+              { "$ref": "#/$defs/stroke" }
+            ]
+          }
+        },
+        "strokeWeight": { "type": ["number", "null"], "minimum": 0 },
+        "strokeAlign": {
+          "type": ["string", "null"]
+        },
+        "effects": { "type": "array", "items": { "$ref": "#/$defs/effect" } },
+        "cornerRadius": { "type": ["number", "null"], "minimum": 0 },
+        "cornerRadii": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": { "type": "number", "minimum": 0 }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["topLeft", "topRight", "bottomRight", "bottomLeft"],
+              "properties": {
+                "topLeft": { "type": "number", "minimum": 0 },
+                "topRight": { "type": "number", "minimum": 0 },
+                "bottomRight": { "type": "number", "minimum": 0 },
+                "bottomLeft": { "type": "number", "minimum": 0 }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "clipContent": { "type": "boolean" },
+        "borderRadius": { "$ref": "#/$defs/borderRadius" }
+      }
+    },
+    "textMeasurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "unit"],
+      "properties": {
+        "value": { "type": ["number", "null"] },
+        "unit": { "type": "string", "minLength": 1 }
+      }
+    },
+    "fontStyleRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "family",
+        "style",
+        "cssStyle",
+        "weight",
+        "postScriptName"
+      ],
+      "properties": {
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 },
+        "family": { "type": "string", "minLength": 1 },
+        "style": { "type": "string" },
+        "cssStyle": { "enum": ["normal", "italic", "oblique"] },
+        "weight": { "type": "number", "minimum": 1, "maximum": 1000 },
+        "postScriptName": { "type": ["string", "null"] }
+      }
+    },
+    "fontRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "family",
+        "style",
+        "cssStyle",
+        "weight",
+        "postScriptName",
+        "usedBy",
+        "characters",
+        "editable",
+        "mixedStyle",
+        "source",
+        "availableInFigma"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "family": { "type": "string", "minLength": 1 },
+        "style": { "type": "string" },
+        "cssStyle": { "enum": ["normal", "italic", "oblique"] },
+        "weight": { "type": "number", "minimum": 1, "maximum": 1000 },
+        "postScriptName": { "type": ["string", "null"] },
+        "usedBy": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "characters": { "type": "string" },
+        "editable": { "type": "boolean" },
+        "mixedStyle": { "type": "boolean" },
+        "source": { "type": "string", "minLength": 1 },
+        "availableInFigma": { "type": "boolean" },
+        "stretch": { "type": "string", "minLength": 1 },
+        "axes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tag", "value"],
+            "properties": {
+              "tag": { "type": "string", "minLength": 1, "maxLength": 4 },
+              "value": { "type": "number" }
+            }
+          }
+        },
+        "assetId": { "type": "string", "minLength": 1 },
+        "resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["match", "confirmed"],
+          "properties": {
+            "managedFontId": { "type": "string", "minLength": 1 },
+            "match": {
+              "enum": ["exact", "compatible", "replacement", "alias", "manual", "fallback"]
+            },
+            "classification": {
+              "enum": ["exact", "compatible", "replacement", "missing"]
+            },
+            "confirmed": { "type": "boolean" },
+            "fallbackFamily": { "type": "string", "minLength": 1 },
+            "requestId": { "type": "string", "minLength": 1 },
+            "faceIndex": { "type": "integer", "minimum": 0 },
+            "binaryHash": { "type": "string", "minLength": 16 },
+            "runtimeFamily": { "type": "string", "minLength": 1 },
+            "effectiveFamily": { "type": "string", "minLength": 1 },
+            "effectiveWeight": { "type": "number", "minimum": 1, "maximum": 1000 },
+            "effectiveStyle": { "enum": ["normal", "italic", "oblique"] },
+            "effectiveStretch": { "type": "string", "minLength": 1 },
+            "effectiveAxes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["tag", "value"],
+                "properties": {
+                  "tag": { "type": "string", "minLength": 1, "maxLength": 4 },
+                  "value": { "type": "number" }
+                }
+              }
+            },
+            "history": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["match", "changedAt", "reason"],
+                "properties": {
+                  "match": { "enum": ["exact", "compatible", "replacement", "alias", "manual", "fallback"] },
+                  "managedFontId": { "type": "string", "minLength": 1 },
+                  "binaryHash": { "type": "string", "minLength": 16 },
+                  "changedAt": { "type": "string", "minLength": 1 },
+                  "reason": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "textPayload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["characters", "fontFamily", "fontSize"],
+          "properties": {
+            "characters": { "type": "string" },
+            "fontFamily": { "type": ["string", "null"] },
+            "fontPostScriptName": { "type": ["string", "null"] },
+            "fontSize": { "type": ["number", "null"], "minimum": 0 },
+            "fontWeight": { "type": ["number", "null"] },
+            "fontStyle": { "type": ["string", "null"] },
+            "lineHeight": {
+              "oneOf": [
+                { "$ref": "#/$defs/textMeasurement" },
+                { "type": "null" }
+              ]
+            },
+            "letterSpacing": {
+              "oneOf": [
+                { "$ref": "#/$defs/textMeasurement" },
+                { "type": "null" }
+              ]
+            },
+            "textAlignHorizontal": { "type": ["string", "null"] },
+            "textAlignVertical": { "type": ["string", "null"] },
+        "textAutoResize": { "type": ["string", "null"] },
+        "leadingTrim": { "type": ["string", "null"], "enum": ["NONE", "CAP_HEIGHT", null] },
+            "paragraphSpacing": { "type": ["number", "null"] },
+            "textDecoration": { "type": ["string", "null"] },
+            "textCase": { "type": ["string", "null"] },
+            "styleRanges": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/fontStyleRange" }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["content", "style"],
+          "properties": {
+            "content": { "type": "string" },
+            "style": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["fontFamily", "fontSize"],
+              "properties": {
+                "fontFamily": { "type": "string" },
+                "fontSize": { "type": "number", "minimum": 0 },
+                "fontWeight": { "type": "number" },
+                "fontStyle": { "type": "string" },
+                "lineHeight": { "type": "number", "minimum": 0 },
+                "letterSpacing": { "type": "number" },
+                "textAlignHorizontal": { "enum": ["LEFT", "CENTER", "RIGHT", "JUSTIFIED"] },
+                "textAlignVertical": { "enum": ["TOP", "CENTER", "BOTTOM"] },
+                "textAutoResize": { "enum": ["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"] }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "imagePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId"],
+      "properties": {
+        "assetId": {
+          "oneOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "null" }
+          ]
+        },
+        "deferred": { "type": "boolean" },
+        "hash": { "type": "string" },
+        "scaleMode": { "type": "string" },
+        "imageTransform": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "objectPosition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" }
+          }
+        },
+        "activePlacement": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "revision"],
+          "properties": {
+            "state": {
+              "enum": [
+                "imported-source",
+                "replacement-fill",
+                "replacement-fit",
+                "editor-crop"
+              ]
+            },
+            "revision": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "vectorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assetId": {
+          "oneOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "null" }
+          ]
+        },
+        "deferred": { "type": "boolean" },
+        "format": { "type": "string" },
+        "renderMode": {
+          "enum": ["SVG_ASSET", "FLATTENED_SVG", "SEMANTIC_SHAPE", "UNSUPPORTED"]
+        },
+        "assetKind": {
+          "type": ["string", "null"]
+        },
+        "fit": { "type": "string" },
+        "pathData": { "type": "string" },
+        "viewBox": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" },
+            { "$ref": "#/$defs/rect" }
+          ]
+        },
+        "preserveAspectRatio": { "type": "string" },
+        "contentBounds": {
+          "oneOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/rect" }
+          ]
+        },
+        "paints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fills", "strokes"],
+          "properties": {
+            "fills": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/vectorPaintSnapshot" }
+            },
+            "strokes": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/vectorPaintSnapshot" }
+            }
+          }
+        },
+        "features": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "hasBooleanOperation": { "type": "boolean" },
+            "hasGradients": { "type": "boolean" },
+            "hasImages": { "type": "boolean" },
+            "hasEffects": { "type": "boolean" },
+            "hasBlendModes": { "type": "boolean" },
+            "hasMasks": { "type": "boolean" },
+            "hasMultipleFills": { "type": "boolean" },
+            "hasMultipleStrokes": { "type": "boolean" }
+          }
+        }
+      },
+      "anyOf": [
+        { "properties": { "assetId": {} }, "required": ["assetId"] },
+        { "properties": { "pathData": {} }, "required": ["pathData"] }
+      ]
+    },
+    "vectorPaintSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" },
+        "opacity": { "type": "number" },
+        "visible": { "type": "boolean" },
+        "hasGradient": { "type": "boolean" },
+        "color": { "$ref": "#/$defs/color" },
+        "strokeWeight": { "type": "number" },
+        "strokeAlign": { "type": "string" }
+      }
+    },
+    "shapePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" },
+        "cornerRadius": { "type": ["number", "null"] }
+      }
+    },
+    "nodeMask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["isMask"],
+      "properties": {
+        "isMask": { "type": "boolean" },
+        "maskType": { "type": "string", "minLength": 1 }
+      }
+    },
+    "maskRelationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maskSourceId", "affectedSiblingIds", "parentId", "scopeTerminationReason"],
+      "properties": {
+        "maskSourceId": { "type": "string", "minLength": 1 },
+        "affectedSiblingIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "parentId": { "type": "string", "minLength": 1 },
+        "scopeTerminationReason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "type",
+        "parentId",
+        "children",
+        "bounds",
+        "positioning",
+        "layout",
+        "sizing",
+        "appearance"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "type": {
+          "enum": [
+            "FRAME",
+            "GROUP",
+            "RECTANGLE",
+            "TEXT",
+            "IMAGE",
+            "VECTOR",
+            "BOOLEAN_OPERATION",
+            "ELLIPSE",
+            "LINE",
+            "POLYGON",
+            "STAR",
+            "COMPONENT",
+            "INSTANCE"
+          ]
+        },
+        "parentId": { "type": ["string", "null"] },
+        "children": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "bounds": { "$ref": "#/$defs/bounds" },
+        "positioning": { "$ref": "#/$defs/positioning" },
+        "layout": { "$ref": "#/$defs/layout" },
+        "sizing": { "$ref": "#/$defs/sizing" },
+        "appearance": { "$ref": "#/$defs/appearance" },
+        "text": { "$ref": "#/$defs/textPayload" },
+        "textFallback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "assetId"],
+          "properties": {
+            "type": { "const": "outlined-svg" },
+            "assetId": { "type": "string", "minLength": 1 }
+          }
+        },
+        "image": { "$ref": "#/$defs/imagePayload" },
+        "vector": { "$ref": "#/$defs/vectorPayload" },
+        "shape": { "$ref": "#/$defs/shapePayload" },
+        "mask": { "$ref": "#/$defs/nodeMask" },
+        "extensions": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "TEXT" } }, "required": ["type"] },
+          "then": { "properties": { "text": {} }, "required": ["text"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "IMAGE" } }, "required": ["type"] },
+          "then": { "properties": { "image": {} }, "required": ["image"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "VECTOR" } }, "required": ["type"] },
+          "then": { "properties": { "vector": {} }, "required": ["vector"] }
+        },
+        {
+          "if": { "properties": { "type": { "const": "BOOLEAN_OPERATION" } }, "required": ["type"] },
+          "then": { "properties": { "vector": {} }, "required": ["vector"] }
+        }
+      ]
+    },
+    "numberFormat": {
+      "type": "object",
+      "properties": {
+        "prefix": { "type": "string" },
+        "suffix": { "type": "string" },
+        "decimalSeparator": { "enum": [".", ","] },
+        "thousandSeparator": { "enum": [".", ",", " "] },
+        "decimalPlaces": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "editableField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "nodeId", "property", "defaultValue"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["text", "textarea", "image", "color", "number", "date", "boolean"] },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "property": { "type": "string", "minLength": 1 },
+        "defaultValue": { "type": ["string", "number", "boolean", "null"] },
+        "label": { "type": "string" },
+        "assetRef": { "type": "string", "minLength": 1 },
+        "typedRef": { "type": "string", "minLength": 1 },
+        "refType": { "const": "asset" },
+        "format": { "type": "object" },
+        "constraints": {
+          "anyOf": [
+            { "$ref": "#/$defs/textFieldConstraints" },
+            { "$ref": "#/$defs/imageFieldConstraints" }
+          ]
+        },
+        "behavior": { "$ref": "#/$defs/fieldBehavior" }
+      }
+    },
+    "textFieldConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "minCharacters": { "type": "integer", "minimum": 0 },
+        "maxCharacters": { "type": "integer", "minimum": 1 },
+        "minWords": { "type": "integer", "minimum": 0 },
+        "maxWords": { "type": "integer", "minimum": 1 },
+        "maxLines": { "type": "integer", "minimum": 1 },
+        "allowLineBreaks": { "type": "boolean" },
+        "pattern": {
+          "enum": ["free", "number", "currency", "percentage", "date", "email", "url", "custom"]
+        },
+        "customPattern": { "type": "string", "maxLength": 256 },
+        "placeholder": { "type": "string" }
+      }
+    },
+    "imageFieldConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "allowedMimeTypes": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "maxFileSizeMb": { "type": "number", "exclusiveMinimum": 0 },
+        "minWidth": { "type": "number", "minimum": 0 },
+        "minHeight": { "type": "number", "minimum": 0 },
+        "aspectRatio": {
+          "oneOf": [
+            { "enum": ["preserve-frame", "free"] },
+            { "type": "number", "exclusiveMinimum": 0 }
+          ]
+        },
+        "replacementMode": {
+          "enum": ["cover", "contain", "preserve-original-crop", "user-crop"]
+        },
+        "scaleMode": { "enum": ["FILL", "FIT", "STRETCH", "CROP", "TILE"] }
+      }
+    },
+    "fieldBehavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "onOverflow": {
+          "enum": ["prevent-input", "trim", "warn-only", "clip-preview", "shrink-to-fit", "allow"]
+        },
+        "showCounter": { "type": "boolean" },
+        "counterType": { "enum": ["characters", "words", "lines"] },
+        "softLimitWarning": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "preserveBox": { "type": "boolean" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "source"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["image", "svg", "vector", "font", "video", "unknown"] },
+        "mimeType": { "type": "string", "minLength": 1 },
+        "source": { "enum": ["embedded", "remote", "stored"] },
+        "data": { "type": "string" },
+        "dataUrl": { "type": "string" },
+        "url": { "type": "string" },
+        "storageKey": { "type": "string", "minLength": 1 },
+        "stableUrl": { "type": "string", "minLength": 1 },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "sizeKb": { "type": "number", "minimum": 0 },
+        "usedBy": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "nodeId": { "type": "string" },
+        "deferred": { "type": "boolean" },
+        "scaleMode": { "type": "string" },
+        "imageTransform": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "svgString": { "type": "string" },
+        "viewBox": { "type": "string" },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "hash": { "type": "string" },
+        "extensions": { "type": "object" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "image" } }, "required": ["type"] },
+          "then": {
+            "properties": { "mimeType": {} },
+            "required": ["mimeType"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source": { "const": "embedded" },
+              "deferred": { "const": false },
+              "type": { "const": "image" }
+            },
+            "required": ["source", "type"]
+          },
+          "then": {
+            "anyOf": [
+              { "properties": { "dataUrl": {} }, "required": ["dataUrl"] },
+              { "properties": { "data": {} }, "required": ["data"] }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source": { "const": "embedded" },
+              "deferred": { "const": false },
+              "type": { "enum": ["svg", "vector"] }
+            },
+            "required": ["source", "type"]
+          },
+          "then": {
+            "anyOf": [
+              { "properties": { "svgString": {} }, "required": ["svgString"] },
+              { "properties": { "data": {} }, "required": ["data"] }
+            ]
+          }
+        },
+        {
+          "if": { "properties": { "source": { "const": "remote" } }, "required": ["source"] },
+          "then": { "properties": { "url": {} }, "required": ["url"] }
+        },
+        {
+          "if": { "properties": { "source": { "const": "stored" } }, "required": ["source"] },
+          "then": {
+            "anyOf": [
+              { "properties": { "storageKey": {} }, "required": ["storageKey"] },
+              { "properties": { "stableUrl": {} }, "required": ["stableUrl"] }
+            ]
+          }
+        }
+      ]
+    },
+    "motionLinking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "matchedNodeIds", "missingNodeIds"],
+      "properties": {
+        "status": {
+          "enum": [
+            "unchecked",
+            "pass",
+            "warning",
+            "fail",
+            "pass-with-warnings",
+            "static-only"
+          ]
+        },
+        "matchedNodeIds": { "type": "array", "items": { "type": "string" } },
+        "missingNodeIds": { "type": "array", "items": { "type": "string" } },
+        "extraTemplateNodeIds": { "type": "array", "items": { "type": "string" } },
+        "extraPackageNodeIds": { "type": "array", "items": { "type": "string" } }
+      },
+      "anyOf": [
+        { "properties": { "extraTemplateNodeIds": {} }, "required": ["extraTemplateNodeIds"] },
+        { "properties": { "extraPackageNodeIds": {} }, "required": ["extraPackageNodeIds"] }
+      ]
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "raw", "linking"],
+      "properties": {
+        "format": { "type": "string", "minLength": 1 },
+        "raw": {},
+        "linking": { "$ref": "#/$defs/motionLinking" },
+        "sourceName": { "type": "string" },
+        "linkedAt": { "type": "string" }
+      }
+    },
+    "referencePreview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assetId": { "type": "string" },
+        "url": { "type": "string" },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "anyOf": [
+        { "properties": { "assetId": {} }, "required": ["assetId"] },
+        { "properties": { "url": {} }, "required": ["url"] }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "figma" },
+        "packageContract": { "const": "template-package-v1" },
+        "pluginVersion": { "type": "string" },
+        "fileKey": { "type": "string" },
+        "url": { "type": "string" },
+        "figmaMcp": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "metadataFetchedAt": { "type": "string" },
+            "designContextFetchedAt": { "type": "string" },
+            "screenshotFetchedAt": { "type": "string" },
+            "nodeId": { "type": "string" },
+            "status": {
+              "enum": ["not_checked", "matched", "changed", "inaccessible", "error"]
+            }
+          }
+        },
+        "application": { "type": "string" },
+        "documentId": { "type": "string" },
+        "documentName": { "type": "string" },
+        "pageId": { "type": "string" },
+        "rootNodeId": { "type": "string" },
+        "exportedAt": { "type": "string" }
+      }
+    },
+    "rendererHint": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["frame", "text", "image", "svg"] },
+        "display": { "enum": ["absolute", "flow"] },
+        "layoutMode": { "enum": ["none", "horizontal", "vertical"] },
+        "clipContent": { "type": "boolean" },
+        "background": { "$ref": "#/$defs/paint" },
+        "valueSource": { "enum": ["editableField", "static"] },
+        "fieldId": { "type": "string" },
+        "fontFamily": { "type": "string" },
+        "fontWeight": { "type": "number" },
+        "fontSize": { "type": "number" },
+        "lineHeightPx": { "type": "number" },
+        "letterSpacingPx": { "type": "number" },
+        "alignHorizontal": { "enum": ["left", "center", "right"] },
+        "alignVertical": { "enum": ["top", "center", "bottom"] },
+        "autoResize": { "enum": ["none", "width", "height", "widthAndHeight"] },
+        "overflow": { "enum": ["visible", "clip", "ellipsis"] },
+        "assetId": { "type": "string" },
+        "objectFit": { "enum": ["cover", "contain", "fill"] },
+        "figmaScaleMode": { "type": "string" },
+        "imageTransform": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "cropMode": {
+          "enum": ["figmaImageTransform", "objectFitOnly", "unknown"]
+        },
+        "viewBox": { "$ref": "#/$defs/rect" },
+        "preserveAspectRatio": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "frame" } } },
+          "then": {
+            "properties": { "display": { "enum": ["absolute", "flow"] } },
+            "required": ["display"]
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "const": "text" } } },
+          "then": {
+            "properties": {
+              "valueSource": { "enum": ["editableField", "static"] },
+              "fontFamily": { "type": "string" },
+              "fontWeight": { "type": "number" },
+              "fontSize": { "type": "number" },
+              "lineHeightPx": { "type": "number" },
+              "letterSpacingPx": { "type": "number" },
+              "alignHorizontal": { "enum": ["left", "center", "right"] },
+              "alignVertical": { "enum": ["top", "center", "bottom"] },
+              "autoResize": {
+                "enum": ["none", "width", "height", "widthAndHeight"]
+              }
+            },
+            "required": [
+              "valueSource",
+              "fontFamily",
+              "fontWeight",
+              "fontSize",
+              "lineHeightPx",
+              "letterSpacingPx",
+              "alignHorizontal",
+              "alignVertical",
+              "autoResize"
+            ]
+          }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["image", "svg"] } } },
+          "then": {
+            "properties": { "assetId": { "type": "string" } },
+            "required": ["assetId"]
+          }
+        }
+      ]
+    },
+    "assetStrategy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "embeddedAssetCount",
+        "remoteAssetCount",
+        "totalEmbeddedBytesApprox",
+        "externalizeThresholdBytes",
+        "diagnostics"
+      ],
+      "properties": {
+        "mode": { "enum": ["preserve", "externalize-recommended"] },
+        "embeddedAssetCount": { "type": "integer", "minimum": 0 },
+        "remoteAssetCount": { "type": "integer", "minimum": 0 },
+        "totalEmbeddedBytesApprox": { "type": "number", "minimum": 0 },
+        "externalizeThresholdBytes": { "type": "number", "minimum": 0 },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["assetId", "code", "severity", "message"],
+            "properties": {
+              "assetId": { "type": "string" },
+              "code": { "type": "string" },
+              "severity": { "enum": ["info", "warning"] },
+              "message": { "type": "string" },
+              "approximateBytes": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "metadata": { "type": "object" },
+        "designHints": { "type": "array", "items": { "type": "object" } },
+        "figmaScreenshot": { "type": "object" },
+        "visualDiff": { "type": "object" },
+        "rendererHintCoverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["hintedNodes", "totalNodes", "percentage"],
+          "properties": {
+            "hintedNodes": { "type": "integer", "minimum": 0 },
+            "totalNodes": { "type": "integer", "minimum": 0 },
+            "percentage": { "type": "number", "minimum": 0, "maximum": 100 }
+          }
+        }
+      }
+    },
+    "packageDiagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["severity", "code", "message"],
+      "properties": {
+        "severity": { "enum": ["info", "warning", "error"] },
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string" },
+        "nodeId": { "type": "string" },
+        "nodeName": { "type": "string" },
+        "assetId": { "type": "string", "minLength": 1 },
+        "parentId": { "type": "string" },
+        "parentName": { "type": "string" },
+        "parentLayoutMode": { "type": "string" },
+        "affectedAxis": { "enum": ["horizontal", "vertical"] },
+        "rawFigmaValue": {},
+        "normalizedValue": {},
+        "details": { "type": "object" }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "composite": false,
+    "baseUrl": ".",
+    "paths": {
+      "@sleinity/template-core": ["../template-core/src/index.ts"],
+      "@sleinity/template-browser": ["../template-browser/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "linear-gradient-intake-evidence-v1",
+  "status": "exploratory-insufficient",
+  "auditDate": "2026-07-17",
+  "productionBehaviorChanged": false,
+  "registeredFixture": false,
+  "fixture": {
+    "path": "/Users/niels/Documents/Templates/template-package-adventure-travel-pinterest-pin-ad.zip",
+    "filename": "template-package-adventure-travel-pinterest-pin-ad.zip",
+    "byteSize": 331707,
+    "zipSha256": "5e3c2c71384f1e809e12331927f5b1dfaffb8e259e22aec007f6ec1abf7a6147",
+    "templateJsonSha256": "d3dc35274bb0e1574badf19099db058148ab2e7179edb48652ea5dfb541d14e4",
+    "previewSha256": "c833d985625729a1e03961c7801ddc263616b67ebd39b377d006fc173c4340cb",
+    "previewDimensions": { "width": 1000, "height": 1500 },
+    "packageId": "pkg_451_97_1784285744004",
+    "rootNodeId": "451:97",
+    "schemaVersion": "1.0",
+    "packageContract": "template-package-v1",
+    "exporterVersion": "0.6.0",
+    "exportedAt": "2026-07-17T10:55:43.966Z"
+  },
+  "gradientNode": {
+    "nodeId": "I451:97;7:2",
+    "name": "Image",
+    "nodeType": "VECTOR",
+    "relativeBounds": { "x": 90, "y": 300, "width": 820, "height": 1020 },
+    "rotation": 0,
+    "canonicalPaint": {
+      "type": "GRADIENT_LINEAR",
+      "opacity": 1,
+      "visible": true,
+      "blendMode": "NORMAL"
+    },
+    "rawPaint": {
+      "type": "GRADIENT_LINEAR",
+      "opacity": 1,
+      "visible": true,
+      "blendMode": "NORMAL",
+      "gradientStops": [
+        { "position": 0, "color": { "r": 0.3607843220233917, "g": 0.14901961386203766, "b": 0.21960784494876862, "a": 1 } },
+        { "position": 1, "color": { "r": 0.7490196228027344, "g": 0.8313725590705872, "b": 1, "a": 1 } }
+      ],
+      "gradientTransform": [
+        [6.123234262925839e-17, 1, 0],
+        [-1, 6.123234262925839e-17, 1]
+      ]
+    },
+    "matrixInterpretation": {
+      "determinant": 1,
+      "supportedInference": "node-normalized-to-gradient-normalized-for-this-orthonormal-case",
+      "inverseStageCount": 1,
+      "derivedStartHandleNormalized": { "x": 0.5, "y": 0 },
+      "derivedEndHandleNormalized": { "x": 0.5, "y": 1 },
+      "derivedStartHandlePixels": { "x": 410, "y": 0 },
+      "derivedEndHandlePixels": { "x": 410, "y": 1020 }
+    },
+    "vectorAsset": {
+      "assetId": "asset:svg:8977914d",
+      "path": "assets/asset_image_002.svg",
+      "byteSize": 499,
+      "sha256": "92f547dd2f0585cb1bf54072f9e8dbd09cc6089c8f0fc216642ffa3d69d4773b",
+      "gradientUnits": "userSpaceOnUse",
+      "x1": 410,
+      "y1": 0,
+      "x2": 410,
+      "y2": 1020,
+      "pixelOwner": "external-svg-vector-asset"
+    }
+  },
+  "gateAssessment": {
+    "matrixDirection": "partial-one-orthonormal-case",
+    "coordinateSpace": "partial-normalized-full-height-case",
+    "handleDerivation": "partial-vertical-start-end-only",
+    "stopOrderingAndInterpolation": "partial-two-opaque-endpoints-only",
+    "stopAlphaVsPaintOpacity": "unresolved-all-one",
+    "rotationAndNonSquare": "partial-non-square-vertical-only",
+    "independentCorners": "unresolved-vector-path",
+    "resize": "unresolved",
+    "singularRuntimeOwner": "svg-asset-owner-only-not-canonical-gradient",
+    "crossSurfaceAuthority": "unverified"
+  },
+  "decision": "keep-gate-open-no-production-implementation"
+}

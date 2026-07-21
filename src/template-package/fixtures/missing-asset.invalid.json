@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.invalid-missing-asset",
+  "name": "Missing Asset",
+  "canvas": { "width": 1080, "height": 1920 },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root", "name": "Frame", "type": "FRAME", "parentId": null, "children": ["image"],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1920 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1920 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 1920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "image": {
+      "id": "image", "name": "Missing Image", "type": "IMAGE", "parentId": "root", "children": [],
+      "bounds": { "absolute": { "x": 160, "y": 240, "width": 760, "height": 1064 }, "relative": { "x": 160, "y": 240, "width": 760, "height": 1064 } },
+      "positioning": { "mode": "ABSOLUTE" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 760 }, "vertical": { "mode": "FIXED", "value": 1064 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null },
+      "image": { "assetId": "does-not-exist", "scaleMode": "FILL" }
+    }
+  },
+  "editableFields": [],
+  "assets": {}
+}

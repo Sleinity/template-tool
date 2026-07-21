@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "linear-gradient-intake-evidence-v1",
+  "status": "substantial-partial-authority-gate-open",
+  "auditDate": "2026-07-17",
+  "productionBehaviorChanged": false,
+  "registeredFixture": false,
+  "fixture": {
+    "path": "/Users/niels/Documents/Templates/template-package-gradient-test.zip",
+    "filename": "template-package-gradient-test.zip",
+    "byteSize": 470098,
+    "zipSha256": "aa55a9c4413f72c443b646bcf257cc21e6fbb465e500da0decbe7cbb184b01f8",
+    "templateJsonSha256": "35763ee58e868cbd9446ee602608afd32500c4042535a204474becf9eca964f8",
+    "previewSha256": "751f48e63e167c6792173a3eaad24d8293550c4cacd653bebbcd4ffcf3b2cc67",
+    "previewDimensions": { "width": 1000, "height": 1500 },
+    "mcpSha256": "24e7517d484a84936bb4b94422a0d7c52cf4e9b567ef0ea992c61bead17ceff3",
+    "packageId": "pkg_451_135_1784286420523",
+    "rootNodeId": "451:135",
+    "schemaVersion": "1.0",
+    "packageContract": "template-package-v1",
+    "exporterVersion": "0.6.0",
+    "exportedAt": "2026-07-17T11:07:00.517Z",
+    "nodeCount": 7,
+    "assetCount": 0,
+    "fontCount": 0,
+    "gradientCount": 6
+  },
+  "authorityFindings": {
+    "canonicalGradientDetailsPresent": false,
+    "rawGradientDetailsPresent": true,
+    "rawPairing": "single-paint-source-index-0",
+    "matrixDirection": "normalized-node-local-to-normalized-gradient",
+    "paintingInverseCount": 1,
+    "stopAxis": "gradient-coordinate-x",
+    "nodeTransformOrder": "gradient-local-before-node-transform",
+    "stopOrder": "source-order",
+    "stopPositions": "preserved-not-redistributed",
+    "stopColorInterpolation": "straight-rgb",
+    "stopAlphaInterpolation": "separate-alpha-then-source-over",
+    "paintOpacity": "unresolved-all-values-one",
+    "cornerEvidence": "uniform-clamped-only",
+    "resizeEvidence": "static-size-aspect-pair-only",
+    "runtimeOwner": "unsupported",
+    "crossSurfaceAuthority": "unverified"
+  },
+  "cases": [
+    { "nodeId": "451:135", "type": "FRAME", "width": 1000, "height": 1500, "stopCount": 2, "determinant": 1, "case": "vertical-root-control" },
+    { "nodeId": "451:170", "type": "RECTANGLE", "width": 58, "height": 120, "stopCount": 2, "determinant": 1, "case": "non-square-nonuniform-stops-pill" },
+    { "nodeId": "451:179", "type": "RECTANGLE", "width": 120, "height": 120, "stopCount": 2, "determinant": 1, "case": "size-aspect-pair-circle" },
+    { "nodeId": "451:175", "type": "RECTANGLE", "width": 240, "height": 240, "stopCount": 2, "determinant": 0.4999999554879082, "case": "diagonal-general-transform" },
+    { "nodeId": "451:177", "type": "RECTANGLE", "width": 120, "height": 120, "stopCount": 2, "determinant": 1, "case": "transparent-stop" },
+    { "nodeId": "451:181", "type": "RECTANGLE", "width": 160.00000699382144, "height": 160.00000699382144, "stopCount": 3, "determinant": 1, "case": "three-stops-node-rotation" }
+  ],
+  "remainingGateEvidence": [
+    "selected-handle-coordinates-for-diagonal-transform",
+    "paint-opacity-below-one",
+    "four-independent-corner-radii",
+    "source-reviewed-same-node-resize-state"
+  ],
+  "decision": "keep-gate-open-no-production-contract-or-implementation"
+}

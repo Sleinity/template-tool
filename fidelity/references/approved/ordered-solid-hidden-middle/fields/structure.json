@@ -1,0 +1,679 @@
+{
+  "assetReadiness": {
+    "backgrounds": [],
+    "images": []
+  },
+  "diagnostics": [
+    {
+      "code": "resolved-ordered-solid-stack-supported",
+      "message": "Ordered SOLID stack uses one revisioned SVG owner for 2 visible paint(s).",
+      "nodeId": "459:55",
+      "severity": "info"
+    }
+  ],
+  "fixtureHashes": {
+    "embeddedPreviewSha256": "c0aad7f89d73428ced5bb6cee903ee78f2f33c40202ae68537f8d36bc7293cf1",
+    "modelSha256": "c407eaaa12b5e0bff18f32d1fbf7ee3ac707d3fd4fb5df60ef98e6377307a76e",
+    "zipSha256": "644950e26b06d7555f48b260c8d18b0aa2fd16f3fd9a3bcb85093b3fe1b696b1"
+  },
+  "fixtureId": "ordered-solid-hidden-middle",
+  "fontReadiness": {
+    "fonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      }
+    ],
+    "status": "loaded"
+  },
+  "nodeCount": 2,
+  "nodes": [
+    {
+      "bounds": {
+        "height": 1500,
+        "width": 1000,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "459:54",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "FRAME",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "dom-css",
+        "data-package-primitive-clipping-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:20b0460b",
+        "data-package-primitive-kind": "rectangular-frame",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:7dd4e09e",
+        "data-package-primitive-paint-strategy": "dom-css-single-solid",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-revision": "primitive-source-v1:dee7baad",
+        "data-package-primitive-stroke-strategy": "none",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-3a6e40e657f58114",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -32693,
+          "y": -20597
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "459:54",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 0,
+      "parentId": null,
+      "positioningRole": "ROOT",
+      "primitiveAppearance": {
+        "ancestorClipChain": [],
+        "axisAligned": true,
+        "backend": "dom-css",
+        "clippingBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "computed": {
+          "backgroundColor": "rgb(242, 239, 232)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:20b0460b",
+        "kind": "rectangular-frame",
+        "linearGradient": null,
+        "orderedSolidStack": null,
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:7dd4e09e"
+        ],
+        "paintStrategy": "dom-css-single-solid",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceRevision": "primitive-source-v1:dee7baad",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "none"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -32693,
+          "y": -20597
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 880,
+        "width": 709.9998,
+        "x": 145,
+        "y": 310
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "459:55",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-ordered-solid-stack": "{\"schemaVersion\":\"resolved-ordered-solid-stack-v1\",\"nodeId\":\"459:55\",\"canonicalSourceRevision\":\"primitive-source-v1:959f266e\",\"resolvedStackRevision\":\"ordered-solid-stack-v1:275db28a\",\"primitiveGeometryRevision\":\"primitive-geometry-v1:bc20af7b\",\"currentBounds\":{\"x\":145,\"y\":310,\"width\":710,\"height\":880},\"cornerGeometry\":{\"order\":[\"top-left\",\"top-right\",\"bottom-right\",\"bottom-left\"],\"raw\":0,\"uniform\":true,\"requested\":[0,0,0,0],\"effective\":[0,0,0,0],\"css\":\"0px 0px 0px 0px\",\"clamped\":false,\"normalizationScale\":1,\"normalizationScales\":[1,1,1,1],\"clampReason\":\"none\"},\"orderedPaints\":[{\"sourceIndex\":0,\"type\":\"SOLID\",\"visible\":true,\"visibilitySource\":\"explicit\",\"rgb\":{\"r\":0,\"g\":0.983,\"b\":1},\"canonicalColorAlpha\":1,\"paintOpacity\":0.3499999940395355,\"effectiveSourceAlpha\":0.3499999940395355,\"blendMode\":\"NORMAL\",\"role\":\"ordinary-visible\",\"capability\":\"source-certified-ordered-solid-layer\",\"paintRevision\":\"ordered-solid-paint-v1:c6b403d5\",\"provenance\":{\"canonicalPath\":\"nodes.459:55.appearance.fills.0\",\"rawFigmaPath\":null,\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.35,\"serializedPaintOpacity\":0.3499999940395355,\"conflicts\":[]},\"source\":{\"type\":\"SOLID\",\"color\":{\"r\":0,\"g\":0.983,\"b\":1,\"a\":1},\"opacity\":0.3499999940395355,\"visible\":true,\"blendMode\":\"NORMAL\",\"solidPaintSource\":{\"schemaVersion\":\"solid-paint-source-v1\",\"sourceIndex\":0,\"pairing\":\"source-index\",\"canonicalPath\":\"nodes.459:55.appearance.fills.0\",\"rawFigmaPath\":null,\"sourceContract\":\"figma-plugin-api-solid-paint-rgb-opacity\",\"exporterCompatibility\":\"plugin-0.6.0-mirrored-color-alpha\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.35,\"serializedPaintOpacity\":0.3499999940395355,\"sourcePaintOpacity\":0.3499999940395355,\"canonicalColorAlpha\":1,\"canonicalPaintOpacity\":0.3499999940395355,\"effectiveOpacity\":0.3499999940395355,\"effectiveOpacityRule\":\"paint-opacity-once\",\"equalityTolerance\":0.000001,\"confidenceBasis\":\"figma-contract-plus-affected-exporter-equal-values\",\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"conflicts\":[]}}},{\"sourceIndex\":1,\"type\":\"SOLID\",\"visible\":false,\"visibilitySource\":\"explicit\",\"rgb\":{\"r\":1,\"g\":0,\"b\":0.617},\"canonicalColorAlpha\":1,\"paintOpacity\":0.550000011920929,\"effectiveSourceAlpha\":0.550000011920929,\"blendMode\":\"NORMAL\",\"role\":\"hidden-preserved\",\"capability\":\"source-certified-ordered-solid-layer\",\"paintRevision\":\"ordered-solid-paint-v1:231659f7\",\"provenance\":{\"canonicalPath\":\"nodes.459:55.appearance.fills.1\",\"rawFigmaPath\":null,\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.55,\"serializedPaintOpacity\":0.550000011920929,\"conflicts\":[]},\"source\":{\"type\":\"SOLID\",\"color\":{\"r\":1,\"g\":0,\"b\":0.617,\"a\":1},\"opacity\":0.550000011920929,\"visible\":false,\"blendMode\":\"NORMAL\",\"solidPaintSource\":{\"schemaVersion\":\"solid-paint-source-v1\",\"sourceIndex\":1,\"pairing\":\"source-index\",\"canonicalPath\":\"nodes.459:55.appearance.fills.1\",\"rawFigmaPath\":null,\"sourceContract\":\"figma-plugin-api-solid-paint-rgb-opacity\",\"exporterCompatibility\":\"plugin-0.6.0-mirrored-color-alpha\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.55,\"serializedPaintOpacity\":0.550000011920929,\"sourcePaintOpacity\":0.550000011920929,\"canonicalColorAlpha\":1,\"canonicalPaintOpacity\":0.550000011920929,\"effectiveOpacity\":0.550000011920929,\"effectiveOpacityRule\":\"paint-opacity-once\",\"equalityTolerance\":0.000001,\"confidenceBasis\":\"figma-contract-plus-affected-exporter-equal-values\",\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"conflicts\":[]}}},{\"sourceIndex\":2,\"type\":\"SOLID\",\"visible\":true,\"visibilitySource\":\"explicit\",\"rgb\":{\"r\":0.975,\"g\":1,\"b\":0.383},\"canonicalColorAlpha\":1,\"paintOpacity\":0.75,\"effectiveSourceAlpha\":0.75,\"blendMode\":\"NORMAL\",\"role\":\"ordinary-visible\",\"capability\":\"source-certified-ordered-solid-layer\",\"paintRevision\":\"ordered-solid-paint-v1:c507aa4b\",\"provenance\":{\"canonicalPath\":\"nodes.459:55.appearance.fills.2\",\"rawFigmaPath\":null,\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.75,\"serializedPaintOpacity\":0.75,\"conflicts\":[]},\"source\":{\"type\":\"SOLID\",\"color\":{\"r\":0.975,\"g\":1,\"b\":0.383,\"a\":1},\"opacity\":0.75,\"visible\":true,\"blendMode\":\"NORMAL\",\"solidPaintSource\":{\"schemaVersion\":\"solid-paint-source-v1\",\"sourceIndex\":2,\"pairing\":\"source-index\",\"canonicalPath\":\"nodes.459:55.appearance.fills.2\",\"rawFigmaPath\":null,\"sourceContract\":\"figma-plugin-api-solid-paint-rgb-opacity\",\"exporterCompatibility\":\"plugin-0.6.0-mirrored-color-alpha\",\"opacityDisposition\":\"mirrored-compatibility-alias\",\"serializedColorAlpha\":0.75,\"serializedPaintOpacity\":0.75,\"sourcePaintOpacity\":0.75,\"canonicalColorAlpha\":1,\"canonicalPaintOpacity\":0.75,\"effectiveOpacity\":0.75,\"effectiveOpacityRule\":\"paint-opacity-once\",\"equalityTolerance\":0.000001,\"confidenceBasis\":\"figma-contract-plus-affected-exporter-equal-values\",\"normalizationRevision\":\"solid-paint-opacity-normalization-v1\",\"conflicts\":[]}}}],\"visiblePaintIndices\":[0,2],\"capability\":\"source-certified-ordered-solid-stack\",\"runtimeOwner\":\"svg-ordered-solid-stack\",\"fallbackReasons\":[],\"provenance\":{\"canonicalPath\":\"nodes.459:55.appearance.fills\",\"rawFigmaPaths\":[],\"normalizationRevisions\":[\"solid-paint-opacity-normalization-v1\"]}}",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"459:54\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:bc20af7b",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible,1:SOLID:hidden-preserved,2:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:c6b403d5,primitive-paint-v1:231659f7,primitive-paint-v1:c507aa4b",
+        "data-package-primitive-paint-strategy": "svg-ordered-solid-stack",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":310,\"width\":710,\"height\":880}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":310,\"width\":710,\"height\":880}",
+        "data-package-primitive-source-revision": "primitive-source-v1:959f266e",
+        "data-package-primitive-stroke-strategy": "none",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-3a6e40e657f58114",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-ordered-solid-stack-supported",
+          "message": "Ordered SOLID stack uses one revisioned SVG owner for 2 visible paint(s).",
+          "nodeId": "459:55",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 880,
+          "width": 710,
+          "x": -32548,
+          "y": -20287
+        },
+        "relative": {
+          "height": 880,
+          "width": 710,
+          "x": 145,
+          "y": 310
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "459:55",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 1,
+      "parentId": "459:54",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "459:54"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedSolidClip": "primitive-geometry-v1:bc20af7b",
+          "svgOrderedSolidGeometryPath": "M 0 0 H 710 L 710 0 V 880 L 710 880 H 0 L 0 880 V 0 L 0 0 Z",
+          "svgOrderedSolidLayerCount": 2,
+          "svgOrderedSolidStack": "ordered-solid-stack-v1:275db28a",
+          "svgStrategy": "svg-ordered-solid-stack",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:bc20af7b",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedSolidStack": {
+          "canonicalSourceRevision": "primitive-source-v1:959f266e",
+          "capability": "source-certified-ordered-solid-stack",
+          "cornerGeometry": {
+            "clampReason": "none",
+            "clamped": false,
+            "css": "0px 0px 0px 0px",
+            "effective": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "normalizationScale": 1,
+            "normalizationScales": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "order": [
+              "top-left",
+              "top-right",
+              "bottom-right",
+              "bottom-left"
+            ],
+            "raw": 0,
+            "requested": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "uniform": true
+          },
+          "currentBounds": {
+            "height": 880,
+            "width": 710,
+            "x": 145,
+            "y": 310
+          },
+          "fallbackReasons": [],
+          "nodeId": "459:55",
+          "orderedPaints": [
+            {
+              "blendMode": "NORMAL",
+              "canonicalColorAlpha": 1,
+              "capability": "source-certified-ordered-solid-layer",
+              "effectiveSourceAlpha": 0.35,
+              "paintOpacity": 0.35,
+              "paintRevision": "ordered-solid-paint-v1:c6b403d5",
+              "provenance": {
+                "canonicalPath": "nodes.459:55.appearance.fills.0",
+                "conflicts": [],
+                "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                "opacityDisposition": "mirrored-compatibility-alias",
+                "rawFigmaPath": null,
+                "serializedColorAlpha": 0.35,
+                "serializedPaintOpacity": 0.35
+              },
+              "rgb": {
+                "b": 1,
+                "g": 0.983,
+                "r": 0
+              },
+              "role": "ordinary-visible",
+              "source": {
+                "blendMode": "NORMAL",
+                "color": {
+                  "a": 1,
+                  "b": 1,
+                  "g": 0.983,
+                  "r": 0
+                },
+                "opacity": 0.35,
+                "solidPaintSource": {
+                  "canonicalColorAlpha": 1,
+                  "canonicalPaintOpacity": 0.35,
+                  "canonicalPath": "nodes.459:55.appearance.fills.0",
+                  "confidenceBasis": "figma-contract-plus-affected-exporter-equal-values",
+                  "conflicts": [],
+                  "effectiveOpacity": 0.35,
+                  "effectiveOpacityRule": "paint-opacity-once",
+                  "equalityTolerance": 0,
+                  "exporterCompatibility": "plugin-0.6.0-mirrored-color-alpha",
+                  "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                  "opacityDisposition": "mirrored-compatibility-alias",
+                  "pairing": "source-index",
+                  "rawFigmaPath": null,
+                  "schemaVersion": "solid-paint-source-v1",
+                  "serializedColorAlpha": 0.35,
+                  "serializedPaintOpacity": 0.35,
+                  "sourceContract": "figma-plugin-api-solid-paint-rgb-opacity",
+                  "sourceIndex": 0,
+                  "sourcePaintOpacity": 0.35
+                },
+                "type": "SOLID",
+                "visible": true
+              },
+              "sourceIndex": 0,
+              "type": "SOLID",
+              "visibilitySource": "explicit",
+              "visible": true
+            },
+            {
+              "blendMode": "NORMAL",
+              "canonicalColorAlpha": 1,
+              "capability": "source-certified-ordered-solid-layer",
+              "effectiveSourceAlpha": 0.55,
+              "paintOpacity": 0.55,
+              "paintRevision": "ordered-solid-paint-v1:231659f7",
+              "provenance": {
+                "canonicalPath": "nodes.459:55.appearance.fills.1",
+                "conflicts": [],
+                "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                "opacityDisposition": "mirrored-compatibility-alias",
+                "rawFigmaPath": null,
+                "serializedColorAlpha": 0.55,
+                "serializedPaintOpacity": 0.55
+              },
+              "rgb": {
+                "b": 0.617,
+                "g": 0,
+                "r": 1
+              },
+              "role": "hidden-preserved",
+              "source": {
+                "blendMode": "NORMAL",
+                "color": {
+                  "a": 1,
+                  "b": 0.617,
+                  "g": 0,
+                  "r": 1
+                },
+                "opacity": 0.55,
+                "solidPaintSource": {
+                  "canonicalColorAlpha": 1,
+                  "canonicalPaintOpacity": 0.55,
+                  "canonicalPath": "nodes.459:55.appearance.fills.1",
+                  "confidenceBasis": "figma-contract-plus-affected-exporter-equal-values",
+                  "conflicts": [],
+                  "effectiveOpacity": 0.55,
+                  "effectiveOpacityRule": "paint-opacity-once",
+                  "equalityTolerance": 0,
+                  "exporterCompatibility": "plugin-0.6.0-mirrored-color-alpha",
+                  "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                  "opacityDisposition": "mirrored-compatibility-alias",
+                  "pairing": "source-index",
+                  "rawFigmaPath": null,
+                  "schemaVersion": "solid-paint-source-v1",
+                  "serializedColorAlpha": 0.55,
+                  "serializedPaintOpacity": 0.55,
+                  "sourceContract": "figma-plugin-api-solid-paint-rgb-opacity",
+                  "sourceIndex": 1,
+                  "sourcePaintOpacity": 0.55
+                },
+                "type": "SOLID",
+                "visible": false
+              },
+              "sourceIndex": 1,
+              "type": "SOLID",
+              "visibilitySource": "explicit",
+              "visible": false
+            },
+            {
+              "blendMode": "NORMAL",
+              "canonicalColorAlpha": 1,
+              "capability": "source-certified-ordered-solid-layer",
+              "effectiveSourceAlpha": 0.75,
+              "paintOpacity": 0.75,
+              "paintRevision": "ordered-solid-paint-v1:c507aa4b",
+              "provenance": {
+                "canonicalPath": "nodes.459:55.appearance.fills.2",
+                "conflicts": [],
+                "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                "opacityDisposition": "mirrored-compatibility-alias",
+                "rawFigmaPath": null,
+                "serializedColorAlpha": 0.75,
+                "serializedPaintOpacity": 0.75
+              },
+              "rgb": {
+                "b": 0.383,
+                "g": 1,
+                "r": 0.975
+              },
+              "role": "ordinary-visible",
+              "source": {
+                "blendMode": "NORMAL",
+                "color": {
+                  "a": 1,
+                  "b": 0.383,
+                  "g": 1,
+                  "r": 0.975
+                },
+                "opacity": 0.75,
+                "solidPaintSource": {
+                  "canonicalColorAlpha": 1,
+                  "canonicalPaintOpacity": 0.75,
+                  "canonicalPath": "nodes.459:55.appearance.fills.2",
+                  "confidenceBasis": "figma-contract-plus-affected-exporter-equal-values",
+                  "conflicts": [],
+                  "effectiveOpacity": 0.75,
+                  "effectiveOpacityRule": "paint-opacity-once",
+                  "equalityTolerance": 0,
+                  "exporterCompatibility": "plugin-0.6.0-mirrored-color-alpha",
+                  "normalizationRevision": "solid-paint-opacity-normalization-v1",
+                  "opacityDisposition": "mirrored-compatibility-alias",
+                  "pairing": "source-index",
+                  "rawFigmaPath": null,
+                  "schemaVersion": "solid-paint-source-v1",
+                  "serializedColorAlpha": 0.75,
+                  "serializedPaintOpacity": 0.75,
+                  "sourceContract": "figma-plugin-api-solid-paint-rgb-opacity",
+                  "sourceIndex": 2,
+                  "sourcePaintOpacity": 0.75
+                },
+                "type": "SOLID",
+                "visible": true
+              },
+              "sourceIndex": 2,
+              "type": "SOLID",
+              "visibilitySource": "explicit",
+              "visible": true
+            }
+          ],
+          "primitiveGeometryRevision": "primitive-geometry-v1:bc20af7b",
+          "provenance": {
+            "canonicalPath": "nodes.459:55.appearance.fills",
+            "normalizationRevisions": [
+              "solid-paint-opacity-normalization-v1"
+            ],
+            "rawFigmaPaths": []
+          },
+          "resolvedStackRevision": "ordered-solid-stack-v1:275db28a",
+          "runtimeOwner": "svg-ordered-solid-stack",
+          "schemaVersion": "resolved-ordered-solid-stack-v1",
+          "visiblePaintIndices": [
+            0,
+            2
+          ]
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible,1:SOLID:hidden-preserved,2:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:c6b403d5",
+          "primitive-paint-v1:231659f7",
+          "primitive-paint-v1:c507aa4b"
+        ],
+        "paintStrategy": "svg-ordered-solid-stack",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 880,
+          "width": 710,
+          "x": 145,
+          "y": 310
+        },
+        "sourceBounds": {
+          "height": 880,
+          "width": 710,
+          "x": 145,
+          "y": 310
+        },
+        "sourceRevision": "primitive-source-v1:959f266e",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "none"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 880,
+          "width": 710,
+          "x": -32548,
+          "y": -20287
+        },
+        "relative": {
+          "height": 880,
+          "width": 710,
+          "x": 145,
+          "y": 310
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    }
+  ],
+  "orderedNodeIds": [
+    "459:54",
+    "459:55"
+  ],
+  "packageVersion": "1.0",
+  "rendererFallbacks": [],
+  "rendererMode": "static",
+  "resolvedTreeVersion": "resolved-render-tree-v1",
+  "rootDimensions": {
+    "background": "rgba(242, 239, 232, 1)",
+    "height": 1500,
+    "width": 1000
+  },
+  "rootNodeId": "459:54",
+  "route": "/templates/new",
+  "runtimeRouting": {
+    "compatibilityNodeCount": 2,
+    "fallbacks": null,
+    "iterationCount": 1,
+    "measurementCount": 0,
+    "mode": "authoritative",
+    "readiness": "unsupported",
+    "recomputedNodeIds": [],
+    "revision": "ab684c1b|84e23576",
+    "routedNodeCount": 0,
+    "settlementId": "core-3a6e40e657f58114",
+    "settlementMs": 0.09999999776482582
+  },
+  "schemaVersion": 1,
+  "surface": "fields",
+  "warnings": []
+}

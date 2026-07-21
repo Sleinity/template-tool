@@ -1,0 +1,62 @@
+# Dependencies and build output
+node_modules/
+dist/
+apps/*/dist/
+packages/*/dist/
+examples/*/dist/
+.pnpm-store/
+*.tsbuildinfo
+
+# Local environment and editor files
+.env
+.env.local
+.env.*.local
+.env.swp
+*.swp
+*.swo
+.DS_Store
+.idea/
+.vscode/
+
+# Local logs, coverage, and package archives
+*.log
+coverage/
+*.tgz
+.changeset/pre.json
+
+# Local-only fixture and font directories. The committed manifests retain
+# hash-gated identities; real source binaries remain external unless their
+# redistribution rights are explicitly approved.
+fidelity/private-assets/
+fidelity/local-archive/
+
+# Renderer-fidelity run output is retained locally, not committed.
+fidelity/artifacts/
+fidelity/candidates/
+fidelity/update-evidence/
+fidelity/scene-graph/candidates/
+fidelity/scene-graph/update-evidence/
+fidelity/settlement/candidates/
+fidelity/settlement/browser-scenarios/
+fidelity/settlement/update-evidence/
+fidelity/runtime-routing/
+fidelity/appearance-contracts/candidates/
+
+# Large generated evidence remains in the local pre-Git backup. Reviewed,
+# compact evidence may be committed deliberately by force-adding an exact file.
+fidelity/evidence/**
+!fidelity/evidence/milestone-7-3-gradient-intake/
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test/
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test/audit.json
+!fidelity/evidence/milestone-7-3-gradient-intake/adventure-travel-pinterest-pin-ad/
+!fidelity/evidence/milestone-7-3-gradient-intake/adventure-travel-pinterest-pin-ad/audit.json
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-2/
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-2/audit.json
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-3/
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-3/audit.json
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-4/
+!fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-4/audit.json
+!fidelity/evidence/phase-12-import-inspector-visible/
+!fidelity/evidence/phase-12-import-inspector-visible/REVIEW.md
+!fidelity/evidence/milestone-7-alpha-mask/
+!fidelity/evidence/milestone-7-alpha-mask/report.md

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.invalid-parent-child",
+  "name": "Invalid Parent Child",
+  "canvas": { "width": 1080, "height": 1920 },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root", "name": "Frame", "type": "FRAME", "parentId": null, "children": ["child"],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1920 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1920 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 1920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "child": {
+      "id": "child", "name": "Orphaned Rectangle", "type": "RECTANGLE", "parentId": "missing-parent", "children": [],
+      "bounds": { "absolute": { "x": 80, "y": 80, "width": 920, "height": 920 }, "relative": { "x": 80, "y": 80, "width": 920, "height": 920 } },
+      "positioning": { "mode": "ABSOLUTE" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 920 }, "vertical": { "mode": "FIXED", "value": 920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    }
+  },
+  "editableFields": [],
+  "assets": {}
+}

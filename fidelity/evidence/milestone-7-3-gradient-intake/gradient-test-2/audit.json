@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "linear-gradient-supplementary-intake-evidence-v1",
+  "status": "partial-authority-gate-open",
+  "auditDate": "2026-07-18",
+  "productionBehaviorChanged": false,
+  "registeredFixture": false,
+  "fixture": {
+    "path": "/Users/niels/Documents/Templates/template-package-gradient-test-2.zip",
+    "filename": "template-package-gradient-test-2.zip",
+    "byteSize": 588502,
+    "zipSha256": "c2a41a23ed57651f50406bf645779191480eca38514c2a748cbe5b064ad6890a",
+    "entries": [
+      {
+        "path": "template.json",
+        "byteSize": 39215,
+        "sha256": "e55bfdfce84b9c3dcf36913d6e95008456abfc50e59d8aa6e832d5436958066f"
+      },
+      {
+        "path": "preview.png",
+        "byteSize": 549065,
+        "sha256": "f585ca5e13695d1a04f85f8006570b7e8341d3f049e912a6ff0f30200c32d698",
+        "width": 1000,
+        "height": 1500
+      }
+    ],
+    "packageId": "pkg_451_135_1784370704869",
+    "rootNodeId": "451:135",
+    "schemaVersion": "1.0",
+    "packageContract": "template-package-v1",
+    "exporterVersion": "0.6.0",
+    "exportedAt": "2026-07-18T10:31:44.852Z",
+    "nodeCount": 10,
+    "assetCount": 0,
+    "fontCount": 0,
+    "editableFieldCount": 0,
+    "gradientCount": 9,
+    "selectedHandleFilesSupplied": 0
+  },
+  "sourceContinuity": {
+    "priorZipSha256": "aa55a9c4413f72c443b646bcf257cc21e6fbb465e500da0decbe7cbb184b01f8",
+    "priorPackageId": "pkg_451_135_1784286420523",
+    "priorRootNodeId": "451:135",
+    "sameRootNodeId": true,
+    "sameResizeCandidateNodeId": "451:175",
+    "sourceFileKeyPresentInSupplement": false
+  },
+  "supplementaryCases": {
+    "diagonalSquare": {
+      "nodeId": "454:34",
+      "width": 120,
+      "height": 120,
+      "determinant": 0.5000001788139521,
+      "derivedStartNormalized": [0.9999998807907318, -7.105424816502816e-15],
+      "derivedEndNormalized": [1.4210849633005633e-14, 0.9999997615814635],
+      "derivedThirdNormalized": [0.49999999999999645, -0.4999999403953659],
+      "selectedHandleComparison": "not-possible-no-handle-evidence-supplied"
+    },
+    "diagonalNonSquare": {
+      "nodeId": "451:175",
+      "width": 554,
+      "height": 240,
+      "determinant": 0.4301193591845731,
+      "derivedStartNormalized": [0.9999999569509116, 0.014040455049113387],
+      "derivedEndNormalized": [1.1664039265501814e-8, 0.9859595061661183],
+      "derivedThirdNormalized": [0.47344620853253455, -0.6366599814115601],
+      "derivedStartPixels": [553.999976150805, 3.369709211787213],
+      "derivedEndPixels": [0.000006461877753088005, 236.6302814798684],
+      "previewInteriorSampleMaxChannelError": 1,
+      "selectedHandleComparison": "not-possible-no-handle-evidence-supplied"
+    },
+    "independentCorners": {
+      "nodeId": "454:32",
+      "width": 240,
+      "height": 240,
+      "sourceRadiiTopLeftTopRightBottomRightBottomLeft": [0, 170, 80, 50],
+      "effectiveEdgeLocalRadii": [0, 163.2, 76.8, 50],
+      "centerGradientMaxChannelError": 0,
+      "topLeftGradientMaxChannelError": 0,
+      "topRightBackgroundMaxChannelError": 0,
+      "bottomRightBackgroundMaxChannelError": 0,
+      "bottomLeftBackgroundMaxChannelError": 1,
+      "finding": "source-preview-supports-full-box-gradient-evaluation-followed-by-milestone-7-2-edge-local-corner-clipping"
+    },
+    "opacityCandidate": {
+      "nodeId": "454:30",
+      "nodeOpacity": 0.699999988079071,
+      "canonicalPaintOpacity": 1,
+      "rawPaintOpacity": 1,
+      "stopAlphas": [1, 1],
+      "nodeOpacitySourceOverSampleMaxChannelError": 2,
+      "ignoreOpacitySampleMaxChannelError": 47,
+      "paintOpacityQuestion": "unresolved-node-opacity-is-pixel-equivalent-to-paint-opacity-for-this-single-isolated-fill"
+    },
+    "resizeCandidate": {
+      "nodeId": "451:175",
+      "beforeBounds": { "width": 240, "height": 240 },
+      "afterBounds": { "width": 554, "height": 240 },
+      "beforeStopPositions": [0.24519230425357819, 0.75],
+      "afterStopPositions": [0, 1],
+      "beforeDeterminant": 0.4999999554879082,
+      "afterDeterminant": 0.4301193591845731,
+      "finding": "same-node-id-but-gradient-stops-and-transform-changed-so-resize-only-semantics-are-not-isolated"
+    }
+  },
+  "gateQuestions": {
+    "matrixDirection": "accepted-existing-model-remains-consistent",
+    "oneInverseAxisDerivation": "accepted-existing-model-remains-consistent",
+    "selectedHandlesAndThirdHandle": "open",
+    "diagonalNonSquare": "source-preview-supported",
+    "paintOpacityBelowOne": "open-only-node-opacity-below-one",
+    "independentCornerClipping": "source-side-closed",
+    "sameSemanticNodeResize": "open-gradient-intent-changed",
+    "singularRuntimeOwner": "blocked-no-production-proposal",
+    "crossSurfaceAuthority": "unverified-runtime-gradient-owner-absent"
+  },
+  "remainingGateEvidence": [
+    "selected-start-end-third-handle-evidence-for-node-451:175-or-equivalent-transform-sensitive-case",
+    "paint-opacity-below-one-with-node-opacity-one",
+    "resize-export-from-current-451:175-state-with-stops-and-handle-intent-unchanged"
+  ],
+  "decision": "result-b-keep-gate-open-no-production-contract-or-implementation"
+}

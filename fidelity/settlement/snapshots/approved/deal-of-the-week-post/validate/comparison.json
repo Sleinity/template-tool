@@ -1,0 +1,152 @@
+{
+  "comparison": {
+    "equivalentWithinTolerance": true,
+    "fixture": {
+      "id": "deal-of-the-week-post",
+      "zipSha256": "96866712f10271407a182d3a905e112b2eb1b9170257c4d8fe6d05c9a7311b05"
+    },
+    "nodeResults": [
+      {
+        "category": "exact",
+        "maximumDelta": 0,
+        "nodeId": "225:117",
+        "note": "Settled bounds match the current DOM observation exactly.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:118",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:119",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:120",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:121",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:122",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:123",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:124",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:125",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:126",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:127",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:128",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:129",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:130",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "225:131",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      }
+    ],
+    "schemaVersion": "settlement-comparison-v1",
+    "summary": {
+      "contract-gap": 0,
+      "current-runtime-compatibility": 0,
+      "dependency-gap": 0,
+      "environment-variance": 0,
+      "exact": 1,
+      "likely-future-renderer-bug": 0,
+      "measurement-gap": 0,
+      "unsupported-preserved": 0,
+      "within-tolerance": 14
+    },
+    "surface": "validate",
+    "tolerances": {
+      "geometry": 0.25,
+      "text": 0.5
+    }
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2500574,
+      "canvas": {
+        "height": 1920,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "ab1a3ddb1b8b4b51e688f564f595b89a673c7abd4d5b715dc742923f15b99c49",
+      "filename": "template-package-deal-of-the-week-post.zip",
+      "id": "deal-of-the-week-post",
+      "packageVersion": "1.0",
+      "rootNodeId": "225:117",
+      "zipSha256": "96866712f10271407a182d3a905e112b2eb1b9170257c4d8fe6d05c9a7311b05"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "settlement-comparison-snapshot-v1"
+}

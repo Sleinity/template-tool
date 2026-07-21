@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "policy": "Real exporter ZIPs remain hash-gated in fidelity/fixtures.json. Source-level probes are explicitly non-authoritative and cannot become pixel references.",
+  "registeredEvidence": [
+    {
+      "id": "now-hiring-post",
+      "kind": "real-zip",
+      "status": "authoritative-core-layout-only",
+      "families": ["media-fill", "rectangle-clipping", "solid-fills", "text"],
+      "gaps": ["true-mask-chain", "gradients", "strokes", "effects", "non-pass-through-blend"]
+    },
+    {
+      "id": "deal-of-the-week-post",
+      "kind": "real-zip",
+      "status": "authoritative-existing-renderer",
+      "families": ["media-fill", "vector-asset", "solid-fills", "text"],
+      "gaps": ["semantic-vector-path-authority", "true-masks", "effects", "gradient-strokes"]
+    },
+    {
+      "id": "deal-of-the-week-banner",
+      "kind": "real-zip",
+      "status": "authoritative-existing-renderer",
+      "families": ["media-fill", "vector-asset", "solid-fills", "text"],
+      "gaps": ["semantic-vector-path-authority", "true-masks", "effects", "gradient-strokes"]
+    },
+    {
+      "id": "optimized-for-template-export",
+      "kind": "real-zip",
+      "status": "exploratory",
+      "families": ["media-fill", "solid-fills", "text"],
+      "gaps": ["exact-font-reference", "true-masks", "effects", "gradients", "strokes"]
+    },
+    {
+      "id": "deal-of-the-week-banner-crop",
+      "kind": "real-zip",
+      "status": "exploratory-static-source-certified",
+      "families": ["media-crop", "affine-image-placement", "rectangle-clipping", "solid-fills", "text"],
+      "gaps": ["crop-resize-source", "editable-image-replacement", "exact-font-reference", "solid-fill-source-fidelity"]
+    },
+    {
+      "id": "appearance-contract-probe",
+      "kind": "source-level-contract-probe",
+      "path": "src/template-package/fixtures/appearanceContractProbe.ts",
+      "status": "exploratory-non-render-authoritative",
+      "families": ["multiple-paints", "linear-gradient", "radial-gradient", "angular-gradient-stroke", "stroke-order", "mask-evidence", "effect-order", "blend-evidence", "components", "variables", "styles"],
+      "gaps": ["not-a-real-exporter-zip", "no-approved-pixel-reference", "masked-sibling-range-unresolved"]
+    },
+    {
+      "id": "circular-fill-inside-hug",
+      "kind": "source-level-routing-probe",
+      "path": "src/template-package/fixtures/circularFillInsideHug.ts",
+      "status": "exploratory-non-render-authoritative",
+      "families": ["fill-inside-hug-main-axis"],
+      "gaps": ["not-a-real-exporter-zip", "cycle-intentionally-not-solved"]
+    }
+  ],
+  "acquisitionBacklog": [
+    "real ZIP with FIT, TILE and adjustments plus source-reviewed CROP resize/replacement",
+    "real ZIP with semantic shapes, vector paths and boolean results",
+    "real ZIP with all gradient types, multiple paints, gradient strokes and dash/cap/join",
+    "real ZIP with alpha, luminance, vector, nested and sibling-range masks",
+    "real ZIP with ordered shadows, blur, blend modes, group isolation and opacity",
+    "real ZIP with components, instances, variants, variables and styles"
+  ]
+}

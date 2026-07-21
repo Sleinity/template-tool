@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.editor-parent-reflow",
+  "name": "Editor Parent Reflow",
+  "canvas": {
+    "width": 600,
+    "height": 800,
+    "background": "#94D0FF"
+  },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root",
+      "name": "Root",
+      "type": "FRAME",
+      "parentId": null,
+      "children": ["hero", "footer", "overlay"],
+      "bounds": {
+        "absolute": { "x": 0, "y": 0, "width": 600, "height": 800 },
+        "relative": { "x": 0, "y": 0, "width": 600, "height": 800 }
+      },
+      "positioning": "ROOT",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "STRETCH",
+        "clipContent": true
+      },
+      "sizing": {
+        "horizontal": { "mode": "FIXED", "value": 600, "min": null, "max": null },
+        "vertical": { "mode": "FIXED", "value": 800, "min": null, "max": null }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": 0,
+        "clipContent": true
+      }
+    },
+    "hero": {
+      "id": "hero",
+      "name": "Flexible Group",
+      "type": "GROUP",
+      "parentId": "root",
+      "children": [],
+      "bounds": {
+        "absolute": { "x": 0, "y": 0, "width": 600, "height": 680 },
+        "relative": { "x": 0, "y": 0, "width": 600, "height": 680 }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": true
+      },
+      "sizing": {
+        "horizontal": { "mode": "FILL", "value": null, "min": 0, "max": null },
+        "vertical": { "mode": "FILL", "value": null, "min": 120, "max": null }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": { "r": 0.58, "g": 0.82, "b": 1, "a": 1 }
+          }
+        ],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": 0,
+        "clipContent": true
+      }
+    },
+    "footer": {
+      "id": "footer",
+      "name": "Footer",
+      "type": "FRAME",
+      "parentId": "root",
+      "children": ["headline-area"],
+      "bounds": {
+        "absolute": { "x": 0, "y": 680, "width": 600, "height": 120 },
+        "relative": { "x": 0, "y": 680, "width": 600, "height": 120 }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 20, "right": 24, "bottom": 20, "left": 24 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "STRETCH",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": { "mode": "FILL", "value": null, "min": null, "max": null },
+        "vertical": { "mode": "HUG", "value": null, "min": 120, "max": 420 }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": { "r": 0.97, "g": 0.96, "b": 0.94, "a": 1 }
+          }
+        ],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": 0,
+        "clipContent": false
+      }
+    },
+    "headline-area": {
+      "id": "headline-area",
+      "name": "Headline Area",
+      "type": "FRAME",
+      "parentId": "footer",
+      "children": ["headline"],
+      "bounds": {
+        "absolute": { "x": 24, "y": 700, "width": 552, "height": 80 },
+        "relative": { "x": 0, "y": 0, "width": 552, "height": 80 }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "STRETCH",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": { "mode": "FILL", "value": null, "min": null, "max": null },
+        "vertical": { "mode": "HUG", "value": null, "min": 80, "max": 360 }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": 0,
+        "clipContent": false
+      }
+    },
+    "headline": {
+      "id": "headline",
+      "name": "field:textarea:headline",
+      "type": "TEXT",
+      "parentId": "headline-area",
+      "children": [],
+      "bounds": {
+        "absolute": { "x": 24, "y": 700, "width": 552, "height": 64 },
+        "relative": { "x": 0, "y": 0, "width": 552, "height": 64 }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": { "mode": "FILL", "value": null, "min": null, "max": null },
+        "vertical": { "mode": "HUG", "value": null, "min": 64, "max": 320 }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": { "r": 0.12, "g": 0.18, "b": 0.19, "a": 1 }
+          }
+        ],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": null,
+        "clipContent": false
+      },
+      "text": {
+        "characters": "Deal of the week.",
+        "fontFamily": "Arial",
+        "fontStyle": "Bold",
+        "fontWeight": 700,
+        "fontSize": 48,
+        "lineHeight": { "value": 64, "unit": "PIXELS" },
+        "letterSpacing": null,
+        "textAlignHorizontal": "LEFT",
+        "textAlignVertical": "TOP",
+        "textAutoResize": "HEIGHT"
+      }
+    },
+    "overlay": {
+      "id": "overlay",
+      "name": "Absolute Overlay",
+      "type": "RECTANGLE",
+      "parentId": "root",
+      "children": [],
+      "bounds": {
+        "absolute": { "x": 420, "y": 80, "width": 120, "height": 72 },
+        "relative": { "x": 420, "y": 80, "width": 120, "height": 72 }
+      },
+      "positioning": "ABSOLUTE",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": true
+      },
+      "sizing": {
+        "horizontal": { "mode": "FIXED", "value": 120, "min": null, "max": null },
+        "vertical": { "mode": "FIXED", "value": 72, "min": null, "max": null }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "fills": [],
+        "strokes": [],
+        "effects": [],
+        "cornerRadius": 0,
+        "clipContent": true
+      }
+    }
+  },
+  "editableFields": [
+    {
+      "id": "headline",
+      "type": "textarea",
+      "nodeId": "headline",
+      "property": "text.characters",
+      "defaultValue": "Deal of the week.",
+      "label": "Headline"
+    }
+  ],
+  "assets": {}
+}

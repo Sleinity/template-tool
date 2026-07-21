@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "fixture.vertical-auto-layout",
+  "name": "Vertical Auto Layout",
+  "canvas": { "width": 1080, "height": 1920 },
+  "rootNodeId": "root",
+  "nodes": {
+    "root": {
+      "id": "root", "name": "Vertical Poster", "type": "FRAME", "parentId": null,
+      "children": ["hero", "footer"],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1920 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1920 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "VERTICAL", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "STRETCH", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FIXED", "value": 1080 }, "vertical": { "mode": "FIXED", "value": 1920 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "hero": {
+      "id": "hero", "name": "Hero", "type": "RECTANGLE", "parentId": "root", "children": [],
+      "bounds": { "absolute": { "x": 0, "y": 0, "width": 1080, "height": 1544 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 1544 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FILL" }, "vertical": { "mode": "FIXED", "value": 1544 } },
+      "appearance": { "opacity": 1, "fills": [{ "type": "SOLID", "color": { "r": 0.58, "g": 0.82, "b": 1, "a": 1 } }], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "footer": {
+      "id": "footer", "name": "Footer", "type": "FRAME", "parentId": "root", "children": ["footer-bar", "headline"],
+      "bounds": { "absolute": { "x": 0, "y": 1544, "width": 1080, "height": 376 }, "relative": { "x": 0, "y": 1544, "width": 1080, "height": 376 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "VERTICAL", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "STRETCH", "clipContent": true },
+      "sizing": { "horizontal": { "mode": "FILL" }, "vertical": { "mode": "HUG", "min": 376 } },
+      "appearance": { "opacity": 1, "fills": [], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "footer-bar": {
+      "id": "footer-bar", "name": "Footer Bar", "type": "RECTANGLE", "parentId": "footer", "children": [],
+      "bounds": { "absolute": { "x": 0, "y": 1544, "width": 1080, "height": 112 }, "relative": { "x": 0, "y": 0, "width": 1080, "height": 112 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": false },
+      "sizing": { "horizontal": { "mode": "FILL" }, "vertical": { "mode": "FIXED", "value": 112 } },
+      "appearance": { "opacity": 1, "fills": [{ "type": "SOLID", "color": { "r": 0.91, "g": 0.95, "b": 0.23, "a": 1 } }], "strokes": [], "effects": [], "borderRadius": null }
+    },
+    "headline": {
+      "id": "headline", "name": "field:textarea:headline", "type": "TEXT", "parentId": "footer", "children": [],
+      "bounds": { "absolute": { "x": 40, "y": 1656, "width": 1000, "height": 264 }, "relative": { "x": 40, "y": 112, "width": 1000, "height": 264 } },
+      "positioning": { "mode": "FLOW" },
+      "layout": { "mode": "NONE", "wrap": false, "gap": 0, "padding": { "top": 0, "right": 0, "bottom": 0, "left": 0 }, "primaryAlignment": "MIN", "counterAlignment": "MIN", "clipContent": false },
+      "sizing": { "horizontal": { "mode": "FILL" }, "vertical": { "mode": "HUG", "min": 104 } },
+      "appearance": { "opacity": 1, "fills": [{ "type": "SOLID", "color": { "r": 0.12, "g": 0.18, "b": 0.19, "a": 1 } }], "strokes": [], "effects": [], "borderRadius": null },
+      "text": { "content": "Deal of the week.", "style": { "fontFamily": "Rethink Sans", "fontSize": 96, "fontWeight": 600, "lineHeight": 104, "textAutoResize": "HEIGHT" } }
+    }
+  },
+  "editableFields": [{ "id": "headline", "type": "textarea", "nodeId": "headline", "property": "text.content", "defaultValue": "Deal of the week." }],
+  "assets": {}
+}

@@ -1,0 +1,2907 @@
+{
+  "assetReadiness": {
+    "backgrounds": [],
+    "images": []
+  },
+  "diagnostics": [
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:135",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-auto-layout-applied",
+      "message": "Applied vertical Auto Layout with 12px gap and MIN/CENTER alignment.",
+      "nodeId": "451:171",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:170",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:179",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "454:34",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:175",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "454:32",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:177",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "454:30",
+      "severity": "info"
+    },
+    {
+      "code": "resolved-linear-gradient-supported",
+      "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+      "nodeId": "451:181",
+      "severity": "info"
+    }
+  ],
+  "fixtureHashes": {
+    "embeddedPreviewSha256": "1a1a4575d1309c33bd09e5030d9df055231af11a0d524173043eaf05648b0d79",
+    "modelSha256": "6fd49b40d287a55463b022f696b33b79cd2e61315c347993e7149045ee374217",
+    "zipSha256": "d3904ce8b52c57111235482fecdd126a6ecf63ddbca1eb72a52e364dc927031b"
+  },
+  "fixtureId": "gradient-test-linear",
+  "fontReadiness": {
+    "fonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      }
+    ],
+    "status": "loaded"
+  },
+  "nodeCount": 10,
+  "nodes": [
+    {
+      "bounds": {
+        "height": 1500,
+        "width": 1000,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[6.123234262925839e-17,1,0],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,6.123234262925839e-17,-6.123234262925839e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616171314629196e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":0}},\"templateHandles\":{\"start\":{\"x\":500,\"y\":-4.5924256971943795e-14},\"end\":{\"x\":500,\"y\":1499.9999999999998},\"third\":{\"x\":0,\"y\":0}},\"svgGradientTransform\":[[6.123234262925839e-14,-1000,1000],[1500,9.184851394388759e-14,-9.184851394388759e-14]],\"stops\":[{\"sourceIndex\":0,\"position\":0,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":1,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:c6d311e0\",\"geometryRevision\":\"linear-gradient-geometry-v1:7df67071\",\"provenance\":{\"canonicalPath\":\"nodes.451:135.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:135.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:135",
+        "data-package-node-name": "gradient-test",
+        "data-package-node-type": "FRAME",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-clipping-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:6b80a628",
+        "data-package-primitive-kind": "rectangular-frame",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:592ef088",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-revision": "primitive-source-v1:85fd5f24",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:135",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -26560,
+          "y": -20597
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:135",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "gradient-test",
+      "order": 0,
+      "parentId": null,
+      "positioningRole": "ROOT",
+      "primitiveAppearance": {
+        "ancestorClipChain": [],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 0 0 H 1000 L 1000 0 V 1500 L 1000 1500 H 0 L 0 1500 V 0 L 0 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:7df67071",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(6.123234262925839e-14 1500 -1000 9.184851394388759e-14 1000 -9.184851394388759e-14)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:6b80a628",
+        "kind": "rectangular-frame",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:7df67071",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:135.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:135.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:c6d311e0",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 1,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -1000,
+              1000
+            ],
+            [
+              1500,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 500,
+              "y": 1500
+            },
+            "start": {
+              "x": 500,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:592ef088"
+        ],
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceRevision": "primitive-source-v1:85fd5f24",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -26560,
+          "y": -20597
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 1324,
+        "width": 919.9996,
+        "x": 40.0001,
+        "y": 88
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-auto-layout-container": "VERTICAL",
+        "data-package-node-id": "451:171",
+        "data-package-node-name": "Frame 1073713897",
+        "data-package-node-type": "FRAME",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "dom-css",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:0325b327",
+        "data-package-primitive-kind": "rectangular-frame",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":40,\"y\":88,\"width\":920,\"height\":1324}",
+        "data-package-primitive-source-bounds": "{\"x\":40,\"y\":88,\"width\":920,\"height\":1324}",
+        "data-package-primitive-source-revision": "primitive-source-v1:7fc7946b",
+        "data-package-primitive-stroke-strategy": "none",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-auto-layout-applied",
+          "message": "Applied vertical Auto Layout with 12px gap and MIN/CENTER alignment.",
+          "nodeId": "451:171",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1324,
+          "width": 920,
+          "x": -26520,
+          "y": -20509
+        },
+        "relative": {
+          "height": 1324,
+          "width": 920,
+          "x": 40,
+          "y": 88
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:171",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "VERTICAL",
+      "maskPlacement": null,
+      "name": "Frame 1073713897",
+      "order": 1,
+      "parentId": "451:135",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "dom-css",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:0325b327",
+        "kind": "rectangular-frame",
+        "linearGradient": null,
+        "ownership": "primitive-authoritative",
+        "paintOrder": null,
+        "paintRevisions": [],
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 1324,
+          "width": 920,
+          "x": 40,
+          "y": 88
+        },
+        "sourceBounds": {
+          "height": 1324,
+          "width": 920,
+          "x": 40,
+          "y": 88
+        },
+        "sourceRevision": "primitive-source-v1:7fc7946b",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "none"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1324,
+          "width": 920,
+          "x": -26520,
+          "y": -20509
+        },
+        "relative": {
+          "height": 1324,
+          "width": 920,
+          "x": 40,
+          "y": 88
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "HUG",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 120,
+        "width": 58.0001,
+        "x": 470.9999,
+        "y": 88
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[6.123234262925839e-17,1,0],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,6.123234262925839e-17,-6.123234262925839e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616171314629196e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":0}},\"templateHandles\":{\"start\":{\"x\":460,\"y\":-3.6739405577555036e-15},\"end\":{\"x\":460,\"y\":119.99999999999999},\"third\":{\"x\":431,\"y\":0}},\"svgGradientTransform\":[[3.5514758724969868e-15,-58,58],[120,7.347881115511007e-15,-7.347881115511007e-15]],\"stops\":[{\"sourceIndex\":0,\"position\":0.24519230425357819,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":0.75,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:de85392b\",\"geometryRevision\":\"linear-gradient-geometry-v1:5b38a3b0\",\"provenance\":{\"canonicalPath\":\"nodes.451:170.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:170.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:170",
+        "data-package-node-name": "Rectangle 7",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[29,29,29,29]",
+        "data-package-primitive-corner-normalization-scale": "0.17058823529411765",
+        "data-package-primitive-corner-normalization-scales": "[0.17058823529411765,0.17058823529411765,0.17058823529411765,0.17058823529411765]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:13a46340",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:a22d1670",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":431,\"y\":0,\"width\":58,\"height\":120}",
+        "data-package-primitive-source-bounds": "{\"x\":431,\"y\":0,\"width\":58,\"height\":120}",
+        "data-package-primitive-source-revision": "primitive-source-v1:ee2786e5",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:170",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 58,
+          "x": -26089,
+          "y": -20509
+        },
+        "relative": {
+          "height": 120,
+          "width": 58,
+          "x": 431,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:170",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 7",
+      "order": 2,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 29 0 H 29 A 29 29 0 0 1 58 29 V 91 A 29 29 0 0 1 29 120 H 29 A 29 29 0 0 1 0 91 V 29 A 29 29 0 0 1 29 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:5b38a3b0",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(3.5514758724969868e-15 120 -58 7.347881115511007e-15 58 -7.347881115511007e-15)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.1706,
+        "cornerNormalizationScales": [
+          0.1706,
+          0.1706,
+          0.1706,
+          0.1706
+        ],
+        "effectiveCorners": [
+          29,
+          29,
+          29,
+          29
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:13a46340",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:5b38a3b0",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:170.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:170.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:de85392b",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.2452,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 0.75,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -58,
+              58
+            ],
+            [
+              120,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 460,
+              "y": 120
+            },
+            "start": {
+              "x": 460,
+              "y": 0
+            },
+            "third": {
+              "x": 431,
+              "y": 0
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:a22d1670"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 120,
+          "width": 58,
+          "x": 431,
+          "y": 0
+        },
+        "sourceBounds": {
+          "height": 120,
+          "width": 58,
+          "x": 431,
+          "y": 0
+        },
+        "sourceRevision": "primitive-source-v1:ee2786e5",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 58,
+          "x": -26089,
+          "y": -20509
+        },
+        "relative": {
+          "height": 120,
+          "width": 58,
+          "x": 431,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 120.0001,
+        "width": 119.9998,
+        "x": 440,
+        "y": 220
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[6.123234262925839e-17,1,0],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,6.123234262925839e-17,-6.123234262925839e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616171314629196e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":0}},\"templateHandles\":{\"start\":{\"x\":460,\"y\":132},\"end\":{\"x\":460,\"y\":252},\"third\":{\"x\":400,\"y\":132}},\"svgGradientTransform\":[[7.347881115511007e-15,-120,120],[120,7.347881115511007e-15,-7.347881115511007e-15]],\"stops\":[{\"sourceIndex\":0,\"position\":0.24519230425357819,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":0.75,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:768e3c8f\",\"geometryRevision\":\"linear-gradient-geometry-v1:db4736de\",\"provenance\":{\"canonicalPath\":\"nodes.451:179.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:179.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:179",
+        "data-package-node-name": "Rectangle 10",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[60.00000000000001,60.00000000000001,60.00000000000001,60.00000000000001]",
+        "data-package-primitive-corner-normalization-scale": "0.35294117647058826",
+        "data-package-primitive-corner-normalization-scales": "[0.35294117647058826,0.35294117647058826,0.35294117647058826,0.35294117647058826]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:930a5d59",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:c88b5c37",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":400,\"y\":132,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-bounds": "{\"x\":400,\"y\":132,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-revision": "primitive-source-v1:1198f8ce",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:179",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -20377
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 132
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:179",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 10",
+      "order": 3,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 60.00000000000001 0 H 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 120 60.00000000000001 V 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 59.99999999999999 120 H 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 0 59.99999999999999 V 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 60.00000000000001 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:db4736de",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(7.347881115511007e-15 120 -120 7.347881115511007e-15 120 -7.347881115511007e-15)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.3529,
+        "cornerNormalizationScales": [
+          0.3529,
+          0.3529,
+          0.3529,
+          0.3529
+        ],
+        "effectiveCorners": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:930a5d59",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:db4736de",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:179.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:179.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:768e3c8f",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.2452,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 0.75,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -120,
+              120
+            ],
+            [
+              120,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 460,
+              "y": 252
+            },
+            "start": {
+              "x": 460,
+              "y": 132
+            },
+            "third": {
+              "x": 400,
+              "y": 132
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:c88b5c37"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 132
+        },
+        "sourceBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 132
+        },
+        "sourceRevision": "primitive-source-v1:1198f8ce",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -20377
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 132
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 120,
+        "width": 119.9998,
+        "x": 440,
+        "y": 352
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[-0.5000001192092896,0.5000000596046448,0.5000000596046448],[-0.5000000596046448,-0.5000001192092896,1]],\"determinant\":0.5000001788139521,\"inverseMatrix\":[[-0.9999998807907176,-0.9999997615814706,1.499999761581467],[0.9999997615814706,-0.9999998807907176,0.49999994039535167]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.9999998807907318,\"y\":-7.105427357601002e-15},\"end\":{\"x\":1.4210854715202004e-14,\"y\":0.9999997615814635},\"third\":{\"x\":0.49999999999999645,\"y\":-0.4999999403953659}},\"templateHandles\":{\"start\":{\"x\":519.9999856948878,\"y\":263.99999999999915},\"end\":{\"x\":400.0000000000017,\"y\":383.9999713897756},\"third\":{\"x\":459.99999999999955,\"y\":204.0000071525561}},\"svgGradientTransform\":[[-119.9999856948861,-119.99997138977648,179.99997138977605],[119.99997138977648,-119.9999856948861,59.9999928474422]],\"stops\":[{\"sourceIndex\":0,\"position\":0,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":1,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:4a4ea55f\",\"geometryRevision\":\"linear-gradient-geometry-v1:4fcc3664\",\"provenance\":{\"canonicalPath\":\"nodes.454:34.appearance.fills.0\",\"rawFigmaPath\":\"nodes.454:34.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "454:34",
+        "data-package-node-name": "Rectangle 14",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[60.00000000000001,60.00000000000001,60.00000000000001,60.00000000000001]",
+        "data-package-primitive-corner-normalization-scale": "0.35294117647058826",
+        "data-package-primitive-corner-normalization-scales": "[0.35294117647058826,0.35294117647058826,0.35294117647058826,0.35294117647058826]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:eae0cdf5",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:4f6845a0",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":400,\"y\":264,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-bounds": "{\"x\":400,\"y\":264,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-revision": "primitive-source-v1:ef739591",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "454:34",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -20245
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 264
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "454:34",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 14",
+      "order": 4,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 60.00000000000001 0 H 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 120 60.00000000000001 V 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 59.99999999999999 120 H 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 0 59.99999999999999 V 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 60.00000000000001 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:4fcc3664",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(-119.9999856948861 119.99997138977648 -119.99997138977648 -119.9999856948861 179.99997138977605 59.9999928474422)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.3529,
+        "cornerNormalizationScales": [
+          0.3529,
+          0.3529,
+          0.3529,
+          0.3529
+        ],
+        "effectiveCorners": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:eae0cdf5",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 0.5,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:4fcc3664",
+          "inverseMatrix": [
+            [
+              -1,
+              -1,
+              1.5
+            ],
+            [
+              1,
+              -1,
+              0.5
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0,
+              "y": 1
+            },
+            "start": {
+              "x": 1,
+              "y": 0
+            },
+            "third": {
+              "x": 0.5,
+              "y": -0.5
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.454:34.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.454:34.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              -0.5,
+              0.5,
+              0.5
+            ],
+            [
+              -0.5,
+              -0.5,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:4a4ea55f",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 1,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              -120,
+              -120,
+              180
+            ],
+            [
+              120,
+              -120,
+              60
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 400,
+              "y": 384
+            },
+            "start": {
+              "x": 520,
+              "y": 264
+            },
+            "third": {
+              "x": 460,
+              "y": 204
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:4f6845a0"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 264
+        },
+        "sourceBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 264
+        },
+        "sourceRevision": "primitive-source-v1:ef739591",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -20245
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 264
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 240.0001,
+        "width": 709.9998,
+        "x": 145,
+        "y": 484
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[-0.5597577095031738,0.45296192169189453,0.5533978939056396],[-0.4180411994457245,-0.4301193356513977,0.9240802526473999]],\"determinant\":0.4301193591845731,\"inverseMatrix\":[[-0.9999999452868723,-1.0531074968367542,1.5265537053692886],[0.9719190511170048,-1.3014008729213469,0.6647408915097869]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.9999999569509115,\"y\":0.014040455049113443},\"end\":{\"x\":1.1664039067937892e-8,\"y\":0.9859595061661183},\"third\":{\"x\":0.4734462085325344,\"y\":-0.63665998141156}},\"templateHandles\":{\"start\":{\"x\":814.9999694351471,\"y\":399.3697092117872},\"end\":{\"x\":105.00000828146774,\"y\":632.6302814798684},\"third\":{\"x\":441.1468080580994,\"y\":243.2016044612256}},\"svgGradientTransform\":[[-709.9999611536794,-747.7063227540955,1083.8531308121949],[233.26057226808115,-312.3362095011232,159.53781396234885]],\"stops\":[{\"sourceIndex\":0,\"position\":0,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":1,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:57d72f70\",\"geometryRevision\":\"linear-gradient-geometry-v1:60c15224\",\"provenance\":{\"canonicalPath\":\"nodes.451:175.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:175.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:175",
+        "data-package-node-name": "Rectangle 8",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:3e23e98b",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:f82321ec",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":105,\"y\":396,\"width\":710,\"height\":240}",
+        "data-package-primitive-source-bounds": "{\"x\":105,\"y\":396,\"width\":710,\"height\":240}",
+        "data-package-primitive-source-revision": "primitive-source-v1:cba6e341",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:175",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 710,
+          "x": -26415,
+          "y": -20113
+        },
+        "relative": {
+          "height": 240,
+          "width": 710,
+          "x": 105,
+          "y": 396
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:175",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 8",
+      "order": 5,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 0 0 H 710 L 710 0 V 240 L 710 240 H 0 L 0 240 V 0 L 0 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:60c15224",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(-709.9999611536794 233.26057226808115 -747.7063227540955 -312.3362095011232 1083.8531308121949 159.53781396234885)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:3e23e98b",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 0.4301,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:60c15224",
+          "inverseMatrix": [
+            [
+              -1,
+              -1.0531,
+              1.5266
+            ],
+            [
+              0.9719,
+              -1.3014,
+              0.6647
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0,
+              "y": 0.986
+            },
+            "start": {
+              "x": 1,
+              "y": 0.014
+            },
+            "third": {
+              "x": 0.4734,
+              "y": -0.6367
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:175.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:175.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              -0.5598,
+              0.453,
+              0.5534
+            ],
+            [
+              -0.418,
+              -0.4301,
+              0.9241
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:57d72f70",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 1,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              -710,
+              -747.7063,
+              1083.8531
+            ],
+            [
+              233.2606,
+              -312.3362,
+              159.5378
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 105,
+              "y": 632.6303
+            },
+            "start": {
+              "x": 815,
+              "y": 399.3697
+            },
+            "third": {
+              "x": 441.1468,
+              "y": 243.2016
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:f82321ec"
+        ],
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 240,
+          "width": 710,
+          "x": 105,
+          "y": 396
+        },
+        "sourceBounds": {
+          "height": 240,
+          "width": 710,
+          "x": 105,
+          "y": 396
+        },
+        "sourceRevision": "primitive-source-v1:cba6e341",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 710,
+          "x": -26415,
+          "y": -20113
+        },
+        "relative": {
+          "height": 240,
+          "width": 710,
+          "x": 105,
+          "y": 396
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 240.0001,
+        "width": 239.9997,
+        "x": 380.0001,
+        "y": 735.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[-0.5504586696624756,0.5,0.5252293944358826],[-0.4999999701976776,-0.4541666507720947,0.9770833253860474]],\"determinant\":0.4999999554879082,\"inverseMatrix\":[[-0.9083333824078272,-1.0000000890241916,1.4541668047580605],[1.0000000294195415,-1.1009174373332271,0.5504586607571446]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.9541667602459647,\"y\":-5.79094689978632e-8},\"end\":{\"x\":0.04583337783813746,\"y\":0.9999999715100725},\"third\":{\"x\":0.4541667157338689,\"y\":-0.5504587765760826}},\"templateHandles\":{\"start\":{\"x\":569.0000224590315,\"y\":647.9999861017275},\"end\":{\"x\":351.000010681153,\"y\":887.9999931624174},\"third\":{\"x\":449.00001177612853,\"y\":515.8898936217402}},\"svgGradientTransform\":[[-218.00001177787854,-240.000021365806,349.0000331419345],[240.00000706068994,-264.2201849599745,132.1100785817147]],\"stops\":[{\"sourceIndex\":0,\"position\":0.24519230425357819,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":0.75,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:47ee8c0d\",\"geometryRevision\":\"linear-gradient-geometry-v1:9c0f982e\",\"provenance\":{\"canonicalPath\":\"nodes.454:32.appearance.fills.0\",\"rawFigmaPath\":\"nodes.454:32.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "454:32",
+        "data-package-node-name": "Rectangle 13",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[0,163.2,76.8,50]",
+        "data-package-primitive-corner-normalization-scale": "0.96",
+        "data-package-primitive-corner-normalization-scales": "[1,0.96,0.96,1]",
+        "data-package-primitive-corner-requested": "[0,170,80,50]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:a20d4f20",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:837f63aa",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":340,\"y\":648,\"width\":240,\"height\":240}",
+        "data-package-primitive-source-bounds": "{\"x\":340,\"y\":648,\"width\":240,\"height\":240}",
+        "data-package-primitive-source-revision": "primitive-source-v1:d56bfac7",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "454:32",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -26180,
+          "y": -19861
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 340,
+          "y": 648
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "454:32",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 13",
+      "order": 6,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 0 0 H 76.80000000000001 A 163.2 163.2 0 0 1 240 163.2 V 163.2 A 76.8 76.8 0 0 1 163.2 240 H 50 A 50 50 0 0 1 0 190 V 0 L 0 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:9c0f982e",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(-218.00001177787854 240.00000706068994 -240.000021365806 -264.2201849599745 349.0000331419345 132.1100785817147)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.96,
+        "cornerNormalizationScales": [
+          1,
+          0.96,
+          0.96,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          163.2,
+          76.8,
+          50
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:a20d4f20",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 0.5,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:9c0f982e",
+          "inverseMatrix": [
+            [
+              -0.9083,
+              -1,
+              1.4542
+            ],
+            [
+              1,
+              -1.1009,
+              0.5505
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.0458,
+              "y": 1
+            },
+            "start": {
+              "x": 0.9542,
+              "y": 0
+            },
+            "third": {
+              "x": 0.4542,
+              "y": -0.5505
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.454:32.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.454:32.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              -0.5505,
+              0.5,
+              0.5252
+            ],
+            [
+              -0.5,
+              -0.4542,
+              0.9771
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:47ee8c0d",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.2452,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 0.75,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              -218,
+              -240,
+              349
+            ],
+            [
+              240,
+              -264.2202,
+              132.1101
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 351,
+              "y": 888
+            },
+            "start": {
+              "x": 569,
+              "y": 648
+            },
+            "third": {
+              "x": 449,
+              "y": 515.8899
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:837f63aa"
+        ],
+        "requestedCorners": [
+          0,
+          170,
+          80,
+          50
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 240,
+          "width": 240,
+          "x": 340,
+          "y": 648
+        },
+        "sourceBounds": {
+          "height": 240,
+          "width": 240,
+          "x": 340,
+          "y": 648
+        },
+        "sourceRevision": "primitive-source-v1:d56bfac7",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 240,
+          "width": 240,
+          "x": -26180,
+          "y": -19861
+        },
+        "relative": {
+          "height": 240,
+          "width": 240,
+          "x": 340,
+          "y": 648
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 120.0001,
+        "width": 119.9998,
+        "x": 440,
+        "y": 987.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[5.921189773481597e-17,1,1.0102239981848604e-18],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,5.921189773481597e-17,-6.022212173300083e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616172865592845e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":-1.0102239981848604e-18}},\"templateHandles\":{\"start\":{\"x\":460,\"y\":900},\"end\":{\"x\":460,\"y\":1020},\"third\":{\"x\":400,\"y\":900}},\"svgGradientTransform\":[[7.347881115511007e-15,-120,120],[120,7.105427728177916e-15,-7.2266546079601e-15]],\"stops\":[{\"sourceIndex\":0,\"position\":0.24519230425357819,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":0.75,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":0}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:aa1e78e8\",\"geometryRevision\":\"linear-gradient-geometry-v1:433a389c\",\"provenance\":{\"canonicalPath\":\"nodes.451:177.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:177.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:177",
+        "data-package-node-name": "Rectangle 9",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[60.00000000000001,60.00000000000001,60.00000000000001,60.00000000000001]",
+        "data-package-primitive-corner-normalization-scale": "0.35294117647058826",
+        "data-package-primitive-corner-normalization-scales": "[0.35294117647058826,0.35294117647058826,0.35294117647058826,0.35294117647058826]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:0beddf30",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:54d65a6e",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":400,\"y\":900,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-bounds": "{\"x\":400,\"y\":900,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-revision": "primitive-source-v1:1cd57e58",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:177",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -19609
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 900
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:177",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 9",
+      "order": 7,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 60.00000000000001 0 H 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 120 60.00000000000001 V 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 59.99999999999999 120 H 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 0 59.99999999999999 V 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 60.00000000000001 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:433a389c",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(7.347881115511007e-15 120 -120 7.105427728177916e-15 120 -7.2266546079601e-15)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.3529,
+        "cornerNormalizationScales": [
+          0.3529,
+          0.3529,
+          0.3529,
+          0.3529
+        ],
+        "effectiveCorners": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:0beddf30",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:433a389c",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:177.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:177.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:aa1e78e8",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.2452,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 0,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 0.75,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -120,
+              120
+            ],
+            [
+              120,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 460,
+              "y": 1020
+            },
+            "start": {
+              "x": 460,
+              "y": 900
+            },
+            "third": {
+              "x": 400,
+              "y": 900
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:54d65a6e"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 900
+        },
+        "sourceBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 900
+        },
+        "sourceRevision": "primitive-source-v1:1cd57e58",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -19609
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 900
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 119.9999,
+        "width": 119.9998,
+        "x": 440,
+        "y": 1120
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[5.921189773481597e-17,1,1.0102239981848604e-18],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,5.921189773481597e-17,-6.022212173300083e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616172865592845e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":-1.0102239981848604e-18}},\"templateHandles\":{\"start\":{\"x\":460,\"y\":1032},\"end\":{\"x\":460,\"y\":1152},\"third\":{\"x\":400,\"y\":1032}},\"svgGradientTransform\":[[7.347881115511007e-15,-120,120],[120,7.105427728177916e-15,-7.2266546079601e-15]],\"stops\":[{\"sourceIndex\":0,\"position\":0.24519230425357819,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":0.800000011920929}},{\"sourceIndex\":1,\"position\":0.75,\"color\":{\"r\":0.7490196228027344,\"g\":0.8313725590705872,\"b\":1,\"a\":0.800000011920929}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:354687d9\",\"geometryRevision\":\"linear-gradient-geometry-v1:52de6934\",\"provenance\":{\"canonicalPath\":\"nodes.454:30.appearance.fills.0\",\"rawFigmaPath\":\"nodes.454:30.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "454:30",
+        "data-package-node-name": "Rectangle 12",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[60.00000000000001,60.00000000000001,60.00000000000001,60.00000000000001]",
+        "data-package-primitive-corner-normalization-scale": "0.35294117647058826",
+        "data-package-primitive-corner-normalization-scales": "[0.35294117647058826,0.35294117647058826,0.35294117647058826,0.35294117647058826]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:73ab997f",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:0ff8b2f4",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":400,\"y\":1032,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-bounds": "{\"x\":400,\"y\":1032,\"width\":120,\"height\":120}",
+        "data-package-primitive-source-revision": "primitive-source-v1:c62d83df",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "454:30",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -19477
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 1032
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "454:30",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 12",
+      "order": 8,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 60.00000000000001 0 H 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 120 60.00000000000001 V 59.99999999999999 A 60.00000000000001 60.00000000000001 0 0 1 59.99999999999999 120 H 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 0 59.99999999999999 V 60.00000000000001 A 60.00000000000001 60.00000000000001 0 0 1 60.00000000000001 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:52de6934",
+          "svgGradientStopCount": 2,
+          "svgGradientTransform": "matrix(7.347881115511007e-15 120 -120 7.105427728177916e-15 120 -7.2266546079601e-15)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.3529,
+        "cornerNormalizationScales": [
+          0.3529,
+          0.3529,
+          0.3529,
+          0.3529
+        ],
+        "effectiveCorners": [
+          60,
+          60,
+          60,
+          60
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:73ab997f",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:52de6934",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.454:30.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.454:30.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:354687d9",
+          "stops": [
+            {
+              "color": {
+                "a": 0.8,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.2452,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 0.8,
+                "b": 1,
+                "g": 0.8314,
+                "r": 0.749
+              },
+              "position": 0.75,
+              "sourceIndex": 1
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -120,
+              120
+            ],
+            [
+              120,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 460,
+              "y": 1152
+            },
+            "start": {
+              "x": 460,
+              "y": 1032
+            },
+            "third": {
+              "x": 400,
+              "y": 1032
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:0ff8b2f4"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 1032
+        },
+        "sourceBounds": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 1032
+        },
+        "sourceRevision": "primitive-source-v1:c62d83df",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 120,
+          "width": 120,
+          "x": -26120,
+          "y": -19477
+        },
+        "relative": {
+          "height": 120,
+          "width": 120,
+          "x": 400,
+          "y": 1032
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 159.9998,
+        "width": 159.9998,
+        "x": 420,
+        "y": 1252.0001
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-linear-gradient": "{\"schemaVersion\":\"resolved-linear-gradient-v1\",\"sourceIndex\":0,\"coordinateSpace\":\"normalized-node-local-to-normalized-gradient\",\"sourceMatrix\":[[5.921189773481597e-17,1,1.0102239981848604e-18],[-1,6.123234262925839e-17,1]],\"determinant\":1,\"inverseMatrix\":[[6.123234262925839e-17,-1,1],[1,5.921189773481597e-17,-6.022212173300083e-17]],\"inversionCount\":1,\"normalizedHandles\":{\"start\":{\"x\":0.5,\"y\":-3.0616172865592845e-17},\"end\":{\"x\":0.5,\"y\":0.9999999999999999},\"third\":{\"x\":0,\"y\":-1.0102239981848604e-18}},\"templateHandles\":{\"start\":{\"x\":459.9999965030893,\"y\":1163.9999930061786},\"end\":{\"x\":459.9999965030893,\"y\":1324},\"third\":{\"x\":379.99999300617856,\"y\":1163.9999930061786}},\"svgGradientTransform\":[[9.797175248929414e-15,-160.00000699382144,160.00000699382144],[160.00000699382144,9.473904051687996e-15,-9.635539898462899e-15]],\"stops\":[{\"sourceIndex\":0,\"position\":0.09134615212678909,\"color\":{\"r\":0.3607843220233917,\"g\":0.14901961386203766,\"b\":0.21960784494876862,\"a\":1}},{\"sourceIndex\":1,\"position\":0.3701923191547394,\"color\":{\"r\":1,\"g\":1,\"b\":1,\"a\":1}},{\"sourceIndex\":2,\"position\":1,\"color\":{\"r\":0.747239351272583,\"g\":0.8314929008483887,\"b\":1,\"a\":1}}],\"paintOpacity\":1,\"capability\":\"source-certified-linear-gradient\",\"runtimeOwner\":\"svg\",\"fallbackReason\":null,\"sourceRevision\":\"linear-gradient-source-v1:70e0f6f7\",\"geometryRevision\":\"linear-gradient-geometry-v1:09a56c17\",\"provenance\":{\"canonicalPath\":\"nodes.451:181.appearance.fills.0\",\"rawFigmaPath\":\"nodes.451:181.extensions.figma.rawFills.0\",\"normalizationRevision\":\"linear-gradient-normalization-v1\",\"conflicts\":[]}}",
+        "data-package-node-id": "451:181",
+        "data-package-node-name": "Rectangle 11",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"451:135\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "false",
+        "data-package-primitive-backend": "svg",
+        "data-package-primitive-corner-clamp-reason": "opposing-radii-exceed-bounds",
+        "data-package-primitive-corner-clamped": "true",
+        "data-package-primitive-corner-effective": "[80.00000349691072,80.00000349691072,80.00000349691072,80.00000349691072]",
+        "data-package-primitive-corner-normalization-scale": "0.47058825586418074",
+        "data-package-primitive-corner-normalization-scales": "[0.47058825586418074,0.47058825586418074,0.47058825586418074,0.47058825586418074]",
+        "data-package-primitive-corner-requested": "[170,170,170,170]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:a6cebc44",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:GRADIENT_LINEAR:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:95999396",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":379.99999300617856,\"y\":1163.9999930061786,\"width\":160.00000699382144,\"height\":160.00000699382144}",
+        "data-package-primitive-source-bounds": "{\"x\":379.99999300617856,\"y\":1163.9999930061786,\"width\":160.00000699382144,\"height\":160.00000699382144}",
+        "data-package-primitive-source-revision": "primitive-source-v1:2fe145ad",
+        "data-package-primitive-stroke-strategy": "svg-linear-gradient",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-022b42e799afd611",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [
+        {
+          "code": "resolved-linear-gradient-supported",
+          "message": "Source-certified linear gradient uses one revisioned SVG primitive owner.",
+          "nodeId": "451:181",
+          "severity": "info"
+        }
+      ],
+      "exportedBounds": {
+        "absolute": {
+          "height": 160.00000699382144,
+          "width": 160.00000699382144,
+          "x": -26140.00000699382,
+          "y": -19345.00000699382
+        },
+        "relative": {
+          "height": 160.00000699382144,
+          "width": 160.00000699382144,
+          "x": 379.99999300617856,
+          "y": 1163.9999930061786
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "451:181",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "Rectangle 11",
+      "order": 9,
+      "parentId": "451:171",
+      "positioningRole": "FLOW",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "451:135"
+          }
+        ],
+        "axisAligned": false,
+        "backend": "svg",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": "M 80.00000349691072 0 H 80.00000349691072 A 80.00000349691072 80.00000349691072 0 0 1 160.00000699382144 80.00000349691072 V 80.00000349691072 A 80.00000349691072 80.00000349691072 0 0 1 80.00000349691072 160.00000699382144 H 80.00000349691072 A 80.00000349691072 80.00000349691072 0 0 1 0 80.00000349691072 V 80.00000349691072 A 80.00000349691072 80.00000349691072 0 0 1 80.00000349691072 0 Z",
+          "svgGradientDefinition": "linear-gradient-geometry-v1:09a56c17",
+          "svgGradientStopCount": 3,
+          "svgGradientTransform": "matrix(9.797175248929414e-15 160.00000699382144 -160.00000699382144 9.473904051687996e-15 160.00000699382144 -9.635539898462899e-15)",
+          "svgStrategy": "svg-linear-gradient",
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "opposing-radii-exceed-bounds",
+        "cornerClamped": true,
+        "cornerNormalizationScale": 0.4706,
+        "cornerNormalizationScales": [
+          0.4706,
+          0.4706,
+          0.4706,
+          0.4706
+        ],
+        "effectiveCorners": [
+          80,
+          80,
+          80,
+          80
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:a6cebc44",
+        "kind": "rectangle",
+        "linearGradient": {
+          "capability": "source-certified-linear-gradient",
+          "coordinateSpace": "normalized-node-local-to-normalized-gradient",
+          "determinant": 1,
+          "fallbackReason": null,
+          "geometryRevision": "linear-gradient-geometry-v1:09a56c17",
+          "inverseMatrix": [
+            [
+              0,
+              -1,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "inversionCount": 1,
+          "normalizedHandles": {
+            "end": {
+              "x": 0.5,
+              "y": 1
+            },
+            "start": {
+              "x": 0.5,
+              "y": 0
+            },
+            "third": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "paintOpacity": 1,
+          "provenance": {
+            "canonicalPath": "nodes.451:181.appearance.fills.0",
+            "conflicts": [],
+            "normalizationRevision": "linear-gradient-normalization-v1",
+            "rawFigmaPath": "nodes.451:181.extensions.figma.rawFills.0"
+          },
+          "runtimeOwner": "svg",
+          "schemaVersion": "resolved-linear-gradient-v1",
+          "sourceIndex": 0,
+          "sourceMatrix": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ],
+          "sourceRevision": "linear-gradient-source-v1:70e0f6f7",
+          "stops": [
+            {
+              "color": {
+                "a": 1,
+                "b": 0.2196,
+                "g": 0.149,
+                "r": 0.3608
+              },
+              "position": 0.0913,
+              "sourceIndex": 0
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 1,
+                "r": 1
+              },
+              "position": 0.3702,
+              "sourceIndex": 1
+            },
+            {
+              "color": {
+                "a": 1,
+                "b": 1,
+                "g": 0.8315,
+                "r": 0.7472
+              },
+              "position": 1,
+              "sourceIndex": 2
+            }
+          ],
+          "svgGradientTransform": [
+            [
+              0,
+              -160,
+              160
+            ],
+            [
+              160,
+              0,
+              0
+            ]
+          ],
+          "templateHandles": {
+            "end": {
+              "x": 460,
+              "y": 1324
+            },
+            "start": {
+              "x": 460,
+              "y": 1164
+            },
+            "third": {
+              "x": 380,
+              "y": 1164
+            }
+          }
+        },
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:GRADIENT_LINEAR:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:95999396"
+        ],
+        "requestedCorners": [
+          170,
+          170,
+          170,
+          170
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 160,
+          "width": 160,
+          "x": 380,
+          "y": 1164
+        },
+        "sourceBounds": {
+          "height": 160,
+          "width": 160,
+          "x": 380,
+          "y": 1164
+        },
+        "sourceRevision": "primitive-source-v1:2fe145ad",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "svg-linear-gradient"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 160.00000699382144,
+          "width": 160.00000699382144,
+          "x": -26140.00000699382,
+          "y": -19345.00000699382
+        },
+        "relative": {
+          "height": 160.00000699382144,
+          "width": 160.00000699382144,
+          "x": 379.99999300617856,
+          "y": 1163.9999930061786
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        0,
+        1,
+        -1,
+        0
+      ],
+      "type": "RECTANGLE"
+    }
+  ],
+  "orderedNodeIds": [
+    "451:135",
+    "451:171",
+    "451:170",
+    "451:179",
+    "454:34",
+    "451:175",
+    "454:32",
+    "451:177",
+    "454:30",
+    "451:181"
+  ],
+  "packageVersion": "1.0",
+  "rendererFallbacks": [],
+  "rendererMode": "static",
+  "resolvedTreeVersion": "resolved-render-tree-v1",
+  "rootDimensions": {
+    "background": "rgba(0, 0, 0, 1)",
+    "height": 1500,
+    "width": 1000
+  },
+  "rootNodeId": "451:135",
+  "route": "/templates/new",
+  "runtimeRouting": {
+    "compatibilityNodeCount": 10,
+    "fallbacks": null,
+    "iterationCount": 1,
+    "measurementCount": 0,
+    "mode": "authoritative",
+    "readiness": "unsupported",
+    "recomputedNodeIds": [],
+    "revision": "f90791b6|84e23576",
+    "routedNodeCount": 0,
+    "settlementId": "core-022b42e799afd611",
+    "settlementMs": 0
+  },
+  "schemaVersion": 1,
+  "surface": "fields",
+  "warnings": []
+}

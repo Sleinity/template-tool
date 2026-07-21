@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "milestone": "7.3",
+  "status": "gate-closed-source-authority-complete",
+  "fixture": {
+    "path": "/Users/niels/Documents/Templates/template-package-gradient-test-4.zip",
+    "filename": "template-package-gradient-test-4.zip",
+    "byteSize": 193635,
+    "sha256": "9da63d95f3a6b661a0c4818908abc39735e63a9b8cdf00e8aa42c243813a0ad3",
+    "templateJson": {
+      "byteSize": 8004,
+      "sha256": "2871dc698f4e69b924fd6b46cbb503067529095716ecb5a3a3814c6487413049"
+    },
+    "preview": {
+      "byteSize": 185409,
+      "sha256": "4d12e49e0b0734f092c34a9257fb3c8b6287ba07ddd638704056bdee8665afc4",
+      "width": 1000,
+      "height": 1500,
+      "mode": "RGBA"
+    },
+    "packageId": "pkg_457_36_1784372293276",
+    "rootNodeId": "457:36",
+    "exporterVersion": "0.6.0",
+    "exportedAt": "2026-07-18T10:58:13.273Z",
+    "nodeCount": 2,
+    "assetCount": 0,
+    "fontCount": 0,
+    "fieldCount": 0
+  },
+  "case": {
+    "nodeId": "457:46",
+    "nodeType": "RECTANGLE",
+    "bounds": { "x": 145, "y": 310, "width": 710, "height": 880 },
+    "canonicalFillCount": 1,
+    "rawFillCount": 1,
+    "paintType": "GRADIENT_LINEAR",
+    "canonicalPaintOpacity": 0.5,
+    "rawPaintOpacity": 0.5,
+    "nodeOpacity": 1,
+    "stopAlpha": [1, 1],
+    "stops": [
+      { "position": 0, "rgba": [0.360784322, 0.149019614, 0.219607845, 1] },
+      { "position": 1, "rgba": [0.749019623, 0.831372559, 1, 1] }
+    ],
+    "gradientTransform": [
+      [-3.5267131437421995e-8, 1, -1.2168755780805895e-8],
+      [-2.254091501235962, -1.2212103683850728e-7, 1.627045750617981]
+    ],
+    "additionalFills": false,
+    "strokeCount": 0,
+    "isMask": false,
+    "effectCount": 0,
+    "paintBlendMode": "NORMAL",
+    "nodeBlendMode": "PASS_THROUGH"
+  },
+  "background": {
+    "nodeId": "457:36",
+    "paintType": "SOLID",
+    "rgba": [0.361, 0.149, 0.22, 1],
+    "paintOpacity": 1,
+    "nodeOpacity": 1,
+    "paintBlendMode": "NORMAL"
+  },
+  "operationOrder": [
+    "interpolate-stop-rgb-straight",
+    "interpolate-stop-alpha-independently",
+    "multiply-interpolated-alpha-by-paint-opacity",
+    "composite-source-over-background"
+  ],
+  "samples": [
+    { "t": 0.1, "pixel": [500, 398], "actualRgb": [97, 47, 66], "expectedRgb": [97, 47, 66] },
+    { "t": 0.5, "pixel": [500, 750], "actualRgb": [117, 82, 106], "expectedRgb": [117, 81, 106] },
+    { "t": 0.9, "pixel": [500, 1102], "actualRgb": [136, 116, 145], "expectedRgb": [137, 116, 146] }
+  ],
+  "maximumChannelError": {
+    "certifiedPaintOpacityThenSourceOver": 1,
+    "paintOpacityTreatedAsNodeOpacity": 1,
+    "premultipliedStopInterpolation": 1,
+    "opacityFoldedIntoStopAlpha": 1,
+    "opacityAppliedToStopRgbOnly": 47,
+    "paintOpacityAppliedTwice": 44,
+    "paintOpacityIgnored": 90
+  },
+  "interpretation": {
+    "pixelEquivalentAlternatives": [
+      "paint-opacity-as-node-opacity-for-this-isolated-single-fill",
+      "opacity-folded-into-opaque-stop-alpha",
+      "straight-versus-premultiplied-interpolation-with-all-stop-alpha-one"
+    ],
+    "authorityReason": "The exported source fields explicitly place 0.5 on the sole gradient paint, keep node opacity and both stop alphas at 1, and the preview agrees with the resulting source-over model. Earlier accepted stop-alpha evidence independently distinguishes straight RGB interpolation from premultiplied-stop interpolation.",
+    "formalDecision": "result-a-close-source-authority-gate"
+  },
+  "productionImplementationStarted": false,
+  "fixtureRegistered": false,
+  "referencesUpdated": false
+}

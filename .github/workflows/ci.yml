@@ -1,0 +1,41 @@
+name: Portable CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm ci:portable
+
+  protected-references:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Guard approved evidence from unreviewed edits
+        if: github.event_name == 'pull_request'
+        run: |
+          changed="$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- fidelity/references/approved fidelity/scene-graph/snapshots fidelity/settlement/snapshots)"
+          if [ -n "$changed" ]; then
+            echo "Approved evidence changed. Attach the guarded promotion packet and obtain explicit review."
+            echo "$changed"
+            exit 1
+          fi

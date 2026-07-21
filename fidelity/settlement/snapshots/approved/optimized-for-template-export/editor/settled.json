@@ -1,0 +1,369 @@
+{
+  "graph": {
+    "compatibility": {
+      "productionPixelsChanged": false,
+      "rendererAuthority": "unchanged",
+      "runtimeUse": "disabled-observational"
+    },
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "id": "optimized-for-template-export",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "invalidation": null,
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 18,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodeOrder": [
+      "378:19",
+      "378:20",
+      "378:27",
+      "378:22",
+      "378:21",
+      "378:25",
+      "378:26",
+      "378:23",
+      "378:24"
+    ],
+    "nodes": {
+      "378:19": {
+        "approximations": [],
+        "bounds": {
+          "height": 1350,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": {
+          "bounds": {
+            "height": 1350,
+            "width": 1080,
+            "x": 0,
+            "y": 0
+          },
+          "strategy": "rectangular-clip-placeholder"
+        },
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:19",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": null,
+        "readiness": "ready",
+        "textMeasurement": null,
+        "unresolved": []
+      },
+      "378:20": {
+        "approximations": [],
+        "bounds": {
+          "height": 800,
+          "width": 999.9999,
+          "x": 40,
+          "y": 40
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:20",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": {
+          "destination": {
+            "height": 800,
+            "width": 1200,
+            "x": -60,
+            "y": 40
+          },
+          "focalPosition": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "intrinsic": {
+            "height": 750,
+            "width": 1125
+          },
+          "mode": "FILL",
+          "preserveAspectRatio": true,
+          "slot": {
+            "height": 800,
+            "width": 999.9999,
+            "x": 40,
+            "y": 40
+          },
+          "sourceCrop": {
+            "height": 750,
+            "width": 937.5,
+            "x": 93.75,
+            "y": 0
+          }
+        },
+        "parentId": "378:19",
+        "readiness": "ready",
+        "textMeasurement": null,
+        "unresolved": []
+      },
+      "378:21": {
+        "approximations": [],
+        "bounds": {
+          "height": 105.5939,
+          "width": 999.9999,
+          "x": 40,
+          "y": 1204.4061
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:21",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:27",
+        "readiness": "ready",
+        "textMeasurement": {
+          "height": 105.5939,
+          "scrollHeight": 106,
+          "scrollWidth": 1000,
+          "width": 999.9999
+        },
+        "unresolved": []
+      },
+      "378:22": {
+        "approximations": [],
+        "bounds": {
+          "height": 158.3906,
+          "width": 999.9999,
+          "x": 40,
+          "y": 950.0156
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:22",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:27",
+        "readiness": "ready",
+        "textMeasurement": {
+          "height": 158.3906,
+          "scrollHeight": 159,
+          "scrollWidth": 1000,
+          "width": 999.9999
+        },
+        "unresolved": []
+      },
+      "378:23": {
+        "approximations": [],
+        "bounds": {
+          "height": 200,
+          "width": 550.6562,
+          "x": 513.3437,
+          "y": 664
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:23",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:19",
+        "readiness": "ready",
+        "textMeasurement": null,
+        "unresolved": []
+      },
+      "378:24": {
+        "approximations": [],
+        "bounds": {
+          "height": 152,
+          "width": 502.6563,
+          "x": 537.3437,
+          "y": 687.9999
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:24",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:23",
+        "readiness": "ready",
+        "textMeasurement": {
+          "height": 152,
+          "scrollHeight": 173,
+          "scrollWidth": 503,
+          "width": 502.6563
+        },
+        "unresolved": []
+      },
+      "378:25": {
+        "approximations": [],
+        "bounds": {
+          "height": 200,
+          "width": 426.7969,
+          "x": 16,
+          "y": 16
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:25",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:19",
+        "readiness": "ready",
+        "textMeasurement": null,
+        "unresolved": []
+      },
+      "378:26": {
+        "approximations": [],
+        "bounds": {
+          "height": 152,
+          "width": 378.7969,
+          "x": 40,
+          "y": 40
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:26",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:25",
+        "readiness": "ready",
+        "textMeasurement": {
+          "height": 152,
+          "scrollHeight": 173,
+          "scrollWidth": 379,
+          "width": 378.7969
+        },
+        "unresolved": []
+      },
+      "378:27": {
+        "approximations": [],
+        "bounds": {
+          "height": 359.9843,
+          "width": 999.9999,
+          "x": 40,
+          "y": 950.0156
+        },
+        "boundsAuthority": "measurement",
+        "changedProperties": [],
+        "clip": null,
+        "effects": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "id": "378:27",
+        "mask": {
+          "dependencyKeys": [],
+          "status": "not-applicable"
+        },
+        "mediaPlacement": null,
+        "parentId": "378:19",
+        "readiness": "ready",
+        "textMeasurement": null,
+        "unresolved": []
+      }
+    },
+    "performance": {
+      "iterationCount": 1,
+      "recomputedNodeCount": 9,
+      "reusedNodeCount": 0,
+      "settlementMs": 0
+    },
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "rootNodeId": "378:19",
+    "schemaVersion": "settled-scene-graph-v1",
+    "sourceSceneVersion": "canonical-scene-graph-v1",
+    "stable": true,
+    "surface": "editor",
+    "unresolvedDependencies": []
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2509168,
+      "canvas": {
+        "height": 1350,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11",
+      "filename": "template-package-optimized-for-template-export.zip",
+      "id": "optimized-for-template-export",
+      "packageVersion": "1.0",
+      "rootNodeId": "378:19",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "scenarioId": null,
+    "surface": "editor"
+  },
+  "schemaVersion": "settled-scene-snapshot-v1"
+}

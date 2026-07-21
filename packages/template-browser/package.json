@@ -1,0 +1,32 @@
+{
+  "name": "@sleinity/template-browser",
+  "version": "0.1.0",
+  "description": "Browser asset, font, persistence, readiness, and deterministic PNG services for TemplatePackage rendering.",
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "README.md"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean --external react --external react-dom --external ajv --external fflate --external html-to-image",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@sleinity/template-core": "workspace:*",
+    "ajv": "^8.20.0",
+    "fflate": "^0.8.3",
+    "html-to-image": "^1.11.13"
+  }
+}

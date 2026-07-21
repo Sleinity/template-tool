@@ -1,0 +1,2112 @@
+{
+  "schemaVersion": "1.0",
+  "packageId": "pkg_54_59_1782932033209",
+  "name": "Blog Hero — 1080×1350",
+  "source": {
+    "type": "figma",
+    "rootNodeId": "54:59",
+    "exportedAt": "2026-07-01T18:53:53.007Z",
+    "pluginVersion": "0.4.1",
+    "packageContract": "template-package-v1"
+  },
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "background": {
+      "r": 0.09,
+      "g": 0.09,
+      "b": 0.09,
+      "a": 1
+    },
+    "coordinateSpace": "figma"
+  },
+  "rootNodeId": "54:59",
+  "nodes": {
+    "54:59": {
+      "id": "54:59",
+      "name": "Blog Hero — 1080×1350",
+      "type": "FRAME",
+      "parentId": null,
+      "children": [
+        "73:75"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -4160,
+          "width": 1080,
+          "height": 1350
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1350
+        }
+      },
+      "positioning": "ROOT",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": true
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FIXED",
+          "value": 1080,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FIXED",
+          "value": 1350,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.09,
+              "g": 0.09,
+              "b": 0.09,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": true
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "73:75": {
+      "id": "73:75",
+      "name": "Frame 1073713894",
+      "type": "FRAME",
+      "parentId": "54:59",
+      "children": [
+        "70:73",
+        "58:61"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -4160,
+          "width": 1080,
+          "height": 1350
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 1350
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FIXED",
+          "value": 1350,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "70:73": {
+      "id": "70:73",
+      "name": "Frame 1073713893",
+      "type": "FRAME",
+      "parentId": "73:75",
+      "children": [
+        "58:58",
+        "58:39"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -4160,
+          "width": 1080,
+          "height": 440
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 440
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.09,
+              "g": 0.09,
+              "b": 0.09,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:58": {
+      "id": "58:58",
+      "name": "Headline",
+      "type": "FRAME",
+      "parentId": "70:73",
+      "children": [
+        "58:59"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -4160,
+          "width": 1080,
+          "height": 320
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 320
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 64,
+          "right": 48,
+          "bottom": 64,
+          "left": 48
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FIXED",
+          "value": 1080,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.09,
+              "g": 0.09,
+              "b": 0.09,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": null,
+        "strokeAlign": "CENTER",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:59": {
+      "id": "58:59",
+      "name": "Background",
+      "type": "FRAME",
+      "parentId": "58:58",
+      "children": [
+        "58:60"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -327,
+          "y": -4096,
+          "width": 984,
+          "height": 192
+        },
+        "relative": {
+          "x": 48,
+          "y": 64,
+          "width": 984,
+          "height": 192
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 48,
+          "right": 0,
+          "bottom": 48,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:60": {
+      "id": "58:60",
+      "name": "field:textarea:headline",
+      "type": "TEXT",
+      "parentId": "58:59",
+      "children": [],
+      "bounds": {
+        "absolute": {
+          "x": -327,
+          "y": -4048,
+          "width": 984,
+          "height": 96
+        },
+        "relative": {
+          "x": 0,
+          "y": 48,
+          "width": 984,
+          "height": 96
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": 96,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "OUTSIDE",
+        "effects": [],
+        "cornerRadius": null,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "TEXT",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0,
+          "textStyleRangesDeferred": true
+        }
+      },
+      "text": {
+        "characters": "Read our blog.",
+        "fontFamily": "Funnel Display",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": 96,
+        "lineHeight": {
+          "value": 96,
+          "unit": "PIXELS"
+        },
+        "letterSpacing": {
+          "value": -1.7000000476837158,
+          "unit": "PERCENT"
+        },
+        "textAlignHorizontal": "LEFT",
+        "textAlignVertical": "CENTER",
+        "textAutoResize": "HEIGHT",
+        "paragraphSpacing": 0,
+        "textDecoration": "NONE",
+        "textCase": "ORIGINAL"
+      }
+    },
+    "58:39": {
+      "id": "58:39",
+      "name": "Brand Bar",
+      "type": "FRAME",
+      "parentId": "70:73",
+      "children": [
+        "58:40"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -3840,
+          "width": 1080,
+          "height": 120
+        },
+        "relative": {
+          "x": 0,
+          "y": 320,
+          "width": 1080,
+          "height": 120
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 48,
+          "right": 48,
+          "bottom": 48,
+          "left": 48
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FIXED",
+          "value": 1080,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": 120,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.09,
+              "g": 0.09,
+              "b": 0.09,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": null,
+        "strokeAlign": "CENTER",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:40": {
+      "id": "58:40",
+      "name": "Frame 12",
+      "type": "FRAME",
+      "parentId": "58:39",
+      "children": [
+        "58:41",
+        "58:56"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -327,
+          "y": -3792,
+          "width": 984,
+          "height": 24
+        },
+        "relative": {
+          "x": 48,
+          "y": 48,
+          "width": 984,
+          "height": 24
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "CENTER",
+        "counterAlignment": "CENTER",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FIXED",
+          "value": 24,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1.3333333730697632,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:41": {
+      "id": "58:41",
+      "name": "Frame 4308",
+      "type": "FRAME",
+      "parentId": "58:40",
+      "children": [
+        "58:87"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -327,
+          "y": -3792,
+          "width": 421,
+          "height": 24
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 421,
+          "height": 24
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MAX",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:87": {
+      "id": "58:87",
+      "name": "Vector 1",
+      "type": "RECTANGLE",
+      "parentId": "58:41",
+      "children": [],
+      "bounds": {
+        "absolute": {
+          "x": -327,
+          "y": -3792,
+          "width": 205,
+          "height": 24
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 205,
+          "height": 24
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FIXED",
+          "value": 205,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FIXED",
+          "value": 24,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "IMAGE",
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "RECTANGLE",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      },
+      "image": {
+        "assetId": "asset:image:fb18a9f8",
+        "deferred": false,
+        "hash": "fb18a9f83d3fc3ea31654e918bf0eeb5e43568ed",
+        "scaleMode": "FILL",
+        "imageTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "58:56": {
+      "id": "58:56",
+      "name": "Frame 1073713873",
+      "type": "FRAME",
+      "parentId": "58:40",
+      "children": [
+        "58:57"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 94,
+          "y": -3792,
+          "width": 563,
+          "height": 24
+        },
+        "relative": {
+          "x": 421,
+          "y": 0,
+          "width": 563,
+          "height": 24
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 10,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MAX",
+        "counterAlignment": "MAX",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:57": {
+      "id": "58:57",
+      "name": "Corporate control. Local freedom. One system.",
+      "type": "TEXT",
+      "parentId": "58:56",
+      "children": [],
+      "bounds": {
+        "absolute": {
+          "x": 94,
+          "y": -3786,
+          "width": 563,
+          "height": 18
+        },
+        "relative": {
+          "x": 0,
+          "y": 6,
+          "width": 563,
+          "height": 18
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.843,
+              "g": 0.843,
+              "b": 0.843,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 2,
+        "strokeAlign": "OUTSIDE",
+        "effects": [],
+        "cornerRadius": null,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "TEXT",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0,
+          "textStyleRangesDeferred": true
+        }
+      },
+      "text": {
+        "characters": "Corporate control. Local freedom. One system.",
+        "fontFamily": "Funnel Display",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": 26,
+        "lineHeight": {
+          "value": 100,
+          "unit": "PERCENT"
+        },
+        "letterSpacing": {
+          "value": -1.7000000476837158,
+          "unit": "PERCENT"
+        },
+        "textAlignHorizontal": "LEFT",
+        "textAlignVertical": "BOTTOM",
+        "textAutoResize": "WIDTH_AND_HEIGHT",
+        "paragraphSpacing": 0,
+        "textDecoration": "NONE",
+        "textCase": "ORIGINAL"
+      }
+    },
+    "58:61": {
+      "id": "58:61",
+      "name": "Visual + CTAs",
+      "type": "FRAME",
+      "parentId": "73:75",
+      "children": [
+        "58:63"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -3720,
+          "width": 1080,
+          "height": 910
+        },
+        "relative": {
+          "x": 0,
+          "y": 440,
+          "width": 1080,
+          "height": 910
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 10,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MAX",
+        "counterAlignment": "MAX",
+        "clipContent": true
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FILL",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "IMAGE",
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": true
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      },
+      "image": {
+        "assetId": "asset:image:21b94426",
+        "deferred": false,
+        "hash": "21b94426c2a46d3db875c9a5f244ce59ea7e5124",
+        "scaleMode": "FILL",
+        "imageTransform": [
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ]
+      }
+    },
+    "58:63": {
+      "id": "58:63",
+      "name": "Frame 1073713892",
+      "type": "FRAME",
+      "parentId": "58:61",
+      "children": [
+        "58:72"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": -375,
+          "y": -3720,
+          "width": 1080,
+          "height": 910
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 1080,
+          "height": 910
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 64,
+          "right": 64,
+          "bottom": 64,
+          "left": 64
+        },
+        "primaryAlignment": "MAX",
+        "counterAlignment": "MAX",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "FIXED",
+          "value": 1080,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "FIXED",
+          "value": 910,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:72": {
+      "id": "58:72",
+      "name": "Buttons",
+      "type": "FRAME",
+      "parentId": "58:63",
+      "children": [
+        "58:73"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 48,
+          "y": -2984,
+          "width": 593,
+          "height": 110
+        },
+        "relative": {
+          "x": 423,
+          "y": 736,
+          "width": 593,
+          "height": 110
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MAX",
+        "counterAlignment": "MAX",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:73": {
+      "id": "58:73",
+      "name": "Frame 1073713891",
+      "type": "FRAME",
+      "parentId": "58:72",
+      "children": [
+        "58:74",
+        "58:77"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 48,
+          "y": -2984,
+          "width": 593,
+          "height": 110
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 593,
+          "height": 110
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 10,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MAX",
+        "counterAlignment": "MAX",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:74": {
+      "id": "58:74",
+      "name": "Button 1",
+      "type": "FRAME",
+      "parentId": "58:73",
+      "children": [
+        "58:75"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 48,
+          "y": -2984,
+          "width": 356,
+          "height": 110
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 356,
+          "height": 110
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 30,
+          "right": 60,
+          "bottom": 30,
+          "left": 60
+        },
+        "primaryAlignment": "CENTER",
+        "counterAlignment": "CENTER",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 2.7772984504699707,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 1000,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:75": {
+      "id": "58:75",
+      "name": "Content",
+      "type": "FRAME",
+      "parentId": "58:74",
+      "children": [
+        "58:76"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 108,
+          "y": -2954,
+          "width": 236,
+          "height": 50
+        },
+        "relative": {
+          "x": 60,
+          "y": 30,
+          "width": 236,
+          "height": 50
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 14.812257766723633,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "CENTER",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1.851532220840454,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:76": {
+      "id": "58:76",
+      "name": "Text",
+      "type": "TEXT",
+      "parentId": "58:75",
+      "children": [],
+      "bounds": {
+        "absolute": {
+          "x": 108,
+          "y": -2954,
+          "width": 236,
+          "height": 50
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 236,
+          "height": 50
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.09,
+              "g": 0.09,
+              "b": 0.09,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 0.7442525625228882,
+        "strokeAlign": "OUTSIDE",
+        "effects": [],
+        "cornerRadius": null,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "TEXT",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0,
+          "textStyleRangesDeferred": true
+        }
+      },
+      "text": {
+        "characters": "Book a Demo",
+        "fontFamily": "Funnel Display",
+        "fontStyle": "Medium",
+        "fontWeight": 500,
+        "fontSize": 36,
+        "lineHeight": {
+          "value": 139.9999976158142,
+          "unit": "PERCENT"
+        },
+        "letterSpacing": {
+          "value": 2,
+          "unit": "PERCENT"
+        },
+        "textAlignHorizontal": "CENTER",
+        "textAlignVertical": "TOP",
+        "textAutoResize": "WIDTH_AND_HEIGHT",
+        "paragraphSpacing": 0,
+        "textDecoration": "NONE",
+        "textCase": "ORIGINAL"
+      }
+    },
+    "58:77": {
+      "id": "58:77",
+      "name": "Button 2",
+      "type": "FRAME",
+      "parentId": "58:73",
+      "children": [
+        "58:78"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 414,
+          "y": -2984,
+          "width": 227,
+          "height": 110
+        },
+        "relative": {
+          "x": 366,
+          "y": 0,
+          "width": 227,
+          "height": 110
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "VERTICAL",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 30,
+          "right": 60,
+          "bottom": 30,
+          "left": 60
+        },
+        "primaryAlignment": "CENTER",
+        "counterAlignment": "CENTER",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 0.741,
+              "b": 0.996,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 2.7772984504699707,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 1000,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:78": {
+      "id": "58:78",
+      "name": "Content",
+      "type": "FRAME",
+      "parentId": "58:77",
+      "children": [
+        "58:79"
+      ],
+      "bounds": {
+        "absolute": {
+          "x": 474,
+          "y": -2954,
+          "width": 107,
+          "height": 50
+        },
+        "relative": {
+          "x": 60,
+          "y": 30,
+          "width": 107,
+          "height": 50
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "HORIZONTAL",
+        "wrap": false,
+        "gap": 14.812257766723633,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "CENTER",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [],
+        "strokes": [],
+        "strokeWeight": 1.851532220840454,
+        "strokeAlign": "INSIDE",
+        "effects": [],
+        "cornerRadius": 0,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "FRAME",
+          "layoutMode": "HORIZONTAL",
+          "primaryAxisSizingMode": "AUTO",
+          "counterAxisSizingMode": "AUTO",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0
+        }
+      }
+    },
+    "58:79": {
+      "id": "58:79",
+      "name": "Text",
+      "type": "TEXT",
+      "parentId": "58:78",
+      "children": [],
+      "bounds": {
+        "absolute": {
+          "x": 474,
+          "y": -2954,
+          "width": 107,
+          "height": 50
+        },
+        "relative": {
+          "x": 0,
+          "y": 0,
+          "width": 107,
+          "height": 50
+        }
+      },
+      "positioning": "FLOW",
+      "layout": {
+        "mode": "NONE",
+        "wrap": false,
+        "gap": 0,
+        "padding": {
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "left": 0
+        },
+        "primaryAlignment": "MIN",
+        "counterAlignment": "MIN",
+        "clipContent": false
+      },
+      "sizing": {
+        "horizontal": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        },
+        "vertical": {
+          "mode": "HUG",
+          "value": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "appearance": {
+        "visible": true,
+        "opacity": 1,
+        "blendMode": "PASS_THROUGH",
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.325,
+              "g": 0.047,
+              "b": 0.149,
+              "a": 1
+            },
+            "opacity": 1,
+            "visible": true,
+            "blendMode": "NORMAL"
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 0.7442525625228882,
+        "strokeAlign": "OUTSIDE",
+        "effects": [],
+        "cornerRadius": null,
+        "cornerRadii": null,
+        "clipContent": false
+      },
+      "extensions": {
+        "figma": {
+          "nodeType": "TEXT",
+          "layoutPositioning": "AUTO",
+          "constraints": {
+            "horizontal": "MIN",
+            "vertical": "MIN"
+          },
+          "rotation": 0,
+          "textStyleRangesDeferred": true
+        }
+      },
+      "text": {
+        "characters": "Today",
+        "fontFamily": "Funnel Display",
+        "fontStyle": "Medium",
+        "fontWeight": 500,
+        "fontSize": 36,
+        "lineHeight": {
+          "value": 139.9999976158142,
+          "unit": "PERCENT"
+        },
+        "letterSpacing": {
+          "value": 2,
+          "unit": "PERCENT"
+        },
+        "textAlignHorizontal": "CENTER",
+        "textAlignVertical": "TOP",
+        "textAutoResize": "WIDTH_AND_HEIGHT",
+        "paragraphSpacing": 0,
+        "textDecoration": "NONE",
+        "textCase": "ORIGINAL"
+      }
+    }
+  },
+  "editableFields": [
+    {
+      "id": "headline",
+      "type": "textarea",
+      "nodeId": "58:60",
+      "property": "text.characters",
+      "label": "Headline",
+      "defaultValue": "Read our blog."
+    }
+  ],
+  "assets": {
+    "asset:image:fb18a9f8": {
+      "id": "asset:image:fb18a9f8",
+      "type": "image",
+      "source": "embedded",
+      "deferred": false,
+      "nodeId": "58:87",
+      "mimeType": "image/png",
+      "hash": "fb18a9f83d3fc3ea31654e918bf0eeb5e43568ed",
+      "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+      "width": 205,
+      "height": 24,
+      "scaleMode": "FILL",
+      "imageTransform": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    },
+    "asset:image:21b94426": {
+      "id": "asset:image:21b94426",
+      "type": "image",
+      "source": "embedded",
+      "deferred": false,
+      "nodeId": "58:61",
+      "mimeType": "image/png",
+      "hash": "21b94426c2a46d3db875c9a5f244ce59ea7e5124",
+      "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+      "width": 1080,
+      "height": 910,
+      "scaleMode": "FILL",
+      "imageTransform": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "motion": {
+    "raw": {},
+    "format": "figma-motion-v1",
+    "linking": {
+      "matchedNodeIds": [],
+      "missingNodeIds": [],
+      "extraPackageNodeIds": [],
+      "status": "unchecked"
+    }
+  },
+  "diagnostics": [
+    {
+      "severity": "info",
+      "code": "IMAGE_ASSET_EMBEDDED",
+      "nodeId": "58:87",
+      "nodeName": "Vector 1",
+      "parentId": "73:75",
+      "parentName": "Hero Content",
+      "parentLayoutMode": "VERTICAL",
+      "affectedAxis": "horizontal",
+      "rawFigmaValue": "FIXED",
+      "normalizedValue": "FIXED",
+      "message": "Embedded image asset:image:fb18a9f8 (image/png, 9 KB)."
+    },
+    {
+      "severity": "info",
+      "code": "LARGE_EMBEDDED_ASSET",
+      "nodeId": "58:61",
+      "nodeName": "Visual + CTAs",
+      "message": "Large image asset (629 KB): asset:image:21b94426."
+    },
+    {
+      "severity": "info",
+      "code": "IMAGE_ASSET_EMBEDDED",
+      "nodeId": "58:61",
+      "nodeName": "Visual + CTAs",
+      "message": "Embedded image asset:image:21b94426 (image/png, 629 KB)."
+    }
+  ]
+}

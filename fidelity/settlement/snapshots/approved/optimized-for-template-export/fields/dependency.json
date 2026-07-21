@@ -1,0 +1,1008 @@
+{
+  "graph": {
+    "edges": [
+      {
+        "from": "asset:asset:image:ceab5479:state",
+        "kind": "media-placement",
+        "reason": "Decoded intrinsic asset dimensions determine scale and crop.",
+        "to": "node:378:20:media.placement"
+      },
+      {
+        "from": "font:font:geist-mono:500:normal:state",
+        "kind": "measurement-input",
+        "reason": "Font activation changes text metrics.",
+        "to": "node:378:21:measure.text"
+      },
+      {
+        "from": "font:font:geist-mono:500:normal:state",
+        "kind": "measurement-input",
+        "reason": "Font activation changes text metrics.",
+        "to": "node:378:22:measure.text"
+      },
+      {
+        "from": "font:font:inter-tight:700:normal:state",
+        "kind": "measurement-input",
+        "reason": "Font activation changes text metrics.",
+        "to": "node:378:24:measure.text"
+      },
+      {
+        "from": "font:font:inter-tight:700:normal:state",
+        "kind": "measurement-input",
+        "reason": "Font activation changes text metrics.",
+        "to": "node:378:26:measure.text"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:19:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:20:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:21:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:22:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:23:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:24:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:25:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:26:semantic"
+      },
+      {
+        "from": "graph:scene-revision",
+        "kind": "semantic-input",
+        "reason": "A scene revision may alter any semantic property.",
+        "to": "node:378:27:semantic"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:19:clip-mask-effect"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:19:diagnostic"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:20:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "constraint",
+        "reason": "Absolute child constraints resolve against parent bounds.",
+        "to": "node:378:20:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:23:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "constraint",
+        "reason": "Absolute child constraints resolve against parent bounds.",
+        "to": "node:378:23:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:25:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "constraint",
+        "reason": "Absolute child constraints resolve against parent bounds.",
+        "to": "node:378:25:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:27:bounds"
+      },
+      {
+        "from": "node:378:19:bounds",
+        "kind": "constraint",
+        "reason": "Absolute child constraints resolve against parent bounds.",
+        "to": "node:378:27:bounds"
+      },
+      {
+        "from": "node:378:19:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:19:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:19:bounds"
+      },
+      {
+        "from": "node:378:19:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:19:bounds"
+      },
+      {
+        "from": "node:378:20:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:20:clip-mask-effect"
+      },
+      {
+        "from": "node:378:20:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:20:diagnostic"
+      },
+      {
+        "from": "node:378:20:bounds",
+        "kind": "media-placement",
+        "reason": "Final node geometry defines the image slot.",
+        "to": "node:378:20:media.slot"
+      },
+      {
+        "from": "node:378:20:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:20:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:20:bounds"
+      },
+      {
+        "from": "node:378:20:media.mode-crop-focal",
+        "kind": "media-placement",
+        "reason": "Fit mode, crop transform and focal position determine placement.",
+        "to": "node:378:20:media.placement"
+      },
+      {
+        "from": "node:378:20:media.placement",
+        "kind": "clip-mask-effect",
+        "reason": "Image placement feeds clipping, masks and effects.",
+        "to": "node:378:20:clip-mask-effect"
+      },
+      {
+        "from": "node:378:20:media.slot",
+        "kind": "media-placement",
+        "reason": "Placement and crop depend on slot dimensions.",
+        "to": "node:378:20:media.placement"
+      },
+      {
+        "from": "node:378:20:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:20:bounds"
+      },
+      {
+        "from": "node:378:21:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:21:clip-mask-effect"
+      },
+      {
+        "from": "node:378:21:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:21:diagnostic"
+      },
+      {
+        "from": "node:378:21:bounds",
+        "kind": "sibling-layout",
+        "reason": "Auto Layout siblings share ordered space allocation.",
+        "to": "node:378:22:bounds"
+      },
+      {
+        "from": "node:378:21:bounds",
+        "kind": "ancestor-layout",
+        "reason": "HUG parent geometry depends on participating children.",
+        "to": "node:378:27:bounds"
+      },
+      {
+        "from": "node:378:21:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:21:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:21:bounds"
+      },
+      {
+        "from": "node:378:21:measure.text",
+        "kind": "measurement-input",
+        "reason": "HUG text bounds consume rendered measurement.",
+        "to": "node:378:21:bounds"
+      },
+      {
+        "from": "node:378:21:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:21:bounds"
+      },
+      {
+        "from": "node:378:21:text.characters",
+        "kind": "measurement-input",
+        "reason": "Text characters affect line breaking and rendered height.",
+        "to": "node:378:21:measure.text"
+      },
+      {
+        "from": "node:378:21:text.style",
+        "kind": "measurement-input",
+        "reason": "Font, size, line-height and spacing affect rendered text geometry.",
+        "to": "node:378:21:measure.text"
+      },
+      {
+        "from": "node:378:22:bounds",
+        "kind": "sibling-layout",
+        "reason": "Auto Layout siblings share ordered space allocation.",
+        "to": "node:378:21:bounds"
+      },
+      {
+        "from": "node:378:22:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:22:clip-mask-effect"
+      },
+      {
+        "from": "node:378:22:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:22:diagnostic"
+      },
+      {
+        "from": "node:378:22:bounds",
+        "kind": "ancestor-layout",
+        "reason": "HUG parent geometry depends on participating children.",
+        "to": "node:378:27:bounds"
+      },
+      {
+        "from": "node:378:22:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:22:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:22:bounds"
+      },
+      {
+        "from": "node:378:22:measure.text",
+        "kind": "measurement-input",
+        "reason": "HUG text bounds consume rendered measurement.",
+        "to": "node:378:22:bounds"
+      },
+      {
+        "from": "node:378:22:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:22:bounds"
+      },
+      {
+        "from": "node:378:22:text.characters",
+        "kind": "measurement-input",
+        "reason": "Text characters affect line breaking and rendered height.",
+        "to": "node:378:22:measure.text"
+      },
+      {
+        "from": "node:378:22:text.style",
+        "kind": "measurement-input",
+        "reason": "Font, size, line-height and spacing affect rendered text geometry.",
+        "to": "node:378:22:measure.text"
+      },
+      {
+        "from": "node:378:23:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:23:clip-mask-effect"
+      },
+      {
+        "from": "node:378:23:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:23:diagnostic"
+      },
+      {
+        "from": "node:378:23:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:24:bounds"
+      },
+      {
+        "from": "node:378:23:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:23:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:23:bounds"
+      },
+      {
+        "from": "node:378:23:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:23:bounds"
+      },
+      {
+        "from": "node:378:24:bounds",
+        "kind": "ancestor-layout",
+        "reason": "HUG parent geometry depends on participating children.",
+        "to": "node:378:23:bounds"
+      },
+      {
+        "from": "node:378:24:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:24:clip-mask-effect"
+      },
+      {
+        "from": "node:378:24:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:24:diagnostic"
+      },
+      {
+        "from": "node:378:24:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:24:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:24:bounds"
+      },
+      {
+        "from": "node:378:24:measure.text",
+        "kind": "measurement-input",
+        "reason": "HUG text bounds consume rendered measurement.",
+        "to": "node:378:24:bounds"
+      },
+      {
+        "from": "node:378:24:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:24:bounds"
+      },
+      {
+        "from": "node:378:24:text.characters",
+        "kind": "measurement-input",
+        "reason": "Text characters affect line breaking and rendered height.",
+        "to": "node:378:24:measure.text"
+      },
+      {
+        "from": "node:378:24:text.style",
+        "kind": "measurement-input",
+        "reason": "Font, size, line-height and spacing affect rendered text geometry.",
+        "to": "node:378:24:measure.text"
+      },
+      {
+        "from": "node:378:25:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:25:clip-mask-effect"
+      },
+      {
+        "from": "node:378:25:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:25:diagnostic"
+      },
+      {
+        "from": "node:378:25:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:26:bounds"
+      },
+      {
+        "from": "node:378:25:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:25:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:25:bounds"
+      },
+      {
+        "from": "node:378:25:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:25:bounds"
+      },
+      {
+        "from": "node:378:26:bounds",
+        "kind": "ancestor-layout",
+        "reason": "HUG parent geometry depends on participating children.",
+        "to": "node:378:25:bounds"
+      },
+      {
+        "from": "node:378:26:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:26:clip-mask-effect"
+      },
+      {
+        "from": "node:378:26:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:26:diagnostic"
+      },
+      {
+        "from": "node:378:26:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:26:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:26:bounds"
+      },
+      {
+        "from": "node:378:26:measure.text",
+        "kind": "measurement-input",
+        "reason": "HUG text bounds consume rendered measurement.",
+        "to": "node:378:26:bounds"
+      },
+      {
+        "from": "node:378:26:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:26:bounds"
+      },
+      {
+        "from": "node:378:26:text.characters",
+        "kind": "measurement-input",
+        "reason": "Text characters affect line breaking and rendered height.",
+        "to": "node:378:26:measure.text"
+      },
+      {
+        "from": "node:378:26:text.style",
+        "kind": "measurement-input",
+        "reason": "Font, size, line-height and spacing affect rendered text geometry.",
+        "to": "node:378:26:measure.text"
+      },
+      {
+        "from": "node:378:27:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:21:bounds"
+      },
+      {
+        "from": "node:378:27:bounds",
+        "kind": "ancestor-layout",
+        "reason": "Parent content box and constraints affect child geometry.",
+        "to": "node:378:22:bounds"
+      },
+      {
+        "from": "node:378:27:bounds",
+        "kind": "clip-mask-effect",
+        "reason": "Clip, mask and effect extents depend on final geometry.",
+        "to": "node:378:27:clip-mask-effect"
+      },
+      {
+        "from": "node:378:27:bounds",
+        "kind": "diagnostic",
+        "reason": "Geometry changes invalidate node diagnostics.",
+        "to": "node:378:27:diagnostic"
+      },
+      {
+        "from": "node:378:27:diagnostic",
+        "kind": "export-readiness",
+        "reason": "Renderer diagnostics participate in export readiness.",
+        "to": "graph:export-readiness"
+      },
+      {
+        "from": "node:378:27:measure.bounds",
+        "kind": "measurement-input",
+        "reason": "Observed DOM bounds supplement semantic geometry.",
+        "to": "node:378:27:bounds"
+      },
+      {
+        "from": "node:378:27:semantic",
+        "kind": "semantic-input",
+        "reason": "Canonical geometry, sizing, transforms and visibility feed settled bounds.",
+        "to": "node:378:27:bounds"
+      }
+    ],
+    "fixture": {
+      "id": "optimized-for-template-export",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "fullTreeFallbacks": [
+      {
+        "reason": "The current runtime recreates the full resolved tree after workingPackage changes.",
+        "source": "scene-revision"
+      },
+      {
+        "reason": "Unmapped future properties must fail safe without silently retaining stale derived state.",
+        "source": "unknown-property"
+      }
+    ],
+    "nodeOrder": [
+      "378:19",
+      "378:20",
+      "378:27",
+      "378:22",
+      "378:21",
+      "378:25",
+      "378:26",
+      "378:23",
+      "378:24"
+    ],
+    "sceneVersion": "canonical-scene-graph-v1",
+    "schemaVersion": "dependency-graph-v1",
+    "vertices": [
+      {
+        "key": "asset:asset:image:ceab5479:state",
+        "kind": "readiness",
+        "nodeId": null,
+        "property": "asset.asset:image:ceab5479.state"
+      },
+      {
+        "key": "font:font:geist-mono:500:normal:state",
+        "kind": "readiness",
+        "nodeId": null,
+        "property": "font.font:geist-mono:500:normal.state"
+      },
+      {
+        "key": "font:font:inter-tight:700:normal:state",
+        "kind": "readiness",
+        "nodeId": null,
+        "property": "font.font:inter-tight:700:normal.state"
+      },
+      {
+        "key": "graph:container",
+        "kind": "measurement",
+        "nodeId": null,
+        "property": "container"
+      },
+      {
+        "key": "graph:export-readiness",
+        "kind": "export",
+        "nodeId": null,
+        "property": "export-readiness"
+      },
+      {
+        "key": "graph:scene-revision",
+        "kind": "semantic",
+        "nodeId": null,
+        "property": "scene-revision"
+      },
+      {
+        "key": "node:378:19:bounds",
+        "kind": "derived",
+        "nodeId": "378:19",
+        "property": "19:bounds"
+      },
+      {
+        "key": "node:378:19:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:19",
+        "property": "19:clip-mask-effect"
+      },
+      {
+        "key": "node:378:19:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:19",
+        "property": "19:diagnostic"
+      },
+      {
+        "key": "node:378:19:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:19",
+        "property": "19:measure.bounds"
+      },
+      {
+        "key": "node:378:19:semantic",
+        "kind": "derived",
+        "nodeId": "378:19",
+        "property": "19:semantic"
+      },
+      {
+        "key": "node:378:20:bounds",
+        "kind": "derived",
+        "nodeId": "378:20",
+        "property": "20:bounds"
+      },
+      {
+        "key": "node:378:20:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:20",
+        "property": "20:clip-mask-effect"
+      },
+      {
+        "key": "node:378:20:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:20",
+        "property": "20:diagnostic"
+      },
+      {
+        "key": "node:378:20:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:20",
+        "property": "20:measure.bounds"
+      },
+      {
+        "key": "node:378:20:media.mode-crop-focal",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "20:media.mode-crop-focal"
+      },
+      {
+        "key": "node:378:20:media.placement",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "20:media.placement"
+      },
+      {
+        "key": "node:378:20:media.slot",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "20:media.slot"
+      },
+      {
+        "key": "node:378:20:semantic",
+        "kind": "derived",
+        "nodeId": "378:20",
+        "property": "20:semantic"
+      },
+      {
+        "key": "node:378:21:bounds",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "21:bounds"
+      },
+      {
+        "key": "node:378:21:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:21",
+        "property": "21:clip-mask-effect"
+      },
+      {
+        "key": "node:378:21:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:21",
+        "property": "21:diagnostic"
+      },
+      {
+        "key": "node:378:21:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:21",
+        "property": "21:measure.bounds"
+      },
+      {
+        "key": "node:378:21:measure.text",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "21:measure.text"
+      },
+      {
+        "key": "node:378:21:semantic",
+        "kind": "derived",
+        "nodeId": "378:21",
+        "property": "21:semantic"
+      },
+      {
+        "key": "node:378:21:text.characters",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "21:text.characters"
+      },
+      {
+        "key": "node:378:21:text.style",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "21:text.style"
+      },
+      {
+        "key": "node:378:22:bounds",
+        "kind": "derived",
+        "nodeId": "378:22",
+        "property": "22:bounds"
+      },
+      {
+        "key": "node:378:22:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:22",
+        "property": "22:clip-mask-effect"
+      },
+      {
+        "key": "node:378:22:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:22",
+        "property": "22:diagnostic"
+      },
+      {
+        "key": "node:378:22:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:22",
+        "property": "22:measure.bounds"
+      },
+      {
+        "key": "node:378:22:measure.text",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "22:measure.text"
+      },
+      {
+        "key": "node:378:22:semantic",
+        "kind": "derived",
+        "nodeId": "378:22",
+        "property": "22:semantic"
+      },
+      {
+        "key": "node:378:22:text.characters",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "22:text.characters"
+      },
+      {
+        "key": "node:378:22:text.style",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "22:text.style"
+      },
+      {
+        "key": "node:378:23:bounds",
+        "kind": "derived",
+        "nodeId": "378:23",
+        "property": "23:bounds"
+      },
+      {
+        "key": "node:378:23:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:23",
+        "property": "23:clip-mask-effect"
+      },
+      {
+        "key": "node:378:23:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:23",
+        "property": "23:diagnostic"
+      },
+      {
+        "key": "node:378:23:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:23",
+        "property": "23:measure.bounds"
+      },
+      {
+        "key": "node:378:23:semantic",
+        "kind": "derived",
+        "nodeId": "378:23",
+        "property": "23:semantic"
+      },
+      {
+        "key": "node:378:24:bounds",
+        "kind": "derived",
+        "nodeId": "378:24",
+        "property": "24:bounds"
+      },
+      {
+        "key": "node:378:24:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:24",
+        "property": "24:clip-mask-effect"
+      },
+      {
+        "key": "node:378:24:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:24",
+        "property": "24:diagnostic"
+      },
+      {
+        "key": "node:378:24:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:24",
+        "property": "24:measure.bounds"
+      },
+      {
+        "key": "node:378:24:measure.text",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "24:measure.text"
+      },
+      {
+        "key": "node:378:24:semantic",
+        "kind": "derived",
+        "nodeId": "378:24",
+        "property": "24:semantic"
+      },
+      {
+        "key": "node:378:24:text.characters",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "24:text.characters"
+      },
+      {
+        "key": "node:378:24:text.style",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "24:text.style"
+      },
+      {
+        "key": "node:378:25:bounds",
+        "kind": "derived",
+        "nodeId": "378:25",
+        "property": "25:bounds"
+      },
+      {
+        "key": "node:378:25:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:25",
+        "property": "25:clip-mask-effect"
+      },
+      {
+        "key": "node:378:25:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:25",
+        "property": "25:diagnostic"
+      },
+      {
+        "key": "node:378:25:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:25",
+        "property": "25:measure.bounds"
+      },
+      {
+        "key": "node:378:25:semantic",
+        "kind": "derived",
+        "nodeId": "378:25",
+        "property": "25:semantic"
+      },
+      {
+        "key": "node:378:26:bounds",
+        "kind": "derived",
+        "nodeId": "378:26",
+        "property": "26:bounds"
+      },
+      {
+        "key": "node:378:26:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:26",
+        "property": "26:clip-mask-effect"
+      },
+      {
+        "key": "node:378:26:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:26",
+        "property": "26:diagnostic"
+      },
+      {
+        "key": "node:378:26:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:26",
+        "property": "26:measure.bounds"
+      },
+      {
+        "key": "node:378:26:measure.text",
+        "kind": "derived",
+        "nodeId": "378",
+        "property": "26:measure.text"
+      },
+      {
+        "key": "node:378:26:semantic",
+        "kind": "derived",
+        "nodeId": "378:26",
+        "property": "26:semantic"
+      },
+      {
+        "key": "node:378:26:text.characters",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "26:text.characters"
+      },
+      {
+        "key": "node:378:26:text.style",
+        "kind": "semantic",
+        "nodeId": "378",
+        "property": "26:text.style"
+      },
+      {
+        "key": "node:378:27:bounds",
+        "kind": "derived",
+        "nodeId": "378:27",
+        "property": "27:bounds"
+      },
+      {
+        "key": "node:378:27:clip-mask-effect",
+        "kind": "derived",
+        "nodeId": "378:27",
+        "property": "27:clip-mask-effect"
+      },
+      {
+        "key": "node:378:27:diagnostic",
+        "kind": "diagnostic",
+        "nodeId": "378:27",
+        "property": "27:diagnostic"
+      },
+      {
+        "key": "node:378:27:measure.bounds",
+        "kind": "measurement",
+        "nodeId": "378:27",
+        "property": "27:measure.bounds"
+      },
+      {
+        "key": "node:378:27:semantic",
+        "kind": "derived",
+        "nodeId": "378:27",
+        "property": "27:semantic"
+      }
+    ]
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2509168,
+      "canvas": {
+        "height": 1350,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11",
+      "filename": "template-package-optimized-for-template-export.zip",
+      "id": "optimized-for-template-export",
+      "packageVersion": "1.0",
+      "rootNodeId": "378:19",
+      "zipSha256": "fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823"
+    },
+    "scenarioId": null,
+    "surface": "fields"
+  },
+  "schemaVersion": "dependency-snapshot-v1"
+}

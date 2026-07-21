@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2500574,
+      "canvas": {
+        "height": 1920,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "ab1a3ddb1b8b4b51e688f564f595b89a673c7abd4d5b715dc742923f15b99c49",
+      "filename": "template-package-deal-of-the-week-post.zip",
+      "id": "deal-of-the-week-post",
+      "packageVersion": "1.0",
+      "rootNodeId": "225:117",
+      "zipSha256": "96866712f10271407a182d3a905e112b2eb1b9170257c4d8fe6d05c9a7311b05"
+    },
+    "scenarioId": null,
+    "surface": "png-export"
+  },
+  "schemaVersion": "settlement-trace-snapshot-v1",
+  "trace": {
+    "fixture": {
+      "id": "deal-of-the-week-post",
+      "zipSha256": "96866712f10271407a182d3a905e112b2eb1b9170257c4d8fe6d05c9a7311b05"
+    },
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 24,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodes": [
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:117",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:118",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:119",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:120",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:121",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:122",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:123",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:124",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:125",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:126",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:127",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:128",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:129",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:130",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "225:131",
+        "unresolved": []
+      }
+    ],
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "settlement-trace-v1",
+    "stable": true,
+    "surface": "png-export",
+    "unresolvedDependencies": []
+  }
+}
