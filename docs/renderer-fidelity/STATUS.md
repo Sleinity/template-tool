@@ -1,7 +1,7 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-28
-Current milestone: SDK 0.2.2 generic template editor handoff release candidate
+Current milestone: SDK 0.2.2 generic template editor handoff complete
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
 
 ## SDK 0.2.2 — generic template editor handoff
@@ -57,6 +57,29 @@ and settlement 80 /
 `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
 No update, promotion, fixture, schema, tolerance or approved-reference command
 ran.
+
+PR [#5](https://github.com/Sleinity/template-tool/pull/5) passed portable CI,
+generic packed-reference acceptance and protected-reference guarding before its
+squash merge at `d4dfb85`. Tag `sdk-v0.2.2` alone published all three packages.
+Workflow run 8 passed both `publish` and `handoff`, including authenticated
+published-core installation, registry archive download, npm and pnpm vendored
+consumers, the generic packed reference, public visibility and Release upload.
+
+The registry-derived public archives are:
+
+- core, 279,287 bytes /
+  `dec3f442f05392286e1b718114b31b700ffa64fb7f164bc74650db2c40512f6b`;
+- browser, 334,484 bytes /
+  `afa917bfb547e6f051c8d7974e9a6ba2a2297587e45d8ade67cd3a64f839c569`;
+- React, 277,566 bytes /
+  `fd3b32124267bee87f69e1eac7dcde5b60c82c818b1a03da39832f0f541fc918`.
+
+All public archives, checksum manifests and neutral handoffs were downloaded
+anonymously. Both checksum manifests pass. A second secret-free pnpm consumer
+and generic packed-reference Chromium run pass directly from those downloaded
+bytes with the same hashes and zero external runtime requests. The release and
+all three package tags point to reviewed commit `d4dfb85`; `sdk-v0.2.1` and its
+historical assets remain unchanged.
 
 ## SDK 0.2.1 — release closeout and Bas acceptance gate
 

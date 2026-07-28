@@ -50,6 +50,27 @@ and settlement 80 /
 `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
 No update, promotion, fixture, schema or tolerance command ran.
 
+### Release result
+
+- PR [#5](https://github.com/Sleinity/template-tool/pull/5) passed both
+  Portable CI jobs and squash-merged at reviewed `main` commit `d4dfb85`.
+- Tag `sdk-v0.2.2` alone triggered workflow run 8. Both `publish` and `handoff`
+  passed: direct published-core installation, registry archive download, npm
+  and pnpm vendored consumers, the generic packed-reference browser gate,
+  public visibility verification, checksums and Release upload.
+- Registry-derived public archives are:
+  - core, 279,287 bytes /
+    `dec3f442f05392286e1b718114b31b700ffa64fb7f164bc74650db2c40512f6b`;
+  - browser, 334,484 bytes /
+    `afa917bfb547e6f051c8d7974e9a6ba2a2297587e45d8ade67cd3a64f839c569`;
+  - React, 277,566 bytes /
+    `fd3b32124267bee87f69e1eac7dcde5b60c82c818b1a03da39832f0f541fc918`.
+- All Release archives and handoffs were downloaded anonymously. Both checksum
+  manifests pass, and a second secret-free pnpm consumer plus generic
+  packed-reference Chromium gate pass directly from those downloaded bytes.
+- `sdk-v0.2.2` and the three package-version tags resolve to `d4dfb85`. The
+  immutable 0.2.1 Release and historical evidence were not modified.
+
 ## 2026-07-28 — SDK 0.2.1 release closeout and Bas acceptance gate
 
 ### Result
