@@ -62,6 +62,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Install pinned Chromium for runtime verification
+        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
+        run: pnpm exec playwright install --with-deps chromium
       - name: Verify secret-free Lovable runtime consumer (npm)
         if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: >-
