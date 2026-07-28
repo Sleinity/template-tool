@@ -1,4 +1,4 @@
-# Private renderer SDK
+# Template Platform SDK
 
 The current physical boundaries and the decision-complete migration order are
 recorded in the
@@ -6,8 +6,9 @@ recorded in the
 That audit treats this SDK as the technical platform used by Studio and future
 products; it does not treat Studio as disposable extraction scaffolding.
 
-The repository is one authoritative monorepo. Template Studio is the reference
-application; three private packages provide the reusable engine for other tools.
+The repository is one authoritative public monorepo. Template Studio is the
+reference application; three scoped packages provide the reusable engine for
+other tools.
 
 | Package | Responsibility | Environment |
 | --- | --- | --- |
@@ -23,15 +24,16 @@ family moves under a separate fidelity gate.
 
 ## Consumer installation
 
-1. Obtain private package access and a GitHub personal access token (classic)
-   with `read:packages`.
+1. Obtain GitHub Packages access and a GitHub personal access token (classic)
+   with `read:packages`; GitHub's npm registry requires authentication even for
+   public packages.
 2. Configure the `@sleinity` registry using [`.npmrc.example`](../../.npmrc.example).
 3. Install exact reviewed versions:
 
    ```sh
-   pnpm add @sleinity/template-core@0.2.0 \
-     @sleinity/template-browser@0.2.0 \
-     @sleinity/template-react@0.2.0
+   pnpm add @sleinity/template-core@0.2.1 \
+     @sleinity/template-browser@0.2.1 \
+     @sleinity/template-react@0.2.1
    ```
 
 4. Start with [`examples/minimal-renderer`](../../examples/minimal-renderer/README.md).
@@ -65,9 +67,9 @@ persistence, readiness, rendering, and PNG export remain browser/React runtime
 responsibilities and are not part of this core-only integration.
 
 Lovable Business cannot provide the Enterprise build secret needed to install a
-private registry package. The private `sdk-v0.2.0` GitHub Release therefore
+GitHub Packages dependency. The public `sdk-v0.2.1` GitHub Release therefore
 includes the exact published core, browser and React archives, one SHA-256
-manifest, and copyable Bas handoffs. The
+manifest, and copyable Bas handoffs without requiring a download token. The
 [core importer handoff](CORE_IMPORTER_HANDOFF.md) remains the narrow import-only
 route. Use the [runtime handoff](RUNTIME_HANDOFF.md) and
 [sequential Lovable prompts](BAS_NARROWCASTING_LOVABLE_PROMPTS.md) for the
@@ -81,7 +83,7 @@ creation, typed field updates, readiness, persistence, and export revisions by
 hand.
 
 ```tsx
-const session = createTemplateSession();
+const session = useTemplateSession();
 
 await session.loadZip({ bytes, sourceName: file.name });
 session.setField("headline", "Updated headline");
@@ -102,12 +104,18 @@ the normal development flow, while `pnpm packed-consumer:verify` packs all three
 archives, installs them into a temporary project with no workspace aliases,
 type-checks, and builds that consumer.
 
+See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) for the browser, React,
+CSP, persistence, revision, upgrade, and licensing contract. The committed
+[narrowcasting reference consumer](../../examples/narrowcasting-integration/README.md)
+shows the complete supported browser integration without Studio.
+
 ## Deferred package refinement
 
-The current packages still embed overlapping renderer, resolved and browser
-implementation. The next physical-core milestone first inverts the pure helpers
-under resolved/backend ownership. Bundle de-duplication remains separate debt;
-SDK 0.2 does not change renderer ownership merely to reduce package size.
+The current packages still embed overlapping renderer and browser
+implementation. Portable package, resolved/backend, primitive and field
+contracts are physically core-owned; browser lifecycle implementation remains
+the next ownership migration. Bundle de-duplication remains separate debt and
+must not change renderer ownership merely to reduce package size.
 
 ## Release workflow
 
@@ -120,3 +128,8 @@ real template → validator/issue packet → focused change → pull request
 Portable GitHub CI never needs proprietary fixture or font bytes. The complete
 hash-gated fidelity suite remains a local release gate until a rights-reviewed
 private asset distribution mechanism is added.
+
+The repository and release assets are publicly downloadable, but package
+manifests remain `UNLICENSED`. Public visibility is not a general reuse grant;
+choose an explicit license before inviting adoption beyond authorized
+collaborators such as this Bas integration.

@@ -1,4 +1,4 @@
-name: Publish private SDK packages
+name: Publish SDK packages
 
 on:
   push:
@@ -7,14 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       prepare_runtime_handoff:
-        description: "Refresh the sdk-v0.2.0 Lovable runtime assets from published packages"
+        description: "Refresh the current SDK Lovable runtime assets from published packages"
         required: false
         default: false
         type: boolean
-
-env:
-  SDK_VERSION: "0.2.0"
-  SDK_RELEASE_TAG: "sdk-v0.2.0"
 
 permissions:
   contents: write
@@ -22,6 +18,7 @@ permissions:
 
 jobs:
   publish:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/sdk-v')
     runs-on: ubuntu-latest
     environment: private-sdk-release
     steps:
@@ -35,27 +32,67 @@ jobs:
           cache: pnpm
           registry-url: https://npm.pkg.github.com
           scope: "@sleinity"
+      - name: Resolve fixed SDK release metadata
+        run: node scripts/repository/sdk-runtime-manifest.mjs env >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - run: pnpm ci:portable
+      - name: Install pinned Chromium for packed reference acceptance
+        run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm narrowcasting:acceptance
       - run: pnpm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Retain published package tags
+        run: |
+          git tag --list '@sleinity/*' | while IFS= read -r tag; do
+            git push origin "refs/tags/${tag}:refs/tags/${tag}"
+          done
+
+  handoff:
+    needs: publish
+    if: >-
+      always() &&
+      (
+        (github.event_name == 'push' && needs.publish.result == 'success') ||
+        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true)
+      )
+    runs-on: ubuntu-latest
+    environment: private-sdk-release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@sleinity"
+      - name: Resolve fixed SDK release metadata
+        run: node scripts/repository/sdk-runtime-manifest.mjs env >> "$GITHUB_ENV"
+      - run: pnpm install --frozen-lockfile
+      - name: Verify current source before a manual handoff refresh
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm ci:portable
       - name: Verify published core consumer
         run: pnpm published-core:verify
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_CORE_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Prepare published runtime Lovable handoff
-        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: |
           mkdir -p release-artifacts
-          for package_name in template-core template-browser template-react; do
-            npm pack "@sleinity/${package_name}@${SDK_VERSION}" \
+          while IFS= read -r package_name; do
+            npm pack "${package_name}@${SDK_VERSION}" \
               --registry=https://npm.pkg.github.com \
               --pack-destination=release-artifacts
-          done
+          done < <(node scripts/repository/sdk-runtime-manifest.mjs package-names)
           node scripts/repository/create-runtime-release-handoff.mjs \
             release-artifacts \
+            release-artifacts
+          node scripts/repository/create-core-release-handoff.mjs \
+            "release-artifacts/sleinity-template-core-${SDK_VERSION}.tgz" \
             release-artifacts
           cp docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md \
             release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md
@@ -63,45 +100,54 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Install pinned Chromium for runtime verification
-        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: pnpm exec playwright install --with-deps chromium
       - name: Verify secret-free Lovable runtime consumer (npm)
-        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
           --archives release-artifacts
         env:
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Verify secret-free Lovable runtime consumer (pnpm)
-        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
           --archives release-artifacts
         env:
           TEMPLATE_CONSUMER_PACKAGE_MANAGER: pnpm
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
-      - name: Create private SDK release and upload Lovable runtime handoff
-        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
+      - name: Verify packed narrowcasting reference from published archives
+        run: >-
+          node scripts/repository/verify-narrowcasting-reference.mjs
+          --archives release-artifacts
+        env:
+          TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Verify repository distribution visibility
         run: |
+          actual_visibility="$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)"
+          test "$actual_visibility" = "$SDK_RELEASE_VISIBILITY"
+          test "$SDK_LICENSE_POLICY" = "authorized-pilot-only"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create SDK release and upload Lovable runtime handoff
+        run: |
+          mapfile -t release_archives < <(
+            node scripts/repository/sdk-runtime-manifest.mjs \
+              archive-paths \
+              release-artifacts
+          )
           gh release view "$SDK_RELEASE_TAG" >/dev/null 2>&1 ||
             gh release create "$SDK_RELEASE_TAG" \
               --verify-tag \
-              --title "SDK 0.2.0" \
-              --notes "Private SDK 0.2.0. The attached archives were downloaded from GitHub Packages and include a checksum-verified Lovable Business runtime handoff."
+              --title "$SDK_RELEASE_TITLE" \
+              --notes "Public SDK ${SDK_VERSION} pilot assets derived from GitHub Packages. UNLICENSED; authorized for the Bas narrowcasting pilot only."
           gh release edit "$SDK_RELEASE_TAG" \
-            --notes "Private SDK 0.2.0. The attached core, browser, and React archives were downloaded from GitHub Packages and include a checksum-verified Lovable Business narrowcasting handoff."
+            --notes "Public SDK ${SDK_VERSION} pilot assets derived from GitHub Packages. UNLICENSED; authorized for the Bas narrowcasting pilot only. See BAS-RUNTIME-HANDOFF.md for checksums and integration instructions."
           gh release upload "$SDK_RELEASE_TAG" \
-            release-artifacts/sleinity-template-core-0.2.0.tgz \
-            release-artifacts/sleinity-template-browser-0.2.0.tgz \
-            release-artifacts/sleinity-template-react-0.2.0.tgz \
+            "${release_archives[@]}" \
             release-artifacts/SHA256SUMS \
+            release-artifacts/CORE-SHA256SUMS \
+            release-artifacts/BAS-LOVABLE-HANDOFF.md \
             release-artifacts/BAS-RUNTIME-HANDOFF.md \
             release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Retain published package tags
-        run: |
-          git tag --list '@sleinity/*' | while IFS= read -r tag; do
-            git push origin "refs/tags/${tag}:refs/tags/${tag}"
-          done

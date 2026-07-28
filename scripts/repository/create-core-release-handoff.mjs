@@ -1,6 +1,12 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import {
+  loadRuntimeDistribution,
+  loadRuntimePackageDefinitions,
+  resolveFixedRuntimeVersion,
+  runtimeArchiveName,
+} from "./sdk-runtime-manifest.mjs";
 
 const [archiveArgument, outputArgument] = process.argv.slice(2);
 if (!archiveArgument || !outputArgument) {
@@ -12,7 +18,19 @@ if (!archiveArgument || !outputArgument) {
 const archivePath = path.resolve(archiveArgument);
 const outputDirectory = path.resolve(outputArgument);
 const archiveName = path.basename(archivePath);
-const expectedArchiveName = "sleinity-template-core-0.2.0.tgz";
+const distribution = await loadRuntimeDistribution();
+const version =
+  process.env.TEMPLATE_CORE_RELEASE_VERSION ??
+  await resolveFixedRuntimeVersion();
+const corePackage = (await loadRuntimePackageDefinitions()).find(
+  (item) => item.name === "@sleinity/template-core",
+);
+if (!corePackage) throw new Error("The runtime manifest has no template-core package.");
+const expectedArchiveName = runtimeArchiveName(corePackage, version);
+const releaseUrl =
+  `${distribution.repositoryUrl}/releases/tag/sdk-v${version}`;
+const archiveUrl =
+  `${distribution.repositoryUrl}/releases/download/sdk-v${version}/${expectedArchiveName}`;
 if (archiveName !== expectedArchiveName) {
   throw new Error(
     `Expected published archive ${expectedArchiveName}, received ${archiveName}.`,
@@ -23,19 +41,27 @@ const archive = await readFile(archivePath);
 const sha256 = createHash("sha256").update(archive).digest("hex");
 await mkdir(outputDirectory, { recursive: true });
 await writeFile(
-  path.join(outputDirectory, "SHA256SUMS"),
+  path.join(outputDirectory, "CORE-SHA256SUMS"),
   `${sha256}  ${archiveName}\n`,
 );
 await writeFile(
   path.join(outputDirectory, "BAS-LOVABLE-HANDOFF.md"),
-  `# Template core 0.2.0 — Lovable Business handoff
+  `# Template core ${version} — Lovable Business handoff
 
 - Package: \`@sleinity/template-core\`
-- Version: \`0.2.0\`
+- Version: \`${version}\`
 - Importer export: \`importTemplatePackage\`
 - Archive: \`${archiveName}\`
+- Public download: ${archiveUrl}
 - SHA-256: \`${sha256}\`
 - Lovable secret: none
+- Release download token: none
+
+The [source repository](${distribution.repositoryUrl}) and
+[GitHub Release](${releaseUrl}) are ${distribution.releaseVisibility}. The
+package manifest remains \`UNLICENSED\`; policy
+\`${distribution.licensePolicy}\` authorizes
+${distribution.authorizedConsumer} and is not a general reuse license.
 
 ## Install
 
@@ -100,7 +126,7 @@ Outside Lovable Business, configure:
 always-auth=true
 \`\`\`
 
-Then run \`npm install @sleinity/template-core@0.2.0\`. The token must be a
+Then run \`npm install @sleinity/template-core@${version}\`. The token must be a
 GitHub personal access token (classic) with \`read:packages\`, and its user must
 have read access to the private package.
 `,

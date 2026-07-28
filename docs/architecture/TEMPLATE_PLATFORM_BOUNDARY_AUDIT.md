@@ -1,8 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.2 runtime handoff complete
+Status: Milestone 2D portable field ownership and SDK 0.2.1 release closeout complete
 Audit date: 2026-07-28
-Code baseline: the fixed SDK 0.2 release and Lovable runtime handoff
+Code baseline: the fixed SDK 0.2.1 release candidate and Lovable reference consumer
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
@@ -13,9 +13,10 @@ the package/source and resolved/backend physical migrations
 without changing renderer behavior, public APIs, package contracts, fixtures,
 or approved evidence.
 
-The repository is already a pnpm monorepo with three published private
-facades, packed-package consumers, a minimal React consumer, and a secret-free
-Lovable runtime handoff. It is not yet fully physically separated:
+The repository is already a public pnpm monorepo with three authenticated
+GitHub npm facades, packed-package consumers, minimal and narrowcasting React
+consumers, and a public-release, secret-free Lovable runtime handoff. It is not
+yet fully physically separated:
 
 - `apps/studio` now owns the real Vite application, routes, views, styles,
   assets, optional services and build;
@@ -30,6 +31,15 @@ Lovable runtime handoff. It is not yet fully physically separated:
 - resolved-tree, primitive-appearance and backend-decision implementations have
   one package owner and no renderer or root implementation dependency;
 - browser font storage and Studio persistence types depend on each other.
+
+The committed narrowcasting consumer is now itself a release gate rather than
+documentation-only example code. An isolated Chromium harness installs locally
+packed or registry-derived archives and verifies its complete import, edit,
+persistence, readiness and silent-export lifecycle. Release publication is
+tag-only; manual workflow dispatch may refresh assets solely from an
+already-published fixed version. Public source and Release visibility do not
+change the package manifests' `UNLICENSED` status or the
+`authorized-pilot-only` Bas policy.
 
 The required target is a reusable **Template Platform** plus an independent
 **Studio application**, not a renderer extracted from an otherwise unchanged
@@ -48,7 +58,7 @@ canonical consumer.
 | React facade | `packages/template-react` | Renderer/session bindings over root source | `packages/template-react` with owned source |
 | Platform implementation | `src/template-package` | Mixed portable, browser, React, Studio and fidelity code | Split by the classification below |
 | Certified evidence | `fidelity`, `tools/fidelity`, `scripts` | Exact fixtures and guarded comparisons | Remains shared repository infrastructure |
-| Consumer proof | `examples/minimal-renderer` | Broad browser session proof | Later `minimal-editor`; add renderer-only proof |
+| Consumer proof | `examples/{minimal-renderer,narrowcasting-integration}` | Minimal render plus import/edit/persist/export host-integration proof | Keep public-entry-only and add host-specific media adapters outside SDK |
 
 The Milestone 0 inventory comprised 22 Studio TypeScript modules, 169
 non-fixture `src/template-package` TypeScript/JSON modules, six package entry
@@ -185,9 +195,10 @@ navigation, approval and completion behavior.
   PNG export and SDK 0.2 `TemplateSession`.
 - React: renderer, render identity, previews, runtime context and SDK 0.2
   session bindings.
-- Distribution: exact published core/browser/React archives, one checksum
-  manifest, npm/pnpm vendored dependency rules and a full browser consumer
-  proving import/edit/save/render/export without GitHub credentials.
+- Distribution: one versioned runtime-package manifest, exact published
+  core/browser/React archives, one checksum manifest, npm/pnpm vendored
+  dependency rules and a full browser consumer proving
+  import/edit/save/render/export without GitHub credentials.
 
 These are real package exports, but the implementations are physically bundled
 from root source. The core and browser barrels are broader than the intended
@@ -202,8 +213,9 @@ long-term stable surface.
 | Motion package entry | Explicit link/summary/evaluate exports | Must first confirm which current raw types are stable |
 | Narrow session persistence | Load/save session state only | Current repository contract includes Studio product operations |
 | Asset/font provider split | Durable byte/identity provider and browser activation provider | Current font registry imports persistence asset types |
-| Capture without delivery | PNG result API independent of anchor download | Existing dependencies support injection but public contract still combines them |
-| Session source-diagnostic projection | Preserve every core source-load diagnostic in blocked session snapshots | Immutable 0.2.0 consumers use core preflight before session load |
+| Capture without delivery | Closed in 0.2.1: `exportPng({ download: false })` returns the revision-safe result without anchor delivery | Capture/readiness and the default download behavior remain unchanged |
+| Session source-diagnostic projection | Closed in 0.2.1: blocked session snapshots retain structured layered source diagnostics | Consumers no longer need a second core-importer preflight |
+| React session ownership | Closed in 0.2.1: `useTemplateSession()` owns one workspace session and defers permanent disposal across StrictMode replay | Hosts remain free to inject an explicitly owned session |
 | Reusable validation UI | View model, summary and issue list | Existing panels are Studio-styled and workflow-specific |
 | Reusable fields UI | `useTemplateFields` and composable editor | Existing component combines UI, file IO, decode and measurement |
 | Reusable importer wizard | Controller-backed step kit and optional default recipe | Deferred until validation/font/field/readiness controllers are package-owned |

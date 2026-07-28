@@ -3,14 +3,14 @@
 ## Repository
 
 - Owner: `Sleinity`
-- Recommended private repository name: `template-tool`
+- Public repository: `template-tool`
 - Default branch: `main`
 - Do not auto-create GitHub starter files; the local project already owns them.
 
 After the first push, add the colleague with **Write** access and create a ruleset
 for `main` requiring pull requests and the `Portable CI / verify` status check.
-Disable force pushes and branch deletion. The private package release workflow
-uses the protected `private-sdk-release` environment.
+Disable force pushes and branch deletion. The authenticated package release
+workflow uses the protected `private-sdk-release` environment.
 
 ## Everyday terms
 
@@ -37,6 +37,16 @@ therefore never probes those external paths. Local renderer releases still run
 commands. Portable CI is a distribution and contract gate, not a replacement
 for the private source-fidelity gate.
 
-The private release workflow publishes with its repository-scoped workflow
-token and pushes the Changesets package tags after publication. Those tags bind
-each immutable package version to the exact reviewed source commit.
+The release workflow publishes to the authenticated GitHub npm registry with
+its repository-scoped workflow token and pushes the Changesets package tags
+after publication. It also attaches checksum-verified archives to the public
+GitHub Release for secret-free Lovable installation. Those tags bind each
+immutable package version to the exact reviewed source commit.
+
+Only an exact `sdk-v*` tag push can execute `changeset publish`. Manual workflow
+dispatch is limited to rebuilding the public handoff from the already-published
+fixed version; `pnpm release:contract` enforces that separation.
+
+Public repository and Release visibility make source and release assets
+downloadable by anyone. The package manifests remain `UNLICENSED`; choose an
+explicit license before treating public visibility as a general reuse grant.

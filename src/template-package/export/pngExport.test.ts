@@ -111,6 +111,32 @@ assert(
   "PNG export should check readiness, wait for assets, capture, then download.",
 );
 
+let silentDownloadCount = 0;
+const silentResult = await exportTemplatePackagePng(
+  {
+    packageValue,
+    node: {} as HTMLElement,
+    renderMode: "editor",
+    download: false,
+  },
+  {
+    checkReadiness: async () => readyReadiness,
+    waitForAssets: async () => [],
+    capture: async () => ({
+      pngDataUrl: "data:image/png;base64,c2lsZW50",
+      fontReadiness,
+    }),
+    download: () => {
+      silentDownloadCount += 1;
+    },
+  },
+);
+assert(
+  silentDownloadCount === 0 &&
+    silentResult.pngDataUrl === "data:image/png;base64,c2lsZW50",
+  "Silent PNG capture should return the current result without initiating a download.",
+);
+
 const blockedReadiness: PackageExportReadinessResult = {
   ...readyReadiness,
   ready: false,

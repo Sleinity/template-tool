@@ -1,5 +1,72 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-28 — SDK 0.2.1 release closeout and Bas acceptance gate
+
+### Result
+
+- Prepared the fixed core/browser/React package train as an unpublished
+  `0.2.1` patch candidate.
+- Projected structured source/import diagnostics into blocked session snapshots,
+  added opt-in silent PNG delivery and added StrictMode-safe React session
+  ownership without changing importer, renderer, readiness or capture output.
+- Completed the committed narrowcasting reference with visible validation
+  evidence and an explicit browser-draft reload action.
+- Added a packed-reference Chromium acceptance gate covering invalid/valid
+  import, field and image editing, Fill/Fit/reset, offline save/reload,
+  revision-safe silent PNG, stale-export rejection and permanent disposal.
+- Added a compatibility contract covering runtime, CSP, storage, revisions,
+  upgrades and licensing.
+- Replaced the hard-coded three-package release orchestration with one validated
+  runtime-package manifest. Pack, checksum, handoff and npm/pnpm verification
+  derive their package set and fixed version from that manifest.
+- Split release automation so only an exact fixed-version tag may publish.
+  Manual dispatch can regenerate public handoff assets only from an
+  already-published fixed train.
+- Aligned distribution with the repository's confirmed public visibility:
+  Release archives need no download token, GitHub npm installs remain
+  authenticated, and `UNLICENSED` is documented as a separate adoption
+  decision.
+
+### Current-run evidence
+
+- `pnpm ci:portable` passes package/root TypeScript, portable tests, Studio and
+  SDK builds, documentation, ownership/archive checks, installed-core and
+  packed consumers, plus both committed examples.
+- Core/browser/React candidate archives are 279,287 / 334,486 / 277,566 bytes.
+  Packed consumer output is 834,646 / 244,671 gzip bytes; minimal and
+  narrowcasting examples are 827.45 / 242.56 and 863.21 / 250.24 gzip kB.
+  Studio remains 998.40 / 290.38 gzip kB JavaScript and 68.52 / 12.20 gzip kB
+  CSS.
+- Both npm and pnpm secret-free archive consumers pass valid and invalid ZIPs,
+  edit, stale-export rejection, IndexedDB save/reload, silent ready PNG export,
+  offline reload and permanent unmount disposal. Runtime network requests and
+  browser console errors are zero.
+- The packed committed-reference browser gate passes the same candidate archive
+  hashes and additionally proves validation presentation, image MIME rejection,
+  Fill/Fit switching, explicit offline reload, no browser download and zero
+  repository-relative/workspace imports.
+- Fresh renderer run `2026-07-28T13-46-51-826Z` is repeat-stable for 19 fixtures
+  across all four surfaces. Full renderer, scene and settlement guards retain
+  only their documented historical/environment-sensitive or unapproved states;
+  all 19 appearance projections are valid and deterministic.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion, fixture, schema, tolerance or approved-reference command
+  ran.
+
+### Release boundary
+
+No `0.2.1` package has been published and no tag or GitHub Release has been
+created at this pre-PR evidence point. Publication must start from the reviewed
+`codex/sdk-0.2.1-closeout` change on `main`. The tag path alone publishes; its
+handoff job must then pass authenticated registry installation,
+registry-derived archive checksums, the packed committed-reference browser
+gate, secret-free vendored npm/pnpm consumers and anonymous public-release
+asset verification before Bas receives final hashes.
+
 ## 2026-07-28 — SDK 0.2 Lovable runtime handoff
 
 ### Result

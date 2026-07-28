@@ -76,7 +76,7 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.2.0
+npm install @sleinity/template-core@0.2.1
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
@@ -86,14 +86,14 @@ package or its linked repository.
 ## Lovable Business
 
 Lovable Business cannot inject the private-registry build secret required for
-GitHub Packages. Use the checksum-verified archive attached to the private
-`sdk-v0.2.0` GitHub Release instead:
+GitHub Packages. Use the checksum-verified archive attached to the public
+`sdk-v0.2.1` GitHub Release instead:
 
-1. Verify `sleinity-template-core-0.2.0.tgz` against `SHA256SUMS`.
+1. Verify `sleinity-template-core-0.2.1.tgz` against `SHA256SUMS`.
 2. Commit it to the private Lovable-synced repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.2.0.tgz"`.
+   "file:vendor/sleinity-template-core-0.2.1.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
 No `.npmrc` or GitHub token belongs in the Lovable repository. The release

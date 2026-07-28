@@ -5,12 +5,16 @@ Private Studio-independent React integration exposing the proven
 context. It deliberately excludes Template Studio routes, settings, Validate,
 Fields, and product editor controls.
 
-For application integration, use `TemplateSessionProvider`,
-`useTemplateSessionSnapshot`, and `TemplateSessionRenderer`. The renderer
+For application integration, use the StrictMode-safe `useTemplateSession`,
+`TemplateSessionProvider`, `useTemplateSessionSnapshot`, and
+`TemplateSessionRenderer`. The owned-session hook creates one active browser
+session and disposes it after permanent unmount without letting React's
+development effect replay dispose the live instance. The renderer
 accepts either provider context or an explicit session, renders host-owned
 fallback content until ready, and exposes an imperative `exportPng()` handle.
 Export rejects pending or stale render identities instead of capturing an older
-session revision.
+session revision. Pass `{ download: false }` when the host needs the PNG result
+without a browser download.
 
 For inspection surfaces, `TemplateInspectionViewport` owns fit, zoom,
 settled-target measurement and non-export overlays while the host owns controls

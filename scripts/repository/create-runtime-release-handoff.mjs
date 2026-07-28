@@ -1,6 +1,12 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import {
+  loadRuntimeDistribution,
+  loadRuntimePackageDefinitions,
+  resolveFixedRuntimeVersion,
+  runtimeArchiveName,
+} from "./sdk-runtime-manifest.mjs";
 
 const [archivesArgument, outputArgument] = process.argv.slice(2);
 if (!archivesArgument || !outputArgument) {
@@ -9,26 +15,19 @@ if (!archivesArgument || !outputArgument) {
   );
 }
 
-const version = process.env.TEMPLATE_RUNTIME_RELEASE_VERSION ?? "0.2.0";
+const version =
+  process.env.TEMPLATE_RUNTIME_RELEASE_VERSION ??
+  await resolveFixedRuntimeVersion();
 const archivesDirectory = path.resolve(archivesArgument);
 const outputDirectory = path.resolve(outputArgument);
-const packages = [
-  {
-    name: "@sleinity/template-core",
-    archive: `sleinity-template-core-${version}.tgz`,
-    role: "ZIP import, validation, portable fields, and package models",
-  },
-  {
-    name: "@sleinity/template-browser",
-    archive: `sleinity-template-browser-${version}.tgz`,
-    role: "Browser session, assets, fonts, persistence, readiness, and PNG export",
-  },
-  {
-    name: "@sleinity/template-react",
-    archive: `sleinity-template-react-${version}.tgz`,
-    role: "React provider, renderer, inspection viewport, and export handle",
-  },
-];
+const distribution = await loadRuntimeDistribution();
+const releaseUrl = `${distribution.repositoryUrl}/releases/tag/sdk-v${version}`;
+const releaseDownloadUrl =
+  `${distribution.repositoryUrl}/releases/download/sdk-v${version}`;
+const packages = (await loadRuntimePackageDefinitions()).map((item) => ({
+  ...item,
+  archive: runtimeArchiveName(item, version),
+}));
 
 const packageEvidence = [];
 for (const packageValue of packages) {
@@ -52,7 +51,7 @@ await writeFile(
 const checksumRows = packageEvidence
   .map(
     (item) =>
-      `| \`${item.name}\` | \`${item.archive}\` | \`${item.sha256}\` | ${item.sizeBytes.toLocaleString("en-US")} |`,
+      `| \`${item.name}\` | [\`${item.archive}\`](${releaseDownloadUrl}/${item.archive}) | \`${item.sha256}\` | ${item.sizeBytes.toLocaleString("en-US")} |`,
   )
   .join("\n");
 const dependencyRows = packageEvidence
@@ -61,6 +60,12 @@ const dependencyRows = packageEvidence
       `    "${item.name}": "file:vendor/${item.archive}"`,
   )
   .join(",\n");
+const overrideRows = packageEvidence
+  .map(
+    (item) =>
+      `  "${item.name}": "file:vendor/${item.archive}"`,
+  )
+  .join("\n");
 const roleRows = packageEvidence
   .map((item) => `- \`${item.name}\`: ${item.role}.`)
   .join("\n");
@@ -73,6 +78,12 @@ This handoff lets a private Lovable Business repository import, edit, render,
 save, restore, and export TemplatePackage ZIPs without a private-registry
 secret. The screen/player consumes only Bas's exported media and does not need
 these SDK packages.
+
+The [source repository](${distribution.repositoryUrl}) and
+[GitHub Release](${releaseUrl}) are ${distribution.releaseVisibility}, so
+downloading the release assets requires no GitHub token. The package manifests
+remain \`UNLICENSED\`; policy \`${distribution.licensePolicy}\` authorizes
+${distribution.authorizedConsumer} and is not a general reuse license.
 
 ## Verified published archives
 
@@ -90,10 +101,9 @@ shasum -a 256 -c SHA256SUMS
 
 ${roleRows}
 
-\`template-react\` depends on \`template-browser\` and \`template-core\`.
-\`template-browser\` depends on \`template-core\`. The consumer must install all
-three vendored archives at the root so npm resolves the private dependency
-closure without contacting GitHub Packages.
+The consumer must install every vendored archive listed above at the root so
+npm resolves the private dependency closure without contacting GitHub
+Packages. Package manifests retain the internal dependency order.
 
 React 19 and React DOM 19 are required peer dependencies of
 \`@sleinity/template-react\`.
@@ -119,23 +129,20 @@ vendored archives in \`pnpm-workspace.yaml\`:
 
 \`\`\`yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-${version}.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-${version}.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-${version}.tgz"
+${overrideRows}
 \`\`\`
 
 ## Supported application contract
 
 \`\`\`tsx
-import { useState } from "react";
-import { createTemplateSession } from "@sleinity/template-browser";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
+  useTemplateSession,
 } from "@sleinity/template-react";
 
 export function TemplateWorkspace() {
-  const [session] = useState(() => createTemplateSession());
+  const session = useTemplateSession();
   return (
     <TemplateSessionProvider session={session}>
       <TemplateSessionRenderer mode="editor" />
@@ -149,14 +156,13 @@ mutation methods for editing, \`session.save()\` / \`loadSavedTemplate()\` for
 browser-local persistence, and the renderer handle's \`exportPng()\` only when
 the current render identity is ready.
 
-For immutable 0.2.0 consumers, first call
-\`importTemplatePackage(bytes, filename)\` from \`template-core\`. Show its
-source diagnostics when the result is not importable and pass the same bytes
-to \`session.loadZip()\` only after that preflight succeeds.
+Blocked imports publish structured diagnostics directly through the session
+snapshot. Consumers do not need to parse a ZIP twice.
 
 The PNG result contains \`filename\`, \`pngDataUrl\`, dimensions, readiness,
-and diagnostics. Bas owns converting that result into his existing media
-upload, campaign, scheduling, and playback contracts.
+and diagnostics. Use \`exportPng({ download: false })\` when Bas will pass that
+result into his existing media upload, campaign, scheduling, and playback
+contracts.
 
 ## Acceptance
 

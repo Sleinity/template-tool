@@ -16,6 +16,7 @@ import {
 } from "../import/runTemplatePackageImportPipeline";
 import type {
   PackageDiagnostic,
+  PackageDiagnosticCategory,
   TemplatePackageValidationResult,
 } from "../packageDiagnostics";
 import {
@@ -156,6 +157,41 @@ function emptySnapshot(): TemplateSessionSnapshotV1 {
 
 function errorMessage(error: unknown, fallback: string): string {
   return error instanceof Error && error.message ? error.message : fallback;
+}
+
+function importDiagnosticCategory(category: string): PackageDiagnosticCategory {
+  if (category === "asset") return "asset";
+  if (category === "field") return "field";
+  if (category === "font") return "font";
+  if (category === "motion") return "motion";
+  if (category === "package") return "schema";
+  return "parse";
+}
+
+function blockedImportDiagnostics(result: PackageImportResult): PackageDiagnostic[] {
+  const layered = result.layeredDiagnostics?.diagnostics;
+  if (!layered?.length) return result.diagnostics;
+  return layered.map((item) => ({
+    code: item.code,
+    severity: item.severity,
+    category: importDiagnosticCategory(item.category),
+    message: item.message,
+    path: item.path,
+    nodeId: item.nodeId,
+    details: {
+      ...item.details,
+      sourceCategory: item.category,
+      sourceLayer: item.layer,
+      sourceOrigin: item.origin,
+      blocksImport: item.blocksImport,
+      ...(item.fieldId ? { fieldId: item.fieldId } : {}),
+      ...(item.assetId ? { assetId: item.assetId } : {}),
+      ...(item.ref ? { ref: item.ref } : {}),
+      ...(item.sourceNodeId ? { sourceNodeId: item.sourceNodeId } : {}),
+      ...(item.suggestion ? { suggestion: item.suggestion } : {}),
+      ...(item.relatedIds ? { relatedIds: item.relatedIds } : {}),
+    },
+  }));
 }
 
 function freezePackage(packageValue: TemplatePackageV1): TemplatePackageV1 {
@@ -312,7 +348,7 @@ export function createTemplateSessionWithDependencies(
             workingPackage: result.package,
             resolvedTree: null,
             validation: result.validation,
-            diagnostics: result.diagnostics,
+            diagnostics: blockedImportDiagnostics(result),
             editableFields: result.package ? getEffectiveEditableFields(result.package) : [],
             error: null,
           });
@@ -335,7 +371,17 @@ export function createTemplateSessionWithDependencies(
           workingPackage: null,
           resolvedTree: null,
           validation: null,
-          diagnostics: [],
+          diagnostics: [
+            {
+              code: "import.failed",
+              severity: "error",
+              category: "parse",
+              message: errorMessage(
+                error,
+                "The TemplatePackage ZIP could not be imported.",
+              ),
+            },
+          ],
           editableFields: [],
           error: {
             code: "import-failed",

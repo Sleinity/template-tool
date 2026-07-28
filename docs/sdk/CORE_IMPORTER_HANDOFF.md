@@ -1,9 +1,9 @@
-# Core importer 0.2.0 handoff
+# Core importer 0.2.1 handoff
 
 ## Contract
 
 - Package: `@sleinity/template-core`
-- Version: `0.2.0`
+- Version: `0.2.1`
 - Supported importer export: `importTemplatePackage`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
@@ -38,10 +38,10 @@ export async function importTemplateZip(file: File) {
 
 ## Lovable Business installation
 
-For a core-only importer integration, use these files from the private
-`sdk-v0.2.0` GitHub Release:
+For a core-only importer integration, use these files from the public
+`sdk-v0.2.1` GitHub Release:
 
-- `sleinity-template-core-0.2.0.tgz`
+- `sleinity-template-core-0.2.1.tgz`
 - `SHA256SUMS`
 - `BAS-LOVABLE-HANDOFF.md`, generated with the published archive's exact hash
 
@@ -49,12 +49,11 @@ The same Release also contains the browser and React archives plus the
 complete [runtime handoff](RUNTIME_HANDOFF.md) for import, edit, render,
 persistence and PNG export.
 
-Download those files using a GitHub account with access to the private
-repository. Verify the checksum, then commit the archive to the private
-Lovable-synced consumer repository:
+Download those files without a GitHub token. Verify the checksum, then commit
+the archive to the private Lovable-synced consumer repository:
 
 ```text
-vendor/sleinity-template-core-0.2.0.tgz
+vendor/sleinity-template-core-0.2.1.tgz
 ```
 
 Declare the local package archive:
@@ -62,7 +61,7 @@ Declare the local package archive:
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.1.tgz"
   }
 }
 ```
@@ -85,9 +84,9 @@ always-auth=true
 ```
 
 ```sh
-npm install @sleinity/template-core@0.2.0
+npm install @sleinity/template-core@0.2.1
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
-`read:packages`. Its user must also have read access to the package or linked
-private repository.
+`read:packages`. Its user must also have read access to the package and any
+access-restricted linked repository.

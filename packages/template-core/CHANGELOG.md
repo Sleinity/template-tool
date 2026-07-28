@@ -1,5 +1,10 @@
 # @sleinity/template-core
 
+## 0.2.1
+
+The fixed SDK train advances together. Core importer behavior and its public
+declaration are unchanged in this patch.
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "template-sdk-runtime-package-set-v1",
+  "distribution": {
+    "repositoryUrl": "https://github.com/Sleinity/template-tool",
+    "releaseVisibility": "public",
+    "licensePolicy": "authorized-pilot-only",
+    "authorizedConsumer": "Bas narrowcasting pilot"
+  },
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "directory": "template-core",
+      "role": "ZIP import, validation, portable fields, and package models"
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "directory": "template-browser",
+      "role": "Browser session, assets, fonts, persistence, readiness, and PNG export"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "directory": "template-react",
+      "role": "React provider, renderer, inspection viewport, and export handle"
+    }
+  ]
+}
