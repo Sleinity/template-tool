@@ -5,6 +5,10 @@
 - Package: `@sleinity/template-core`
 - Version: `0.2.1`
 - Supported importer export: `importTemplatePackage`
+- Public archive:
+  [download](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/sleinity-template-core-0.2.1.tgz)
+- Published SHA-256:
+  `36c16c316ef32252e4b0878084aa3c0b0ff69c09afb0c3e0be64bf13d6e66916`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
 - Output: loaded source evidence, an imported baseline, an editable working

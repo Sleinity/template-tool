@@ -1,12 +1,13 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-28
-Current milestone: SDK 0.2.1 release closeout and Bas acceptance gate; release candidate not yet published
+Current milestone: SDK 0.2.1 release closeout and Bas acceptance gate complete
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
 
 ## SDK 0.2.1 — release closeout and Bas acceptance gate
 
-The fixed core/browser/React train is prepared as a `0.2.1` patch release.
+The fixed core/browser/React train is published as `0.2.1` from reviewed
+`main` commit `b30a50d` and tag `sdk-v0.2.1`.
 Blocked session imports now retain structured source diagnostics, so consumers
 can call `TemplateSession.loadZip()` once instead of running a separate core
 preflight. PNG capture accepts `download: false` for media-pipeline delivery
@@ -29,7 +30,7 @@ with zero external runtime requests, browser downloads or console errors.
 A versioned runtime-package
 manifest now drives release archives, checksums, handoffs and npm/pnpm isolated
 consumer verification. All three SDK packages build during prepack.
-The repository is now public: `sdk-v0.2.1` Release assets will be anonymously
+The repository and `sdk-v0.2.1` Release assets are public and anonymously
 downloadable, while direct GitHub npm installation remains authenticated.
 `UNLICENSED` remains an explicit adoption blocker beyond authorized consumers.
 
@@ -47,6 +48,23 @@ valid import, structured invalid diagnostics, edit, stale-export rejection,
 save/reload, ready silent capture, offline reload and permanent disposal with
 zero external runtime requests and no browser console errors.
 
+The registry-derived public archives are 279,287 / 334,486 / 277,568 bytes
+with SHA-256:
+
+- core:
+  `36c16c316ef32252e4b0878084aa3c0b0ff69c09afb0c3e0be64bf13d6e66916`;
+- browser:
+  `b9cf8f61ea784cc50fe6d9a312013060408b1408f1627efa0cd8706d712b4575`;
+- React:
+  `ed38f5d71ee6b59f2a5b9528f390a3c0173f464b264d3c4e3a9b375abfae1552`.
+
+The tag workflow's publish and handoff jobs pass. It verifies the published
+core directly from GitHub Packages, downloads all three exact registry
+archives, runs secret-free npm and pnpm consumers, runs the packed committed
+reference, confirms public visibility and uploads the checksum-verified public
+Release. A separate anonymous download and npm consumer repeat the same hashes
+and lifecycle without GitHub credentials.
+
 Fresh renderer run `2026-07-28T13-46-51-826Z` is repeat-stable for all 19
 fixtures and four surfaces. Renderer, scene and settlement comparisons retain
 their documented historical/environment-sensitive or unapproved states.
@@ -57,8 +75,7 @@ scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
 and settlement 80 /
 `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
 No update, promotion, fixture, schema, tolerance or approved-reference command
-ran. Publication, tag creation and GitHub Release assets remain a separate
-reviewed action.
+ran.
 
 ## SDK 0.2 — Lovable runtime handoff
 
