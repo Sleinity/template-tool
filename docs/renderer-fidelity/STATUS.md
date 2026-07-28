@@ -1,8 +1,64 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-28
-Current milestone: SDK 0.2 Lovable runtime handoff; renderer authority unchanged
+Current milestone: SDK 0.2.1 release closeout and Bas acceptance gate; release candidate not yet published
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.2.1 — release closeout and Bas acceptance gate
+
+The fixed core/browser/React train is prepared as a `0.2.1` patch release.
+Blocked session imports now retain structured source diagnostics, so consumers
+can call `TemplateSession.loadZip()` once instead of running a separate core
+preflight. PNG capture accepts `download: false` for media-pipeline delivery
+without changing capture, readiness or the backwards-compatible download
+default. React now exports `useTemplateSession()` for one session per workspace
+with StrictMode-safe deferred disposal.
+
+A committed narrowcasting reference consumer demonstrates valid/invalid ZIP
+import, descriptor-driven field editing, image replacement and Fill/Fit,
+explicit and automatic browser-draft restoration, revision-bound render
+readiness, silent PNG export and a host-owned `onTemplateExportReady` boundary.
+It also presents validation status independently from the structured source
+diagnostics.
+
+A packed-reference Chromium gate now copies that committed example into an
+isolated consumer and installs the three candidate archives. It exercises the
+complete invalid/valid, edit/reset, image rejection/replacement, Fill/Fit,
+save/offline-reload, stale-export, silent-PNG and permanent-disposal lifecycle
+with zero external runtime requests, browser downloads or console errors.
+A versioned runtime-package
+manifest now drives release archives, checksums, handoffs and npm/pnpm isolated
+consumer verification. All three SDK packages build during prepack.
+The repository is now public: `sdk-v0.2.1` Release assets will be anonymously
+downloadable, while direct GitHub npm installation remains authenticated.
+`UNLICENSED` remains an explicit adoption blocker beyond authorized consumers.
+
+Tag publication and manual Release-asset refresh now have separate workflow
+paths. Only an exact fixed-version tag may execute `changeset publish`; manual
+dispatch can only download an already-published fixed train, verify the
+registry bytes and refresh its public handoff assets.
+
+Current-run `pnpm ci:portable` passes. Studio is 998.40 / 290.38 gzip kB
+JavaScript and 68.52 / 12.20 gzip kB CSS. Core/browser/React candidate archives
+are 279,287, 334,486 and 277,566 bytes; packed consumer output is 834,646 /
+244,671 gzip bytes. The minimal and narrowcasting consumers are 827.45 / 242.56
+and 863.21 / 250.24 gzip kB. npm and pnpm secret-free archive consumers pass
+valid import, structured invalid diagnostics, edit, stale-export rejection,
+save/reload, ready silent capture, offline reload and permanent disposal with
+zero external runtime requests and no browser console errors.
+
+Fresh renderer run `2026-07-28T13-46-51-826Z` is repeat-stable for all 19
+fixtures and four surfaces. Renderer, scene and settlement comparisons retain
+their documented historical/environment-sensitive or unapproved states.
+Appearance projections are valid and deterministic. Direct approved-byte
+aggregation remains renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, promotion, fixture, schema, tolerance or approved-reference command
+ran. Publication, tag creation and GitHub Release assets remain a separate
+reviewed action.
 
 ## SDK 0.2 — Lovable runtime handoff
 

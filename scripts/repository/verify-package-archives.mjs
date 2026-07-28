@@ -2,10 +2,13 @@ import { mkdtemp, readFile, readdir, rm, stat } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { loadRuntimePackageDefinitions } from "./sdk-runtime-manifest.mjs";
 
 const root = process.cwd();
 const output = await mkdtemp(path.join(os.tmpdir(), "template-sdk-pack-"));
-const packages = ["template-core", "template-browser", "template-react"];
+const packages = (await loadRuntimePackageDefinitions(root)).map(
+  (item) => item.directory,
+);
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const forbidden = [
   /^package\/src\//,

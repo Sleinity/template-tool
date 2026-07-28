@@ -1,26 +1,30 @@
-# SDK 0.2.0 runtime handoff
+# SDK 0.2.1 runtime handoff
 
 The complete browser editor/runtime integration uses the fixed-version SDK
 train:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.2.0` | ZIP import, strict validation, diagnostics, portable fields and package models | No peer dependencies |
-| `@sleinity/template-browser@0.2.0` | Browser session, assets, fonts, persistence, readiness and PNG export | Browser runtime |
-| `@sleinity/template-react@0.2.0` | React provider, renderer, inspection viewport and revision-safe export handle | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.2.1` | ZIP import, strict validation, diagnostics, portable fields and package models | No peer dependencies |
+| `@sleinity/template-browser@0.2.1` | Browser session, assets, fonts, persistence, readiness and PNG export | Browser runtime |
+| `@sleinity/template-react@0.2.1` | React provider, renderer, inspection viewport and revision-safe export handle | React 19 and React DOM 19 |
 
 For Lovable Business, download the three published archives and the combined
-`SHA256SUMS` from the private `sdk-v0.2.0` GitHub Release. Commit the verified
+`SHA256SUMS` from the public
+[`sdk-v0.2.1` GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.2.1).
+Commit the verified
 archives under `vendor/` and declare all three as root `file:` dependencies.
 Installing only `template-react` is insufficient because npm must resolve its
 private browser/core dependency closure without contacting GitHub Packages.
+The repository and Release are public, so downloading these assets requires no
+GitHub token. GitHub's npm registry remains authenticated.
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.1.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.1.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.1.tgz"
   }
 }
 ```
@@ -33,9 +37,9 @@ transitive closure. A pnpm consumer must additionally declare:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.1.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.1.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.1.tgz"
 ```
 
 The release smoke verifies both npm and pnpm installation modes without
@@ -43,22 +47,21 @@ credentials.
 
 ## Application boundary
 
-Use `createTemplateSession()` as the high-level owner of import, editable state,
-resolved output, persistence and lifecycle revisions. Use
+Use `createTemplateSession()` when the host owns lifecycle explicitly. In
+React workspaces, prefer `useTemplateSession()` for StrictMode-safe creation
+and permanent-unmount disposal. Use
 `TemplateSessionProvider`, `useTemplateSessionSnapshot()` and
 `TemplateSessionRenderer` for React integration.
 
-For immutable 0.2.0 consumers, run `importTemplatePackage(bytes, filename)` as
-the ZIP preflight gate. It preserves source diagnostics for malformed ZIPs;
-pass the same bytes to `session.loadZip()` only after the preflight result is
-importable. Projecting every source-load diagnostic into blocked session
-snapshots is a later runtime patch, not a reason to rebuild the published
-0.2.0 archives.
+Blocked imports publish ordered source diagnostics directly into the session
+snapshot, so consumers call `session.loadZip()` once.
 
 An editor renders in `editor` mode and mutates fields through the session.
 Export is allowed only when the session is ready and the renderer has published
 a ready identity for the exact current session revision. The returned PNG data
 URL and metadata cross into Bas's existing media upload contract.
+Use `exportPng({ download: false })` so this host callback does not also
+initiate a browser download.
 
 Bas owns authentication, media storage, campaigns, scheduling, distribution
 and playback. The screen/player consumes the exported media URL or asset ID and
@@ -72,12 +75,16 @@ than part of the first Lovable test.
 
 The release workflow downloads the actual GitHub Packages archives, generates
 one checksum manifest, and installs all three into an isolated consumer as
-secret-free `file:vendor/...` dependencies. Its browser smoke verifies:
+secret-free `file:vendor/...` dependencies. It also copies the committed
+narrowcasting reference into a second isolated packed consumer. The browser
+smokes verify:
 
 - structured invalid-ZIP diagnostics;
 - valid ZIP import and ready rendering;
 - a field edit and stale-export rejection;
 - browser save, offline reload and edited-state restoration;
+- validation presentation, image MIME rejection, replacement, Fill/Fit and
+  reset in the committed reference;
 - ready PNG export and returned preview data;
 - no external import, render, persistence or export requests;
 - declarations and JavaScript free of Studio, workspace, root-source and
@@ -85,3 +92,11 @@ secret-free `file:vendor/...` dependencies. Its browser smoke verifies:
 
 Use [the sequential Lovable prompts](BAS_NARROWCASTING_LOVABLE_PROMPTS.md) for
 the repository-specific implementation.
+
+The committed
+[narrowcasting integration reference](../../examples/narrowcasting-integration/README.md)
+is the copyable implementation authority for this release.
+
+Package publication runs only for an exact `sdk-v*` tag. Manual workflow
+dispatch may refresh checksums and handoff assets from an already-published
+fixed version, but cannot execute package publication.

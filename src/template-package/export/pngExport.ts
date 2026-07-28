@@ -32,6 +32,11 @@ export interface PackagePngExportRequest {
   packageValue: TemplatePackageV1;
   node: HTMLElement;
   renderMode: "static" | "editor";
+  /**
+   * Initiate a browser download after capture. Defaults to true for backwards
+   * compatibility. Set false when the returned data URL is uploaded by a host.
+   */
+  download?: boolean;
   templateName?: string;
   now?: Date;
   fontSet?: FontFaceSetLike | null;
@@ -236,8 +241,10 @@ export async function exportTemplatePackagePng(
     request.now,
   );
 
-  request.onProgress?.("Downloading PNG…");
-  download(filename, captureResult.pngDataUrl);
+  if (request.download !== false) {
+    request.onProgress?.("Downloading PNG…");
+    download(filename, captureResult.pngDataUrl);
+  }
 
   return {
     filename,

@@ -12,11 +12,14 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { createCompactLifecycleFixture } from "../compact-lifecycle-fixture.mjs";
+import { resolveFixedRuntimeVersion } from "./sdk-runtime-manifest.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
 const mode = args[0];
-const version = process.env.TEMPLATE_CORE_RELEASE_VERSION ?? "0.2.0";
+const version =
+  process.env.TEMPLATE_CORE_RELEASE_VERSION ??
+  await resolveFixedRuntimeVersion(root);
 const packageName = "@sleinity/template-core";
 const registry = "https://npm.pkg.github.com";
 const packageManager = process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "npm";
@@ -26,7 +29,7 @@ const vendorDirectory = path.join(consumerDirectory, "vendor");
 
 if (mode !== "--published" && mode !== "--archive") {
   throw new Error(
-    "Use --published or --archive /absolute/path/to/sleinity-template-core-0.2.0.tgz.",
+    `Use --published or --archive /absolute/path/to/sleinity-template-core-${version}.tgz.`,
   );
 }
 

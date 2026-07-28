@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {
@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --sourcemap --clean --external react --external react-dom",
+    "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

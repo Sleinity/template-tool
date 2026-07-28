@@ -1,5 +1,15 @@
 # @sleinity/template-browser
 
+## 0.2.1
+
+### Patch Changes
+
+- Project structured source diagnostics into blocked sessions, add opt-in silent
+  PNG capture, and provide StrictMode-safe React session ownership for reusable
+  host integrations. Build the browser package during prepack so packed and
+  published archives cannot reuse stale output.
+  - @sleinity/template-core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,12 +1,10 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  createTemplateSession,
-  type TemplateSessionV1,
-} from "@sleinity/template-browser";
+import type { TemplateSessionV1 } from "@sleinity/template-browser";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
+  useTemplateSession,
   useTemplateSessionSnapshot,
   type TemplateSessionRendererHandle,
   type ResolvedProductRenderIdentityV1,
@@ -60,8 +58,8 @@ function TemplateConsumer({ session }: { session: TemplateSessionV1 }) {
   const exportPng = async () => {
     if (identity?.readiness !== "ready") return;
     setMessage("Waiting for the current render revision and exporting…");
-    await rendererRef.current?.exportPng();
-    setMessage("PNG exported from the same package revision shown above.");
+    await rendererRef.current?.exportPng({ download: false });
+    setMessage("PNG captured from the same package revision shown above.");
   };
 
   const saveSession = async () => {
@@ -112,16 +110,7 @@ function TemplateConsumer({ session }: { session: TemplateSessionV1 }) {
 }
 
 function App() {
-  const [session] = useState(() => createTemplateSession());
-  const lifecycleGeneration = useRef(0);
-  useEffect(() => {
-    const generation = ++lifecycleGeneration.current;
-    return () => {
-      queueMicrotask(() => {
-        if (lifecycleGeneration.current === generation) session.dispose();
-      });
-    };
-  }, [session]);
+  const session = useTemplateSession();
   return (
     <TemplateSessionProvider session={session}>
       <TemplateConsumer session={session} />

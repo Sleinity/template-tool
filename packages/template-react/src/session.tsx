@@ -3,6 +3,7 @@ import {
   forwardRef,
   useCallback,
   useContext,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -12,9 +13,11 @@ import {
   type ReactNode,
 } from "react";
 import {
+  createTemplateSession,
   exportTemplatePackagePng,
   type PackagePngExportRequest,
   type PackagePngExportResult,
+  type TemplateSessionOptions,
   type TemplateSessionSnapshotV1,
   type TemplateSessionV1,
 } from "@sleinity/template-browser";
@@ -29,6 +32,27 @@ const TemplateSessionContext = createContext<TemplateSessionV1 | null>(null);
 
 export interface TemplateSessionProviderProps {
   session: TemplateSessionV1;
+}
+
+/**
+ * Owns one browser session for the mounted React workspace. Disposal is
+ * deferred by one microtask so React StrictMode's development effect replay
+ * cannot dispose the active session between its synthetic cleanup/setup pair.
+ */
+export function useTemplateSession(
+  options: TemplateSessionOptions = {},
+): TemplateSessionV1 {
+  const [session] = useState(() => createTemplateSession(options));
+  const lifecycleGeneration = useRef(0);
+  useEffect(() => {
+    const generation = ++lifecycleGeneration.current;
+    return () => {
+      queueMicrotask(() => {
+        if (lifecycleGeneration.current === generation) session.dispose();
+      });
+    };
+  }, [session]);
+  return session;
 }
 
 export function TemplateSessionProvider({

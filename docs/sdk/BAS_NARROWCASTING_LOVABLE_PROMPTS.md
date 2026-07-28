@@ -41,20 +41,23 @@ The required SDK peer versions are React 19 and React DOM 19. If this project is
 ## Prompt 2 — install the vendored SDK
 
 Before using this prompt, copy the three checksum-verified archives from the
-private `sdk-v0.2.0` release into the repository's `vendor/` directory.
+public
+[`sdk-v0.2.1` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.2.1)
+into the repository's `vendor/` directory. Downloading the Release assets
+requires no GitHub token.
 
 ```text
-Integrate the checksum-verified Template Platform 0.2.0 archives already present in this private repository:
+Integrate the checksum-verified Template Platform 0.2.1 archives already present in this private repository:
 
-- vendor/sleinity-template-core-0.2.0.tgz
-- vendor/sleinity-template-browser-0.2.0.tgz
-- vendor/sleinity-template-react-0.2.0.tgz
+- vendor/sleinity-template-core-0.2.1.tgz
+- vendor/sleinity-template-browser-0.2.1.tgz
+- vendor/sleinity-template-react-0.2.1.tgz
 
 Add these exact dependencies:
 
-"@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.0.tgz"
-"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.0.tgz"
-"@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.0.tgz"
+"@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.1.tgz"
+"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.1.tgz"
+"@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.1.tgz"
 
 Requirements:
 
@@ -65,7 +68,7 @@ Requirements:
 - Do not add NODE_AUTH_TOKEN, a GitHub PAT, or another package-registry secret.
 - Do not replace these dependencies with registry URLs or Git dependencies.
 - Do not modify the SDK archives.
-- Confirm all installed package versions resolve to 0.2.0.
+- Confirm all installed package versions resolve to 0.2.1.
 - Run the existing typecheck and production build.
 - Report changed files and any dependency conflicts before continuing.
 ```
@@ -81,14 +84,11 @@ Use the repository’s existing route and layout conventions. If no suitable con
 
 Use only these supported APIs:
 
-From @sleinity/template-core:
-- importTemplatePackage
-
 From @sleinity/template-browser:
-- createTemplateSession
 - TemplateSessionV1
 
 From @sleinity/template-react:
+- useTemplateSession
 - TemplateSessionProvider
 - useTemplateSessionSnapshot
 - TemplateSessionRenderer
@@ -96,14 +96,14 @@ From @sleinity/template-react:
 
 Implementation requirements:
 
-1. Create one TemplateSession per mounted workspace with useState(() => createTemplateSession()).
-2. Dispose it safely on permanent unmount without letting React StrictMode’s development remount dispose the active session.
+1. Create and own one TemplateSession per mounted workspace with useTemplateSession().
+2. Let the owned-session hook handle permanent disposal and React StrictMode development replay.
 3. Wrap the workspace in TemplateSessionProvider.
 4. Add a ZIP file picker accepting .zip and application/zip.
-5. Read the file bytes once and preflight them with importTemplatePackage(bytes, file.name). If importable is false, show result.source.diagnostics and result.validation and do not call the session.
-6. For a preflight-valid package, call session.loadZip with the same ArrayBuffer and filename.
+5. Read the file bytes once and call session.loadZip with the ArrayBuffer and filename.
+6. Show structured snapshot.diagnostics and snapshot.validation when the session blocks the import.
 7. Show idle, loading, ready, blocked, disposed, and error states.
-8. Show validation, source diagnostics, session diagnostics, and typed session errors when loading fails.
+8. Show validation, session diagnostics, and typed session errors when loading fails.
 9. Render ready templates through TemplateSessionRenderer in editor mode.
 10. Pair every onRenderIdentity result with the session snapshot revision that produced it. Treat it as ready only while that revision still equals the current snapshot revision.
 11. Do not implement a custom renderer.
@@ -163,13 +163,13 @@ Requirements:
    - the session snapshot status is ready;
    - a render identity exists for the exact current snapshot revision;
    - that render identity’s readiness is ready.
-3. Call rendererRef.current.exportPng() only for that ready revision.
+3. Call rendererRef.current.exportPng({ download: false }) only for that ready revision.
 4. Handle readiness and export errors visibly.
 5. Capture the returned filename, pngDataUrl, width, height, readiness, and diagnostics.
 6. Show a small exported-image preview and metadata after export.
 7. Expose the successful export through a local callback named onTemplateExportReady.
 8. Include the PNG data URL, filename, dimensions, diagnostics, session revision, and render identity in the callback payload.
-9. Do not upload or publish the PNG yet.
+9. Do not upload or publish the PNG yet, and confirm the silent capture does not trigger a browser download.
 10. Confirm editing a field invalidates the previous identity and prevents stale export until the new render becomes ready.
 ```
 

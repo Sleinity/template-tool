@@ -20,3 +20,12 @@ The session exposes `loadZip`, `loadSavedTemplate`, `save`, `setField`, image
 replacement/reset/mode operations, full imported-state restore, `getSnapshot`,
 `subscribe`, and `dispose`. Older asynchronous imports cannot publish over a
 newer operation revision.
+
+Blocked ZIP imports publish ordered structured diagnostics through
+`snapshot.diagnostics`, including source layer/origin evidence in each
+diagnostic's details. Consumers do not need to run a second core import
+preflight before `session.loadZip()`.
+
+PNG export keeps its existing download default. Hosts that pass the returned
+PNG to an upload or media pipeline use `exportPng({ download: false })` to
+capture the same ready revision without initiating a browser download.

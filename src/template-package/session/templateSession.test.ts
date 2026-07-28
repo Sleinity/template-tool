@@ -193,8 +193,51 @@ const failedSession = createTemplateSessionWithDependencies({}, {
 await failedSession.loadZip({ bytes: new ArrayBuffer(0) });
 assert(
   failedSession.getSnapshot().status === "blocked" &&
-    failedSession.getSnapshot().error?.message === "Broken ZIP",
-  "Import failures should become typed blocked state rather than rejected session promises.",
+    failedSession.getSnapshot().error?.message === "Broken ZIP" &&
+    failedSession.getSnapshot().diagnostics.some(
+      (diagnostic) => diagnostic.code === "import.failed",
+    ),
+  "Import failures should become typed blocked state with structured diagnostics rather than rejected session promises.",
+);
+
+const sourceDiagnosticSession = createTemplateSessionWithDependencies({}, {
+  ...dependencies,
+  importZip: async () => ({
+    package: null,
+    validation: null,
+    diagnostics: [],
+    pluginDiagnostics: [],
+    enrichment: null,
+    layeredDiagnostics: {
+      canImport: false,
+      status: "blocked",
+      diagnostics: [
+        {
+          code: "bundle.required-file-missing",
+          severity: "error",
+          category: "zip",
+          message: "template.json is missing.",
+          path: "template.json",
+          layer: "package-structure",
+          origin: "loader",
+          blocksImport: true,
+        },
+      ],
+      blockingDiagnostics: [],
+      warningDiagnostics: [],
+      infoDiagnostics: [],
+      layers: [],
+    },
+  }),
+});
+await sourceDiagnosticSession.loadZip({ bytes: new ArrayBuffer(0) });
+const sourceDiagnostic = sourceDiagnosticSession.getSnapshot().diagnostics[0];
+assert(
+  sourceDiagnosticSession.getSnapshot().status === "blocked" &&
+    sourceDiagnostic?.code === "bundle.required-file-missing" &&
+    sourceDiagnostic.category === "parse" &&
+    sourceDiagnostic.details?.sourceLayer === "package-structure",
+  "Blocked ZIP imports should project ordered source diagnostics through the session snapshot.",
 );
 
 const publicationsBeforeDispose = publicationCount;

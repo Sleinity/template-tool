@@ -14,6 +14,11 @@ import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
 import { preview } from "vite";
 import { createCompactLifecycleFixture } from "../compact-lifecycle-fixture.mjs";
+import {
+  loadRuntimePackageDefinitions,
+  resolveFixedRuntimeVersion,
+  runtimeArchiveName,
+} from "./sdk-runtime-manifest.mjs";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
@@ -24,28 +29,19 @@ if (args[0] !== "--archives" || !args[1]) {
 }
 
 const sourceArchivesDirectory = path.resolve(args[1]);
-const version = process.env.TEMPLATE_RUNTIME_RELEASE_VERSION ?? "0.2.0";
+const version =
+  process.env.TEMPLATE_RUNTIME_RELEASE_VERSION ??
+  await resolveFixedRuntimeVersion(root);
 const packageManager =
   process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "npm";
 const packageManagerScript =
   process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER_SCRIPT ?? null;
-const packageDefinitions = [
-  {
-    name: "@sleinity/template-core",
-    directory: "template-core",
-    archive: `sleinity-template-core-${version}.tgz`,
-  },
-  {
-    name: "@sleinity/template-browser",
-    directory: "template-browser",
-    archive: `sleinity-template-browser-${version}.tgz`,
-  },
-  {
-    name: "@sleinity/template-react",
-    directory: "template-react",
-    archive: `sleinity-template-react-${version}.tgz`,
-  },
-];
+const packageDefinitions = (await loadRuntimePackageDefinitions(root)).map(
+  (item) => ({
+    ...item,
+    archive: runtimeArchiveName(item, version),
+  }),
+);
 const workspace = await mkdtemp(
   path.join(os.tmpdir(), "template-runtime-release-consumer-"),
 );
@@ -226,15 +222,12 @@ ${Object.entries(vendoredDependencies)
 import { createRoot } from "react-dom/client";
 import {
   getPackageFieldValue,
-  importTemplatePackage,
 } from "@sleinity/template-core";
-import {
-  createTemplateSession,
-  type TemplateSessionV1,
-} from "@sleinity/template-browser";
+import type { TemplateSessionV1 } from "@sleinity/template-browser";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
+  useTemplateSession,
   useTemplateSessionSnapshot,
   type ResolvedProductRenderIdentityV1,
   type TemplateSessionRendererHandle,
@@ -274,12 +267,6 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
     const file = event.currentTarget.files?.[0];
     if (!file) return;
     const bytes = await file.arrayBuffer();
-    const preflight = importTemplatePackage(bytes, file.name);
-    setImportDiagnosticCount(preflight.source.diagnostics.length);
-    if (!preflight.importable || !preflight.workingPackage) {
-      setMessage("invalid-diagnostics");
-      return;
-    }
     setMessage("loading");
     const result = await session.loadZip({
       bytes,
@@ -289,13 +276,13 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   }
 
   async function loadInvalid() {
-    const result = importTemplatePackage(
-      new Uint8Array([0, 1, 2, 3]).buffer,
-      "invalid.zip",
-    );
-    setImportDiagnosticCount(result.source.diagnostics.length);
+    const result = await session.loadZip({
+      bytes: new Uint8Array([0, 1, 2, 3]).buffer,
+      sourceName: "invalid.zip",
+    });
+    setImportDiagnosticCount(result.diagnostics.length);
     setMessage(
-      !result.importable && result.source.diagnostics.length > 0
+      result.status === "blocked" && result.diagnostics.length > 0
         ? "invalid-diagnostics"
         : "invalid-missing-diagnostics",
     );
@@ -316,7 +303,7 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
       return;
     }
     try {
-      await rendererRef.current?.exportPng();
+      await rendererRef.current?.exportPng({ download: false });
       setMessage("stale-export-accepted");
     } catch {
       setMessage("stale-export-rejected");
@@ -330,7 +317,7 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   }
 
   async function exportPng() {
-    const result = await rendererRef.current?.exportPng();
+    const result = await rendererRef.current?.exportPng({ download: false });
     if (!result) return;
     setExportPreview(result.pngDataUrl);
     setMessage(
@@ -391,16 +378,8 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
 }
 
 function App() {
-  const [session] = useState(() => createTemplateSession());
-  const lifecycleGeneration = useRef(0);
-  useEffect(() => {
-    const generation = ++lifecycleGeneration.current;
-    return () => {
-      queueMicrotask(() => {
-        if (lifecycleGeneration.current === generation) session.dispose();
-      });
-    };
-  }, [session]);
+  const session = useTemplateSession();
+  lastOwnedSession = session;
   return (
     <TemplateSessionProvider session={session}>
       <RuntimeTest session={session} />
@@ -408,8 +387,28 @@ function App() {
   );
 }
 
+let lastOwnedSession: TemplateSessionV1 | null = null;
+
+function ConsumerRoot() {
+  const [mounted, setMounted] = useState(true);
+  const [unmountStatus, setUnmountStatus] = useState("mounted");
+  useEffect(() => {
+    if (mounted) return;
+    queueMicrotask(() => {
+      setUnmountStatus(lastOwnedSession?.getSnapshot().status ?? "missing");
+    });
+  }, [mounted]);
+  return (
+    <>
+      <button onClick={() => setMounted(false)}>Unmount session workspace</button>
+      <p className="unmount-status">{unmountStatus}</p>
+      {mounted ? <App /> : null}
+    </>
+  );
+}
+
 createRoot(document.getElementById("root")!).render(
-  <StrictMode><App /></StrictMode>,
+  <StrictMode><ConsumerRoot /></StrictMode>,
 );
 `,
   );
@@ -536,10 +535,14 @@ createRoot(document.getElementById("root")!).render(
   });
   const page = await context.newPage();
   const consoleErrors = [];
+  let downloadCount = 0;
   page.on("console", (message) => {
     if (message.type() === "error") consoleErrors.push(message.text());
   });
   page.on("pageerror", (error) => consoleErrors.push(error.message));
+  page.on("download", () => {
+    downloadCount += 1;
+  });
 
   await page.goto(applicationUrl);
   await page.getByRole("button", { name: "Load invalid ZIP" }).click();
@@ -594,11 +597,12 @@ createRoot(document.getElementById("root")!).render(
   await page.getByRole("button", { name: "Save browser draft" }).click();
   await page.getByText("saved").waitFor();
 
-  const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export current PNG" }).click();
-  await downloadPromise;
   await page.getByText("exported").waitFor({ timeout: 60_000 });
   await page.getByAltText("Export preview").waitFor();
+  if (downloadCount !== 0) {
+    throw new Error("Silent host PNG capture unexpectedly initiated a download.");
+  }
 
   await page.reload();
   await page.getByText("restored").waitFor();
@@ -606,6 +610,10 @@ createRoot(document.getElementById("root")!).render(
   await page.waitForFunction(() =>
     document.body.textContent?.includes("· release edit"),
   );
+  await page
+    .getByRole("button", { name: "Unmount session workspace" })
+    .click();
+  await page.getByText("disposed").waitFor();
 
   if (externalRequestCount !== 0) {
     throw new Error(
