@@ -26,7 +26,7 @@ import {
 } from "@sleinity/template-react";
 import "./styles.css";
 
-const SAVED_TEMPLATE_KEY = "template-platform:narrowcasting-example:saved-id";
+const SAVED_TEMPLATE_KEY = "template-platform:editor-example:saved-id";
 
 export interface TemplateExportReadyPayload {
   filename: string;
@@ -255,7 +255,7 @@ function FieldControl({
   );
 }
 
-export function NarrowcastingTemplateWorkspace({
+export function TemplateEditorWorkspace({
   onTemplateExportReady,
   onSession,
   acceptanceMode = false,
@@ -270,7 +270,7 @@ export function NarrowcastingTemplateWorkspace({
   }, [onSession, session]);
   return (
     <TemplateSessionProvider session={session}>
-      <NarrowcastingTemplateEditor
+      <TemplateEditor
         session={session}
         onTemplateExportReady={onTemplateExportReady}
         acceptanceMode={acceptanceMode}
@@ -279,7 +279,7 @@ export function NarrowcastingTemplateWorkspace({
   );
 }
 
-function NarrowcastingTemplateEditor({
+function TemplateEditor({
   session,
   onTemplateExportReady,
   acceptanceMode,
@@ -392,8 +392,8 @@ function NarrowcastingTemplateEditor({
     <main>
       <header>
         <div>
-          <p className="eyebrow">Admin-only reference integration</p>
-          <h1>Template Platform narrowcasting test</h1>
+          <p className="eyebrow">Reusable editor reference</p>
+          <h1>Template Platform integration test</h1>
         </div>
         <span className={`status status-${snapshot.status}`}>{snapshot.status}</span>
       </header>
@@ -553,11 +553,11 @@ function ReferenceApplication() {
         </section>
       ) : null}
       {mounted ? (
-        <NarrowcastingTemplateWorkspace
+        <TemplateEditorWorkspace
           acceptanceMode={acceptanceMode}
           onSession={rememberSession}
           onTemplateExportReady={(payload) => {
-            console.info("Ready for the host media pipeline", {
+            console.info("Template output ready for the host application", {
               filename: payload.filename,
               width: payload.width,
               height: payload.height,

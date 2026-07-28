@@ -35,7 +35,7 @@ if (version !== fixedVersion) {
 const args = process.argv.slice(2);
 if (args.length > 0 && (args[0] !== "--archives" || !args[1])) {
   throw new Error(
-    "Usage: node verify-narrowcasting-reference.mjs [--archives ARCHIVES_DIRECTORY]",
+    "Usage: node verify-template-editor-reference.mjs [--archives ARCHIVES_DIRECTORY]",
   );
 }
 const sourceArchivesDirectory = args[0] === "--archives"
@@ -44,11 +44,11 @@ const sourceArchivesDirectory = args[0] === "--archives"
 const packageDefinitions = await loadRuntimePackageDefinitions(root);
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const workspace = await mkdtemp(
-  path.join(os.tmpdir(), "template-narrowcasting-reference-"),
+  path.join(os.tmpdir(), "template-editor-reference-"),
 );
 const consumerDirectory = path.join(workspace, "consumer");
 const vendorDirectory = path.join(consumerDirectory, "vendor");
-const fixturePath = path.join(workspace, "narrowcasting-acceptance.zip");
+const fixturePath = path.join(workspace, "template-editor-acceptance.zip");
 const imagePath = path.join(workspace, "replacement.png");
 let browser;
 let server;
@@ -90,7 +90,7 @@ async function createAcceptanceFixture() {
   const packageValue = JSON.parse(
     new TextDecoder().decode(files["template.json"]),
   );
-  const assetId = "asset:image:narrowcasting-acceptance";
+  const assetId = "asset:image:template-editor-acceptance";
   packageValue.nodes.root.children.push("hero-image");
   packageValue.nodes["hero-image"] = {
     id: "hero-image",
@@ -133,7 +133,7 @@ async function createAcceptanceFixture() {
     image: {
       assetId,
       deferred: false,
-      hash: "narrowcasting-acceptance",
+      hash: "template-editor-acceptance",
       scaleMode: "FILL",
       imageTransform: [[1, 0, 0], [0, 1, 0]],
     },
@@ -145,7 +145,7 @@ async function createAcceptanceFixture() {
     deferred: false,
     nodeId: "hero-image",
     mimeType: "image/png",
-    hash: "narrowcasting-acceptance",
+    hash: "template-editor-acceptance",
     dataUrl:
       "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
     width: 120,
@@ -174,13 +174,13 @@ async function createAcceptanceFixture() {
 
 try {
   await cp(
-    path.join(root, "examples", "narrowcasting-integration"),
+    path.join(root, "examples", "template-editor-integration"),
     consumerDirectory,
     {
       recursive: true,
       filter(source) {
         const relative = path.relative(
-          path.join(root, "examples", "narrowcasting-integration"),
+          path.join(root, "examples", "template-editor-integration"),
           source,
         );
         const segments = relative.split(path.sep);
@@ -339,7 +339,7 @@ ${Object.entries(vendoredDependencies)
   });
   const applicationUrl = server.resolvedUrls?.local?.[0];
   if (!applicationUrl) {
-    throw new Error("The packed narrowcasting reference has no browser URL.");
+    throw new Error("The packed template editor reference has no browser URL.");
   }
 
   browser = await chromium.launch({ headless: true });
@@ -491,7 +491,7 @@ ${Object.entries(vendoredDependencies)
 
   const files = await readdir(vendorDirectory);
   console.log(
-    `Verified packed narrowcasting reference with ${files.length} archives: invalid/valid ZIP, validation, text/image edits, Fill/Fit/reset, stale export rejection, offline persistence, silent PNG, disposal, and zero external requests (${archiveEvidence
+    `Verified packed template editor reference with ${files.length} archives: invalid/valid ZIP, validation, text/image edits, Fill/Fit/reset, stale export rejection, offline persistence, silent PNG, disposal, and zero external requests (${archiveEvidence
       .map((item) => `${item.directory}=${item.sha256}`)
       .join(", ")}).`,
   );

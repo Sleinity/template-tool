@@ -1,8 +1,62 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-28
-Current milestone: SDK 0.2.1 release closeout and Bas acceptance gate complete
+Current milestone: SDK 0.2.2 generic template editor handoff release candidate
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.2.2 — generic template editor handoff
+
+The fixed core/browser/React train is prepared at `0.2.2` without a public
+runtime symbol or behavior change. Active distribution policy is now
+`sleinity-tools-only`: the public repository and Release assets remain
+`UNLICENSED` and are authorized for Sleinity-owned applications only.
+
+The primary SDK documentation is host-neutral. It defines import, validation,
+diagnostics, editable state, browser persistence, readiness, rendering and
+silent PNG capture while leaving navigation, authentication, catalogues,
+collaboration, cloud storage and publishing to the consuming application.
+Lovable Business is a separate vendored-archive recipe with sequential
+template-editor prompts and no registry secret.
+
+The committed reference and its packed Chromium gate are renamed to the
+generic template editor boundary. Fixture identities, callback names, storage
+keys, headings and commands are host-neutral; the verified browser lifecycle
+remains invalid/valid ZIP import, validation, diagnostics, field/image editing,
+Fill/Fit/reset, offline save/reload, stale-export rejection, silent PNG and
+permanent disposal.
+
+Release automation now generates `SDK-RUNTIME-HANDOFF.md`,
+`SDK-CORE-HANDOFF.md` and `LOVABLE-TEMPLATE-EDITOR-PROMPTS.md`. Contract checks
+reject retired host-specific naming on active SDK surfaces. The immutable
+`sdk-v0.2.1` Release and its historical records remain unchanged.
+
+Current-run `pnpm ci:portable` passes repository and package TypeScript,
+portable tests, Studio and SDK builds, documentation, ownership/archive checks,
+the installed-core consumer, packed consumer and both examples. The generic
+packed-reference Chromium gate passes the full browser lifecycle from the
+candidate archives with zero external requests, browser downloads or console
+errors. The secret-free pnpm vendored consumer passes the same runtime
+lifecycle; npm verification remains assigned to release CI because the local
+runtime has no npm executable.
+
+Studio remains 998.40 / 290.38 gzip kB JavaScript and 68.52 / 12.20 gzip kB
+CSS. Core/browser/React candidate archives are 279,287 / 334,484 / 277,566
+bytes. Packed consumer output is 834,646 / 244,671 gzip bytes; minimal and
+generic editor examples are 827.45 / 242.56 and 863.21 / 250.22 gzip kB.
+Core's declaration remains exactly 86,272 bytes /
+`e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+
+Fresh renderer run `2026-07-28T15-09-16-072Z` is repeat-stable for all 19
+fixtures and four surfaces. Renderer, scene and settlement guards retain their
+documented historical/environment-sensitive or unapproved states. Appearance
+projections are valid and deterministic. Direct approved-byte aggregation
+remains renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, promotion, fixture, schema, tolerance or approved-reference command
+ran.
 
 ## SDK 0.2.1 — release closeout and Bas acceptance gate
 

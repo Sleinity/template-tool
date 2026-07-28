@@ -10,7 +10,7 @@ pnpm example:dev
 ```
 
 For an interactive editor, mount `TemplateSessionRenderer` in `editor` mode and
-call the session's typed field methods. For narrowcasting, use `static` mode,
-load a saved template or ZIP once, inject the current values with `setField`, and
-keep the renderer mounted; no Template Studio route or renderer-time network
-access is required.
+call the session's typed field methods. For a read-only presentation surface,
+use `static` mode, load a saved template or ZIP once, inject current values with
+`setField`, and keep the renderer mounted. Neither route needs Template Studio
+UI or renderer-time network access.

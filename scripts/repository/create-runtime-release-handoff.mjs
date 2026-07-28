@@ -71,19 +71,19 @@ const roleRows = packageEvidence
   .join("\n");
 
 await writeFile(
-  path.join(outputDirectory, "BAS-RUNTIME-HANDOFF.md"),
-  `# Template Platform ${version} — Lovable Business runtime handoff
+  path.join(outputDirectory, "SDK-RUNTIME-HANDOFF.md"),
+  `# Template Platform ${version} — runtime handoff
 
-This handoff lets a private Lovable Business repository import, edit, render,
-save, restore, and export TemplatePackage ZIPs without a private-registry
-secret. The screen/player consumes only Bas's exported media and does not need
-these SDK packages.
+This handoff lets a React/TypeScript application import, validate, edit, render,
+save, restore, and export TemplatePackage ZIPs. The SDK owns template behavior;
+the host owns product navigation, authentication, catalogues, collaboration,
+cloud storage, publishing, and other application workflows.
 
 The [source repository](${distribution.repositoryUrl}) and
 [GitHub Release](${releaseUrl}) are ${distribution.releaseVisibility}, so
 downloading the release assets requires no GitHub token. The package manifests
 remain \`UNLICENSED\`; policy \`${distribution.licensePolicy}\` authorizes
-${distribution.authorizedConsumer} and is not a general reuse license.
+${distribution.authorizedUse} and is not a general reuse license.
 
 ## Verified published archives
 
@@ -108,7 +108,7 @@ Packages. Package manifests retain the internal dependency order.
 React 19 and React DOM 19 are required peer dependencies of
 \`@sleinity/template-react\`.
 
-## Lovable Business installation
+## Vendored installation
 
 Commit the verified archives under \`vendor/\`, then add:
 
@@ -120,9 +120,9 @@ ${dependencyRows}
 }
 \`\`\`
 
-Run the repository's package manager and commit its lockfile. Do not add a
-GitHub Packages \`.npmrc\`, \`NODE_AUTH_TOKEN\`, a GitHub PAT, or another
-registry secret to the Lovable repository.
+Run the repository's package manager and commit its lockfile. A vendored
+consumer does not need a GitHub Packages \`.npmrc\`, \`NODE_AUTH_TOKEN\`, a
+GitHub PAT, or another registry secret.
 
 For pnpm consumers, also map the private transitive dependency closure to the
 vendored archives in \`pnpm-workspace.yaml\`:
@@ -160,9 +160,15 @@ Blocked imports publish structured diagnostics directly through the session
 snapshot. Consumers do not need to parse a ZIP twice.
 
 The PNG result contains \`filename\`, \`pngDataUrl\`, dimensions, readiness,
-and diagnostics. Use \`exportPng({ download: false })\` when Bas will pass that
-result into his existing media upload, campaign, scheduling, and playback
-contracts.
+and diagnostics. Use \`exportPng({ download: false })\` when the host consumes
+the returned output without initiating a browser download.
+
+## Lovable Business recipe
+
+Lovable Business consumers use the vendored installation above because the
+private-registry build secret is unavailable. Follow
+\`LOVABLE-TEMPLATE-EDITOR-PROMPTS.md\` one prompt at a time after committing
+the checksum-verified archives.
 
 ## Acceptance
 
@@ -172,10 +178,10 @@ contracts.
 - Save/reload restores the edited package from browser storage while offline.
 - PNG export uses the current ready revision.
 - Import, render, persistence, and export make no external runtime requests.
-- The Lovable build succeeds without GitHub credentials.
+- A vendored build succeeds without GitHub credentials.
 
-Follow \`BAS-NARROWCASTING-LOVABLE-PROMPTS.md\` one prompt at a time for the
-repository-specific implementation.
+The committed generic template editor reference is the implementation and
+browser-acceptance authority for this release.
 `,
 );
 

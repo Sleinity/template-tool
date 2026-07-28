@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       prepare_runtime_handoff:
-        description: "Refresh the current SDK Lovable runtime assets from published packages"
+        description: "Refresh the current SDK integration assets from published packages"
         required: false
         default: false
         type: boolean
@@ -38,7 +38,7 @@ jobs:
       - run: pnpm ci:portable
       - name: Install pinned Chromium for packed reference acceptance
         run: pnpm exec playwright install chromium
-      - run: pnpm narrowcasting:acceptance
+      - run: pnpm template-editor:acceptance
       - run: pnpm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,7 +80,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_CORE_RELEASE_VERSION: ${{ env.SDK_VERSION }}
-      - name: Prepare published runtime Lovable handoff
+      - name: Prepare published runtime handoff
         run: |
           mkdir -p release-artifacts
           while IFS= read -r package_name; do
@@ -94,29 +94,29 @@ jobs:
           node scripts/repository/create-core-release-handoff.mjs \
             "release-artifacts/sleinity-template-core-${SDK_VERSION}.tgz" \
             release-artifacts
-          cp docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md \
-            release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md
+          cp docs/sdk/LOVABLE_TEMPLATE_EDITOR_PROMPTS.md \
+            release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Install pinned Chromium for runtime verification
         run: pnpm exec playwright install chromium
-      - name: Verify secret-free Lovable runtime consumer (npm)
+      - name: Verify secret-free vendored runtime consumer (npm)
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
           --archives release-artifacts
         env:
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
-      - name: Verify secret-free Lovable runtime consumer (pnpm)
+      - name: Verify secret-free vendored runtime consumer (pnpm)
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
           --archives release-artifacts
         env:
           TEMPLATE_CONSUMER_PACKAGE_MANAGER: pnpm
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
-      - name: Verify packed narrowcasting reference from published archives
+      - name: Verify packed template editor reference from published archives
         run: >-
-          node scripts/repository/verify-narrowcasting-reference.mjs
+          node scripts/repository/verify-template-editor-reference.mjs
           --archives release-artifacts
         env:
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
@@ -124,10 +124,11 @@ jobs:
         run: |
           actual_visibility="$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)"
           test "$actual_visibility" = "$SDK_RELEASE_VISIBILITY"
-          test "$SDK_LICENSE_POLICY" = "authorized-pilot-only"
+          test "$SDK_LICENSE_POLICY" = "sleinity-tools-only"
+          test "$SDK_AUTHORIZED_USE" = "Sleinity-owned applications"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create SDK release and upload Lovable runtime handoff
+      - name: Create SDK release and upload integration handoff
         run: |
           mapfile -t release_archives < <(
             node scripts/repository/sdk-runtime-manifest.mjs \
@@ -138,16 +139,16 @@ jobs:
             gh release create "$SDK_RELEASE_TAG" \
               --verify-tag \
               --title "$SDK_RELEASE_TITLE" \
-              --notes "Public SDK ${SDK_VERSION} pilot assets derived from GitHub Packages. UNLICENSED; authorized for the Bas narrowcasting pilot only."
+              --notes "Public SDK ${SDK_VERSION} assets derived from GitHub Packages. UNLICENSED; authorized for Sleinity-owned applications only."
           gh release edit "$SDK_RELEASE_TAG" \
-            --notes "Public SDK ${SDK_VERSION} pilot assets derived from GitHub Packages. UNLICENSED; authorized for the Bas narrowcasting pilot only. See BAS-RUNTIME-HANDOFF.md for checksums and integration instructions."
+            --notes "Public SDK ${SDK_VERSION} assets derived from GitHub Packages. UNLICENSED; authorized for Sleinity-owned applications only. See SDK-RUNTIME-HANDOFF.md for checksums and integration instructions."
           gh release upload "$SDK_RELEASE_TAG" \
             "${release_archives[@]}" \
             release-artifacts/SHA256SUMS \
             release-artifacts/CORE-SHA256SUMS \
-            release-artifacts/BAS-LOVABLE-HANDOFF.md \
-            release-artifacts/BAS-RUNTIME-HANDOFF.md \
-            release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md \
+            release-artifacts/SDK-CORE-HANDOFF.md \
+            release-artifacts/SDK-RUNTIME-HANDOFF.md \
+            release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

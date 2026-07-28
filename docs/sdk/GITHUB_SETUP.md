@@ -39,14 +39,16 @@ for the private source-fidelity gate.
 
 The release workflow publishes to the authenticated GitHub npm registry with
 its repository-scoped workflow token and pushes the Changesets package tags
-after publication. It also attaches checksum-verified archives to the public
-GitHub Release for secret-free Lovable installation. Those tags bind each
-immutable package version to the exact reviewed source commit.
+after publication. It also attaches checksum-verified archives and
+host-neutral handoffs to the public GitHub Release for secret-free vendored
+installation. Those tags bind each immutable package version to the exact
+reviewed source commit.
 
 Only an exact `sdk-v*` tag push can execute `changeset publish`. Manual workflow
 dispatch is limited to rebuilding the public handoff from the already-published
 fixed version; `pnpm release:contract` enforces that separation.
 
 Public repository and Release visibility make source and release assets
-downloadable by anyone. The package manifests remain `UNLICENSED`; choose an
-explicit license before treating public visibility as a general reuse grant.
+downloadable by anyone. The package manifests remain `UNLICENSED`; the
+`sleinity-tools-only` policy authorizes Sleinity-owned applications only and
+is not a general reuse grant.

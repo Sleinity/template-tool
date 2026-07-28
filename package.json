@@ -68,7 +68,7 @@
     "vendored-core:verify": "node scripts/repository/verify-core-release-consumer.mjs --archive",
     "runtime-handoff:create": "node scripts/repository/create-runtime-release-handoff.mjs release-artifacts release-artifacts",
     "vendored-runtime:verify": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-artifacts",
-    "narrowcasting:acceptance": "node scripts/repository/verify-narrowcasting-reference.mjs",
+    "template-editor:acceptance": "node scripts/repository/verify-template-editor-reference.mjs",
     "release:contract": "node scripts/repository/verify-release-contract.mjs",
     "session:browser-smoke": "node scripts/repository/verify-session-browser.mjs",
     "studio:browser-smoke": "node scripts/repository/verify-studio-browser.mjs",

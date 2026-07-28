@@ -3,8 +3,8 @@
   "distribution": {
     "repositoryUrl": "https://github.com/Sleinity/template-tool",
     "releaseVisibility": "public",
-    "licensePolicy": "authorized-pilot-only",
-    "authorizedConsumer": "Bas narrowcasting pilot"
+    "licensePolicy": "sleinity-tools-only",
+    "authorizedUse": "Sleinity-owned applications"
   },
   "packages": [
     {

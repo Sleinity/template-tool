@@ -21,12 +21,12 @@ export async function loadRuntimeDistribution(root = defaultRoot) {
     distribution?.repositoryUrl !==
       "https://github.com/Sleinity/template-tool" ||
     distribution?.releaseVisibility !== "public" ||
-    distribution?.licensePolicy !== "authorized-pilot-only" ||
-    typeof distribution?.authorizedConsumer !== "string" ||
-    !distribution.authorizedConsumer
+    distribution?.licensePolicy !== "sleinity-tools-only" ||
+    typeof distribution?.authorizedUse !== "string" ||
+    !distribution.authorizedUse
   ) {
     throw new Error(
-      "The SDK runtime distribution must explicitly record the public authorized-pilot policy.",
+      "The SDK runtime distribution must explicitly record the Sleinity-tools-only policy.",
     );
   }
   return { ...distribution };
@@ -163,6 +163,7 @@ async function cli() {
         `SDK_RELEASE_TITLE=SDK ${version}`,
         `SDK_RELEASE_VISIBILITY=${distribution.releaseVisibility}`,
         `SDK_LICENSE_POLICY=${distribution.licensePolicy}`,
+        `SDK_AUTHORIZED_USE=${distribution.authorizedUse}`,
       ].join("\n") + "\n",
     );
     return;

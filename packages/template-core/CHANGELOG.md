@@ -1,5 +1,11 @@
 # @sleinity/template-core
 
+## 0.2.2
+
+The fixed SDK train advances together with host-neutral installation,
+authorization, and template-editor handoffs. Core importer behavior and its
+public declaration are unchanged.
+
 ## 0.2.1
 
 The fixed SDK train advances together. Core importer behavior and its public

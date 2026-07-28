@@ -1,22 +1,20 @@
-# Core importer 0.2.1 handoff
+# Core importer 0.2.2 handoff
 
 ## Contract
 
 - Package: `@sleinity/template-core`
-- Version: `0.2.1`
+- Version: `0.2.2`
 - Supported importer export: `importTemplatePackage`
-- Public archive:
-  [download](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/sleinity-template-core-0.2.1.tgz)
-- Published SHA-256:
-  `36c16c316ef32252e4b0878084aa3c0b0ff69c09afb0c3e0be64bf13d6e66916`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
-- Output: loaded source evidence, an imported baseline, an editable working
-  package, strict validation, diagnostics, and `importable`.
+- Output: loaded source evidence, imported baseline, editable working package,
+  strict validation, diagnostics, and `importable`.
 - Runtime secret: none.
 - Peer dependencies: none.
-- Browser support: direct browser execution after `File.arrayBuffer()`; no API
-  route is required.
+- Runtime dependencies: `ajv` and `fflate`, installed transitively.
+- Browser support: direct execution after `File.arrayBuffer()`; no API route is
+  required.
+- Node support: modern Node with the documented web-compatible primitives.
 
 ```ts
 import { importTemplatePackage } from "@sleinity/template-core";
@@ -40,46 +38,35 @@ export async function importTemplateZip(file: File) {
 }
 ```
 
-## Lovable Business installation
+## Vendored installation
 
-For a core-only importer integration, use these files from the public
-`sdk-v0.2.1` GitHub Release:
+Download these files from the public
+[`sdk-v0.2.2` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.2.2):
 
-- `sleinity-template-core-0.2.1.tgz`
+- `sleinity-template-core-0.2.2.tgz`
 - `SHA256SUMS`
-- `BAS-LOVABLE-HANDOFF.md`, generated with the published archive's exact hash
+- `SDK-CORE-HANDOFF.md`
 
-The same Release also contains the browser and React archives plus the
-complete [runtime handoff](RUNTIME_HANDOFF.md) for import, edit, render,
-persistence and PNG export.
-
-Download those files without a GitHub token. Verify the checksum, then commit
-the archive to the private Lovable-synced consumer repository:
-
-```text
-vendor/sleinity-template-core-0.2.1.tgz
-```
-
-Declare the local package archive:
+Verify the archive, commit it to the private consumer repository, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.1.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.2.tgz"
   }
 }
 ```
 
-Run `npm install` and commit the lockfile. Do not add the GitHub Packages
-`.npmrc`, a personal token, or `NODE_AUTH_TOKEN` to the Lovable repository.
+This installation needs no `.npmrc`, package-registry token, or runtime
+secret. Test one valid ZIP and require `importable === true`. Test invalid ZIP
+bytes and require structured source diagnostics. Confirm the importer makes no
+network requests.
 
-Test one valid TemplatePackage ZIP and require `ok === true`. Test an invalid
-ZIP and require `ok === false` with source diagnostics. Confirm the browser
-makes no importer-time network requests.
+Lovable Business consumers use this same vendored route. The complete
+[runtime handoff](RUNTIME_HANDOFF.md) covers import, editing, rendering,
+persistence, and PNG capture with all three packages.
 
 ## Optional direct registry installation
-
-Authenticated local and CI consumers can install the package directly:
 
 ```ini
 @sleinity:registry=https://npm.pkg.github.com
@@ -88,9 +75,8 @@ always-auth=true
 ```
 
 ```sh
-npm install @sleinity/template-core@0.2.1
+npm install @sleinity/template-core@0.2.2
 ```
 
-`NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
-`read:packages`. Its user must also have read access to the package and any
-access-restricted linked repository.
+`NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
+`read:packages` and package access.
