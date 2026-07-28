@@ -66,9 +66,12 @@ responsibilities and are not part of this core-only integration.
 
 Lovable Business cannot provide the Enterprise build secret needed to install a
 private registry package. The private `sdk-v0.2.0` GitHub Release therefore
-includes the exact published core archive, its SHA-256 manifest, and a
-copyable Bas handoff. See
-[the core importer handoff](CORE_IMPORTER_HANDOFF.md).
+includes the exact published core, browser and React archives, one SHA-256
+manifest, and copyable Bas handoffs. The
+[core importer handoff](CORE_IMPORTER_HANDOFF.md) remains the narrow import-only
+route. Use the [runtime handoff](RUNTIME_HANDOFF.md) and
+[sequential Lovable prompts](BAS_NARROWCASTING_LOVABLE_PROMPTS.md) for the
+import/edit/render/export narrowcasting test.
 
 ## Consumer runtime contract
 

@@ -38,11 +38,16 @@ export async function importTemplateZip(file: File) {
 
 ## Lovable Business installation
 
-The private `sdk-v0.2.0` GitHub Release contains:
+For a core-only importer integration, use these files from the private
+`sdk-v0.2.0` GitHub Release:
 
 - `sleinity-template-core-0.2.0.tgz`
 - `SHA256SUMS`
 - `BAS-LOVABLE-HANDOFF.md`, generated with the published archive's exact hash
+
+The same Release also contains the browser and React archives plus the
+complete [runtime handoff](RUNTIME_HANDOFF.md) for import, edit, render,
+persistence and PNG export.
 
 Download those files using a GitHub account with access to the private
 repository. Verify the checksum, then commit the archive to the private

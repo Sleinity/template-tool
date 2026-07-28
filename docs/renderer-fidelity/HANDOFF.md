@@ -1,5 +1,41 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-28 — SDK 0.2 Lovable runtime handoff
+
+### Result
+
+- Extended the private release from the core-only experiment to the complete
+  fixed `0.2.0` core/browser/React runtime without rebuilding registry
+  artifacts.
+- Added a combined SHA-256 handoff, explicit npm/pnpm vendoring rules and
+  sequential Lovable prompts that keep Bas's media storage, scheduling and
+  playback outside Template Platform ownership.
+- Added an isolated production browser consumer for preflight diagnostics,
+  ZIP/session import, edit, stale-export rejection, browser persistence,
+  render readiness, PNG export and offline reload.
+- Documented the immutable 0.2.0 diagnostic seam: use the supported core
+  importer as the malformed-ZIP preflight gate before passing valid bytes to
+  `TemplateSession`.
+
+### Current-run evidence
+
+- Local registry-shaped archives install without GitHub credentials under npm
+  and pnpm. pnpm uses explicit vendored overrides for the private transitive
+  closure.
+- Both consumer runs typecheck, build and pass the Chromium lifecycle with zero
+  external runtime requests and no browser console errors.
+- Archive inspection rejects Studio, workspace, credential, absolute-path and
+  repository-relative import references.
+- Documentation and release workflow verification run with the repository
+  release gates before the private `sdk-v0.2.0` asset refresh.
+
+### Compatibility
+
+No package version, public API, importer normalization, renderer behavior,
+persistence record, export output, fixture, tolerance or approved reference
+changes. The runtime handoff consumes the already-published `0.2.0` archives;
+Bas's screen/player receives only the exported media result.
+
 ## 2026-07-28 — SDK 0.2 core importer release readiness
 
 ### Result

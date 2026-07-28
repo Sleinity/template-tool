@@ -66,6 +66,8 @@
     "packed-core-node:verify": "node scripts/repository/verify-packed-core-node.mjs",
     "published-core:verify": "node scripts/repository/verify-core-release-consumer.mjs --published",
     "vendored-core:verify": "node scripts/repository/verify-core-release-consumer.mjs --archive",
+    "runtime-handoff:create": "node scripts/repository/create-runtime-release-handoff.mjs release-artifacts release-artifacts",
+    "vendored-runtime:verify": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-artifacts",
     "session:browser-smoke": "node scripts/repository/verify-session-browser.mjs",
     "studio:browser-smoke": "node scripts/repository/verify-studio-browser.mjs",
     "boundaries:check": "node scripts/repository/verify-package-boundaries.mjs",

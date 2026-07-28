@@ -1,9 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2C portable resolved/backend ownership complete; platform contract locked
-Audit date: 2026-07-22
-Code baseline: the current SDK 0.2 working tree, including the uncommitted
-`TemplateSession` and packed-consumer changes
+Status: Milestone 2D portable field ownership and SDK 0.2 runtime handoff complete
+Audit date: 2026-07-28
+Code baseline: the fixed SDK 0.2 release and Lovable runtime handoff
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
@@ -14,9 +13,9 @@ the package/source and resolved/backend physical migrations
 without changing renderer behavior, public APIs, package contracts, fixtures,
 or approved evidence.
 
-The repository is already a pnpm monorepo with three publishable private
-facades, a packed-package consumer check, and a minimal React consumer. It is
-not yet fully physically separated:
+The repository is already a pnpm monorepo with three published private
+facades, packed-package consumers, a minimal React consumer, and a secret-free
+Lovable runtime handoff. It is not yet fully physically separated:
 
 - `apps/studio` now owns the real Vite application, routes, views, styles,
   assets, optional services and build;
@@ -186,6 +185,9 @@ navigation, approval and completion behavior.
   PNG export and SDK 0.2 `TemplateSession`.
 - React: renderer, render identity, previews, runtime context and SDK 0.2
   session bindings.
+- Distribution: exact published core/browser/React archives, one checksum
+  manifest, npm/pnpm vendored dependency rules and a full browser consumer
+  proving import/edit/save/render/export without GitHub credentials.
 
 These are real package exports, but the implementations are physically bundled
 from root source. The core and browser barrels are broader than the intended
@@ -201,6 +203,7 @@ long-term stable surface.
 | Narrow session persistence | Load/save session state only | Current repository contract includes Studio product operations |
 | Asset/font provider split | Durable byte/identity provider and browser activation provider | Current font registry imports persistence asset types |
 | Capture without delivery | PNG result API independent of anchor download | Existing dependencies support injection but public contract still combines them |
+| Session source-diagnostic projection | Preserve every core source-load diagnostic in blocked session snapshots | Immutable 0.2.0 consumers use core preflight before session load |
 | Reusable validation UI | View model, summary and issue list | Existing panels are Studio-styled and workflow-specific |
 | Reusable fields UI | `useTemplateFields` and composable editor | Existing component combines UI, file IO, decode and measurement |
 | Reusable importer wizard | Controller-backed step kit and optional default recipe | Deferred until validation/font/field/readiness controllers are package-owned |

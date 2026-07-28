@@ -5,6 +5,16 @@ on:
     tags:
       - "sdk-v*"
   workflow_dispatch:
+    inputs:
+      prepare_runtime_handoff:
+        description: "Refresh the sdk-v0.2.0 Lovable runtime assets from published packages"
+        required: false
+        default: false
+        type: boolean
+
+env:
+  SDK_VERSION: "0.2.0"
+  SDK_RELEASE_TAG: "sdk-v0.2.0"
 
 permissions:
   contents: write
@@ -34,41 +44,56 @@ jobs:
         run: pnpm published-core:verify
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TEMPLATE_CORE_RELEASE_VERSION: "0.2.0"
-      - name: Prepare published core Lovable handoff
-        if: startsWith(github.ref, 'refs/tags/sdk-v')
+          TEMPLATE_CORE_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Prepare published runtime Lovable handoff
+        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: |
           mkdir -p release-artifacts
-          npm pack @sleinity/template-core@0.2.0 \
-            --registry=https://npm.pkg.github.com \
-            --pack-destination=release-artifacts
-          node scripts/repository/create-core-release-handoff.mjs \
-            release-artifacts/sleinity-template-core-0.2.0.tgz \
+          for package_name in template-core template-browser template-react; do
+            npm pack "@sleinity/${package_name}@${SDK_VERSION}" \
+              --registry=https://npm.pkg.github.com \
+              --pack-destination=release-artifacts
+          done
+          node scripts/repository/create-runtime-release-handoff.mjs \
+            release-artifacts \
             release-artifacts
-          TEMPLATE_CORE_ARCHIVE_SHA256="$(cut -d ' ' -f 1 release-artifacts/SHA256SUMS)"
-          echo "TEMPLATE_CORE_ARCHIVE_SHA256=${TEMPLATE_CORE_ARCHIVE_SHA256}" >> "$GITHUB_ENV"
+          cp docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md \
+            release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Verify secret-free Lovable archive consumer
-        if: startsWith(github.ref, 'refs/tags/sdk-v')
+          TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Verify secret-free Lovable runtime consumer (npm)
+        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: >-
-          node scripts/repository/verify-core-release-consumer.mjs
-          --archive release-artifacts/sleinity-template-core-0.2.0.tgz
+          node scripts/repository/verify-runtime-release-consumer.mjs
+          --archives release-artifacts
         env:
-          TEMPLATE_CORE_ARCHIVE_SHA256: ${{ env.TEMPLATE_CORE_ARCHIVE_SHA256 }}
-          TEMPLATE_CORE_RELEASE_VERSION: "0.2.0"
-      - name: Create private SDK release and upload Lovable handoff
-        if: startsWith(github.ref, 'refs/tags/sdk-v')
+          TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Verify secret-free Lovable runtime consumer (pnpm)
+        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
+        run: >-
+          node scripts/repository/verify-runtime-release-consumer.mjs
+          --archives release-artifacts
+        env:
+          TEMPLATE_CONSUMER_PACKAGE_MANAGER: pnpm
+          TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Create private SDK release and upload Lovable runtime handoff
+        if: startsWith(github.ref, 'refs/tags/sdk-v') || inputs.prepare_runtime_handoff == true
         run: |
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 ||
-            gh release create "$GITHUB_REF_NAME" \
+          gh release view "$SDK_RELEASE_TAG" >/dev/null 2>&1 ||
+            gh release create "$SDK_RELEASE_TAG" \
               --verify-tag \
               --title "SDK 0.2.0" \
-              --notes "Private SDK 0.2.0. The attached core archive was downloaded from GitHub Packages and includes a checksum-verified Lovable Business handoff."
-          gh release upload "$GITHUB_REF_NAME" \
+              --notes "Private SDK 0.2.0. The attached archives were downloaded from GitHub Packages and include a checksum-verified Lovable Business runtime handoff."
+          gh release edit "$SDK_RELEASE_TAG" \
+            --notes "Private SDK 0.2.0. The attached core, browser, and React archives were downloaded from GitHub Packages and include a checksum-verified Lovable Business narrowcasting handoff."
+          gh release upload "$SDK_RELEASE_TAG" \
             release-artifacts/sleinity-template-core-0.2.0.tgz \
+            release-artifacts/sleinity-template-browser-0.2.0.tgz \
+            release-artifacts/sleinity-template-react-0.2.0.tgz \
             release-artifacts/SHA256SUMS \
-            release-artifacts/BAS-LOVABLE-HANDOFF.md \
+            release-artifacts/BAS-RUNTIME-HANDOFF.md \
+            release-artifacts/BAS-NARROWCASTING-LOVABLE-PROMPTS.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

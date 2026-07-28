@@ -1,8 +1,35 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-28
-Current milestone: SDK 0.2 core importer release readiness; renderer authority unchanged
+Current milestone: SDK 0.2 Lovable runtime handoff; renderer authority unchanged
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.2 — Lovable runtime handoff
+
+The fixed `0.2.0` core, browser and React packages now have one secret-free
+Lovable Business distribution contract. Release automation downloads the exact
+published archives, generates one checksum manifest and a dependency/runtime
+handoff, installs all three as root `file:vendor/...` dependencies, and uploads
+the archives plus sequential Bas narrowcasting prompts to `sdk-v0.2.0`.
+
+The isolated production-build browser consumer passes with both npm and pnpm.
+It verifies core preflight diagnostics, valid session import, editor rendering,
+field mutation, stale-export rejection, browser save/reload, ready PNG export
+and offline restoration with zero external runtime requests. pnpm consumers
+require explicit vendored overrides for the private transitive closure; npm
+resolves the exact root file dependencies directly.
+
+Immutable 0.2.0 has one documented compatibility seam: malformed-ZIP source
+diagnostics are preserved by `importTemplatePackage()` but are not guaranteed
+to be projected into every blocked `TemplateSession` snapshot. Consumers
+preflight once with core, show its diagnostics on failure, and pass the same
+bytes to the session only on success. A later version may close that projection
+gap; the published 0.2.0 archives are not rebuilt.
+
+This handoff changes release automation, documentation and isolated
+verification only. Renderer, schema, import normalization, persistence,
+readiness, export pixels, fixtures, tolerances and approved references are
+unchanged.
 
 ## SDK 0.2 — core importer release readiness
 
