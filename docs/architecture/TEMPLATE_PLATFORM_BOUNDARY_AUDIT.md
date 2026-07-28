@@ -1,6 +1,6 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.2.2 generic handoff release candidate
+Status: Milestone 2D portable field ownership and SDK 0.2.2 generic handoff published
 Audit date: 2026-07-28
 Code baseline: the fixed SDK 0.2.2 train and generic template editor reference
 Authority: current code and imports take precedence over intended folder names
