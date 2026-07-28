@@ -4,8 +4,8 @@
 
 ### Result
 
-- Prepared the fixed core/browser/React package train as an unpublished
-  `0.2.1` patch candidate.
+- Published the fixed core/browser/React package train as `0.2.1` from reviewed
+  `main` commit `b30a50d` and tag `sdk-v0.2.1`.
 - Projected structured source/import diagnostics into blocked session snapshots,
   added opt-in silent PNG delivery and added StrictMode-safe React session
   ownership without changing importer, renderer, readiness or capture output.
@@ -57,15 +57,30 @@
   No update, promotion, fixture, schema, tolerance or approved-reference command
   ran.
 
-### Release boundary
+### Release result
 
-No `0.2.1` package has been published and no tag or GitHub Release has been
-created at this pre-PR evidence point. Publication must start from the reviewed
-`codex/sdk-0.2.1-closeout` change on `main`. The tag path alone publishes; its
-handoff job must then pass authenticated registry installation,
-registry-derived archive checksums, the packed committed-reference browser
-gate, secret-free vendored npm/pnpm consumers and anonymous public-release
-asset verification before Bas receives final hashes.
+- PR [#3](https://github.com/Sleinity/template-tool/pull/3) passed portable CI,
+  packed-reference Chromium acceptance and protected-reference guarding before
+  its squash merge.
+- Tag `sdk-v0.2.1` alone executed publication. Workflow run 7 passed both
+  `publish` and `handoff`; manual publication was not used.
+- The registry-derived public archives are:
+  - core, 279,287 bytes /
+    `36c16c316ef32252e4b0878084aa3c0b0ff69c09afb0c3e0be64bf13d6e66916`;
+  - browser, 334,486 bytes /
+    `b9cf8f61ea784cc50fe6d9a312013060408b1408f1627efa0cd8706d712b4575`;
+  - React, 277,568 bytes /
+    `ed38f5d71ee6b59f2a5b9528f390a3c0173f464b264d3c4e3a9b375abfae1552`.
+- Published-core installation, registry archive download, npm and pnpm
+  secret-free consumers, the packed committed-reference gate, distribution
+  visibility and public Release upload all pass in the tag workflow.
+- All public assets were then downloaded anonymously, `SHA256SUMS` and
+  `CORE-SHA256SUMS` passed, and the secret-free npm consumer repeated import,
+  diagnostics, editing, stale-export rejection, persistence, PNG and offline
+  reload without GitHub credentials.
+- Core/browser/React package tags at `0.2.1` point to the same reviewed
+  `b30a50d` commit. General adoption remains blocked by `UNLICENSED`; this
+  Release authorizes the Bas narrowcasting pilot only.
 
 ## 2026-07-28 — SDK 0.2 Lovable runtime handoff
 

@@ -19,6 +19,16 @@ private browser/core dependency closure without contacting GitHub Packages.
 The repository and Release are public, so downloading these assets requires no
 GitHub token. GitHub's npm registry remains authenticated.
 
+| Archive | Public download | SHA-256 |
+| --- | --- | --- |
+| `sleinity-template-core-0.2.1.tgz` | [download](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/sleinity-template-core-0.2.1.tgz) | `36c16c316ef32252e4b0878084aa3c0b0ff69c09afb0c3e0be64bf13d6e66916` |
+| `sleinity-template-browser-0.2.1.tgz` | [download](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/sleinity-template-browser-0.2.1.tgz) | `b9cf8f61ea784cc50fe6d9a312013060408b1408f1627efa0cd8706d712b4575` |
+| `sleinity-template-react-0.2.1.tgz` | [download](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/sleinity-template-react-0.2.1.tgz) | `ed38f5d71ee6b59f2a5b9528f390a3c0173f464b264d3c4e3a9b375abfae1552` |
+
+Verify these values with the Release's
+[`SHA256SUMS`](https://github.com/Sleinity/template-tool/releases/download/sdk-v0.2.1/SHA256SUMS)
+instead of copying hashes into an install script.
+
 ```json
 {
   "dependencies": {

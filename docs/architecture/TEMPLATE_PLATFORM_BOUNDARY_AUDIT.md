@@ -1,8 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.2.1 release closeout complete
+Status: Milestone 2D portable field ownership and SDK 0.2.1 published release closeout complete
 Audit date: 2026-07-28
-Code baseline: the fixed SDK 0.2.1 release candidate and Lovable reference consumer
+Code baseline: the published fixed SDK 0.2.1 train and Lovable reference consumer
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
