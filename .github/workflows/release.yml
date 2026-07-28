@@ -37,7 +37,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm ci:portable
       - name: Install pinned Chromium for packed reference acceptance
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install chromium
       - run: pnpm narrowcasting:acceptance
       - run: pnpm release
         env:
@@ -100,7 +100,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Install pinned Chromium for runtime verification
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install chromium
       - name: Verify secret-free Lovable runtime consumer (npm)
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs

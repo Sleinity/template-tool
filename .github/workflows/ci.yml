@@ -24,7 +24,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm ci:portable
       - name: Install pinned Chromium for packed reference acceptance
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install chromium
       - run: pnpm narrowcasting:acceptance
 
   protected-references:
