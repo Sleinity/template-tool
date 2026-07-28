@@ -14,7 +14,7 @@ persist, and export TemplatePackage ZIPs through the SDK packages.
 | Other browsers | Expected modern-platform compatibility, but not a pixel-authority claim until separately verified |
 | Network | No importer- or renderer-time external requests are required |
 | Server rendering | Not supported by the browser session/renderer contract |
-| Playback client | Does not need the SDK when it displays an exported PNG |
+| Host integration | Product navigation, authentication, catalogues, cloud storage, and publishing remain host-owned |
 
 ## Content security policy
 
@@ -54,8 +54,8 @@ available for rollback.
 - `exportPng()` retains the original download behavior.
 - `exportPng({ download: false })` returns the same revision-safe PNG result
   without initiating a browser download.
-- The host may convert the returned data URL to its existing media upload
-  contract only after a successful current-revision result.
+- The host may pass the returned data URL and metadata to an existing storage
+  or publishing contract only after a successful current-revision result.
 
 ## Versioning and upgrades
 
@@ -71,7 +71,6 @@ minor releases. Breaking contracts require explicit migration notes.
 
 ## Licensing
 
-The current package manifests use `UNLICENSED`. Repository visibility and code
-access do not grant a public reuse license. Resolve the intended license before
-presenting the repository or release archives as generally reusable public
-software.
+The package manifests use `UNLICENSED`. The `sleinity-tools-only` release
+policy authorizes use in Sleinity-owned applications only. Repository and
+Release visibility do not grant a general public reuse license.

@@ -168,7 +168,7 @@ importers:
         specifier: ^6.0.7
         version: 6.4.3(@types/node@26.0.1)(jiti@1.21.7)(terser@5.48.0)
 
-  examples/narrowcasting-integration:
+  examples/template-editor-integration:
     dependencies:
       '@sleinity/template-browser':
         specifier: workspace:*

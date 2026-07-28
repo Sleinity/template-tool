@@ -1,5 +1,55 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-28 — SDK 0.2.2 generic template editor handoff
+
+### Result
+
+- Prepared the fixed package train at `0.2.2` without changing a runtime API,
+  import contract, renderer, readiness rule, persistence record or PNG output.
+- Replaced the active product-specific pilot policy with
+  `sleinity-tools-only`, authorizing Sleinity-owned applications while package
+  manifests remain `UNLICENSED`.
+- Renamed the committed consumer and packed Chromium gate to a generic template
+  editor reference with neutral component, storage, fixture, command and
+  callback identities.
+- Replaced active handoffs with platform-neutral SDK and core guides. Lovable
+  Business remains a separate secret-free vendored installation recipe with
+  sequential editor prompts.
+- Updated release automation to generate `SDK-RUNTIME-HANDOFF.md`,
+  `SDK-CORE-HANDOFF.md` and `LOVABLE-TEMPLATE-EDITOR-PROMPTS.md` and added a
+  contract guard against retired product-specific naming.
+- Preserved the immutable `sdk-v0.2.1` Release and its historical evidence.
+
+### Verification boundary
+
+Current-run `pnpm ci:portable` passes direct package/root checks, portable
+tests, Studio and SDK builds, archive/boundary checks, installed-core and packed
+consumers, documentation and both examples. The generic packed-reference
+Chromium gate passes invalid/valid ZIPs, validation, diagnostics, text/image
+editing, Fill/Fit/reset, offline save/reload, stale-export rejection, silent
+PNG and permanent disposal with zero external requests, browser downloads or
+console errors. The pnpm secret-free vendored consumer passes the runtime
+lifecycle; npm verification remains a release-CI gate because this local
+runtime has no npm executable.
+
+Core/browser/React candidate archives are 279,287 / 334,484 / 277,566 bytes.
+Packed output is 834,646 / 244,671 gzip bytes. Studio is 998.40 / 290.38 gzip
+kB JavaScript and 68.52 / 12.20 gzip kB CSS; minimal and generic editor
+examples are 827.45 / 242.56 and 863.21 / 250.22 gzip kB. Core's declaration
+is still 86,272 bytes /
+`e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+
+Fresh renderer run `2026-07-28T15-09-16-072Z` is repeat-stable for all 19
+fixtures and four surfaces. Appearance is valid and deterministic. The guarded
+renderer, scene and settlement commands retain only their documented
+historical/environment-sensitive or unapproved states. Approved aggregates
+remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, promotion, fixture, schema or tolerance command ran.
+
 ## 2026-07-28 — SDK 0.2.1 release closeout and Bas acceptance gate
 
 ### Result

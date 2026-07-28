@@ -45,8 +45,8 @@ await writeFile(
   `${sha256}  ${archiveName}\n`,
 );
 await writeFile(
-  path.join(outputDirectory, "BAS-LOVABLE-HANDOFF.md"),
-  `# Template core ${version} — Lovable Business handoff
+  path.join(outputDirectory, "SDK-CORE-HANDOFF.md"),
+  `# Template core ${version} — importer handoff
 
 - Package: \`@sleinity/template-core\`
 - Version: \`${version}\`
@@ -54,14 +54,14 @@ await writeFile(
 - Archive: \`${archiveName}\`
 - Public download: ${archiveUrl}
 - SHA-256: \`${sha256}\`
-- Lovable secret: none
+- Vendored-install secret: none
 - Release download token: none
 
 The [source repository](${distribution.repositoryUrl}) and
 [GitHub Release](${releaseUrl}) are ${distribution.releaseVisibility}. The
 package manifest remains \`UNLICENSED\`; policy
 \`${distribution.licensePolicy}\` authorizes
-${distribution.authorizedConsumer} and is not a general reuse license.
+${distribution.authorizedUse} and is not a general reuse license.
 
 ## Install
 
@@ -71,7 +71,7 @@ ${distribution.authorizedConsumer} and is not a general reuse license.
    shasum -a 256 ${archiveName}
    \`\`\`
 
-2. Commit it to the private Lovable-synced repository as
+2. Commit it to the consuming repository as
    \`vendor/${archiveName}\`.
 3. Add the dependency:
 
@@ -83,8 +83,8 @@ ${distribution.authorizedConsumer} and is not a general reuse license.
    }
    \`\`\`
 
-4. Run \`npm install\` and commit the lockfile. Do not add a GitHub Packages
-   \`.npmrc\` or token to the Lovable repository.
+4. Run \`npm install\` and commit the lockfile. A vendored consumer does not
+   need a GitHub Packages \`.npmrc\` or token.
 
 ## Use
 
@@ -118,7 +118,7 @@ export async function importTemplateZip(file: File) {
 
 ## Optional authenticated registry installation
 
-Outside Lovable Business, configure:
+For direct authenticated registry installation, configure:
 
 \`\`\`ini
 @sleinity:registry=https://npm.pkg.github.com

@@ -27,5 +27,6 @@ diagnostic's details. Consumers do not need to run a second core import
 preflight before `session.loadZip()`.
 
 PNG export keeps its existing download default. Hosts that pass the returned
-PNG to an upload or media pipeline use `exportPng({ download: false })` to
-capture the same ready revision without initiating a browser download.
+PNG to an existing storage or publishing service use
+`exportPng({ download: false })` to capture the same ready revision without
+initiating a browser download.

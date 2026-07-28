@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import {
   loadRuntimeDistribution,
@@ -7,6 +7,69 @@ import {
 } from "./sdk-runtime-manifest.mjs";
 
 const root = process.cwd();
+const retiredActivePaths = [
+  "docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md",
+  "examples/narrowcasting-integration/package.json",
+  "examples/narrowcasting-integration/src/main.tsx",
+  "scripts/repository/verify-narrowcasting-reference.mjs",
+];
+for (const retiredPath of retiredActivePaths) {
+  try {
+    await access(path.join(root, retiredPath));
+    throw new Error(`Retired active SDK path still exists: ${retiredPath}.`);
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+}
+
+const hostSpecificPattern =
+  /\bBas\b|narrowcast|screen\/player|campaign|playlist|authorizedConsumer|authorized-pilot/iu;
+const activeRoots = [
+  "config/sdk-runtime-packages.json",
+  "docs/sdk",
+  "examples/minimal-renderer/README.md",
+  "examples/template-editor-integration",
+  "packages/template-core/README.md",
+  "packages/template-browser/README.md",
+  "packages/template-react/README.md",
+  ".github/workflows/ci.yml",
+  ".github/workflows/release.yml",
+  "scripts/repository/create-core-release-handoff.mjs",
+  "scripts/repository/create-runtime-release-handoff.mjs",
+  "scripts/repository/sdk-runtime-manifest.mjs",
+  "scripts/repository/verify-template-editor-reference.mjs",
+];
+
+async function collectFiles(relativePath) {
+  const absolutePath = path.join(root, relativePath);
+  const entries = await readdir(absolutePath, { withFileTypes: true }).catch(
+    (error) => {
+      if (error?.code === "ENOTDIR") return null;
+      throw error;
+    },
+  );
+  if (entries === null) return [relativePath];
+  const files = [];
+  for (const entry of entries) {
+    if (entry.name === "dist" || entry.name === "node_modules") continue;
+    const childPath = path.join(relativePath, entry.name);
+    if (entry.isDirectory()) files.push(...await collectFiles(childPath));
+    else files.push(childPath);
+  }
+  return files;
+}
+
+for (const activeRoot of activeRoots) {
+  for (const activeFile of await collectFiles(activeRoot)) {
+    const source = await readFile(path.join(root, activeFile), "utf8");
+    if (hostSpecificPattern.test(source)) {
+      throw new Error(
+        `Active SDK surface contains retired host-specific naming: ${activeFile}.`,
+      );
+    }
+  }
+}
+
 const workflow = await readFile(
   path.join(root, ".github", "workflows", "release.yml"),
   "utf8",
@@ -42,9 +105,13 @@ for (const required of [
   "create-runtime-release-handoff.mjs",
   "create-core-release-handoff.mjs",
   "verify-runtime-release-consumer.mjs",
-  "verify-narrowcasting-reference.mjs",
+  "verify-template-editor-reference.mjs",
+  "SDK-CORE-HANDOFF.md",
+  "SDK-RUNTIME-HANDOFF.md",
+  "LOVABLE-TEMPLATE-EDITOR-PROMPTS.md",
   "SDK_RELEASE_VISIBILITY",
   "SDK_LICENSE_POLICY",
+  "SDK_AUTHORIZED_USE",
 ]) {
   if (!handoffJob.includes(required)) {
     throw new Error(`Release handoff job is missing ${required}.`);
@@ -54,7 +121,8 @@ for (const required of [
 const distribution = await loadRuntimeDistribution(root);
 if (
   distribution.releaseVisibility !== "public" ||
-  distribution.licensePolicy !== "authorized-pilot-only"
+  distribution.licensePolicy !== "sleinity-tools-only" ||
+  distribution.authorizedUse !== "Sleinity-owned applications"
 ) {
   throw new Error("Release distribution policy is not explicit.");
 }
@@ -78,5 +146,5 @@ for (const item of await loadRuntimePackageDefinitions(root)) {
 }
 
 console.log(
-  `SDK ${version} release contract passed: tag-only publication, manual handoff-only refresh, public authorized pilot assets.`,
+  `SDK ${version} release contract passed: tag-only publication, manual handoff-only refresh, public Sleinity-tools-only assets.`,
 );

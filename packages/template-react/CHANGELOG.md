@@ -1,5 +1,16 @@
 # @sleinity/template-react
 
+## 0.2.2
+
+### Patch Changes
+
+- Replace the integration-specific distribution with host-neutral SDK and
+  Lovable Business template-editor handoffs. React runtime behavior is
+  unchanged.
+- Updated dependencies
+  - @sleinity/template-browser@0.2.2
+  - @sleinity/template-core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

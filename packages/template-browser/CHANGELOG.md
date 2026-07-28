@@ -1,5 +1,14 @@
 # @sleinity/template-browser
 
+## 0.2.2
+
+### Patch Changes
+
+- Replace the integration-specific distribution with host-neutral SDK and
+  Lovable Business template-editor handoffs. Browser runtime behavior is
+  unchanged.
+  - @sleinity/template-core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

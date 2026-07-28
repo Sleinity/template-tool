@@ -1,8 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.2.1 published release closeout complete
+Status: Milestone 2D portable field ownership and SDK 0.2.2 generic handoff release candidate
 Audit date: 2026-07-28
-Code baseline: the published fixed SDK 0.2.1 train and Lovable reference consumer
+Code baseline: the fixed SDK 0.2.2 train and generic template editor reference
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
@@ -14,9 +14,9 @@ without changing renderer behavior, public APIs, package contracts, fixtures,
 or approved evidence.
 
 The repository is already a public pnpm monorepo with three authenticated
-GitHub npm facades, packed-package consumers, minimal and narrowcasting React
-consumers, and a public-release, secret-free Lovable runtime handoff. It is not
-yet fully physically separated:
+GitHub npm facades, packed-package consumers, minimal and generic template
+editor React consumers, and a public-release, secret-free vendored runtime
+handoff. It is not yet fully physically separated:
 
 - `apps/studio` now owns the real Vite application, routes, views, styles,
   assets, optional services and build;
@@ -32,14 +32,14 @@ yet fully physically separated:
   one package owner and no renderer or root implementation dependency;
 - browser font storage and Studio persistence types depend on each other.
 
-The committed narrowcasting consumer is now itself a release gate rather than
-documentation-only example code. An isolated Chromium harness installs locally
-packed or registry-derived archives and verifies its complete import, edit,
-persistence, readiness and silent-export lifecycle. Release publication is
-tag-only; manual workflow dispatch may refresh assets solely from an
+The committed generic template editor consumer is itself a release gate rather
+than documentation-only example code. An isolated Chromium harness installs
+locally packed or registry-derived archives and verifies its complete import,
+edit, persistence, readiness and silent-export lifecycle. Release publication
+is tag-only; manual workflow dispatch may refresh assets solely from an
 already-published fixed version. Public source and Release visibility do not
-change the package manifests' `UNLICENSED` status or the
-`authorized-pilot-only` Bas policy.
+change the package manifests' `UNLICENSED` status; active
+`sleinity-tools-only` policy authorizes Sleinity-owned applications only.
 
 The required target is a reusable **Template Platform** plus an independent
 **Studio application**, not a renderer extracted from an otherwise unchanged
@@ -58,7 +58,7 @@ canonical consumer.
 | React facade | `packages/template-react` | Renderer/session bindings over root source | `packages/template-react` with owned source |
 | Platform implementation | `src/template-package` | Mixed portable, browser, React, Studio and fidelity code | Split by the classification below |
 | Certified evidence | `fidelity`, `tools/fidelity`, `scripts` | Exact fixtures and guarded comparisons | Remains shared repository infrastructure |
-| Consumer proof | `examples/{minimal-renderer,narrowcasting-integration}` | Minimal render plus import/edit/persist/export host-integration proof | Keep public-entry-only and add host-specific media adapters outside SDK |
+| Consumer proof | `examples/{minimal-renderer,template-editor-integration}` | Minimal render plus import/edit/persist/export host-integration proof | Keep public-entry-only and connect existing host services outside SDK |
 
 The Milestone 0 inventory comprised 22 Studio TypeScript modules, 169
 non-fixture `src/template-package` TypeScript/JSON modules, six package entry
