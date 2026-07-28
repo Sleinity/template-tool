@@ -73,7 +73,7 @@
     "sdk:verify": "pnpm packages:typecheck && pnpm packages:build && pnpm boundaries:check && pnpm packages:pack:check && pnpm packed-core-node:verify && pnpm packed-consumer:verify",
     "example:dev": "pnpm --filter @sleinity/template-minimal-renderer dev",
     "example:build": "pnpm --filter @sleinity/template-minimal-renderer build",
-    "ci:portable": "pnpm repository:audit && pnpm test:portable && pnpm exec tsc -b --pretty false && pnpm build && pnpm docs:verify && pnpm sdk:verify && pnpm example:build",
+    "ci:portable": "pnpm repository:audit && pnpm packages:build && pnpm test:portable && pnpm exec tsc -b --pretty false && pnpm build && pnpm docs:verify && pnpm sdk:verify && pnpm example:build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm sdk:verify && changeset publish"
