@@ -2,6 +2,7 @@ import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import react from "@vitejs/plugin-react";
 import { build } from "vite";
 import {
   formatLifecycleFixtureReport,
@@ -50,6 +51,10 @@ const forbiddenSourceTerms = [
   "createImportedTemplateDefinition",
 ];
 const forbiddenDirectories = ["import", "motion", "remotion", "templates", "export"];
+const sourceRoots = [
+  path.join(projectRoot, "src"),
+  path.join(projectRoot, "apps", "studio", "src"),
+];
 
 async function sourceFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -63,30 +68,38 @@ async function sourceFiles(directory) {
 }
 
 try {
-  for (const directory of forbiddenDirectories) {
-    const removedPipelinePath = path.join(projectRoot, "src", directory);
-    const exists = await readdir(removedPipelinePath).then(
-      () => true,
-      () => false,
-    );
-    if (exists) {
-      throw new Error(`Removed pipeline directory still exists: src/${directory}`);
+  for (const sourceRoot of sourceRoots) {
+    for (const directory of forbiddenDirectories) {
+      const removedPipelinePath = path.join(sourceRoot, directory);
+      const exists = await readdir(removedPipelinePath).then(
+        () => true,
+        () => false,
+      );
+      if (exists) {
+        throw new Error(
+          `Removed pipeline directory still exists: ${path.relative(projectRoot, removedPipelinePath)}`,
+        );
+      }
     }
   }
 
-  for (const file of await sourceFiles(path.join(projectRoot, "src"))) {
-    if (file.endsWith("packageOnlyArchitecture.test.tsx")) continue;
-    const source = await readFile(file, "utf8");
-    const forbidden = forbiddenSourceTerms.find((term) => source.includes(term));
-    if (forbidden) {
-      throw new Error(
-        `Removed pipeline reference "${forbidden}" remains in ${path.relative(projectRoot, file)}`,
-      );
+  for (const sourceRoot of sourceRoots) {
+    for (const file of await sourceFiles(sourceRoot)) {
+      if (file.endsWith("packageOnlyArchitecture.test.tsx")) continue;
+      const source = await readFile(file, "utf8");
+      const forbidden = forbiddenSourceTerms.find((term) => source.includes(term));
+      if (forbidden) {
+        throw new Error(
+          `Removed pipeline reference "${forbidden}" remains in ${path.relative(projectRoot, file)}`,
+        );
+      }
     }
   }
 
   await build({
     root: projectRoot,
+    configFile: false,
+    plugins: [react()],
     logLevel: "warn",
     ssr: {
       noExternal: true,

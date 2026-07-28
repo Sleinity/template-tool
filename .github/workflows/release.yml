@@ -30,5 +30,47 @@ jobs:
       - run: pnpm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify published core consumer
+        run: pnpm published-core:verify
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEMPLATE_CORE_RELEASE_VERSION: "0.2.0"
+      - name: Prepare published core Lovable handoff
+        if: startsWith(github.ref, 'refs/tags/sdk-v')
+        run: |
+          mkdir -p release-artifacts
+          npm pack @sleinity/template-core@0.2.0 \
+            --registry=https://npm.pkg.github.com \
+            --pack-destination=release-artifacts
+          node scripts/repository/create-core-release-handoff.mjs \
+            release-artifacts/sleinity-template-core-0.2.0.tgz \
+            release-artifacts
+          TEMPLATE_CORE_ARCHIVE_SHA256="$(cut -d ' ' -f 1 release-artifacts/SHA256SUMS)"
+          echo "TEMPLATE_CORE_ARCHIVE_SHA256=${TEMPLATE_CORE_ARCHIVE_SHA256}" >> "$GITHUB_ENV"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify secret-free Lovable archive consumer
+        if: startsWith(github.ref, 'refs/tags/sdk-v')
+        run: >-
+          node scripts/repository/verify-core-release-consumer.mjs
+          --archive release-artifacts/sleinity-template-core-0.2.0.tgz
+        env:
+          TEMPLATE_CORE_ARCHIVE_SHA256: ${{ env.TEMPLATE_CORE_ARCHIVE_SHA256 }}
+          TEMPLATE_CORE_RELEASE_VERSION: "0.2.0"
+      - name: Create private SDK release and upload Lovable handoff
+        if: startsWith(github.ref, 'refs/tags/sdk-v')
+        run: |
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 ||
+            gh release create "$GITHUB_REF_NAME" \
+              --verify-tag \
+              --title "SDK 0.2.0" \
+              --notes "Private SDK 0.2.0. The attached core archive was downloaded from GitHub Packages and includes a checksum-verified Lovable Business handoff."
+          gh release upload "$GITHUB_REF_NAME" \
+            release-artifacts/sleinity-template-core-0.2.0.tgz \
+            release-artifacts/SHA256SUMS \
+            release-artifacts/BAS-LOVABLE-HANDOFF.md \
+            --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Retain published package tags
         run: git push origin --tags

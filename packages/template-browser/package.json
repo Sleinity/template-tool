@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-browser",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Browser asset, font, persistence, readiness, and deterministic PNG services for TemplatePackage rendering.",
   "license": "UNLICENSED",
   "repository": {
@@ -11,7 +11,10 @@
   "private": false,
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

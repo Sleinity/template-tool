@@ -3,6 +3,7 @@ export * from "./packageLayoutModel";
 export * from "./packageConstraintLayout";
 export * from "./ScaledTemplatePackagePreview";
 export * from "./TemplateInspectionPreview";
+export * from "./TemplateInspectionViewport";
 export * from "./TemplatePackageRenderer";
 export * from "./previewViewport";
 export * from "./productRenderIdentity";

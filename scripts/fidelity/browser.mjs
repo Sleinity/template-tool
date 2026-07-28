@@ -653,6 +653,12 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
         const restoreStarted = performance.now();
         await page.getByRole("button", { name: `Open template ${name}` }).click();
         await page.getByTestId("package-editor-panel").waitFor();
+        const closeDiagnostics = page.getByRole("button", {
+          name: "Close diagnostics panel",
+        });
+        if (await closeDiagnostics.isVisible().catch(() => false)) {
+          await closeDiagnostics.click();
+        }
         timings.draftRestoreMs = performance.now() - restoreStarted;
         fixtureResult.route = new URL(page.url()).pathname;
         const editorSelector = '[data-testid="package-working-preview"] [data-template-package-canvas]';

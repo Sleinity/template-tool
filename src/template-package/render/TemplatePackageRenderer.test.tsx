@@ -21,6 +21,7 @@ import {
   TemplatePackageRenderer,
 } from "./TemplatePackageRenderer";
 import { TemplateInspectionPreview } from "./TemplateInspectionPreview";
+import { TemplateInspectionViewport } from "./TemplateInspectionViewport";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);
@@ -57,6 +58,14 @@ const missingInspectionMarkup = renderToStaticMarkup(
     targetNodeIds: ["missing-target"],
   }),
 );
+const viewportMarkup = renderToStaticMarkup(
+  createElement(TemplateInspectionViewport, {
+    packageValue,
+    targetNodeIds: multiHighlightIds,
+    className: "host-owned-stage",
+    "data-host-stage": "true",
+  }),
+);
 
 assert(markup.length > 0, "Package renderer should produce static markup.");
 assert(
@@ -65,6 +74,19 @@ assert(
     !markup.includes("data-package-renderer-rollout") &&
     !markup.includes("renderer-admin"),
   "The product renderer must expose one semantic-first identity without rollout selection metadata.",
+);
+assert(
+  inspectionMarkup.includes("Fit template") &&
+    inspectionMarkup.includes('aria-label="Zoom in"') &&
+    inspectionMarkup.includes('aria-label="Zoom out"'),
+  "The compatibility inspection preview should preserve accessible controls without a Studio UI dependency.",
+);
+assert(
+  viewportMarkup.includes('class="host-owned-stage"') &&
+    viewportMarkup.includes('data-host-stage="true"') &&
+    viewportMarkup.includes('data-inspection-geometry-contract="settled-core-with-compatibility-fallback"') &&
+    viewportMarkup.includes('data-inspection-isolation-overlay="true"'),
+  "The composable inspection viewport should accept host stage attributes while preserving inspection geometry and overlays.",
 );
 assert(
   inspectionMarkup.includes('data-inspection-isolation-overlay="true"') &&

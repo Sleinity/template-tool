@@ -1,5 +1,2 @@
-export * from "./createResolvedRenderTree";
-export * from "./fontReadiness";
-export * from "./imagePlacement";
-export * from "./types";
-export * from "../backend-decision";
+/** @deprecated Internal compatibility forwarder to the template-core owner. */
+export * from "../../../packages/template-core/src/resolved";

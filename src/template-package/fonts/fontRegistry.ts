@@ -45,6 +45,7 @@ export interface LinkManagedFontOptions {
   allowReplacement?: boolean;
   confirmed?: boolean;
   reason?: string;
+  registry?: ManagedFontRegistry | null;
 }
 
 export async function linkRequirementToManagedFont(
@@ -128,7 +129,10 @@ export async function linkRequirementToManagedFont(
       },
     },
   };
-  await getManagedFontRegistry()?.linkRequirementToManagedFont(
+  const registryValue = Object.prototype.hasOwnProperty.call(options, "registry")
+    ? options.registry
+    : getManagedFontRegistry();
+  await registryValue?.linkRequirementToManagedFont(
     createFontRequirementKey(requirement),
     font.id,
     {
@@ -184,8 +188,8 @@ export async function unlinkManagedFontRequirement(
 
 export async function autoLinkManagedFonts(
   packageValue: TemplatePackageV1,
+  registryValue: ManagedFontRegistry | null = getManagedFontRegistry(),
 ): Promise<TemplatePackageV1> {
-  const registryValue = getManagedFontRegistry();
   if (!registryValue || !packageValue.fontRequirements?.length) {
     return packageValue;
   }
@@ -210,7 +214,11 @@ export async function autoLinkManagedFonts(
       nextPackage,
       requirement.id,
       candidate.font,
-      { confirmed: true, reason: "Unambiguous exact managed-font match." },
+      {
+        confirmed: true,
+        reason: "Unambiguous exact managed-font match.",
+        registry: registryValue,
+      },
     );
   }
   return nextPackage;

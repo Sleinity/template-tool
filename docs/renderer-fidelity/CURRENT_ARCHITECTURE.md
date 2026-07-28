@@ -1,16 +1,16 @@
 # Current Renderer Architecture Map
 
-This map describes the repository as audited through 2026-07-20. Paths are code evidence, not intended future boundaries.
+This map describes the repository as audited through 2026-07-22. Paths are code evidence, not intended future boundaries.
 
 ## Modules and ownership
 
 | Stage | Primary modules | Owned data / responsibility |
 | --- | --- | --- |
-| ZIP index and bytes | `src/template-package/bundle/loadTemplatePackageBundle.ts`, `zipBundleReader.ts`, `zipReader.ts` | Required/optional file index and raw bytes |
-| Source-contract parse | `sourceContract.ts`, `loadTemplatePackageBundleSource.ts` | Loose exporter contract, raw JSON, source diagnostics |
-| Normalization | `normalizeTemplatePackageBundle.ts`, `assetManifestAdapter.ts` | Compatibility rewrite, canonical-shaped JSON, normalization diagnostics, preserved extensions |
-| Strict validation | `parseTemplatePackage.ts`, `validateTemplatePackage.ts`, `schema/template-package-v1.schema.json` | Validated `TemplatePackageV1` or errors |
-| Motion linking | `motion/packageMotion.ts` | Canonical motion and node-link diagnostics |
+| ZIP index and bytes | `packages/template-core/src/bundle/{loadTemplatePackageBundle,zipBundleReader,zipReader}.ts` | Required/optional file index and raw bytes |
+| Source-contract parse | `packages/template-core/src/bundle/{sourceContract,loadTemplatePackageBundleSource}.ts` | Loose exporter contract, raw JSON, source diagnostics |
+| Normalization | `packages/template-core/src/bundle/{normalizeTemplatePackageBundle,assetManifestAdapter}.ts` | Compatibility rewrite, canonical-shaped JSON, normalization diagnostics, preserved extensions |
+| Strict validation | `packages/template-core/src/{parseTemplatePackage,validateTemplatePackage}.ts`, `schema/template-package-v1.schema.json` | Validated `TemplatePackageV1` or errors |
+| Motion linking | `packages/template-core/src/motion/packageMotion.ts` | Portable canonical motion and node-link diagnostics; public motion API remains deferred |
 | Asset ingestion | `bundle/bundleAssetIngestion.ts`, `assets/*` | Managed asset records, content-addressed identity, runtime asset URLs |
 | Font resolution | `fonts/*`, `server/font-resolution/*` | Font requirements, managed faces, readiness/fallback state |
 | Optional enrichment | `import/runTemplatePackageImportPipeline.ts`, `enrichment/*`, `server/figma-enrichment/*` | Cached Figma metadata, renderer hints, comparison diagnostics |
@@ -18,7 +18,7 @@ This map describes the repository as audited through 2026-07-20. Paths are code 
 | Canonical scene contract | `scene/*`, `scripts/scene-graph/*` | Pure `CanonicalSceneGraphV1`, authority/mapping/migration registries, validation and equivalence; Milestone 4 core routing is its first bounded runtime consumer |
 | Core layout runtime authority | `runtime-routing/*` | Capability route, six-state property ownership, intrinsic text measurement publication, pure core settlement, coherent fallback, readiness telemetry |
 | Appearance contract preparation | `appearance-contracts/*`, `scripts/appearance-contracts/*` | Pure observational appearance projections, source sufficiency, backend requirements; no renderer import |
-| Mask source and relationship authority | `masks/packageMaskRelationships.ts`, canonical/resolved mask projections | Strict source relationship validation, capability selection, revisions, clip derivation, explicit fallback |
+| Mask source and relationship authority | `packages/template-core/src/masks/packageMaskRelationships.ts`, canonical/resolved mask projections | Strict source relationship validation, capability selection, revisions, clip derivation, explicit fallback |
 | Primitive appearance authority | `primitives/*`, `ResolvedRenderNode.primitiveAppearance` | Ordered paint/stroke intent, source/settled/path geometry, independent corners, clipping chain, revisions, and one capability-selected DOM/CSS or SVG owner |
 | Linear-gradient authority | `bundle/normalizeTemplatePackageBundle.ts`, `primitives/linearGradient.ts`, `TemplatePackageRenderer.tsx` | Source-indexed canonical hydration/provenance, one-inverse normalized geometry, bounds-derived SVG transform, stop/paint opacity, revision guard, and singular SVG owner for the certified subset |
 | Ordered-SOLID authority | `bundle/normalizeTemplatePackageBundle.ts`, `primitives/resolvePrimitiveAppearance.ts`, `TemplatePackageRenderer.tsx` | Apply-once SOLID opacity provenance, `ResolvedOrderedSolidStackV1`, current bounds/corners, ascending source-index layers, and one SVG group/shared clip for the certified subset |
@@ -26,10 +26,11 @@ This map describes the repository as audited through 2026-07-20. Paths are code 
 | Backend orchestration | `backend-decision/*`, `ResolvedRenderNode.backendDecision` | One versioned node/subtree decision over existing layout, DOM/CSS, SVG, media, vector, mask, compatibility, fallback, and unsupported owners |
 | Internal rollout activation | `renderer-rollout/*`, `RendererRolloutProvider`, `TemplatePackageRenderer.tsx` | Persisted `legacy`/`semantic`/`compare` preference, safe current-default fallback, one mode decision over backend activation, rollback, and non-blocking compare evidence |
 | Stage 1 operator cohort | `renderer-rollout/cohort/*`, `RendererRolloutCohortProvider`, internal admin disclosure | Content-addressed eligibility, explicit local observation, manual decision/approval, expiry/invalidation, incident history, and immediate Legacy rollback; never source/package authority |
-| Resolved semantics | `resolved/createResolvedRenderTree.ts`, `resolved/types.ts` | `ResolvedRenderTreeV1`, nodes, assets, field targets, motion links, warnings and fidelity diagnostics |
-| Runtime layout compatibility | `render/packageConstraintLayout.ts`, `packageTransformLayout.ts`, `packageClipping.ts`, `packageStrokeLayout.ts`, `packageTextLayout.ts`, `packageLayoutModel.ts` | Raw/canonical interpretation into CSS-compatible models |
+| Portable resolved models | `packages/template-core/src/models/*` | Color/asset/axis, positioning/layout, stroke, transform and vector intent consumed by both resolution and renderer adapters |
+| Resolved semantics | `resolved/createResolvedRenderTree.ts`, `resolved/types.ts` | `ResolvedRenderTreeV1`, nodes, assets, field targets, motion links, warnings and fidelity diagnostics; implementation remains bridged but has no renderer import |
+| Runtime layout compatibility | `render/packageConstraintLayout.ts`, `packageTransformLayout.ts`, `packageClipping.ts`, `packageStrokeLayout.ts`, `packageTextLayout.ts`, `packageLayoutModel.ts` | CSS/React adaptation over core portable models plus remaining renderer-owned compatibility behavior |
 | Renderer | `render/TemplatePackageRenderer.tsx` | DOM/SVG/CSS output, editor/static modes, motion application, HUG measurement, overlays |
-| Preview shells | `render/TemplateInspectionPreview.tsx`, `ScaledTemplatePackagePreview.tsx` | Fit/zoom/highlight and scaled live rendering |
+| Preview shells | `render/TemplateInspectionViewport.tsx`, compatibility `TemplateInspectionPreview.tsx`, Studio preview composition, `ScaledTemplatePackagePreview.tsx` | UI-independent fit/zoom/highlight behavior; host-owned controls/stage; scaled live rendering |
 | Diagnostics | `backend-decision/createDiagnosticProjection.ts`, `packageDiagnostics.ts`, `quality/*`, `analysis/*`, `debug/*`, `bundle/layeredSourceDiagnostics.ts` | Source, renderer, layout, capability/backend, user-facing quality, and analysis reports with capability/region grouping |
 | Export | `export/packageExportReadiness.ts`, `export/pngExport.ts`, `enrichment/captureTemplatePackagePreview.ts` | Validation/font/asset readiness, image decode, DOM capture, PNG download |
 | Visual comparison | `enrichment/TemplatePackageVisualDiff.tsx`, `visualDiff.ts`, `comparePackageToFigmaMetadata.ts` | Live static render beside reference and structural difference metrics |
@@ -59,7 +60,7 @@ Milestone 2 did not close this gap. It created a deterministic pre-measurement s
 
 - Raw Figma/exporter values become canonical semantics mainly in `normalizeTemplatePackageBundle.ts` and enrichment helpers.
 - Some raw Figma values remain in `node.extensions.figma` and become runtime semantics in constraint, transform, clipping, stroke, text, and image helpers.
-- Canonical/resolved semantics become DOM/SVG/CSS in `TemplatePackageRenderer.tsx`, `packageVectorRender.ts`, and the compatibility helpers.
+- Canonical values become portable resolved intent in the core model family; DOM/SVG/CSS adaptation remains in `TemplatePackageRenderer.tsx`, `packageVectorRender.ts`, and the compatibility helpers.
 - Browser-measured values include rendered text line rectangles/cap height, element/viewport dimensions through `ResizeObserver`, `document.fonts` readiness, computed styles, and intrinsic image decode state.
 - For source-certified static CROP, the raw affine matrix maps normalized node/slot coordinates to normalized source coordinates. The placement resolver inverts it once into intrinsic-source-pixel to slot-pixel CSS geometry, and the renderer clips the single image layer at the current slot. The browser supplies sampling only; it does not feed crop geometry back into authority.
 - Imported media intent and editor replacement authority are separate. `node.image.scaleMode/imageTransform` retain Figma source semantics; optional `node.image.activePlacement` records `imported-source`, `replacement-fill`, `replacement-fit`, or reserved `editor-crop` plus a monotonic revision. Canonical scene, resolved tree, routing identity, renderer telemetry, persistence, and PNG metadata carry that state. Per-field async operation revisions prevent stale file/decode results from republishing after a newer replacement or reset.

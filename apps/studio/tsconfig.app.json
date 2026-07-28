@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../node_modules/.tmp/tsconfig.studio-app.tsbuildinfo",
+    "baseUrl": ".",
+    "paths": {
+      "@sleinity/template-core": ["../../packages/template-core/src/index.ts"],
+      "@sleinity/template-browser": ["../../packages/template-browser/src/index.ts"],
+      "@sleinity/template-react": ["../../packages/template-react/src/index.ts"]
+    },
+    "noEmit": true
+  },
+  "include": ["src"]
+}

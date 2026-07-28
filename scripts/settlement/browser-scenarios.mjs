@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { createServer } from "vite";
 import { browserStructure, launchBrowser, waitForCurrentReadiness } from "../fidelity/browser.mjs";
 import { loadManifest, parseArguments, repoRoot, stableStringify, verifyFixture } from "../fidelity/core.mjs";
+import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 import { observationFromStructure, settlementRoot, writeSettlementCandidate } from "./core.mjs";
 import { resolveSettlementModel } from "./model.mjs";
 
@@ -30,7 +30,10 @@ function comparisonCriticalBrowser(browser) {
   return normalized;
 }
 
-const server = await createServer({ root: repoRoot, logLevel: "error", server: { host: "127.0.0.1", port: Number(args.port || 0), strictPort: Boolean(args.port) } });
+const server = await createStudioViteServer({
+  port: Number(args.port || 0),
+  strictPort: Boolean(args.port),
+});
 await server.listen();
 const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");
 if (!baseUrl) throw new Error("Scenario Vite server did not publish a local URL.");

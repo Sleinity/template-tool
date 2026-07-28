@@ -15,10 +15,11 @@ export * from "../../../src/template-package/fonts/runtimeFontSignature";
 export * from "../../../src/template-package/enrichment/captureTemplatePackagePreview";
 export * from "../../../src/template-package/editor/textMeasurement";
 export * from "../../../src/template-package/import";
+export * from "../../../src/template-package/session";
 export * from "../../../src/template-package/enrichment";
 export {
   createTextFitResult,
-  measureTextFieldFit,
   type FieldTextFitResult,
   type TextFitMeasurement,
 } from "../../../src/template-package/editor/fieldConstraints";
+export { measureTextFieldFit } from "../../../src/template-package/editor/textMeasurement";

@@ -1,10 +1,10 @@
 import {
-  createZipBundleReader,
+  loadTemplatePackageBundleSource,
   type LoadedTemplatePackageSource,
-} from "../../../src/template-package/bundle";
-import { loadTemplatePackageBundleSource } from "../../../src/template-package/bundle/loadTemplatePackageBundleSource";
-import type { TemplatePackageValidationResult } from "../../../src/template-package/packageDiagnostics";
-import type { TemplatePackageV1 } from "../../../src/template-package/types";
+} from "./bundle/loadTemplatePackageBundleSource";
+import { createZipBundleReader } from "./bundle/zipBundleReader";
+import type { TemplatePackageValidationResult } from "./packageDiagnostics";
+import type { TemplatePackageV1 } from "./types";
 
 export interface TemplatePackageImportResultV1 {
   schemaVersion: "template-package-import-result-v1";

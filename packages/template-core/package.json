@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Framework-neutral TemplatePackage ZIP importer, validator, canonical scene, resolver, and field override API.",
   "license": "UNLICENSED",
   "repository": {
@@ -11,7 +11,10 @@
   "private": false,
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,6 +30,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --sourcemap --clean --external react --external react-dom --external ajv --external fflate",
+    "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {

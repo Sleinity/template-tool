@@ -1,3 +1,2 @@
-export * from "./resolvePrimitiveAppearance";
-export * from "./types";
-export * from "./linearGradient";
+/** @deprecated Internal compatibility forwarder to the template-core owner. */
+export * from "../../../packages/template-core/src/primitives";

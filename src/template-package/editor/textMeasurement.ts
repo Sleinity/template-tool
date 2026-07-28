@@ -1,4 +1,8 @@
 import type { EditableFieldBinding } from "../types";
+import {
+  createTextFitResult,
+  type FieldTextFitResult,
+} from "../../../packages/template-core/src/editor/fieldConstraints";
 
 export type TextLineMeasure = (value: string) => number | null;
 
@@ -77,4 +81,56 @@ export function createRenderedTextLineMeasure(
   field: EditableFieldBinding,
 ): TextLineMeasure {
   return (value) => measureRenderedTextLines(root, field, value);
+}
+
+export function measureTextFieldFit(
+  field: EditableFieldBinding,
+  root: ParentNode,
+  fontReliable: boolean,
+): FieldTextFitResult | null {
+  if (!["text", "textarea", "number", "date"].includes(field.type)) return null;
+  if (typeof CSS === "undefined" || typeof document === "undefined") return null;
+  const element = root.querySelector<HTMLElement>(
+    `[data-package-node-id="${CSS.escape(field.nodeId)}"]`,
+  );
+  if (!element) return null;
+  const computed = getComputedStyle(element);
+  const lineHeightPx = Number.parseFloat(computed.lineHeight);
+  const range = document.createRange();
+  range.selectNodeContents(element);
+  const rects = Array.from(range.getClientRects()).filter(
+    (rect) => rect.width > 0 || rect.height > 0,
+  );
+  const visualOverflowPx = {
+    x: Math.max(0, element.scrollWidth - element.clientWidth),
+    y: element.dataset.packageHugTextMeasured !== undefined
+      ? 0
+      : Math.max(0, element.scrollHeight - element.clientHeight),
+  };
+  const measuredLines = rects.length > 0
+    ? Math.max(
+        1,
+        rects
+          .map((rect) => rect.top)
+          .sort((left, right) => left - right)
+          .filter(
+            (top, index, values) =>
+              index === 0 || Math.abs(top - values[index - 1]) > 0.5,
+          ).length,
+      )
+    : undefined;
+  range.detach();
+  return createTextFitResult(
+    field,
+    {
+      clientWidth: element.clientWidth,
+      clientHeight: element.clientHeight,
+      scrollWidth: element.scrollWidth,
+      scrollHeight: element.scrollHeight,
+      lineHeightPx: Number.isFinite(lineHeightPx) ? lineHeightPx : 0,
+      measuredLines,
+      visualOverflowPx,
+    },
+    fontReliable,
+  );
 }

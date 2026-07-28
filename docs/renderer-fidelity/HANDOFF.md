@@ -1,5 +1,437 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-28 — SDK 0.2 core importer release readiness
+
+### Result
+
+- Versioned the existing fixed SDK train at `0.2.0` without changing importer
+  or renderer behavior.
+- Documented `importTemplatePackage(ArrayBuffer, sourceName?)` as the supported
+  core-only ZIP importer. It needs no React peer, server route, runtime secret
+  or importer-time browser/network service.
+- Added a core `prepack` build, stricter archive contents and dependency checks,
+  an actual published-registry consumer, and a secret-free vendored archive
+  consumer.
+- Extended the tag workflow to download the published core archive, generate
+  its SHA-256 and Bas handoff, verify that exact artifact, and attach it to the
+  private `sdk-v0.2.0` GitHub Release for Lovable Business.
+
+### Current-run evidence
+
+- `pnpm ci:portable` passes, including portable tests, repository/root/package
+  TypeScript, Studio/SDK/minimal builds, boundaries, documentation, archive
+  inspection and both existing isolated consumers. The first sandboxed
+  temporary install failed on registry DNS; the identical gate passed with
+  registry access.
+- A local 0.2.0 archive passes the new secret-free Lovable-style React,
+  TypeScript, valid-ZIP, invalid-ZIP and declaration verification. The
+  authoritative published-registry and downloaded-artifact runs execute after
+  tag publication.
+- Core/browser/React archives are 279,286, 333,080 and 276,760 bytes. The
+  packed consumer is 833,790 / 244,411 gzip bytes; the minimal consumer is
+  826.54 / 242.27 gzip kB. Studio is 998.38 / 290.37 gzip kB JavaScript and
+  68.52 / 12.20 gzip kB CSS.
+- The core declaration remains 86,272 bytes /
+  `e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+- Fresh renderer run `2026-07-28T10-00-02-265Z` is repeat-stable across 19
+  fixtures and four surfaces. Renderer, scene and settlement comparisons retain
+  their documented historical/environment-sensitive and unapproved states.
+- Direct approved-byte aggregation remains renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+### Release boundary
+
+The `sdk-v0.2.0` tag is allowed only from the reviewed release commit. The
+post-publish registry install, registry-derived archive hash, secret-free
+vendored verification and private Release assets must all succeed before the
+release is reported complete.
+
+## 2026-07-23 — Template Platform Milestone 2D portable field editing ownership
+
+### Result
+
+- Moved the framework-neutral editor-session contract, effective-field
+  discovery, immutable mutations, image replacement/reset, field constraints
+  and measurement-result projection into `template-core`.
+- Kept rendered line/fit measurement in the browser, moved field-label
+  presentation into Studio and replaced retired root editor implementations
+  with checked behavior-free forwarders.
+- Preserved the complete SDK declaration at exactly 86,272 bytes /
+  `e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+- Added package-owned field contract coverage and extended the installed core
+  archive smoke through text, color, visibility, image and restore operations
+  while rejecting DOM, CSS, storage, font and network globals.
+
+### Current-run evidence
+
+- Direct core/browser and root TypeScript, portable tests, repository audit,
+  documentation, SDK/Studio/minimal builds, boundaries, archives, both
+  isolated consumers, both browser smokes and all 19 appearance projections
+  pass. The aggregate portable command's sandboxed dependency download was
+  rerun successfully through the same isolated checks with network access.
+- Core/browser/React JavaScript and declarations are 425.32/84.25,
+  503.00/106.95 and 428.39/67.58 kB; archives are 278,164, 333,080 and
+  276,760 bytes. Studio is 998.38/290.37 kB gzip JavaScript and 68.52/12.20
+  kB CSS. Packed/minimal consumers remain 833,790/244,411 bytes and
+  826.54/242.27 kB gzip.
+- `milestone-2d-portable-field-editing` and its fresh-process comparison are
+  repeat-stable. The guard retains 31 approved passes, 17 documented
+  historical/environment-sensitive differences and 28 unapproved surfaces.
+  Scene retains four historical differences/15 unapproved candidates;
+  settlement retains its documented stable states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+### Next boundary
+
+The next milestone may physically migrate browser assets, fonts, persistence
+and session lifecycle into `template-browser`. Preserve file/decode and
+revision-staleness guards as complete browser-owned lifecycles; keep React
+rendering and Studio workflow outside that migration.
+
+## 2026-07-22 — Template Platform Milestone 2C portable resolved/backend ownership
+
+### Result
+
+- Moved resolved graph construction, image placement, injected font readiness,
+  backend decisions and the internal primitive-appearance closure into
+  `template-core`; root compatibility paths are behavior-free forwarders.
+- Preserved the complete SDK declaration at exactly 86,272 bytes /
+  `e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+- Closed the 2B direct-typecheck gap, made package-owned tests execute
+  explicitly, strengthened reverse-dependency checks, and extended the
+  installed core archive smoke through resolved/backend/font-readiness APIs.
+- Corrected the Ajv ESM entry used by the installed Node package; canonical
+  validation behavior and declarations are unchanged.
+
+### Current-run evidence
+
+- Portable tests, root and package TypeScript, SDK/root/Studio/minimal builds,
+  boundaries, archives, both packed consumers, both browser smokes,
+  documentation and all 19 appearance projections pass.
+- Core/browser/React JavaScript and declarations are 425.39/84.25,
+  503.14/106.95 and 428.39/67.58 kB; archives are 278,660, 333,107 and
+  276,760 bytes. Studio is 998.31/290.44 kB gzip JavaScript and 68.52/12.20
+  kB CSS. Packed/minimal consumers are 833,790/244,411 bytes and
+  826.54/242.27 kB gzip.
+- `milestone-2c-portable-resolved-backend` and its fresh-process comparison
+  are repeat-stable. The guard retains 31 approved passes, 17 documented
+  historical/environment-sensitive differences and 28 unapproved surfaces.
+  Scene retains four historical differences/15 unapproved candidates;
+  settlement retains its documented stable states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+### Next boundary
+
+Milestone 2D may move pure field mutation, constraints and editing-session
+contracts into core. Keep file decoding, browser text measurement, persistence,
+sessions, React presentation and Studio workflow outside that migration.
+
+## 2026-07-22 — Template Platform Milestone 2B portable resolution dependency inversion
+
+### Result
+
+- Moved portable color/asset/axis, layout, stroke, transform and vector models
+  plus backend output types into `template-core` without changing public SDK
+  symbols, renderer output or runtime authority.
+- Split CSS/React vector and transform adaptation from the portable models.
+  Resolved-tree creation now has zero renderer imports; backend decision and
+  diagnostic implementations have zero resolved-type imports.
+- Preserved internal compatibility paths through behavior-free forwarders and
+  typed public wrappers. Core's declaration remains exactly 86,272 bytes at
+  `e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+- Added model parity coverage, enforced import directions and duplicate-owner
+  checks, and added an isolated packed-core Node consumer with no repository
+  fixture, alias, DOM, storage, font or network dependency.
+
+### Current-run evidence
+
+- Portable tests, root TypeScript, SDK/Studio/minimal builds, boundaries, archives,
+  packed consumers, session and Studio browser smokes, documentation and all
+  19 appearance projections pass.
+- Core/browser/React JavaScript and declarations are 425.58/84.25,
+  503.17/106.95 and 428.43/67.58 kB; archives are 278,706, 333,127 and
+  276,779 bytes. Studio is 998.31/290.44 kB gzip JavaScript and 68.56/12.21
+  kB CSS. Packed/minimal consumers are 833,790/244,411 bytes and
+  826.54/242.27 kB gzip.
+- `milestone-2b-portable-resolution-guard` is repeat-stable and retains 31
+  approved passes, 17 historical/environment-sensitive differences and 28
+  unapproved surfaces. Scene retains four historical differences/15
+  unapproved candidates; settlement retains its documented stable states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+2C review correction: the 2B model fixture omitted a required asset field and
+package-owned side-effect tests were not guaranteed to execute in the bundled
+suite. Milestone 2C fixes the fixture, requires direct package typechecks and
+uses explicit dynamic test imports. No 2B production behavior changed.
+
+### Next boundary
+
+Milestone 2C must audit and move the resolved/backend implementation together
+with its actual primitive/appearance dependency closure. Do not copy primitive
+contracts, introduce a core-to-root implementation dependency, or move field,
+browser or React behavior in that milestone.
+
+## 2026-07-22 — Template Platform Milestone 2A portable core source ownership
+
+### Result
+
+- Moved the canonical package types/schema, diagnostics, migration, parsing,
+  validation, ZIP/source reader and normalization into `template-core` with
+  the loader's portable registry, asset-reference, mask, motion-linking and
+  Figma-URL dependency closure.
+- Rebased the public core entry and synchronous ZIP importer to local owners.
+  The built public declaration is byte-for-byte identical to Milestone 1B.
+- Retained root consumers through checked behavior-free forwarders. No alias,
+  copied contract or duplicate schema/type owner remains.
+- Added a package-owned DOM-free source-contract suite and strengthened source,
+  declaration and archive boundaries against root, browser, React, network and
+  Studio edges.
+
+### Current-run evidence
+
+- The aggregate portable CI gate passes: portable tests, root/package
+  TypeScript, direct/delegated Studio builds, SDK
+  builds/declarations, boundaries, archives, repository audit, documentation,
+  packed/minimal consumers, session/Studio browser smokes and all 19 appearance
+  projections pass.
+- Studio is 997.93 / 290.39 kB gzip JavaScript and 68.56 / 12.21 kB CSS.
+  Core/browser/React are 425.51/84.25, 503.83/106.95 and 427.70/67.58 kB
+  JavaScript/declarations; archives are 286,787, 342,222 and 277,126 bytes.
+  Packed and minimal consumers remain 833,600/244,508 bytes and 826.35/242.35
+  kB gzip.
+- `milestone-2a-portable-core` is two-pass stable across 19 fixtures and four
+  surfaces. The guard retains 31 passes, 17 documented historical/environment
+  differences and 28 unapproved surfaces. Scene retains four historical
+  differences/15 unapproved candidates; settlement retains its stable
+  documented reference states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion, fixture, schema or tolerance command ran.
+
+### Forwarder retirement and next boundary
+
+- Package/source/validation forwarders retire when browser session and Studio
+  production imports switch to the core public entry.
+- Shared type, asset-reference, mask and motion forwarders retire after the
+  resolved/backend/field and React renderer families physically move.
+- Next, invert the five pure helpers imported by resolved-tree creation from
+  the renderer directory and place shared backend decision types below both
+  implementations. Do not relocate resolved/backend behavior before that
+  acyclic boundary is verified.
+
+## 2026-07-22 — Template Platform Milestone 1B Studio UI boundary
+
+### Result
+
+- Added public `TemplateInspectionViewport` state and imperative fit/target/zoom
+  API while retaining live settled-target measurement, resize-centre behavior,
+  inspection overlays and render-identity publication.
+- Preserved `TemplateInspectionPreview` and its props through a native,
+  Studio-independent compatibility composition. Studio owns a styled wrapper
+  with the prior controls, icons, DOM classes and fidelity selectors.
+- Moved the complete UI kit and seven editor/font/quality panels and their UI
+  tests under `apps/studio`. Root technical helpers remain in place; no
+  renderer, schema, persistence, diagnostic or export authority changed.
+- Removed retired panel barrel exports and strengthened source, bundle,
+  declaration, archive and packed-consumer checks against Studio/UI/icon edges.
+
+### Current-run evidence
+
+- Portable tests, root/package TypeScript, Studio/root builds, declarations,
+  boundaries, archives, documentation and all 19 appearance projections pass.
+- The Studio browser smoke imports the compact ZIP and verifies target
+  publication, imperative `getSnapshot`, zoom, template/target fit, resize and
+  observer disposal, in addition to routes/history/APIs/font URL and zero
+  external requests or console errors.
+- Studio output is 997.62 / 290.27 kB minified/gzip JavaScript and 68.56 / 12.21
+  kB CSS. Core/browser/React package outputs are 426.69/84.25,
+  503.96/106.95 and 427.72/67.58 kB JavaScript/declarations. The minimal
+  consumer is 826.35 / 242.35 kB gzip; the packed consumer exercising both
+  preview APIs is 833,600 / 244,508 gzip bytes.
+- Renderer runs `milestone-1b-studio-ui-boundary` and
+  `milestone-1b-studio-ui-boundary-compare` are four-surface repeat-stable and
+  retain 31 passes, 17 historical/environment-sensitive differences and 28
+  unapproved surfaces. Scene retains four historical differences/15 unapproved
+  candidates; settlement retains its stable documented reference states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion, fixture, schema or tolerance command ran.
+
+### Next boundary
+
+The next milestone may move the portable package/source/validation contract
+into `template-core`. Do not move resolved-tree families until their five pure
+render-helper dependencies and shared backend decision types are inverted.
+
+## 2026-07-22 — Template Platform Milestone 1A Studio ownership
+
+### Result
+
+- Moved the real Vite application, routes, views, styles, assets, optional
+  Figma/font services, configuration and Studio-owned tests to `apps/studio`.
+- Root build/dev/preview commands now delegate to that workspace. Programmatic
+  browser/fidelity tools use one Studio-root Vite server helper; model-only
+  builds remain repository-rooted with configuration disabled.
+- Preserved root environment loading, application URLs, IndexedDB origin, both
+  optional API paths, the exact `/src/assets/fonts/rethink-sans-600.ttf` URL,
+  public SDK exports and every renderer surface selector.
+- Strengthened boundaries so packages cannot reference `apps/studio`, required
+  Studio owners are present, and duplicate root application/config owners fail.
+- Retained `src/components/ui`, `src/template-package` and `src/test-suite.ts`
+  explicitly. Milestone 1B must split the public inspection preview from Studio
+  controls before moving the remaining UI.
+
+### Migration evidence
+
+- Portable tests, root/package TypeScript, direct Studio and root delegated
+  builds, root dev delegation, repository audit, boundaries, archives,
+  packed/minimal consumers, route/history/API/font smoke and session browser
+  smoke pass.
+- Studio output is 996.42 kB / 290.33 kB gzip JavaScript and 68.56 / 12.21 kB
+  CSS, materially flat from Milestone 0. SDK, packed-consumer and minimal
+  consumer sizes are unchanged.
+- A working-directory-sensitive Tailwind content path initially exposed the
+  diagnostics overlay in programmatic captures. Absolute Studio/root content
+  paths restored the documented closed-diagnostics editor surface; no runtime
+  or renderer behavior was changed.
+- All 19 appearance projections are valid/deterministic. Fidelity run
+  `milestone-1a-independent-studio` is four-surface repeat-stable and retains
+  31 passes, 17 historical/environment-sensitive differences and 28 unapproved
+  surfaces. Scene retains four historical differences/15 unapproved candidates;
+  settlement retains its stable documented historical/unapproved states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion, fixture, schema or tolerance command ran.
+
+## 2026-07-22 — Template Platform Milestone 0 boundary audit
+
+### Result
+
+- Added the authoritative
+  [Template Platform boundary audit](../architecture/TEMPLATE_PLATFORM_BOUNDARY_AUDIT.md).
+- Classified all audited production modules through exhaustive ordered path
+  rules: platform UI-independent, reusable React, advanced inspection, Studio
+  application, Studio fidelity/development-only, or internal.
+- Recorded actual package/root/Studio import crossings, browser and network
+  assumptions, public API coverage/gaps, React reusability, future importer
+  experience direction, circular-dependency risks, temporary-forwarder rules,
+  and a decision-complete Milestone 1 handoff.
+- No implementation source moved and no production contract or behavior
+  changed. The existing SDK 0.2 working-tree work remains the baseline.
+
+### Current-run evidence
+
+- Portable unit/lifecycle tests, root and package TypeScript, Studio production
+  build, all three package builds/declarations, package boundaries, three
+  archives, packed and minimal consumers, browser session smoke and
+  documentation links pass.
+- Studio remains 996.83 kB / 290.45 kB gzip JavaScript and 68.56 / 12.21 kB
+  CSS. The packed consumer remains 827,428 / 242,805 gzip bytes; the minimal
+  consumer remains 829.55 / 243.61 kB gzip.
+- All 19 appearance projections are valid and deterministic. Renderer run
+  `milestone-0-platform-boundary-audit` is repeat-stable across Validate,
+  Fields, editor and PNG export.
+- The renderer guard has 31 approved passes, 17 documented
+  historical/environment-sensitive differences and 28 intentionally
+  unapproved surfaces. Scene and settlement retain their documented historical
+  and unapproved states.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion or tolerance command ran.
+
+### Next milestone boundary
+
+Milestone 1 moves only the real Vite application, routes, UI, styles, assets and
+optional Studio services under `apps/studio`, while keeping the three current
+facades bridging root platform source. It must preserve every product route,
+fidelity selector/surface and current package/consumer/evidence identity. It
+does not move platform implementation or redesign public APIs.
+
+## 2026-07-22 — SDK 0.2 consumer runtime contract
+
+### Implemented
+
+- Added `createTemplateSession()` to the browser package with versioned
+  snapshots, immutable base/working package separation, resolved-tree and
+  validation publication, typed edits, image replacement/reset/mode changes,
+  full restore, injected adapters, persistence, subscription, and disposal.
+- Extended import/font linking with an optional per-session managed-font
+  registry while preserving the existing global browser default.
+- Added React provider, external-store snapshot hook, session renderer, current
+  render identity, and guarded imperative PNG export.
+- Migrated the minimal consumer to the high-level contract, including an
+  offline save/reload example, without adding Studio UI.
+- Added an isolated packed-tarball consumer build and a browser smoke covering
+  ZIP import, edit, persistence, PNG, reload, and offline restoration.
+- Added a fixed-group minor Changeset for the three SDK packages. Source-package
+  relocation and bundle de-duplication remain explicitly deferred.
+
+### Authority
+
+- No renderer owner, backend decision, schema, normalization, appearance
+  family, runtime route, settlement rule, comparison tolerance, fixture, or
+  approved reference changes in this milestone.
+- The session composes existing authorities and rejects stale work; it does not
+  introduce a parallel renderer or settled graph.
+
+### Current-run verification
+
+- Portable unit tests and TypeScript pass. All three SDK facades build with
+  declarations; package boundary, packed-archive, and documentation checks pass.
+- A clean temporary React consumer installed only locally packed tarballs and
+  built without monorepo aliases or repository-relative declarations. Its
+  output is 827,428 JavaScript bytes / 242,805 gzip bytes.
+- The minimal session consumer builds at 829.55 kB / 243.61 kB gzip. The Studio
+  remains effectively flat at 996.83 kB / 290.45 kB gzip JavaScript and 68.56 /
+  12.21 kB CSS; its existing chunk-size warning is unchanged.
+- The browser smoke passes ZIP import, ready identity, text edit, save, guarded
+  PNG export, reload, and offline restoration with external requests blocked.
+- All 19 appearance projections are valid and deterministic. Fidelity run
+  `sdk-02-consumer-runtime-final` is repeat-stable for all 19 fixtures across
+  Validate, Fields, editor, and PNG export.
+- Full renderer, scene, and settlement comparisons retain their documented
+  historical, environment-sensitive, and unapproved states. Approved identities
+  remain renderer 96 / `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update or tolerance command ran.
+
 ## 2026-07-21 — Private GitHub monorepo and reusable SDK extraction
 
 ### Completed

@@ -4,13 +4,30 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --dir ../.. dev",
-    "build": "pnpm --dir ../.. build",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
     "test": "pnpm --dir ../.. test"
   },
   "dependencies": {
     "@sleinity/template-browser": "workspace:*",
     "@sleinity/template-core": "workspace:*",
-    "@sleinity/template-react": "workspace:*"
+    "@sleinity/template-react": "workspace:*",
+    "ajv": "^8.20.0",
+    "fflate": "^0.8.3",
+    "html-to-image": "^1.11.13",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
   }
 }

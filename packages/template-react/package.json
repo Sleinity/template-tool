@@ -1,7 +1,7 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.1.0",
-  "description": "UI-free React renderer integration for TemplatePackage applications.",
+  "version": "0.2.0",
+  "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
@@ -11,7 +11,10 @@
   "private": false,
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

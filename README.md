@@ -17,7 +17,10 @@ released as versioned private packages for other client tools.
   references.
 
 See [the private SDK guide](docs/sdk/README.md) and
-[GitHub setup](docs/sdk/GITHUB_SETUP.md).
+[GitHub setup](docs/sdk/GITHUB_SETUP.md). The evidence-backed
+[Template Platform boundary audit](docs/architecture/TEMPLATE_PLATFORM_BOUNDARY_AUDIT.md)
+defines the phased separation between reusable platform capabilities and the
+independently built Studio product.
 
 ## Template Studio
 

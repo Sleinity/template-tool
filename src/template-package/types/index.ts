@@ -1,9 +1,2 @@
-export * from "./Appearance";
-export * from "./Assets";
-export * from "./EditableFieldBinding";
-export * from "./Enrichment";
-export * from "./Fonts";
-export * from "./Layout";
-export * from "./PackageMotion";
-export * from "./TemplateNode";
-export * from "./TemplatePackage";
+/** @deprecated Internal compatibility forwarder. Import from @sleinity/template-core. */
+export * from "../../../packages/template-core/src/types";

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { createServer } from "vite";
 import {
   browserStructure,
   launchBrowser,
@@ -14,6 +13,7 @@ import {
   stableStringify,
   verifyFixture,
 } from "../fidelity/core.mjs";
+import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 
 const args = parseArguments(process.argv.slice(2));
 const runId = String(args["run-id"] || "milestone-7-1-primitives-reload");
@@ -39,14 +39,9 @@ if (specifications.length === 0) throw new Error(`Unknown primitive fixture filt
 const output = resolve(args.output || join(repoRoot, "fidelity/evidence/milestone-7-1-primitives", runId));
 mkdirSync(output, { recursive: true });
 const selector = '[data-testid="package-working-preview"] [data-template-package-canvas]';
-const server = await createServer({
-  root: repoRoot,
-  logLevel: "error",
-  server: {
-    host: "127.0.0.1",
-    port: Number(args.port || 0),
-    strictPort: Boolean(args.port),
-  },
+const server = await createStudioViteServer({
+  port: Number(args.port || 0),
+  strictPort: Boolean(args.port),
 });
 await server.listen();
 const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");

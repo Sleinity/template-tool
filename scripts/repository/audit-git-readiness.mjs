@@ -25,7 +25,11 @@ const secretPatterns = [
 
 for (const file of files) {
   const absolute = path.join(root, file);
-  const metadata = await stat(absolute);
+  const metadata = await stat(absolute).catch((error) => {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  });
+  if (!metadata) continue;
   if (metadata.size > 100 * 1024 * 1024) {
     issues.push(`${file} exceeds GitHub's 100 MB file limit.`);
   }

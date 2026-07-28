@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { createServer } from "vite";
+import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 import {
   artifactDirectory,
   createRepeatabilityReport,
@@ -63,7 +63,10 @@ async function capture() {
   const candidateRoot = resolve(options.output || defaultCandidates);
   const models = new Map();
   for (const fixture of fixtureRecords) models.set(fixture.id, await resolveModel(fixture));
-  const server = await createServer({ root: repoRoot, logLevel: "error", server: { host: "127.0.0.1", port: Number(options.port || 0), strictPort: Boolean(options.port) } });
+  const server = await createStudioViteServer({
+    port: Number(options.port || 0),
+    strictPort: Boolean(options.port),
+  });
   await server.listen();
   const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");
   if (!baseUrl) throw new Error("Fidelity Vite server did not publish a local URL.");

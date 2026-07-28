@@ -17,6 +17,7 @@ import {
   type TemplatePackageEnrichmentResult,
 } from "../enrichment/enrichTemplatePackage";
 import { autoLinkManagedFonts } from "../fonts/fontRegistry";
+import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
 import { packageWithEffectiveEditableFields } from "../editor/packageFieldBindings";
 import type {
   PackageDiagnostic,
@@ -69,6 +70,7 @@ export interface TemplatePackageImportPipelineInput {
   sourceName: string;
   figmaUrl?: string;
   assetStorage?: AssetStorageAdapter;
+  fontRegistry?: ManagedFontRegistry | null;
 }
 
 export function createImportSessionRevisionGuard(): ImportSessionRevisionGuard {
@@ -141,6 +143,7 @@ export async function buildZipPackageImportResult(
   sourceName: string,
   figmaUrl = "",
   assetStorage: AssetStorageAdapter | undefined = createIndexedDbAssetStore(),
+  fontRegistry?: ManagedFontRegistry | null,
 ): Promise<PackageImportResult> {
   const reader = createZipBundleReader(buffer, { sourceName });
   const loadedSource = loadTemplatePackageBundleSource(reader);
@@ -153,7 +156,7 @@ export async function buildZipPackageImportResult(
       : null;
   const packageValue = assetIngestion?.packageValue ?? loadedSource.packageValue;
   const linkedPackage = packageValue
-    ? await autoLinkManagedFonts(packageValue)
+    ? await autoLinkManagedFonts(packageValue, fontRegistry)
     : null;
   const finalPackage = linkedPackage ?? packageValue;
   const bundledFigmaUrl =
@@ -207,6 +210,7 @@ export async function runTemplatePackageImportPipeline(
     input.sourceName,
     input.figmaUrl,
     input.assetStorage,
+    input.fontRegistry,
   );
 }
 
