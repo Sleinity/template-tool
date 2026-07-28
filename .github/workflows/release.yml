@@ -73,4 +73,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Retain published package tags
-        run: git push origin --tags
+        run: |
+          git tag --list '@sleinity/*' | while IFS= read -r tag; do
+            git push origin "refs/tags/${tag}:refs/tags/${tag}"
+          done
