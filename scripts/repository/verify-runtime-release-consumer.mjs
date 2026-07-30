@@ -244,7 +244,6 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   const restored = useRef(false);
   const [identity, setIdentity] = useState<RevisionedIdentity | null>(null);
   const [message, setMessage] = useState("idle");
-  const [exportPreview, setExportPreview] = useState<string | null>(null);
   const [importDiagnosticCount, setImportDiagnosticCount] = useState(0);
   const firstTextField = snapshot.editableFields.find(
     (field) => field.type === "text" || field.type === "textarea",
@@ -316,17 +315,6 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
     setMessage("saved");
   }
 
-  async function exportPng() {
-    const result = await rendererRef.current?.exportPng({ download: false });
-    if (!result) return;
-    setExportPreview(result.pngDataUrl);
-    setMessage(
-      result.width > 0 && result.height > 0
-        ? "exported"
-        : "invalid-export-metadata",
-    );
-  }
-
   return (
     <main data-session-status={snapshot.status}>
       <input
@@ -348,12 +336,6 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
       >
         Save browser draft
       </button>
-      <button
-        disabled={!identityReady}
-        onClick={() => void exportPng()}
-      >
-        Export current PNG
-      </button>
       <p className="message">{message}</p>
       <p className="diagnostics">
         {snapshot.diagnostics.length + importDiagnosticCount}
@@ -370,9 +352,6 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
           setIdentity({ revision: snapshot.revision, value })
         }
       />
-      {exportPreview ? (
-        <img alt="Export preview" src={exportPreview} />
-      ) : null}
     </main>
   );
 }
@@ -597,11 +576,15 @@ createRoot(document.getElementById("root")!).render(
   await page.getByRole("button", { name: "Save browser draft" }).click();
   await page.getByText("saved").waitFor();
 
-  await page.getByRole("button", { name: "Export current PNG" }).click();
-  await page.getByText("exported").waitFor({ timeout: 60_000 });
-  await page.getByAltText("Export preview").waitFor();
+  // Current-revision PNG raster acceptance belongs to the packed generic
+  // template-editor reference that runs after both package-manager consumers.
+  // That stronger test installs these same archives and covers exact fonts,
+  // media replacement, Fill/Fit, offline reload, stale rejection, silent PNG,
+  // downloads, and external requests. Keep this smaller consumer focused on
+  // secret-free installation plus the session lifecycle so one browser raster
+  // operation is not duplicated three times in the release handoff.
   if (downloadCount !== 0) {
-    throw new Error("Silent host PNG capture unexpectedly initiated a download.");
+    throw new Error("The runtime lifecycle unexpectedly initiated a download.");
   }
 
   await page.reload();
@@ -628,7 +611,7 @@ createRoot(document.getElementById("root")!).render(
   await context.close();
 
   console.log(
-    `Verified secret-free runtime archives: import, diagnostics, edit, stale-export rejection, persistence, ready PNG, and offline reload (${archiveEvidence
+    `Verified secret-free runtime archives: import, diagnostics, edit, stale-export rejection, persistence, and offline reload (${archiveEvidence
       .map((item) => `${item.directory}=${item.sha256}`)
       .join(", ")}).`,
   );
