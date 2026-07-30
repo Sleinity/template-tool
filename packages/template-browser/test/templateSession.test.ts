@@ -1,14 +1,14 @@
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import { InMemoryTemplateRepository } from "../persistence/inMemoryTemplateRepository";
-import { createResolvedRenderTree } from "../resolved";
-import type { EditableFieldBinding, TemplatePackageV1 } from "../types";
-import { validateTemplatePackage } from "../validateTemplatePackage";
-import type { PackageImportResult } from "../import/runTemplatePackageImportPipeline";
+import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import { InMemoryTemplateRepository } from "../src/persistence/inMemoryTemplateRepository";
+import { createResolvedRenderTree } from "../../../src/template-package/resolved";
+import type { EditableFieldBinding, TemplatePackageV1 } from "../../../src/template-package/types";
+import { validateTemplatePackage } from "../../../src/template-package/validateTemplatePackage";
+import type { PackageImportResult } from "../src/import/runTemplatePackageImportPipeline";
 import type {
   ManagedFontRecord,
   ManagedFontRegistry,
-} from "../fonts/fontRegistryTypes";
-import { createTemplateSessionWithDependencies } from "./templateSession";
+} from "../src/fonts/fontRegistryTypes";
+import { createTemplateSessionWithDependencies } from "../src/session/templateSession";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

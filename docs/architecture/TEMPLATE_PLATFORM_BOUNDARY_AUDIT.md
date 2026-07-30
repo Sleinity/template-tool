@@ -1,15 +1,15 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.4.0 external-adoption contract
+Status: Milestone 2E physical browser-runtime ownership and SDK 0.4.1 patch
 Audit date: 2026-07-30
-Code baseline: the fixed SDK 0.4.0 train and compatibility-hardened generic template editor reference
+Code baseline: the fixed SDK 0.4.1 train and compatibility-hardened generic template editor reference
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
 
 This audit defines the boundary between the reusable Template Platform and the
 Template Studio product. Milestones 1A–2C completed the application/UI movement,
-the package/source and resolved/backend physical migrations
+the package/source, resolved/backend, field and browser-runtime physical migrations
 without changing renderer behavior, public APIs, package contracts, fixtures,
 or approved evidence.
 
@@ -22,15 +22,19 @@ handoff. It is not yet fully physically separated:
   assets, optional services and build;
 - `template-core` physically owns package types, schema, ZIP/source parsing,
   normalization, validation, portable resolution models, resolved trees,
-  primitive appearance and backend decisions; its later scene/editor exports and the browser/React
-  facades still compile implementation from root source;
+  primitive appearance, backend decisions and portable field contracts;
+- `template-browser` physically owns browser assets, exact fonts, persistence,
+  import orchestration, sessions, readiness, compatibility inspection,
+  optional enrichment and PNG capture;
+- `template-react` still compiles renderer implementation from root source;
 - Studio production modules still use both public package imports and direct
   root implementation imports;
 - Studio now owns its complete UI kit and product panels; the public inspection
   viewport has no Studio, icon, route or persistence dependency;
 - resolved-tree, primitive-appearance and backend-decision implementations have
   one package owner and no renderer or root implementation dependency;
-- browser font storage and Studio persistence types depend on each other.
+- browser font and template persistence share one package-internal
+  content-addressed binary/storage layer without a font-to-persistence cycle.
 
 The committed generic template editor consumer is itself a release gate rather
 than documentation-only example code. An isolated Chromium harness installs
@@ -58,7 +62,7 @@ canonical consumer.
 | Studio UI and product panels | `apps/studio/src/components` | Product design system, field/font/quality panels and styled preview | `apps/studio` |
 | Studio optional services | `apps/studio/server/figma-enrichment` | Optional Vite-local Figma enrichment; open-font resolution retired before SDK 0.3.0 | `apps/studio/server` |
 | Core package/source contract | `packages/template-core/src` | Physical owner of types, schema, ZIP/source normalization/validation, portable models, resolved trees, primitive appearance and backend decisions | `packages/template-core` |
-| Browser facade | `packages/template-browser` | Browser/session exports over root source | `packages/template-browser` with owned source |
+| Browser runtime | `packages/template-browser/src` | Physical owner of browser assets, fonts, storage, import, sessions, compatibility, readiness and capture | `packages/template-browser` |
 | React facade | `packages/template-react` | Renderer/session bindings over root source | `packages/template-react` with owned source |
 | Platform implementation | `src/template-package` | Mixed portable, browser, React, Studio and fidelity code | Split by the classification below |
 | Certified evidence | `fidelity`, `tools/fidelity`, `scripts` | Exact fixtures and guarded comparisons | Remains shared repository infrastructure |
@@ -72,15 +76,15 @@ without adding a second application or changing that production behavior.
 ## 3. Current dependency graph
 
 ```text
-template-core owned package/source/validation
-        ↑
-root src/template-package remaining implementation
-        ↑              ↑              ↑
- core bridges    template-browser   template-react
-        ↑              ↑              ↑
-        └──────── apps/studio ─────────┘
+template-core
+      ↑
+template-browser
+      ↑
+template-react ──> retained root renderer implementation
+      ↑                         ↑
+      └──────── apps/studio ────┘
 
-apps/studio/server ──> root enrichment/types/validation
+apps/studio/server ──> checked root enrichment forwarders
 ```
 
 The intended graph is:
@@ -135,16 +139,14 @@ even when they are currently reachable through a broad barrel export.
 | `packages/template-react/src/**`; renderer modules `TemplatePackageRenderer.tsx`, `ScaledTemplatePackagePreview.tsx`, `TemplateInspectionViewport.tsx`, compatibility `TemplateInspectionPreview.tsx`, and `previewViewport.ts` | P2 | Renderer, session bindings, the host-neutral importer wizard, and composable/compatibility preview interfaces |
 | `packages/template-core/src/{types,schema,bundle,models,resolved,backend-decision,primitives}/**` and its package/validation modules | P1 | Physical owner of portable package, normalization, resolution, primitive appearance and backend contracts; primitives remain internal |
 | Legacy root package/source/validation/resolved/backend/primitive paths | I1 | Behavior-free compatibility forwarders to `template-core`; never package implementation |
-| `packages/template-browser/src/**` | P1 | Current supported browser facade; physical ownership still pending |
-| `src/template-package/assets/{assetReliability,packageAssetResolution}.ts` | P1 | Portable asset identity/reliability records |
-| `src/template-package/assets/indexedDbAssetStore.ts` | P1 | UI-independent browser adapter; destination is browser |
-| `src/template-package/editor/{packageEditorSession,packageFieldBindings,fieldConstraints,textMeasurement}.ts` | P1 | Pure field operations plus explicitly browser-only measurement split |
+| `packages/template-browser/src/**` | P1 | Physical owner of browser assets, exact fonts, persistence, import orchestration, sessions, compatibility, readiness, enrichment adapters and capture |
+| `src/template-package/assets/**`, `fonts/**`, `persistence/**`, `import/**`, `session/**`, `export/**` and browser enrichment paths | I1 | Checked behavior-free compatibility forwarders to `template-browser` |
+| `src/template-package/assets/packageAssetResolution.ts` | I1 | Behavior-free compatibility forwarder to portable core asset resolution |
+| `src/template-package/editor/{packageEditorSession,packageFieldBindings,fieldConstraints}.ts` | I1 | Behavior-free compatibility forwarders to portable core field ownership |
+| `src/template-package/editor/textMeasurement.ts` | I1 | Behavior-free compatibility forwarder to browser-owned measurement |
 | `src/template-package/motion/**` | P1 | Portable linking, summary and time evaluation |
-| `src/template-package/fonts/{fontBinaryMetadata,fontIdentity,fontMatching,fontRegistryTypes,fontRegistry,inMemoryFontRegistry,indexedDbFontRegistry,managedFontRecord,managedFontAssets,runtimeFontSignature}.ts` | P1 | Portable identity/matching plus browser providers; split by environment inside core/browser |
-| `src/template-package/import/**`, `src/template-package/session/**`, `src/template-package/export/**` | P1 | UI-independent browser lifecycle, readiness and capture APIs |
-| `src/template-package/enrichment/{analyzePackageAssets,comparePackageToFigmaMetadata,createRendererHints,enrichTemplatePackage,extractMcpDesignHints,parseFigmaUrl}.ts` | P1 | Pure optional import-time enrichment records |
-| `src/template-package/enrichment/{figmaEnrichmentApi,captureTemplatePackagePreview}.ts` | P1 | Browser adapters; fixed Studio endpoint must become injected |
-| `src/template-package/persistence/**` | S1 | Current broad Studio catalogue/draft repository; a new narrow session persistence port will later move to browser |
+| `packages/template-core/src/motion/**` | P1 | Portable motion linking and summary authority |
+| `src/template-package/enrichment/visualDiff.ts` | S2 | Fidelity-only comparison helper; not browser package production |
 | Remaining `src/template-package/render/**`, `masks/**`, `runtime-routing/**`, bundle helpers, enrichment `visualDiff.ts`, editor `fieldLabels.ts`, and unlisted barrels | I1 | Proven implementation details; exported only if a later contract explicitly promotes them |
 
 Index barrels inherit the strictest public surface of their explicit exports;
@@ -331,8 +333,9 @@ selection. Existing complete Studio pages are not exported.
 4. **Completed in Milestones 2B–2C:** invert renderer/backend dependencies and
    move resolved/backend contracts with the internal primitive closure into core.
 5. Move pure field/edit contracts into core, then retire their root owners.
-6. Move browser assets, fonts, import, session, readiness and capture into
-   `template-browser`; introduce provider boundaries and narrow persistence.
+6. **Completed in Milestone 2E:** move browser assets, fonts, import, session,
+   readiness, compatibility, enrichment and capture into `template-browser`;
+   introduce shared binary storage and narrow persistence boundaries.
 7. Move the React renderer and its browser hooks into `template-react`.
 8. Migrate ordinary Studio behavior to public entries; isolate fidelity-only
    inspection entries.
@@ -347,11 +350,13 @@ owner without behavior or type duplication. Each forwarder must have a named
 retirement step in the same family migration. Vite aliases must not be used to
 hide incomplete physical ownership from packed-package tests.
 
-Milestones 2A–2C retain checked forwarder groups. Package/source/validation
+Milestones 2A–2E retain checked forwarder groups. Package/source/validation
 forwarders retire when browser session and Studio production imports switch to
 the core public entry. Resolved/backend/primitive forwarders retire after field
 consumers and the React renderer migrate. Shared type, asset-reference, mask
-and motion forwarders retire after the field and React renderer families move. The
+and motion forwarders retire after the React renderer family moves. Browser
+forwarders retire when ordinary Studio, renderer and fidelity consumers use
+supported package or explicit advanced-inspection entry points. The
 boundary checker requires every listed legacy module to contain exactly one
 re-export and rejects duplicate type/schema owners.
 
@@ -449,9 +454,18 @@ The wizard imports no Studio code. It may own its own session or accept an
 injected one, and optional host adapters may supply exact font bytes, image
 editing or post-confirmation persistence. Authentication, catalogues,
 publishing, routing and navigation remain host-owned. After external-host
-acceptance, the next physical boundary remains browser-runtime ownership for
-assets, fonts, persistence and session lifecycle before React renderer
-relocation.
+acceptance, the next physical boundary was browser-runtime ownership.
+
+Milestone 2E gives `template-browser` physical ownership of assets, exact font
+handling, browser storage, template/draft persistence, import orchestration,
+the seven-step wizard controller, confirmation compatibility and integrity,
+sessions, readiness, enrichment adapters and PNG capture. Font and template
+persistence share one package-internal content-addressed binary storage layer.
+The browser package depends on core plus package-local seams and has no root,
+React, Studio or renderer implementation dependency. Root consumers remain on
+checked behavior-free forwarders until the React renderer and ordinary Studio
+public-entry migrations. Core and browser are external dependencies of their
+downstream package bundles rather than duplicated embedded facades.
 
 ## 14. Milestone 0 verification record
 
@@ -640,6 +654,39 @@ ran.
   31 approved passes, 17 historical/environment-sensitive differences and 28
   unapproved surfaces. Scene retains four historical differences and 15
   unapproved candidates; settlement retains its documented stable states.
+- Approved identities remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+## 21. Milestone 2E verification record
+
+- `template-browser` physically owns browser assets, exact fonts, storage,
+  persistence, import/wizard/confirmation orchestration, sessions, readiness,
+  compatibility inspection, enrichment and PNG capture. Root consumers use
+  checked behavior-free forwarders; browser production source imports no root,
+  React, Studio or renderer implementation.
+- Portable CI, root/package TypeScript, SDK/Studio/example builds,
+  declarations/API inventory, boundaries, archives, DOM-free core, packed
+  consumers, browser smokes and the packed generic editor pass. The secret-free
+  pnpm vendored consumer passes; npm is unavailable in the local bundled
+  runtime and remains a CI/post-release check.
+- Core declarations remain exactly 87,431 bytes at
+  `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+  Core/browser/React archives are 283,577 / 209,477 / 303,397 bytes. Browser is
+  47.8% smaller than 0.4.0; consumer and Studio gzip remain materially flat.
+- Studio is 1,001.02/291.35 kB gzip JavaScript. Packed, minimal and generic
+  consumers are 897,726/262,605 bytes, 858.15/251.51 kB and
+  912.50/266.51 kB.
+- Appearance is deterministic for 19 fixtures. Renderer
+  `2026-07-30T17-10-29-068Z`, scene
+  `scene-2026-07-30T17-12-05-022Z`, and settlement
+  `settlement-2026-07-30T17-12-07-041Z` comparisons retain the documented
+  historical/unapproved states. Exact-font and source-authoritative evidence
+  pass.
 - Approved identities remain renderer 96 /
   `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
   scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,

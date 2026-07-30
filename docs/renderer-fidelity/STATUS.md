@@ -1,8 +1,57 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-30
-Current milestone: SDK 0.4.0 external-adoption contract hardening
+Current milestone: Milestone 2E physical browser-runtime ownership / SDK 0.4.1
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## Milestone 2E — physical browser-runtime ownership
+
+The fixed core/browser/React train is prepared at `0.4.1` with no public-symbol
+change. `template-browser` now physically owns browser assets, exact fonts,
+IndexedDB storage, template/draft persistence, import orchestration, the
+headless wizard, confirmation compatibility and integrity, sessions,
+readiness, enrichment adapters and PNG capture. Root paths retained by Studio,
+the renderer and fidelity tooling are checked behavior-free forwarders.
+
+Font and template persistence share a browser-internal content-addressed
+binary/storage layer, removing the prior font-to-persistence cycle. Browser
+production source has no root, React, Studio or renderer implementation
+dependency. Its build externalizes `template-core`; the React build declares
+core and browser as external fixed-train dependencies. The 0.4 public API
+inventory remains symbol-identical.
+
+Portable CI, direct package/root TypeScript, SDK/Studio/example builds,
+declarations, API inventory, boundaries, release policy, archives, DOM-free
+core, packed consumers, session/Studio browser smokes, and the packed generic
+editor pass. The generic editor again proves supported/restricted CSP,
+wizard confirmation, fresh-session reopening, host editing, exact fonts,
+offline persistence, silent PNG, disposal, simultaneous headless compositions
+and zero external requests. A secret-free pnpm vendored consumer passes; this
+local runtime has no npm executable, so the npm variant remains a CI and
+post-publication gate.
+
+Core declarations remain exactly 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 283,577 / 209,477 / 303,397 bytes.
+Browser archive size is 47.8% below 0.4.0; core is identical and React is
+materially flat. Studio is 1,001.02 / 291.35 gzip kB JavaScript; minimal and
+generic examples are 858.15 / 251.51 and 912.50 / 266.51 gzip kB; the packed
+consumer is 897,726 / 262,605 gzip bytes. Consumer and Studio gzip remain
+materially flat while physical package duplication is reduced.
+
+Appearance evidence is valid and deterministic for all 19 fixtures. Renderer
+baseline `2026-07-30T17-09-39-496Z`, exact-font run
+`font-evidence-2026-07-30T17-12-09-413Z`, and source-authoritative run
+`2026-07-30T17-12-16-183Z` are stable. Guarded renderer run
+`2026-07-30T17-10-29-068Z`, scene run
+`scene-2026-07-30T17-12-05-022Z`, and settlement run
+`settlement-2026-07-30T17-12-07-041Z` retain the documented historical and
+unapproved comparison states. Approved aggregates remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No reference, fixture, schema, tolerance, promotion or update command ran.
 
 ## SDK 0.4.0 — external-adoption contract hardening
 

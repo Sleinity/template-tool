@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.4.0 \
-  @sleinity/template-browser@0.4.0 \
-  @sleinity/template-react@0.4.0
+pnpm add @sleinity/template-core@0.4.1 \
+  @sleinity/template-browser@0.4.1 \
+  @sleinity/template-react@0.4.1
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.4.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.0)
+[`sdk-v0.4.1` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.1)
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -149,7 +149,8 @@ injected adapters.
 See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) and the focused
 [template editor reference](../../examples/template-editor-integration/README.md).
 The repository verifies both workspace and isolated packed consumers.
-For upgrades, see [Migrating to SDK 0.4](SDK_0_4_MIGRATION.md). Integration
+For upgrades, see [Migrating to SDK 0.4](SDK_0_4_MIGRATION.md) and the
+[0.4.1 ownership patch](SDK_0_4_1_MIGRATION.md). Integration
 failures are organized by stable compatibility code in the
 [troubleshooting guide](TROUBLESHOOTING.md). The committed
 [machine-readable API contract](../../config/sdk-public-api.json) is the

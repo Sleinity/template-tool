@@ -1,19 +1,19 @@
 import type {
   TemplatePackageFontRequirement,
   TemplatePackageV1,
-} from "../types";
+} from "../../../src/template-package/types";
 import {
   CANONICAL_FONT_FACE_VERSION,
   createRuntimeFontFamily,
   type CanonicalFontFaceV1,
-} from "./fontIdentity";
+} from "../src/fonts/fontIdentity";
 import {
   areExactFontRequirementsResolved,
   ExactFontSetupError,
   formatRequiredFontFace,
   isExactFontRequirementResolved,
   selectExactFontSetupFace,
-} from "./exactFontSetup";
+} from "../src/fonts/exactFontSetup";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

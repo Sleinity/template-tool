@@ -1,5 +1,5 @@
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import type { TemplatePackageV1 } from "../types";
+import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import type { TemplatePackageV1 } from "../../../src/template-package/types";
 import {
   autoLinkManagedFonts,
   createTemplatePackageFontEmbedCss,
@@ -10,7 +10,7 @@ import {
   normalizeManagedFontRecord,
   setManagedFontRegistryForTests,
   useFallbackForRequirement,
-} from "./index";
+} from "../src/fonts";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

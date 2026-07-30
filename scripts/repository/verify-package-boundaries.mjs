@@ -211,17 +211,17 @@ if (coreEntry.includes("fontCharacterCoverage")) {
   );
 }
 for (const file of [
-  "src/template-package/fonts/fontMatching.ts",
+  "packages/template-browser/src/fonts/fontMatching.ts",
   "packages/template-core/src/resolved/fontReadiness.ts",
   "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
-  "src/template-package/import/templateImportWizard.ts",
+  "packages/template-browser/src/import/templateImportWizard.ts",
 ]) {
   if (!(await read(file)).includes("fontUsesPlatformEmojiFallback") &&
-      file !== "src/template-package/fonts/fontMatching.ts") {
+      file !== "packages/template-browser/src/fonts/fontMatching.ts") {
     violations.push(`${file} must consume the shared emoji fallback classifier`);
   }
   if (
-    file === "src/template-package/fonts/fontMatching.ts" &&
+    file === "packages/template-browser/src/fonts/fontMatching.ts" &&
     !(await read(file)).includes("textFaceCoverageCharacters")
   ) {
     violations.push(`${file} must consume shared text-face coverage authority`);
@@ -387,13 +387,145 @@ for (const activeFontUi of [
 }
 
 const fontResolutionSource = await read(
-  "src/template-package/fonts/fontResolution.ts",
+  "packages/template-browser/src/fonts/fontResolution.ts",
 );
 if (
   fontResolutionSource.includes("resolve-open-font") ||
   fontResolutionSource.includes("requestTrustedOpenFont")
 ) {
   violations.push("Browser font resolution still contains open-font network behavior");
+}
+
+const requiredBrowserOwnerDirectories = [
+  "assets",
+  "editor",
+  "enrichment",
+  "export",
+  "fonts",
+  "import",
+  "persistence",
+  "runtime",
+  "session",
+  "storage",
+];
+for (const ownerDirectory of requiredBrowserOwnerDirectories) {
+  if (!(await exists(`packages/template-browser/src/${ownerDirectory}`))) {
+    violations.push(
+      `template-browser must physically own its ${ownerDirectory} runtime family`,
+    );
+  }
+}
+
+const browserSourceDirectory = path.join(
+  root,
+  "packages",
+  "template-browser",
+  "src",
+);
+const browserCoreBridge = path.join(
+  browserSourceDirectory,
+  "internal",
+  "core.ts",
+);
+for (const file of await sourceFiles(browserSourceDirectory)) {
+  const source = await readFile(file, "utf8");
+  const relative = path.relative(root, file);
+  for (const forbidden of [
+    /src[\\/]template-package/,
+    /apps[\\/]studio/,
+    /from\s+["']react(?:-dom)?["']/,
+    /from\s+["'][^"']*\/render(?:\/|["'])/,
+  ]) {
+    if (forbidden.test(source)) {
+      violations.push(`${relative} crosses the browser package boundary: ${forbidden}`);
+    }
+  }
+  if (file !== browserCoreBridge && /template-core[\\/]src/.test(source)) {
+    violations.push(
+      `${relative} must use the package-local core bridge or @sleinity/template-core`,
+    );
+  }
+  if (
+    file.includes(`${path.sep}fonts${path.sep}`) &&
+    /from\s+["'][^"']*persistence/.test(source)
+  ) {
+    violations.push(
+      `${relative} recreates the forbidden font-to-persistence dependency`,
+    );
+  }
+}
+
+const permittedCoreBridgeImports = new Set([
+  "../../../template-core/src/assets/packageAssetResolution",
+  "../../../template-core/src/bundle/assetRegistry",
+  "../../../template-core/src/editor/fieldConstraints",
+  "../../../template-core/src/enrichment/parseFigmaUrl",
+  "../../../template-core/src/motion/packageMotion",
+  "../../../template-core/src/resolved/fontCharacterCoverage",
+]);
+const coreBridgeSource = await read("packages/template-browser/src/internal/core.ts");
+for (const match of coreBridgeSource.matchAll(/from\s+["']([^"']+)["']/g)) {
+  if (!permittedCoreBridgeImports.has(match[1])) {
+    violations.push(
+      `template-browser internal core bridge imports an unapproved private path: ${match[1]}`,
+    );
+  }
+}
+
+const legacyBrowserForwarderRoots = [
+  "src/template-package/assets",
+  "src/template-package/fonts",
+  "src/template-package/persistence",
+  "src/template-package/import",
+  "src/template-package/session",
+  "src/template-package/export",
+  "src/template-package/enrichment",
+];
+const browserForwarderExceptions = new Set([
+  "src/template-package/assets/packageAssetResolution.ts",
+  "src/template-package/enrichment/parseFigmaUrl.ts",
+  "src/template-package/enrichment/visualDiff.ts",
+]);
+for (const directory of legacyBrowserForwarderRoots) {
+  for (const file of await sourceFiles(path.join(root, directory))) {
+    const relative = path.relative(root, file);
+    if (
+      /\.test\.[cm]?[jt]sx?$/.test(file) ||
+      browserForwarderExceptions.has(relative)
+    ) {
+      continue;
+    }
+    const executable = (await readFile(file, "utf8"))
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/\/\/.*$/gm, "")
+      .trim();
+    if (
+      !/^export \* from ["'][^"']*packages\/template-browser\/src\/[^"']+["'];$/.test(
+        executable,
+      )
+    ) {
+      violations.push(
+        `${relative} must be a behavior-free template-browser compatibility forwarder`,
+      );
+    }
+  }
+}
+for (const forwarder of [
+  "src/template-package/bundle/bundleAssetIngestion.ts",
+  "src/template-package/bundle/layeredSourceDiagnostics.ts",
+  "src/template-package/editor/textMeasurement.ts",
+]) {
+  const executable = (await read(forwarder))
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\/\/.*$/gm, "")
+    .trim();
+  if (
+    !/^export \* from ["'][^"']*packages\/template-browser\/src\/[^"']+["'];$/.test(
+      executable,
+    )
+  ) {
+    violations.push(`${forwarder} must be a behavior-free browser forwarder`);
+  }
 }
 
 const studioDistDirectory = path.join(root, "apps", "studio", "dist");

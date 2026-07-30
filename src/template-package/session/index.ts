@@ -1,19 +1,2 @@
-export {
-  TEMPLATE_SESSION_SCHEMA_VERSION,
-  createTemplateSession,
-  type TemplateSessionErrorV1,
-  type TemplateSessionImageReplacementInput,
-  type TemplateSessionLoadStateInputV1,
-  type TemplateSessionLoadStateResultV1,
-  type TemplateSessionLoadZipInput,
-  type TemplateSessionMutationResult,
-  type TemplateSessionOptions,
-  type TemplateSessionPackageUpdateResult,
-  type TemplateSessionFontLinkOptions,
-  type TemplateSessionFontPreparationResult,
-  type TemplateSessionFontUploadInput,
-  type TemplateSessionSaveOptions,
-  type TemplateSessionSnapshotV1,
-  type TemplateSessionStatus,
-  type TemplateSessionV1,
-} from "./templateSession";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/session";

@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-browser",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Browser asset, font, persistence, readiness, and deterministic PNG services for TemplatePackage rendering.",
   "license": "UNLICENSED",
   "repository": {
@@ -41,7 +41,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external react --external react-dom --external ajv --external fflate --external html-to-image",
+    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external react --external react-dom --external ajv --external fflate --external html-to-image",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

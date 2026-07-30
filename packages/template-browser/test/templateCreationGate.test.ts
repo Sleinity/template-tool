@@ -1,11 +1,11 @@
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import { validatePackageFieldConstraints } from "../editor";
-import type { PackageQualityIssue } from "../quality";
-import type { TemplatePackageV1 } from "../types";
+import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import { validatePackageFieldConstraints } from "../../../src/template-package/editor";
+import type { PackageQualityIssue } from "../src/internal/qualityIssue";
+import type { TemplatePackageV1 } from "../../../src/template-package/types";
 import {
   createFieldConstraintSummaries,
   createTemplateCreationGate,
-} from "./templateCreationGate";
+} from "../src/import/templateCreationGate";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

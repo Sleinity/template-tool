@@ -1,12 +1,2 @@
-export * from "./managedFontAssets";
-export * from "./fontBinaryMetadata";
-export * from "./fontIdentity";
-export * from "./fontResolution";
-export * from "./fontRegistryTypes";
-export * from "./fontMatching";
-export * from "./exactFontSetup";
-export * from "./fontRegistry";
-export * from "./indexedDbFontRegistry";
-export * from "./inMemoryFontRegistry";
-export * from "./managedFontRecord";
-export * from "./runtimeFontSignature";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/fonts";

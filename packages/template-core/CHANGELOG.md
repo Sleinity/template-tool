@@ -1,5 +1,12 @@
 # @sleinity/template-core
 
+## 0.4.1
+
+### Patch Changes
+
+- Advance the fixed SDK train for the browser-runtime ownership migration.
+  Portable core behavior and the public core declaration are unchanged.
+
 ## 0.4.0
 
 ### Minor Changes

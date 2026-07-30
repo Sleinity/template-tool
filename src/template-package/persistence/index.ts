@@ -1,10 +1,2 @@
-export * from "./types";
-export * from "./draftAutosaveCoordinator";
-export * from "./persistenceSubmission";
-export * from "./savedRecordValidation";
-export * from "./assetRepository";
-export * from "./inMemoryTemplateRepository";
-export * from "./indexedDbTemplateRepository";
-export * from "./indexedDbSchema";
-export * from "./templateRepository";
-export * from "./semanticRendererMvpMigration";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/persistence";

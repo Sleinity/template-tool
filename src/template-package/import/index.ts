@@ -1,6 +1,2 @@
-export * from "./runTemplatePackageImportPipeline";
-export * from "./templateCreationGate";
-export * from "./templateImportCompatibility";
-export * from "./templateImportIntegrity";
-export * from "./templateImportValidation";
-export * from "./templateImportWizard";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/import";

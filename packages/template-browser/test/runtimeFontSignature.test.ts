@@ -1,8 +1,8 @@
-import type { TemplatePackageFontRequirement } from "../types";
+import type { TemplatePackageFontRequirement } from "../../../src/template-package/types";
 import {
   packageRuntimeFontSignature,
   runtimeFontTarget,
-} from "./runtimeFontSignature";
+} from "../src/fonts/runtimeFontSignature";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);
