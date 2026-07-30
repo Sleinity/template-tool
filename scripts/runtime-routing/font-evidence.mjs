@@ -7,6 +7,7 @@ import { strFromU8, unzipSync } from "fflate";
 import { browserStructure, launchBrowser, waitForCurrentReadiness } from "../fidelity/browser.mjs";
 import { loadManifest, parseArguments, repoRoot, stableStringify, verifyFixture } from "../fidelity/core.mjs";
 import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
+import { applyCompatibilityFontFallbacks } from "../repository/studio-font-harness.mjs";
 
 const args = parseArguments(process.argv.slice(2));
 const runId = String(args["run-id"] || `font-evidence-${new Date().toISOString().replace(/[:.]/g, "-")}`);
@@ -106,8 +107,7 @@ async function advanceToEditor(page, installAtStart) {
   await page.getByTestId("zip-package-input").setInputFiles(verified.path);
   await page.getByRole("button", { name: "Import template" }).click();
   await page.getByTestId("package-step-prepare-fonts").waitFor();
-  const replacements = page.getByRole("button", { name: "Use replacement" });
-  for (let index = (await replacements.count()) - 1; index >= 0; index -= 1) await replacements.nth(index).click();
+  await applyCompatibilityFontFallbacks(page);
   await page.getByRole("button", { name: "Check template" }).click();
   await page.getByTestId("package-step-validate").waitFor();
   await selectValidatePreview(page);

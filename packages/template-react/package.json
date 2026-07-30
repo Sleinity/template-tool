@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {
@@ -10,7 +10,9 @@
   },
   "private": false,
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/importer.css"
+  ],
   "files": [
     "dist",
     "README.md"
@@ -22,6 +24,13 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./importer": {
+      "types": "./dist/importer.d.ts",
+      "import": "./dist/importer.js"
+    },
+    "./importer.css": {
+      "default": "./dist/importer.css"
     }
   },
   "publishConfig": {
@@ -29,7 +38,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts --sourcemap --clean --external react --external react-dom",
+    "build": "tsup src/index.ts src/importer.tsx --format esm --dts --sourcemap --clean --external react --external react-dom",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

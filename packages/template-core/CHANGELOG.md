@@ -1,5 +1,14 @@
 # @sleinity/template-core
 
+## 0.3.0
+
+### Minor Changes
+
+- Add the host-neutral template setup wizard, portable editable-field rule
+  operations, and revision-safe session setup/font preparation APIs.
+- Align portable font readiness with the established device-emoji fallback
+  while keeping all non-emoji text-face coverage strict.
+
 ## 0.2.2
 
 The fixed SDK train advances together with host-neutral installation,

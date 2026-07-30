@@ -135,14 +135,59 @@ ${overrideRows}
 ## Supported application contract
 
 \`\`\`tsx
+import { useEffect } from "react";
+import type {
+  TemplateImportConfirmationV1,
+} from "@sleinity/template-browser";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
   useTemplateSession,
 } from "@sleinity/template-react";
+import {
+  TemplateImportWizard,
+  useTemplateImportWizard,
+} from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
 
-export function TemplateWorkspace() {
+export function AddTemplate({
+  onConfirmed,
+}: {
+  onConfirmed(result: TemplateImportConfirmationV1): void;
+}) {
+  const wizard = useTemplateImportWizard();
+  return (
+    <TemplateImportWizard
+      wizard={wizard}
+      onComplete={(result) => {
+        onConfirmed(result);
+        // The host returns to its own dashboard.
+      }}
+    />
+  );
+}
+
+export function ConfirmedTemplateEditor({
+  record,
+}: {
+  record: TemplateImportConfirmationV1;
+}) {
   const session = useTemplateSession();
+  useEffect(() => {
+    const result = session.loadTemplateState({
+      importedPackage: record.importedPackage,
+      packageValue: record.packageValue,
+      source: {
+        type: "package-zip",
+        sourceName: record.sourceName,
+      },
+      importValidation: record.importValidation,
+    });
+    if (!result.applied) {
+      throw new Error(result.diagnostics[0]?.message ?? "Template rejected.");
+    }
+  }, [record, session]);
+
   return (
     <TemplateSessionProvider session={session}>
       <TemplateSessionRenderer mode="editor" />
@@ -151,10 +196,27 @@ export function TemplateWorkspace() {
 }
 \`\`\`
 
-Use \`session.loadZip()\` for import, \`session.setField()\` and the image
-mutation methods for editing, \`session.save()\` / \`loadSavedTemplate()\` for
-browser-local persistence, and the renderer handle's \`exportPng()\` only when
-the current render identity is ready.
+The seven-step wizard provides ZIP import, structured package validation,
+exact-font preparation, render validation, diagnostics, field-rule setup and
+current-revision confirmation. Its controller/provider/hooks can also power a
+custom page, modal, drawer or workspace UI. It does not publish or navigate;
+post-confirmation persistence runs only when the host provides an adapter.
+
+The wizard session is setup-owned. Store the immutable confirmation only after
+explicit confirmation, return to host navigation, and create a fresh
+\`useTemplateSession()\` when the user selects that template. Reopen it with
+\`session.loadTemplateState()\`; the SDK clones and revalidates both packages,
+rebuilds resolved/editable state, and publishes a fresh revision.
+
+The host owns forms, croppers, transformations, AI features, and other content
+workflows. Read \`snapshot.editableFields\` and deliver final supported values
+through \`session.setField()\`, \`session.replaceImage()\`,
+\`session.setImageReplacementMode()\`, reset, and restore. Template constraints
+remain the minimum safety and fidelity authority.
+
+Use \`session.save()\` / \`loadSavedTemplate()\` for browser-local persistence,
+and the renderer handle's \`exportPng()\` only when the current render identity
+is ready.
 
 Blocked imports publish structured diagnostics directly through the session
 snapshot. Consumers do not need to parse a ZIP twice.
@@ -174,6 +236,11 @@ the checksum-verified archives.
 
 - A valid ZIP reaches a ready render identity.
 - An invalid ZIP produces structured diagnostics.
+- Invalid font files are rejected, exact uploaded faces complete the wizard,
+  and a verified stored exact face is reused automatically.
+- Field-rule edits and image Fill/Fit defaults publish a new session revision.
+- Confirmation returns to host state and reopens in a fresh validated session.
+- Host-owned controls can preprocess values before supported session mutations.
 - A field edit invalidates the previous export identity.
 - Save/reload restores the edited package from browser storage while offline.
 - PNG export uses the current ready revision.

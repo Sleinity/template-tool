@@ -156,7 +156,8 @@ const validResult = await buildZipResultForPackage(packageValue);
 assert(
   validResult.validation?.valid === true &&
     canAdvancePackageWizard(0, true, null) &&
-    canAdvancePackageWizard(1, true, validResult) &&
+    !canAdvancePackageWizard(1, true, validResult) &&
+    canAdvancePackageWizard(1, true, validResult, true) &&
     canAdvancePackageWizard(2, true, validResult) &&
     canAdvancePackageWizard(3, true, validResult),
   "A selected package with a valid canonical result should progress through Validate and Review.",
@@ -268,9 +269,10 @@ const noFontResult = await buildZipResultForPackage(
   "no-font-package.zip",
 );
 assert(
-  canAdvancePackageWizard(1, true, noFontResult) &&
+  !canAdvancePackageWizard(1, true, noFontResult) &&
+    canAdvancePackageWizard(1, true, noFontResult, true) &&
     Boolean(noFontResult.package?.fontRequirements?.length),
-  "ZIP import should infer missing font requirements before the Fonts and Validate steps diverge.",
+  "ZIP import should infer font requirements and keep progression blocked until their exact faces are ready.",
 );
 const inferredFontMarkup = renderToStaticMarkup(
   createElement(PackageFontPreparationPanel, {
@@ -309,7 +311,8 @@ const missingFontMarkup = renderToStaticMarkup(
 );
 assert(
   missingFontMarkup.includes("Test Serif") &&
-    missingFontMarkup.includes("Missing") &&
+    missingFontMarkup.includes("Font required") &&
+    missingFontMarkup.includes("Test Serif — Regular (400)") &&
     missingFontMarkup.includes("font-requirement-row") &&
     missingFontMarkup.includes("ui-subsection-title"),
   "Prepare Fonts should show required or missing font faces when present.",
@@ -378,8 +381,9 @@ assert(
   canNavigatePackageWizard(0, false, null) &&
     !canNavigatePackageWizard(1, false, null) &&
     !canNavigatePackageWizard(2, true, null) &&
-    canNavigatePackageWizard(4, true, validResult),
-  "Fresh imports should expose only steps whose required package data is available.",
+    !canNavigatePackageWizard(4, true, validResult) &&
+    canNavigatePackageWizard(4, true, validResult, "import", true),
+  "Fresh imports should expose later steps only after exact required fonts are ready.",
 );
 
 const savedTemplate = createSavedTemplateRecord({
@@ -687,6 +691,7 @@ assert(
       1,
       true,
       noFontZipResult,
+      true,
     ) &&
     canAdvancePackageWizard(
       2,

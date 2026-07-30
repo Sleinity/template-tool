@@ -132,8 +132,20 @@ const glyphGap = matchCanonicalFontFace(
 assert(
   glyphGap.classification === "compatible" &&
     glyphGap.glyphCoverage === "incomplete" &&
-    glyphGap.reasons.some((reason) => reason.includes("cover")),
-  "Incomplete required glyph coverage must remain visible and require confirmation.",
+    glyphGap.reasons.some((reason) => reason.includes("Ω") && reason.includes("U+03A9")),
+  "Incomplete required glyph coverage must identify the missing character and require confirmation.",
+);
+
+const explicitEmojiFallback = matchCanonicalFontFace(
+  createCanonicalFontRequest(
+    requirement({ characters: "Summer Sale ☀️" }),
+  ),
+  face(),
+);
+assert(
+  explicitEmojiFallback.classification === "exact" &&
+    explicitEmojiFallback.glyphCoverage === "complete",
+  "Explicit emoji presentation should not weaken exact authority for the requested text face.",
 );
 
 const managed = (id: string, weight: number): ManagedFontRecord => ({

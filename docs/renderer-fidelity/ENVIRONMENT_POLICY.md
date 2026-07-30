@@ -15,4 +15,8 @@ The repository is not a Git checkout. `gitCommit` is therefore always `null`; co
 
 The default headless path uses the matching Playwright Chromium, with the existing Remotion headless shell as a local fallback. `--headed` uses Playwright Chromium or `FIDELITY_BROWSER_CHANNEL`. Do not compare outputs from a materially different OS/browser/font environment as if they were the same baseline; either reproduce the approved environment or create a separately reviewed environment policy.
 
-Exact font absence is visible in the fixture run and environment report. The current baseline used the wizard’s explicit `Use replacement` action for unresolved declared fonts. Those pixels are a regression baseline, not an authoritative exact-font design reference.
+Exact font absence is visible in the fixture run and environment report. The
+application-default baseline retains its recorded replacement state through a
+development-only harness operation; the user-facing Studio and SDK setup flows
+do not expose replacement controls. Those pixels are a regression baseline,
+not an authoritative exact-font design reference.

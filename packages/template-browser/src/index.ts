@@ -5,6 +5,7 @@ export * from "../../../src/template-package/export";
 export * from "../../../src/template-package/fonts/fontBinaryMetadata";
 export * from "../../../src/template-package/fonts/fontIdentity";
 export * from "../../../src/template-package/fonts/fontMatching";
+export * from "../../../src/template-package/fonts/exactFontSetup";
 export * from "../../../src/template-package/fonts/fontRegistry";
 export * from "../../../src/template-package/fonts/fontRegistryTypes";
 export * from "../../../src/template-package/fonts/indexedDbFontRegistry";

@@ -54,6 +54,19 @@ try {
         throw new Error(`${archive} is missing ${requiredEntry}.`);
       }
     }
+    if (archive.includes("template-react")) {
+      for (const requiredEntry of [
+        "package/dist/importer.js",
+        "package/dist/importer.js.map",
+        "package/dist/importer.d.ts",
+        "package/dist/importer.css",
+        "package/dist/importer.css.map",
+      ]) {
+        if (!entries.includes(requiredEntry)) {
+          throw new Error(`${archive} is missing ${requiredEntry}.`);
+        }
+      }
+    }
     const manifestSource = spawnSync(
       "tar",
       ["-xOzf", path.join(output, archive), "package/package.json"],
@@ -92,6 +105,35 @@ try {
         ]) {
           if (extracted.stdout.includes(migratedRootSource)) {
             throw new Error(`${archive} ${entry} contains migrated root source ${migratedRootSource}.`);
+          }
+        }
+      }
+    }
+    if (archive.includes("template-react")) {
+      for (const entry of [
+        "package/dist/importer.js",
+        "package/dist/importer.d.ts",
+        "package/dist/importer.css",
+      ]) {
+        const extracted = spawnSync(
+          "tar",
+          ["-xOzf", path.join(output, archive), entry],
+          { encoding: "utf8" },
+        );
+        if (extracted.status !== 0) {
+          throw new Error(`Could not inspect ${entry} in ${archive}.`);
+        }
+        for (const forbiddenSource of [
+          "apps/studio",
+          "components/ui",
+          "lucide-react",
+          "/Users/",
+          "workspace:",
+        ]) {
+          if (extracted.stdout.includes(forbiddenSource)) {
+            throw new Error(
+              `${archive} ${entry} contains forbidden dependency ${forbiddenSource}.`,
+            );
           }
         }
       }

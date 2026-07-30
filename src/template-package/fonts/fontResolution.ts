@@ -12,20 +12,18 @@ import {
   createRuntimeFontFamily,
 } from "./fontIdentity";
 import { matchCanonicalFontFace } from "./fontMatching";
-
-export interface TrustedOpenFontResponse {
-  ok: boolean;
-  code?: string;
-  message?: string;
-  dataUrl?: string;
-  mimeType?: string;
-  fileName?: string;
-  provider?: string;
-  license?: {
-    name: string;
-    url: string;
-  };
-}
+import {
+  fontMimeType,
+  selectExactFontSetupFace,
+} from "./exactFontSetup";
+import {
+  getManagedFontRegistry,
+  linkRequirementToManagedFont,
+} from "./fontRegistry";
+import type {
+  ManagedFontRecord,
+  ManagedFontRegistry,
+} from "./fontRegistryTypes";
 
 function bytesToDataUrl(bytes: ArrayBuffer, mimeType: string): string {
   const values = new Uint8Array(bytes);
@@ -45,6 +43,7 @@ export async function attachFontBinary(
     fileName?: string;
     provider?: string;
     license?: { name: string; url: string };
+    requireExact?: boolean;
   },
 ): Promise<{
   packageValue: TemplatePackageV1;
@@ -58,18 +57,25 @@ export async function attachFontBinary(
   const inspection = await inspectOpenTypeFontBinary(source);
   if (!inspection.faces.length) throw new Error("The selected file is not a readable OpenType font.");
   const request = createCanonicalFontRequest(requirement);
-  const candidates = inspection.faces
-    .map((face) => ({ face, match: matchCanonicalFontFace(request, face) }))
-    .filter(({ match }) => match.classification === "exact" || match.classification === "compatible")
-    .sort((left, right) => right.match.score - left.match.score);
-  const selected = candidates[0];
-  if (!selected) {
-    const mismatch = matchCanonicalFontFace(request, inspection.faces[0]);
-    throw new Error(mismatch.reasons.join(" ") || "The font face does not match.");
-  }
-  if (candidates[1]?.match.score === selected.match.score) {
-    throw new Error("The font contains several equally compatible faces and cannot be linked automatically.");
-  }
+  const selected = options.requireExact
+    ? selectExactFontSetupFace(requirement, inspection.faces)
+    : (() => {
+        const candidates = inspection.faces
+          .map((face) => ({ face, match: matchCanonicalFontFace(request, face) }))
+          .filter(({ match }) =>
+            match.classification === "exact" ||
+            match.classification === "compatible")
+          .sort((left, right) => right.match.score - left.match.score);
+        const candidate = candidates[0];
+        if (!candidate) {
+          const mismatch = matchCanonicalFontFace(request, inspection.faces[0]);
+          throw new Error(mismatch.reasons.join(" ") || "The font face does not match.");
+        }
+        if (candidates[1]?.match.score === candidate.match.score) {
+          throw new Error("The font contains several equally compatible faces and cannot be linked automatically.");
+        }
+        return candidate;
+      })();
   const metadata = selected.face;
   const classification = selected.match.classification as "exact" | "compatible";
   const hash = inspection.binaryHash;
@@ -141,33 +147,99 @@ export async function attachUploadedFont(
           ? "font/otf"
           : "font/ttf");
   return attachFontBinary(packageValue, requirement.id, await file.arrayBuffer(), {
-    mimeType,
+    mimeType: fontMimeType(file.name, mimeType),
     fileName: file.name,
   });
 }
 
-export async function requestTrustedOpenFont(
-  requirement: TemplatePackageFontRequirement,
-): Promise<TrustedOpenFontResponse> {
-  const response = await fetch("/api/template-package/resolve-open-font", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({
-      family: requirement.family,
-      weight: requirement.weight,
-      style: requirement.cssStyle,
-      postScriptName: requirement.postScriptName,
-    }),
-  });
-  return (await response.json()) as TrustedOpenFontResponse;
-}
-
-export function dataUrlToArrayBuffer(dataUrl: string): ArrayBuffer {
-  const payload = dataUrl.slice(dataUrl.indexOf(",") + 1);
-  const binary = atob(payload);
-  const bytes = new Uint8Array(binary.length);
-  for (let index = 0; index < binary.length; index += 1) {
-    bytes[index] = binary.charCodeAt(index);
+export async function uploadExactManagedFontForRequirement(
+  packageValue: TemplatePackageV1,
+  requirementId: string,
+  source: ArrayBuffer,
+  options: {
+    mimeType?: string;
+    fileName?: string;
+    provider?: string;
+    registry?: ManagedFontRegistry | null;
+    reason?: string;
+  } = {},
+): Promise<{
+  packageValue: TemplatePackageV1;
+  metadata: FontBinaryMetadata;
+  assetId: string;
+  managedFont: ManagedFontRecord | null;
+}> {
+  const mimeType = fontMimeType(options.fileName, options.mimeType);
+  const prepared = await attachFontBinary(
+    packageValue,
+    requirementId,
+    source,
+    {
+      mimeType,
+      fileName: options.fileName,
+      provider: options.provider ?? "user-upload",
+      requireExact: true,
+    },
+  );
+  const registry = Object.prototype.hasOwnProperty.call(options, "registry")
+    ? options.registry ?? null
+    : getManagedFontRegistry();
+  if (!registry) {
+    return {
+      ...prepared,
+      managedFont: null,
+    };
   }
-  return bytes.buffer;
+  const requirement = packageValue.fontRequirements?.find(
+    (item) => item.id === requirementId,
+  );
+  if (!requirement) throw new Error("The font requirement no longer exists.");
+  const metadata = prepared.metadata;
+  const managedFont = await registry.registerUploadedFont({
+    bytes: source,
+    family:
+      metadata.typographicFamily ??
+      metadata.family ??
+      requirement.family,
+    typographicFamily: metadata.typographicFamily ?? undefined,
+    legacyFamily: metadata.legacyFamily ?? undefined,
+    subfamily: metadata.subfamily ?? undefined,
+    typographicSubfamily: metadata.typographicSubfamily ?? undefined,
+    legacySubfamily: metadata.legacySubfamily ?? undefined,
+    style: metadata.style,
+    weight: metadata.weight ?? requirement.weight,
+    stretch: metadata.stretch ?? undefined,
+    postScriptName: metadata.postScriptName ?? undefined,
+    fullName: metadata.fullName ?? undefined,
+    faceIndex: metadata.collectionFaceIndex,
+    runtimeFamily:
+      prepared.packageValue.fontRequirements?.find(
+        (item) => item.id === requirementId,
+      )?.resolution?.runtimeFamily,
+    variableAxes: metadata.variableAxes,
+    unicodeCoverage: metadata.unicodeCoverage,
+    rawNameRecords: metadata.rawNameRecords,
+    license: metadata.license,
+    source: "uploaded",
+    mimeType,
+    fileName: options.fileName ?? "uploaded-font",
+  });
+  const nextPackage = await linkRequirementToManagedFont(
+    packageValue,
+    requirementId,
+    managedFont,
+    {
+      confirmed: true,
+      reason:
+        options.reason ??
+        "Uploaded face passed the exact template-setup font policy.",
+      registry,
+    },
+  );
+  return {
+    packageValue: nextPackage,
+    metadata,
+    assetId: managedFont.assetId,
+    managedFont,
+  };
 }

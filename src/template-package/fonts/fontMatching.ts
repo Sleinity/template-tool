@@ -4,13 +4,15 @@ import type {
 } from "../types";
 import {
   CANONICAL_FONT_FACE_VERSION,
-  coverageContains,
   createCanonicalFontRequest,
   normalizeFontIdentityName,
   normalizeFontStretch,
   type CanonicalFontFaceV1,
   type CanonicalFontRequestV1,
 } from "./fontIdentity";
+import {
+  textFaceCoverageCharacters,
+} from "../../../packages/template-core/src/resolved/fontCharacterCoverage";
 import type {
   FontRequirementKey,
   ManagedFontCandidate,
@@ -129,6 +131,41 @@ function fullNameRepresentsRequest(
   return Boolean(suffix && styleLabel && (suffix === styleLabel || suffix.includes(styleLabel)));
 }
 
+function formatMissingCharacter(character: string): string {
+  const codePoint = character.codePointAt(0);
+  const code = codePoint === undefined
+    ? "unknown"
+    : `U+${codePoint.toString(16).toUpperCase().padStart(4, "0")}`;
+  return `“${character}” (${code})`;
+}
+
+function missingCoverageCharacters(
+  coverage: CanonicalFontFaceV1["unicodeCoverage"],
+  characters: string,
+): string[] {
+  const missing = new Map<number, string>();
+  for (const character of characters) {
+    const codePoint = character.codePointAt(0);
+    if (codePoint === undefined || /\s/u.test(character)) continue;
+    if (
+      !coverage.ranges.some(
+        (range) => codePoint >= range.start && codePoint <= range.end,
+      )
+    ) {
+      missing.set(codePoint, character);
+    }
+  }
+  return Array.from(missing.values());
+}
+
+function missingCharacterReason(characters: readonly string[]): string {
+  const visible = characters.slice(0, 8).map(formatMissingCharacter);
+  const remainder = characters.length - visible.length;
+  return `The selected face is missing required ${characters.length === 1 ? "character" : "characters"}: ${
+    visible.join(", ")
+  }${remainder > 0 ? `, and ${remainder} more` : ""}.`;
+}
+
 export function matchCanonicalFontFace(
   request: CanonicalFontRequestV1,
   face: CanonicalFontFaceV1,
@@ -165,9 +202,16 @@ export function matchCanonicalFontFace(
     (request.style === "oblique" && face.style === "italic");
   const stretchMatches = normalizeFontStretch(face.stretch) === request.stretch;
   const requestedAxesSupported = axesSupported(request, face);
+  const coverageCharacters = textFaceCoverageCharacters(
+    request.rawFamily,
+    request.characters,
+  );
+  const missingCharacters = face.unicodeCoverage.ranges.length === 0
+    ? []
+    : missingCoverageCharacters(face.unicodeCoverage, coverageCharacters);
   const glyphCoverage = face.unicodeCoverage.ranges.length === 0
     ? "unknown"
-    : coverageContains(face.unicodeCoverage, request.characters)
+    : missingCharacters.length === 0
       ? "complete"
       : "incomplete";
 
@@ -182,7 +226,9 @@ export function matchCanonicalFontFace(
   if (!styleMatches) reasons.push(`The selected face is ${face.style}; the request is ${request.style}.`);
   if (!stretchMatches) reasons.push(`The selected face is ${face.stretch}; the request is ${request.stretch}.`);
   if (!requestedAxesSupported) reasons.push("The selected variable face cannot produce the requested axis instance.");
-  if (glyphCoverage === "incomplete") reasons.push("The selected face does not cover every required character.");
+  if (glyphCoverage === "incomplete") {
+    reasons.push(missingCharacterReason(missingCharacters));
+  }
 
   const exactSemantics = familyMatches && weightSupported && styleMatches && stretchMatches &&
     requestedAxesSupported && glyphCoverage !== "incomplete";

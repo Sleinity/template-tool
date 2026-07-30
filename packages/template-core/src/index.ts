@@ -21,6 +21,7 @@ export * from "./importTemplatePackage";
 export * from "../../../src/template-package/scene";
 export * from "./resolved";
 export * from "./editor/packageEditorSession";
+export * from "./editor/packageFieldRules";
 export {
   clearTemplatePackageImageOverride,
   getEffectiveEditableFields,

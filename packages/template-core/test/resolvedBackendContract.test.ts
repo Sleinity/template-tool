@@ -209,4 +209,29 @@ assert(
   "Injected font readiness must remain portable and deterministic.",
 );
 
+let emojiReadinessSample = "";
+const emojiReadiness = await checkResolvedFontReadiness(
+  tree,
+  {
+    ready: Promise.resolve(),
+    check: (_font, sample) => {
+      emojiReadinessSample = sample ?? "";
+      return true;
+    },
+  },
+  [{ family: "Rethink Sans", weight: 600, style: "normal" }],
+  [{
+    family: "Rethink Sans",
+    weight: 600,
+    style: "normal",
+    usedBy: ["headline"],
+    characters: "Summer Sale ☀️",
+  }],
+);
+assert(
+  emojiReadiness.required[0]?.glyphCoverage === "fallback-likely" &&
+    emojiReadinessSample === "Summer Sale ",
+  "Readiness should preserve the existing non-blocking emoji fallback while checking only text-face characters.",
+);
+
 console.log("Portable resolved/backend ownership tests passed.");

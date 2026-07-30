@@ -1,8 +1,112 @@
 # Renderer Fidelity Status
 
-Status date: 2026-07-28
-Current milestone: SDK 0.2.2 generic template editor handoff complete
+Status date: 2026-07-30
+Current milestone: SDK 0.3.0 RC3 external shell composability and template reopening
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.3.0 RC3 — external shell composability and template reopening
+
+The fixed core/browser/React train remains unpublished at `0.3.0`.
+`template-browser` now provides `createTemplateImportWizard`, a headless
+controller with seven explicit steps: ZIP Import, Package Validation, Font
+Validation, Render Validation, Field Rules, Confirmation and Completed. Every
+step exposes revision-bound readiness, blockers, warnings, diagnostics and
+navigation permissions. `template-react/importer` adds provider/snapshot hooks,
+a preview bridge using the existing renderer, and an optional responsive
+default interface. `TemplateImporterWizard` remains a compatibility alias.
+
+Every attempted import now publishes a structured phase report and a non-null
+compatibility validation result, including corrupt ZIP failures. Exact-font
+and post-confirmation persistence adapters are optional,
+abortable and cannot bypass the existing validation authorities. Confirmation
+is immutable and contains the imported baseline, validated working package,
+sanitized field rules, package/font/render evidence, diagnostics, current
+identity, deterministic fingerprint, SDK version and source metadata.
+Controller-owned sessions are disposed by the controller; injected sessions
+are never disposed. The host retains ownership of authentication, catalogues,
+routing, cloud storage, publishing and navigation.
+
+The wizard now stops at field-rule configuration; the unpublished image-editor
+adapter and wizard content-editing actions have been removed. External shells
+own their controls and preprocessing and submit final descriptor-supported
+values through the established session mutation contract.
+
+`TemplateSession.loadTemplateState()` reopens an in-memory or host-retained
+confirmation in a fresh session. It clones and revalidates the baseline and
+working package, requires matching identity, rebuilds resolved/editable state,
+and publishes atomically at a fresh revision without trusting stored readiness.
+
+`template-core` now owns pure editable-field rule replacement, update,
+reordering and target/warning projection. `template-browser` adds validated
+working-package replacement and one shared exact-font setup policy. Studio and
+the reusable wizard now accept only a unique family/PostScript, weight or
+variable-range, posture, stretch, axis and complete text-face glyph match. A
+shared deterministic classifier delegates only explicit emoji sequences to the
+existing device emoji fallback; ordinary text-style symbols, letters, numbers,
+punctuation, currency and accented characters remain blocking. Valid stored
+faces are reused automatically; invalid replacement uploads are atomic and
+cannot displace a ready link. Low-level candidate/link/fallback contracts remain
+available for compatibility but are absent from setup UI. These additions
+rebuild resolved state, invalidate prior render identities and prevent stale
+asynchronous work from overwriting a newer session. Existing field mutation,
+image placement, diagnostic, readiness, persistence, renderer and PNG
+contracts are unchanged.
+
+Studio and the reusable wizard show `Ready`, the verified filename and a
+neutral device-emoji note when this narrow fallback applies. Genuine coverage
+failures identify the missing characters. The supplied
+`RethinkSans-SemiBold.ttf` now verifies as exact for the real
+`deal-of-the-week-banner` requirement containing `Summer Sale ☀️`. A
+current-run headless Studio reproduction with the supplied ZIP and font reports
+`Ready`, exact classification and enabled progression; the verified font SHA-256
+is `cc5cf4e24fef00ceb7546500d3f6ada6c0884ab1603d2f8608a80f811010b9b5`.
+
+The generic template-editor reference now uses the RC3 wizard through public
+package entry points, returns confirmation to an in-memory dashboard, and
+reopens the selected record through a fresh hydrated session. The packed
+Chromium acceptance gate exercises cancellation without catalogue mutation,
+invalid and valid ZIPs, exact font rejection/upload and persisted reuse,
+field-rule editing, image Fill/Fit defaults, revision-ready completion,
+host-owned text preprocessing, downstream field/image editing, offline draft
+reload, stale-export rejection, silent PNG and permanent disposal. It reports
+zero external runtime requests, browser downloads or console errors.
+
+Current RC3 direct package/root/Studio TypeScript, portable tests, production
+builds, documentation, ownership/archive checks, DOM-free installed core,
+browser session, Studio smoke, packed consumer and packed generic-editor
+acceptance pass. The core declaration remains 87,431 bytes with SHA-256
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Core/browser/React candidate archives are 283,433 / 372,987 / 303,379 bytes.
+The dedicated importer output is 35.68 kB JavaScript (6.26 kB gzip), 7.18 kB
+CSS, and 4.13 kB declarations.
+Studio is 1,000.84 / 291.46 gzip kB JavaScript and 68.26 / 12.12 gzip kB CSS.
+The minimal and wizard-backed generic editor examples are 844.64 / 248.23 and
+916.12 / 265.59 gzip kB. The isolated packed consumer is 885,100 / 259,603
+gzip bytes.
+
+Fresh renderer run `2026-07-30T12-10-08-113Z` is repeat-stable for all
+19 fixtures and four surfaces. Source-authoritative run
+`2026-07-30T12-10-55-869Z` also passes through the real upload-only Studio UI.
+Guarded renderer comparison `2026-07-30T12-11-01-871Z`, scene run
+`scene-2026-07-30T12-12-26-619Z` and settlement run
+`settlement-2026-07-30T12-12-28-310Z`
+guards retain only their documented historical/environment-sensitive
+or unapproved states; the approved gradient and ordered-SOLID overlap remains
+clean except for the already reviewed Inspector-only paint-opacity difference.
+All 19 appearance projections are valid and deterministic. Approved
+aggregates remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+Direct byte aggregation confirms those approved identities after the final
+run. No update, promotion, fixture, schema, tolerance or approved-reference
+command ran.
+
+The release candidate is not yet published. Publication remains tag-only after
+review and must prove that a generic external host can install all three
+registry-derived `0.3.0` archives and complete the setup workflow without
+hand-written importer orchestration.
 
 ## SDK 0.2.2 — generic template editor handoff
 

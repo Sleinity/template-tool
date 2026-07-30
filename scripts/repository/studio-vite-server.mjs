@@ -17,6 +17,10 @@ export function createStudioViteServer({
   return createServer({
     root: studioRoot,
     logLevel,
+    define: {
+      "import.meta.env.VITE_TEMPLATE_PACKAGE_FONT_SETUP_HARNESS":
+        JSON.stringify("true"),
+    },
     server: {
       host: "127.0.0.1",
       port,

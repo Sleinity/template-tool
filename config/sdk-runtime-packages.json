@@ -15,12 +15,12 @@
     {
       "name": "@sleinity/template-browser",
       "directory": "template-browser",
-      "role": "Browser session, assets, fonts, persistence, readiness, and PNG export"
+      "role": "Browser session, headless import workflow, assets, fonts, persistence, readiness, and PNG export"
     },
     {
       "name": "@sleinity/template-react",
       "directory": "template-react",
-      "role": "React provider, renderer, inspection viewport, and export handle"
+      "role": "React import bindings and default UI, renderer, inspection viewport, and export handle"
     }
   ]
 }

@@ -35,6 +35,15 @@ try {
   await page.goto(applicationUrl);
   await page.locator('input[type="file"]').setInputFiles(fixturePath);
   await page.locator("[data-template-package-canvas]").waitFor();
+  await page
+    .getByLabel("Upload required font")
+    .setInputFiles(
+      path.join(
+        root,
+        "apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+      ),
+    );
+  await page.getByText("Required font is ready.").waitFor();
   await page.waitForFunction(() =>
     !document.querySelector(".identity")?.textContent?.includes("not ready"));
 
@@ -69,7 +78,7 @@ try {
   await page.getByRole("button", { name: "Export PNG" }).click();
   try {
     await page.getByText(
-      "PNG exported from the same package revision shown above.",
+      "PNG captured from the same package revision shown above.",
     ).waitFor({ timeout: 60000 });
   } catch (error) {
     const state = await page.evaluate(() => ({

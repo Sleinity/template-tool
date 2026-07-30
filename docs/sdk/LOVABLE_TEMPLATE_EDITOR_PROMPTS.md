@@ -41,22 +41,22 @@ The required SDK peer versions are React 19 and React DOM 19. If this project is
 
 Before using this prompt, copy the three checksum-verified archives from the
 public
-[`sdk-v0.2.2` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.2.2)
+[`sdk-v0.3.0` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0)
 into the repository's `vendor/` directory. Downloading the Release assets
 requires no GitHub token.
 
 ```text
-Integrate the checksum-verified Template Platform 0.2.2 archives already present in this private repository:
+Integrate the checksum-verified Template Platform 0.3.0 archives already present in this private repository:
 
-- vendor/sleinity-template-core-0.2.2.tgz
-- vendor/sleinity-template-browser-0.2.2.tgz
-- vendor/sleinity-template-react-0.2.2.tgz
+- vendor/sleinity-template-core-0.3.0.tgz
+- vendor/sleinity-template-browser-0.3.0.tgz
+- vendor/sleinity-template-react-0.3.0.tgz
 
 Add these exact dependencies:
 
-"@sleinity/template-core": "file:vendor/sleinity-template-core-0.2.2.tgz"
-"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.2.2.tgz"
-"@sleinity/template-react": "file:vendor/sleinity-template-react-0.2.2.tgz"
+"@sleinity/template-core": "file:vendor/sleinity-template-core-0.3.0.tgz"
+"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.3.0.tgz"
+"@sleinity/template-react": "file:vendor/sleinity-template-react-0.3.0.tgz"
 
 Requirements:
 
@@ -67,7 +67,7 @@ Requirements:
 - Do not add NODE_AUTH_TOKEN, a GitHub PAT, or another package-registry secret.
 - Do not replace these dependencies with registry URLs or Git dependencies.
 - Do not modify the SDK archives.
-- Confirm all installed package versions resolve to 0.2.2.
+- Confirm all installed package versions resolve to 0.3.0.
 - Run the existing typecheck and production build.
 - Report changed files and any dependency conflicts before continuing.
 ```
@@ -84,29 +84,29 @@ Use the repository’s existing route and layout conventions. If no suitable con
 Use only these supported APIs:
 
 From @sleinity/template-browser:
-- TemplateSessionV1
+- TemplateImportConfirmationV1
 
-From @sleinity/template-react:
-- useTemplateSession
-- TemplateSessionProvider
-- useTemplateSessionSnapshot
-- TemplateSessionRenderer
-- TemplateSessionRendererHandle
+From @sleinity/template-react/importer:
+- useTemplateImportWizard
+- TemplateImportWizard
 
 Implementation requirements:
 
-1. Create and own one TemplateSession per mounted workspace with useTemplateSession().
-2. Let the owned-session hook handle permanent disposal and React StrictMode development replay.
-3. Wrap the workspace in TemplateSessionProvider.
-4. Add a ZIP file picker accepting .zip and application/zip.
-5. Read the file bytes once and call session.loadZip with the ArrayBuffer and filename.
-6. Show idle, loading, ready, blocked, disposed, and error states.
-7. Show snapshot.validation, snapshot.diagnostics, and typed session errors when loading fails.
-8. Render ready templates through TemplateSessionRenderer in editor mode.
-9. Pair every onRenderIdentity result with the session snapshot revision that produced it. Treat it as ready only while that revision still equals the current snapshot revision.
-10. Do not implement a custom renderer.
-11. Do not call external services during import or rendering.
-12. Do not connect this page to existing catalogues, cloud persistence, or publishing yet.
+1. Create and own one import controller per mounted workspace with useTemplateImportWizard().
+2. Let the owned-controller hook handle permanent disposal and React StrictMode development replay.
+3. Import TemplateImportConfirmationV1 as a type from @sleinity/template-browser.
+4. Import TemplateImportWizard from @sleinity/template-react/importer.
+5. Import @sleinity/template-react/importer.css once in the application.
+6. Pass the owned controller to TemplateImportWizard.
+7. Let the wizard provide ZIP import, package validation, exact-font validation, render validation, diagnostics, field-rule configuration, confirmation, and completion.
+8. In onComplete, retain the complete TemplateImportConfirmationV1 in host-owned page state and return to the host dashboard.
+9. Add the template to the in-memory host catalogue only after onComplete runs.
+10. Cancellation must return to the dashboard without creating a host record.
+11. Keep the wizard session limited to setup. Do not use wizard.session as the downstream editor session.
+12. Do not copy Studio import screens or recreate the wizard steps.
+13. Do not implement a custom renderer.
+14. Do not call external services during import or rendering.
+15. Do not connect this page to existing cloud persistence or publishing yet.
 
 Provide a concise summary of the files added and how to open the test page.
 ```
@@ -114,10 +114,17 @@ Provide a concise summary of the files added and how to open the test page.
 ## Prompt 4 — add descriptor-driven editing
 
 ```text
-Extend the Template Platform test page with a minimal reusable field editor.
+Extend the Template Platform test page with confirmed-template reopening and a minimal host-owned field editor.
 
 Use:
 
+From @sleinity/template-react:
+- useTemplateSession
+- TemplateSessionProvider
+- useTemplateSessionSnapshot
+- TemplateSessionRenderer
+
+- session.loadTemplateState
 - snapshot.editableFields
 - snapshot.workingPackage
 - getPackageFieldValue from @sleinity/template-core
@@ -129,18 +136,24 @@ Use:
 
 Requirements:
 
-1. Render controls from the template’s editable-field descriptors.
-2. Support text, textarea, number, date, color, and boolean fields.
-3. Read current values with getPackageFieldValue instead of manually guessing node property paths.
-4. Display field labels, constraints, mutation warnings, and rejected updates.
-5. Add reset for each field and restore-all-imported-state.
-6. For image fields:
+1. When the user selects a confirmed host record, create a fresh session with useTemplateSession().
+2. Call session.loadTemplateState() with the record’s importedPackage, packageValue, source filename, and importValidation.
+3. Treat applied=false as a blocked reopen and show its structured diagnostics. Never fall back to the wizard session.
+4. Wrap the editor and TemplateSessionRenderer in TemplateSessionProvider using the fresh session.
+5. Render controls from the freshly rebuilt editable-field descriptors.
+6. Support text, textarea, number, date, color, and boolean fields.
+7. Read current values with getPackageFieldValue instead of manually guessing node property paths.
+8. Display field labels, constraints, mutation warnings, and rejected updates.
+9. Add reset for each field and restore-all-imported-state.
+10. For image fields:
    - validate the selected MIME type and file size;
    - convert the image to a data URL;
    - obtain width and height with createImageBitmap;
    - call session.replaceImage with MIME type, size, dimensions, and replacement-fill;
    - expose Fill and Fit mode controls.
-7. Keep this editor descriptor-driven. Do not hard-code fields for a particular template.
+11. Keep this editor descriptor-driven. Do not hard-code fields for a particular template.
+12. Hosts may add stricter validation, crop tools, transformations, or richer controls before calling the SDK. Final values must still use a supported descriptor and pass SDK constraints.
+13. Arbitrary package-node mutation is not part of the stable editing contract.
 ```
 
 ## Prompt 5 — add browser-local persistence
@@ -196,18 +209,22 @@ Add automated coverage consistent with this repository’s existing test stack.
 Cover:
 
 1. The route mounts without affecting existing routes.
-2. Invalid ZIP bytes produce a blocked/error state with structured diagnostics and validation details.
-3. A valid test ZIP reaches ready state.
-4. Editing a field changes the current working package.
-5. Reset restores the imported value.
-6. Image constraints reject invalid input; a valid replacement supports Fill and Fit.
-7. Saving returns an ID and explicit reload restores the edited draft.
-8. The saved draft reloads while offline.
-9. Export remains disabled before render readiness.
-10. A field edit invalidates the previous export identity.
-11. Export returns PNG metadata for the latest ready revision without a browser download.
-12. Session disposal occurs on permanent unmount.
-13. No GitHub token, .npmrc, registry dependency, or external SDK runtime request is introduced.
+2. TemplateImportWizard mounts from the public importer subpath with its packaged stylesheet.
+3. Invalid ZIP bytes remain blocked with structured import validation, non-null compatibility validation, and diagnostics.
+4. A valid test ZIP advances through Package Validation, Font Validation, Render Validation, Field Rules, Confirmation, and Completed.
+5. The exact required family and weight are shown, invalid font files are rejected with a clear reason, a verified exact upload is reused after reload, and an unlinked, compatible, replacement, or fallback-only requirement remains blocked.
+6. Field-rule labels, ordering, constraints, and image Fill/Fit defaults update the setup revision without editing content.
+7. Confirmation is disabled before current render readiness and returns the current immutable package/evidence result.
+8. Confirmation returns to the host dashboard, selecting the record creates a fresh session, and loadTemplateState() rebuilds ready editable state.
+9. Editing a content field through host-owned controls changes the current working package after reopening.
+10. Reset restores the imported value.
+11. Image constraints reject invalid input; a valid host-provided replacement supports Fill and Fit.
+12. Saving returns an ID and explicit reload restores the edited draft.
+13. The saved draft reloads while offline.
+14. A content edit invalidates the previous export identity.
+15. Export returns PNG metadata for the latest ready revision without a browser download.
+16. Session disposal occurs on permanent unmount.
+17. No GitHub token, .npmrc, registry dependency, or external SDK runtime request is introduced.
 
 Also provide a manual browser checklist for valid and invalid ZIP import, text edit/reset, image replacement, Fill/Fit switching, save/reload, offline reload, PNG capture, and browser network inspection.
 

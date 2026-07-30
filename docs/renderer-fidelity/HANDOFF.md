@@ -1,5 +1,179 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-30 — SDK 0.3.0 RC3 external shell composability and template reopening
+
+### Result
+
+- Added the `createTemplateImportWizard` headless browser controller with
+  seven inspectable steps, subscriptions, restart/cancel/disposal and
+  revision-safe stale-work rejection.
+- Added structured import, exact-font and render-validation reports. Corrupt
+  and otherwise blocked ZIP attempts now retain layered diagnostics while also
+  exposing phase validation and a non-null compatibility validation result.
+- Retained optional exact-font and post-confirmation persistence adapters.
+  They are abortable and all returned data passes the
+  existing SDK validators before state publication.
+- Removed the unpublished wizard image-editor adapter and content-editing
+  actions. The wizard configures image rules; external shells own content
+  controls and submit final values through existing session mutation APIs.
+- Added atomic `TemplateSession.loadTemplateState()` reopening with cloned,
+  freshly validated baseline/working packages, identity checks, rebuilt
+  resolved/editable state, new revisions, and stale-work rejection.
+- Added React provider, snapshot hook and existing-renderer preview bridge plus
+  a responsive optional default UI with drag/drop, seven steps, theming,
+  class/action slots and an immutable host-neutral confirmation result.
+- Preserved `TemplateImporterWizard` and its completion value as compatibility
+  aliases, and preserved all 0.2.2 session, renderer, editing, persistence and
+  PNG APIs.
+- Updated the generic editor, packed consumer and documentation to use public
+  RC3 entry points. No Studio, router, catalogue, cloud, publishing or product
+  workflow moved into the SDK.
+
+### Verification boundary
+
+Portable tests, package/root/Studio typechecks, production builds,
+documentation, package boundaries/archive inspection, DOM-free core, isolated
+packed consumer, session/Studio smokes and the packed generic-editor Chromium
+lifecycle pass for RC3. The packed browser run covers invalid/valid import,
+exact-font upload/reuse, field rules, confirmation-to-dashboard, fresh
+session hydration, host-owned preprocessing, downstream image mutation,
+current render readiness, offline draft reload, silent PNG and disposal with
+no external requests or console errors.
+
+Core/browser/React candidate archives are 283,433 / 372,987 / 303,379 bytes.
+Core declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Studio is 1,000.84 / 291.46 gzip kB JavaScript; minimal and generic editor
+examples are 844.64 / 248.23 and 916.12 / 265.59 gzip kB. The isolated packed
+consumer is 885,100 / 259,603 gzip bytes.
+
+Appearance run `appearance-2026-07-30T12-10-06-005Z` is valid and
+deterministic for all 19 fixtures. Renderer run
+`2026-07-30T12-10-08-113Z` and source-authoritative run
+`2026-07-30T12-10-55-869Z` are repeat-stable. Guarded renderer run
+`2026-07-30T12-11-01-871Z`, scene run
+`scene-2026-07-30T12-12-26-619Z` and settlement run
+`settlement-2026-07-30T12-12-28-310Z` retain only documented historical or
+unapproved states. Approved aggregates remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, promotion, fixture, schema, tolerance or approved-reference command
+ran.
+
+### Release boundary
+
+The fixed train remains unpublished at `0.3.0`. The implementation and local
+release gates are complete; review and a generic external-host acceptance are
+still required before tag-only publication and registry-derived handoff assets.
+
+## 2026-07-29 — SDK 0.3.0 reusable template setup wizard
+
+### Result
+
+- Added the `@sleinity/template-react/importer` subpath with a complete,
+  accessible and themeable `TemplateImporterWizard`.
+- Kept setup ownership explicit: a host supplies `TemplateSessionV1`; the
+  wizard does not dispose, save, publish, navigate or create product records.
+- Added core-owned pure field-rule replacement, update and reordering, with
+  current target/warning projection.
+- Added browser-session working-package replacement and a shared exact-font
+  preparation policy with validation, resolved-tree rebuilding, revision
+  invalidation and stale-work rejection.
+- Replaced candidate lists, open-font retrieval, compatible/replacement
+  suggestions and fallback controls with one upload-only requirement card in
+  Studio and the reusable wizard. Normal upright posture is verified but
+  omitted from labels; exceptional italic/oblique, stretch and axis
+  requirements remain visible.
+- Exact upload requires one unambiguous family/PostScript, weight or
+  variable-range, posture, stretch, axis and complete text-face glyph match.
+  A shared deterministic coverage classifier delegates only explicit emoji
+  presentation, ZWJ, skin-tone, flag and keycap sequences to the established
+  device emoji fallback. Ordinary symbols and text characters remain strict.
+  Stored exact faces are reused automatically, and an invalid replacement
+  never removes the current valid link.
+- Both font screens show the verified file and a neutral device-emoji note
+  when that fallback applies. Genuine coverage failures identify the missing
+  characters. The supplied Rethink Sans SemiBold binary verifies as exact for
+  the real `Summer Sale ☀️` requirement. A current-run headless Studio
+  reproduction with the supplied ZIP and font reports `Ready`, exact
+  classification and enabled progression; the binary is
+  `cc5cf4e24fef00ceb7546500d3f6ada6c0884ab1603d2f8608a80f811010b9b5`.
+- Retired the Studio open-font client, resolution panel and
+  `/api/template-package/resolve-open-font` endpoint. Historical fallback
+  mutation is available only through the test-server fidelity harness and is
+  absent from production bundles and package archives.
+- Migrated the generic template-editor reference to the public wizard entry
+  while preserving its downstream content editor, IndexedDB draft lifecycle
+  and silent PNG capture.
+- Advanced the fixed core/browser/React train to `0.3.0`; no fourth package,
+  schema change, renderer behavior change or additional product workflow was
+  introduced.
+
+### Public setup contract
+
+The supported setup path is:
+
+1. create or receive a host-owned session, normally with
+   `useTemplateSession()`;
+2. render `TemplateImporterWizard` from
+   `@sleinity/template-react/importer` and import its stylesheet;
+3. let the wizard load the ZIP, prepare fonts, validate and configure field
+   rules;
+4. accept `onComplete` only when the current session revision has a ready render
+   identity;
+5. save, publish or navigate through host-owned services after completion.
+
+The completion value contains the validated working package, current session
+snapshot, source evidence, validation evidence and the current ready render
+identity. Existing lower-level public APIs remain available.
+
+### Current-run evidence
+
+- Direct package and Studio TypeScript, portable tests, Studio/SDK/example
+  builds, ownership checks, archive inspection, installed-core and packed
+  consumers, browser-session and Studio smokes, and documentation checks pass.
+- The packed generic-reference Chromium gate passes cancellation, invalid and
+  valid ZIP import, corrupt-file rejection, exact upload, atomic replacement
+  and persisted reuse, validation, field-rule editing, image defaults,
+  current-revision completion, downstream text/image editing, Fill/Fit/reset,
+  offline save/reload, stale-export rejection, silent PNG and permanent
+  disposal. External runtime requests, browser downloads and console errors
+  are zero.
+- Core's declaration is 87,431 bytes /
+  `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+  Candidate core/browser/React archives are 283,433 / 347,441 / 304,595
+  bytes. Studio is 1,000.84 / 291.46 gzip kB JavaScript and 68.26 / 12.12 gzip
+  kB CSS; minimal and generic editor examples are 842.57 / 247.59 and 898.67 /
+  260.76 gzip kB. The isolated packed consumer is 898,605 / 262,087 gzip
+  bytes. The dedicated importer is 34.27 kB JavaScript / 7.20 kB gzip.
+- Fresh renderer run `2026-07-29T18-55-30-592Z` is repeat-stable
+  across all 19 fixtures and four surfaces. Source-authoritative run
+  `2026-07-29T18-55-13-659Z` passes via the real upload UI. Guarded
+  renderer comparison `2026-07-29T18-57-22-207Z`, scene and
+  settlement runs retain their documented historical/environment-sensitive or
+  unapproved states. The approved gradient/ordered-SOLID overlap remains clean
+  except for the already reviewed Inspector-only paint-opacity difference. All
+  19 appearance projections are valid and deterministic.
+- Approved aggregates remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 /
+  `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No update, promotion, fixture, schema, tolerance or approved-reference
+  command ran.
+
+### Release and next boundary
+
+This is a locally verified release candidate, not yet a published release.
+Review must precede the tag-only `sdk-v0.3.0` publication and the public
+registry-derived archive handoff. After an external generic-host acceptance
+test, the next physical platform milestone may migrate asset, font,
+persistence and session implementation into `template-browser`; renderer and
+Studio ownership remain separate.
+
 ## 2026-07-28 — SDK 0.2.2 generic template editor handoff
 
 ### Result

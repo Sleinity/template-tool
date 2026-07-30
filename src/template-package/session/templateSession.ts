@@ -10,10 +10,23 @@ import {
   type PackageFieldUpdateOptions,
 } from "../editor/packageFieldBindings";
 import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
+import type { ManagedFontCandidate } from "../fonts/fontRegistryTypes";
+import {
+  getManagedFontRegistry,
+  linkRequirementToManagedFont,
+  useFallbackForRequirement,
+} from "../fonts/fontRegistry";
+import { findManagedFontCandidates } from "../fonts/fontMatching";
+import { uploadExactManagedFontForRequirement } from "../fonts/fontResolution";
 import {
   runTemplatePackageImportPipeline,
   type PackageImportResult,
 } from "../import/runTemplatePackageImportPipeline";
+import {
+  createFailedTemplatePackageValidation,
+  createTemplateImportValidationReport,
+  type TemplateImportValidationReportV1,
+} from "../import/templateImportValidation";
 import type {
   PackageDiagnostic,
   PackageDiagnosticCategory,
@@ -63,6 +76,7 @@ export interface TemplateSessionSnapshotV1 {
   workingPackage: TemplatePackageV1 | null;
   resolvedTree: ResolvedRenderTreeV1 | null;
   validation: TemplatePackageValidationResult | null;
+  importValidation: TemplateImportValidationReportV1 | null;
   diagnostics: PackageDiagnostic[];
   editableFields: EditableFieldBinding[];
   error: TemplateSessionErrorV1 | null;
@@ -78,6 +92,23 @@ export interface TemplateSessionLoadZipInput {
   bytes: ArrayBuffer;
   sourceName?: string;
   figmaUrl?: string;
+}
+
+export interface TemplateSessionLoadStateInputV1 {
+  importedPackage: TemplatePackageV1;
+  packageValue: TemplatePackageV1;
+  source?: SavedTemplateSourceMetadata | null;
+  importValidation?: TemplateImportValidationReportV1 | null;
+  expectedRevision?: number;
+}
+
+export interface TemplateSessionLoadStateResultV1 {
+  applied: boolean;
+  stale: boolean;
+  snapshot: TemplateSessionSnapshotV1;
+  importedPackageValidation: TemplatePackageValidationResult;
+  packageValidation: TemplatePackageValidationResult;
+  diagnostics: PackageDiagnostic[];
 }
 
 export interface TemplateSessionImageReplacementInput {
@@ -101,10 +132,35 @@ export interface TemplateSessionMutationResult {
   snapshot: TemplateSessionSnapshotV1;
 }
 
+export interface TemplateSessionPackageUpdateResult {
+  applied: boolean;
+  stale: boolean;
+  snapshot: TemplateSessionSnapshotV1;
+  validation: TemplatePackageValidationResult;
+  diagnostics: PackageDiagnostic[];
+}
+
+export interface TemplateSessionFontUploadInput {
+  bytes: ArrayBuffer;
+  mimeType: string;
+  fileName?: string;
+}
+
+export interface TemplateSessionFontLinkOptions {
+  allowReplacement?: boolean;
+  confirmed?: boolean;
+}
+
+export interface TemplateSessionFontPreparationResult
+  extends TemplateSessionPackageUpdateResult {}
+
 export interface TemplateSessionV1 {
   getSnapshot(): TemplateSessionSnapshotV1;
   subscribe(listener: () => void): () => void;
   loadZip(input: TemplateSessionLoadZipInput): Promise<TemplateSessionSnapshotV1>;
+  loadTemplateState(
+    input: TemplateSessionLoadStateInputV1,
+  ): TemplateSessionLoadStateResultV1;
   loadSavedTemplate(id: string): Promise<TemplateSessionSnapshotV1>;
   save(options?: TemplateSessionSaveOptions): Promise<SavedTemplateRecord>;
   setField(
@@ -121,7 +177,28 @@ export interface TemplateSessionV1 {
     fieldId: string,
     mode: "replacement-fill" | "replacement-fit",
   ): TemplateSessionMutationResult;
+  replaceWorkingPackage(
+    packageValue: TemplatePackageV1,
+    expectedRevision?: number,
+  ): TemplateSessionPackageUpdateResult;
+  getManagedFontCandidates(
+    requirementId: string,
+  ): Promise<ManagedFontCandidate[]>;
+  linkManagedFont(
+    requirementId: string,
+    managedFontId: string,
+    options?: TemplateSessionFontLinkOptions,
+  ): Promise<TemplateSessionFontPreparationResult>;
+  uploadFont(
+    requirementId: string,
+    input: TemplateSessionFontUploadInput,
+  ): Promise<TemplateSessionFontPreparationResult>;
+  useFontFallback(
+    requirementId: string,
+    fallbackFamily?: string,
+  ): TemplateSessionFontPreparationResult;
   restoreImportedState(): TemplateSessionSnapshotV1;
+  reset(): TemplateSessionSnapshotV1;
   dispose(): void;
 }
 
@@ -149,6 +226,7 @@ function emptySnapshot(): TemplateSessionSnapshotV1 {
     workingPackage: null,
     resolvedTree: null,
     validation: null,
+    importValidation: null,
     diagnostics: [],
     editableFields: [],
     error: null,
@@ -231,6 +309,9 @@ export function createTemplateSessionWithDependencies(
   let disposed = false;
   const listeners = new Set<() => void>();
   const repository = options.repository ?? getTemplateRepository();
+  const fontRegistry = Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+    ? options.fontRegistry ?? null
+    : getManagedFontRegistry();
 
   const assertActive = () => {
     if (disposed) throw new Error("TemplateSession has been disposed.");
@@ -254,6 +335,7 @@ export function createTemplateSessionWithDependencies(
     source: SavedTemplateSourceMetadata | null;
     savedTemplateId: string | null;
     diagnostics?: PackageDiagnostic[];
+    importValidation?: TemplateImportValidationReportV1 | null;
   }) => {
     const workingPackage = input.workingPackage;
     const validation = input.validation ?? dependencies.validate(workingPackage);
@@ -266,6 +348,7 @@ export function createTemplateSessionWithDependencies(
       workingPackage,
       resolvedTree: ready ? dependencies.createResolvedTree(workingPackage) : null,
       validation,
+      importValidation: input.importValidation ?? snapshot.importValidation,
       diagnostics: input.diagnostics ?? validation.diagnostics,
       editableFields: getEffectiveEditableFields(workingPackage),
       error: null,
@@ -303,6 +386,70 @@ export function createTemplateSessionWithDependencies(
     }
     return { applied, warning: result.warning, snapshot };
   };
+  const activeWorkingPackage = () => {
+    assertActive();
+    if (
+      snapshot.status !== "ready" ||
+      !snapshot.workingPackage ||
+      !snapshot.basePackage
+    ) {
+      throw new Error("Load a valid TemplatePackage before changing setup.");
+    }
+    return snapshot.workingPackage;
+  };
+  const replaceWorkingPackage = (
+    packageValue: TemplatePackageV1,
+    expectedRevision = snapshot.revision,
+  ): TemplateSessionPackageUpdateResult => {
+    assertActive();
+    const candidatePackage = structuredClone(packageValue);
+    const validation = dependencies.validate(candidatePackage);
+    if (expectedRevision !== snapshot.revision) {
+      return {
+        applied: false,
+        stale: true,
+        snapshot,
+        validation,
+        diagnostics: validation.diagnostics,
+      };
+    }
+    activeWorkingPackage();
+    if (!validation.valid) {
+      return {
+        applied: false,
+        stale: false,
+        snapshot,
+        validation,
+        diagnostics: validation.diagnostics,
+      };
+    }
+    operationRevision += 1;
+    publishPackage({
+      basePackage: snapshot.basePackage as TemplatePackageV1,
+      workingPackage: candidatePackage,
+      validation,
+      source: snapshot.source,
+      savedTemplateId: snapshot.savedTemplateId,
+      diagnostics: validation.diagnostics,
+    });
+    return {
+      applied: true,
+      stale: false,
+      snapshot,
+      validation,
+      diagnostics: validation.diagnostics,
+    };
+  };
+  const fontRequirement = (requirementId: string) => {
+    const packageValue = activeWorkingPackage();
+    const requirement = packageValue.fontRequirements?.find(
+      (item) => item.id === requirementId,
+    );
+    if (!requirement) {
+      throw new Error(`Font requirement "${requirementId}" was not found.`);
+    }
+    return { packageValue, requirement };
+  };
 
   return {
     getSnapshot: () => snapshot,
@@ -322,6 +469,7 @@ export function createTemplateSessionWithDependencies(
         workingPackage: null,
         resolvedTree: null,
         validation: null,
+        importValidation: null,
         diagnostics: [],
         editableFields: [],
         error: null,
@@ -338,6 +486,10 @@ export function createTemplateSessionWithDependencies(
         if (disposed || candidateRevision !== operationRevision) return snapshot;
         const basePackage = result.loadedSource?.originalPackageValue ?? result.package;
         if (!basePackage || !result.package || !result.validation?.valid) {
+          const diagnostics = blockedImportDiagnostics(result);
+          const validation =
+            result.validation ??
+            createFailedTemplatePackageValidation(diagnostics);
           return publish({
             status: "blocked",
             savedTemplateId: null,
@@ -347,8 +499,14 @@ export function createTemplateSessionWithDependencies(
               : null,
             workingPackage: result.package,
             resolvedTree: null,
-            validation: result.validation,
-            diagnostics: blockedImportDiagnostics(result),
+            validation,
+            importValidation: createTemplateImportValidationReport({
+              diagnostics,
+              validation: result.validation,
+              loadedSource: result.loadedSource,
+              layeredDiagnostics: result.layeredDiagnostics,
+            }),
+            diagnostics,
             editableFields: result.package ? getEffectiveEditableFields(result.package) : [],
             error: null,
           });
@@ -360,9 +518,26 @@ export function createTemplateSessionWithDependencies(
           source: result.sourceMetadata ?? null,
           savedTemplateId: null,
           diagnostics: result.diagnostics,
+          importValidation: createTemplateImportValidationReport({
+            diagnostics: result.diagnostics,
+            validation: result.validation,
+            loadedSource: result.loadedSource,
+            layeredDiagnostics: result.layeredDiagnostics,
+          }),
         });
       } catch (error) {
         if (disposed || candidateRevision !== operationRevision) return snapshot;
+        const diagnostics: PackageDiagnostic[] = [
+          {
+            code: "import.failed",
+            severity: "error",
+            category: "parse",
+            message: errorMessage(
+              error,
+              "The TemplatePackage ZIP could not be imported.",
+            ),
+          },
+        ];
         return publish({
           status: "blocked",
           savedTemplateId: null,
@@ -370,18 +545,11 @@ export function createTemplateSessionWithDependencies(
           basePackage: null,
           workingPackage: null,
           resolvedTree: null,
-          validation: null,
-          diagnostics: [
-            {
-              code: "import.failed",
-              severity: "error",
-              category: "parse",
-              message: errorMessage(
-                error,
-                "The TemplatePackage ZIP could not be imported.",
-              ),
-            },
-          ],
+          validation: createFailedTemplatePackageValidation(diagnostics),
+          importValidation: createTemplateImportValidationReport({
+            diagnostics,
+          }),
+          diagnostics,
           editableFields: [],
           error: {
             code: "import-failed",
@@ -389,6 +557,125 @@ export function createTemplateSessionWithDependencies(
           },
         });
       }
+    },
+    loadTemplateState(input) {
+      assertActive();
+      const expectedRevision = input.expectedRevision ?? snapshot.revision;
+      const malformed = (
+        !input.importedPackage ||
+        typeof input.importedPackage !== "object" ||
+        !input.packageValue ||
+        typeof input.packageValue !== "object"
+      );
+      if (malformed) {
+        const validation = createFailedTemplatePackageValidation([
+          {
+            code: "session.state.invalid",
+            severity: "error",
+            category: "schema",
+            message:
+              "Confirmed template state must contain imported and working packages.",
+          },
+        ]);
+        return {
+          applied: false,
+          stale: false,
+          snapshot,
+          importedPackageValidation: validation,
+          packageValidation: validation,
+          diagnostics: validation.diagnostics,
+        };
+      }
+
+      const importedPackage = structuredClone(input.importedPackage);
+      const packageValue = structuredClone(input.packageValue);
+      const importedPackageValidation = dependencies.validate(importedPackage);
+      const packageValidation = dependencies.validate(packageValue);
+      const identityDiagnostics: PackageDiagnostic[] =
+        importedPackage.packageId === packageValue.packageId
+          ? []
+          : [{
+              code: "session.state.package-identity-mismatch",
+              severity: "error",
+              category: "schema",
+              message:
+                "Imported and working packages must have the same package identity.",
+              details: {
+                importedPackageId: importedPackage.packageId,
+                workingPackageId: packageValue.packageId,
+              },
+            }];
+      const diagnostics = [
+        ...importedPackageValidation.diagnostics.map((diagnostic) => ({
+          ...diagnostic,
+          details: {
+            ...diagnostic.details,
+            hydrationPackage: "imported",
+          },
+        })),
+        ...packageValidation.diagnostics.map((diagnostic) => ({
+          ...diagnostic,
+          details: {
+            ...diagnostic.details,
+            hydrationPackage: "working",
+          },
+        })),
+        ...identityDiagnostics,
+      ];
+
+      if (expectedRevision !== snapshot.revision) {
+        return {
+          applied: false,
+          stale: true,
+          snapshot,
+          importedPackageValidation,
+          packageValidation,
+          diagnostics,
+        };
+      }
+      if (
+        !importedPackageValidation.valid ||
+        !packageValidation.valid ||
+        identityDiagnostics.length
+      ) {
+        return {
+          applied: false,
+          stale: false,
+          snapshot,
+          importedPackageValidation,
+          packageValidation,
+          diagnostics,
+        };
+      }
+
+      operationRevision += 1;
+      const source = input.source ? structuredClone(input.source) : null;
+      const originalImportValidation =
+        input.importValidation?.schemaVersion ===
+            "template-import-validation-v1" &&
+          input.importValidation.importable
+          ? structuredClone(input.importValidation)
+          : createTemplateImportValidationReport({
+              diagnostics: packageValidation.diagnostics,
+              validation: packageValidation,
+            });
+      publishPackage({
+        basePackage: freezePackage(importedPackage),
+        workingPackage: packageValue,
+        validation: packageValidation,
+        source,
+        savedTemplateId: null,
+        diagnostics: packageValidation.diagnostics,
+        importValidation: originalImportValidation,
+      });
+      return {
+        applied: true,
+        stale: false,
+        snapshot,
+        importedPackageValidation,
+        packageValidation,
+        diagnostics,
+      };
     },
     async loadSavedTemplate(id) {
       assertActive();
@@ -480,6 +767,62 @@ export function createTemplateSessionWithDependencies(
       return applyMutation(fieldId, (packageValue, field) =>
         setTemplatePackageImageReplacementMode(packageValue, field, mode));
     },
+    replaceWorkingPackage,
+    async getManagedFontCandidates(requirementId) {
+      const { requirement } = fontRequirement(requirementId);
+      if (!fontRegistry) return [];
+      const fonts = await fontRegistry.listManagedFonts();
+      return findManagedFontCandidates(requirement, fonts);
+    },
+    async linkManagedFont(requirementId, managedFontId, linkOptions = {}) {
+      const capturedRevision = snapshot.revision;
+      const { packageValue } = fontRequirement(requirementId);
+      const font = await fontRegistry?.getManagedFont(managedFontId);
+      if (!font) {
+        throw new Error(`Managed font "${managedFontId}" was not found.`);
+      }
+      const nextPackage = await linkRequirementToManagedFont(
+        packageValue,
+        requirementId,
+        font,
+        {
+          allowReplacement: linkOptions.allowReplacement,
+          confirmed: linkOptions.confirmed ?? true,
+          reason: "Confirmed in the reusable template setup wizard.",
+          registry: null,
+        },
+      );
+      return replaceWorkingPackage(nextPackage, capturedRevision);
+    },
+    async uploadFont(requirementId, input) {
+      const capturedRevision = snapshot.revision;
+      const { packageValue } = fontRequirement(requirementId);
+      const prepared = await uploadExactManagedFontForRequirement(
+        packageValue,
+        requirementId,
+        input.bytes,
+        {
+          mimeType: input.mimeType,
+          fileName: input.fileName,
+          provider: "user-upload",
+          registry: fontRegistry,
+          reason: "Uploaded in the reusable exact-font setup flow.",
+        },
+      );
+      return replaceWorkingPackage(prepared.packageValue, capturedRevision);
+    },
+    useFontFallback(requirementId, fallbackFamily = "sans-serif") {
+      const capturedRevision = snapshot.revision;
+      const { packageValue } = fontRequirement(requirementId);
+      return replaceWorkingPackage(
+        useFallbackForRequirement(
+          packageValue,
+          requirementId,
+          fallbackFamily,
+        ),
+        capturedRevision,
+      );
+    },
     restoreImportedState() {
       assertActive();
       if (
@@ -497,6 +840,13 @@ export function createTemplateSessionWithDependencies(
         ),
         source: snapshot.source,
         savedTemplateId: snapshot.savedTemplateId,
+      });
+    },
+    reset() {
+      assertActive();
+      operationRevision += 1;
+      return publish({
+        ...snapshotPayload(emptySnapshot()),
       });
     },
     dispose() {

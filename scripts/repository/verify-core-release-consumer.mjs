@@ -308,9 +308,9 @@ if (invalid.importable || invalid.source.valid || invalid.source.diagnostics.len
     .update(declaration)
     .digest("hex");
   if (
-    declaration.byteLength !== 86_272 ||
+    declaration.byteLength !== 87_431 ||
     declarationHash !==
-      "e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8"
+      "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
   ) {
     throw new Error(
       `Released core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}.`,

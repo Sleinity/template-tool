@@ -21,6 +21,23 @@ Candidate discovery, upload validation, trusted-font validation, explicit linkin
 
 Different-family replacement requires an explicit action. An exact face can replace a prior fallback and retains resolution history. Old managed records are normalized into the V2 record shape on read without discarding legacy identity.
 
+### Emoji fallback coverage authority
+
+Exact text-face coverage excludes only explicit emoji sequences that the
+existing renderer deliberately delegates to the device emoji font. The shared
+classifier recognizes default emoji presentation, U+FE0F presentation
+sequences, ZWJ sequences, skin-tone modifiers, regional-indicator flags and
+keycaps. A text-presentation selector retains its base symbol under text-face
+authority.
+
+This exception is deliberately narrow. Letters, numbers, punctuation,
+currency, accented characters, Greek letters and ordinary text-presentation
+symbols still require coverage from the uploaded face. Emoji and symbol font
+families retain authority for their own characters. Exact binary identity,
+family/PostScript matching, weight, posture, stretch, axes, face ambiguity and
+revision checks are unchanged. Accepted platform fallback remains visible as
+the existing non-blocking `font.glyph-fallback-likely` portability diagnostic.
+
 ## Runtime identity
 
 Managed faces are registered under a deterministic private family:
@@ -41,4 +58,4 @@ The final now-hiring evidence is under `fidelity/candidates/milestone-5-3-source
 
 ## Compatibility and open evidence
 
-Older packages without the new resolution fields keep existing fallback behavior. Unknown metadata, ambiguous collection faces, uncovered glyphs, unavailable axes, and corrupt binaries do not acquire exact authority. Cross-browser raster equivalence, OpenType feature settings, source-preview font-version identity, variable-axis instances beyond the current declared weight, rich mixed-face runs, and Inter Tight license provenance remain open.
+Older packages without the new resolution fields keep existing fallback behavior. Unknown metadata, ambiguous collection faces, uncovered text-face glyphs, unavailable axes, and corrupt binaries do not acquire exact authority. Device emoji appearance remains platform-dependent and is reported as portability evidence. Cross-browser raster equivalence, OpenType feature settings, source-preview font-version identity, variable-axis instances beyond the current declared weight, rich mixed-face runs, and Inter Tight license provenance remain open.
