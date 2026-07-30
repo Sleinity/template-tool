@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import type { TemplateSessionV1 } from "@sleinity/template-browser";
+import type { TemplateSessionV1 } from "@sleinity/template-browser/session";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,

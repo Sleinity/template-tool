@@ -1,8 +1,61 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-30
-Current milestone: SDK 0.3.0 released with external shell composability and template reopening
+Current milestone: SDK 0.4.0 external-adoption contract hardening
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.4.0 — external-adoption contract hardening
+
+The fixed core/browser/React train is prepared at `0.4.0`. Browser consumers
+now have curated `/session`, `/importer`, and `/compatibility` entry points
+while every 0.3 root export remains supported. The committed machine-readable
+API contract records every package path and public symbol and rejects
+unversioned export drift.
+
+`inspectTemplateRuntimeSupport()` reports required browser, storage, exact-font,
+image, SVG, local data/blob, render and optional capture capabilities with
+stable `ready`, `warning`, and `blocked` codes.
+`inspectTemplateImportConfirmation()` freshly validates package state, package
+identity, the compatible FNV fingerprint, 0.4 SHA-256 digest and browser-local
+managed-font authority. Supported 0.3 confirmations without the new digest
+remain loadable with a compatibility warning. Current confirmations missing
+their digest, unsupported schemas, malformed packages, identity mismatches,
+and integrity failures are blocked.
+`loadTemplateImportConfirmation()` is the recommended atomic reopening path;
+it never trusts stored validation, resolved trees, readiness or render
+identities and delegates publication to the existing guarded
+`loadTemplateState()` contract.
+
+The runtime preflight exposed that AJV schema compilation requires CSP
+`script-src 'unsafe-eval'`. Canonical compilation is now lazy, so an
+intentionally restricted host mounts and receives
+`runtime.dynamic-code.unavailable` instead of crashing before preflight. The
+supported packed-CSP profile additionally verifies local data/blob images,
+managed fonts, IndexedDB and silent PNG capture with zero external requests.
+
+Current-run portable tests, root/package TypeScript, SDK builds, API/export
+manifest, boundaries, archives, DOM-free installed core, isolated npm and pnpm
+React consumers, Studio build/smoke, session smoke, examples, documentation and the
+packed generic-editor lifecycle pass. Core declarations remain exactly 87,431
+bytes / `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 283,577 / 401,430 / 303,406 bytes;
+Studio is 1,000.89 / 291.48 gzip kB JavaScript; minimal and generic examples
+are 846.43 / 248.93 and 903.04 / 264.80 gzip kB; the packed consumer is
+885,908 / 260,129 gzip bytes.
+
+Appearance evidence is valid and deterministic for all 19 fixtures. Renderer
+run `2026-07-30T14-56-21-866Z`, exact-font run
+`font-evidence-2026-07-30T14-58-54-584Z`, and source-authoritative run
+`2026-07-30T14-59-01-309Z` are stable. Guarded renderer run
+`2026-07-30T14-57-08-849Z`, scene run
+`scene-2026-07-30T14-58-50-470Z`, and settlement run
+`settlement-2026-07-30T14-58-52-279Z` retain the documented historical and
+unapproved comparison states. Approved aggregates remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No reference, fixture, schema, tolerance, promotion or update command ran.
 
 ## SDK 0.3.0 — external shell composability and template reopening
 

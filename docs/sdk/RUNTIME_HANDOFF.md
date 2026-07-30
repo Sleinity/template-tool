@@ -1,13 +1,13 @@
-# SDK 0.3.0 runtime handoff
+# SDK 0.4.0 runtime handoff
 
 Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
 application:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.3.0` | ZIP import, strict validation, diagnostics, portable fields and package models | No peer dependencies |
-| `@sleinity/template-browser@0.3.0` | Browser session, assets, fonts, persistence, readiness and PNG capture | Browser runtime |
-| `@sleinity/template-react@0.3.0` | React provider, setup wizard, renderer, inspection viewport and revision-safe capture handle | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.4.0` | ZIP import, strict validation, diagnostics, portable fields and package models | No peer dependencies |
+| `@sleinity/template-browser@0.4.0` | Browser session, assets, fonts, persistence, readiness and PNG capture | Browser runtime |
+| `@sleinity/template-react@0.4.0` | React provider, setup wizard, renderer, inspection viewport and revision-safe capture handle | React 19 and React DOM 19 |
 
 ## Installation
 
@@ -21,9 +21,9 @@ always-auth=true
 ```
 
 ```sh
-pnpm add @sleinity/template-core@0.3.0 \
-  @sleinity/template-browser@0.3.0 \
-  @sleinity/template-react@0.3.0
+pnpm add @sleinity/template-core@0.4.0 \
+  @sleinity/template-browser@0.4.0 \
+  @sleinity/template-react@0.4.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
@@ -31,16 +31,16 @@ pnpm add @sleinity/template-core@0.3.0 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-[`sdk-v0.3.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0).
+[`sdk-v0.4.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.3.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.3.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.3.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.0.tgz"
   }
 }
 ```
@@ -50,9 +50,9 @@ same archives:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.3.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.3.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.3.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.0.tgz"
 ```
 
 Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
@@ -84,9 +84,12 @@ creation and permanent-unmount disposal. Compose it with:
 - `TemplateSessionRenderer`
 - `TemplateSessionRendererHandle`
 
-Call `session.loadZip()` once, or use `session.loadTemplateState()` to open a
-host-retained confirmed baseline and working package in a fresh session. The
-snapshot publishes lifecycle status,
+Run `inspectTemplateRuntimeSupport()` before presenting template workflows.
+After confirmation, create a fresh session and reopen the host record with
+`loadTemplateImportConfirmation()`. It verifies confirmation schema, package
+identity, FNV fingerprint, SHA-256 digest and local font authority before
+delegating to the session's fresh `loadTemplateState()` rebuild. The snapshot
+publishes lifecycle status,
 validation, ordered diagnostics, editable fields, base and working packages,
 resolved state, and revisions. Mutate fields and images through the session,
 reset individual fields, or restore all imported state.

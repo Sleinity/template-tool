@@ -17,8 +17,20 @@ import type {
   TemplatePackageV1,
 } from "./types";
 
-const ajv = new Ajv2020({ allErrors: true, strict: true, allowUnionTypes: true });
-const validateSchema = ajv.compile(schema);
+type SchemaValidator = ReturnType<Ajv2020["compile"]>;
+
+let validateSchema: SchemaValidator | null = null;
+
+function getSchemaValidator(): SchemaValidator {
+  if (validateSchema) return validateSchema;
+  const ajv = new Ajv2020({
+    allErrors: true,
+    strict: true,
+    allowUnionTypes: true,
+  });
+  validateSchema = ajv.compile(schema);
+  return validateSchema;
+}
 
 const allowedFieldProperties: Record<TemplateNode["type"], RegExp[]> = {
   FRAME: [
@@ -963,13 +975,14 @@ function validateSemanticPackage(
 }
 
 export function validateTemplatePackage(input: unknown): TemplatePackageValidationResult {
-  const schemaValid = validateSchema(input);
+  const schemaValidator = getSchemaValidator();
+  const schemaValid = schemaValidator(input);
   if (!schemaValid) {
     return {
       valid: false,
       schemaValid: false,
       semanticValid: false,
-      diagnostics: schemaDiagnostics(validateSchema.errors),
+      diagnostics: schemaDiagnostics(schemaValidator.errors),
       pluginDiagnostics: extractPluginDiagnostics(input),
       motionLinking: null,
     };

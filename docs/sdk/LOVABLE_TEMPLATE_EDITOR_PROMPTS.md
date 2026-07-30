@@ -41,22 +41,22 @@ The required SDK peer versions are React 19 and React DOM 19. If this project is
 
 Before using this prompt, copy the three checksum-verified archives from the
 public
-[`sdk-v0.3.0` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0)
+[`sdk-v0.4.0` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.0)
 into the repository's `vendor/` directory. Downloading the Release assets
 requires no GitHub token.
 
 ```text
-Integrate the checksum-verified Template Platform 0.3.0 archives already present in this private repository:
+Integrate the checksum-verified Template Platform 0.4.0 archives already present in this private repository:
 
-- vendor/sleinity-template-core-0.3.0.tgz
-- vendor/sleinity-template-browser-0.3.0.tgz
-- vendor/sleinity-template-react-0.3.0.tgz
+- vendor/sleinity-template-core-0.4.0.tgz
+- vendor/sleinity-template-browser-0.4.0.tgz
+- vendor/sleinity-template-react-0.4.0.tgz
 
 Add these exact dependencies:
 
-"@sleinity/template-core": "file:vendor/sleinity-template-core-0.3.0.tgz"
-"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.3.0.tgz"
-"@sleinity/template-react": "file:vendor/sleinity-template-react-0.3.0.tgz"
+"@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.0.tgz"
+"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.0.tgz"
+"@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.0.tgz"
 
 Requirements:
 
@@ -67,7 +67,7 @@ Requirements:
 - Do not add NODE_AUTH_TOKEN, a GitHub PAT, or another package-registry secret.
 - Do not replace these dependencies with registry URLs or Git dependencies.
 - Do not modify the SDK archives.
-- Confirm all installed package versions resolve to 0.3.0.
+- Confirm all installed package versions resolve to 0.4.0.
 - Run the existing typecheck and production build.
 - Report changed files and any dependency conflicts before continuing.
 ```
@@ -83,8 +83,12 @@ Use the repository’s existing route and layout conventions. If no suitable con
 
 Use only these supported APIs:
 
-From @sleinity/template-browser:
+From @sleinity/template-browser/importer:
 - TemplateImportConfirmationV1
+
+From @sleinity/template-browser/compatibility:
+- inspectTemplateRuntimeSupport
+- loadTemplateImportConfirmation
 
 From @sleinity/template-react/importer:
 - useTemplateImportWizard
@@ -94,7 +98,7 @@ Implementation requirements:
 
 1. Create and own one import controller per mounted workspace with useTemplateImportWizard().
 2. Let the owned-controller hook handle permanent disposal and React StrictMode development replay.
-3. Import TemplateImportConfirmationV1 as a type from @sleinity/template-browser.
+3. Import TemplateImportConfirmationV1 as a type from @sleinity/template-browser/importer.
 4. Import TemplateImportWizard from @sleinity/template-react/importer.
 5. Import @sleinity/template-react/importer.css once in the application.
 6. Pass the owned controller to TemplateImportWizard.
@@ -124,7 +128,7 @@ From @sleinity/template-react:
 - useTemplateSessionSnapshot
 - TemplateSessionRenderer
 
-- session.loadTemplateState
+- loadTemplateImportConfirmation from @sleinity/template-browser/compatibility
 - snapshot.editableFields
 - snapshot.workingPackage
 - getPackageFieldValue from @sleinity/template-core
@@ -137,23 +141,24 @@ From @sleinity/template-react:
 Requirements:
 
 1. When the user selects a confirmed host record, create a fresh session with useTemplateSession().
-2. Call session.loadTemplateState() with the record’s importedPackage, packageValue, source filename, and importValidation.
-3. Treat applied=false as a blocked reopen and show its structured diagnostics. Never fall back to the wizard session.
-4. Wrap the editor and TemplateSessionRenderer in TemplateSessionProvider using the fresh session.
-5. Render controls from the freshly rebuilt editable-field descriptors.
-6. Support text, textarea, number, date, color, and boolean fields.
-7. Read current values with getPackageFieldValue instead of manually guessing node property paths.
-8. Display field labels, constraints, mutation warnings, and rejected updates.
-9. Add reset for each field and restore-all-imported-state.
-10. For image fields:
+2. Run inspectTemplateRuntimeSupport() before exposing the editor and show its stable blocked or warning codes.
+3. Call loadTemplateImportConfirmation(session, record). It must inspect integrity and atomically rebuild state through loadTemplateState().
+4. Treat applied=false as a blocked reopen and show the inspection issues. Never fall back to the wizard session.
+5. Wrap the editor and TemplateSessionRenderer in TemplateSessionProvider using the fresh session.
+6. Render controls from the freshly rebuilt editable-field descriptors.
+7. Support text, textarea, number, date, color, and boolean fields.
+8. Read current values with getPackageFieldValue instead of manually guessing node property paths.
+9. Display field labels, constraints, mutation warnings, and rejected updates.
+10. Add reset for each field and restore-all-imported-state.
+11. For image fields:
    - validate the selected MIME type and file size;
    - convert the image to a data URL;
    - obtain width and height with createImageBitmap;
    - call session.replaceImage with MIME type, size, dimensions, and replacement-fill;
    - expose Fill and Fit mode controls.
-11. Keep this editor descriptor-driven. Do not hard-code fields for a particular template.
-12. Hosts may add stricter validation, crop tools, transformations, or richer controls before calling the SDK. Final values must still use a supported descriptor and pass SDK constraints.
-13. Arbitrary package-node mutation is not part of the stable editing contract.
+12. Keep this editor descriptor-driven. Do not hard-code fields for a particular template.
+13. Hosts may add stricter validation, crop tools, transformations, or richer controls before calling the SDK. Final values must still use a supported descriptor and pass SDK constraints.
+14. Arbitrary package-node mutation is not part of the stable editing contract.
 ```
 
 ## Prompt 5 — add browser-local persistence
@@ -215,7 +220,7 @@ Cover:
 5. The exact required family and weight are shown, invalid font files are rejected with a clear reason, a verified exact upload is reused after reload, and an unlinked, compatible, replacement, or fallback-only requirement remains blocked.
 6. Field-rule labels, ordering, constraints, and image Fill/Fit defaults update the setup revision without editing content.
 7. Confirmation is disabled before current render readiness and returns the current immutable package/evidence result.
-8. Confirmation returns to the host dashboard, selecting the record creates a fresh session, and loadTemplateState() rebuilds ready editable state.
+8. Confirmation returns to the host dashboard, selecting the record creates a fresh session, and loadTemplateImportConfirmation() verifies and rebuilds ready editable state.
 9. Editing a content field through host-owned controls changes the current working package after reopening.
 10. Reset restores the imported value.
 11. Image constraints reject invalid input; a valid host-provided replacement supports Fill and Fit.

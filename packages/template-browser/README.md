@@ -10,6 +10,14 @@ font availability checks into `template-core`.
 
 ## Consumer session
 
+New hosts should import from the curated entry points:
+
+- `@sleinity/template-browser/session`
+- `@sleinity/template-browser/importer`
+- `@sleinity/template-browser/compatibility`
+
+The broad package root remains supported for existing integrations.
+
 `createTemplateSession()` is the supported high-level host contract. It owns a
 revision-safe ZIP/import lifecycle, immutable imported baseline, editable
 working package, validation, resolved tree, typed fields, and optional save/load
@@ -26,6 +34,14 @@ session. It clones and revalidates the imported baseline and working package,
 requires matching package identity, rebuilds resolved and editable state, and
 publishes atomically at a new revision. Stored validation, resolved trees,
 readiness, and render identities are never trusted.
+
+`inspectTemplateRuntimeSupport()` reports required browser, storage, font,
+image, SVG, data/blob, rendering, and optional capture capabilities with stable
+machine-readable codes. `inspectTemplateImportConfirmation()` validates
+confirmation identity and integrity without changing session state.
+`loadTemplateImportConfirmation()` is the recommended atomic reopening helper.
+SDK 0.4 confirmations include SHA-256 content evidence; supported 0.3
+confirmations without it remain loadable with a compatibility warning.
 
 SDK 0.3 adds setup-specific operations used by the React importer:
 `replaceWorkingPackage`, managed-font candidate lookup/linking, font upload,

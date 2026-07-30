@@ -127,7 +127,7 @@ try {
     path.join(consumerDirectory, "src/main.tsx"),
     `import { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { createTemplateSession } from "@sleinity/template-browser";
+import { createTemplateSession } from "@sleinity/template-browser/session";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,

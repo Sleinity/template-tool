@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.3.0 \
-  @sleinity/template-browser@0.3.0 \
-  @sleinity/template-react@0.3.0
+pnpm add @sleinity/template-core@0.4.0 \
+  @sleinity/template-browser@0.4.0 \
+  @sleinity/template-react@0.4.0
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.3.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0)
+[`sdk-v0.4.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.0)
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -67,6 +67,16 @@ dependencies, server route, runtime secret, or network requirement. See the
 [core importer handoff](CORE_IMPORTER_HANDOFF.md).
 
 ## React runtime contract
+
+New integrations should use the curated browser entry points:
+
+- `@sleinity/template-browser/session` for session ownership and mutation;
+- `@sleinity/template-browser/importer` for the headless import workflow and
+  confirmation types;
+- `@sleinity/template-browser/compatibility` for runtime preflight,
+  confirmation inspection and atomic reopening.
+
+The broad browser root remains compatible for existing 0.3 integrations.
 
 For a complete host-neutral setup flow, use the importer subpath:
 
@@ -111,6 +121,13 @@ session.setField("headline", "Updated headline");
 </TemplateSessionProvider>
 ```
 
+Before presenting template workflows, run
+`inspectTemplateRuntimeSupport()` from the compatibility entry point. After
+confirmation, retain the immutable result in host state, create a fresh
+session, and reopen it with `loadTemplateImportConfirmation()`. This verifies
+identity and digest evidence before delegating to the session's fresh,
+atomic `loadTemplateState()` rebuild.
+
 Use `useTemplateSessionSnapshot()` for lifecycle, validation, diagnostics,
 editable fields, working package, resolved tree, and revisions. The session
 supports typed field/image mutation, imported-state restoration, IndexedDB
@@ -132,6 +149,16 @@ injected adapters.
 See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) and the focused
 [template editor reference](../../examples/template-editor-integration/README.md).
 The repository verifies both workspace and isolated packed consumers.
+For upgrades, see [Migrating to SDK 0.4](SDK_0_4_MIGRATION.md). Integration
+failures are organized by stable compatibility code in the
+[troubleshooting guide](TROUBLESHOOTING.md). The committed
+[machine-readable API contract](../../config/sdk-public-api.json) is the
+authoritative public export inventory.
+
+Recommended high-level APIs are the curated browser subpaths and React entry
+points. The broad core/browser roots remain supported low-level adapter
+surfaces. Fidelity-only inspection code stays outside package export maps, and
+repository internals are not publicly supported.
 
 ## Offline and network behavior
 

@@ -61,6 +61,7 @@ const fontPath = path.join(
 );
 let browser;
 let server;
+let restrictedServer;
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -70,7 +71,7 @@ function run(command, args, options = {}) {
   });
   if (result.status !== 0) {
     throw new Error(
-      `${command} ${args.join(" ")} failed:\n${result.stderr || result.stdout}`,
+      `${command} ${args.join(" ")} failed:\n${result.stdout}\n${result.stderr}`,
     );
   }
   return result.stdout;
@@ -388,7 +389,23 @@ ${Object.entries(vendoredDependencies)
     root: consumerDirectory,
     configFile: false,
     logLevel: "warn",
-    preview: { host: "127.0.0.1", port: 0 },
+    preview: {
+      host: "127.0.0.1",
+      port: 0,
+      headers: {
+        "Content-Security-Policy": [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-eval'",
+          "style-src 'self' 'unsafe-inline'",
+          "img-src 'self' data: blob:",
+          "font-src 'self' data: blob:",
+          "connect-src 'self' blob: data:",
+          "worker-src 'self' blob:",
+          "object-src 'none'",
+          "base-uri 'self'",
+        ].join("; "),
+      },
+    },
   });
   const applicationUrl = server.resolvedUrls?.local?.[0];
   if (!applicationUrl) {
@@ -424,6 +441,26 @@ ${Object.entries(vendoredDependencies)
   });
 
   await page.goto(`${applicationUrl}?acceptance=1`);
+  const runtimeSupport = page.locator('[data-testid="runtime-support"]');
+  await page.waitForTimeout(1_000);
+  if (await runtimeSupport.count() === 0) {
+    throw new Error(
+      `Supported-CSP reference did not mount. Browser errors: ${
+        consoleErrors.join(" | ") || "none"
+      }. Body: ${(await page.locator("body").innerText()).slice(0, 500)}`,
+    );
+  }
+  await page.waitForFunction(() =>
+    document.querySelector('[data-testid="runtime-support"]')
+      ?.getAttribute("data-runtime-status") !== "checking");
+  const runtimeStatus = await runtimeSupport.getAttribute("data-runtime-status");
+  if (runtimeStatus !== "ready") {
+    throw new Error(
+      `Supported-CSP runtime preflight returned ${runtimeStatus}: ${
+        await runtimeSupport.getAttribute("data-runtime-issues")
+      }`,
+    );
+  }
   for (const surface of ["page", "modal", "drawer"]) {
     await page
       .locator(
@@ -659,14 +696,56 @@ ${Object.entries(vendoredDependencies)
   }
   await context.close();
 
+  restrictedServer = await preview({
+    root: consumerDirectory,
+    configFile: false,
+    logLevel: "warn",
+    preview: {
+      host: "127.0.0.1",
+      port: 0,
+      headers: {
+        "Content-Security-Policy": [
+          "default-src 'self'",
+          "script-src 'self'",
+          "style-src 'self'",
+          "img-src 'self'",
+          "font-src 'self'",
+          "connect-src 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
+        ].join("; "),
+      },
+    },
+  });
+  const restrictedApplicationUrl = restrictedServer.resolvedUrls?.local?.[0];
+  if (!restrictedApplicationUrl) {
+    throw new Error("The restricted-CSP reference has no browser URL.");
+  }
+  const restrictedContext = await browser.newContext();
+  const restrictedPage = await restrictedContext.newPage();
+  await restrictedPage.goto(restrictedApplicationUrl);
+  await restrictedPage
+    .locator('[data-testid="runtime-support"][data-runtime-status="blocked"]')
+    .waitFor();
+  const restrictedIssues = await restrictedPage
+    .locator('[data-testid="runtime-support"]')
+    .getAttribute("data-runtime-issues");
+  if (!restrictedIssues?.includes("runtime.dynamic-code.unavailable")) {
+    throw new Error(
+      `Restricted CSP did not expose the expected dynamic-code blocker: ${restrictedIssues}`,
+    );
+  }
+  await restrictedContext.close();
+
   const files = await readdir(vendorDirectory);
   console.log(
-    `Verified packed template editor reference with ${files.length} archives: dashboard-to-wizard confirmation, fresh confirmed-state hydration, default UI plus simultaneous headless page/modal/drawer composition, invalid/valid ZIP, exact font rejection/upload/reuse, field rules, host-owned text transformation and downstream image edits, Fill/Fit/reset, stale export rejection, offline persistence, silent PNG, disposal, and zero external requests (${archiveEvidence
+    `Verified packed template editor reference with ${files.length} archives: supported-CSP runtime readiness, restricted-CSP structured blocking, dashboard-to-wizard confirmation, fresh confirmed-state hydration, default UI plus simultaneous headless page/modal/drawer composition, invalid/valid ZIP, exact font rejection/upload/reuse, field rules, host-owned text transformation and downstream image edits, Fill/Fit/reset, stale export rejection, offline persistence, silent PNG, disposal, and zero external requests (${archiveEvidence
       .map((item) => `${item.directory}=${item.sha256}`)
       .join(", ")}).`,
   );
 } finally {
   await browser?.close();
+  await restrictedServer?.close();
   await server?.close();
   await rm(workspace, { recursive: true, force: true });
 }

@@ -14,12 +14,14 @@ import {
 } from "react";
 import {
   createTemplateSession,
-  exportTemplatePackagePng,
-  type PackagePngExportRequest,
-  type PackagePngExportResult,
   type TemplateSessionOptions,
   type TemplateSessionSnapshotV1,
   type TemplateSessionV1,
+} from "@sleinity/template-browser/session";
+import {
+  exportTemplatePackagePng,
+  type PackagePngExportRequest,
+  type PackagePngExportResult,
 } from "@sleinity/template-browser";
 import {
   TemplatePackageRenderer,

@@ -27,12 +27,19 @@ integration. Typical required allowances include:
 img-src 'self' data: blob:
 font-src 'self' data: blob:
 style-src 'self' 'unsafe-inline'
+script-src 'self' 'unsafe-eval'
+connect-src 'self' blob: data:
 ```
 
 Do not add an external image or font origin merely to satisfy the renderer.
 Assets and managed fonts should remain package- or browser-storage-backed for
 offline deterministic rendering. The exact CSP matrix is a host acceptance
 test, not a reason to weaken the host's global policy without review.
+Call `inspectTemplateRuntimeSupport()` to receive stable `ready`, `warning`,
+or `blocked` evidence for the current browser and policy. The packed acceptance
+tests both a supported policy and an intentionally restricted policy.
+SDK 0.4 lazily initializes the canonical AJV validator so the preflight can
+report `runtime.dynamic-code.unavailable` before a ZIP is validated.
 
 ## Storage and persistence
 
@@ -45,6 +52,23 @@ Same-version save/reload is verified. Cross-version saved-draft compatibility
 must be tested for every release until an explicit persisted-record migration
 contract is published. Keep the imported ZIP or uploaded media authority
 available for rollback.
+
+Browser-local managed fonts and IndexedDB records are not cross-device
+artifacts. `inspectTemplateImportConfirmation()` surfaces missing local font
+authority rather than implying that a confirmation is independently portable.
+
+## Confirmation compatibility
+
+New 0.4 confirmations retain the compatible FNV fingerprint and add a SHA-256
+package digest. The digest is content-integrity evidence, not a signature or
+authorization mechanism. A valid 0.3 confirmation without the digest remains
+loadable with an informational compatibility warning. A confirmation claiming
+to come from 0.4 or newer is blocked if its required digest is absent.
+
+Use `inspectTemplateImportConfirmation()` for a read-only report, or
+`loadTemplateImportConfirmation()` for the recommended atomic path. Unsupported
+confirmation schemas, malformed packages, identity mismatches, and fingerprint
+or digest mismatches are blocked before the active session changes.
 
 ## Revision and export contract
 

@@ -9,6 +9,15 @@ import {
   createTemplateImportWizard,
   type TemplateImportConfirmationV1,
 } from "./templateImportWizard";
+import {
+  inspectTemplateImportConfirmation,
+  inspectTemplateRuntimeSupport,
+  loadTemplateImportConfirmation,
+} from "./templateImportCompatibility";
+import {
+  createTemplatePackageDigest,
+  createTemplatePackageFingerprint,
+} from "./templateImportIntegrity";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -162,8 +171,10 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.3.0" &&
+    confirmation.sdkVersion === "0.4.0" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
+    confirmation.packageDigest?.algorithm === "sha-256" &&
+    confirmation.packageDigest.value.length === 64 &&
     confirmation.sourceName === "wizard.zip" &&
     confirmation.importedAt === "2026-07-30T10:00:00.000Z" &&
     confirmation.configuredFieldRules[0].helpText ===
@@ -171,6 +182,274 @@ assert(
     wizard.getSnapshot().status === "completed" &&
     wizard.getSnapshot().persistenceReceipt?.id === "host-template-1",
   "Confirmation should be immutable, host-neutral, fingerprinted, and persistence-aware.",
+);
+
+const currentInspection = await inspectTemplateImportConfirmation(
+  confirmation,
+  { fontRegistry: null },
+);
+assert(
+  currentInspection.status === "ready" &&
+    currentInspection.loadable &&
+    currentInspection.digest.status === "verified" &&
+    currentInspection.fingerprint.matches,
+  "A current confirmation should pass fresh compatibility inspection.",
+);
+
+const reopenedSession = createTemplateSessionWithDependencies(
+  {},
+  {
+    importZip: async () => readyImport(packageValue),
+    createResolvedTree: createResolvedRenderTree,
+    validate: validateTemplatePackage,
+  },
+);
+const reopened = await loadTemplateImportConfirmation(
+  reopenedSession,
+  confirmation,
+  { fontRegistry: null },
+);
+assert(
+  reopened.applied &&
+    !reopened.stale &&
+    reopenedSession.getSnapshot().workingPackage?.packageId ===
+      confirmation.packageValue.packageId &&
+    reopenedSession.getSnapshot().importValidation?.importable === true,
+  "A compatible confirmation should reopen through fresh session validation.",
+);
+const firstReopenedRevision = reopenedSession.getSnapshot().revision;
+const reopenedAgain = await loadTemplateImportConfirmation(
+  reopenedSession,
+  confirmation,
+  { fontRegistry: null },
+);
+assert(
+  reopenedAgain.applied &&
+    reopenedSession.getSnapshot().revision > firstReopenedRevision,
+  "Repeated compatible reopening should publish a fresh session revision.",
+);
+
+const legacyConfirmation = structuredClone(confirmation) as Record<
+  string,
+  unknown
+>;
+delete legacyConfirmation.packageDigest;
+legacyConfirmation.sdkVersion = "0.3.0";
+const legacyInspection = await inspectTemplateImportConfirmation(
+  legacyConfirmation,
+  { fontRegistry: null },
+);
+assert(
+  legacyInspection.loadable &&
+    legacyInspection.status === "warning" &&
+    legacyInspection.digest.status === "legacy-missing" &&
+    legacyInspection.issues.some(
+      (issue) => issue.code === "confirmation.digest-missing",
+    ),
+  "A valid 0.3.0 confirmation should remain loadable with a digest warning.",
+);
+const missingCurrentDigest = structuredClone(confirmation) as Record<
+  string,
+  unknown
+>;
+delete missingCurrentDigest.packageDigest;
+const missingCurrentDigestInspection = await inspectTemplateImportConfirmation(
+  missingCurrentDigest,
+  { fontRegistry: null },
+);
+assert(
+  !missingCurrentDigestInspection.loadable &&
+    missingCurrentDigestInspection.issues.some(
+      (issue) => issue.code === "confirmation.digest-required",
+    ),
+  "A 0.4.0 confirmation missing its required digest should be rejected.",
+);
+
+const beforeRejectedHydration = reopenedSession.getSnapshot();
+const tamperedConfirmation = structuredClone(confirmation);
+tamperedConfirmation.packageValue.name = "Tampered confirmation";
+const rejectedHydration = await loadTemplateImportConfirmation(
+  reopenedSession,
+  tamperedConfirmation,
+  { fontRegistry: null },
+);
+assert(
+  !rejectedHydration.applied &&
+    !rejectedHydration.stale &&
+    rejectedHydration.inspection.status === "blocked" &&
+    reopenedSession.getSnapshot() === beforeRejectedHydration &&
+    rejectedHydration.inspection.issues.some(
+      (issue) =>
+        issue.code === "confirmation.fingerprint-mismatch" ||
+        issue.code === "confirmation.digest-mismatch",
+    ),
+  "Tampered confirmation state should be rejected without replacing the active session.",
+);
+
+const mismatchedIdentity = structuredClone(confirmation);
+mismatchedIdentity.importedPackage.packageId = "different-package";
+const mismatchedInspection = await inspectTemplateImportConfirmation(
+  mismatchedIdentity,
+  { fontRegistry: null },
+);
+assert(
+  !mismatchedInspection.loadable &&
+    mismatchedInspection.issues.some(
+      (issue) => issue.code === "confirmation.package-identity-mismatch",
+    ),
+  "Package identity mismatches should block reopening.",
+);
+
+const futureSchema = structuredClone(confirmation) as Record<string, unknown>;
+futureSchema.schemaVersion = "template-import-confirmation-v2";
+const futureInspection = await inspectTemplateImportConfirmation(futureSchema, {
+  fontRegistry: null,
+});
+assert(
+  !futureInspection.loadable &&
+    futureInspection.issues.some(
+      (issue) => issue.code === "confirmation.schema-unsupported",
+    ),
+  "Unsupported future confirmation schemas should be rejected.",
+);
+
+const localFontConfirmation = structuredClone(confirmation);
+for (const candidatePackage of [
+  localFontConfirmation.importedPackage,
+  localFontConfirmation.packageValue,
+]) {
+  const textNodeId = Object.values(candidatePackage.nodes).find(
+    (node) => node.type === "TEXT",
+  )?.id;
+  assert(textNodeId, "The fixture should contain a text node for font evidence.");
+  candidatePackage.fontRequirements = [{
+    id: "font:local-only",
+    family: "Local Only",
+    style: "Regular",
+    cssStyle: "normal",
+    weight: 400,
+    postScriptName: "LocalOnly-Regular",
+    usedBy: [textNodeId],
+    characters: "A",
+    editable: false,
+    mixedStyle: false,
+    source: "test",
+    availableInFigma: false,
+    assetId: "asset:font:local-only",
+    resolution: {
+      managedFontId: "managed-font:local-only:0",
+      match: "exact",
+      classification: "exact",
+      confirmed: true,
+      requestId: "font:local-only",
+      faceIndex: 0,
+      binaryHash: "local-only-binary-hash",
+      runtimeFamily: "__template_font_local_only_0_static",
+      effectiveFamily: "Local Only",
+      effectiveWeight: 400,
+      effectiveStyle: "normal",
+      effectiveStretch: "normal",
+    },
+  }];
+  candidatePackage.assets["asset:font:local-only"] = {
+    id: "asset:font:local-only",
+    type: "font",
+    source: "stored",
+    mimeType: "font/ttf",
+    hash: "local-only-binary-hash",
+    storageKey: "sha256:local-only-binary-hash",
+    usedBy: [textNodeId],
+    extensions: {
+      managedFontId: "managed-font:local-only:0",
+      fontFaceIdentity: {
+        binaryHash: "local-only-binary-hash",
+        faceIndex: 0,
+        runtimeFamily: "__template_font_local_only_0_static",
+        typographicFamily: "Local Only",
+        postScriptName: "LocalOnly-Regular",
+        weight: 400,
+        style: "normal",
+        stretch: "normal",
+        classification: "exact",
+      },
+    },
+  };
+}
+localFontConfirmation.packageFingerprint = createTemplatePackageFingerprint(
+  localFontConfirmation.packageValue,
+);
+localFontConfirmation.packageDigest = await createTemplatePackageDigest(
+  localFontConfirmation.packageValue,
+);
+const localFontInspection = await inspectTemplateImportConfirmation(
+  localFontConfirmation,
+  { fontRegistry: null },
+);
+assert(
+  localFontInspection.loadable &&
+    localFontInspection.status === "warning" &&
+    localFontInspection.fonts[0]?.localBinaryAvailable === false &&
+    localFontInspection.issues.some(
+      (issue) => issue.code === "confirmation.font-binary-unavailable",
+    ),
+  "A valid confirmation should remain reopenable while clearly reporting missing browser-local font authority.",
+);
+
+const portableRuntime = await inspectTemplateRuntimeSupport({
+  persistence: "none",
+  managedFonts: false,
+  renderValidation: false,
+  pngCapture: false,
+});
+assert(
+  portableRuntime.status === "ready" && portableRuntime.supported,
+  "A DOM-free import-only environment should pass the selected runtime requirements.",
+);
+const browserRuntime = await inspectTemplateRuntimeSupport();
+assert(
+  browserRuntime.status === "blocked" &&
+    browserRuntime.issues.some((issue) => issue.code === "runtime.dom.unavailable"),
+  "The complete browser workflow should report structured blockers in a DOM-free environment.",
+);
+const indexedDbRuntime = await inspectTemplateRuntimeSupport({
+  persistence: "indexeddb",
+  managedFonts: false,
+  renderValidation: false,
+});
+assert(
+  indexedDbRuntime.status === "blocked" &&
+    indexedDbRuntime.issues.some(
+      (issue) => issue.code === "runtime.indexeddb.unavailable",
+    ),
+  "Default persistence should report missing IndexedDB with a stable code.",
+);
+const managedFontRuntime = await inspectTemplateRuntimeSupport({
+  persistence: "none",
+  managedFonts: true,
+  renderValidation: false,
+});
+assert(
+  managedFontRuntime.status === "blocked" &&
+    managedFontRuntime.issues.some(
+      (issue) => issue.code === "runtime.font-face.unavailable",
+    ) &&
+    managedFontRuntime.issues.some(
+      (issue) => issue.code === "runtime.font-face-set.unavailable",
+    ),
+  "Managed-font workflows should report missing font activation capabilities.",
+);
+const captureRuntime = await inspectTemplateRuntimeSupport({
+  persistence: "none",
+  managedFonts: false,
+  renderValidation: false,
+  pngCapture: true,
+});
+assert(
+  captureRuntime.status === "blocked" &&
+    captureRuntime.issues.some(
+      (issue) => issue.code === "runtime.png-capture.unavailable",
+    ),
+  "Requested PNG capture should report missing browser capture capabilities.",
 );
 
 wizard.restart();

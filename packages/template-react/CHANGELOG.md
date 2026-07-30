@@ -1,5 +1,18 @@
 # @sleinity/template-react
 
+## 0.4.0
+
+### Minor Changes
+
+- Consume the curated browser session and importer entry points without
+  changing the React wizard, renderer, inspection, or PNG contracts.
+
+### Patch Changes
+
+- Updated dependencies
+  - @sleinity/template-core@0.4.0
+  - @sleinity/template-browser@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

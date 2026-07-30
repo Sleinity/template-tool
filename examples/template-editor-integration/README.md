@@ -8,7 +8,8 @@ ZIP import, structured package validation, exact-font preparation, render
 validation, diagnostics, field-rule setup, confirmation and completion. The
 landing view acts as an in-memory dashboard: Add template opens the wizard,
 confirmation returns its host-neutral result to the dashboard, and selecting
-the new record opens a fresh session through `loadTemplateState()` without a
+the new record opens a fresh session through
+`loadTemplateImportConfirmation()` without a
 backend. After reopening it demonstrates host-owned descriptor-driven content
 editing, image replacement with Fill/Fit, imported-state restoration,
 browser-local IndexedDB save and explicit reload, revision-bound render

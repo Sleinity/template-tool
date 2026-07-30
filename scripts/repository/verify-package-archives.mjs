@@ -67,6 +67,16 @@ try {
         }
       }
     }
+    if (archive.includes("template-browser")) {
+      for (const entryPoint of ["session", "importer", "compatibility"]) {
+        for (const extension of ["js", "js.map", "d.ts"]) {
+          const requiredEntry = `package/dist/${entryPoint}.${extension}`;
+          if (!entries.includes(requiredEntry)) {
+            throw new Error(`${archive} is missing ${requiredEntry}.`);
+          }
+        }
+      }
+    }
     const manifestSource = spawnSync(
       "tar",
       ["-xOzf", path.join(output, archive), "package/package.json"],
@@ -78,6 +88,19 @@ try {
     const manifest = JSON.parse(manifestSource.stdout);
     if (JSON.stringify(manifest).includes("workspace:")) {
       throw new Error(`${archive} contains a workspace dependency.`);
+    }
+    for (const [exportPath, target] of Object.entries(manifest.exports ?? {})) {
+      if (!target || typeof target !== "object") continue;
+      for (const field of ["types", "import", "default"]) {
+        const exportedFile = target[field];
+        if (typeof exportedFile !== "string") continue;
+        const archiveEntry = `package/${exportedFile.replace(/^\.\//u, "")}`;
+        if (!entries.includes(archiveEntry)) {
+          throw new Error(
+            `${archive} export ${exportPath} points to missing ${archiveEntry}.`,
+          );
+        }
+      }
     }
     for (const entry of ["package/dist/index.js", "package/dist/index.d.ts"]) {
       const extracted = spawnSync("tar", ["-xOzf", path.join(output, archive), entry], { encoding: "utf8" });

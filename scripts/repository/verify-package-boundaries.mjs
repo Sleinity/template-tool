@@ -486,11 +486,45 @@ try {
   const declarationHash = createHash("sha256").update(declaration).digest("hex");
   if (declaration.byteLength !== 87431 || declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033") {
     violations.push(
-      `template-core public declaration drifted from SDK 0.3.0: ${declaration.byteLength} bytes / ${declarationHash}`,
+      `template-core public declaration drifted from the protected SDK 0.3.0 baseline: ${declaration.byteLength} bytes / ${declarationHash}`,
     );
   }
 } catch {
   violations.push("template-core must build dist/index.d.ts before declaration verification");
+}
+
+for (const entryPoint of ["session", "importer", "compatibility"]) {
+  if (!(await exists(`packages/template-browser/src/${entryPoint}.ts`))) {
+    violations.push(`template-browser is missing curated ${entryPoint} source`);
+  }
+  for (const extension of ["js", "d.ts"]) {
+    const fileName = `${entryPoint}.${extension}`;
+    const browserBundlePath = path.join(
+      root,
+      "packages/template-browser/dist",
+      fileName,
+    );
+    try {
+      const source = await readFile(browserBundlePath, "utf8");
+      for (const forbidden of [
+        "apps/studio",
+        "components/ui",
+        "lucide-react",
+        'from "react"',
+        "from 'react'",
+      ]) {
+        if (source.includes(forbidden)) {
+          violations.push(
+            `template-browser ${fileName} contains forbidden dependency: ${forbidden}`,
+          );
+        }
+      }
+    } catch {
+      violations.push(
+        `template-browser must build curated ${fileName} before boundary verification`,
+      );
+    }
+  }
 }
 
 for (const fileName of [
