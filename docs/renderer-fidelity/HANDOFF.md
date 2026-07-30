@@ -1,6 +1,6 @@
 # Renderer Fidelity Handoff
 
-## 2026-07-30 — SDK 0.3.0 RC3 external shell composability and template reopening
+## 2026-07-30 — SDK 0.3.0 external shell composability and template reopening
 
 ### Result
 
@@ -40,7 +40,12 @@ session hydration, host-owned preprocessing, downstream image mutation,
 current render readiness, offline draft reload, silent PNG and disposal with
 no external requests or console errors.
 
-Core/browser/React candidate archives are 283,433 / 372,987 / 303,379 bytes.
+Core/browser/React published archives are 283,433 / 372,987 / 303,379 bytes.
+Their registry-derived SHA-256 values are
+`92183190066f93913d200714aecdf6515bbd8cf7b0e0169f719279e3f2f8656c`,
+`a18235221191c1e5c6aa022d4e91e21026cf014075779f996bb57cf6e30ad236`
+and
+`8f8757d5371518aaff24d4c9c61e286fea18eb3b6d69e961aad04e5fc17e61f3`.
 Core declarations remain 87,431 bytes /
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
 Studio is 1,000.84 / 291.46 gzip kB JavaScript; minimal and generic editor
@@ -64,9 +69,24 @@ ran.
 
 ### Release boundary
 
-The fixed train remains unpublished at `0.3.0`. The implementation and local
-release gates are complete; review and a generic external-host acceptance are
-still required before tag-only publication and registry-derived handoff assets.
+The fixed train was published once from `sdk-v0.3.0`. The initial tag workflow
+published all three packages successfully but withheld Release assets when a
+duplicated PNG raster in the small npm lifecycle consumer did not settle on the
+GitHub runner. PR #8 separated responsibilities: npm and pnpm consumers own
+secret-free installation and session lifecycle, while the stronger packed
+generic-editor test owns published-archive silent PNG acceptance. That test
+remains required and passed.
+
+The corrected manual workflow ran handoff-only from `main`; its publication job
+was skipped. It reinstalled the published core package, downloaded all three
+registry archives, passed npm and pnpm vendored consumers, passed the complete
+packed generic editor, verified public distribution policy, and created the
+public
+[SDK 0.3.0 Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0).
+An independent anonymous download matched `SHA256SUMS` and repeated Dashboard
+→ Wizard → Confirmation → fresh-session reopening, host-owned edits, exact
+font and image paths, offline persistence, stale-export rejection, silent PNG,
+disposal and zero external requests.
 
 ## 2026-07-29 — SDK 0.3.0 reusable template setup wizard
 

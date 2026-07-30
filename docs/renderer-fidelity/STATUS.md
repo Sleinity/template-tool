@@ -1,12 +1,16 @@
 # Renderer Fidelity Status
 
 Status date: 2026-07-30
-Current milestone: SDK 0.3.0 RC3 external shell composability and template reopening
+Current milestone: SDK 0.3.0 released with external shell composability and template reopening
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
 
-## SDK 0.3.0 RC3 — external shell composability and template reopening
+## SDK 0.3.0 — external shell composability and template reopening
 
-The fixed core/browser/React train remains unpublished at `0.3.0`.
+The fixed core/browser/React train was published at `0.3.0` from
+`sdk-v0.3.0` on 2026-07-30. The public
+[GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0)
+contains registry-derived archives, combined checksums, host-neutral handoffs
+and Lovable Business prompts.
 `template-browser` now provides `createTemplateImportWizard`, a headless
 controller with seven explicit steps: ZIP Import, Package Validation, Font
 Validation, Render Validation, Field Rules, Confirmation and Completed. Every
@@ -76,7 +80,12 @@ builds, documentation, ownership/archive checks, DOM-free installed core,
 browser session, Studio smoke, packed consumer and packed generic-editor
 acceptance pass. The core declaration remains 87,431 bytes with SHA-256
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
-Core/browser/React candidate archives are 283,433 / 372,987 / 303,379 bytes.
+Core/browser/React published archives are 283,433 / 372,987 / 303,379 bytes.
+Their registry-derived SHA-256 values are respectively
+`92183190066f93913d200714aecdf6515bbd8cf7b0e0169f719279e3f2f8656c`,
+`a18235221191c1e5c6aa022d4e91e21026cf014075779f996bb57cf6e30ad236`
+and
+`8f8757d5371518aaff24d4c9c61e286fea18eb3b6d69e961aad04e5fc17e61f3`.
 The dedicated importer output is 35.68 kB JavaScript (6.26 kB gzip), 7.18 kB
 CSS, and 4.13 kB declarations.
 Studio is 1,000.84 / 291.46 gzip kB JavaScript and 68.26 / 12.12 gzip kB CSS.
@@ -103,10 +112,13 @@ Direct byte aggregation confirms those approved identities after the final
 run. No update, promotion, fixture, schema, tolerance or approved-reference
 command ran.
 
-The release candidate is not yet published. Publication remains tag-only after
-review and must prove that a generic external host can install all three
-registry-derived `0.3.0` archives and complete the setup workflow without
-hand-written importer orchestration.
+Publication and external-host acceptance are complete. The tag workflow
+published all three packages once, and a later manual handoff-only run did not
+enter the publication path. Secret-free npm and pnpm consumers passed against
+the registry-derived archives. An independent anonymous Release download
+matched `SHA256SUMS` and passed the complete Dashboard → Wizard → Confirmation
+→ fresh-session reopening flow, host-owned mutation, offline restoration,
+silent PNG capture, disposal and zero-external-request checks.
 
 ## SDK 0.2.2 — generic template editor handoff
 
