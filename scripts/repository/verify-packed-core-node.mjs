@@ -139,11 +139,13 @@ try {
     createBackendDiagnosticProjection,
     createResolvedRenderTree,
     clearTemplatePackageImageOverride,
+    editableFieldRuleKey,
     getPackageFieldValue,
     importTemplatePackage,
     replaceTemplatePackageImage,
     restoreImportedPackageForEditing,
     setTemplatePackageImageReplacementMode,
+    updatePackageEditableFieldRule,
     updateTemplatePackageField,
     validateTemplatePackage,
   } = await import("@sleinity/template-core");
@@ -241,7 +243,26 @@ try {
     defaultValue: null,
   };
   editable.editableFields = [textField, colorField, visibilityField, imageField];
-  const textEdited = updateTemplatePackageField(editable, textField, "Edited");
+  const configured = updatePackageEditableFieldRule(
+    editable,
+    editableFieldRuleKey(textField),
+    {
+      label: "Configured copy",
+      constraints: { maxCharacters: 40, maxLines: 2 },
+      behavior: { onOverflow: "prevent-input" },
+    },
+  );
+  if (
+    !configured.applied ||
+    configured.fields[0]?.label !== "Configured copy"
+  ) {
+    throw new Error("Packed core field-rule contract did not apply portable configuration.");
+  }
+  const textEdited = updateTemplatePackageField(
+    configured.packageValue,
+    configured.fields[0],
+    "Edited",
+  );
   const colorEdited = updateTemplatePackageField(textEdited.packageValue, colorField, "#ff3366");
   const hidden = updateTemplatePackageField(colorEdited.packageValue, visibilityField, false);
   const imageEdited = replaceTemplatePackageImage(
@@ -294,8 +315,8 @@ try {
   const declaration = await readFile(path.join(installedDist, "index.d.ts"));
   const declarationHash = createHash("sha256").update(declaration).digest("hex");
   if (
-    declaration.byteLength !== 86272 ||
-    declarationHash !== "e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8"
+    declaration.byteLength !== 87431 ||
+    declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
   ) {
     throw new Error(
       `Packed core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}`,

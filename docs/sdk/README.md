@@ -11,8 +11,8 @@ packages:
 | Package | Responsibility | Environment |
 | --- | --- | --- |
 | `@sleinity/template-core` | ZIP import, strict validation, diagnostics, canonical/resolved models, and portable field editing | Framework-neutral TypeScript |
-| `@sleinity/template-browser` | Browser session, assets, fonts, persistence, readiness, and PNG capture | Modern browser/Chromium |
-| `@sleinity/template-react` | React provider, renderer, inspection viewport, and revision-safe capture handle | React 19 browser app |
+| `@sleinity/template-browser` | Browser session, headless import workflow, assets, fonts, persistence, readiness, and PNG capture | Modern browser/Chromium |
+| `@sleinity/template-react` | React importer bindings/default UI, renderer, inspection viewport, and revision-safe capture handle | React 19 browser app |
 
 ## Installation
 
@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.2.2 \
-  @sleinity/template-browser@0.2.2 \
-  @sleinity/template-react@0.2.2
+pnpm add @sleinity/template-core@0.3.0 \
+  @sleinity/template-browser@0.3.0 \
+  @sleinity/template-react@0.3.0
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.2.2` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.2.2)
+[`sdk-v0.3.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.3.0)
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -67,6 +67,36 @@ dependencies, server route, runtime secret, or network requirement. See the
 [core importer handoff](CORE_IMPORTER_HANDOFF.md).
 
 ## React runtime contract
+
+For a complete host-neutral setup flow, use the importer subpath:
+
+```tsx
+import {
+  TemplateImportWizard,
+  useTemplateImportWizard,
+} from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
+
+const wizard = useTemplateImportWizard();
+
+<TemplateImportWizard
+  wizard={wizard}
+  onComplete={(result) => {
+    // Hand result.packageValue to existing host services.
+  }}
+/>;
+```
+
+The seven-step wizard provides ZIP import, structured package validation,
+exact-font validation, render validation, field-rule setup, confirmation and a
+revision-safe completion result. Hosts may use its default UI or compose their
+own through the controller, provider, snapshot hook and preview bridge. It does
+not save, publish or navigate unless an optional host persistence adapter is
+explicitly provided for post-confirmation storage.
+
+See the [template import workflow](TEMPLATE_IMPORT_WIZARD.md) for default,
+headless, page/modal/drawer, adapter, theming, restart, persistence and
+migration guidance.
 
 React hosts should let `useTemplateSession()` own the lifecycle:
 

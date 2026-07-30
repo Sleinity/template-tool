@@ -5,6 +5,7 @@ import { comparePng, writeDifferenceImage } from "./image.mjs";
 import { artifactDirectory, stableStringify } from "./core.mjs";
 import { mergeStructuralReport } from "./model.mjs";
 import { exactFontForRequirement } from "./fonts.mjs";
+import { applyCompatibilityFontFallbacks } from "../repository/studio-font-harness.mjs";
 
 const remotionChromium = join(process.cwd(), "node_modules", ".remotion", "chrome-headless-shell", "mac-arm64", "chrome-headless-shell-mac-arm64", "chrome-headless-shell");
 
@@ -490,7 +491,7 @@ async function prepareSourceAuthoritativeFonts(page, manifest, fixtureResult) {
       throw new Error(`No verified exact font binary is registered for ${family} ${weight} ${style}.`);
     }
     const uploadStarted = performance.now();
-    await row.getByRole("button", { name: "Upload font" }).click();
+    await row.getByRole("button", { name: "Upload font file" }).click();
     await page.getByTestId("package-font-upload-input").setInputFiles(font.path);
     await page.waitForFunction(
       ({ id, hash }) => {
@@ -614,6 +615,7 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
       const model = models.get(fixture.id);
       const fixtureResult = { fixtureId: fixture.id, surfaces: {}, fontDecisions: [], route: null };
       try {
+        fixtureResult.phase = "open-import";
         await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
         const importStarted = performance.now();
         await page.getByTestId("zip-package-input").setInputFiles(fixture.path);
@@ -621,21 +623,27 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
         await page.getByTestId("package-step-prepare-fonts").waitFor();
         timings.importMs = performance.now() - importStarted;
         if (fontProfile === "source-authoritative") {
+          fixtureResult.phase = "upload-source-fonts";
           if (!exactFontManifest) throw new Error("Source-authoritative font profile has no verified font manifest.");
           await prepareSourceAuthoritativeFonts(page, exactFontManifest, fixtureResult);
         } else {
-          const replacementButtons = page.getByRole("button", { name: "Use replacement" });
-          const replacementCount = await replacementButtons.count();
-          for (let index = replacementCount - 1; index >= 0; index -= 1) {
-            const row = replacementButtons.nth(index).locator("xpath=ancestor::*[contains(@class,'font-requirement-row')]");
-            fixtureResult.fontDecisions.push({ action: "Use replacement", requirement: (await row.innerText()).replace(/\s+/g, " ").trim() });
-            await replacementButtons.nth(index).click();
+          fixtureResult.phase = "apply-development-font-fallbacks";
+          const fallbacks = await applyCompatibilityFontFallbacks(page);
+          for (const fallback of fallbacks) {
+            fixtureResult.fontDecisions.push({
+              action: "Use replacement",
+              requirement: `${fallback.family} ${fallback.weight} ${fallback.style}`,
+              requirementId: fallback.requirementId,
+              source: "development-only-font-harness",
+            });
           }
         }
+        fixtureResult.phase = "open-validate";
         await page.getByRole("button", { name: "Check template" }).click();
         await page.getByTestId("package-step-validate").waitFor();
         const validateSelector = '[data-testid="package-step-validate"] [data-template-package-canvas]';
         if (!(await page.locator(validateSelector).count())) await selectValidatePreview(page, validateSelector);
+        fixtureResult.phase = "capture-validate";
         if (selectedSurfaces.includes("validate")) fixtureResult.surfaces.validate = await captureRenderer({ page, fixture, model, surface: "validate", route: "/templates/new", mode: "static", selector: validateSelector, runId, candidateRoot, repeat, consoleMessages, timings });
         const continueFields = page.getByRole("button", { name: "Continue to fields" });
         if (await continueFields.isDisabled()) throw new Error(`Fixture ${fixture.id} is blocked at Validate; Fields/editor/export surfaces cannot be reached.`);

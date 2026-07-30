@@ -1,8 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.2.2 generic handoff published
-Audit date: 2026-07-28
-Code baseline: the fixed SDK 0.2.2 train and generic template editor reference
+Status: Milestone 2D portable field ownership and SDK 0.3.0 setup-wizard release candidate
+Audit date: 2026-07-29
+Code baseline: the fixed SDK 0.3.0 train and wizard-backed generic template editor reference
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
@@ -35,7 +35,11 @@ handoff. It is not yet fully physically separated:
 The committed generic template editor consumer is itself a release gate rather
 than documentation-only example code. An isolated Chromium harness installs
 locally packed or registry-derived archives and verifies its complete import,
-edit, persistence, readiness and silent-export lifecycle. Release publication
+setup, edit, persistence, readiness and silent-export lifecycle. The reusable
+setup workflow is now package-owned: `template-react/importer` composes the
+host-owned browser session, managed-font preparation, core field-rule updates,
+validation and the current render identity without importing Studio or
+assuming product navigation, catalogue or persistence. Release publication
 is tag-only; manual workflow dispatch may refresh assets solely from an
 already-published fixed version. Public source and Release visibility do not
 change the package manifests' `UNLICENSED` status; active
@@ -52,7 +56,7 @@ canonical consumer.
 | --- | --- | --- | --- |
 | Studio entry, routes, views, styles and assets | `apps/studio/src` | Product application | `apps/studio` |
 | Studio UI and product panels | `apps/studio/src/components` | Product design system, field/font/quality panels and styled preview | `apps/studio` |
-| Studio optional services | `apps/studio/server/{figma-enrichment,font-resolution}` | Vite-local import/font services | `apps/studio/server` |
+| Studio optional services | `apps/studio/server/figma-enrichment` | Optional Vite-local Figma enrichment; open-font resolution retired before SDK 0.3.0 | `apps/studio/server` |
 | Core package/source contract | `packages/template-core/src` | Physical owner of types, schema, ZIP/source normalization/validation, portable models, resolved trees, primitive appearance and backend decisions | `packages/template-core` |
 | Browser facade | `packages/template-browser` | Browser/session exports over root source | `packages/template-browser` with owned source |
 | React facade | `packages/template-react` | Renderer/session bindings over root source | `packages/template-react` with owned source |
@@ -128,7 +132,7 @@ even when they are currently reachable through a broad barrel export.
 | `src/template-package/scene/**` | P3 | Versioned canonical semantic/provenance inspection; bounded runtime consumers remain internal |
 | `src/template-package/quality/{types,createTemplatePackageQualityReport,diagnosticPresentation,loadedSourceDiagnosticAdapter,qualityWorkspace}.ts` | P3 | Reusable diagnostic records/view models; presentation remains host-owned |
 | `src/template-package/render/productRenderIdentity.ts` | P3 | Versioned readiness/identity evidence used by stable bindings |
-| `packages/template-react/src/**`; renderer modules `TemplatePackageRenderer.tsx`, `ScaledTemplatePackagePreview.tsx`, `TemplateInspectionViewport.tsx`, compatibility `TemplateInspectionPreview.tsx`, and `previewViewport.ts` | P2 | Renderer plus UI-independent composable and compatibility preview interfaces |
+| `packages/template-react/src/**`; renderer modules `TemplatePackageRenderer.tsx`, `ScaledTemplatePackagePreview.tsx`, `TemplateInspectionViewport.tsx`, compatibility `TemplateInspectionPreview.tsx`, and `previewViewport.ts` | P2 | Renderer, session bindings, the host-neutral importer wizard, and composable/compatibility preview interfaces |
 | `packages/template-core/src/{types,schema,bundle,models,resolved,backend-decision,primitives}/**` and its package/validation modules | P1 | Physical owner of portable package, normalization, resolution, primitive appearance and backend contracts; primitives remain internal |
 | Legacy root package/source/validation/resolved/backend/primitive paths | I1 | Behavior-free compatibility forwarders to `template-core`; never package implementation |
 | `packages/template-browser/src/**` | P1 | Current supported browser facade; physical ownership still pending |
@@ -156,10 +160,10 @@ they do not promote internal siblings automatically.
 | `TemplateInspectionViewport` | Reusable; UI-independent state, imperative fit/zoom API, live settled-target measurement and overlays | P2 composable viewport |
 | `TemplateInspectionPreview` | Backward-compatible native-control composition over the viewport | P2 compatibility interface; Studio uses its local styled composition |
 | `TemplatePackageFieldEditor` | Splittable; combines reusable mutations with Studio UI, file decode and measurement | Existing component stays S1; later `useTemplateFields` and composable P2 editor |
-| `TemplatePackageFieldRulesEditor` | Studio-specific today; workflow, drag UI and design tokens are coupled | Existing component stays S1; later controller and importer-wizard field-rules step |
+| `TemplatePackageFieldRulesEditor` | Studio-specific complete panel; workflow, drag UI and design tokens are coupled | Existing component stays S1; the package-owned pure rules and importer-wizard field-rules step are separate P1/P2 interfaces |
 | `TemplatePackageQualityPanel` | Reusable filtering/view-model logic under Studio presentation | P3 view model; later small P2 summary/list, not this complete panel |
 | Validate/readiness panels | Studio-specific copy, actions, persistence and UI components | S1; later new P2 validation summary/list |
-| Font preparation/resolution panels | Studio acquisition workflow and UI | S1; later importer wizard consumes P1 font provider/controller |
+| Font preparation/resolution panels | Studio acquisition workflow and UI | S1; the compact importer wizard now consumes public browser font/session operations without exporting these panels |
 | Import flow/editor page/export controls | Complete product workflows | S1; never exported as SDK pages |
 
 Reusable components must be accessible, unstyled/composable, controlled where
@@ -176,7 +180,7 @@ navigation, approval and completion behavior.
 | Validation | AJV schema plus semantic validation | Studio status, blocker and technical panels | Yes | `validateTemplatePackage` and diagnostic types | Core stable result; P2 summary/list later | Changing diagnostic identity or blocking semantics |
 | Diagnostics | Source, validation, resolved/backend and quality projections | Studio quality workspace, diagnosis panels and issue packets | Pure records mostly; complete report needs browser readiness evidence | Fragmented; quality modules are not package exports | P1 stable diagnostics plus P3 inspection projection; keep workbench S1/S2 | Collapsing diagnostic audiences or exposing unstable internals |
 | Assets | Portable reliability/reference resolution plus IndexedDB/object URLs | Import/editor file UI and dashboard thumbnails | Yes with in-memory/browser adapters | Browser assets barrel | Core owns identity; browser owns storage/URL lifecycle; Studio owns thumbnails/catalogue | Object URL lifetime, byte identity, offline restore |
-| Fonts | Portable identity/matching and browser registries/`FontFace` activation | Studio upload/link/acquisition panels | Technical matching yes; activation needs browser/Chromium | Broad browser exports | Core identity/matching; browser provider/activation; Studio acquisition UI | Exact binary identity, glyph coverage, stale activation |
+| Fonts | Portable identity/matching and browser registries/`FontFace` activation | Studio upload/link/acquisition panels | Technical matching yes; activation needs browser/Chromium | Broad browser exports | Core identity/matching; browser provider/activation; Studio acquisition UI | Exact binary identity, strict text-face coverage with explicit device-emoji fallback, stale activation |
 | Fields | Pure bindings, constraints and image authority | Studio field editor/rules builder | Pure edits yes; file/decode and visual fit need browser | Core mutation exports; browser measurement | Core operations, browser file/measurement controller, later P2 hook/editor/rule step | Defaults/edit lifecycle divergence and stale image decode |
 | Motion | Pure motion link/summary/evaluation | Studio playback toggle, timeline and RAF clock | Yes at explicit time | Root motion barrel only, not current package facade | Core stable motion API; renderer consumes `timeMs`; host owns controls | Timing semantics and final-frame export |
 | Resolution | Resolved tree, backend decisions, bounded routing over core-owned portable models | Studio creates trees and inspects diagnostics | Yes; helper and backend type directions are now acyclic | Core exports resolved/backend | Core technical/advanced APIs; next move the implementation with its primitive/appearance closure | Accidental pixel authority change during physical movement |
@@ -218,7 +222,7 @@ long-term stable surface.
 | React session ownership | Closed in 0.2.1: `useTemplateSession()` owns one workspace session and defers permanent disposal across StrictMode replay | Hosts remain free to inject an explicitly owned session |
 | Reusable validation UI | View model, summary and issue list | Existing panels are Studio-styled and workflow-specific |
 | Reusable fields UI | `useTemplateFields` and composable editor | Existing component combines UI, file IO, decode and measurement |
-| Reusable importer wizard | Controller-backed step kit and optional default recipe | Deferred until validation/font/field/readiness controllers are package-owned |
+| Reusable importer wizard | Closed in SDK 0.3.0 RC3: `template-browser` owns the seven-step headless workflow and reports; `template-react/importer` provides bindings, preview bridge and optional UI. The wizard configures field rules but does not own content inputs. Confirmed state reopens atomically through `TemplateSession.loadTemplateState()` | Studio panels remain private; hosts own content controls, preprocessing, authentication, catalogues, publication, routing and navigation |
 | Non-React browser mount | Host-owned React island | Deferred until renderer is physically package-owned |
 | Headless pixels | Pinned Chromium runner | Browser platform separation must close first |
 
@@ -284,12 +288,13 @@ still bypass them.
 | `document.fonts`/`FontFace` | fonts, renderer, editor, capture | Browser/Chromium authority; never core |
 | DOM range/canvas measurement | renderer, field measurement, visual diff | Renderer/browser; visual diff remains Studio/fidelity |
 | Observers/animation frames | renderer, previews, Studio editor | Renderer hooks or host playback controls |
-| Fixed `/api` fetches | Figma enrichment and open-font resolution | Host-injected optional providers; never renderer-time |
+| Fixed `/api` fetches | Figma enrichment only | Host-injected optional provider; never renderer-time |
 | Local filesystem fixture paths | scripts only | Private evidence configuration, never package runtime |
 | Headless rendering | fidelity harness only | Later pinned Chromium package; React SSR is not final pixels |
 
-Renderer-time network access remains forbidden. Optional enrichment and remote
-font acquisition occur before rendering and must be cached/provenance-aware.
+Renderer-time network access remains forbidden. Optional Figma enrichment
+occurs before rendering and remains cached/provenance-aware. Required fonts are
+supplied as exact local uploads; setup performs no font-network request.
 
 ## 9. Reusable importer direction
 
@@ -432,9 +437,21 @@ Milestone 2D gives `template-core` physical ownership of the framework-neutral
 editor-session contract, field discovery and mutation, image replacement/reset,
 constraint evaluation and measurement-result projection. Browser-owned DOM
 measurement remains in `template-browser`, Studio owns field labels, and the
-legacy root editor paths are checked forwarders. The next physical boundary is
-browser-runtime ownership for assets, fonts, persistence and session lifecycle
-before React renderer relocation.
+legacy root editor paths are checked forwarders.
+
+SDK 0.3 adds a package-owned product interface without changing those physical
+boundaries. `template-core` owns pure field-rule setup mutations;
+`template-browser` owns the seven-step headless import controller, structured
+validation projections, adapter orchestration and revision-safe
+working-package/font/session operations; `template-react/importer` owns the
+provider, snapshot hook, preview bridge and optional accessible composition.
+The wizard imports no Studio code. It may own its own session or accept an
+injected one, and optional host adapters may supply exact font bytes, image
+editing or post-confirmation persistence. Authentication, catalogues,
+publishing, routing and navigation remain host-owned. After external-host
+acceptance, the next physical boundary remains browser-runtime ownership for
+assets, fonts, persistence and session lifecycle before React renderer
+relocation.
 
 ## 14. Milestone 0 verification record
 

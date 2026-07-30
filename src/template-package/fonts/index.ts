@@ -4,6 +4,7 @@ export * from "./fontIdentity";
 export * from "./fontResolution";
 export * from "./fontRegistryTypes";
 export * from "./fontMatching";
+export * from "./exactFontSetup";
 export * from "./fontRegistry";
 export * from "./indexedDbFontRegistry";
 export * from "./inMemoryFontRegistry";

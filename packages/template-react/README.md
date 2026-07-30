@@ -5,6 +5,60 @@ Private Studio-independent React integration exposing the proven
 context. It deliberately excludes Template Studio routes, settings, Validate,
 Fields, and product editor controls.
 
+## Template setup wizard
+
+Applications that need a complete import/setup flow use the dedicated importer
+entry and stylesheet:
+
+```tsx
+import {
+  TemplateImportWizard,
+  useTemplateImportWizard,
+} from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
+
+const wizard = useTemplateImportWizard();
+
+<TemplateImportWizard
+  wizard={wizard}
+  onComplete={({ packageValue, renderIdentity }) => {
+    // Persist, publish, or navigate through host-owned services.
+  }}
+/>;
+```
+
+The fixed ZIP Import → Package Validation → Font Validation → Render Validation
+→ Field Rules → Confirmation → Completed workflow owns no catalogue, cloud
+persistence, navigation, authentication, or publishing. A framework-neutral
+controller lives in `template-browser`; this entry provides
+`TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot` and
+`TemplateImportWizardPreview` for custom page, modal, drawer or workspace
+interfaces. The optional default UI accepts host class/style/action slots,
+supports image constraint and Fill/Fit-default configuration, never
+saves automatically, and completes only for the current validated render
+identity. Required fonts progress only through an
+exact uploaded face with complete required text-face coverage. Explicit emoji
+sequences may use the device emoji font; the wizard shows this as a neutral
+portability note while ordinary text-style symbols and other missing
+characters remain blocking and are identified. The wizard
+shows the required family, named weight and numeric weight, omits normal
+upright posture from the label, and shows italic/oblique, stretch, or variable
+axes only when relevant. Previously verified exact files are reused
+automatically; suggestions, open-font retrieval, compatible faces,
+replacements, and system fallback do not bypass or appear in the setup flow.
+
+Optional font and confirmation-persistence adapters integrate
+host-owned services without weakening SDK validation. The confirmation result
+contains the imported baseline, validated package, sanitized field rules,
+structured import/font/render evidence, current render identity, deterministic
+fingerprint and source metadata. `TemplateImporterWizard` remains as a
+compatibility alias for the earlier unpublished five-step component contract.
+
+The wizard is not a content-input framework. Hosts render their own controls
+from the session's editable descriptors and may preprocess values with richer
+forms, croppers, or other tools before calling the existing session mutation
+methods. Final values must still pass template constraints.
+
 For application integration, use the StrictMode-safe `useTemplateSession`,
 `TemplateSessionProvider`, `useTemplateSessionSnapshot`, and
 `TemplateSessionRenderer`. The owned-session hook creates one active browser

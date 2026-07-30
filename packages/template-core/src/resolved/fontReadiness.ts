@@ -3,6 +3,10 @@ import type {
   TemplatePackageFontRequirement,
   TemplatePackageV1,
 } from "../types";
+import {
+  fontUsesPlatformEmojiFallback,
+  textFaceCoverageCharacters,
+} from "./fontCharacterCoverage";
 import type { ResolvedRenderTreeV1 } from "./types";
 
 export interface FontRequirement {
@@ -147,13 +151,6 @@ function manifestIncludes(
   );
 }
 
-function likelyUsesGlyphFallback(requirement: FontRequirement): boolean {
-  return (
-    Boolean(requirement.characters?.match(/\p{Extended_Pictographic}/u)) &&
-    !/emoji|symbol/i.test(requirement.family)
-  );
-}
-
 export async function checkResolvedFontReadiness(
   tree: ResolvedRenderTreeV1,
   fontSet: FontFaceSetLike | null | undefined,
@@ -166,7 +163,10 @@ export async function checkResolvedFontReadiness(
 
   const required = await Promise.all(
     requirements.map(async (requirement): Promise<FontReadinessEntry> => {
-      const glyphCoverage = likelyUsesGlyphFallback(requirement)
+      const glyphCoverage = fontUsesPlatformEmojiFallback(
+        requirement.family,
+        requirement.characters,
+      )
         ? "fallback-likely"
         : "unverified";
       if (!fontSet) {
@@ -186,7 +186,11 @@ export async function checkResolvedFontReadiness(
       ) {
         const fallbackFamily = requirement.resolution.fallbackFamily;
         const fallbackSpecification = `${requirement.style} ${requirement.weight} 16px "${fallbackFamily}"`;
-        const verified = fontSet.check(fallbackSpecification, requirement.characters || "Template");
+        const sample = textFaceCoverageCharacters(
+          requirement.family,
+          requirement.characters,
+        ) || "Template";
+        const verified = fontSet.check(fallbackSpecification, sample);
         return {
           ...requirement,
           status: "fallback",
@@ -199,7 +203,10 @@ export async function checkResolvedFontReadiness(
       }
       const effectiveFamily = requirement.runtimeFamily ?? requirement.family;
       const specification = `${requirement.style} ${requirement.weight} 16px "${effectiveFamily}"`;
-      const sample = requirement.characters || "Template";
+      const sample = textFaceCoverageCharacters(
+        requirement.family,
+        requirement.characters,
+      ) || "Template";
       const checkPassed = fontSet.check(specification, sample);
       const manifestRequirement = {
         ...requirement,

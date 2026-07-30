@@ -20,6 +20,7 @@ function TemplateConsumer({ session }: { session: TemplateSessionV1 }) {
   const firstTextField = snapshot.editableFields.find(
     (field) => field.type === "text" || field.type === "textarea",
   );
+  const fontRequirements = snapshot.workingPackage?.fontRequirements ?? [];
 
   useEffect(() => {
     if (restoreStarted.current) return;
@@ -55,6 +56,22 @@ function TemplateConsumer({ session }: { session: TemplateSessionV1 }) {
     session.setField(firstTextField.id, `${currentText} · edited`);
   };
 
+  const uploadRequiredFont = async (requirementId: string, file: File) => {
+    setMessage("Checking required font…");
+    try {
+      await session.uploadFont(requirementId, {
+        bytes: await file.arrayBuffer(),
+        mimeType: file.type || "font/ttf",
+        fileName: file.name,
+      });
+      setMessage("Required font is ready.");
+    } catch (error) {
+      setMessage(
+        error instanceof Error ? error.message : "The font file did not match.",
+      );
+    }
+  };
+
   const exportPng = async () => {
     if (identity?.readiness !== "ready") return;
     setMessage("Waiting for the current render revision and exporting…");
@@ -87,6 +104,21 @@ function TemplateConsumer({ session }: { session: TemplateSessionV1 }) {
             }}
           />
         </label>
+        {fontRequirements.map((requirement) => (
+          <label className="button" key={requirement.id}>
+            Upload required font
+            <input
+              hidden
+              type="file"
+              accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                event.currentTarget.value = "";
+                if (file) void uploadRequiredFont(requirement.id, file);
+              }}
+            />
+          </label>
+        ))}
         <button disabled={!firstTextField} onClick={editFirstText}>Edit first text field</button>
         <button disabled={snapshot.status !== "ready"} onClick={() => void saveSession()}>
           Save session

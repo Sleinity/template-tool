@@ -4,6 +4,7 @@ import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
 } from "@sleinity/template-react";
+import { TemplateImporterWizard } from "../../../packages/template-react/src/importer";
 import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
 import { createResolvedRenderTree } from "../resolved";
 import type { TemplatePackageV1 } from "../types";
@@ -66,4 +67,24 @@ assert(
   fallbackMarkup.includes("Waiting for template") &&
     !fallbackMarkup.includes("data-template-package-canvas"),
   "The React adapter should expose host-owned fallback UI while a session is not ready.",
+);
+
+const wizardMarkup = renderToStaticMarkup(
+  createElement(TemplateImporterWizard, {
+    session: idleSession,
+    onComplete: () => undefined,
+    onCancel: () => undefined,
+  }),
+);
+assert(
+  wizardMarkup.includes('aria-label="Template setup wizard"') &&
+    wizardMarkup.includes("ZIP Import") &&
+    wizardMarkup.includes("Package Validation") &&
+    wizardMarkup.includes("Font Validation") &&
+    wizardMarkup.includes("Render Validation") &&
+    wizardMarkup.includes("Confirmation") &&
+    wizardMarkup.includes("Prepare fonts") === false &&
+    wizardMarkup.includes("Choose template ZIP") &&
+    wizardMarkup.includes("Cancel"),
+  "The reusable importer should expose the accessible seven-step host-neutral contract without Studio UI.",
 );

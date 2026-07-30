@@ -13,6 +13,8 @@ import {
   type PackageImageFieldConstraints,
 } from "@sleinity/template-core";
 import type {
+  TemplateImportConfirmationV1,
+  TemplateImportWizardControllerV1,
   TemplateSessionMutationResult,
   TemplateSessionV1,
 } from "@sleinity/template-browser";
@@ -24,9 +26,21 @@ import {
   type ResolvedProductRenderIdentityV1,
   type TemplateSessionRendererHandle,
 } from "@sleinity/template-react";
+import {
+  TemplateImportWizard,
+  TemplateImportWizardProvider,
+  useTemplateImportWizard,
+  useTemplateImportWizardSnapshot,
+} from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
 import "./styles.css";
 
 const SAVED_TEMPLATE_KEY = "template-platform:editor-example:saved-id";
+
+interface HostTemplateRecord {
+  id: string;
+  confirmation: TemplateImportConfirmationV1;
+}
 
 export interface TemplateExportReadyPayload {
   filename: string;
@@ -256,22 +270,47 @@ function FieldControl({
 }
 
 export function TemplateEditorWorkspace({
+  record,
+  onBack,
   onTemplateExportReady,
   onSession,
   acceptanceMode = false,
 }: {
+  record: HostTemplateRecord;
+  onBack(): void;
   onTemplateExportReady(payload: TemplateExportReadyPayload): void;
   onSession?(session: TemplateSessionV1): void;
   acceptanceMode?: boolean;
 }) {
   const session = useTemplateSession();
+  const loadedRecord = useRef<string | null>(null);
   useEffect(() => {
     onSession?.(session);
   }, [onSession, session]);
+  useEffect(() => {
+    if (loadedRecord.current === record.id) return;
+    loadedRecord.current = record.id;
+    const result = session.loadTemplateState({
+      importedPackage: record.confirmation.importedPackage,
+      packageValue: record.confirmation.packageValue,
+      source: {
+        type: "package-zip",
+        sourceName: record.confirmation.sourceName,
+      },
+      importValidation: record.confirmation.importValidation,
+    });
+    if (!result.applied) {
+      throw new Error(
+        result.diagnostics[0]?.message ??
+          "The confirmed template could not be reopened.",
+      );
+    }
+  }, [record, session]);
   return (
     <TemplateSessionProvider session={session}>
       <TemplateEditor
         session={session}
+        onBack={onBack}
         onTemplateExportReady={onTemplateExportReady}
         acceptanceMode={acceptanceMode}
       />
@@ -281,18 +320,21 @@ export function TemplateEditorWorkspace({
 
 function TemplateEditor({
   session,
+  onBack,
   onTemplateExportReady,
   acceptanceMode,
 }: {
   session: TemplateSessionV1;
+  onBack(): void;
   onTemplateExportReady(payload: TemplateExportReadyPayload): void;
   acceptanceMode: boolean;
 }) {
   const snapshot = useTemplateSessionSnapshot();
   const rendererRef = useRef<TemplateSessionRendererHandle>(null);
-  const restoreStarted = useRef(false);
   const [identity, setIdentity] = useState<RevisionedIdentity | null>(null);
-  const [message, setMessage] = useState("Choose a TemplatePackage ZIP.");
+  const [message, setMessage] = useState(
+    "Host-owned controls are connected to the hydrated template session.",
+  );
   const [exportPreview, setExportPreview] = useState<TemplateExportReadyPayload | null>(null);
   const identityReady =
     identity?.revision === snapshot.revision &&
@@ -315,28 +357,6 @@ function TemplateEditor({
         : result.error?.message ?? "The browser-local draft could not be reloaded.",
     );
   }, [session]);
-
-  useEffect(() => {
-    if (restoreStarted.current) return;
-    restoreStarted.current = true;
-    const savedId = localStorage.getItem(SAVED_TEMPLATE_KEY);
-    if (!savedId) return;
-    void reloadSavedDraft();
-  }, [reloadSavedDraft]);
-
-  const loadZip = async (file: File) => {
-    setMessage("Importing and validating…");
-    setExportPreview(null);
-    const result = await session.loadZip({
-      bytes: await file.arrayBuffer(),
-      sourceName: file.name,
-    });
-    setMessage(
-      result.status === "ready"
-        ? "Template ready."
-        : result.error?.message ?? "Import blocked. Review the diagnostics below.",
-    );
-  };
 
   const save = async () => {
     try {
@@ -399,18 +419,30 @@ function TemplateEditor({
       </header>
 
       <section className="toolbar">
-        <label className="button">
-          Choose ZIP
-          <input
-            hidden
-            type="file"
-            accept=".zip,application/zip"
-            onChange={(event) => {
-              const file = event.currentTarget.files?.[0];
-              if (file) void loadZip(file);
-            }}
-          />
-        </label>
+        <button
+          type="button"
+          onClick={onBack}
+        >
+          Back to dashboard
+        </button>
+        <button
+          type="button"
+          disabled={!snapshot.workingPackage || !firstTextField}
+          onClick={() => {
+            if (!snapshot.workingPackage || !firstTextField) return;
+            const current = getPackageFieldValue(
+              snapshot.workingPackage,
+              firstTextField,
+            );
+            const next = String(current ?? "").toLocaleUpperCase();
+            setMessage(
+              mutationMessage(session.setField(firstTextField.id, next)),
+            );
+            setExportPreview(null);
+          }}
+        >
+          Apply host uppercase transform
+        </button>
         <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>
           Save browser draft
         </button>
@@ -520,6 +552,25 @@ function TemplateEditor({
   );
 }
 
+function TemplateImportWorkspace({
+  onConfirmed,
+  onCancel,
+}: {
+  onConfirmed(result: TemplateImportConfirmationV1): void;
+  onCancel(): void;
+}) {
+  const wizard = useTemplateImportWizard();
+  return (
+    <main>
+      <TemplateImportWizard
+        wizard={wizard}
+        onComplete={onConfirmed}
+        onCancel={onCancel}
+      />
+    </main>
+  );
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReferenceApplication />
@@ -532,6 +583,14 @@ function ReferenceApplication() {
   );
   const [mounted, setMounted] = useState(true);
   const [disposedStatus, setDisposedStatus] = useState("mounted");
+  const [view, setView] = useState<"dashboard" | "import" | "editor">(
+    "dashboard",
+  );
+  const [records, setRecords] = useState<HostTemplateRecord[]>([]);
+  const [selectedRecordId, setSelectedRecordId] = useState<string | null>(null);
+  const [hostMessage, setHostMessage] = useState(
+    "No template is added until the wizard is confirmed.",
+  );
   const sessionRef = useRef<TemplateSessionV1 | null>(null);
   const rememberSession = useCallback((session: TemplateSessionV1) => {
     sessionRef.current = session;
@@ -542,32 +601,156 @@ function ReferenceApplication() {
       setDisposedStatus(sessionRef.current?.getSnapshot().status ?? "missing");
     }, 0);
   };
+  const selectedRecord =
+    records.find((record) => record.id === selectedRecordId) ?? null;
   return (
     <>
       {acceptanceMode ? (
-        <section className="acceptance-controls">
-          <button type="button" onClick={unmountWorkspace}>
-            Unmount acceptance workspace
-          </button>
-          <span data-testid="disposed-status">{disposedStatus}</span>
-        </section>
+        <>
+          <section className="acceptance-controls">
+            <button type="button" onClick={unmountWorkspace}>
+              Unmount acceptance workspace
+            </button>
+            <span data-testid="disposed-status">{disposedStatus}</span>
+          </section>
+          <HeadlessAcceptanceSurfaces />
+        </>
       ) : null}
       {mounted ? (
-        <TemplateEditorWorkspace
-          acceptanceMode={acceptanceMode}
-          onSession={rememberSession}
-          onTemplateExportReady={(payload) => {
-            console.info("Template output ready for the host application", {
-              filename: payload.filename,
-              width: payload.width,
-              height: payload.height,
-              sessionRevision: payload.sessionRevision,
-              renderIdentity: payload.renderIdentity.identityId,
-              diagnosticCount: payload.diagnostics.length,
-            });
-          }}
-        />
+        view === "import" ? (
+          <TemplateImportWorkspace
+            onCancel={() => {
+              setHostMessage("Template setup cancelled.");
+              setView("dashboard");
+            }}
+            onConfirmed={(confirmation) => {
+              const record: HostTemplateRecord = {
+                id: confirmation.packageFingerprint,
+                confirmation,
+              };
+              setRecords((current) => [
+                ...current.filter((item) => item.id !== record.id),
+                record,
+              ]);
+              setSelectedRecordId(null);
+              setHostMessage("Confirmed template added to the in-memory host catalogue.");
+              setView("dashboard");
+            }}
+          />
+        ) : view === "editor" && selectedRecord ? (
+          <TemplateEditorWorkspace
+            key={selectedRecord.id}
+            record={selectedRecord}
+            onBack={() => {
+              setSelectedRecordId(null);
+              setHostMessage("Returned from the host-owned editor.");
+              setView("dashboard");
+            }}
+            acceptanceMode={acceptanceMode}
+            onSession={rememberSession}
+            onTemplateExportReady={(payload) => {
+              console.info("Template output ready for the host application", {
+                filename: payload.filename,
+                width: payload.width,
+                height: payload.height,
+                sessionRevision: payload.sessionRevision,
+                renderIdentity: payload.renderIdentity.identityId,
+                diagnosticCount: payload.diagnostics.length,
+              });
+            }}
+          />
+        ) : (
+          <main className="dashboard">
+            <header>
+              <div>
+                <p className="eyebrow">HOST APPLICATION</p>
+                <h1>Template dashboard</h1>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setHostMessage("Template setup opened.");
+                  setView("import");
+                }}
+              >
+                Add new template
+              </button>
+            </header>
+            <p className="message">{hostMessage}</p>
+            {records.length === 0 ? (
+              <section className="empty-state">
+                <h2>No templates have been added.</h2>
+                <p>
+                  The host catalogue changes only after explicit wizard
+                  confirmation.
+                </p>
+              </section>
+            ) : (
+              <section className="template-list" aria-label="Host templates">
+                {records.map((record) => (
+                  <article key={record.id} className="template-card">
+                    <h2>{record.confirmation.packageValue.name}</h2>
+                    <p>
+                      {record.confirmation.packageValue.canvas.width}×
+                      {record.confirmation.packageValue.canvas.height} ·{" "}
+                      {record.confirmation.editableFields.length} editable fields
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedRecordId(record.id);
+                        setView("editor");
+                      }}
+                    >
+                      Open template {record.confirmation.packageValue.name}
+                    </button>
+                  </article>
+                ))}
+              </section>
+            )}
+          </main>
+        )
       ) : null}
     </>
+  );
+}
+
+function HeadlessStatus({
+  label,
+}: {
+  label: string;
+}) {
+  const snapshot = useTemplateImportWizardSnapshot();
+  return (
+    <div
+      data-headless-surface={label}
+      data-active-step={snapshot.activeStep}
+      data-wizard-revision={snapshot.revision}
+    >
+      {label}: {snapshot.activeStep}
+    </div>
+  );
+}
+
+function HeadlessAcceptanceSurfaces() {
+  const pageWizard = useTemplateImportWizard();
+  const modalWizard = useTemplateImportWizard();
+  const drawerWizard = useTemplateImportWizard();
+  const surfaces: Array<[string, TemplateImportWizardControllerV1]> = [
+    ["page", pageWizard],
+    ["modal", modalWizard],
+    ["drawer", drawerWizard],
+  ];
+  return (
+    <section aria-label="Headless wizard composition acceptance">
+      {surfaces.map(([label, wizard]) => (
+        <TemplateImportWizardProvider
+          key={label}
+          wizard={wizard}
+        >
+          <HeadlessStatus label={label} />
+        </TemplateImportWizardProvider>
+      ))}
+    </section>
   );
 }

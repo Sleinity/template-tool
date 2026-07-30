@@ -1,5 +1,27 @@
 # @sleinity/template-react
 
+## 0.3.0
+
+### Minor Changes
+
+- Add the host-neutral template setup wizard, portable editable-field rule
+  operations, and session setup/font preparation APIs.
+- Add provider/snapshot hooks, a renderer-backed preview bridge and a
+  responsive seven-step default interface over the headless browser workflow.
+- Replace setup font suggestions and replacements with a clear exact-file
+  upload, verified reuse, and blocking readiness gate.
+- Show exact emoji-fallback uploads as ready with a neutral portability note,
+  while keeping ordinary missing characters blocking.
+- Keep content editing host-owned: the wizard configures image constraints and
+  Fill/Fit defaults without exposing its own image-editor adapter or content
+  replacement controls.
+
+### Patch Changes
+
+- Updated dependencies
+  - @sleinity/template-core@0.3.0
+  - @sleinity/template-browser@0.3.0
+
 ## 0.2.2
 
 ### Patch Changes

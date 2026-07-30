@@ -9,6 +9,15 @@ const server = await createStudioViteServer({ logLevel: "warn" });
 const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "template-studio-browser-"));
 const fixture = await createCompactLifecycleFixture();
 const fixturePath = path.join(temporaryDirectory, fixture.sourceName);
+const exactFontPath = path.join(
+  process.cwd(),
+  "apps",
+  "studio",
+  "src",
+  "assets",
+  "fonts",
+  "rethink-sans-600.ttf",
+);
 await writeFile(fixturePath, fixture.bytes);
 let browser;
 
@@ -17,7 +26,7 @@ try {
   const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");
   if (!baseUrl) throw new Error("The Studio Vite server has no local URL.");
 
-  const [figmaResponse, fontApiResponse, fontAssetResponse] = await Promise.all([
+  const [figmaResponse, retiredFontApiResponse, fontAssetResponse] = await Promise.all([
     fetch(`${baseUrl}/api/template-package/enrich-figma`, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -30,9 +39,12 @@ try {
     }),
     fetch(`${baseUrl}/src/assets/fonts/rethink-sans-600.ttf`),
   ]);
-  if (figmaResponse.status !== 400 || fontApiResponse.status !== 404) {
+  if (
+    figmaResponse.status !== 400 ||
+    retiredFontApiResponse.status !== 404
+  ) {
     throw new Error(
-      `Studio API routes were not handled: figma=${figmaResponse.status} font=${fontApiResponse.status}.`,
+      `Studio API contract is unexpected: figma=${figmaResponse.status} retired-font=${retiredFontApiResponse.status}.`,
     );
   }
   if (!fontAssetResponse.ok || (await fontAssetResponse.arrayBuffer()).byteLength === 0) {
@@ -73,6 +85,55 @@ try {
   await page.getByTestId("zip-package-input").setInputFiles(fixturePath);
   await page.getByRole("button", { name: "Import template" }).click();
   await page.getByTestId("package-step-prepare-fonts").waitFor();
+  if (
+    await page.getByText(/available fonts|add open font|use replacement|link font/i)
+      .count()
+  ) {
+    throw new Error("Studio exposed a retired font suggestion or replacement control.");
+  }
+  await page.getByRole("button", { name: "Upload font file" }).click();
+  await page.getByTestId("package-font-upload-input").setInputFiles({
+    name: "not-a-font.ttf",
+    mimeType: "font/ttf",
+    buffer: Buffer.from("not a font"),
+  });
+  await page.locator('[data-font-ui-status="File doesn’t match"]').waitFor();
+  if (!(await page.getByRole("button", { name: "Check template" }).isDisabled())) {
+    throw new Error("Studio allowed progression after an invalid font upload.");
+  }
+  await page.getByRole("button", { name: "Upload font file" }).click();
+  await page.getByTestId("package-font-upload-input").setInputFiles(
+    exactFontPath,
+  );
+  await page.locator('[data-font-ui-status="Ready"]').waitFor();
+  await page.getByText(
+    "Emoji in this template will use the device emoji font.",
+    { exact: true },
+  ).waitFor();
+  const verifiedHash = await page
+    .locator("[data-font-linked-binary-hash]")
+    .getAttribute("data-font-linked-binary-hash");
+  await page.getByRole("button", { name: "Replace file" }).click();
+  await page.getByTestId("package-font-upload-input").setInputFiles({
+    name: "invalid-replacement.ttf",
+    mimeType: "font/ttf",
+    buffer: Buffer.from("not a font"),
+  });
+  await page.locator('[data-font-ui-status="Ready"]').waitFor();
+  if (
+    !verifiedHash ||
+    await page.locator("[data-font-linked-binary-hash]").getAttribute(
+      "data-font-linked-binary-hash",
+    ) !== verifiedHash
+  ) {
+    throw new Error("An invalid replacement changed the verified exact font.");
+  }
+  await page.reload();
+  await page.getByTestId("zip-package-input").setInputFiles(fixturePath);
+  await page.getByRole("button", { name: "Import template" }).click();
+  await page.getByTestId("package-step-prepare-fonts").waitFor();
+  await page.locator('[data-font-ui-status="Ready"]').waitFor();
+  await page.getByRole("button", { name: "Replace file" }).waitFor();
   await page.getByRole("button", { name: "Check template" }).click();
   await page.getByTestId("package-step-validate").waitFor();
   await page.getByRole("button", { name: "Continue to fields" }).click();
@@ -126,7 +187,7 @@ try {
   }
   await context.close();
   console.log(
-    "Studio browser smoke passed: routes, history, APIs, font URL, and inspection fit/zoom/resize/disposal.",
+    "Studio browser smoke passed: exact font rejection/upload/atomic replacement/reuse, routes, history, Figma API, retired open-font route, font URL, and inspection fit/zoom/resize/disposal.",
   );
 } finally {
   await browser?.close();

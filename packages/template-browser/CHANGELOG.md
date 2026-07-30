@@ -1,5 +1,31 @@
 # @sleinity/template-browser
 
+## 0.3.0
+
+### Minor Changes
+
+- Add the host-neutral template setup wizard, portable editable-field rule
+  operations, and revision-safe session setup/font preparation APIs.
+- Add the seven-step headless import controller, structured import/font/render
+  reports, host adapters, immutable confirmation and blocked-import validation
+  compatibility.
+- Make the setup font path upload-only and require an exact, glyph-complete
+  face while retaining lower-level compatibility contracts for existing
+  packages.
+- Accept an otherwise exact text face when only explicit emoji sequences use
+  device fallback, and identify genuinely missing characters.
+- Add atomic `loadTemplateState()` reopening for host-retained confirmed
+  templates, with fresh validation, identity checks, rebuilt session state,
+  baseline restoration and stale-work rejection.
+- Keep the wizard focused on import and field-rule setup; external shells own
+  content controls and preprocessing through the existing session mutation
+  contract.
+
+### Patch Changes
+
+- Updated dependencies
+  - @sleinity/template-core@0.3.0
+
 ## 0.2.2
 
 ### Patch Changes

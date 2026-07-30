@@ -27,6 +27,12 @@ import {
   canOpenTemplatePackageEditor,
   type TemplatePackageEditorSession,
 } from "../src/editor/packageEditorSession";
+import {
+  editableFieldRuleKey,
+  reorderPackageEditableFieldRule,
+  replacePackageEditableFieldRules,
+  updatePackageEditableFieldRule,
+} from "../src/editor/packageFieldRules";
 import { validateTemplatePackage } from "../src/validateTemplatePackage";
 import type {
   EditableFieldBinding,
@@ -132,6 +138,61 @@ assert(
     descriptors[0]?.id === headline.id,
   "Exported field descriptors must retain source order.",
 );
+
+{
+  const fieldKey = editableFieldRuleKey(headline);
+  const renamed = updatePackageEditableFieldRule(imported, fieldKey, {
+    label: "Campaign headline",
+    constraints: {
+      maxCharacters: 42,
+      maxLines: 2,
+      pattern: "free",
+    },
+    behavior: {
+      onOverflow: "prevent-input",
+      showCounter: true,
+      counterType: "characters",
+    },
+  });
+  assert(
+    renamed.applied &&
+      renamed.packageValue !== imported &&
+      renamed.fields[0]?.label === "Campaign headline" &&
+      (renamed.fields[0]?.constraints as { maxCharacters?: number })
+        .maxCharacters === 42 &&
+      imported.editableFields[0]?.label !== "Campaign headline",
+    "Field-rule updates must remain immutable and preserve typed constraints.",
+  );
+
+  const appended = structuredClone(headline);
+  appended.id = "second-headline";
+  const replaced = replacePackageEditableFieldRules(imported, [
+    headline,
+    appended,
+  ]);
+  const reordered = reorderPackageEditableFieldRule(
+    replaced.packageValue,
+    editableFieldRuleKey(appended),
+    0,
+  );
+  assert(
+    reordered.applied &&
+      reordered.fields.map((field) => field.id).join(",") ===
+        "second-headline,headline",
+    "Field-rule replacement and reordering must preserve explicit host order.",
+  );
+
+  let duplicateRejected = false;
+  try {
+    replacePackageEditableFieldRules(imported, [headline, headline]);
+  } catch {
+    duplicateRejected = true;
+  }
+  assert(
+    duplicateRejected,
+    "Duplicate field-rule identities must be rejected before session publication.",
+  );
+}
 
 const markerPackage = freshPackage();
 markerPackage.editableFields = [];

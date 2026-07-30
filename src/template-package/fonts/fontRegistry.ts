@@ -9,6 +9,10 @@ import {
   findManagedFontForRequirement,
   matchManagedFont,
 } from "./fontMatching";
+import {
+  isExactFontRequirementResolved,
+  managedFontExactlyMatchesRequirement,
+} from "./exactFontSetup";
 import { IndexedDbManagedFontRegistry } from "./indexedDbFontRegistry";
 import type {
   ManagedFontCandidate,
@@ -196,15 +200,28 @@ export async function autoLinkManagedFonts(
   let nextPackage = structuredClone(packageValue);
   const fonts = await registryValue.listManagedFonts();
   for (const requirement of nextPackage.fontRequirements ?? []) {
-    if (requirement.resolution?.managedFontId) continue;
+    const currentlyLinked = requirement.resolution?.managedFontId
+      ? fonts.find((font) => font.id === requirement.resolution?.managedFontId)
+      : null;
+    if (
+      isExactFontRequirementResolved(nextPackage, requirement) &&
+      managedFontExactlyMatchesRequirement(requirement, currentlyLinked)
+    ) {
+      continue;
+    }
     const key = createFontRequirementKey(requirement);
     const mapping = await registryValue.getMapping(key);
     const mapped = mapping
       ? fonts.find((font) => font.id === mapping.managedFontId)
       : null;
-    const candidate = mapped
+    const mappedCandidate = mapped
       ? findManagedFontCandidates(requirement, [mapped])[0] ?? null
-      : findManagedFontForRequirement(requirement, fonts);
+      : null;
+    const candidate =
+      mappedCandidate?.classification === "exact" &&
+      !mappedCandidate.requiresConfirmation
+        ? mappedCandidate
+        : findManagedFontForRequirement(requirement, fonts);
     if (
       !candidate ||
       candidate.requiresConfirmation ||

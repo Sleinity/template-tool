@@ -1,6 +1,7 @@
 import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
 import type { TemplatePackageV1 } from "../types";
 import {
+  autoLinkManagedFonts,
   createTemplatePackageFontEmbedCss,
   createFontRequirementKey,
   findManagedFontCandidates,
@@ -150,6 +151,47 @@ assert(
     persistedMapping.runtimeFamily === registered.runtimeFamily &&
     persistedMapping.classification === "exact",
   "Managed-font mappings should persist request, face, binary and runtime identity together.",
+);
+
+const exactRegistered = await registry.registerUploadedFont({
+  bytes: new Uint8Array([5, 6, 7, 8, 9]).buffer,
+  family: "Registry Sans",
+  typographicFamily: "Registry Sans",
+  legacyFamily: "Registry Sans",
+  subfamily: "Regular",
+  postScriptName: "RegistrySans-Regular",
+  style: "normal",
+  weight: 400,
+  unicodeCoverage: {
+    ranges: [{ start: 0x20, end: 0x7e }],
+    codePointCount: 95,
+  },
+  source: "uploaded",
+  mimeType: "font/ttf",
+  fileName: "RegistrySans-Exact.ttf",
+});
+const linkedExact = await linkRequirementToManagedFont(
+  packageValue,
+  packageValue.fontRequirements[0].id,
+  exactRegistered,
+  { confirmed: true },
+);
+const importedReplacement = structuredClone(linkedExact);
+if (!importedReplacement.fontRequirements?.[0].resolution) {
+  throw new Error("Auto-link replacement test requires a resolution.");
+}
+importedReplacement.fontRequirements[0].resolution.match = "replacement";
+importedReplacement.fontRequirements[0].resolution.classification =
+  "replacement";
+const relinkedExact = await autoLinkManagedFonts(
+  importedReplacement,
+  registry,
+);
+assert(
+  relinkedExact.fontRequirements?.[0].resolution?.classification === "exact" &&
+    relinkedExact.fontRequirements[0].resolution.binaryHash ===
+      exactRegistered.assetHash,
+  "Setup auto-linking should treat imported replacement state as unresolved and reuse an unambiguous stored exact face.",
 );
 
 const exportFontCss = await createTemplatePackageFontEmbedCss(linkedPackage);

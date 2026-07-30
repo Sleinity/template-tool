@@ -16,17 +16,24 @@ The exact 149,328-byte binary hashes to `90b15711dc3779b2e64e8aff5228154dd019a90
 
 Use versioned request and face objects. Preserve every relevant source and OpenType identity separately. Prefer typographic family/subfamily for semantic family matching and retain legacy/full/PostScript/raw records as evidence. One matcher owns candidate discovery and final link validation.
 
+Required glyph coverage belongs to the requested text face except for explicit
+emoji sequences already delegated by the renderer to the device emoji font.
+That bounded exception includes emoji presentation, ZWJ, skin-tone, regional
+flag and keycap sequences and remains visible as non-blocking portability
+evidence. It does not exempt ordinary Unicode symbols or other text
+characters.
+
 ## Alternatives
 
 Filename matching and legacy-family preference were rejected because they misclassify valid faces. Family-only CSS checks were rejected because browsers may satisfy them with local fallback.
 
 ## Consequences
 
-Exact, compatible, replacement, missing, ambiguous, axis, and glyph-coverage outcomes are explicit. The managed-record schema advances compatibly to V2.
+Exact, compatible, replacement, missing, ambiguous, axis, and glyph-coverage outcomes are explicit. Accepted device-emoji fallback does not weaken exact authority for the requested text face. The managed-record schema advances compatibly to V2.
 
 ## Compatibility impact
 
-Canonical validation stays strict. Older records normalize on read. Unknown faces retain fallback/replacement behavior rather than being guessed exact.
+Canonical validation stays strict. Older records normalize on read. Unknown faces retain fallback/replacement behavior rather than being guessed exact. Previously rejected uploads require no migration because they were never registered.
 
 ## Migration impact
 

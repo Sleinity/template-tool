@@ -135,6 +135,8 @@ import {
   TemplateInspectionViewport,
   useTemplateSessionSnapshot,
 } from "@sleinity/template-react";
+import { TemplateImportWizard } from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
 
 const session = createTemplateSession();
 
@@ -151,7 +153,10 @@ function Player() {
 
 function App() {
   const [runtime] = useState(() => session);
-  return <TemplateSessionProvider session={runtime}><Player /></TemplateSessionProvider>;
+  return <TemplateSessionProvider session={runtime}>
+    <TemplateImportWizard options={{ session: runtime }} onComplete={() => undefined} />
+    <Player />
+  </TemplateSessionProvider>;
 }
 
 createRoot(document.getElementById("root")!).render(<App />);
@@ -181,6 +186,21 @@ createRoot(document.getElementById("root")!).render(<App />);
       }
       if (packageName === "template-react" && ["apps/studio", "components/ui", "lucide-react"].some((term) => source.includes(term))) {
         throw new Error(`${packageName}/${fileName} contains a Studio UI dependency.`);
+      }
+    }
+    if (packageName === "template-react") {
+      for (const fileName of ["importer.js", "importer.d.ts", "importer.css"]) {
+        const source = await readFile(path.join(installed, fileName), "utf8");
+        if (
+          /(?:from|import)\s*["']\.\.\/\.\.\/src\//.test(source) ||
+          ["/Users/", "/private/", "apps/studio", "lucide-react"].some(
+            (term) => source.includes(term),
+          )
+        ) {
+          throw new Error(
+            `${packageName}/${fileName} contains a repository or Studio dependency.`,
+          );
+        }
       }
     }
   }

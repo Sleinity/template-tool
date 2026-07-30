@@ -2,7 +2,6 @@ import type { Plugin, PreviewServer, ViteDevServer } from "vite";
 import { createFigmaEnrichmentApiHandler } from "./apiRoute";
 import { createFigmaEnrichmentProvider } from "./createProvider";
 import type { FigmaProviderEnvironment } from "./createProvider";
-import { createOpenFontApiHandler } from "../font-resolution/openFontApi";
 
 function installMiddleware(
   server: ViteDevServer | PreviewServer,
@@ -11,10 +10,8 @@ function installMiddleware(
   const handler = createFigmaEnrichmentApiHandler(
     createFigmaEnrichmentProvider(environment),
   );
-  const fontHandler = createOpenFontApiHandler();
   server.middlewares.use((request, response, next) => {
-    void fontHandler(request, response)
-      .then((handled) => (handled ? true : handler(request, response)))
+    void handler(request, response)
       .then((handled) => {
         if (!handled) next();
       })

@@ -76,7 +76,7 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.2.2
+npm install @sleinity/template-core@0.3.0
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
@@ -87,13 +87,13 @@ package or its linked repository.
 
 Lovable Business cannot inject the private-registry build secret required for
 GitHub Packages. Use the checksum-verified archive attached to the public
-`sdk-v0.2.2` GitHub Release instead:
+`sdk-v0.3.0` GitHub Release instead:
 
-1. Verify `sleinity-template-core-0.2.2.tgz` against `SHA256SUMS`.
+1. Verify `sleinity-template-core-0.3.0.tgz` against `SHA256SUMS`.
 2. Commit it to the private Lovable-synced repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.2.2.tgz"`.
+   "file:vendor/sleinity-template-core-0.3.0.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
 No `.npmrc` or GitHub token belongs in the Lovable repository. The release
@@ -102,8 +102,9 @@ attached, so it is not an independently rebuilt artifact.
 
 The packed-core Node verification installs only the package archive, imports it
 by package name, loads an inline ZIP, creates resolved/backend projections,
-applies text/color/visibility/image edits and restores imported state without
+applies text/color/visibility/image edits and field-rule configuration, and
+restores imported state without
 repository fixtures, and rejects DOM, CSS, storage, font and network global
 access. The built public declaration is
-locked to the Milestone 2A contract at 86,272 bytes and SHA-256
-`e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8`.
+locked to the SDK 0.3.0 contract at 87,431 bytes and SHA-256
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.

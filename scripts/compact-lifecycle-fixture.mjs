@@ -72,10 +72,10 @@ export async function createCompactLifecycleFixture() {
         sizing: { horizontal: fixed(400), vertical: fixed(64) },
         appearance: appearance({ r: 0.08, g: 0.1, b: 0.16, a: 1 }),
         text: {
-          characters: "Portable SDK session",
-          fontFamily: "Arial",
-          fontStyle: "Regular",
-          fontWeight: 400,
+          characters: "Portable SDK session ☀️",
+          fontFamily: "Rethink Sans",
+          fontStyle: "SemiBold",
+          fontWeight: 600,
           fontSize: 32,
           lineHeight: { value: 40, unit: "PIXELS" },
           letterSpacing: { value: 0, unit: "PIXELS" },
@@ -94,7 +94,7 @@ export async function createCompactLifecycleFixture() {
       nodeId: "headline",
       property: "text.characters",
       label: "Headline",
-      defaultValue: "Portable SDK session",
+      defaultValue: "Portable SDK session ☀️",
     }],
     assets: {},
   };

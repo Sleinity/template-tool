@@ -70,6 +70,47 @@ for (const activeRoot of activeRoots) {
   }
 }
 
+const lovablePrompts = await readFile(
+  path.join(root, "docs", "sdk", "LOVABLE_TEMPLATE_EDITOR_PROMPTS.md"),
+  "utf8",
+);
+if (
+  /From @sleinity\/template-react\/importer:\n(?:- [^\n]+\n)*- TemplateImportConfirmationV1/mu
+    .test(lovablePrompts) ||
+  /TemplateSessionProvider using wizard\.session/u.test(lovablePrompts) ||
+  !lovablePrompts.includes("session.loadTemplateState()") ||
+  !lovablePrompts.includes(
+    "TemplateImportConfirmationV1 as a type from @sleinity/template-browser",
+  )
+) {
+  throw new Error(
+    "Lovable handoff must import confirmation from template-browser and reopen it in a fresh session.",
+  );
+}
+
+const runtimeHandoffGenerator = await readFile(
+  path.join(
+    root,
+    "scripts",
+    "repository",
+    "create-runtime-release-handoff.mjs",
+  ),
+  "utf8",
+);
+if (
+  runtimeHandoffGenerator.includes(
+    "<TemplateSessionProvider session={wizard.session}>",
+  ) ||
+  !runtimeHandoffGenerator.includes("session.loadTemplateState(") ||
+  !runtimeHandoffGenerator.includes(
+    'from "@sleinity/template-browser";',
+  )
+) {
+  throw new Error(
+    "Generated runtime handoff must return confirmation to the host and reopen it in a fresh session.",
+  );
+}
+
 const workflow = await readFile(
   path.join(root, ".github", "workflows", "release.yml"),
   "utf8",

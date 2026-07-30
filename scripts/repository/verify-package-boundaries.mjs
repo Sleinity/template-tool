@@ -54,6 +54,7 @@ const migratedCoreEntryPaths = [
   "resolved",
   "editor/packageEditorSession",
   "editor/packageFieldBindings",
+  "editor/packageFieldRules",
 ];
 for (const migratedPath of migratedCoreEntryPaths) {
   if (coreEntry.includes(`../../../src/template-package/${migratedPath}`)) {
@@ -99,6 +100,7 @@ const requiredCoreOwners = [
   "packages/template-core/src/primitives/index.ts",
   "packages/template-core/src/resolved/types.ts",
   "packages/template-core/src/resolved/imagePlacement.ts",
+  "packages/template-core/src/resolved/fontCharacterCoverage.ts",
   "packages/template-core/src/resolved/fontReadiness.ts",
   "packages/template-core/src/resolved/createResolvedRenderTree.ts",
   "packages/template-core/src/resolved/index.ts",
@@ -106,6 +108,7 @@ const requiredCoreOwners = [
   "packages/template-core/src/publicBackendDiagnosticProjection.ts",
   "packages/template-core/src/editor/packageEditorSession.ts",
   "packages/template-core/src/editor/packageFieldBindings.ts",
+  "packages/template-core/src/editor/packageFieldRules.ts",
   "packages/template-core/src/editor/fieldConstraints.ts",
 ];
 for (const owner of requiredCoreOwners) {
@@ -202,6 +205,29 @@ for (const file of await sourceFiles(path.join(root, "packages", "template-core"
   }
 }
 
+if (coreEntry.includes("fontCharacterCoverage")) {
+  violations.push(
+    "The emoji fallback coverage classifier must remain an internal core contract",
+  );
+}
+for (const file of [
+  "src/template-package/fonts/fontMatching.ts",
+  "packages/template-core/src/resolved/fontReadiness.ts",
+  "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
+  "src/template-package/import/templateImportWizard.ts",
+]) {
+  if (!(await read(file)).includes("fontUsesPlatformEmojiFallback") &&
+      file !== "src/template-package/fonts/fontMatching.ts") {
+    violations.push(`${file} must consume the shared emoji fallback classifier`);
+  }
+  if (
+    file === "src/template-package/fonts/fontMatching.ts" &&
+    !(await read(file)).includes("textFaceCoverageCharacters")
+  ) {
+    violations.push(`${file} must consume shared text-face coverage authority`);
+  }
+}
+
 const resolvedTreeSource = await read("packages/template-core/src/resolved/createResolvedRenderTree.ts");
 if (/from\s+["'][^"']*\/render(?:\/|["'])/.test(resolvedTreeSource)) {
   violations.push("Resolved-tree creation must not import renderer-owned helpers");
@@ -253,6 +279,7 @@ for (const [compatibilityPath, forbiddenDefinition] of [
 }
 
 const reactEntry = await read("packages/template-react/src/index.ts");
+const reactImporterEntry = await read("packages/template-react/src/importer.tsx");
 for (const studioOnly of ["TemplatePackageQualityPanel", "TemplatePackageFieldEditor", "TemplatePackageImportFlow", "TemplateOverviewPage"]) {
   if (reactEntry.includes(studioOnly)) {
     violations.push(`template-react exports Studio-only UI: ${studioOnly}`);
@@ -260,6 +287,32 @@ for (const studioOnly of ["TemplatePackageQualityPanel", "TemplatePackageFieldEd
 }
 if (!reactEntry.includes("TemplateInspectionViewport")) {
   violations.push("template-react must export the composable inspection viewport");
+}
+for (const studioOnly of [
+  "TemplatePackageImportFlow",
+  "TemplatePackageFieldRulesEditor",
+  "components/ui",
+  "lucide-react",
+  "apps/studio",
+]) {
+  if (reactImporterEntry.includes(studioOnly)) {
+    violations.push(`template-react importer contains Studio-only dependency: ${studioOnly}`);
+  }
+}
+for (const requiredImporterContract of [
+  "TemplateImportWizard",
+  "useTemplateImportWizard",
+  "TemplateImportWizardProvider",
+  "useTemplateImportWizardSnapshot",
+  "TemplateImportWizardPreview",
+  "TemplateImportWizardHandle",
+  "TemplateImporterWizard",
+  "TemplateImporterCompletionV1",
+  "TemplateSessionV1",
+]) {
+  if (!reactImporterEntry.includes(requiredImporterContract)) {
+    violations.push(`template-react importer is missing ${requiredImporterContract}`);
+  }
 }
 
 for (const packageName of [
@@ -289,7 +342,6 @@ const requiredStudioOwners = [
   "apps/studio/src/routing",
   "apps/studio/src/assets",
   "apps/studio/server/figma-enrichment/vitePlugin.ts",
-  "apps/studio/server/font-resolution/openFontApi.ts",
   "apps/studio/src/components/ui",
   "apps/studio/src/components/template-package/TemplateInspectionPreview.tsx",
   "apps/studio/src/components/template-package/editor/TemplatePackageFieldEditor.tsx",
@@ -297,13 +349,71 @@ const requiredStudioOwners = [
   "apps/studio/src/components/template-package/editor/TemplatePackageDiagnosticsPanel.tsx",
   "apps/studio/src/components/template-package/editor/fieldLabels.ts",
   "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
-  "apps/studio/src/components/template-package/fonts/FontResolutionPanel.tsx",
   "apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx",
   "apps/studio/src/components/template-package/quality/TemplatePackageDiagnosticContext.tsx",
 ];
 for (const owner of requiredStudioOwners) {
   if (!(await exists(owner))) {
     violations.push(`Studio must own ${owner}`);
+  }
+}
+
+for (const retired of [
+  "apps/studio/server/font-resolution/openFontApi.ts",
+  "apps/studio/server/font-resolution/openFontApi.test.ts",
+  "apps/studio/src/components/template-package/fonts/FontResolutionPanel.tsx",
+]) {
+  if (await exists(retired)) {
+    violations.push(`Retired open-font owner remains: ${retired}`);
+  }
+}
+
+for (const activeFontUi of [
+  "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
+  "packages/template-react/src/importer.tsx",
+]) {
+  const source = await read(activeFontUi);
+  for (const retiredLabel of [
+    "Add open font",
+    "Available fonts",
+    "Use replacement",
+    "Link font",
+    "resolve-open-font",
+  ]) {
+    if (source.includes(retiredLabel)) {
+      violations.push(`${activeFontUi} exposes retired font setup text: ${retiredLabel}`);
+    }
+  }
+}
+
+const fontResolutionSource = await read(
+  "src/template-package/fonts/fontResolution.ts",
+);
+if (
+  fontResolutionSource.includes("resolve-open-font") ||
+  fontResolutionSource.includes("requestTrustedOpenFont")
+) {
+  violations.push("Browser font resolution still contains open-font network behavior");
+}
+
+const studioDistDirectory = path.join(root, "apps", "studio", "dist");
+if (await exists("apps/studio/dist")) {
+  for (const file of await sourceFiles(studioDistDirectory)) {
+    const source = await readFile(file, "utf8");
+    for (const forbidden of [
+      "__templatePackageFontSetupHarness",
+      "resolve-open-font",
+      "Add open font",
+      "Available fonts",
+      "Use replacement",
+      "Link font",
+    ]) {
+      if (source.includes(forbidden)) {
+        violations.push(
+          `Studio production output ${path.relative(root, file)} contains retired/development-only font behavior: ${forbidden}`,
+        );
+      }
+    }
   }
 }
 
@@ -374,16 +484,22 @@ const coreDeclarationPath = path.join(root, "packages/template-core/dist/index.d
 try {
   const declaration = await readFile(coreDeclarationPath);
   const declarationHash = createHash("sha256").update(declaration).digest("hex");
-  if (declaration.byteLength !== 86272 || declarationHash !== "e44413972edbaaf6de093dc800de5863b5317357322a9f1517effbb619fb84c8") {
+  if (declaration.byteLength !== 87431 || declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033") {
     violations.push(
-      `template-core public declaration drifted from Milestone 2A: ${declaration.byteLength} bytes / ${declarationHash}`,
+      `template-core public declaration drifted from SDK 0.3.0: ${declaration.byteLength} bytes / ${declarationHash}`,
     );
   }
 } catch {
   violations.push("template-core must build dist/index.d.ts before declaration verification");
 }
 
-for (const fileName of ["index.js", "index.d.ts"]) {
+for (const fileName of [
+  "index.js",
+  "index.d.ts",
+  "importer.js",
+  "importer.d.ts",
+  "importer.css",
+]) {
   const reactBundlePath = path.join(root, "packages/template-react/dist", fileName);
   try {
     const source = await readFile(reactBundlePath, "utf8");
@@ -391,6 +507,11 @@ for (const fileName of ["index.js", "index.d.ts"]) {
       if (source.includes(forbidden)) {
         violations.push(`template-react ${fileName} contains Studio dependency: ${forbidden}`);
       }
+    }
+    if (source.includes("__templatePackageFontSetupHarness")) {
+      violations.push(
+        `template-react ${fileName} contains the development-only Studio font harness`,
+      );
     }
   } catch {
     violations.push(`template-react must build ${fileName} before boundary verification`);

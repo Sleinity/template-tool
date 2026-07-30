@@ -54,6 +54,8 @@ import {
   type TemplateCreationBlocker,
   type TemplatePackageCreateMetadata,
   analyzeAssetReliability,
+  areExactFontRequirementsResolved,
+  isExactFontRequirementResolved,
   enrichTemplatePackage,
   requestFigmaEnrichment,
   prepareTemplatePackageFonts,
@@ -62,6 +64,7 @@ import {
   type PersistenceSubmissionController,
   type PersistenceSubmissionState,
   type SavedTemplateRecord,
+  useFallbackForRequirement,
 } from "@sleinity/template-browser";
 import { FontPreparationStep } from "../components/template-package/fonts/FontPreparationStep";
 import {
@@ -104,6 +107,19 @@ import {
   FieldExportReadinessPanel,
   TemplateCreationReadinessPanel,
 } from "./import/TemplateCreationReadinessPanels";
+
+declare global {
+  interface Window {
+    __templatePackageFontSetupHarness?: {
+      applyCompatibilityFallbacks(): Array<{
+        requirementId: string;
+        family: string;
+        weight: number;
+        style: string;
+      }>;
+    };
+  }
+}
 
 export {
   buildZipPackageImportResult,
@@ -235,10 +251,17 @@ const motionLabel = (packageValue: TemplatePackageV1 | null) => {
 export const PackageFontPreparationPanel = ({
   packageValue,
   onPackageChange,
+  onReadinessChange,
 }: {
   packageValue: TemplatePackageV1 | null;
   onPackageChange: (packageValue: TemplatePackageV1) => void;
+  onReadinessChange?: (ready: boolean) => void;
 }) => {
+  useEffect(() => {
+    if (!packageValue || packageValue.fontRequirements?.length) return;
+    onReadinessChange?.(true);
+  }, [onReadinessChange, packageValue]);
+
   if (!packageValue) {
     return (
       <div
@@ -284,6 +307,7 @@ export const PackageFontPreparationPanel = ({
     <FontPreparationStep
       packageValue={packageValue}
       onPackageChange={onPackageChange}
+      onReadinessChange={onReadinessChange}
     />
   );
 };
@@ -292,9 +316,13 @@ export function canAdvancePackageWizard(
   stepIndex: number,
   hasSelectedPackage: boolean,
   result: PackageImportResult | null,
+  exactFontsReady = false,
 ): boolean {
   if (stepIndex === 0) return hasSelectedPackage;
-  if (stepIndex === 1 || stepIndex === 2 || stepIndex === 3) {
+  if (stepIndex === 1) {
+    return canImportPackageResult(result) && exactFontsReady;
+  }
+  if (stepIndex === 2 || stepIndex === 3) {
     return canImportPackageResult(result);
   }
   return true;
@@ -305,11 +333,12 @@ export function canNavigatePackageWizard(
   hasSelectedPackage: boolean,
   result: PackageImportResult | null,
   mode: TemplatePackageFlowMode = "import",
+  exactFontsReady = false,
 ): boolean {
   if (targetStep === 0) return true;
   if (mode === "settings") return canImportPackageResult(result);
   if (targetStep === 1) return hasSelectedPackage;
-  return canImportPackageResult(result);
+  return canImportPackageResult(result) && exactFontsReady;
 }
 
 export const ZIP_ONLY_IMPORT_MESSAGE =
@@ -540,6 +569,16 @@ export function TemplatePackageImportFlow({
     useState<ResolvedProductRenderIdentityV1 | null>(null);
   const [fontReadiness, setFontReadiness] =
     useState<FontReadinessReport | null>(null);
+  const [exactFontsReady, setExactFontsReady] = useState(
+    areExactFontRequirementsResolved(initialSettingsResult?.package),
+  );
+  const developmentFontHarnessEnabled =
+    import.meta.env.DEV ||
+    import.meta.env.VITE_TEMPLATE_PACKAGE_FONT_SETUP_HARNESS === "true";
+  const [
+    developmentCompatibilityFontsReady,
+    setDevelopmentCompatibilityFontsReady,
+  ] = useState(false);
   const [selectedQualityIssueId, setSelectedQualityIssueId] = useState<
     string | null
   >(null);
@@ -552,6 +591,7 @@ export function TemplatePackageImportFlow({
   }>({ status: "idle", message: null });
 
   const selectPackageFile = (file: File) => {
+    setDevelopmentCompatibilityFontsReady(false);
     const unsupportedMessage = validateTemplatePackageUploadName(file.name);
     if (unsupportedMessage) {
       importRevisionRef.current.invalidate();
@@ -691,6 +731,9 @@ export function TemplatePackageImportFlow({
   };
 
   const activePackage = result?.package ?? null;
+  useEffect(() => {
+    setExactFontsReady(areExactFontRequirementsResolved(activePackage));
+  }, [activePackage]);
   const bundledFigmaSource = result?.loadedSource?.figmaSource;
   const figmaReferencePng = useMemo(
     () => getFigmaReferencePng(activePackage),
@@ -969,10 +1012,18 @@ export function TemplatePackageImportFlow({
 
   const canCreate = creationGate.canCreate;
   const hasImportInput = Boolean(zipBuffer);
+  const fontGateReady =
+    exactFontsReady ||
+    (developmentFontHarnessEnabled && developmentCompatibilityFontsReady);
   const nextDisabled =
     stepIndex === 0
       ? !hasImportInput
-      : !canAdvancePackageWizard(stepIndex, hasImportInput, result) ||
+      : !canAdvancePackageWizard(
+          stepIndex,
+          hasImportInput,
+          result,
+          fontGateReady,
+        ) ||
         (stepIndex === 2 && qualityReport?.status === "blocked");
 
   const submitTemplate = async () => {
@@ -1051,6 +1102,41 @@ export function TemplatePackageImportFlow({
     setSelectedQualityIssueId(null);
   };
 
+  useEffect(() => {
+    if (!developmentFontHarnessEnabled || !activePackage) return;
+    const api = {
+      applyCompatibilityFallbacks() {
+        const unresolved = (activePackage.fontRequirements ?? []).filter(
+          (requirement) =>
+            !isExactFontRequirementResolved(activePackage, requirement),
+        );
+        let nextPackage = activePackage;
+        for (const requirement of unresolved) {
+          nextPackage = useFallbackForRequirement(
+            nextPackage,
+            requirement.id,
+          );
+        }
+        if (unresolved.length) {
+          setDevelopmentCompatibilityFontsReady(true);
+          updateActivePackage(nextPackage);
+        }
+        return unresolved.map((requirement) => ({
+          requirementId: requirement.id,
+          family: requirement.family,
+          weight: requirement.weight,
+          style: requirement.cssStyle,
+        }));
+      },
+    };
+    window.__templatePackageFontSetupHarness = api;
+    return () => {
+      if (window.__templatePackageFontSetupHarness === api) {
+        delete window.__templatePackageFontSetupHarness;
+      }
+    };
+  }, [activePackage]);
+
   const markSettingsChanged = () => {
     settingsChangeRevisionRef.current += 1;
     setFieldChangesPending(true);
@@ -1115,6 +1201,7 @@ export function TemplatePackageImportFlow({
                 Boolean(zipBuffer),
                 result,
                 mode,
+                fontGateReady,
               );
               return (
                 <li key={step}>
@@ -1463,11 +1550,12 @@ export function TemplatePackageImportFlow({
                 className="space-y-5"
               >
                 <p className="ui-page-description">
-                  Add any missing fonts, or choose a replacement before checking the template.
+                  Upload the exact font file shown for every required face.
                 </p>
                 <PackageFontPreparationPanel
                   packageValue={activePackage}
                   onPackageChange={updateActivePackage}
+                  onReadinessChange={setExactFontsReady}
                 />
               </div>
             ) : null}
