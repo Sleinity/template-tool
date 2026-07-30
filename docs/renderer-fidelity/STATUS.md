@@ -20,15 +20,24 @@ dependency. Its build externalizes `template-core`; the React build declares
 core and browser as external fixed-train dependencies. The 0.4 public API
 inventory remains symbol-identical.
 
+The train was published from `sdk-v0.4.1` on 2026-07-30. The public
+[GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.1)
+contains registry-derived archives, combined checksums, runtime/core handoffs
+and Lovable prompts. An initial tag run exposed a concurrent `prepack`
+declaration-resolution race after core and React publication; PR #12 made
+workspace type resolution independent of another package's `dist` cleanup.
+The corrected tag run published browser, retained package tags, verified the
+published core plus secret-free npm/pnpm consumers, and created the Release.
+
 Portable CI, direct package/root TypeScript, SDK/Studio/example builds,
 declarations, API inventory, boundaries, release policy, archives, DOM-free
 core, packed consumers, session/Studio browser smokes, and the packed generic
 editor pass. The generic editor again proves supported/restricted CSP,
 wizard confirmation, fresh-session reopening, host editing, exact fonts,
 offline persistence, silent PNG, disposal, simultaneous headless compositions
-and zero external requests. A secret-free pnpm vendored consumer passes; this
-local runtime has no npm executable, so the npm variant remains a CI and
-post-publication gate.
+and zero external requests. Secret-free npm and pnpm vendored consumers pass.
+The same generic acceptance was rerun locally against anonymously downloaded
+public Release bytes.
 
 Core declarations remain exactly 87,431 bytes /
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
@@ -38,6 +47,12 @@ materially flat. Studio is 1,001.02 / 291.35 gzip kB JavaScript; minimal and
 generic examples are 858.15 / 251.51 and 912.50 / 266.51 gzip kB; the packed
 consumer is 897,726 / 262,605 gzip bytes. Consumer and Studio gzip remain
 materially flat while physical package duplication is reduced.
+Registry-derived archive SHA-256 values are core
+`1604c4923a6cba0ce039ad26b738b11fe4c755048a9c4d47cd08200f4bdf8654`,
+browser
+`cad8ab9e506973ad31926bdc9345640a7b6271de7f1c11c7d418b4274109d054`,
+and React
+`5169ee62db4ccde8437bae49f1d73915acbb4d8b2749d513a467260b734c3fe2`.
 
 Appearance evidence is valid and deterministic for all 19 fixtures. Renderer
 baseline `2026-07-30T17-09-39-496Z`, exact-font run
