@@ -13,6 +13,9 @@
   exports unchanged.
 - Externalize `@sleinity/template-core` from the browser bundle so installed
   consumers no longer receive a second embedded copy of core.
+- Resolve workspace core declarations from source during local package builds
+  so concurrent fixed-train `prepack` builds cannot race another package's
+  output cleanup.
 - Updated dependencies
   - @sleinity/template-core@0.4.1
 

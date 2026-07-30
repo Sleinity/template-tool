@@ -422,6 +422,18 @@ const browserSourceDirectory = path.join(
   "template-browser",
   "src",
 );
+const browserTypeScriptConfig = JSON.parse(
+  await read("packages/template-browser/tsconfig.json"),
+);
+if (
+  browserTypeScriptConfig.compilerOptions?.paths?.[
+    "@sleinity/template-core"
+  ]?.[0] !== "../template-core/src/index.ts"
+) {
+  violations.push(
+    "template-browser must resolve workspace core types from source so concurrent prepack builds cannot race core dist cleanup",
+  );
+}
 const browserCoreBridge = path.join(
   browserSourceDirectory,
   "internal",
