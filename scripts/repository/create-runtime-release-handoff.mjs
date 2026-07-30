@@ -138,7 +138,11 @@ ${overrideRows}
 import { useEffect } from "react";
 import type {
   TemplateImportConfirmationV1,
-} from "@sleinity/template-browser";
+} from "@sleinity/template-browser/importer";
+import {
+  inspectTemplateRuntimeSupport,
+  loadTemplateImportConfirmation,
+} from "@sleinity/template-browser/compatibility";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
@@ -156,6 +160,13 @@ export function AddTemplate({
   onConfirmed(result: TemplateImportConfirmationV1): void;
 }) {
   const wizard = useTemplateImportWizard();
+  useEffect(() => {
+    void inspectTemplateRuntimeSupport().then((report) => {
+      if (report.status === "blocked") {
+        console.error("Template runtime unavailable", report.issues);
+      }
+    });
+  }, []);
   return (
     <TemplateImportWizard
       wizard={wizard}
@@ -174,18 +185,13 @@ export function ConfirmedTemplateEditor({
 }) {
   const session = useTemplateSession();
   useEffect(() => {
-    const result = session.loadTemplateState({
-      importedPackage: record.importedPackage,
-      packageValue: record.packageValue,
-      source: {
-        type: "package-zip",
-        sourceName: record.sourceName,
-      },
-      importValidation: record.importValidation,
+    void loadTemplateImportConfirmation(session, record).then((result) => {
+      if (!result.applied) {
+        throw new Error(
+          result.inspection.issues[0]?.message ?? "Template rejected.",
+        );
+      }
     });
-    if (!result.applied) {
-      throw new Error(result.diagnostics[0]?.message ?? "Template rejected.");
-    }
   }, [record, session]);
 
   return (
@@ -205,8 +211,11 @@ post-confirmation persistence runs only when the host provides an adapter.
 The wizard session is setup-owned. Store the immutable confirmation only after
 explicit confirmation, return to host navigation, and create a fresh
 \`useTemplateSession()\` when the user selects that template. Reopen it with
-\`session.loadTemplateState()\`; the SDK clones and revalidates both packages,
-rebuilds resolved/editable state, and publishes a fresh revision.
+\`loadTemplateImportConfirmation()\`; the SDK verifies confirmation integrity,
+clones and revalidates both packages through \`loadTemplateState()\`, rebuilds
+resolved/editable state, and publishes a fresh revision. Run
+\`inspectTemplateRuntimeSupport()\` before exposing template workflows so
+restricted browser or CSP environments fail with stable structured codes.
 
 The host owns forms, croppers, transformations, AI features, and other content
 workflows. Read \`snapshot.editableFields\` and deliver final supported values

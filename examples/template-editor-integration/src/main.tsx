@@ -15,9 +15,16 @@ import {
 import type {
   TemplateImportConfirmationV1,
   TemplateImportWizardControllerV1,
+} from "@sleinity/template-browser/importer";
+import type {
   TemplateSessionMutationResult,
   TemplateSessionV1,
-} from "@sleinity/template-browser";
+} from "@sleinity/template-browser/session";
+import {
+  inspectTemplateRuntimeSupport,
+  loadTemplateImportConfirmation,
+  type TemplateRuntimeSupportReportV1,
+} from "@sleinity/template-browser/compatibility";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
@@ -284,28 +291,41 @@ export function TemplateEditorWorkspace({
 }) {
   const session = useTemplateSession();
   const loadedRecord = useRef<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   useEffect(() => {
     onSession?.(session);
   }, [onSession, session]);
   useEffect(() => {
     if (loadedRecord.current === record.id) return;
     loadedRecord.current = record.id;
-    const result = session.loadTemplateState({
-      importedPackage: record.confirmation.importedPackage,
-      packageValue: record.confirmation.packageValue,
-      source: {
-        type: "package-zip",
-        sourceName: record.confirmation.sourceName,
+    setLoadError(null);
+    void loadTemplateImportConfirmation(session, record.confirmation).then(
+      (result) => {
+        if (!result.applied) {
+          setLoadError(
+            result.inspection.issues[0]?.message ??
+              result.sessionResult?.diagnostics[0]?.message ??
+              "The confirmed template could not be reopened.",
+          );
+        }
       },
-      importValidation: record.confirmation.importValidation,
-    });
-    if (!result.applied) {
-      throw new Error(
-        result.diagnostics[0]?.message ??
-          "The confirmed template could not be reopened.",
-      );
-    }
+      (error) => {
+        setLoadError(
+          error instanceof Error
+            ? error.message
+            : "The confirmed template could not be reopened.",
+        );
+      },
+    );
   }, [record, session]);
+  if (loadError) {
+    return (
+      <main>
+        <p role="alert">{loadError}</p>
+        <button type="button" onClick={onBack}>Back to dashboard</button>
+      </main>
+    );
+  }
   return (
     <TemplateSessionProvider session={session}>
       <TemplateEditor
@@ -532,7 +552,7 @@ function TemplateEditor({
             ref={rendererRef}
             mode="editor"
             fallback={<p>Import a valid ZIP to render the template.</p>}
-            onRenderIdentity={(value) =>
+            onRenderIdentity={(value: ResolvedProductRenderIdentityV1) =>
               setIdentity({ revision: snapshot.revision, value })
             }
           />
@@ -591,6 +611,8 @@ function ReferenceApplication() {
   const [hostMessage, setHostMessage] = useState(
     "No template is added until the wizard is confirmed.",
   );
+  const [runtimeSupport, setRuntimeSupport] =
+    useState<TemplateRuntimeSupportReportV1 | null>(null);
   const sessionRef = useRef<TemplateSessionV1 | null>(null);
   const rememberSession = useCallback((session: TemplateSessionV1) => {
     sessionRef.current = session;
@@ -603,6 +625,15 @@ function ReferenceApplication() {
   };
   const selectedRecord =
     records.find((record) => record.id === selectedRecordId) ?? null;
+  useEffect(() => {
+    let active = true;
+    void inspectTemplateRuntimeSupport({ pngCapture: true }).then((report) => {
+      if (active) setRuntimeSupport(report);
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
   return (
     <>
       {acceptanceMode ? (
@@ -676,6 +707,16 @@ function ReferenceApplication() {
                 Add new template
               </button>
             </header>
+            <p
+              className="message"
+              data-testid="runtime-support"
+              data-runtime-status={runtimeSupport?.status ?? "checking"}
+              data-runtime-issues={
+                runtimeSupport?.issues.map((issue) => issue.code).join(",") ?? ""
+              }
+            >
+              Runtime compatibility: {runtimeSupport?.status ?? "checking"}.
+            </p>
             <p className="message">{hostMessage}</p>
             {records.length === 0 ? (
               <section className="empty-state">

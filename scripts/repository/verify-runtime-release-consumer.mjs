@@ -223,7 +223,13 @@ import { createRoot } from "react-dom/client";
 import {
   getPackageFieldValue,
 } from "@sleinity/template-core";
-import type { TemplateSessionV1 } from "@sleinity/template-browser";
+import type { TemplateSessionV1 } from "@sleinity/template-browser/session";
+import {
+  TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION,
+} from "@sleinity/template-browser/importer";
+import {
+  inspectTemplateRuntimeSupport,
+} from "@sleinity/template-browser/compatibility";
 import {
   TemplateSessionProvider,
   TemplateSessionRenderer,
@@ -244,6 +250,7 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   const restored = useRef(false);
   const [identity, setIdentity] = useState<RevisionedIdentity | null>(null);
   const [message, setMessage] = useState("idle");
+  const [runtimeStatus, setRuntimeStatus] = useState("checking");
   const [importDiagnosticCount, setImportDiagnosticCount] = useState(0);
   const firstTextField = snapshot.editableFields.find(
     (field) => field.type === "text" || field.type === "textarea",
@@ -251,6 +258,12 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   const identityReady =
     identity?.revision === snapshot.revision &&
     identity.value.readiness === "ready";
+
+  useEffect(() => {
+    void inspectTemplateRuntimeSupport({ pngCapture: true }).then((report) => {
+      setRuntimeStatus(report.status);
+    });
+  }, []);
 
   useEffect(() => {
     if (restored.current) return;
@@ -337,6 +350,13 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
         Save browser draft
       </button>
       <p className="message">{message}</p>
+      <p
+        className="runtime-support"
+        data-status={runtimeStatus}
+        data-confirmation-schema={TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION}
+      >
+        {runtimeStatus}
+      </p>
       <p className="diagnostics">
         {snapshot.diagnostics.length + importDiagnosticCount}
       </p>
@@ -348,7 +368,7 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
         ref={rendererRef}
         mode="editor"
         fallback={<p>Waiting for a ready package.</p>}
-        onRenderIdentity={(value) =>
+        onRenderIdentity={(value: ResolvedProductRenderIdentityV1) =>
           setIdentity({ revision: snapshot.revision, value })
         }
       />
@@ -524,6 +544,7 @@ createRoot(document.getElementById("root")!).render(
   });
 
   await page.goto(applicationUrl);
+  await page.locator('.runtime-support[data-status="ready"]').waitFor();
   await page.getByRole("button", { name: "Load invalid ZIP" }).click();
   try {
     await page.getByText("invalid-diagnostics").waitFor();

@@ -10,17 +10,53 @@ export default defineConfig(({ mode }) => {
   return {
     envDir: repositoryRoot,
     resolve: {
-      alias: {
-        "@sleinity/template-core": fileURLToPath(
+      alias: [
+        {
+          find: "@sleinity/template-browser/session",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-browser/src/session.ts",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
+          find: "@sleinity/template-browser/importer",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-browser/src/importer.ts",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
+          find: "@sleinity/template-browser/compatibility",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-browser/src/compatibility.ts",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
+          find: /^@sleinity\/template-core$/,
+          replacement: fileURLToPath(
           new URL("../../packages/template-core/src/index.ts", import.meta.url),
-        ),
-        "@sleinity/template-browser": fileURLToPath(
+          ),
+        },
+        {
+          find: /^@sleinity\/template-browser$/,
+          replacement: fileURLToPath(
           new URL("../../packages/template-browser/src/index.ts", import.meta.url),
-        ),
-        "@sleinity/template-react": fileURLToPath(
+          ),
+        },
+        {
+          find: /^@sleinity\/template-react$/,
+          replacement: fileURLToPath(
           new URL("../../packages/template-react/src/index.ts", import.meta.url),
-        ),
-      },
+          ),
+        },
+      ],
     },
     server: {
       fs: {

@@ -31,12 +31,17 @@ import type {
   TemplatePackageValidationResult,
 } from "../packageDiagnostics";
 import type { TemplateImportValidationReportV1 } from "./templateImportValidation";
+import {
+  createTemplatePackageDigest,
+  createTemplatePackageFingerprint,
+  type TemplatePackageDigestV1,
+} from "./templateImportIntegrity";
 
 export const TEMPLATE_IMPORT_WIZARD_SCHEMA_VERSION =
   "template-import-wizard-snapshot-v1" as const;
 export const TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-import-confirmation-v1" as const;
-export const TEMPLATE_SDK_VERSION = "0.3.0" as const;
+export const TEMPLATE_SDK_VERSION = "0.4.0" as const;
 
 export const TEMPLATE_IMPORT_WIZARD_STEPS = [
   "zip-import",
@@ -240,6 +245,11 @@ export interface TemplateImportConfirmationV1 {
   schemaVersion: typeof TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION;
   sdkVersion: typeof TEMPLATE_SDK_VERSION;
   packageFingerprint: string;
+  /**
+   * New confirmations include a SHA-256 content digest. It remains optional so
+   * an otherwise valid SDK 0.3.0 confirmation can be inspected and reopened.
+   */
+  packageDigest?: TemplatePackageDigestV1;
   sourceName: string;
   importedAt: string;
   importedPackage: TemplatePackageV1;
@@ -334,20 +344,6 @@ function stableHash(value: string): string {
     hash = Math.imul(hash, 0x01000193);
   }
   return (hash >>> 0).toString(16).padStart(8, "0");
-}
-
-function stableValue(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(stableValue);
-  if (!value || typeof value !== "object") return value;
-  return Object.fromEntries(
-    Object.entries(value as Record<string, unknown>)
-      .sort(([left], [right]) => left.localeCompare(right))
-      .map(([key, entry]) => [key, stableValue(entry)]),
-  );
-}
-
-function packageFingerprint(packageValue: TemplatePackageV1): string {
-  return `fnv1a:${stableHash(JSON.stringify(stableValue(packageValue)))}`;
 }
 
 function ruleId(field: EditableFieldBinding): string {
@@ -1136,6 +1132,18 @@ export function createTemplateImportWizard(
           "Template confirmation requires current package, font, field, and render validation.",
         );
       }
+      const confirmedRevision = sessionValue.revision;
+      const packageDigest = await createTemplatePackageDigest(
+        sessionValue.workingPackage,
+      );
+      if (
+        sessionSnapshot().revision !== confirmedRevision ||
+        activeStep !== "confirmation"
+      ) {
+        throw new Error(
+          "Template confirmation became stale while package integrity was calculated.",
+        );
+      }
       busy = true;
       error = null;
       notify();
@@ -1144,7 +1152,10 @@ export function createTemplateImportWizard(
       const nextConfirmation = freezeConfirmation({
         schemaVersion: TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION,
         sdkVersion: TEMPLATE_SDK_VERSION,
-        packageFingerprint: packageFingerprint(sessionValue.workingPackage),
+        packageFingerprint: createTemplatePackageFingerprint(
+          sessionValue.workingPackage,
+        ),
+        packageDigest,
         sourceName,
         importedAt,
         importedPackage: structuredClone(sessionValue.basePackage),

@@ -78,9 +78,9 @@ if (
   /From @sleinity\/template-react\/importer:\n(?:- [^\n]+\n)*- TemplateImportConfirmationV1/mu
     .test(lovablePrompts) ||
   /TemplateSessionProvider using wizard\.session/u.test(lovablePrompts) ||
-  !lovablePrompts.includes("session.loadTemplateState()") ||
+  !lovablePrompts.includes("loadTemplateImportConfirmation()") ||
   !lovablePrompts.includes(
-    "TemplateImportConfirmationV1 as a type from @sleinity/template-browser",
+    "TemplateImportConfirmationV1 as a type from @sleinity/template-browser/importer",
   )
 ) {
   throw new Error(
@@ -101,9 +101,10 @@ if (
   runtimeHandoffGenerator.includes(
     "<TemplateSessionProvider session={wizard.session}>",
   ) ||
-  !runtimeHandoffGenerator.includes("session.loadTemplateState(") ||
+  !runtimeHandoffGenerator.includes("loadTemplateImportConfirmation(") ||
+  !runtimeHandoffGenerator.includes("inspectTemplateRuntimeSupport(") ||
   !runtimeHandoffGenerator.includes(
-    'from "@sleinity/template-browser";',
+    'from "@sleinity/template-browser/importer";',
   )
 ) {
   throw new Error(
@@ -168,6 +169,15 @@ if (
   throw new Error("Release distribution policy is not explicit.");
 }
 const version = await resolveFixedRuntimeVersion(root);
+const apiContract = JSON.parse(
+  await readFile(path.join(root, "config", "sdk-public-api.json"), "utf8"),
+);
+if (
+  apiContract.schemaVersion !== "template-sdk-public-api-contract-v1" ||
+  apiContract.sdkVersion !== version
+) {
+  throw new Error("The committed SDK public API contract is missing or stale.");
+}
 for (const item of await loadRuntimePackageDefinitions(root)) {
   const manifest = JSON.parse(
     await readFile(
@@ -183,6 +193,19 @@ for (const item of await loadRuntimePackageDefinitions(root)) {
     throw new Error(
       `${item.name} does not satisfy the fixed-version registry/prepack contract.`,
     );
+  }
+  const contractPackage = apiContract.packages?.find(
+    (candidate) => candidate.name === item.name,
+  );
+  const manifestExports = Object.keys(manifest.exports ?? {}).sort();
+  const contractExports = (contractPackage?.entries ?? [])
+    .map((entry) => entry.path)
+    .sort();
+  if (
+    contractPackage?.version !== version ||
+    JSON.stringify(manifestExports) !== JSON.stringify(contractExports)
+  ) {
+    throw new Error(`${item.name} export paths differ from the API contract.`);
   }
 }
 

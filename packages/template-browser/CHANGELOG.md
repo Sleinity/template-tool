@@ -1,5 +1,25 @@
 # @sleinity/template-browser
 
+## 0.4.0
+
+### Minor Changes
+
+- Add curated session, importer, and compatibility entry points while retaining
+  every existing root export.
+- Add structured browser-runtime and confirmation compatibility inspection,
+  SHA-256 confirmation integrity, and atomic confirmation reopening through
+  fresh `loadTemplateState()` validation.
+- Keep valid 0.3.0 confirmations loadable with a legacy-digest warning and make
+  unavailable browser-local managed fonts explicit without claiming
+  cross-device portability.
+- Report the current validator's dynamic-code CSP requirement with a stable
+  capability code and verify supported and intentionally restricted profiles.
+
+### Patch Changes
+
+- Updated dependencies
+  - @sleinity/template-core@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

@@ -1,8 +1,8 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2D portable field ownership and SDK 0.3.0 setup-wizard release candidate
-Audit date: 2026-07-29
-Code baseline: the fixed SDK 0.3.0 train and wizard-backed generic template editor reference
+Status: Milestone 2D portable field ownership and SDK 0.4.0 external-adoption contract
+Audit date: 2026-07-30
+Code baseline: the fixed SDK 0.4.0 train and compatibility-hardened generic template editor reference
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions

@@ -140,7 +140,8 @@ and a current ready or non-blocking-warning render identity. The immutable
 - sanitized editable fields and complete configured field rules;
 - import, package, font and render-validation reports;
 - diagnostics, blockers, warnings and the current render identity;
-- a deterministic package fingerprint, SDK version, filename and import time.
+- a deterministic package fingerprint, SHA-256 package digest, SDK version,
+  filename and import time.
 
 Node paths are not exposed through the wizard field projection. Disabled fields
 and help text remain confirmation metadata; enabled field rules are materialized
@@ -158,20 +159,19 @@ confirmation result and open it in a fresh session without trusting stored
 validation or render evidence:
 
 ```ts
-const result = session.loadTemplateState({
-  importedPackage: confirmation.importedPackage,
-  packageValue: confirmation.packageValue,
-  source: {
-    type: "package-zip",
-    sourceName: confirmation.sourceName,
-  },
-  importValidation: confirmation.importValidation,
-});
+import {
+  loadTemplateImportConfirmation,
+} from "@sleinity/template-browser/compatibility";
+
+const result = await loadTemplateImportConfirmation(session, confirmation);
 ```
 
-`loadTemplateState()` clones and validates both package states, verifies their
-identity, rebuilds editable fields and the resolved tree, and publishes a new
-revision atomically. The imported baseline remains reset authority.
+The helper checks confirmation schema, SDK compatibility, package identity,
+fingerprint, digest and local font authority before delegating to
+`loadTemplateState()`. That method clones and validates both package states,
+rebuilds editable fields and the resolved tree, and publishes a new revision
+atomically. Stored validation, resolved trees, readiness and render identities
+are never trusted. The imported baseline remains reset authority.
 
 ## Host-owned editing
 
@@ -197,7 +197,7 @@ replace the validation or readiness authorities.
 
 ## Migration
 
-- Existing 0.2.2 session and renderer integrations remain supported.
+- Existing 0.2.2 and 0.3.0 session and renderer integrations remain supported.
 - Existing unpublished `TemplateImporterWizard` integrations continue through
   a compatibility alias.
 - New integrations should prefer `TemplateImportWizard` or the headless

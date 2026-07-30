@@ -1,5 +1,61 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-30 — SDK 0.4.0 external-adoption contract hardening
+
+### Result
+
+- Added curated `template-browser/session`, `/importer`, and `/compatibility`
+  entry points without removing broad root exports.
+- Added structured runtime preflight, confirmation inspection, 0.4 SHA-256
+  integrity evidence, supported 0.3 legacy loading, explicit local-font
+  portability evidence, and atomic confirmation reopening.
+- Added and enforced a machine-readable public API inventory plus migration,
+  compatibility and troubleshooting guidance.
+- Updated the generic host and release consumers to preflight, retain
+  host-owned confirmation state, create a fresh session, inspect integrity and
+  reopen atomically before host-owned editing.
+- Made canonical AJV compilation lazy so restrictive CSP environments receive
+  the stable `runtime.dynamic-code.unavailable` blocker rather than failing at
+  module load. No validation result, schema, renderer, persistence record,
+  editing or PNG behavior changed.
+
+### Verification boundary
+
+Portable tests, package/root TypeScript, all package builds/declarations,
+Studio and example builds, API/export checks, boundaries, release policy,
+archive inspection, DOM-free core, npm/pnpm packed consumers, session/Studio browser
+smokes and the packed generic editor pass. The generic editor proves supported
+and restricted CSP profiles, full wizard confirmation, fresh-session reopen,
+host-owned edits, exact fonts, offline draft restoration, silent PNG,
+disposal and zero external requests.
+
+Core declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local archives are core 283,577, browser 401,430 and React 303,406 bytes.
+Studio is 1,000.89 / 291.48 gzip kB JavaScript; minimal and generic examples
+are 846.43 / 248.93 and 903.04 / 264.80 gzip kB; the packed consumer is
+885,908 / 260,129 gzip bytes.
+
+Appearance is valid/deterministic for all 19 fixtures. Renderer baseline
+`2026-07-30T14-56-21-866Z`, exact-font evidence
+`font-evidence-2026-07-30T14-58-54-584Z`, and source-authoritative baseline
+`2026-07-30T14-59-01-309Z` are stable. Full renderer
+`2026-07-30T14-57-08-849Z`, scene
+`scene-2026-07-30T14-58-50-470Z`, and settlement
+`settlement-2026-07-30T14-58-52-279Z` comparisons retain only documented
+historical/unapproved states. Approved identities remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, reference, fixture, schema, tolerance or promotion command ran.
+
+### Next boundary
+
+After external 0.4 acceptance, resume Milestone 2E browser-source ownership.
+Portable cross-device confirmation artifacts remain a separate SDK 0.5
+design milestone.
+
 ## 2026-07-30 — SDK 0.3.0 external shell composability and template reopening
 
 ### Result

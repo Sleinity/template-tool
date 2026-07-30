@@ -28,9 +28,11 @@ import {
   type TemplateImportWizardOptionsV1,
   type TemplateImportWizardSnapshotV1,
   type TemplateImportWizardStepId,
-  type TemplateSessionSnapshotV1,
-  type TemplateSessionV1,
-} from "@sleinity/template-browser";
+} from "@sleinity/template-browser/importer";
+import type {
+  TemplateSessionSnapshotV1,
+  TemplateSessionV1,
+} from "@sleinity/template-browser/session";
 import {
   TemplateSessionRenderer,
   type TemplateSessionRendererHandle,

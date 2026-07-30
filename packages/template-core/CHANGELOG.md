@@ -1,5 +1,15 @@
 # @sleinity/template-core
 
+## 0.4.0
+
+### Minor Changes
+
+- Advance the fixed SDK train for the external-adoption compatibility contract.
+  Portable importer, package, validation, field, and renderer-model behavior is
+  unchanged.
+- Initialize canonical schema compilation on first validation so browser
+  runtime preflight can report restrictive CSP environments before import.
+
 ## 0.3.0
 
 ### Minor Changes
