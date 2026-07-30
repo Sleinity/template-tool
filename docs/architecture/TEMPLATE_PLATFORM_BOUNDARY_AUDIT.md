@@ -671,13 +671,19 @@ ran.
   React, Studio or renderer implementation.
 - Portable CI, root/package TypeScript, SDK/Studio/example builds,
   declarations/API inventory, boundaries, archives, DOM-free core, packed
-  consumers, browser smokes and the packed generic editor pass. The secret-free
-  pnpm vendored consumer passes; npm is unavailable in the local bundled
-  runtime and remains a CI/post-release check.
+  consumers, browser smokes and the packed generic editor pass. Secret-free npm
+  and pnpm vendored consumers pass in the release workflow; the generic editor
+  also passes against anonymously downloaded public Release bytes.
 - Core declarations remain exactly 87,431 bytes at
   `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
   Core/browser/React archives are 283,577 / 209,477 / 303,397 bytes. Browser is
   47.8% smaller than 0.4.0; consumer and Studio gzip remain materially flat.
+  Registry-derived SHA-256 values are core
+  `1604c4923a6cba0ce039ad26b738b11fe4c755048a9c4d47cd08200f4bdf8654`,
+  browser
+  `cad8ab9e506973ad31926bdc9345640a7b6271de7f1c11c7d418b4274109d054`,
+  and React
+  `5169ee62db4ccde8437bae49f1d73915acbb4d8b2749d513a467260b734c3fe2`.
 - Studio is 1,001.02/291.35 kB gzip JavaScript. Packed, minimal and generic
   consumers are 897,726/262,605 bytes, 858.15/251.51 kB and
   912.50/266.51 kB.

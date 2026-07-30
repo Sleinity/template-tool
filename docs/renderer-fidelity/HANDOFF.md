@@ -16,6 +16,12 @@
   build while preserving every 0.4 root and curated public symbol.
 - Moved pure browser runtime tests beside the package and strengthened archive,
   ownership, duplicate-owner, cycle and dependency checks.
+- Published the fixed train from `sdk-v0.4.1`; the public
+  [Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.1)
+  contains registry-derived archives, checksums and host-neutral handoffs.
+- Closed the concurrent Changesets `prepack` declaration race found by the
+  first tag run. The corrected run published browser, retained fixed package
+  tags and completed the Release without runtime or archive-content changes.
 
 ### Verification boundary
 
@@ -23,8 +29,9 @@ Portable CI, root/package TypeScript, all package/Studio/example builds,
 declarations, API/export checks, boundaries, release policy, archive
 inspection, DOM-free core, packed consumers, the session and Studio browser
 smokes, and the packed generic editor pass. The local pnpm vendored runtime
-consumer passes without credentials; npm is unavailable in this bundled local
-runtime and remains a CI/post-release check.
+consumer passes without credentials. The release workflow verifies both npm
+and pnpm vendored consumers; the generic browser acceptance also passes
+against anonymously downloaded public Release bytes.
 
 Core declarations remain 87,431 bytes /
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
@@ -32,6 +39,12 @@ Archives are core 283,577, browser 209,477 and React 303,397 bytes, reducing the
 browser archive by 47.8% from 0.4.0. Studio is 1,001.02 / 291.35 gzip kB
 JavaScript; minimal and generic examples are 858.15 / 251.51 and 912.50 /
 266.51 gzip kB; the packed consumer is 897,726 / 262,605 gzip bytes.
+Registry-derived archive hashes are core
+`1604c4923a6cba0ce039ad26b738b11fe4c755048a9c4d47cd08200f4bdf8654`,
+browser
+`cad8ab9e506973ad31926bdc9345640a7b6271de7f1c11c7d418b4274109d054`,
+and React
+`5169ee62db4ccde8437bae49f1d73915acbb4d8b2749d513a467260b734c3fe2`.
 
 Appearance is valid/deterministic for all 19 fixtures. Renderer baseline
 `2026-07-30T17-09-39-496Z`, exact-font evidence
