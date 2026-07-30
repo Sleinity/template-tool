@@ -1,15 +1,15 @@
-import type { TemplatePackageFontRequirement } from "../types";
+import type { TemplatePackageFontRequirement } from "../../../src/template-package/types";
 import {
   CANONICAL_FONT_FACE_VERSION,
   createCanonicalFontRequest,
   createRuntimeFontFamily,
   type CanonicalFontFaceV1,
-} from "./fontIdentity";
+} from "../src/fonts/fontIdentity";
 import {
   findManagedFontCandidates,
   matchCanonicalFontFace,
-} from "./fontMatching";
-import type { ManagedFontRecord } from "./fontRegistryTypes";
+} from "../src/fonts/fontMatching";
+import type { ManagedFontRecord } from "../src/fonts/fontRegistryTypes";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

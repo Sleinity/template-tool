@@ -1,3 +1,2 @@
-export * from "./assetReliability";
-export * from "./packageAssetResolution";
-export * from "./indexedDbAssetStore";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/assets";

@@ -1,5 +1,21 @@
 # @sleinity/template-browser
 
+## 0.4.1
+
+### Patch Changes
+
+- Make the package the physical owner of browser assets, exact fonts,
+  persistence, import orchestration, sessions, readiness, compatibility
+  inspection, enrichment and PNG capture while retaining behavior-free root
+  compatibility paths.
+- Remove the font/persistence dependency cycle through one internal
+  content-addressed binary storage layer and keep all public root and curated
+  exports unchanged.
+- Externalize `@sleinity/template-core` from the browser bundle so installed
+  consumers no longer receive a second embedded copy of core.
+- Updated dependencies
+  - @sleinity/template-core@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

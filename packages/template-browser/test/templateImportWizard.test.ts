@@ -1,23 +1,23 @@
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import { createResolvedRenderTree } from "../resolved";
-import type { ResolvedProductRenderIdentityV1 } from "../render/productRenderIdentity";
-import type { TemplatePackageV1 } from "../types";
-import { validateTemplatePackage } from "../validateTemplatePackage";
-import type { PackageImportResult } from "./runTemplatePackageImportPipeline";
-import { createTemplateSessionWithDependencies } from "../session/templateSession";
+import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import { createResolvedRenderTree } from "../../../src/template-package/resolved";
+import type { ResolvedProductRenderIdentityV1 } from "../src/runtime/renderIdentity";
+import type { TemplatePackageV1 } from "../../../src/template-package/types";
+import { validateTemplatePackage } from "../../../src/template-package/validateTemplatePackage";
+import type { PackageImportResult } from "../src/import/runTemplatePackageImportPipeline";
+import { createTemplateSessionWithDependencies } from "../src/session/templateSession";
 import {
   createTemplateImportWizard,
   type TemplateImportConfirmationV1,
-} from "./templateImportWizard";
+} from "../src/import/templateImportWizard";
 import {
   inspectTemplateImportConfirmation,
   inspectTemplateRuntimeSupport,
   loadTemplateImportConfirmation,
-} from "./templateImportCompatibility";
+} from "../src/import/templateImportCompatibility";
 import {
   createTemplatePackageDigest,
   createTemplatePackageFingerprint,
-} from "./templateImportIntegrity";
+} from "../src/import/templateImportIntegrity";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -171,7 +171,7 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.4.0" &&
+    confirmation.sdkVersion === "0.4.1" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
     confirmation.packageDigest?.algorithm === "sha-256" &&
     confirmation.packageDigest.value.length === 64 &&
@@ -262,7 +262,7 @@ assert(
     missingCurrentDigestInspection.issues.some(
       (issue) => issue.code === "confirmation.digest-required",
     ),
-  "A 0.4.0 confirmation missing its required digest should be rejected.",
+  "A 0.4.1 confirmation missing its required digest should be rejected.",
 );
 
 const beforeRejectedHydration = reopenedSession.getSnapshot();

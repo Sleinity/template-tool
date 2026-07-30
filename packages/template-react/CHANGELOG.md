@@ -1,5 +1,15 @@
 # @sleinity/template-react
 
+## 0.4.1
+
+### Patch Changes
+
+- Externalize the fixed-train core and browser packages from React builds
+  without changing renderer, importer, inspection or PNG behavior.
+- Updated dependencies
+  - @sleinity/template-core@0.4.1
+  - @sleinity/template-browser@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

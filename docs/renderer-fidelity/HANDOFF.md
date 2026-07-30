@@ -1,5 +1,59 @@
 # Renderer Fidelity Handoff
 
+## 2026-07-30 — Milestone 2E physical browser-runtime ownership
+
+### Result
+
+- Moved the complete browser runtime into `packages/template-browser/src`:
+  assets, exact fonts, browser storage, template/draft persistence, import,
+  wizard/confirmation, sessions, readiness, enrichment and PNG capture.
+- Added one internal content-addressed binary/storage owner shared by font and
+  template persistence, removing the previous cycle.
+- Retained Studio, renderer and fidelity compatibility through checked
+  behavior-free root forwarders. Browser production source imports no root,
+  React, Studio or renderer implementation.
+- Externalized core from the browser build and core/browser from the React
+  build while preserving every 0.4 root and curated public symbol.
+- Moved pure browser runtime tests beside the package and strengthened archive,
+  ownership, duplicate-owner, cycle and dependency checks.
+
+### Verification boundary
+
+Portable CI, root/package TypeScript, all package/Studio/example builds,
+declarations, API/export checks, boundaries, release policy, archive
+inspection, DOM-free core, packed consumers, the session and Studio browser
+smokes, and the packed generic editor pass. The local pnpm vendored runtime
+consumer passes without credentials; npm is unavailable in this bundled local
+runtime and remains a CI/post-release check.
+
+Core declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Archives are core 283,577, browser 209,477 and React 303,397 bytes, reducing the
+browser archive by 47.8% from 0.4.0. Studio is 1,001.02 / 291.35 gzip kB
+JavaScript; minimal and generic examples are 858.15 / 251.51 and 912.50 /
+266.51 gzip kB; the packed consumer is 897,726 / 262,605 gzip bytes.
+
+Appearance is valid/deterministic for all 19 fixtures. Renderer baseline
+`2026-07-30T17-09-39-496Z`, exact-font evidence
+`font-evidence-2026-07-30T17-12-09-413Z`, and source-authoritative baseline
+`2026-07-30T17-12-16-183Z` are stable. Renderer comparison
+`2026-07-30T17-10-29-068Z`, scene comparison
+`scene-2026-07-30T17-12-05-022Z`, and settlement comparison
+`settlement-2026-07-30T17-12-07-041Z` retain only the documented historical
+and unapproved states. Approved identities remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No update, reference, fixture, schema, tolerance or promotion command ran.
+
+### Next boundary
+
+Move React renderer ownership into `template-react` under the existing
+fidelity gate, then migrate ordinary Studio imports to curated package entry
+points. Portable cross-device confirmed-template artifacts remain SDK 0.5
+design work.
+
 ## 2026-07-30 — SDK 0.4.0 external-adoption contract hardening
 
 ### Result

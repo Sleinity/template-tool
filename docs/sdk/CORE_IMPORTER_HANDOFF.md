@@ -1,9 +1,9 @@
-# Core importer 0.4.0 handoff
+# Core importer 0.4.1 handoff
 
 ## Contract
 
 - Package: `@sleinity/template-core`
-- Version: `0.4.0`
+- Version: `0.4.1`
 - Supported importer export: `importTemplatePackage`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
@@ -41,9 +41,9 @@ export async function importTemplateZip(file: File) {
 ## Vendored installation
 
 Download these files from the public
-[`sdk-v0.4.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.0):
+[`sdk-v0.4.1` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.1):
 
-- `sleinity-template-core-0.4.0.tgz`
+- `sleinity-template-core-0.4.1.tgz`
 - `SHA256SUMS`
 - `SDK-CORE-HANDOFF.md`
 
@@ -52,7 +52,7 @@ Verify the archive, commit it to the private consumer repository, and declare:
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.1.tgz"
   }
 }
 ```
@@ -75,7 +75,7 @@ always-auth=true
 ```
 
 ```sh
-npm install @sleinity/template-core@0.4.0
+npm install @sleinity/template-core@0.4.1
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with

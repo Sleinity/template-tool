@@ -4,6 +4,12 @@ Private browser runtime for TemplatePackage assets, managed fonts, measurement,
 persistence, revision-bound readiness, and PNG export. Consumers may replace
 the default storage registries through the existing adapter interfaces.
 
+As of 0.4.1 this package physically owns that complete browser runtime. Its
+production modules depend on `@sleinity/template-core` and package-local
+contracts; they do not compile implementation from the repository root,
+Template Studio, React, or renderer JSX. Retained root paths are temporary
+behavior-free compatibility forwarders for Studio and fidelity tooling.
+
 Rendered text-line and visual-fit collection remain browser-owned. They project
 DOM measurements into the portable field-fit model without moving DOM, CSS, or
 font availability checks into `template-core`.

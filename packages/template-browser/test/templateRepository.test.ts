@@ -1,20 +1,20 @@
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import { validateTemplatePackage } from "../validateTemplatePackage";
+import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import { validateTemplatePackage } from "../../../src/template-package/validateTemplatePackage";
 import type {
   TemplatePackageV1,
   TextTemplateNode,
-} from "../types";
+} from "../../../src/template-package/types";
 import {
   createInMemoryTemplateRepositoryStorage,
   InMemoryTemplateRepository,
-} from "./inMemoryTemplateRepository";
-import { validateCurrentSavedTemplateRecord } from "./savedRecordValidation";
+} from "../src/persistence/inMemoryTemplateRepository";
+import { validateCurrentSavedTemplateRecord } from "../src/persistence/savedRecordValidation";
 import {
   createSavedOutputDraftRecord,
   createSavedTemplateRecord,
-} from "./templateRepository";
-import { createSavedAssetRecord } from "./assetRepository";
-import { semanticRendererMvpMigrationRecord } from "./semanticRendererMvpMigration";
+} from "../src/persistence/templateRepository";
+import { createSavedAssetRecord } from "../src/persistence/assetRepository";
+import { semanticRendererMvpMigrationRecord } from "../src/persistence/semanticRendererMvpMigration";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

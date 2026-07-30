@@ -1,7 +1,2 @@
-export * from "./analyzePackageAssets";
-export * from "./comparePackageToFigmaMetadata";
-export * from "./createRendererHints";
-export * from "./enrichTemplatePackage";
-export * from "./extractMcpDesignHints";
-export * from "./figmaEnrichmentApi";
-export * from "./parseFigmaUrl";
+/** @deprecated Internal compatibility forwarder to the template-browser owner. */
+export * from "../../../packages/template-browser/src/enrichment";
