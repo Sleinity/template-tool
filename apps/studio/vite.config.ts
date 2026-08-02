@@ -12,6 +12,24 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: [
         {
+          find: "@sleinity/template-core/renderer-internal",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-core/src/renderer-internal.ts",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
+          find: "@sleinity/template-react/renderer-internal",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-react/src/renderer-internal.ts",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
           find: "@sleinity/template-browser/session",
           replacement: fileURLToPath(
             new URL(

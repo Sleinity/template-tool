@@ -81,11 +81,19 @@ if (
   !lovablePrompts.includes("loadTemplateImportConfirmation()") ||
   !lovablePrompts.includes(
     "TemplateImportConfirmationV1 as a type from @sleinity/template-browser/importer",
-  )
+  ) ||
+  !lovablePrompts.includes("Do not import an entry named `renderer-internal`")
 ) {
   throw new Error(
     "Lovable handoff must import confirmation from template-browser and reopen it in a fresh session.",
   );
+}
+const runtimeHandoff = await readFile(
+  path.join(root, "docs", "sdk", "RUNTIME_HANDOFF.md"),
+  "utf8",
+);
+if (!runtimeHandoff.includes("they are not supported host APIs")) {
+  throw new Error("Runtime handoff must exclude renderer-internal entries from host use.");
 }
 
 const runtimeHandoffGenerator = await readFile(
@@ -105,7 +113,8 @@ if (
   !runtimeHandoffGenerator.includes("inspectTemplateRuntimeSupport(") ||
   !runtimeHandoffGenerator.includes(
     'from "@sleinity/template-browser/importer";',
-  )
+  ) ||
+  !runtimeHandoffGenerator.includes("must never import those internal entries")
 ) {
   throw new Error(
     "Generated runtime handoff must return confirmation to the host and reopen it in a fresh session.",
@@ -197,7 +206,10 @@ for (const item of await loadRuntimePackageDefinitions(root)) {
   const contractPackage = apiContract.packages?.find(
     (candidate) => candidate.name === item.name,
   );
-  const manifestExports = Object.keys(manifest.exports ?? {}).sort();
+  const internalExports = new Set(manifest.sdkInternalExports ?? []);
+  const manifestExports = Object.keys(manifest.exports ?? {})
+    .filter((entry) => !internalExports.has(entry))
+    .sort();
   const contractExports = (contractPackage?.entries ?? [])
     .map((entry) => entry.path)
     .sort();

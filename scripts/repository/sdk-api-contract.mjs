@@ -69,8 +69,10 @@ async function createContract() {
     const manifest = JSON.parse(
       await readFile(path.join(packageRoot, "package.json"), "utf8"),
     );
+    const internalExports = new Set(manifest.sdkInternalExports ?? []);
     const entries = [];
     for (const [exportPath, target] of Object.entries(manifest.exports ?? {})) {
+      if (internalExports.has(exportPath)) continue;
       const typesPath =
         target && typeof target === "object" && typeof target.types === "string"
           ? target.types

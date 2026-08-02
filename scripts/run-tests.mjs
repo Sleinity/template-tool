@@ -101,6 +101,24 @@ try {
     configFile: false,
     plugins: [react()],
     logLevel: "warn",
+    resolve: {
+      alias: [
+        {
+          find: "@sleinity/template-core/renderer-internal",
+          replacement: path.join(
+            projectRoot,
+            "packages/template-core/src/renderer-internal.ts",
+          ),
+        },
+        {
+          find: "@sleinity/template-react/renderer-internal",
+          replacement: path.join(
+            projectRoot,
+            "packages/template-react/src/renderer-internal.ts",
+          ),
+        },
+      ],
+    },
     ssr: {
       noExternal: true,
     },

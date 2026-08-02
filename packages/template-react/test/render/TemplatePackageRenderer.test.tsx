@@ -1,27 +1,30 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import editorAutoLayoutReflow from "../fixtures/editor-auto-layout-reflow.json";
-import editorParentReflow from "../fixtures/editor-parent-reflow.json";
-import { createNowHiringResponsiveReflowFixture } from "../fixtures/nowHiringResponsiveReflow";
-import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
-import type { TemplatePackageV1 } from "../types";
+import editorAutoLayoutReflow from "../../../../src/template-package/fixtures/editor-auto-layout-reflow.json";
+import editorParentReflow from "../../../../src/template-package/fixtures/editor-parent-reflow.json";
+import { createNowHiringResponsiveReflowFixture } from "../../../../src/template-package/fixtures/nowHiringResponsiveReflow";
+import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
 import {
   getPackageMotionFinalFrameTimeMs,
   linkPackageMotionValue,
-} from "../motion";
+} from "@sleinity/template-core/renderer-internal";
 import {
   canvasBackgroundToCss,
   collectTemplatePackageRenderWarnings,
   normalizedColorToCss,
   resolvePackageAssetSource,
-} from "./packageRenderUtils";
-import { resolvePackageNodeLayoutRole } from "./packageLayoutModel";
+} from "../../src/render/packageRenderUtils";
+import { resolvePackageNodeLayoutRole } from "../../src/render/packageLayoutModel";
 import {
   resolveFigmaCapHeightTextHeight,
   TemplatePackageRenderer,
-} from "./TemplatePackageRenderer";
-import { TemplateInspectionPreview } from "./TemplateInspectionPreview";
-import { TemplateInspectionViewport } from "./TemplateInspectionViewport";
+} from "../../src/render/TemplatePackageRenderer";
+import { TemplateInspectionPreview } from "../../src/render/TemplateInspectionPreview";
+import {
+  TemplateInspectionViewport,
+  type TemplateInspectionViewportProps,
+} from "../../src/render/TemplateInspectionViewport";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);
@@ -64,7 +67,7 @@ const viewportMarkup = renderToStaticMarkup(
     targetNodeIds: multiHighlightIds,
     className: "host-owned-stage",
     "data-host-stage": "true",
-  }),
+  } as TemplateInspectionViewportProps),
 );
 
 assert(markup.length > 0, "Package renderer should produce static markup.");

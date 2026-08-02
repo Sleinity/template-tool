@@ -7,6 +7,11 @@ and resolved projections, and applying typed field values.
 This package performs no renderer-time network access and does not export the
 Template Studio UI.
 
+`@sleinity/template-core/renderer-internal` is a package-private sibling seam
+for `@sleinity/template-react`. It is not a host integration API and carries no
+independent compatibility promise. Applications must use the documented core,
+browser, and React entries instead.
+
 The canonical package types, schema, diagnostics, ZIP/source reader,
 normalization and strict validation are physically owned by this package.
 Portable color/asset/axis, layout, stroke, transform and vector models plus the
@@ -76,7 +81,7 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.4.1
+npm install @sleinity/template-core@0.4.2
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
@@ -87,13 +92,13 @@ package or its linked repository.
 
 Lovable Business cannot inject the private-registry build secret required for
 GitHub Packages. Use the checksum-verified archive attached to the public
-`sdk-v0.4.1` GitHub Release instead:
+`sdk-v0.4.2` GitHub Release instead:
 
-1. Verify `sleinity-template-core-0.4.1.tgz` against `SHA256SUMS`.
+1. Verify `sleinity-template-core-0.4.2.tgz` against `SHA256SUMS`.
 2. Commit it to the private Lovable-synced repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.4.1.tgz"`.
+   "file:vendor/sleinity-template-core-0.4.2.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
 No `.npmrc` or GitHub token belongs in the Lovable repository. The release
@@ -106,5 +111,5 @@ applies text/color/visibility/image edits and field-rule configuration, and
 restores imported state without
 repository fixtures, and rejects DOM, CSS, storage, font and network global
 access. The built public declaration is
-locked to the SDK 0.4.1 contract at 87,431 bytes and SHA-256
+locked to the SDK 0.4.2 contract at 87,431 bytes and SHA-256
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.

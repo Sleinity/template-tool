@@ -5,6 +5,17 @@ Private Studio-independent React integration exposing the proven
 context. It deliberately excludes Template Studio routes, settings, Validate,
 Fields, and product editor controls.
 
+Host applications must use this package's documented root and importer entry
+points. `@sleinity/template-core/renderer-internal` and
+`@sleinity/template-react/renderer-internal` are unsupported fixed-train seams
+reserved for repository composition and compatibility forwarders; Studio and
+external applications must never import them directly.
+
+The production renderer, previews, inspection viewport and renderer-specific
+runtime routing are physically owned by this package. Their former repository
+paths are behavior-free compatibility forwarders that will retire when Studio
+and fidelity tooling migrate to supported or explicit inspection entries.
+
 ## Template setup wizard
 
 Applications that need a complete import/setup flow use the dedicated importer

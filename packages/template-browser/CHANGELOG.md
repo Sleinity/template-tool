@@ -1,5 +1,14 @@
 # @sleinity/template-browser
 
+## 0.4.2
+
+### Patch Changes
+
+- Advance the fixed SDK train for physical React renderer ownership. Browser
+  runtime behavior and supported exports are unchanged.
+- Updated dependencies
+  - @sleinity/template-core@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

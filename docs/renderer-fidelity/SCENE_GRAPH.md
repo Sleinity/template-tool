@@ -16,7 +16,7 @@ Milestone 6.1 extends each media section with `activePlacementState` and `placem
 
 The current application executes only the Milestone 4 core subset of that path. `ResolvedRenderTreeV1`, canonical nodes, raw Figma compatibility helpers, browser layout, and DOM measurement remain the visual and fallback render path. The scene graph is not a settled graph and does not accept browser measurements, CSS, DOM nodes, React elements, decoded images, or network results.
 
-Code contract: `src/template-package/scene/types.ts`. Transformer: `createCanonicalSceneGraph.ts`. Validation: `validateCanonicalSceneGraph.ts`. Stable serialization: `serializeCanonicalSceneGraph.ts`.
+Code contract: `packages/template-core/src/scene/types.ts`. Transformer: `createCanonicalSceneGraph.ts`. Validation: `validateCanonicalSceneGraph.ts`. Stable serialization: `serializeCanonicalSceneGraph.ts`. The former root scene paths are behavior-free repository forwarders.
 
 ## Graph shape
 

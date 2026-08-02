@@ -1,5 +1,5 @@
-import type { TemplatePackageV1 } from "../../types";
-import type { TemplatePackageRenderMode } from "../TemplatePackageRenderer";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
+import type { TemplatePackageRenderMode } from "../../../src/render/TemplatePackageRenderer";
 
 export type RendererFixtureGroup =
   | "sizing"

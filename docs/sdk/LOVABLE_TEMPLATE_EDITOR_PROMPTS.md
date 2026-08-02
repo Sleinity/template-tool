@@ -41,22 +41,22 @@ The required SDK peer versions are React 19 and React DOM 19. If this project is
 
 Before using this prompt, copy the three checksum-verified archives from the
 public
-[`sdk-v0.4.1` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.1)
+[`sdk-v0.4.2` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.2)
 into the repository's `vendor/` directory. Downloading the Release assets
 requires no GitHub token.
 
 ```text
-Integrate the checksum-verified Template Platform 0.4.1 archives already present in this private repository:
+Integrate the checksum-verified Template Platform 0.4.2 archives already present in this private repository:
 
-- vendor/sleinity-template-core-0.4.1.tgz
-- vendor/sleinity-template-browser-0.4.1.tgz
-- vendor/sleinity-template-react-0.4.1.tgz
+- vendor/sleinity-template-core-0.4.2.tgz
+- vendor/sleinity-template-browser-0.4.2.tgz
+- vendor/sleinity-template-react-0.4.2.tgz
 
 Add these exact dependencies:
 
-"@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.1.tgz"
-"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.1.tgz"
-"@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.1.tgz"
+"@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.2.tgz"
+"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.2.tgz"
+"@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.2.tgz"
 
 Requirements:
 
@@ -67,7 +67,7 @@ Requirements:
 - Do not add NODE_AUTH_TOKEN, a GitHub PAT, or another package-registry secret.
 - Do not replace these dependencies with registry URLs or Git dependencies.
 - Do not modify the SDK archives.
-- Confirm all installed package versions resolve to 0.4.1.
+- Confirm all installed package versions resolve to 0.4.2.
 - Run the existing typecheck and production build.
 - Report changed files and any dependency conflicts before continuing.
 ```
@@ -82,6 +82,9 @@ Use the repository’s existing route and layout conventions. If no suitable con
 /template-editor-integration-test
 
 Use only these supported APIs:
+
+Do not import an entry named `renderer-internal`; it is an unsupported
+repository seam rather than a host integration API.
 
 From @sleinity/template-browser/importer:
 - TemplateImportConfirmationV1

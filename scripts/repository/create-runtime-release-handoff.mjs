@@ -108,6 +108,10 @@ Packages. Package manifests retain the internal dependency order.
 React 19 and React DOM 19 are required peer dependencies of
 \`@sleinity/template-react\`.
 
+Entries named \`renderer-internal\` are unsupported fixed-train repository
+seams. Host applications must use only the documented root and curated entry
+points and must never import those internal entries.
+
 ## Vendored installation
 
 Commit the verified archives under \`vendor/\`, then add:

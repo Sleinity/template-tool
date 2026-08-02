@@ -27,8 +27,8 @@ import {
   TemplatePackageRenderer,
   type TemplatePackageMotionRenderMode,
   type TemplatePackageRenderMode,
-} from "../../../src/template-package/render/TemplatePackageRenderer";
-import type { ResolvedProductRenderIdentityV1 } from "../../../src/template-package/render/productRenderIdentity";
+} from "./render/TemplatePackageRenderer";
+import type { ResolvedProductRenderIdentityV1 } from "./render/productRenderIdentity";
 
 const TemplateSessionContext = createContext<TemplateSessionV1 | null>(null);
 

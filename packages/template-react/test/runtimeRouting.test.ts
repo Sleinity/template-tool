@@ -1,9 +1,9 @@
-import { createNowHiringResponsiveReflowFixture } from "../fixtures/nowHiringResponsiveReflow";
-import { createCircularFillInsideHugFixture } from "../fixtures/circularFillInsideHug";
-import { createCanonicalSceneGraph, serializeCanonicalSceneGraph } from "../scene";
-import { createCoreLayoutRoute } from "./createCoreLayoutRoute";
-import { CORE_LAYOUT_PROPERTY_OWNERSHIP } from "./propertyOwnership";
-import { settleCoreLayout } from "./settleCoreLayout";
+import { createNowHiringResponsiveReflowFixture } from "../../../src/template-package/fixtures/nowHiringResponsiveReflow";
+import { createCircularFillInsideHugFixture } from "../../../src/template-package/fixtures/circularFillInsideHug";
+import { createCanonicalSceneGraph, serializeCanonicalSceneGraph } from "@sleinity/template-core";
+import { createCoreLayoutRoute } from "../src/internal/runtime-routing/createCoreLayoutRoute";
+import { CORE_LAYOUT_PROPERTY_OWNERSHIP } from "../src/internal/runtime-routing/propertyOwnership";
+import { settleCoreLayout } from "../src/internal/runtime-routing/settleCoreLayout";
 import {
   applyVerticalTrimCompatibilityRoute,
   isCapTrimGlyphPlacementValid,
@@ -11,7 +11,7 @@ import {
   resolveCapTrimGlyphOrigin,
   resolveVerticalTextPaintPlacement,
   resolveVerticalTextTrimMode,
-} from "./verticalTextTrim";
+} from "../src/internal/runtime-routing/verticalTextTrim";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

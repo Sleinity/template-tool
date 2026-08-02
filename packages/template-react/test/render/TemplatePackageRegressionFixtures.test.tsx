@@ -1,9 +1,9 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { collectTemplatePackageRenderWarnings } from "./packageRenderUtils";
+import { collectTemplatePackageRenderWarnings } from "../../src/render/packageRenderUtils";
 import { rendererRegressionFixtures } from "./regression-fixtures";
 import type { RendererFixtureGroup } from "./regression-fixtures";
-import { TemplatePackageRenderer } from "./TemplatePackageRenderer";
+import { TemplatePackageRenderer } from "../../src/render/TemplatePackageRenderer";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

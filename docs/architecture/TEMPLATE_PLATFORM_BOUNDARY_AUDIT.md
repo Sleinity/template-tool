@@ -1,15 +1,15 @@
 # Template Platform Boundary Audit
 
-Status: Milestone 2E physical browser-runtime ownership and SDK 0.4.1 patch
-Audit date: 2026-07-30
-Code baseline: the fixed SDK 0.4.1 train and compatibility-hardened generic template editor reference
+Status: Milestone 2F physical React-renderer ownership and SDK 0.4.2 patch
+Audit date: 2026-08-02
+Code baseline: the fixed SDK 0.4.2 train and compatibility-hardened generic template editor reference
 Authority: current code and imports take precedence over intended folder names
 
 ## 1. Purpose and conclusions
 
 This audit defines the boundary between the reusable Template Platform and the
 Template Studio product. Milestones 1A–2C completed the application/UI movement,
-the package/source, resolved/backend, field and browser-runtime physical migrations
+the package/source, resolved/backend, field, browser-runtime and React-renderer physical migrations
 without changing renderer behavior, public APIs, package contracts, fixtures,
 or approved evidence.
 
@@ -26,7 +26,8 @@ handoff. It is not yet fully physically separated:
 - `template-browser` physically owns browser assets, exact fonts, persistence,
   import orchestration, sessions, readiness, compatibility inspection,
   optional enrichment and PNG capture;
-- `template-react` still compiles renderer implementation from root source;
+- `template-react` physically owns the production React renderer, previews,
+  inspection viewport, renderer adapters and renderer-specific runtime routing;
 - Studio production modules still use both public package imports and direct
   root implementation imports;
 - Studio now owns its complete UI kit and product panels; the public inspection
@@ -63,8 +64,8 @@ canonical consumer.
 | Studio optional services | `apps/studio/server/figma-enrichment` | Optional Vite-local Figma enrichment; open-font resolution retired before SDK 0.3.0 | `apps/studio/server` |
 | Core package/source contract | `packages/template-core/src` | Physical owner of types, schema, ZIP/source normalization/validation, portable models, resolved trees, primitive appearance and backend decisions | `packages/template-core` |
 | Browser runtime | `packages/template-browser/src` | Physical owner of browser assets, fonts, storage, import, sessions, compatibility, readiness and capture | `packages/template-browser` |
-| React facade | `packages/template-react` | Renderer/session bindings over root source | `packages/template-react` with owned source |
-| Platform implementation | `src/template-package` | Mixed portable, browser, React, Studio and fidelity code | Split by the classification below |
+| React renderer | `packages/template-react/src` | Physical renderer, preview, inspection, session-binding and importer-UI owner | `packages/template-react` |
+| Platform compatibility source | `src/template-package` | Behavior-free forwarders plus remaining Studio/fidelity internals | Retire with ordinary Studio and fidelity public-entry migration |
 | Certified evidence | `fidelity`, `tools/fidelity`, `scripts` | Exact fixtures and guarded comparisons | Remains shared repository infrastructure |
 | Consumer proof | `examples/{minimal-renderer,template-editor-integration}` | Minimal render plus import/edit/persist/export host-integration proof | Keep public-entry-only and connect existing host services outside SDK |
 
@@ -80,9 +81,9 @@ template-core
       ↑
 template-browser
       ↑
-template-react ──> retained root renderer implementation
-      ↑                         ↑
-      └──────── apps/studio ────┘
+template-react
+      ↑
+apps/studio ──> checked root compatibility forwarders
 
 apps/studio/server ──> checked root enrichment forwarders
 ```
@@ -133,7 +134,8 @@ even when they are currently reachable through a broad barrel export.
 | `src/template-package/{debug/**,analysis/TemplatePackageStressReports.tsx,quality/fidelityIssuePacket.ts,runtime-routing/devHarness.ts}` | S2 | Explicit fidelity/development tooling |
 | `src/template-package/analysis/{featureCoverage,fidelityRisk,types,index}.ts` | P3 | Advanced capability/risk inspection |
 | `src/template-package/appearance-contracts/**`, `src/template-package/settlement/**` | P3 | Versioned observational evidence, not ordinary runtime API |
-| `src/template-package/scene/**` | P3 | Versioned canonical semantic/provenance inspection; bounded runtime consumers remain internal |
+| `packages/template-core/src/scene/**` | P3 | Physical owner of versioned canonical semantic/provenance inspection; bounded runtime consumers remain internal |
+| `src/template-package/scene/**` | I1 | Behavior-free compatibility forwarders to the core scene owner |
 | `src/template-package/quality/{types,createTemplatePackageQualityReport,diagnosticPresentation,loadedSourceDiagnosticAdapter,qualityWorkspace}.ts` | P3 | Reusable diagnostic records/view models; presentation remains host-owned |
 | `src/template-package/render/productRenderIdentity.ts` | P3 | Versioned readiness/identity evidence used by stable bindings |
 | `packages/template-react/src/**`; renderer modules `TemplatePackageRenderer.tsx`, `ScaledTemplatePackagePreview.tsx`, `TemplateInspectionViewport.tsx`, compatibility `TemplateInspectionPreview.tsx`, and `previewViewport.ts` | P2 | Renderer, session bindings, the host-neutral importer wizard, and composable/compatibility preview interfaces |
@@ -157,7 +159,7 @@ they do not promote internal siblings automatically.
 | Current interface | Finding | Target |
 | --- | --- | --- |
 | `TemplatePackageRenderer` | Reusable now; no Studio route/persistence dependency | P2 stable renderer entry |
-| Session provider, snapshot hook and renderer | Reusable now; package still imports root renderer source | P2 stable session entry |
+| Session provider, snapshot hook and renderer | Reusable and physically package-owned | P2 stable session entry |
 | `ScaledTemplatePackagePreview` | Reusable behavior with browser observer | P2 renderer/preview entry |
 | `TemplateInspectionViewport` | Reusable; UI-independent state, imperative fit/zoom API, live settled-target measurement and overlays | P2 composable viewport |
 | `TemplateInspectionPreview` | Backward-compatible native-control composition over the viewport | P2 compatibility interface; Studio uses its local styled composition |
@@ -236,14 +238,10 @@ without replacing the existing diagnostic records.
 
 ### 7.1 Package facades into root source
 
-- `template-core` imports root types, parser, validation, bundle, scene,
-  resolved, backend and editor modules.
-- `template-browser` imports root assets, persistence, export, fonts,
-  enrichment, measurement, import and session modules.
-- `template-react` imports root renderer and preview modules; its session binding
-  also imports root renderer files directly.
-
-These edges are allowed only during the behavior-preserving facade phase.
+Closed. Core, browser and React production modules have zero root-source
+implementation imports. Retained root paths are checked behavior-free
+forwarders used only while Studio and fidelity consumers migrate to supported
+package or explicit advanced-inspection entries.
 
 ### 7.2 Platform modules into Studio UI
 
@@ -272,12 +270,12 @@ still bypass them.
 - Milestone 2C physically moves resolved trees, injected font readiness,
   image placement, backend decisions and the required primitive-appearance
   closure into core. Root paths are checked behavior-free forwarders.
-- `fonts/indexedDbFontRegistry.ts` imports persistence asset types while
-  `persistence/indexedDbTemplateRepository.ts` imports font record types. Move
-  shared content-addressed binary record types into the browser provider layer.
-- `import/runTemplatePackageImportPipeline.ts` imports Studio-shaped saved
-  template metadata only to type source metadata. Replace it with a platform
-  source-record type before moving persistence.
+- Milestone 2E removed the font/persistence cycle through one browser-internal
+  content-addressed binary layer and narrowed import source metadata.
+- Milestone 2F physically moves canonical-scene authority to core and the
+  production React renderer/runtime-routing closure to React. The fixed-train
+  internal sibling entries exist only for renderer composition and are not
+  supported host APIs.
 - bundle diagnostics call resolved-tree creation. Keep this as an advanced
   inspection composition, not part of the low-level ZIP parser.
 
@@ -332,11 +330,14 @@ selection. Existing complete Studio pages are not exported.
    contracts and their portable loader closure into `template-core`.
 4. **Completed in Milestones 2B–2C:** invert renderer/backend dependencies and
    move resolved/backend contracts with the internal primitive closure into core.
-5. Move pure field/edit contracts into core, then retire their root owners.
+5. **Completed in Milestone 2D:** move pure field/edit contracts into core;
+   retain checked root forwarders for remaining repository consumers.
 6. **Completed in Milestone 2E:** move browser assets, fonts, import, session,
    readiness, compatibility, enrichment and capture into `template-browser`;
    introduce shared binary storage and narrow persistence boundaries.
-7. Move the React renderer and its browser hooks into `template-react`.
+7. **Completed in Milestone 2F:** move canonical scene authority into core and
+   the React renderer, previews, renderer routing and browser hooks into
+   `template-react`.
 8. Migrate ordinary Studio behavior to public entries; isolate fidelity-only
    inspection entries.
 9. Extract reusable validation/field/preview view models and selected
@@ -350,12 +351,10 @@ owner without behavior or type duplication. Each forwarder must have a named
 retirement step in the same family migration. Vite aliases must not be used to
 hide incomplete physical ownership from packed-package tests.
 
-Milestones 2A–2E retain checked forwarder groups. Package/source/validation
-forwarders retire when browser session and Studio production imports switch to
-the core public entry. Resolved/backend/primitive forwarders retire after field
-consumers and the React renderer migrate. Shared type, asset-reference, mask
-and motion forwarders retire after the React renderer family moves. Browser
-forwarders retire when ordinary Studio, renderer and fidelity consumers use
+Milestones 2A–2F retain checked forwarder groups. Package/source/validation
+forwarders retire when Studio production imports switch to the core public
+entry. Resolved/backend/primitive, shared type/asset/mask/motion, browser and
+renderer forwarders retire when ordinary Studio and fidelity consumers use
 supported package or explicit advanced-inspection entry points. The
 boundary checker requires every listed legacy module to contain exactly one
 re-export and rejects duplicate type/schema owners.
@@ -694,6 +693,36 @@ ran.
   historical/unapproved states. Exact-font and source-authoritative evidence
   pass.
 - Approved identities remain renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no update, promotion, fixture, schema or
+  tolerance command ran.
+
+## 22. Milestone 2F verification record
+
+- `template-core` physically owns canonical-scene construction, serialization,
+  validation, equivalence and mappings. `template-react` physically owns the
+  renderer, previews, inspection viewport, adapters and renderer-specific
+  runtime routing. Neither package imports root implementation source.
+- Root scene/render/routing compatibility paths contain one checked re-export.
+  Unsupported `renderer-internal` fixed-train entries connect these repository
+  forwarders without adding supported host APIs; ordinary Studio modules,
+  examples and browser production code are forbidden from importing them.
+- Package/root TypeScript, portable tests, builds, declarations/API inventory,
+  boundaries, archives, packed core/React consumers, browser smokes, generic
+  editor acceptance and runtime-routing scenarios pass.
+- Core declarations remain exactly 87,431 bytes at
+  `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+  Core/browser/React archives are 347,076 / 209,476 / 153,598 bytes; the React
+  archive is 49.4% smaller than 0.4.1 and the fixed-train total is 10.8%
+  smaller. The packed consumer is 856,967 / 251,434 gzip bytes. Studio remains
+  materially flat at 1,001.02 / 291.15 gzip kB.
+- Appearance is deterministic for all 19 fixtures. Renderer run
+  `2026-08-02T13-40-25-642Z` reproduces the 0.4.1 historical/unapproved states;
+  scene retains four historical and 15 unapproved states, and settlement
+  retains its documented states. Approved identities remain renderer 96 /
   `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
   scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
   and settlement 80 /

@@ -1,8 +1,55 @@
 # Renderer Fidelity Status
 
-Status date: 2026-07-30
-Current milestone: Milestone 2E physical browser-runtime ownership / SDK 0.4.1
+Status date: 2026-08-02
+Current milestone: Milestone 2F physical React-renderer ownership / SDK 0.4.2
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## Milestone 2F — physical React-renderer ownership
+
+The fixed core/browser/React train is prepared at `0.4.2` without changing its
+recorded public API. `template-core` now physically owns canonical-scene
+construction, serialization, validation, equivalence and mappings.
+`template-react` physically owns the complete production React renderer,
+previews, inspection viewport, CSS/SVG/text/vector/constraint adapters and
+renderer-specific runtime routing. Root paths retained by Studio and fidelity
+tools are checked behavior-free forwarders.
+
+The fixed-train `renderer-internal` sibling seams allow repository forwarders
+and the React renderer to consume internal owners without bundling root source.
+They are excluded from the public API inventory, explicitly unsupported for
+hosts, and forbidden in Studio production modules, examples and browser code.
+React externalizes core and browser; browser never imports React. Studio's
+development aliases resolve the compatibility forwarders to the same workspace
+owners, preventing a second renderer instance without exposing the seam to
+application code.
+
+Current-run package/root TypeScript, portable tests, builds, declarations, API
+inventory, boundaries, release contract, archives, DOM-free core, isolated
+packed consumer, session/Studio browser smokes and the packed generic editor
+pass. The generic editor again proves wizard confirmation, fresh-session
+reopening, host editing, exact fonts, persistence, silent PNG, simultaneous
+compositions and zero external SDK requests.
+
+Core declarations remain exactly 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 347,076 / 209,476 / 153,598 bytes. React
+is 49.4% smaller than 0.4.1 and the three-archive total is 10.8% smaller despite
+the explicit core internal seam. The packed consumer is 856,967 / 251,434 gzip
+bytes, down 4.3% gzip. Studio remains flat at 1,001.02 / 291.15 gzip kB;
+minimal and generic examples are 816.87 / 239.88 and 871.21 / 255.00 gzip kB.
+
+Appearance remains deterministic for all 19 fixtures. Renderer baseline
+`2026-08-02T13-39-40-949Z` and comparison
+`2026-08-02T13-40-25-642Z` reproduce the 0.4.1 result: 31 approved passes, 17
+historical/environment-sensitive differences and 28 unapproved surfaces.
+Scene retains four historical differences and 15 unapproved fixtures;
+settlement retains its documented historical states. Runtime-routing stage 4a,
+exact-font, text-trim and all nine browser scenarios pass. Approved identities
+remain renderer 96 / `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No reference, fixture, schema, tolerance, promotion or update command ran.
 
 ## Milestone 2E — physical browser-runtime ownership
 

@@ -1,12 +1,12 @@
-import { createNowHiringResponsiveReflowFixture } from "../fixtures/nowHiringResponsiveReflow";
-import { createResolvedRenderTree } from "../resolved/createResolvedRenderTree";
-import { createCanonicalSceneGraph } from "./createCanonicalSceneGraph";
-import { createSceneEquivalenceReport } from "./createSceneEquivalenceReport";
-import { SCENE_MIGRATION_MAP } from "./migrationMap";
-import { PROPERTY_AUTHORITY_MATRIX } from "./propertyAuthority";
-import { serializeCanonicalSceneGraph } from "./serializeCanonicalSceneGraph";
-import { SOURCE_TO_SCENE_MAPPING } from "./sourceToSceneMapping";
-import { validateCanonicalSceneGraph } from "./validateCanonicalSceneGraph";
+import { createNowHiringResponsiveReflowFixture } from "../../../src/template-package/fixtures/nowHiringResponsiveReflow";
+import { createResolvedRenderTree } from "../src/resolved/createResolvedRenderTree";
+import { createCanonicalSceneGraph } from "../src/scene/createCanonicalSceneGraph";
+import { createSceneEquivalenceReport } from "../src/scene/createSceneEquivalenceReport";
+import { SCENE_MIGRATION_MAP } from "../src/scene/migrationMap";
+import { PROPERTY_AUTHORITY_MATRIX } from "../src/scene/propertyAuthority";
+import { serializeCanonicalSceneGraph } from "../src/scene/serializeCanonicalSceneGraph";
+import { SOURCE_TO_SCENE_MAPPING } from "../src/scene/sourceToSceneMapping";
+import { validateCanonicalSceneGraph } from "../src/scene/validateCanonicalSceneGraph";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
