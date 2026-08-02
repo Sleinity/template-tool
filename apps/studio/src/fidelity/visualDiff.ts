@@ -1,4 +1,4 @@
-import type { TemplatePackageV1, VisualDiffResult } from "../types";
+import type { TemplatePackageV1, VisualDiffResult } from "@sleinity/template-core";
 
 export function describeVisualDiffError(error: unknown): string {
   if (error instanceof Error && error.message.trim()) return error.message;

@@ -6,8 +6,12 @@
     "baseUrl": ".",
     "paths": {
       "@sleinity/template-core": ["../template-core/src/index.ts"],
+      "@sleinity/template-core/editor": ["../template-core/src/editor.ts"],
+      "@sleinity/template-core/inspection": ["../template-core/src/inspection.ts"],
       "@sleinity/template-core/renderer-internal": ["../template-core/src/renderer-internal.ts"],
       "@sleinity/template-browser": ["../template-browser/src/index.ts"],
+      "@sleinity/template-browser/assets": ["../template-browser/src/assets.ts"],
+      "@sleinity/template-browser/capture": ["../template-browser/src/capture.ts"],
       "@sleinity/template-browser/importer": ["../template-browser/src/importer.ts"]
     }
   },

@@ -1,4 +1,1 @@
-export * from "./types";
-export * from "./featureCoverage";
-export * from "./fidelityRisk";
-export * from "./TemplatePackageStressReports";
+export * from "../../../packages/template-react/src/inspection/analysis";

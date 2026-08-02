@@ -24,6 +24,21 @@ well. Their former root paths are checked behavior-free forwarders.
 Legacy repository paths are internal compatibility forwarders only. Consumers
 must import supported contracts from `@sleinity/template-core`.
 
+## Curated entries
+
+- `@sleinity/template-core/editor` — field discovery, mutation, rules,
+  constraints, counters, and validation.
+- `@sleinity/template-core/assets` — portable asset safety, references, and
+  source resolution.
+- `@sleinity/template-core/fonts` — requirements, readiness, and character
+  coverage.
+- `@sleinity/template-core/motion` — motion linking, summaries, evaluation,
+  and final-frame timing.
+- `@sleinity/template-core/inspection` — supported advanced canonical-scene,
+  appearance, measurement, dependency, settlement, comparison, and diagnostic
+  evidence. These records report existing authority; they do not select or
+  replace the renderer.
+
 ## ZIP importer
 
 `importTemplatePackage` is the supported importer entry point for consumers.
@@ -81,7 +96,7 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.4.2
+npm install @sleinity/template-core@0.5.0
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
@@ -92,13 +107,13 @@ package or its linked repository.
 
 Lovable Business cannot inject the private-registry build secret required for
 GitHub Packages. Use the checksum-verified archive attached to the public
-`sdk-v0.4.2` GitHub Release instead:
+`sdk-v0.5.0` GitHub Release instead:
 
-1. Verify `sleinity-template-core-0.4.2.tgz` against `SHA256SUMS`.
+1. Verify `sleinity-template-core-0.5.0.tgz` against `SHA256SUMS`.
 2. Commit it to the private Lovable-synced repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.4.2.tgz"`.
+   "file:vendor/sleinity-template-core-0.5.0.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
 No `.npmrc` or GitHub token belongs in the Lovable repository. The release
@@ -111,5 +126,5 @@ applies text/color/visibility/image edits and field-rule configuration, and
 restores imported state without
 repository fixtures, and rejects DOM, CSS, storage, font and network global
 access. The built public declaration is
-locked to the SDK 0.4.2 contract at 87,431 bytes and SHA-256
+locked to the SDK 0.5.0 root contract at 87,431 bytes and SHA-256
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.

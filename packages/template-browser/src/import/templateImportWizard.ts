@@ -35,7 +35,7 @@ export const TEMPLATE_IMPORT_WIZARD_SCHEMA_VERSION =
   "template-import-wizard-snapshot-v1" as const;
 export const TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-import-confirmation-v1" as const;
-export const TEMPLATE_SDK_VERSION = "0.4.1" as const;
+export const TEMPLATE_SDK_VERSION = "0.5.0" as const;
 
 export const TEMPLATE_IMPORT_WIZARD_STEPS = [
   "zip-import",

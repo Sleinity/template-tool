@@ -4,27 +4,27 @@ import { Button, Status } from "../../ui";
 import type {
   TemplatePackageFontRequirement,
   TemplatePackageV1,
-} from "../../../../../../src/template-package/types";
+} from "@sleinity/template-core";
 import {
   fontUsesPlatformEmojiFallback,
-} from "../../../../../../packages/template-core/src/resolved/fontCharacterCoverage";
+} from "@sleinity/template-core/fonts";
 import {
   areExactFontRequirementsResolved,
   formatRequiredFontFace,
   isExactFontRequirementResolved,
   managedFontExactlyMatchesRequirement,
-} from "../../../../../../src/template-package/fonts/exactFontSetup";
+} from "@sleinity/template-browser/fonts";
 import {
   autoLinkManagedFonts,
   getManagedFontRegistry,
-} from "../../../../../../src/template-package/fonts/fontRegistry";
+} from "@sleinity/template-browser/fonts";
 import {
   uploadExactManagedFontForRequirement,
-} from "../../../../../../src/template-package/fonts/fontResolution";
+} from "@sleinity/template-browser/fonts";
 import type {
   ManagedFontDiagnostic,
   ManagedFontRecord,
-} from "../../../../../../src/template-package/fonts/fontRegistryTypes";
+} from "@sleinity/template-browser/fonts";
 
 interface FontPreparationStepProps {
   packageValue: TemplatePackageV1;

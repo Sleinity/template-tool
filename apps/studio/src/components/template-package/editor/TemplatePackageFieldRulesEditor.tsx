@@ -8,21 +8,21 @@ import {
   Select,
   Status,
 } from "../../ui";
-import { resolvePackageAssetReference } from "../../../../../../src/template-package/assets/packageAssetResolution";
-import { resolvePackageAssetSource } from "../../../../../../src/template-package/render";
+import { resolvePackageAssetReference } from "@sleinity/template-browser/assets";
+import { resolvePackageAssetSource } from "@sleinity/template-core/assets";
 import type {
   EditableFieldBinding,
   PackageImageFieldConstraints,
   PackageTextFieldConstraints,
   TemplatePackageV1,
-} from "../../../../../../src/template-package/types";
+} from "@sleinity/template-core";
 import { formatEditableFieldLabel } from "./fieldLabels";
-import { withTextFieldConstraint } from "../../../../../../src/template-package/editor/fieldConstraints";
+import { withTextFieldConstraint } from "@sleinity/template-core/editor";
 import {
   getEffectiveEditableFields,
   getPackageEditorFieldTargetStatuses,
   packageWithEffectiveEditableFields,
-} from "../../../../../../src/template-package/editor/packageFieldBindings";
+} from "@sleinity/template-core/editor";
 
 interface TemplatePackageFieldRulesEditorProps {
   packageValue: TemplatePackageV1;

@@ -4,9 +4,9 @@ import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plu
 import {
   createSavedOutputDraftRecord,
   createSavedTemplateRecord,
-} from "../../../../src/template-package/persistence";
-import type { TemplatePackageV1 } from "../../../../src/template-package/types";
-import { validateTemplatePackage } from "../../../../src/template-package/validateTemplatePackage";
+} from "@sleinity/template-browser/persistence";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
+import { validateTemplatePackage } from "@sleinity/template-core";
 import { TemplateOverviewPage } from "./TemplateOverviewPage";
 
 function assert(condition: unknown, message: string): void {

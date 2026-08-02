@@ -7,12 +7,13 @@ import {
 } from "lucide-react";
 import { Alert, Button } from "../../components/ui";
 import type {
-  LoadedSourceDiagnosticReport,
   LoadedTemplatePackageSource,
   TemplatePackageBundleDiagnostic,
-} from "../../../../../src/template-package/bundle";
-import type { TemplatePackageValidationResult } from "../../../../../src/template-package/packageDiagnostics";
-import type { SavedTemplateRecord } from "../../../../../src/template-package/persistence";
+  TemplatePackageValidationResult,
+  TemplatePackageV1,
+} from "@sleinity/template-core";
+import type { LoadedSourceDiagnosticReport } from "@sleinity/template-browser/importer";
+import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
 import {
   getDiagnosticAudience,
   getPackageQualityPrimaryTarget,
@@ -23,8 +24,7 @@ import {
   getPackageQualityWorkspaceCounts,
   type PackageQualityIssue,
   type PackageQualityReport,
-} from "../../../../../src/template-package/quality";
-import type { TemplatePackageV1 } from "../../../../../src/template-package/types";
+} from "@sleinity/template-react/inspection";
 
 type ReadinessState = "ready" | "warning" | "blocked";
 

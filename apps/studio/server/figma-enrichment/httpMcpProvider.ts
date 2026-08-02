@@ -2,7 +2,7 @@ import type {
   FigmaMcpEvidence,
   FigmaMcpMetadata,
   ParsedFigmaUrl,
-} from "../../../../src/template-package/enrichment";
+} from "@sleinity/template-browser/enrichment";
 import { normalizeProviderMetadata } from "./normalizeMetadata";
 import {
   type BackendFigmaEnrichmentProvider,

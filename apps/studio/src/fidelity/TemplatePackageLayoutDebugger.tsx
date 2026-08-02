@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import type {
   EditableFieldBinding,
   TemplatePackageV1,
-} from "../types";
+} from "@sleinity/template-core";
 import {
   buildPackageLayoutDebugReport,
   collectPackageLayoutDebugNodeIds,

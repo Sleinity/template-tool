@@ -1,5 +1,17 @@
 # @sleinity/template-react
 
+## 0.5.0
+
+### Minor Changes
+
+- Add the supported advanced `inspection` entry for renderer feature coverage,
+  fidelity risk, quality-report composition, and diagnostic projections.
+- Keep Studio-only layout debugging, issue packets, stress reports, visual
+  comparison, and development harnesses outside SDK archives.
+- Updated dependencies
+  - @sleinity/template-core@0.5.0
+  - @sleinity/template-browser@0.5.0
+
 ## 0.4.2
 
 ### Patch Changes

@@ -7,8 +7,14 @@ Studio consumer for the private renderer SDK.
 Milestone 1B closes the UI seam: the design system, field/font/quality panels,
 and the styled inspection-preview composition are Studio-owned. The public
 React package exposes a UI-independent viewport and compatibility preview;
-published packages never import `apps/studio`. Technical implementation remains
-under `../../src/template-package` until the later physical package milestones.
+published packages never import `apps/studio`.
+
+As of SDK 0.5.0, ordinary Studio production and server code consumes the same
+supported core, browser, React, and advanced-inspection entry points as an
+external host. It does not import repository compatibility paths or package
+source internals. Studio-specific layout debugging, stress reports, visual
+comparison, fidelity issue packets, and development harness adapters remain
+local to `src/fidelity` and are not SDK exports.
 
 The public packages bundle only their supported entry points. Studio-only
 navigation, import panels, Fields, Validate, and editor controls are not part of

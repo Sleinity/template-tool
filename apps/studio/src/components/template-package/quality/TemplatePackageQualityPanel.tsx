@@ -15,15 +15,15 @@ import {
   type PackageQualityAreaFilter,
   type PackageQualityIssueGroup,
   type PackageQualitySeverityFilter,
-} from "../../../../../../src/template-package/quality/qualityWorkspace";
-import type { PackageQualityHealth, PackageQualityIssue, PackageQualityReport } from "../../../../../../src/template-package/quality/types";
+} from "@sleinity/template-react/inspection";
+import type { PackageQualityHealth, PackageQualityIssue, PackageQualityReport } from "@sleinity/template-react/inspection";
 import {
   diagnosticPresentationLabels,
   getDiagnosticFriendlyTarget,
   getDiagnosticPresentation,
   getDiagnosticPresentationState,
   getPackageQualityIssueTitle,
-} from "../../../../../../src/template-package/quality/diagnosticPresentation";
+} from "@sleinity/template-react/inspection";
 
 interface TemplatePackageQualityPanelProps {
   report: PackageQualityReport;

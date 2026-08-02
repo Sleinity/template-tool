@@ -1,12 +1,14 @@
 import { useMemo } from "react";
-import type { TemplatePackageV1 } from "../types";
-import { analyzeRendererFeatureCoverage } from "./featureCoverage";
-import { analyzeFidelityRisk } from "./fidelityRisk";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
+import {
+  analyzeFidelityRisk,
+  analyzeRendererFeatureCoverage,
+} from "@sleinity/template-react/inspection";
 import type {
   FeatureSupportStatus,
   FidelityRiskLevel,
   RendererFeatureCoverageItem,
-} from "./types";
+} from "@sleinity/template-react/inspection";
 
 interface TemplatePackageStressReportsProps {
   packageValue: TemplatePackageV1;

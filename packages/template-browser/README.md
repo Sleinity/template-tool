@@ -21,8 +21,18 @@ New hosts should import from the curated entry points:
 - `@sleinity/template-browser/session`
 - `@sleinity/template-browser/importer`
 - `@sleinity/template-browser/compatibility`
+- `@sleinity/template-browser/assets`
+- `@sleinity/template-browser/fonts`
+- `@sleinity/template-browser/persistence`
+- `@sleinity/template-browser/capture`
+- `@sleinity/template-browser/enrichment`
 
 The broad package root remains supported for existing integrations.
+
+The five functional entries above expose the existing browser adapters and
+services without requiring consumers to depend on the broad root. Enrichment
+remains host-injected and optional; import, validation, fonts, rendering, and
+capture still perform no SDK-owned external request.
 
 `createTemplateSession()` is the supported high-level host contract. It owns a
 revision-safe ZIP/import lifecycle, immutable imported baseline, editable

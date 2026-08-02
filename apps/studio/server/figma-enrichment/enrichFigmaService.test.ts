@@ -2,8 +2,8 @@ import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plu
 import type {
   FigmaMcpMetadata,
   ParsedFigmaUrl,
-} from "../../../../src/template-package/enrichment";
-import type { TemplatePackageV1 } from "../../../../src/template-package/types";
+} from "@sleinity/template-browser/enrichment";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
 import { handleFigmaEnrichment } from "./enrichFigmaService";
 import type { BackendFigmaEnrichmentProvider } from "./provider";
 import { FigmaProviderError } from "./provider";

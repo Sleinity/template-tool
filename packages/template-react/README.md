@@ -13,8 +13,20 @@ external applications must never import them directly.
 
 The production renderer, previews, inspection viewport and renderer-specific
 runtime routing are physically owned by this package. Their former repository
-paths are behavior-free compatibility forwarders that will retire when Studio
-and fidelity tooling migrate to supported or explicit inspection entries.
+paths are behavior-free compatibility forwarders for remaining test and
+fidelity infrastructure.
+
+## Advanced inspection
+
+`@sleinity/template-react/inspection` is a supported advanced entry for hosts
+that need renderer feature coverage, fidelity-risk projection, quality-report
+composition, diagnostic presentation, filtering, and grouping. Ordinary
+importing, editing, and rendering do not require it, and ordinary consumers do
+not bundle it unless they import the entry.
+
+Layout debug components, stress reports, visual-difference tools, fidelity
+issue packets, and runtime development harnesses remain Studio/fidelity-only
+and are not shipped in this package.
 
 ## Template setup wizard
 

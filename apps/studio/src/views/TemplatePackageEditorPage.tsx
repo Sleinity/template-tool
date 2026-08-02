@@ -28,7 +28,7 @@ import {
 } from "../components/ui";
 import { TemplatePackageDiagnosticsPanel } from "../components/template-package/editor/TemplatePackageDiagnosticsPanel";
 import { TemplatePackageFieldEditor } from "../components/template-package/editor/TemplatePackageFieldEditor";
-import { validatePackageFieldConstraints } from "../../../../src/template-package/editor";
+import { validatePackageFieldConstraints } from "@sleinity/template-core/editor";
 import {
   collectTemplatePackageRenderWarnings,
   ScaledTemplatePackagePreview,
@@ -53,8 +53,8 @@ import {
   type PackagePngExportDiagnostic,
   type DraftAutosaveState,
 } from "@sleinity/template-browser";
-import { getPackageMotionSummary } from "../../../../src/template-package/motion";
-import { createRuntimeRoutingHarnessApi } from "../../../../src/template-package/runtime-routing/devHarness";
+import { getPackageMotionSummary } from "@sleinity/template-core/motion";
+import { createRuntimeRoutingHarnessApi } from "../fidelity/runtimeRoutingDevHarness";
 
 interface TemplatePackageEditorPageProps {
   session: TemplatePackageEditorSession;

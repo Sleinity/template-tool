@@ -4,12 +4,12 @@ import type {
   PackageSizingMode,
   TemplateNode,
   TemplatePackageV1,
-} from "../types";
+} from "@sleinity/template-core";
 import {
   resolvePackageNodeLayoutRole,
   type PackageNodeLayoutRole,
-} from "../render/packageLayoutModel";
-import { resolvePackageAbsoluteConstraints } from "../render/packageConstraintLayout";
+} from "@sleinity/template-react/renderer-internal";
+import { resolvePackageAbsoluteConstraints } from "@sleinity/template-react/renderer-internal";
 
 export type PackageLayoutDebugSeverity = "info" | "warning";
 

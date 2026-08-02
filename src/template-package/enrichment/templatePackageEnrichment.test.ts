@@ -11,12 +11,12 @@ import {
   createPngRasterReadinessTracker,
   createTemplatePackageCaptureOptions,
 } from "./captureTemplatePackagePreview";
-import { describeVisualDiffError } from "./visualDiff";
+import { describeVisualDiffError } from "../../../apps/studio/src/fidelity/visualDiff";
 import {
   compareRgbaImages,
   compareRgbaPixels,
   getFigmaReferencePng,
-} from "./visualDiff";
+} from "../../../apps/studio/src/fidelity/visualDiff";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

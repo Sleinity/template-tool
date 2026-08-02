@@ -10,17 +10,17 @@
     {
       "name": "@sleinity/template-core",
       "directory": "template-core",
-      "role": "ZIP import, validation, portable fields, and package models"
+      "role": "ZIP import, validation, portable fields, package models, and advanced portable inspection records"
     },
     {
       "name": "@sleinity/template-browser",
       "directory": "template-browser",
-      "role": "Browser session, headless import workflow, assets, fonts, persistence, readiness, and PNG export"
+      "role": "Browser session, headless import workflow, assets, fonts, persistence, readiness, capture, and enrichment"
     },
     {
       "name": "@sleinity/template-react",
       "directory": "template-react",
-      "role": "React import bindings and default UI, renderer, inspection viewport, and export handle"
+      "role": "React import bindings and default UI, renderer, inspection viewport, export handle, and advanced renderer inspection"
     }
   ]
 }

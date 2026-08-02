@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.4.2 \
-  @sleinity/template-browser@0.4.2 \
-  @sleinity/template-react@0.4.2
+pnpm add @sleinity/template-core@0.5.0 \
+  @sleinity/template-browser@0.5.0 \
+  @sleinity/template-react@0.5.0
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.4.2` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.2)
+[`sdk-v0.5.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.5.0)
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -149,8 +149,7 @@ injected adapters.
 See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) and the focused
 [template editor reference](../../examples/template-editor-integration/README.md).
 The repository verifies both workspace and isolated packed consumers.
-For upgrades, see [Migrating to SDK 0.4](SDK_0_4_MIGRATION.md) and the
-[0.4.2 ownership patch](SDK_0_4_2_MIGRATION.md). Integration
+For upgrades, see [Migrating to SDK 0.5](SDK_0_5_MIGRATION.md). Integration
 failures are organized by stable compatibility code in the
 [troubleshooting guide](TROUBLESHOOTING.md). The committed
 [machine-readable API contract](../../config/sdk-public-api.json) is the
@@ -158,8 +157,18 @@ authoritative public export inventory.
 
 Recommended high-level APIs are the curated browser subpaths and React entry
 points. The broad core/browser roots remain supported low-level adapter
-surfaces. Fidelity-only inspection code stays outside package export maps, and
-repository internals are not publicly supported.
+surfaces. SDK 0.5 also provides supported advanced inspection entries:
+
+- `@sleinity/template-core/inspection` for UI-independent canonical,
+  appearance, dependency, measurement, settlement, comparison, and diagnostic
+  evidence;
+- `@sleinity/template-react/inspection` for renderer feature coverage,
+  fidelity risk, quality reports, and diagnostic presentation.
+
+The advanced entries are optional and report existing authority. Ordinary
+importing, editing, and rendering do not require them. Studio-only debug
+panels, visual-difference tooling, fidelity issue packets, and development
+harnesses stay outside package export maps.
 The `@sleinity/template-core/renderer-internal` and
 `@sleinity/template-react/renderer-internal` entries are reserved for
 fixed-train renderer/repository composition; external applications and Studio

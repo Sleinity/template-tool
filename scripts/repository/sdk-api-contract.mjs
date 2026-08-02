@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import ts from "typescript";
@@ -12,17 +12,28 @@ const contractPath = path.join(root, "config", "sdk-public-api.json");
 const classifications = {
   "@sleinity/template-core": {
     ".": "supported-low-level-adapter",
+    "./assets": "supported-low-level-adapter",
+    "./editor": "supported-low-level-adapter",
+    "./fonts": "supported-low-level-adapter",
+    "./inspection": "supported-advanced-inspection",
+    "./motion": "supported-low-level-adapter",
   },
   "@sleinity/template-browser": {
     ".": "supported-low-level-adapter",
     "./session": "recommended-high-level-integration",
     "./importer": "recommended-high-level-integration",
     "./compatibility": "recommended-high-level-integration",
+    "./assets": "supported-low-level-adapter",
+    "./fonts": "supported-low-level-adapter",
+    "./persistence": "supported-low-level-adapter",
+    "./capture": "supported-low-level-adapter",
+    "./enrichment": "supported-low-level-adapter",
   },
   "@sleinity/template-react": {
     ".": "recommended-high-level-integration",
     "./importer": "recommended-high-level-integration",
     "./importer.css": "recommended-high-level-integration",
+    "./inspection": "supported-advanced-inspection",
   },
 };
 
@@ -113,6 +124,9 @@ async function createContract() {
 const generated = `${JSON.stringify(await createContract(), null, 2)}\n`;
 if (process.argv.includes("--print")) {
   process.stdout.write(generated);
+} else if (process.argv.includes("--write")) {
+  await writeFile(contractPath, generated);
+  console.log("Updated the versioned SDK public API contract.");
 } else if (process.argv.includes("--check")) {
   const expected = await readFile(contractPath, "utf8");
   if (expected !== generated) {
@@ -123,5 +137,5 @@ if (process.argv.includes("--print")) {
   }
   console.log("SDK public API contract matches every built package entry point.");
 } else {
-  throw new Error("Use --print or --check.");
+  throw new Error("Use --print, --write, or --check.");
 }

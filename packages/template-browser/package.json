@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-browser",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Browser asset, font, persistence, readiness, and deterministic PNG services for TemplatePackage rendering.",
   "license": "UNLICENSED",
   "repository": {
@@ -34,6 +34,26 @@
     "./compatibility": {
       "types": "./dist/compatibility.d.ts",
       "import": "./dist/compatibility.js"
+    },
+    "./assets": {
+      "types": "./dist/assets.d.ts",
+      "import": "./dist/assets.js"
+    },
+    "./fonts": {
+      "types": "./dist/fonts.d.ts",
+      "import": "./dist/fonts.js"
+    },
+    "./persistence": {
+      "types": "./dist/persistence.d.ts",
+      "import": "./dist/persistence.js"
+    },
+    "./capture": {
+      "types": "./dist/capture.d.ts",
+      "import": "./dist/capture.js"
+    },
+    "./enrichment": {
+      "types": "./dist/enrichment.d.ts",
+      "import": "./dist/enrichment.js"
     }
   },
   "publishConfig": {
@@ -41,7 +61,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external react --external react-dom --external ajv --external fflate --external html-to-image",
+    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts --sourcemap --external @sleinity/template-core --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

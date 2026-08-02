@@ -3,7 +3,7 @@ import type {
   FigmaMcpMetadata,
   FigmaMcpNodeMetadata,
   ParsedFigmaUrl,
-} from "../../../../src/template-package/enrichment";
+} from "@sleinity/template-browser/enrichment";
 import {
   type BackendFigmaEnrichmentProvider,
   FigmaProviderError,

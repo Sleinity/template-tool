@@ -1,22 +1,20 @@
 import type { ReactNode } from "react";
-import { analyzeAssetReliability } from "../../../../../src/template-package/assets";
+import { analyzeAssetReliability } from "@sleinity/template-browser/assets";
+import type { TemplatePackageEnrichmentResult } from "@sleinity/template-browser/enrichment";
+import type { LoadedSourceDiagnosticReport } from "@sleinity/template-browser/importer";
+import type { validatePackageJpgExportReadiness } from "@sleinity/template-browser/capture";
+import { getPackageMotionSummary, type PackageMotionDiagnostic } from "@sleinity/template-core/motion";
+import { collectTemplatePackageRenderWarnings } from "@sleinity/template-react";
 import {
-  comparePreviewReferenceDimensions,
-  type LoadedSourceDiagnosticReport,
   type LoadedTemplatePackageSource,
-} from "../../../../../src/template-package/bundle";
-import type { TemplatePackageEnrichmentResult } from "../../../../../src/template-package/enrichment";
-import type { validatePackageJpgExportReadiness } from "../../../../../src/template-package/export";
-import { getPackageMotionSummary, type PackageMotionDiagnostic } from "../../../../../src/template-package/motion";
-import type { PackageDiagnostic } from "../../../../../src/template-package/packageDiagnostics";
-import { collectTemplatePackageRenderWarnings } from "../../../../../src/template-package/render";
-import {
+  type PackageDiagnostic,
+  type TemplatePackageV1,
   createResolvedRenderTree,
   type FontReadinessReport,
-} from "../../../../../src/template-package/resolved";
-import type { SavedTemplateRecord } from "../../../../../src/template-package/persistence";
-import type { TemplatePackageV1 } from "../../../../../src/template-package/types";
-import { getDiagnosticCodeTitle } from "../../../../../src/template-package/quality";
+} from "@sleinity/template-core";
+import { comparePreviewReferenceDimensions } from "@sleinity/template-core/inspection";
+import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import { getDiagnosticCodeTitle } from "@sleinity/template-react/inspection";
 
 const formatBytes = (value: number | undefined): string => {
   if (!value || value <= 0) return "0 KB";

@@ -1,9 +1,11 @@
 import { strToU8, zipSync } from "fflate";
-import { createCanonicalSceneGraph } from "../scene";
-import type { ResolvedRenderTreeV1 } from "../resolved";
-import type { ResolvedProductRenderIdentityV1 } from "../render/productRenderIdentity";
-import type { TemplatePackageV1 } from "../types";
-import type { PackageQualityIssue } from "./types";
+import {
+  createCanonicalSceneGraph,
+  type ResolvedRenderTreeV1,
+  type TemplatePackageV1,
+} from "@sleinity/template-core";
+import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
+import type { PackageQualityIssue } from "@sleinity/template-react/inspection";
 
 export interface FidelityIssuePacketInput {
   packageValue: TemplatePackageV1;

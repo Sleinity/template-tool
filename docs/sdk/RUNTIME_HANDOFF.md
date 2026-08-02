@@ -1,13 +1,13 @@
-# SDK 0.4.2 runtime handoff
+# SDK 0.5.0 runtime handoff
 
 Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
 application:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.4.2` | ZIP import, strict validation, diagnostics, portable fields and package models | No peer dependencies |
-| `@sleinity/template-browser@0.4.2` | Browser session, assets, fonts, persistence, readiness and PNG capture | Browser runtime |
-| `@sleinity/template-react@0.4.2` | React provider, setup wizard, renderer, inspection viewport and revision-safe capture handle | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.5.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
+| `@sleinity/template-browser@0.5.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
+| `@sleinity/template-react@0.5.0` | React provider, setup wizard, renderer, inspection viewport, capture handle and optional advanced inspection | React 19 and React DOM 19 |
 
 ## Installation
 
@@ -21,9 +21,9 @@ always-auth=true
 ```
 
 ```sh
-pnpm add @sleinity/template-core@0.4.2 \
-  @sleinity/template-browser@0.4.2 \
-  @sleinity/template-react@0.4.2
+pnpm add @sleinity/template-core@0.5.0 \
+  @sleinity/template-browser@0.5.0 \
+  @sleinity/template-react@0.5.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
@@ -31,16 +31,16 @@ pnpm add @sleinity/template-core@0.4.2 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-[`sdk-v0.4.2` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.2).
+[`sdk-v0.5.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.5.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.2.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.2.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.2.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.5.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.5.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.5.0.tgz"
   }
 }
 ```
@@ -50,13 +50,27 @@ same archives:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.4.2.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.4.2.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.4.2.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.5.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.5.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.5.0.tgz"
 ```
 
 Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
 consumer.
+
+## Focused and advanced entries
+
+Ordinary hosts can use the existing root, session, importer, compatibility,
+and React contracts. Focused integrations may additionally import core
+`editor`/`assets`/`fonts`/`motion`, browser
+`assets`/`fonts`/`persistence`/`capture`/`enrichment`, plus
+`@sleinity/template-core/inspection` and
+`@sleinity/template-react/inspection`. Inspection entries expose technical evidence and
+projections; they are optional and do not select rendering authority.
+
+Do not import `renderer-internal`. Studio-only debug components, stress
+reports, visual-difference tooling, issue packets, and development harnesses
+are not shipped as SDK APIs.
 
 ## Runtime contract
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { appRoutePath, parseAppRoute, type AppRoute } from "./routing/appRoutes";
-import type { TemplatePackageEditorSession } from "../../../src/template-package/editor";
+import type { TemplatePackageEditorSession } from "@sleinity/template-core/editor";
 import {
   createSavedOutputDraftRecord,
   createSavedTemplateRecord,
@@ -13,7 +13,7 @@ import {
   type SavedTemplateRecord,
   createSavedAssetRecord,
   recordSemanticRendererMvpMigration,
-} from "../../../src/template-package/persistence";
+} from "@sleinity/template-browser/persistence";
 import type { TemplatePackageCreateMetadata } from "./views/TemplatePackageImportFlow";
 import { TemplatePackageImportFlow } from "./views/TemplatePackageImportFlow";
 import { TemplateOverviewPage } from "./views/TemplateOverviewPage";

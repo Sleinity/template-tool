@@ -1,23 +1,25 @@
 import figmaPluginV041 from "../../../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import { analyzeAssetReliability } from "../../../../../../src/template-package/assets";
+import { analyzeAssetReliability } from "@sleinity/template-browser/assets";
 import type {
   LoadedSourceDiagnosticReport,
   LoadedSourceLayeredDiagnostic,
-} from "../../../../../../src/template-package/bundle";
+} from "@sleinity/template-browser/importer";
 import {
   getPackageEditorFieldWarnings,
   validatePackageFieldConstraints,
-} from "../../../../../../src/template-package/editor";
-import { validatePackageJpgExportReadiness } from "../../../../../../src/template-package/export";
-import { createResolvedRenderTree } from "../../../../../../src/template-package/resolved";
-import { createBackendDiagnosticProjection } from "../../../../../../src/template-package/backend-decision/createDiagnosticProjection";
-import type { TemplatePackageV1 } from "../../../../../../src/template-package/types";
-import { validateTemplatePackage } from "../../../../../../src/template-package/validateTemplatePackage";
+} from "@sleinity/template-core/editor";
+import { validatePackageJpgExportReadiness } from "@sleinity/template-browser/capture";
+import {
+  createBackendDiagnosticProjection,
+  createResolvedRenderTree,
+  validateTemplatePackage,
+  type TemplatePackageV1,
+} from "@sleinity/template-core";
 import {
   createTemplatePackageQualityReport,
   derivePackageQualityOverallStatus,
   getTemplatePackageLayerPath,
-} from "../../../../../../src/template-package/quality/createTemplatePackageQualityReport";
+} from "@sleinity/template-react/inspection";
 import { TemplatePackageQualityPanel } from "./TemplatePackageQualityPanel";
 import { TemplatePackageDiagnosticContext } from "./TemplatePackageDiagnosticContext";
 import {
@@ -28,7 +30,7 @@ import {
   getDiagnosticPresentationState,
   getPackageQualityIssueTitle,
   serializePackageQualityTechnicalDetails,
-} from "../../../../../../src/template-package/quality/diagnosticPresentation";
+} from "@sleinity/template-react/inspection";
 import {
   filterPackageQualityIssues,
   getPackageQualityTechnicalTrace,
@@ -39,8 +41,8 @@ import {
   packageQualityIssueMatchesSearch,
   summarizePackageQualityCategories,
   visiblePackageQualitySelection,
-} from "../../../../../../src/template-package/quality/qualityWorkspace";
-import type { PackageQualityIssue } from "../../../../../../src/template-package/quality/types";
+} from "@sleinity/template-react/inspection";
+import type { PackageQualityIssue } from "@sleinity/template-react/inspection";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

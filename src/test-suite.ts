@@ -25,7 +25,7 @@ import "./template-package/masks/packageMaskRelationships.test";
 import "./template-package/primitives/primitiveAppearance.test";
 import "./template-package/primitives/linearGradient.test";
 import "../apps/studio/src/components/template-package/quality/TemplatePackageQualityPanels.test";
-import "./template-package/quality/fidelityIssuePacket.test";
+import "../apps/studio/src/fidelity/fidelityIssuePacket.test";
 import "../packages/template-browser/test/templateRepository.test";
 import "../packages/template-browser/test/draftAutosaveCoordinator.test";
 import "../packages/template-browser/test/persistenceSubmission.test";
