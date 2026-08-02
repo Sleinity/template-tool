@@ -4,7 +4,7 @@ import {
   handleFigmaEnrichment,
 } from "./enrichFigmaService";
 import type { BackendFigmaEnrichmentProvider } from "./provider";
-import type { FigmaEnrichmentApiResponse } from "../../../../src/template-package/enrichment/figmaEnrichmentApi";
+import type { FigmaEnrichmentApiResponse } from "@sleinity/template-browser/enrichment";
 
 const DEFAULT_BODY_LIMIT = 64 * 1024 * 1024;
 

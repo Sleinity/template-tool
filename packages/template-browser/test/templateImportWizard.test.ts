@@ -171,7 +171,7 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.4.1" &&
+    confirmation.sdkVersion === "0.5.0" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
     confirmation.packageDigest?.algorithm === "sha-256" &&
     confirmation.packageDigest.value.length === 64 &&
@@ -262,7 +262,7 @@ assert(
     missingCurrentDigestInspection.issues.some(
       (issue) => issue.code === "confirmation.digest-required",
     ),
-  "A 0.4.1 confirmation missing its required digest should be rejected.",
+  "A current confirmation missing its required digest should be rejected.",
 );
 
 const beforeRejectedHydration = reopenedSession.getSnapshot();

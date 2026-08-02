@@ -1,10 +1,10 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import App from "./App";
-import * as bundleApi from "../../../src/template-package/bundle";
-import * as importApi from "../../../src/template-package/import";
-import type { TemplatePackageImportPipelineInput } from "../../../src/template-package/import";
-import type { SavedTemplateRecord } from "../../../src/template-package/persistence";
+import * as bundleApi from "@sleinity/template-core";
+import * as importApi from "@sleinity/template-browser/importer";
+import type { TemplatePackageImportPipelineInput } from "@sleinity/template-browser/importer";
+import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
 import { TemplatePackageImportFlow } from "./views/TemplatePackageImportFlow";
 
 function assert(condition: unknown, message: string): void {

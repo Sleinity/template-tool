@@ -5,7 +5,8 @@
     "composite": false,
     "baseUrl": ".",
     "paths": {
-      "@sleinity/template-core": ["../template-core/src/index.ts"]
+      "@sleinity/template-core": ["../template-core/src/index.ts"],
+      "@sleinity/template-core/inspection": ["../template-core/src/inspection.ts"]
     }
   },
   "include": ["src"]

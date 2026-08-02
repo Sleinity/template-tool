@@ -3,11 +3,10 @@ import { useMemo, useRef, useState } from "react";
 import { Button, Status } from "../../ui";
 import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
 import { TemplateInspectionPreview } from "../TemplateInspectionPreview";
-import { resolvePackageAssetReference } from "../../../../../../src/template-package/assets";
-import { captureTemplatePackagePreview } from "../../../../../../src/template-package/enrichment/captureTemplatePackagePreview";
-import type { ResolvedRenderTreeV1 } from "../../../../../../src/template-package/resolved";
-import type { TemplatePackageV1 } from "../../../../../../src/template-package/types";
-import { createFidelityIssuePacket, downloadFidelityIssuePacket } from "../../../../../../src/template-package/quality/fidelityIssuePacket";
+import { resolvePackageAssetReference } from "@sleinity/template-browser/assets";
+import { captureTemplatePackagePreview } from "@sleinity/template-browser/capture";
+import type { ResolvedRenderTreeV1, TemplatePackageV1 } from "@sleinity/template-core";
+import { createFidelityIssuePacket, downloadFidelityIssuePacket } from "../../../fidelity/fidelityIssuePacket";
 import {
   diagnosticPresentationLabels,
   getDiagnosticContext,
@@ -16,8 +15,8 @@ import {
   getDiagnosticPresentationState,
   getPackageQualityIssueTitle,
   serializePackageQualityTechnicalDetails,
-} from "../../../../../../src/template-package/quality/diagnosticPresentation";
-import type { DiagnosticUserAction, PackageQualityIssue } from "../../../../../../src/template-package/quality/types";
+} from "@sleinity/template-react/inspection";
+import type { DiagnosticUserAction, PackageQualityIssue } from "@sleinity/template-react/inspection";
 
 interface TemplatePackageDiagnosticContextProps {
   packageValue: TemplatePackageV1;

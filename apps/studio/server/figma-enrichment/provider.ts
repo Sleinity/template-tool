@@ -1,7 +1,7 @@
 import type {
   FigmaEnrichmentProviderInfo,
   FigmaMcpEnrichmentProvider,
-} from "../../../../src/template-package/enrichment";
+} from "@sleinity/template-browser/enrichment";
 
 export interface BackendFigmaEnrichmentProvider
   extends FigmaMcpEnrichmentProvider {

@@ -23,7 +23,7 @@ import {
 import type {
   SavedOutputDraftRecord,
   SavedTemplateRecord,
-} from "../../../../src/template-package/persistence";
+} from "@sleinity/template-browser/persistence";
 
 const templateDateFormatter = new Intl.DateTimeFormat("en", {
   day: "numeric",

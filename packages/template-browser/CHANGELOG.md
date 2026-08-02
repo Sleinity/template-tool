@@ -1,5 +1,14 @@
 # @sleinity/template-browser
 
+## 0.5.0
+
+### Minor Changes
+
+- Add supported `assets`, `fonts`, `persistence`, `capture`, and `enrichment`
+  entry points while retaining every broad root and 0.4 curated export.
+- Updated dependencies
+  - @sleinity/template-core@0.5.0
+
 ## 0.4.2
 
 ### Patch Changes

@@ -56,6 +56,39 @@ export default defineConfig(({ mode }) => {
             ),
           ),
         },
+        ...[
+          "editor",
+          "assets",
+          "fonts",
+          "motion",
+          "inspection",
+        ].map((entry) => ({
+          find: `@sleinity/template-core/${entry}`,
+          replacement: fileURLToPath(
+            new URL(`../../packages/template-core/src/${entry}.ts`, import.meta.url),
+          ),
+        })),
+        ...[
+          "assets",
+          "fonts",
+          "persistence",
+          "capture",
+          "enrichment",
+        ].map((entry) => ({
+          find: `@sleinity/template-browser/${entry}`,
+          replacement: fileURLToPath(
+            new URL(`../../packages/template-browser/src/${entry}.ts`, import.meta.url),
+          ),
+        })),
+        {
+          find: "@sleinity/template-react/inspection",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-react/src/inspection.ts",
+              import.meta.url,
+            ),
+          ),
+        },
         {
           find: /^@sleinity\/template-core$/,
           replacement: fileURLToPath(

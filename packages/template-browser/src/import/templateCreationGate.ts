@@ -7,7 +7,7 @@ import type {
   FieldConstraintIssue,
   FieldConstraintValidation,
 } from "../internal/core";
-import type { PackageQualityIssue } from "../internal/qualityIssue";
+import type { PackageQualityIssue } from "@sleinity/template-core/inspection";
 
 export interface TemplateCreationBlocker {
   code: string;

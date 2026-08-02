@@ -2,7 +2,7 @@ import type {
   FigmaMcpMetadata,
   FigmaMcpNodeMetadata,
   ParsedFigmaUrl,
-} from "../../../../src/template-package/enrichment";
+} from "@sleinity/template-browser/enrichment";
 import { FigmaProviderError } from "./provider";
 
 function isRecord(value: unknown): value is Record<string, unknown> {

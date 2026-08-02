@@ -1,5 +1,14 @@
 # @sleinity/template-core
 
+## 0.5.0
+
+### Minor Changes
+
+- Add supported `editor`, `assets`, `fonts`, `motion`, and advanced
+  `inspection` entry points without changing the broad root contract.
+- Physically own portable appearance and observational settlement inspection
+  records previously reached through repository compatibility paths.
+
 ## 0.4.2
 
 ### Patch Changes

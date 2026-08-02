@@ -1,5 +1,5 @@
 import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import type { TemplatePackageV1 } from "../../../../src/template-package/types";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
 import { handleFigmaEnrichment } from "./enrichFigmaService";
 import { FigmaRestProvider } from "./figmaRestProvider";
 

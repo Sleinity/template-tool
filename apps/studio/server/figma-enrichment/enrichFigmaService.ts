@@ -2,18 +2,17 @@ import {
   type FigmaEnrichmentApiRequest,
   type FigmaEnrichmentApiResponse,
   type FigmaPackageSummary,
-} from "../../../../src/template-package/enrichment/figmaEnrichmentApi";
+} from "@sleinity/template-browser/enrichment";
 import {
   comparePackageToFigmaMetadata,
   type FigmaMcpMetadata,
-} from "../../../../src/template-package/enrichment/comparePackageToFigmaMetadata";
-import { enrichTemplatePackage } from "../../../../src/template-package/enrichment/enrichTemplatePackage";
-import { parseFigmaUrl } from "../../../../src/template-package/enrichment/parseFigmaUrl";
+} from "@sleinity/template-browser/enrichment";
+import { enrichTemplatePackage, parseFigmaUrl } from "@sleinity/template-browser/enrichment";
 import type {
   PackageMetadataDifference,
   TemplatePackageV1,
-} from "../../../../src/template-package/types";
-import { validateTemplatePackage } from "../../../../src/template-package/validateTemplatePackage";
+} from "@sleinity/template-core";
+import { validateTemplatePackage } from "@sleinity/template-core";
 import {
   type BackendFigmaEnrichmentProvider,
   FigmaProviderError,

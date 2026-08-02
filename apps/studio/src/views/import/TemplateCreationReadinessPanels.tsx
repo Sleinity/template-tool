@@ -2,7 +2,7 @@ import type {
   FieldConstraintSummary,
   TemplateCreationBlocker,
   TemplateCreationGate,
-} from "../../../../../src/template-package/import";
+} from "@sleinity/template-browser/importer";
 
 interface TemplateCreationReadinessPanelProps {
   gate: TemplateCreationGate;

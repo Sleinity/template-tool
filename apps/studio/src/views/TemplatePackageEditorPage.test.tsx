@@ -4,10 +4,10 @@ import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plu
 import {
   canOpenTemplatePackageEditor,
   type TemplatePackageEditorSession,
-} from "../../../../src/template-package/editor";
-import type { TemplatePackageV1 } from "../../../../src/template-package/types";
-import { linkPackageMotionValue } from "../../../../src/template-package/motion";
-import { validateTemplatePackage } from "../../../../src/template-package/validateTemplatePackage";
+} from "@sleinity/template-core/editor";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
+import { linkPackageMotionValue } from "@sleinity/template-core/motion";
+import { validateTemplatePackage } from "@sleinity/template-core";
 import {
   getLivePreviewMotionRenderMode,
   getPngExportMotionRenderMode,

@@ -2,9 +2,8 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import fieldRulesSource from "./TemplatePackageFieldRulesEditor.tsx?raw";
 import figmaPluginV041 from "../../../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import { validatePackageJpgExportReadiness } from "../../../../../../src/template-package/export";
-import { validateTemplatePackage } from "../../../../../../src/template-package/validateTemplatePackage";
-import type { EditableFieldBinding, TemplatePackageV1 } from "../../../../../../src/template-package/types";
+import { validatePackageJpgExportReadiness } from "@sleinity/template-browser/capture";
+import { validateTemplatePackage, type EditableFieldBinding, type TemplatePackageV1 } from "@sleinity/template-core";
 import { TemplatePackageFieldEditor } from "./TemplatePackageFieldEditor";
 import {
   editableFieldSelectionKey,
@@ -21,12 +20,12 @@ import {
   validatePackageFieldConstraints,
   validateTextFieldValue,
   withTextFieldConstraint,
-} from "../../../../../../src/template-package/editor/fieldConstraints";
+} from "@sleinity/template-core/editor";
 import {
   getEffectiveEditableFields,
   getPackageFieldOverrideValue,
   updateTemplatePackageField,
-} from "../../../../../../src/template-package/editor/packageFieldBindings";
+} from "@sleinity/template-core/editor";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

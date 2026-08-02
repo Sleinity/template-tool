@@ -136,7 +136,33 @@ import {
   useTemplateSessionSnapshot,
 } from "@sleinity/template-react";
 import { TemplateImportWizard } from "@sleinity/template-react/importer";
+import type { FieldConstraintValidation } from "@sleinity/template-core/editor";
+import type { PackageAssetSafetyIssue } from "@sleinity/template-core/assets";
+import type { FontRequirement } from "@sleinity/template-core/fonts";
+import type { PackageMotionSummary } from "@sleinity/template-core/motion";
+import type { SettlementComparisonV1 } from "@sleinity/template-core/inspection";
+import type { AssetReliabilityReport } from "@sleinity/template-browser/assets";
+import type { ManagedFontRecord } from "@sleinity/template-browser/fonts";
+import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import type { PackagePngExportDiagnostic } from "@sleinity/template-browser/capture";
+import type { FigmaMcpMetadata } from "@sleinity/template-browser/enrichment";
+import type { PackageQualityReport } from "@sleinity/template-react/inspection";
 import "@sleinity/template-react/importer.css";
+
+type CuratedSdkContract = [
+  FieldConstraintValidation,
+  PackageAssetSafetyIssue,
+  FontRequirement,
+  PackageMotionSummary,
+  SettlementComparisonV1,
+  AssetReliabilityReport,
+  ManagedFontRecord,
+  SavedTemplateRecord,
+  PackagePngExportDiagnostic,
+  FigmaMcpMetadata,
+  PackageQualityReport,
+];
+const curatedContractTypecheck: CuratedSdkContract | null = null;
 
 const session = createTemplateSession();
 
@@ -153,6 +179,7 @@ function Player() {
 
 function App() {
   const [runtime] = useState(() => session);
+  void curatedContractTypecheck;
   return <TemplateSessionProvider session={runtime}>
     <TemplateImportWizard options={{ session: runtime }} onComplete={() => undefined} />
     <Player />
@@ -219,6 +246,17 @@ createRoot(document.getElementById("root")!).render(<App />);
   const builtJavascript = await readFile(
     path.join(consumerDirectory, "dist/assets", javascript),
   );
+  const builtSource = builtJavascript.toString("utf8");
+  for (const advancedOnlyToken of [
+    "appearance-contract-projection-v1",
+    "settled-scene-graph-v1",
+  ]) {
+    if (builtSource.includes(advancedOnlyToken)) {
+      throw new Error(
+        `Type-only advanced inspection imports leaked ${advancedOnlyToken} into the ordinary consumer bundle.`,
+      );
+    }
+  }
   const sizeBytes = builtJavascript.byteLength;
   const gzipBytes = gzipSync(builtJavascript).byteLength;
   console.log(

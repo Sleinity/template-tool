@@ -10,7 +10,7 @@ import {
   detectPackageLayoutSuspiciousFlags,
   measurePackageLayoutChain,
   type PackageNodeDomMeasurement,
-} from "./packageLayoutDebug";
+} from "../../../apps/studio/src/fidelity/packageLayoutDebug";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

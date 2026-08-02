@@ -9,13 +9,13 @@ import {
   Select,
   Textarea,
 } from "../../ui";
-import { resolvePackageAssetSource } from "../../../../../../src/template-package/render";
-import { resolvePackageAssetReference } from "../../../../../../src/template-package/assets/packageAssetResolution";
+import { resolvePackageAssetSource } from "@sleinity/template-core/assets";
+import { resolvePackageAssetReference } from "@sleinity/template-browser/assets";
 import type {
   EditableFieldBinding,
   PackageImageFieldConstraints,
   TemplatePackageV1,
-} from "../../../../../../src/template-package/types";
+} from "@sleinity/template-core";
 import {
   getPackageEditorFieldWarnings,
   clearTemplatePackageImageOverride,
@@ -27,16 +27,16 @@ import {
   replaceTemplatePackageImage,
   setTemplatePackageImageReplacementMode,
   updateTemplatePackageField,
-} from "../../../../../../src/template-package/editor/packageFieldBindings";
+} from "@sleinity/template-core/editor";
 import {
   fieldCounter,
   resolveFieldBehavior,
   validateTextFieldValue,
-} from "../../../../../../src/template-package/editor/fieldConstraints";
+} from "@sleinity/template-core/editor";
 import { formatEditableFieldLabel } from "./fieldLabels";
 import {
   createRenderedTextLineMeasure,
-} from "../../../../../../src/template-package/editor/textMeasurement";
+} from "@sleinity/template-browser";
 
 interface TemplatePackageFieldEditorProps {
   packageValue: TemplatePackageV1;

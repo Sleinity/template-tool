@@ -1,4 +1,4 @@
-import type { TemplatePackageV1 } from "../types";
+import type { TemplatePackageV1 } from "@sleinity/template-core";
 
 export const RUNTIME_ROUTING_HARNESS_KEY = "__templatePackageRuntimeRoutingHarness";
 
@@ -60,4 +60,3 @@ export function createRuntimeRoutingHarnessApi(
     },
   };
 }
-

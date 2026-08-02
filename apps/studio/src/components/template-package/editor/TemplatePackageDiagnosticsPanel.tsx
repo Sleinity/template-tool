@@ -4,16 +4,16 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useState } from "react";
-import { TemplatePackageStressReports } from "../../../../../../src/template-package/analysis";
-import { TemplatePackageLayoutDebugger } from "../../../../../../src/template-package/debug";
-import type { TemplatePackageValidationResult } from "../../../../../../src/template-package/packageDiagnostics";
-import type { TemplatePackageRenderWarning } from "../../../../../../src/template-package/render";
+import { TemplatePackageStressReports } from "../../../fidelity/TemplatePackageStressReports";
+import { TemplatePackageLayoutDebugger } from "../../../fidelity/TemplatePackageLayoutDebugger";
+import type { TemplatePackageRenderWarning } from "@sleinity/template-react";
 import type {
   EditableFieldBinding,
+  TemplatePackageValidationResult,
   TemplatePackageV1,
-} from "../../../../../../src/template-package/types";
-import type { PackageEditorFieldWarning } from "../../../../../../src/template-package/editor/packageFieldBindings";
-import { getDiagnosticCodeTitle } from "../../../../../../src/template-package/quality";
+} from "@sleinity/template-core";
+import type { PackageEditorFieldWarning } from "@sleinity/template-core/editor";
+import { getDiagnosticCodeTitle } from "@sleinity/template-react/inspection";
 
 interface TemplatePackageDiagnosticsPanelProps {
   packageValue: TemplatePackageV1;

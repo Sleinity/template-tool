@@ -1,8 +1,42 @@
 # Renderer Fidelity Status
 
 Status date: 2026-08-02
-Current milestone: Milestone 2F physical React-renderer ownership / SDK 0.4.2
+Current milestone: Milestone 2G Studio contract adoption / SDK 0.5.0
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## Milestone 2G — Studio contract adoption and advanced inspection
+
+The fixed core/browser/React train is prepared at `0.5.0`. Studio production
+and server modules now consume supported package entries rather than root
+compatibility modules, package-source paths or renderer-internal seams. Its
+workflow, UI, routes, persistence and rendering model remain unchanged.
+
+Core now exposes focused editor, asset, font and motion entries plus an
+advanced inspection entry for UI-independent evidence. Browser exposes focused
+asset, font, persistence, capture and enrichment entries. React exposes an
+advanced renderer-inspection entry. Advanced inspection remains observational
+and does not select rendering authority. Studio-only layout/debug, stress,
+visual-difference, issue-packet and development-harness code is physically
+owned under `apps/studio/src/fidelity` and excluded from SDK archives.
+
+Current package/root TypeScript, portable tests, builds, API/release/docs and
+boundary checks, archive inspection, isolated consumers, browser smokes and
+generic editor acceptance pass. Core root declarations remain exactly 87,431
+bytes / `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 583,847 / 323,857 / 208,261 bytes. The
+ordinary packed consumer remains 856,967 / 251,414 gzip bytes. Studio is flat
+at 1,001.01 / 291.02 gzip kB; minimal and generic examples are 816.87 / 239.87
+and 871.21 / 254.99 gzip kB.
+
+Appearance is deterministic for 19 fixtures. Renderer comparison
+`2026-08-02T16-15-48-741Z` reproduces 31 approved passes, 17 historical
+differences and 28 unapproved surfaces. Scene retains four historical and 15
+unapproved states; settlement retains its documented stable/reference matrix.
+Approved renderer, scene and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No approved evidence or guarded policy changed.
 
 ## Milestone 2F — physical React-renderer ownership
 

@@ -34,8 +34,8 @@ import {
   Surface,
 } from "../components/ui";
 import { TemplatePackageFieldRulesEditor, editableFieldSelectionKey } from "../components/template-package/editor/TemplatePackageFieldRulesEditor";
-import { validatePackageFieldConstraints } from "../../../../src/template-package/editor";
-import { getFigmaReferencePng } from "../../../../src/template-package/enrichment/visualDiff";
+import { validatePackageFieldConstraints } from "@sleinity/template-core/editor";
+import { getFigmaReferencePng } from "../fidelity/visualDiff";
 import type {
   PackageDiagnostic,
   TemplatePackageValidationResult,
@@ -90,7 +90,7 @@ import {
   groupPackageQualityIssues,
   type DiagnosticUserAction,
   type PackageQualityIssue,
-} from "../../../../src/template-package/quality";
+} from "@sleinity/template-react/inspection";
 import { TemplatePackageDiagnosticContext } from "../components/template-package/quality/TemplatePackageDiagnosticContext";
 import { TemplatePackageQualityPanel } from "../components/template-package/quality/TemplatePackageQualityPanel";
 import {

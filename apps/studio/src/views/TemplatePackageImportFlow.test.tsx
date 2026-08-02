@@ -3,11 +3,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import importFlowSource from "./TemplatePackageImportFlow.tsx?raw";
 import diagnosticContextSource from "../components/template-package/quality/TemplatePackageDiagnosticContext.tsx?raw";
 import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import { analyzeAssetReliability } from "../../../../src/template-package/assets";
-import { createSavedTemplateRecord } from "../../../../src/template-package/persistence";
-import { linkPackageMotionValue } from "../../../../src/template-package/motion";
-import type { TemplatePackageV1 } from "../../../../src/template-package/types";
-import { validateTemplatePackage } from "../../../../src/template-package/validateTemplatePackage";
+import { analyzeAssetReliability } from "@sleinity/template-browser/assets";
+import { createSavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import { linkPackageMotionValue } from "@sleinity/template-core/motion";
+import { validateTemplatePackage, type TemplatePackageV1 } from "@sleinity/template-core";
 import {
   AssetDiagnosisPanel,
   buildZipPackageImportResult,
@@ -32,15 +31,15 @@ import {
   preserveImportedPackageBaseline,
   rebuildPackageImportResult,
   runTemplatePackageImportPipeline,
-} from "../../../../src/template-package/import";
+} from "@sleinity/template-browser/importer";
 import type {
   LoadedSourceDiagnosticReport,
   LoadedSourceLayeredDiagnostic,
-} from "../../../../src/template-package/bundle";
+} from "@sleinity/template-browser/importer";
 import type {
   PackageQualityIssue,
   PackageQualityReport,
-} from "../../../../src/template-package/quality";
+} from "@sleinity/template-react/inspection";
 import {
   CompactPackageSummary,
   PackageBlockingIssues,

@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import type {
   FieldConstraintSummary,
   TemplateCreationGate,
-} from "../../../../../src/template-package/import";
+} from "@sleinity/template-browser/importer";
 import {
   FieldExportReadinessPanel,
   TemplateCreationReadinessPanel,

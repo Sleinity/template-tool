@@ -64,6 +64,9 @@ try {
         "package/dist/renderer-internal.js",
         "package/dist/renderer-internal.js.map",
         "package/dist/renderer-internal.d.ts",
+        "package/dist/inspection.js",
+        "package/dist/inspection.js.map",
+        "package/dist/inspection.d.ts",
       ]) {
         if (!entries.includes(requiredEntry)) {
           throw new Error(`${archive} is missing ${requiredEntry}.`);
@@ -75,6 +78,13 @@ try {
         "package/dist/renderer-internal.js",
         "package/dist/renderer-internal.js.map",
         "package/dist/renderer-internal.d.ts",
+        ...["editor", "assets", "fonts", "motion", "inspection"].flatMap(
+          (entryPoint) => [
+            `package/dist/${entryPoint}.js`,
+            `package/dist/${entryPoint}.js.map`,
+            `package/dist/${entryPoint}.d.ts`,
+          ],
+        ),
       ]) {
         if (!entries.includes(requiredEntry)) {
           throw new Error(`${archive} is missing ${requiredEntry}.`);
@@ -82,7 +92,16 @@ try {
       }
     }
     if (archive.includes("template-browser")) {
-      for (const entryPoint of ["session", "importer", "compatibility"]) {
+      for (const entryPoint of [
+        "session",
+        "importer",
+        "compatibility",
+        "assets",
+        "fonts",
+        "persistence",
+        "capture",
+        "enrichment",
+      ]) {
         for (const extension of ["js", "js.map", "d.ts"]) {
           const requiredEntry = `package/dist/${entryPoint}.${extension}`;
           if (!entries.includes(requiredEntry)) {
@@ -147,11 +166,43 @@ try {
         }
       }
     }
+    for (const entry of entries.filter((item) =>
+      item.startsWith("package/dist/") &&
+      (item.endsWith(".js") || item.endsWith(".d.ts"))
+    )) {
+      const extracted = spawnSync(
+        "tar",
+        ["-xOzf", path.join(output, archive), entry],
+        { encoding: "utf8" },
+      );
+      if (extracted.status !== 0) {
+        throw new Error(`Could not inspect ${entry} in ${archive}.`);
+      }
+      for (const forbiddenSource of [
+        "apps/studio",
+        "src/template-package",
+        "packages/template-core/src",
+        "packages/template-browser/src",
+        "packages/template-react/src",
+        "/Users/",
+        "workspace:",
+        "NODE_AUTH_TOKEN",
+        "GITHUB_TOKEN",
+      ]) {
+        if (extracted.stdout.includes(forbiddenSource)) {
+          throw new Error(
+            `${archive} ${entry} contains forbidden source ${forbiddenSource}.`,
+          );
+        }
+      }
+    }
     if (archive.includes("template-react")) {
       for (const entry of [
         "package/dist/importer.js",
         "package/dist/importer.d.ts",
         "package/dist/importer.css",
+        "package/dist/inspection.js",
+        "package/dist/inspection.d.ts",
       ]) {
         const extracted = spawnSync(
           "tar",

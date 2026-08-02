@@ -738,3 +738,51 @@ ran.
   `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
   No approved file changed and no update, promotion, fixture, schema or
   tolerance command ran.
+
+## 23. Milestone 2G / SDK 0.5.0 verification record
+
+- Studio production and server modules now import only supported package
+  names. The boundary checker rejects `src/template-package`, package-source,
+  and `renderer-internal` imports from those graphs. Centralized fixture access
+  remains test-only.
+- Core physically owns portable appearance, canonical-scene, measurement,
+  dependency and observational settlement inspection records. React physically
+  owns renderer feature coverage, fidelity-risk and quality/diagnostic
+  projections. These are supported advanced evidence APIs and do not become
+  render authority.
+- Studio physically owns layout debugging, stress reports, visual comparison,
+  fidelity issue packets and runtime development harness adapters. They are
+  absent from SDK entry points and archives.
+- New supported entries are core `editor`, `assets`, `fonts`, `motion` and
+  `inspection`; browser `assets`, `fonts`, `persistence`, `capture` and
+  `enrichment`; and React `inspection`. Every 0.4.2 root and curated export is
+  retained in the machine-readable 0.5.0 API inventory.
+- Retained root appearance, settlement, analysis, quality and preview-QA paths
+  are checked behavior-free forwarders for test/fidelity infrastructure. The
+  former root Studio debugger, stress-report, visual-diff, issue-packet and
+  development-harness modules are deleted. Their retirement owner is Studio
+  fidelity; the remaining forwarders retire when the corresponding tests and
+  harness scripts adopt the package entries directly.
+- Current package/root TypeScript, portable tests, builds, API/release/docs and
+  boundary checks, archive inspection, DOM-free core consumer, packed React
+  consumer, Studio/session browser smokes and packed generic editor acceptance
+  pass. The generic editor again reports zero external SDK requests.
+- Core root declarations remain exactly 87,431 bytes at
+  `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+  Local core/browser/React archives are 583,847 / 323,857 / 208,261 bytes. The
+  optional entries increase archive bytes, while the ordinary packed consumer
+  remains flat at 856,967 / 251,414 gzip bytes. Studio remains flat at
+  1,001.01 / 291.02 gzip kB; minimal and generic examples remain 816.87 /
+  239.87 and 871.21 / 254.99 gzip kB.
+- Appearance is deterministic for all 19 fixtures. Renderer run
+  `2026-08-02T16-15-48-741Z` retains 31 approved passes, 17 documented
+  historical/environment-sensitive differences and 28 unapproved surfaces.
+  Scene retains four historical and 15 unapproved states; settlement retains
+  its documented stable/reference-difference matrix. Approved identities stay
+  renderer 96 /
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and settlement 80 /
+  `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved file changed and no reference, fixture, schema, promotion or
+  tolerance update command ran.

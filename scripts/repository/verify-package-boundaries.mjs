@@ -121,6 +121,11 @@ const requiredCoreOwners = [
   "packages/template-core/src/scene/sourceToSceneMapping.ts",
   "packages/template-core/src/scene/migrationMap.ts",
   "packages/template-core/src/scene/index.ts",
+  "packages/template-core/src/inspection.ts",
+  "packages/template-core/src/inspection/qualityTypes.ts",
+  "packages/template-core/src/inspection/previewQa.ts",
+  "packages/template-core/src/inspection/appearance/createAppearanceContractProjection.ts",
+  "packages/template-core/src/inspection/settlement/settleSceneGraph.ts",
 ];
 for (const owner of requiredCoreOwners) {
   if (!(await exists(owner))) violations.push(`template-core must physically own ${owner}`);
@@ -176,6 +181,24 @@ const legacyCoreForwarders = {
   "src/template-package/scene/sourceToSceneMapping.ts": "../../../packages/template-core/src/scene/sourceToSceneMapping",
   "src/template-package/scene/migrationMap.ts": "../../../packages/template-core/src/scene/migrationMap",
   "src/template-package/scene/index.ts": "../../../packages/template-core/src/scene",
+  "src/template-package/bundle/previewQa.ts": "../../../packages/template-core/src/inspection/previewQa",
+  "src/template-package/appearance-contracts/index.ts": "../../../packages/template-core/src/inspection/appearance",
+  "src/template-package/appearance-contracts/backendRequirements.ts": "../../../packages/template-core/src/inspection/appearance/backendRequirements",
+  "src/template-package/appearance-contracts/createAppearanceContractProjection.ts": "../../../packages/template-core/src/inspection/appearance/createAppearanceContractProjection",
+  "src/template-package/appearance-contracts/serializeAppearanceContractProjection.ts": "../../../packages/template-core/src/inspection/appearance/serializeAppearanceContractProjection",
+  "src/template-package/appearance-contracts/sourceDataSufficiency.ts": "../../../packages/template-core/src/inspection/appearance/sourceDataSufficiency",
+  "src/template-package/appearance-contracts/types.ts": "../../../packages/template-core/src/inspection/appearance/types",
+  "src/template-package/appearance-contracts/validateAppearanceContractProjection.ts": "../../../packages/template-core/src/inspection/appearance/validateAppearanceContractProjection",
+  "src/template-package/settlement/index.ts": "../../../packages/template-core/src/inspection/settlement",
+  "src/template-package/settlement/compareSettlement.ts": "../../../packages/template-core/src/inspection/settlement/compareSettlement",
+  "src/template-package/settlement/createDependencyGraph.ts": "../../../packages/template-core/src/inspection/settlement/createDependencyGraph",
+  "src/template-package/settlement/environmentProfiles.ts": "../../../packages/template-core/src/inspection/settlement/environmentProfiles",
+  "src/template-package/settlement/invalidateDependencyGraph.ts": "../../../packages/template-core/src/inspection/settlement/invalidateDependencyGraph",
+  "src/template-package/settlement/measurement.ts": "../../../packages/template-core/src/inspection/settlement/measurement",
+  "src/template-package/settlement/measurementInventory.ts": "../../../packages/template-core/src/inspection/settlement/measurementInventory",
+  "src/template-package/settlement/serializeSettlement.ts": "../../../packages/template-core/src/inspection/settlement/serializeSettlement",
+  "src/template-package/settlement/settleSceneGraph.ts": "../../../packages/template-core/src/inspection/settlement/settleSceneGraph",
+  "src/template-package/settlement/types.ts": "../../../packages/template-core/src/inspection/settlement/types",
 };
 for (const [forwarder, target] of Object.entries(legacyCoreForwarders)) {
   if (!(await exists(forwarder))) {
@@ -219,6 +242,12 @@ for (const file of await sourceFiles(path.join(root, "packages", "template-core"
     /\bfetch\s*\(/,
     /apps[\\/]studio/,
   ]) {
+    if (
+      file.endsWith("inspection/settlement/measurementInventory.ts") &&
+      String(forbidden).includes("document|window")
+    ) {
+      continue;
+    }
     if (forbidden.test(source)) {
       violations.push(`${path.relative(root, file)} crosses the portable-core boundary: ${forbidden}`);
     }
@@ -301,6 +330,16 @@ const legacyReactForwarders = {
   "src/template-package/runtime-routing/settleCoreLayout.ts": "@sleinity/template-react/renderer-internal",
   "src/template-package/runtime-routing/useCoreLayoutRuntime.ts": "@sleinity/template-react/renderer-internal",
   "src/template-package/runtime-routing/verticalTextTrim.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/analysis/types.ts": "../../../packages/template-react/src/inspection/analysis/types",
+  "src/template-package/analysis/featureCoverage.ts": "../../../packages/template-react/src/inspection/analysis/featureCoverage",
+  "src/template-package/analysis/fidelityRisk.ts": "../../../packages/template-react/src/inspection/analysis/fidelityRisk",
+  "src/template-package/analysis/index.ts": "../../../packages/template-react/src/inspection/analysis",
+  "src/template-package/quality/types.ts": "../../../packages/template-react/src/inspection/quality/types",
+  "src/template-package/quality/createTemplatePackageQualityReport.ts": "../../../packages/template-react/src/inspection/quality/createTemplatePackageQualityReport",
+  "src/template-package/quality/diagnosticPresentation.ts": "../../../packages/template-react/src/inspection/quality/diagnosticPresentation",
+  "src/template-package/quality/loadedSourceDiagnosticAdapter.ts": "../../../packages/template-react/src/inspection/quality/loadedSourceDiagnosticAdapter",
+  "src/template-package/quality/qualityWorkspace.ts": "../../../packages/template-react/src/inspection/quality/qualityWorkspace",
+  "src/template-package/quality/index.ts": "../../../packages/template-react/src/inspection/quality",
 };
 for (const [compatibilityPath, target] of Object.entries(legacyReactForwarders)) {
   const source = (await read(compatibilityPath)).trim();
@@ -311,6 +350,7 @@ for (const [compatibilityPath, target] of Object.entries(legacyReactForwarders))
 
 const reactEntry = await read("packages/template-react/src/index.ts");
 const reactImporterEntry = await read("packages/template-react/src/importer.tsx");
+const reactInspectionEntry = await read("packages/template-react/src/inspection.ts");
 for (const owner of [
   "packages/template-react/src/render/TemplatePackageRenderer.tsx",
   "packages/template-react/src/render/TemplateInspectionViewport.tsx",
@@ -321,6 +361,8 @@ for (const owner of [
   "packages/template-react/src/render/productRenderIdentity.ts",
   "packages/template-react/src/internal/runtime-routing/useCoreLayoutRuntime.ts",
   "packages/template-react/src/internal/runtime-routing/settleCoreLayout.ts",
+  "packages/template-react/src/inspection/analysis/featureCoverage.ts",
+  "packages/template-react/src/inspection/quality/createTemplatePackageQualityReport.ts",
 ]) {
   if (!(await exists(owner))) {
     violations.push(`template-react must physically own ${owner}`);
@@ -345,6 +387,11 @@ for (const file of await sourceFiles(path.join(root, "packages", "template-brows
 }
 
 const coreManifest = JSON.parse(await read("packages/template-core/package.json"));
+for (const entry of ["./editor", "./assets", "./fonts", "./motion", "./inspection"]) {
+  if (!coreManifest.exports?.[entry]) {
+    violations.push(`template-core is missing curated entry ${entry}`);
+  }
+}
 if (
   JSON.stringify(coreManifest.sdkInternalExports) !==
     JSON.stringify(["./renderer-internal"]) ||
@@ -353,6 +400,9 @@ if (
   violations.push("template-core must declare exactly one renderer-internal sibling entry");
 }
 const reactManifest = JSON.parse(await read("packages/template-react/package.json"));
+if (!reactManifest.exports?.["./inspection"] || !reactInspectionEntry.includes("inspection/quality")) {
+  violations.push("template-react must expose the supported advanced inspection entry");
+}
 if (
   JSON.stringify(reactManifest.sdkInternalExports) !==
     JSON.stringify(["./renderer-internal"]) ||
@@ -370,11 +420,53 @@ for (const searchRoot of ["apps/studio", "examples", "packages/template-browser/
     ]) {
       if (
         source.includes(internalEntry) &&
-        relativeFile !== "apps/studio/vite.config.ts"
+        relativeFile !== "apps/studio/vite.config.ts" &&
+        relativeFile !== "apps/studio/src/fidelity/packageLayoutDebug.ts"
       ) {
         violations.push(`${relativeFile} must not consume SDK internal entry ${internalEntry}`);
       }
     }
+  }
+}
+const browserManifest = JSON.parse(await read("packages/template-browser/package.json"));
+for (const entry of ["./assets", "./fonts", "./persistence", "./capture", "./enrichment"]) {
+  if (!browserManifest.exports?.[entry]) {
+    violations.push(`template-browser is missing curated entry ${entry}`);
+  }
+}
+
+for (const searchRoot of ["apps/studio/src", "apps/studio/server"]) {
+  for (const file of await sourceFiles(path.join(root, searchRoot))) {
+    const relativeFile = path.relative(root, file);
+    if (/\.test\.[cm]?[jt]sx?$/.test(relativeFile)) continue;
+    const source = await readFile(file, "utf8");
+    for (const forbidden of [
+      /src[\\/]template-package/,
+      /packages[\\/]template-(?:core|browser|react)[\\/]src/,
+      /@sleinity\/template-(?:core|react)\/renderer-internal/,
+    ]) {
+      if (
+        relativeFile === "apps/studio/src/fidelity/packageLayoutDebug.ts" &&
+        forbidden.test("@sleinity/template-react/renderer-internal")
+      ) {
+        continue;
+      }
+      if (forbidden.test(source)) {
+        violations.push(`${relativeFile} bypasses the supported Studio package boundary: ${forbidden}`);
+      }
+    }
+  }
+}
+for (const studioFidelityOwner of [
+  "apps/studio/src/fidelity/packageLayoutDebug.ts",
+  "apps/studio/src/fidelity/TemplatePackageLayoutDebugger.tsx",
+  "apps/studio/src/fidelity/TemplatePackageStressReports.tsx",
+  "apps/studio/src/fidelity/fidelityIssuePacket.ts",
+  "apps/studio/src/fidelity/visualDiff.ts",
+  "apps/studio/src/fidelity/runtimeRoutingDevHarness.ts",
+]) {
+  if (!(await exists(studioFidelityOwner))) {
+    violations.push(`Studio must physically own fidelity-only module ${studioFidelityOwner}`);
   }
 }
 const studioViteConfig = await read("apps/studio/vite.config.ts");
@@ -457,6 +549,11 @@ const requiredStudioOwners = [
   "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
   "apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx",
   "apps/studio/src/components/template-package/quality/TemplatePackageDiagnosticContext.tsx",
+  "apps/studio/src/fidelity/TemplatePackageStressReports.tsx",
+  "apps/studio/src/fidelity/TemplatePackageLayoutDebugger.tsx",
+  "apps/studio/src/fidelity/fidelityIssuePacket.ts",
+  "apps/studio/src/fidelity/visualDiff.ts",
+  "apps/studio/src/fidelity/runtimeRoutingDevHarness.ts",
 ];
 for (const owner of requiredStudioOwners) {
   if (!(await exists(owner))) {
@@ -692,6 +789,11 @@ const retiredRootStudioOwners = [
   "src/template-package/fonts/FontResolutionPanel.tsx",
   "src/template-package/quality/TemplatePackageQualityPanel.tsx",
   "src/template-package/quality/TemplatePackageDiagnosticContext.tsx",
+  "src/template-package/analysis/TemplatePackageStressReports.tsx",
+  "src/template-package/debug/TemplatePackageLayoutDebugger.tsx",
+  "src/template-package/quality/fidelityIssuePacket.ts",
+  "src/template-package/enrichment/visualDiff.ts",
+  "src/template-package/runtime-routing/devHarness.ts",
 ];
 for (const retired of retiredRootStudioOwners) {
   if (await exists(retired)) {
@@ -709,6 +811,7 @@ for (const retained of [
 }
 
 for (const file of await sourceFiles(path.join(root, "src", "template-package"))) {
+  if (/\.test\.[cm]?[jt]sx?$/.test(file)) continue;
   const source = await readFile(file, "utf8");
   if (/components[\\/]ui|apps[\\/]studio/.test(source)) {
     violations.push(

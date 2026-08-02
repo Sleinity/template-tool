@@ -1,5 +1,45 @@
 # Renderer Fidelity Handoff
 
+## 2026-08-02 — Milestone 2G Studio contract adoption / SDK 0.5.0
+
+### Result
+
+- Migrated ordinary Studio production and server imports to supported core,
+  browser, React and advanced-inspection package entries.
+- Added focused core editor/assets/fonts/motion/inspection, browser
+  assets/fonts/persistence/capture/enrichment, and React inspection entries.
+- Moved portable appearance/settlement inspection ownership to core and
+  renderer quality/coverage/risk ownership to React.
+- Moved layout debugging, stress reports, visual comparison, fidelity issue
+  packets and development harness adapters into Studio fidelity ownership.
+- Preserved every 0.4.2 public export and all Studio/rendering behavior.
+
+### Verification boundary
+
+Package/root TypeScript, portable tests, builds, API/release/docs contracts,
+boundaries, archives, DOM-free core, packed consumer, Studio/session browser
+smokes and packed generic editor acceptance pass. Core root declarations remain
+87,431 bytes / `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Archives are core 583,847, browser 323,857 and React 208,261 bytes; the growth
+contains opt-in entries while the ordinary packed consumer stays flat at
+856,967 / 251,414 gzip bytes. Studio stays flat at 1,001.01 / 291.02 gzip kB.
+
+Appearance is deterministic for 19 fixtures. Renderer comparison
+`2026-08-02T16-15-48-741Z` retains the prior 31 approved passes, 17 historical
+differences and 28 unapproved surfaces. Scene retains four historical and 15
+unapproved states; settlement retains its documented states. Approved
+renderer, scene and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No reference, fixture, schema, promotion or tolerance update ran.
+
+### Next boundary
+
+SDK 0.6.0 may design a portable cross-device confirmed-template artifact with
+managed font and asset evidence. That design must not blur the current host
+persistence and renderer-authority boundaries.
+
 ## 2026-08-02 — Milestone 2F physical React-renderer ownership
 
 ### Result

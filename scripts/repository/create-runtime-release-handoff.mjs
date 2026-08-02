@@ -136,6 +136,17 @@ overrides:
 ${overrideRows}
 \`\`\`
 
+## Focused and advanced entries
+
+Ordinary hosts use the existing root, session, importer, compatibility, and
+React contracts. Focused integrations may additionally import core
+\`editor\`/\`assets\`/\`fonts\`/\`motion\`, browser
+\`assets\`/\`fonts\`/\`persistence\`/\`capture\`/\`enrichment\`, and advanced
+core or React \`inspection\` entries. Inspection is optional evidence and does
+not select rendering authority. Studio-only debug components, stress reports,
+visual-difference tooling, issue packets, and development harnesses are not SDK
+APIs.
+
 ## Supported application contract
 
 \`\`\`tsx

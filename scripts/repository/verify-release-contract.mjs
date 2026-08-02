@@ -92,7 +92,11 @@ const runtimeHandoff = await readFile(
   path.join(root, "docs", "sdk", "RUNTIME_HANDOFF.md"),
   "utf8",
 );
-if (!runtimeHandoff.includes("they are not supported host APIs")) {
+if (
+  !runtimeHandoff.includes("they are not supported host APIs") ||
+  !runtimeHandoff.includes("Focused and advanced entries") ||
+  !runtimeHandoff.includes("@sleinity/template-react/inspection")
+) {
   throw new Error("Runtime handoff must exclude renderer-internal entries from host use.");
 }
 
@@ -114,6 +118,7 @@ if (
   !runtimeHandoffGenerator.includes(
     'from "@sleinity/template-browser/importer";',
   ) ||
+  !runtimeHandoffGenerator.includes("Focused and advanced entries") ||
   !runtimeHandoffGenerator.includes("must never import those internal entries")
 ) {
   throw new Error(
