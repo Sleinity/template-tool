@@ -16,6 +16,9 @@
   Tailwind scan to the new renderer owner, preserving its pixels and bundle.
 - Corrected the browser-scenario harness to select a current complete fidelity
   baseline instead of a retired hard-coded candidate path.
+- Published the fixed train from `sdk-v0.4.2`; the public
+  [Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.2)
+  contains the registry-derived archives, checksums and host-neutral handoffs.
 
 ### Verification boundary
 
@@ -27,6 +30,15 @@ bytes / `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
 Core/browser/React archives are 347,076 / 209,476 / 153,598 bytes. The React
 archive is 49.4% smaller and the isolated consumer is 856,967 / 251,434 gzip
 bytes. Studio stays flat at 1,001.02 / 291.15 gzip kB.
+Registry-derived archive SHA-256 values are core
+`7bb364bec2630969bd5ac4f9f8e8e52b88f90ce99694ce10040489a4159ff74f`,
+browser
+`7c22e32cfcb9851b71af05768f857bf95705071c63daa9b5339cc258719c1fca`,
+and React
+`ced85dd35631f0347b30882c7c1105b166b7428205385c4d4b814b519d863408`.
+The tag workflow passed portable CI, packed browser acceptance, authenticated
+publication, secret-free npm/pnpm consumers and public Release creation. A
+separate anonymous download passed checksums and generic-editor acceptance.
 
 Appearance is deterministic for 19 fixtures. Renderer baseline
 `2026-08-02T13-39-40-949Z` and comparison

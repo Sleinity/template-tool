@@ -23,6 +23,13 @@ development aliases resolve the compatibility forwarders to the same workspace
 owners, preventing a second renderer instance without exposing the seam to
 application code.
 
+The train was published from `sdk-v0.4.2` on 2026-08-02. The public
+[GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.4.2)
+contains the registry-derived archives, combined checksums, runtime/core
+handoffs and Lovable prompts. Authenticated GitHub Packages reports `0.4.2` for
+all three packages. Anonymous Release downloads passed the combined checksum
+and the complete generic editor browser acceptance without credentials.
+
 Current-run package/root TypeScript, portable tests, builds, declarations, API
 inventory, boundaries, release contract, archives, DOM-free core, isolated
 packed consumer, session/Studio browser smokes and the packed generic editor
@@ -37,6 +44,12 @@ is 49.4% smaller than 0.4.1 and the three-archive total is 10.8% smaller despite
 the explicit core internal seam. The packed consumer is 856,967 / 251,434 gzip
 bytes, down 4.3% gzip. Studio remains flat at 1,001.02 / 291.15 gzip kB;
 minimal and generic examples are 816.87 / 239.88 and 871.21 / 255.00 gzip kB.
+Registry-derived archive SHA-256 values are core
+`7bb364bec2630969bd5ac4f9f8e8e52b88f90ce99694ce10040489a4159ff74f`,
+browser
+`7c22e32cfcb9851b71af05768f857bf95705071c63daa9b5339cc258719c1fca`,
+and React
+`ced85dd35631f0347b30882c7c1105b166b7428205385c4d4b814b519d863408`.
 
 Appearance remains deterministic for all 19 fixtures. Renderer baseline
 `2026-08-02T13-39-40-949Z` and comparison

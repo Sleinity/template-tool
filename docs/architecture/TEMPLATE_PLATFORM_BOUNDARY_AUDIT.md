@@ -719,6 +719,15 @@ ran.
   archive is 49.4% smaller than 0.4.1 and the fixed-train total is 10.8%
   smaller. The packed consumer is 856,967 / 251,434 gzip bytes. Studio remains
   materially flat at 1,001.02 / 291.15 gzip kB.
+- The train was published from `sdk-v0.4.2`. Authenticated package lookup,
+  secret-free npm/pnpm consumers, public Release visibility, anonymous archive
+  checksums and generic-editor acceptance pass. Registry-derived SHA-256 values
+  are core
+  `7bb364bec2630969bd5ac4f9f8e8e52b88f90ce99694ce10040489a4159ff74f`,
+  browser
+  `7c22e32cfcb9851b71af05768f857bf95705071c63daa9b5339cc258719c1fca`,
+  and React
+  `ced85dd35631f0347b30882c7c1105b166b7428205385c4d4b814b519d863408`.
 - Appearance is deterministic for all 19 fixtures. Renderer run
   `2026-08-02T13-40-25-642Z` reproduces the 0.4.1 historical/unapproved states;
   scene retains four historical and 15 unapproved states, and settlement
