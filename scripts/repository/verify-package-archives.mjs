@@ -61,6 +61,20 @@ try {
         "package/dist/importer.d.ts",
         "package/dist/importer.css",
         "package/dist/importer.css.map",
+        "package/dist/renderer-internal.js",
+        "package/dist/renderer-internal.js.map",
+        "package/dist/renderer-internal.d.ts",
+      ]) {
+        if (!entries.includes(requiredEntry)) {
+          throw new Error(`${archive} is missing ${requiredEntry}.`);
+        }
+      }
+    }
+    if (archive.includes("template-core")) {
+      for (const requiredEntry of [
+        "package/dist/renderer-internal.js",
+        "package/dist/renderer-internal.js.map",
+        "package/dist/renderer-internal.d.ts",
       ]) {
         if (!entries.includes(requiredEntry)) {
           throw new Error(`${archive} is missing ${requiredEntry}.`);
@@ -125,6 +139,7 @@ try {
           "src/template-package/editor/packageEditorSession",
           "src/template-package/editor/packageFieldBindings",
           "src/template-package/editor/fieldConstraints",
+          "src/template-package/scene",
         ]) {
           if (extracted.stdout.includes(migratedRootSource)) {
             throw new Error(`${archive} ${entry} contains migrated root source ${migratedRootSource}.`);
@@ -157,6 +172,25 @@ try {
             throw new Error(
               `${archive} ${entry} contains forbidden dependency ${forbiddenSource}.`,
             );
+          }
+        }
+      }
+      for (const entry of entries.filter((item) =>
+        item.startsWith("package/dist/") && item.endsWith(".map")
+      )) {
+        const extracted = spawnSync(
+          "tar",
+          ["-xOzf", path.join(output, archive), entry],
+          { encoding: "utf8" },
+        );
+        for (const embeddedOwner of [
+          "packages/template-core/src",
+          "packages/template-browser/src",
+          "src/template-package/render",
+          "src/template-package/runtime-routing",
+        ]) {
+          if (extracted.stdout.includes(embeddedOwner)) {
+            throw new Error(`${archive} ${entry} embeds ${embeddedOwner}.`);
           }
         }
       }

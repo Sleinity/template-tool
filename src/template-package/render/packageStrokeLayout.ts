@@ -1,1 +1,1 @@
-export * from "../../../packages/template-core/src/models/packageStrokeModel";
+export * from "@sleinity/template-react/renderer-internal";

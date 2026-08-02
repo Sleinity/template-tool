@@ -1,5 +1,18 @@
 # @sleinity/template-react
 
+## 0.4.2
+
+### Patch Changes
+
+- Physically own the renderer, inspection viewport, React/CSS/SVG adapters and
+  renderer-specific runtime-routing closure previously compiled from root.
+- Consume core renderer machinery through the fixed-train internal sibling
+  seam, reducing embedded implementation without changing supported APIs or
+  renderer behavior.
+- Updated dependencies
+  - @sleinity/template-core@0.4.2
+  - @sleinity/template-browser@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

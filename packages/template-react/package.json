@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {
@@ -31,14 +31,21 @@
     },
     "./importer.css": {
       "default": "./dist/importer.css"
+    },
+    "./renderer-internal": {
+      "types": "./dist/renderer-internal.d.ts",
+      "import": "./dist/renderer-internal.js"
     }
   },
+  "sdkInternalExports": [
+    "./renderer-internal"
+  ],
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/importer.tsx --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-browser --external react --external react-dom",
+    "build": "tsup src/index.ts src/importer.tsx src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external react --external react-dom",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

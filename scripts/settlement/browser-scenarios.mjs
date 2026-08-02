@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { browserStructure, launchBrowser, waitForCurrentReadiness } from "../fidelity/browser.mjs";
 import { loadManifest, parseArguments, repoRoot, stableStringify, verifyFixture } from "../fidelity/core.mjs";
@@ -17,6 +17,23 @@ const runId = String(args["run-id"] || `browser-scenarios-${new Date().toISOStri
 const root = join(settlementRoot, "browser-scenarios", runId);
 const headed = Boolean(args.headed);
 const profile = headed ? "chromium-visible" : "chromium-headless";
+
+function resolveReplacementPath() {
+  const candidatesRoot = join(repoRoot, "fidelity", "candidates");
+  const requestedRun = args["fidelity-run"] ? String(args["fidelity-run"]) : null;
+  const runs = requestedRun
+    ? [requestedRun]
+    : readdirSync(candidatesRoot, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .map((entry) => entry.name)
+        .sort()
+        .reverse();
+  for (const run of runs) {
+    const candidate = join(candidatesRoot, run, fixture.id, "editor", "capture-1.png");
+    if (existsSync(candidate)) return candidate;
+  }
+  throw new Error("A complete fidelity baseline with an editor PNG is required before browser scenarios.");
+}
 
 function enrichBrowserNodes(browser) {
   return browser.nodes.map((node) => {
@@ -109,7 +126,7 @@ try {
   await page.getByRole("button", { name: "Reset" }).click();
   results.push(await capture("reset-imported-defaults"));
 
-  const replacementPath = join(repoRoot, "fidelity", "candidates", "milestone-3-headless-baseline", fixture.id, "editor", "capture-1.png");
+  const replacementPath = resolveReplacementPath();
   await page.getByLabel("Product image", { exact: true }).setInputFiles(replacementPath);
   await page.getByRole("button", { name: "Clear replacement" }).waitFor();
   results.push(await capture("image-replacement", { id: "image-replacement", type: "asset-state", assetId: "asset:image:ceab5479" }));

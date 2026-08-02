@@ -18,7 +18,7 @@ export * from "./bundle/sourceContract";
 export * from "./bundle/normalizeTemplatePackageBundle";
 export * from "./bundle/loadTemplatePackageBundleSource";
 export * from "./importTemplatePackage";
-export * from "../../../src/template-package/scene";
+export * from "./scene";
 export * from "./resolved";
 export * from "./editor/packageEditorSession";
 export * from "./editor/packageFieldRules";

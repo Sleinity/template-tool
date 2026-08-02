@@ -1,1 +1,1 @@
-export * from "../../../packages/template-core/src/models/packageLayoutModel";
+export * from "@sleinity/template-react/renderer-internal";

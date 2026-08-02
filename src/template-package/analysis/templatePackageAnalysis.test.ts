@@ -2,7 +2,7 @@ import {
   axis,
   createRendererFixturePackage,
   setFigmaMetadata,
-} from "../render/regression-fixtures/createFixturePackage";
+} from "../../../packages/template-react/test/render/regression-fixtures/createFixturePackage";
 import { analyzeRendererFeatureCoverage } from "./featureCoverage";
 import { analyzeFidelityRisk } from "./fidelityRisk";
 

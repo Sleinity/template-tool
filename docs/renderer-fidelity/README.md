@@ -83,7 +83,7 @@ These documents are retained as specialist sources and are not duplicated here:
 - [Constraint and sizing matrix](../../src/template-package/render/CONSTRAINT_SIZING_MATRIX.md)
 - [Vector rendering](../../src/template-package/render/VECTOR_RENDERING.md)
 - [Font subsystem](../../src/template-package/fonts/README.md)
-- [Renderer regression fixtures](../../src/template-package/render/regression-fixtures/README.md)
+- [Renderer regression fixtures](../../packages/template-react/test/render/regression-fixtures/README.md)
 
 ## Evidence labels
 

@@ -9,6 +9,7 @@ export default {
     `${studioRoot}/index.html`,
     `${studioRoot}/src/**/*.{ts,tsx}`,
     `${repositoryRoot}/src/**/*.{ts,tsx}`,
+    `${repositoryRoot}/packages/template-react/src/**/*.{ts,tsx}`,
   ],
   theme: {
     extend: {

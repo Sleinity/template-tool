@@ -6,7 +6,7 @@ import {
   resolveInspectionTargetBounds,
   unionPreviewBounds,
   zoomPreviewAtPoint,
-} from "./previewViewport";
+} from "../../src/render/previewViewport";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

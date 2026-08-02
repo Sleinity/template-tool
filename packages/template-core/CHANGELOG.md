@@ -1,5 +1,14 @@
 # @sleinity/template-core
 
+## 0.4.2
+
+### Patch Changes
+
+- Physically own the canonical scene contract previously bridged through root
+  source while preserving the byte-identical public declaration.
+- Add the unsupported `renderer-internal` sibling seam used exclusively by
+  `@sleinity/template-react`; host applications must not import it.
+
 ## 0.4.1
 
 ### Patch Changes

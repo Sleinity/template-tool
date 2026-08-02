@@ -5,8 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "@sleinity/template-core": ["../../packages/template-core/src/index.ts"],
+      "@sleinity/template-core/renderer-internal": ["../../packages/template-core/src/renderer-internal.ts"],
       "@sleinity/template-browser": ["../../packages/template-browser/src/index.ts"],
-      "@sleinity/template-react": ["../../packages/template-react/src/index.ts"]
+      "@sleinity/template-browser/importer": ["../../packages/template-browser/src/importer.ts"],
+      "@sleinity/template-react": ["../../packages/template-react/src/index.ts"],
+      "@sleinity/template-react/renderer-internal": ["../../packages/template-react/src/renderer-internal.ts"]
     },
     "noEmit": true
   },

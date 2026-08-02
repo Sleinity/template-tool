@@ -1,5 +1,50 @@
 # Renderer Fidelity Handoff
 
+## 2026-08-02 — Milestone 2F physical React-renderer ownership
+
+### Result
+
+- Moved canonical-scene ownership into `packages/template-core/src/scene`.
+- Moved the production renderer, previews, inspection viewport, renderer
+  adapters and renderer-specific runtime routing into `template-react`.
+- Replaced consumed root scene/render/routing paths with checked behavior-free
+  forwarders; retained fidelity-only `runtime-routing/devHarness` outside the
+  production package.
+- Added unsupported fixed-train internal sibling seams for repository
+  composition while preserving every recorded 0.4.1 public entry and symbol.
+- Externalized core/browser implementation from React and extended Studio's
+  Tailwind scan to the new renderer owner, preserving its pixels and bundle.
+- Corrected the browser-scenario harness to select a current complete fidelity
+  baseline instead of a retired hard-coded candidate path.
+
+### Verification boundary
+
+Package/root TypeScript, portable tests, all builds, declarations, public API,
+boundaries, release policy, archives, packed core/React consumers, session and
+Studio browser smokes, generic-editor acceptance, routing stage 4a, exact-font,
+text-trim and nine browser scenarios pass. Core declarations remain 87,431
+bytes / `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Core/browser/React archives are 347,076 / 209,476 / 153,598 bytes. The React
+archive is 49.4% smaller and the isolated consumer is 856,967 / 251,434 gzip
+bytes. Studio stays flat at 1,001.02 / 291.15 gzip kB.
+
+Appearance is deterministic for 19 fixtures. Renderer baseline
+`2026-08-02T13-39-40-949Z` and comparison
+`2026-08-02T13-40-25-642Z` reproduce the prior 31 approved passes, 17
+historical/environment-sensitive differences and 28 unapproved surfaces.
+Scene retains 4 historical and 15 unapproved states; settlement retains its
+documented states. Approved renderer, scene and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No approved evidence or guarded policy changed.
+
+### Next boundary
+
+Migrate ordinary Studio production imports to curated package entries and
+define explicit advanced inspection entries for remaining fidelity consumers.
+Portable cross-device confirmed-template artifacts remain SDK 0.5 design work.
+
 ## 2026-07-30 — Milestone 2E physical browser-runtime ownership
 
 ### Result

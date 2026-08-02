@@ -51,6 +51,7 @@ const migratedCoreEntryPaths = [
   "bundle/sourceContract",
   "bundle/normalizeTemplatePackageBundle",
   "bundle/loadTemplatePackageBundleSource",
+  "scene",
   "resolved",
   "editor/packageEditorSession",
   "editor/packageFieldBindings",
@@ -110,6 +111,16 @@ const requiredCoreOwners = [
   "packages/template-core/src/editor/packageFieldBindings.ts",
   "packages/template-core/src/editor/packageFieldRules.ts",
   "packages/template-core/src/editor/fieldConstraints.ts",
+  "packages/template-core/src/renderer-internal.ts",
+  "packages/template-core/src/scene/types.ts",
+  "packages/template-core/src/scene/createCanonicalSceneGraph.ts",
+  "packages/template-core/src/scene/validateCanonicalSceneGraph.ts",
+  "packages/template-core/src/scene/serializeCanonicalSceneGraph.ts",
+  "packages/template-core/src/scene/createSceneEquivalenceReport.ts",
+  "packages/template-core/src/scene/propertyAuthority.ts",
+  "packages/template-core/src/scene/sourceToSceneMapping.ts",
+  "packages/template-core/src/scene/migrationMap.ts",
+  "packages/template-core/src/scene/index.ts",
 ];
 for (const owner of requiredCoreOwners) {
   if (!(await exists(owner))) violations.push(`template-core must physically own ${owner}`);
@@ -156,6 +167,15 @@ const legacyCoreForwarders = {
   "src/template-package/editor/packageEditorSession.ts": "../../../packages/template-core/src/editor/packageEditorSession",
   "src/template-package/editor/packageFieldBindings.ts": "../../../packages/template-core/src/editor/packageFieldBindings",
   "src/template-package/editor/fieldConstraints.ts": "../../../packages/template-core/src/editor/fieldConstraints",
+  "src/template-package/scene/types.ts": "../../../packages/template-core/src/scene/types",
+  "src/template-package/scene/createCanonicalSceneGraph.ts": "../../../packages/template-core/src/scene/createCanonicalSceneGraph",
+  "src/template-package/scene/validateCanonicalSceneGraph.ts": "../../../packages/template-core/src/scene/validateCanonicalSceneGraph",
+  "src/template-package/scene/serializeCanonicalSceneGraph.ts": "../../../packages/template-core/src/scene/serializeCanonicalSceneGraph",
+  "src/template-package/scene/createSceneEquivalenceReport.ts": "../../../packages/template-core/src/scene/createSceneEquivalenceReport",
+  "src/template-package/scene/propertyAuthority.ts": "../../../packages/template-core/src/scene/propertyAuthority",
+  "src/template-package/scene/sourceToSceneMapping.ts": "../../../packages/template-core/src/scene/sourceToSceneMapping",
+  "src/template-package/scene/migrationMap.ts": "../../../packages/template-core/src/scene/migrationMap",
+  "src/template-package/scene/index.ts": "../../../packages/template-core/src/scene",
 };
 for (const [forwarder, target] of Object.entries(legacyCoreForwarders)) {
   if (!(await exists(forwarder))) {
@@ -258,28 +278,114 @@ for (const file of await sourceFiles(path.join(root, "packages", "template-core"
   }
 }
 
-for (const [compatibilityPath, target] of Object.entries({
-  "src/template-package/render/packageLayoutModel.ts": "../../../packages/template-core/src/models/packageLayoutModel",
-  "src/template-package/render/packageStrokeLayout.ts": "../../../packages/template-core/src/models/packageStrokeModel",
-})) {
+const legacyReactForwarders = {
+  "src/template-package/render/index.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/TemplatePackageRenderer.tsx": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/productRenderIdentity.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/ScaledTemplatePackagePreview.tsx": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/TemplateInspectionPreview.tsx": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/TemplateInspectionViewport.tsx": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageClipping.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageConstraintLayout.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageLayoutModel.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageRenderUtils.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageStrokeLayout.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageTextLayout.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageTransformLayout.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/packageVectorRender.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/render/previewViewport.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/index.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/types.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/propertyOwnership.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/createCoreLayoutRoute.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/settleCoreLayout.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/useCoreLayoutRuntime.ts": "@sleinity/template-react/renderer-internal",
+  "src/template-package/runtime-routing/verticalTextTrim.ts": "@sleinity/template-react/renderer-internal",
+};
+for (const [compatibilityPath, target] of Object.entries(legacyReactForwarders)) {
   const source = (await read(compatibilityPath)).trim();
   if (source !== `export * from "${target}";`) {
-    violations.push(`${compatibilityPath} must remain a behavior-free core-model forwarder`);
-  }
-}
-
-for (const [compatibilityPath, forbiddenDefinition] of [
-  ["src/template-package/render/packageRenderUtils.ts", /export function (?:normalizedColorToCss|canvasBackgroundToCss|getFirstVisibleSolidPaint|resolvePackageAssetSource|resolvePackageAxisLimits)\b/],
-  ["src/template-package/render/packageTransformLayout.ts", /(?:export\s+)?function resolvePackageTransform\b/],
-  ["src/template-package/render/packageVectorRender.ts", /function (?:svgStringSource|fallbackAssetSource|formatViewBox|validContentBounds)\b/],
-]) {
-  if (forbiddenDefinition.test(await read(compatibilityPath))) {
-    violations.push(`${compatibilityPath} duplicates its core-owned portable model`);
+    violations.push(`${compatibilityPath} must remain a behavior-free React-owner forwarder`);
   }
 }
 
 const reactEntry = await read("packages/template-react/src/index.ts");
 const reactImporterEntry = await read("packages/template-react/src/importer.tsx");
+for (const owner of [
+  "packages/template-react/src/render/TemplatePackageRenderer.tsx",
+  "packages/template-react/src/render/TemplateInspectionViewport.tsx",
+  "packages/template-react/src/render/TemplateInspectionPreview.tsx",
+  "packages/template-react/src/render/ScaledTemplatePackagePreview.tsx",
+  "packages/template-react/src/render/packageRenderUtils.ts",
+  "packages/template-react/src/render/previewViewport.ts",
+  "packages/template-react/src/render/productRenderIdentity.ts",
+  "packages/template-react/src/internal/runtime-routing/useCoreLayoutRuntime.ts",
+  "packages/template-react/src/internal/runtime-routing/settleCoreLayout.ts",
+]) {
+  if (!(await exists(owner))) {
+    violations.push(`template-react must physically own ${owner}`);
+  }
+}
+for (const file of await sourceFiles(path.join(root, "packages", "template-react", "src"))) {
+  const source = await readFile(file, "utf8");
+  for (const forbidden of [
+    /src[\\/]template-package/,
+    /packages[\\/]template-(?:core|browser)[\\/]src/,
+    /apps[\\/]studio/,
+  ]) {
+    if (forbidden.test(source)) {
+      violations.push(`${path.relative(root, file)} crosses React package ownership: ${forbidden}`);
+    }
+  }
+}
+for (const file of await sourceFiles(path.join(root, "packages", "template-browser", "src"))) {
+  if ((await readFile(file, "utf8")).includes("@sleinity/template-react")) {
+    violations.push(`${path.relative(root, file)} creates a browser-to-React dependency`);
+  }
+}
+
+const coreManifest = JSON.parse(await read("packages/template-core/package.json"));
+if (
+  JSON.stringify(coreManifest.sdkInternalExports) !==
+    JSON.stringify(["./renderer-internal"]) ||
+  !coreManifest.exports?.["./renderer-internal"]
+) {
+  violations.push("template-core must declare exactly one renderer-internal sibling entry");
+}
+const reactManifest = JSON.parse(await read("packages/template-react/package.json"));
+if (
+  JSON.stringify(reactManifest.sdkInternalExports) !==
+    JSON.stringify(["./renderer-internal"]) ||
+  !reactManifest.exports?.["./renderer-internal"]
+) {
+  violations.push("template-react must declare exactly one repository renderer-internal entry");
+}
+for (const searchRoot of ["apps/studio", "examples", "packages/template-browser/src"]) {
+  for (const file of await sourceFiles(path.join(root, searchRoot))) {
+    const relativeFile = path.relative(root, file);
+    const source = await readFile(file, "utf8");
+    for (const internalEntry of [
+      "@sleinity/template-core/renderer-internal",
+      "@sleinity/template-react/renderer-internal",
+    ]) {
+      if (
+        source.includes(internalEntry) &&
+        relativeFile !== "apps/studio/vite.config.ts"
+      ) {
+        violations.push(`${relativeFile} must not consume SDK internal entry ${internalEntry}`);
+      }
+    }
+  }
+}
+const studioViteConfig = await read("apps/studio/vite.config.ts");
+for (const internalEntry of [
+  "@sleinity/template-core/renderer-internal",
+  "@sleinity/template-react/renderer-internal",
+]) {
+  if (!studioViteConfig.includes(internalEntry)) {
+    violations.push(`Studio Vite must resolve ${internalEntry} to its workspace owner during the compatibility-forwarder migration`);
+  }
+}
 for (const studioOnly of ["TemplatePackageQualityPanel", "TemplatePackageFieldEditor", "TemplatePackageImportFlow", "TemplateOverviewPage"]) {
   if (reactEntry.includes(studioOnly)) {
     violations.push(`template-react exports Studio-only UI: ${studioOnly}`);
