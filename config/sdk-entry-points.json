@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "template-sdk-entry-points-v1",
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "directory": "template-core",
+      "entries": [
+        { "path": ".", "source": "src/index.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./assets", "source": "src/assets.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./editor", "source": "src/editor.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./fonts", "source": "src/fonts.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./inspection", "source": "src/inspection.ts", "classification": "supported-advanced-inspection" },
+        { "path": "./motion", "source": "src/motion.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./renderer-internal", "source": "src/renderer-internal.ts", "classification": "sdk-internal" }
+      ]
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "directory": "template-browser",
+      "entries": [
+        { "path": ".", "source": "src/index.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./assets", "source": "src/assets.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./capture", "source": "src/capture.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./compatibility", "source": "src/compatibility.ts", "classification": "recommended-high-level-integration" },
+        { "path": "./enrichment", "source": "src/enrichment.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./fonts", "source": "src/fonts.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./importer", "source": "src/importer.ts", "classification": "recommended-high-level-integration" },
+        { "path": "./persistence", "source": "src/persistence.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./session", "source": "src/session.ts", "classification": "recommended-high-level-integration" }
+      ]
+    },
+    {
+      "name": "@sleinity/template-react",
+      "directory": "template-react",
+      "entries": [
+        { "path": ".", "source": "src/index.ts", "classification": "recommended-high-level-integration" },
+        { "path": "./editor", "source": "src/editor.tsx", "classification": "recommended-high-level-integration" },
+        { "path": "./importer", "source": "src/importer.tsx", "classification": "recommended-high-level-integration" },
+        { "path": "./importer.css", "source": "src/importer.css", "classification": "recommended-high-level-integration" },
+        { "path": "./inspection", "source": "src/inspection.ts", "classification": "supported-advanced-inspection" },
+        { "path": "./renderer-internal", "source": "src/renderer-internal.ts", "classification": "sdk-internal" }
+      ]
+    }
+  ]
+}

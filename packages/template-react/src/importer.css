@@ -258,7 +258,6 @@
 .template-importer__field-issues p { margin: 0; padding: 8px 10px; border: 1px solid var(--ti-border); border-radius: 7px; }
 
 .template-importer__preview { position: relative; width: 100%; height: clamp(340px, 50vh, 600px); min-width: 0; overflow: hidden; border: 1px solid var(--ti-border); border-radius: var(--ti-radius-panel); background: var(--ti-muted-surface); contain: layout paint; }
-.template-importer__preview-transform { position: absolute; inset: 0 auto auto 0; will-change: transform; }
 .template-importer__preview-renderer { overflow: visible; }
 .template-importer__actions { height: var(--ti-footer-height); display: flex; align-items: center; justify-content: space-between; gap: var(--ti-space-4); padding: var(--ti-space-4) var(--ti-space-6); border-top: 1px solid var(--ti-border); background: var(--ti-surface); }
 .template-importer__actions > div { display: flex; gap: 8px; margin-left: auto; }

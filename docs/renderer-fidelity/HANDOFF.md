@@ -1,5 +1,112 @@
 # Renderer Fidelity Handoff
 
+## 2026-08-04 — SDK 0.7.0 release hardening and first-host candidate
+
+### Result
+
+- Froze the existing core/browser/React `0.7.0` exports, including
+  `@sleinity/template-react/editor`, without adding another public capability.
+- Added one checked entry-point inventory for package exports, Studio source
+  aliases, API classification, build/archive validation and internal-entry
+  protection.
+- Corrected Studio importer source parity and removed React implementation
+  self-imports that could resolve through an installed or stale package build.
+- Added archive bundle probes for five representative adoption profiles and a
+  local release-candidate handoff generator with checksums and first-host
+  acceptance instructions.
+- Preserved broad roots, compatibility forwarders, renderer ownership, schemas,
+  fixtures and approved evidence.
+
+### Verification boundary
+
+Current-run portable CI, archive/API/release/docs/boundary contracts, package,
+Studio and example builds, npm/pnpm vendored consumers, realistic ZIP tests,
+session and Studio browser smokes and packed template-editor acceptance pass.
+The packed acceptance covers normal/restricted CSP and reports no unexpected
+network requests, downloads or console errors.
+
+Local archives are 588,525 / 334,022 / 246,656 bytes for core/browser/React.
+Their release-candidate SHA-256 values are
+`f8bb1eddc8710d6971faabac3614425dc9ba66ae528547e117fec13082e1311f`,
+`692979bdeb0228ec9ca3735fb5c2732de992f06106671ccd4a00bea4ecb688c2`, and
+`2bb7df4629b70a5ec24c364936b5c10c5f5ec3ba0ec79516b9f217bb81b9af68`.
+Curated core, browser, React renderer, React importer and React editor bundle
+probes pass within their recorded initial baselines.
+
+Renderer run `2026-08-04T16-09-07-981Z` is repeat-stable. Comparison
+`2026-08-04T16-09-54-633Z` retains 31 approved passes, 17 documented
+historical/environment-sensitive differences and 28 unapproved surfaces. Scene
+retains four historical differences and 15 unapproved fixtures; settlement
+retains its documented matrix. Appearance, routing, exact-font, text-trim,
+mask/primitive browser and current source-evidence gates pass. The historical
+`milestone-7-2-compatibility-before` candidate is absent, so the stroke
+before/after source-evidence script is not claimed. No fixture, schema,
+tolerance, reference update or promotion command ran.
+
+### Open release gate
+
+The generated local candidate is ready for the real first host. That host must
+complete `docs/sdk/FIRST_HOST_ACCEPTANCE.md` using only the three archives and
+record installation, lifecycle, offline reopening, current-revision capture and
+zero repository/internal imports. Do not create or push `sdk-v0.7.0` until this
+external gate passes. After it passes, the tag-only workflow must publish the
+fixed train, redownload registry archives, repeat secret-free npm/pnpm and
+browser acceptance, verify public repository visibility and create the GitHub
+Release from those registry-derived artifacts.
+
+## 2026-08-04 — SDK 0.7.0 headless host-editor integration
+
+### Result
+
+- Added the curated `@sleinity/template-react/editor` entry with a responsive,
+  session-bound viewport, revision-safe identity/capture handle, ordered
+  editable-field controllers and one deduplicated diagnostic projection.
+- Reused the same viewport inside `TemplateImportWizardPreview` and removed the
+  standalone reference's custom fitting, field-value and diagnostic glue.
+- Preserved host ownership of forms, image preparation, navigation, storage,
+  crop/AI workflows and publishing.
+- Stabilized controller identity across readiness publications that do not
+  change the session revision.
+
+### Verification boundary
+
+Portable tests, root/package TypeScript, all builds/declarations,
+API/release/docs/boundary checks, archive inspection, the isolated curated-entry
+consumer and packed generic-editor browser acceptance pass. The browser flow
+proves shared responsive fitting, current-revision identity/capture, plural and
+singular field parity, diagnostics, confirmation/reopening, host text/image
+editing, Fill/Fit/reset, offline drafts, StrictMode, restricted CSP and zero
+external SDK requests.
+
+Core declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Archives are 588,525 / 334,022 / 245,268 bytes for core/browser/React; the
+isolated consumer is 893,788 / 261,806 gzip bytes. The generic example is
+911.17 / 266.41 gzip kB and Studio is 1,000.85 / 290.99 gzip kB.
+
+Source-authoritative font evidence and all 19 appearance projections are
+stable. Renderer comparison `2026-08-04T14-21-58-135Z` retains 31 approved
+passes, 17 historical/environment-sensitive differences and 28 unapproved
+surfaces. Scene retains four historical and 15 unapproved states; settlement
+retains its documented matrix. Approved renderer, scene and settlement
+identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No approved evidence or guarded policy changed.
+
+The packed browser acceptance passed after controller identity was stabilized.
+The final stale renderer/asset callback guard then passed React typecheck, build
+and archive inspection. A repeated clean-install browser run was blocked before
+execution by npm-registry `ENOTFOUND`; it is recorded as an environment failure,
+not a product pass or failure.
+
+### Next boundary
+
+Use these primitives in the first external 0.7 integration. Add autosave or
+image-file preparation bindings only if the reference, Studio and that host
+demonstrate the same remaining boilerplate.
+
 ## 2026-08-04 — SDK 0.6.0 release closeout
 
 ### Result
@@ -1868,6 +1975,26 @@ Current-run verification:
 - `jq empty fidelity/evidence/milestone-7-3-gradient-intake/gradient-test-4/audit.json`: passed.
 
 No production schema, canonical normalization, resolver, renderer, runtime owner, fixture manifest, candidate, or approved reference was changed. Broader production suites were not run because only documentation and intake evidence changed.
+
+## SDK 0.7.0 headless host-editor boundary
+
+- React owns the supported `editor` entry. `TemplateSessionViewport` composes
+  the intrinsic `TemplateSessionRenderer` with the existing fitting model and
+  binds measurement, identity, readiness, issues and capture permission to one
+  live session revision.
+- Editable-field hooks project ordered descriptors and resolved values into
+  state-plus-mutation controllers. They delegate to the existing session
+  mutations and core target/constraint authority; no field validation or
+  package mutation logic is copied into React.
+- The diagnostic hook deduplicates existing package, exact-font, asset,
+  session and current viewport evidence. It ignores stale viewport snapshots
+  and does not absorb transient field mutation failures.
+- The importer preview and generic reference use the shared viewport. The
+  reference uses the public controller and diagnostic hooks while retaining
+  host-owned forms, image-file preparation, navigation, draft actions and PNG
+  callback behavior.
+- No renderer DOM, template schema, persistence record, fixture, tolerance or
+  approved reference changes are authorized by this milestone.
 
 ## Adventure-travel intake after gate approval
 

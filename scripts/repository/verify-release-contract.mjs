@@ -26,6 +26,8 @@ const hostSpecificPattern =
   /\bBas\b|narrowcast|screen\/player|campaign|playlist|authorizedConsumer|authorized-pilot/iu;
 const activeRoots = [
   "config/sdk-runtime-packages.json",
+  "config/sdk-entry-points.json",
+  "config/sdk-bundle-baselines.json",
   "docs/sdk",
   "examples/minimal-renderer/README.md",
   "examples/template-editor-integration",
@@ -116,6 +118,12 @@ if (
   !runtimeHandoffGenerator.includes("loadTemplateImportConfirmation(") ||
   !runtimeHandoffGenerator.includes("inspectTemplateRuntimeSupport(") ||
   !runtimeHandoffGenerator.includes(
+    'from "@sleinity/template-react/editor";',
+  ) ||
+  !runtimeHandoffGenerator.includes("TemplateSessionViewport") ||
+  !runtimeHandoffGenerator.includes("useTemplateSessionEditableFields") ||
+  !runtimeHandoffGenerator.includes("useTemplateSessionDiagnosticSummary") ||
+  !runtimeHandoffGenerator.includes(
     'from "@sleinity/template-browser/importer";',
   ) ||
   !runtimeHandoffGenerator.includes("Focused and advanced entries") ||
@@ -165,6 +173,8 @@ for (const required of [
   "SDK-CORE-HANDOFF.md",
   "SDK-RUNTIME-HANDOFF.md",
   "LOVABLE-TEMPLATE-EDITOR-PROMPTS.md",
+  "SDK-0.7-MIGRATION.md",
+  "FIRST-HOST-ACCEPTANCE.md",
   "SDK_RELEASE_VISIBILITY",
   "SDK_LICENSE_POLICY",
   "SDK_AUTHORIZED_USE",

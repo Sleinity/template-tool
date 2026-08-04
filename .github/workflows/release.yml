@@ -96,6 +96,10 @@ jobs:
             release-artifacts
           cp docs/sdk/LOVABLE_TEMPLATE_EDITOR_PROMPTS.md \
             release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md
+          cp docs/sdk/SDK_0_7_MIGRATION.md \
+            release-artifacts/SDK-0.7-MIGRATION.md
+          cp docs/sdk/FIRST_HOST_ACCEPTANCE.md \
+            release-artifacts/FIRST-HOST-ACCEPTANCE.md
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
@@ -149,6 +153,8 @@ jobs:
             release-artifacts/SDK-CORE-HANDOFF.md \
             release-artifacts/SDK-RUNTIME-HANDOFF.md \
             release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md \
+            release-artifacts/SDK-0.7-MIGRATION.md \
+            release-artifacts/FIRST-HOST-ACCEPTANCE.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

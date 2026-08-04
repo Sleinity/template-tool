@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {
@@ -32,6 +32,10 @@
     "./importer.css": {
       "default": "./dist/importer.css"
     },
+    "./editor": {
+      "types": "./dist/editor.d.ts",
+      "import": "./dist/editor.js"
+    },
     "./inspection": {
       "types": "./dist/inspection.d.ts",
       "import": "./dist/inspection.js"
@@ -49,7 +53,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/importer.tsx src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/inspection --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external @sleinity/template-browser/assets --external @sleinity/template-browser/capture --external react --external react-dom && tsup src/inspection.ts --format esm --dts --sourcemap --external @sleinity/template-react --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/inspection --external @sleinity/template-browser --external @sleinity/template-browser/assets --external @sleinity/template-browser/capture --external react --external react-dom",
+    "build": "tsup src/index.ts src/importer.tsx src/editor.tsx src/inspection.ts src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/inspection --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external @sleinity/template-browser/session --external @sleinity/template-browser/assets --external @sleinity/template-browser/capture --external react --external react-dom",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

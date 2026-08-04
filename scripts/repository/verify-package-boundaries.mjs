@@ -1,9 +1,11 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
 
 const root = process.cwd();
 const violations = [];
+const sdkEntryInventory = await loadSdkEntryPointInventory(root);
 
 async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
@@ -349,6 +351,7 @@ for (const [compatibilityPath, target] of Object.entries(legacyReactForwarders))
 
 const reactEntry = await read("packages/template-react/src/index.ts");
 const reactImporterEntry = await read("packages/template-react/src/importer.tsx");
+const reactEditorEntry = await read("packages/template-react/src/editor.tsx");
 const reactInspectionEntry = await read("packages/template-react/src/inspection.ts");
 for (const owner of [
   "packages/template-react/src/render/TemplatePackageRenderer.tsx",
@@ -469,12 +472,37 @@ for (const studioFidelityOwner of [
   }
 }
 const studioViteConfig = await read("apps/studio/vite.config.ts");
-for (const internalEntry of [
-  "@sleinity/template-core/renderer-internal",
-  "@sleinity/template-react/renderer-internal",
-]) {
-  if (!studioViteConfig.includes(internalEntry)) {
-    violations.push(`Studio Vite must resolve ${internalEntry} to its workspace owner during the compatibility-forwarder migration`);
+if (
+  !studioViteConfig.includes("sdk-entry-points.json") ||
+  !studioViteConfig.includes("sdkSourceAliases")
+) {
+  violations.push(
+    "Studio Vite must derive every workspace SDK alias from config/sdk-entry-points.json",
+  );
+}
+const packageManifestsByName = new Map([
+  [coreManifest.name, coreManifest],
+  [browserManifest.name, browserManifest],
+  [reactManifest.name, reactManifest],
+]);
+for (const packageValue of sdkEntryInventory.packages) {
+  const manifest = packageManifestsByName.get(packageValue.name);
+  if (!manifest) {
+    violations.push(`SDK entry inventory has no runtime manifest for ${packageValue.name}`);
+    continue;
+  }
+  const expectedPaths = packageValue.entries.map((entry) => entry.path).sort();
+  const actualPaths = Object.keys(manifest.exports ?? {}).sort();
+  if (JSON.stringify(expectedPaths) !== JSON.stringify(actualPaths)) {
+    violations.push(`${packageValue.name} exports differ from the checked SDK entry inventory`);
+  }
+  const expectedInternal = packageValue.entries
+    .filter((entry) => entry.classification === "sdk-internal")
+    .map((entry) => entry.path)
+    .sort();
+  const actualInternal = [...(manifest.sdkInternalExports ?? [])].sort();
+  if (JSON.stringify(expectedInternal) !== JSON.stringify(actualInternal)) {
+    violations.push(`${packageValue.name} internal exports differ from the checked SDK entry inventory`);
   }
 }
 for (const studioOnly of ["TemplatePackageQualityPanel", "TemplatePackageFieldEditor", "TemplatePackageImportFlow", "TemplateOverviewPage"]) {
@@ -509,6 +537,27 @@ for (const requiredImporterContract of [
 ]) {
   if (!reactImporterEntry.includes(requiredImporterContract)) {
     violations.push(`template-react importer is missing ${requiredImporterContract}`);
+  }
+}
+
+for (const requiredEditorContract of [
+  "TemplateSessionViewport",
+  "TemplateSessionViewportHandle",
+  "useTemplateSessionEditableFields",
+  "useTemplateSessionEditableField",
+  "useTemplateSessionDiagnosticSummary",
+]) {
+  if (!reactEditorEntry.includes(requiredEditorContract)) {
+    violations.push(`template-react editor is missing ${requiredEditorContract}`);
+  }
+}
+for (const forbiddenEditorDependency of [
+  "apps/studio",
+  "lucide-react",
+  "TemplatePackageFieldEditor",
+]) {
+  if (reactEditorEntry.includes(forbiddenEditorDependency)) {
+    violations.push(`template-react editor contains Studio-only dependency: ${forbiddenEditorDependency}`);
   }
 }
 

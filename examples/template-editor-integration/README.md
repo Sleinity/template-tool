@@ -10,13 +10,15 @@ landing view acts as an in-memory dashboard: Add template opens the wizard,
 confirmation returns its host-neutral result to the dashboard, and selecting
 the new record opens a fresh session through
 `loadTemplateImportConfirmation()` without a
-backend. After reopening it demonstrates host-owned descriptor-driven content
-editing, image replacement with Fill/Fit, imported-state restoration,
+backend. After reopening it demonstrates the public
+`@sleinity/template-react/editor` viewport, editable-field controllers and
+diagnostic projection with host-owned content controls, image replacement with
+Fill/Fit, imported-state restoration,
 browser-local IndexedDB save and explicit reload, revision-bound render
 readiness, and silent PNG capture through `exportPng({ download: false })`.
 The uppercase action is deliberately host-side preprocessing: it proves the
 SDK does not dictate the input interface and accepts the final supported value
-through `session.setField()`.
+through the field controller.
 
 The `onTemplateExportReady` callback is the intended boundary to host-owned
 catalogue, cloud-storage, or publishing services. The SDK does not own those

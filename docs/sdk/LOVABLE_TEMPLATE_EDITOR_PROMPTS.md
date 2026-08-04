@@ -41,22 +41,22 @@ The required SDK peer versions are React 19 and React DOM 19. If this project is
 
 Before using this prompt, copy the three checksum-verified archives from the
 public
-[`sdk-v0.6.0` release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0)
+future `sdk-v0.7.0` release
 into the repository's `vendor/` directory. Downloading the Release assets
 requires no GitHub token.
 
 ```text
-Integrate the checksum-verified Template Platform 0.6.0 archives already present in this private repository:
+Integrate the checksum-verified Template Platform 0.7.0 archives already present in this private repository:
 
-- vendor/sleinity-template-core-0.6.0.tgz
-- vendor/sleinity-template-browser-0.6.0.tgz
-- vendor/sleinity-template-react-0.6.0.tgz
+- vendor/sleinity-template-core-0.7.0.tgz
+- vendor/sleinity-template-browser-0.7.0.tgz
+- vendor/sleinity-template-react-0.7.0.tgz
 
 Add these exact dependencies:
 
-"@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz"
-"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.6.0.tgz"
-"@sleinity/template-react": "file:vendor/sleinity-template-react-0.6.0.tgz"
+"@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz"
+"@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.7.0.tgz"
+"@sleinity/template-react": "file:vendor/sleinity-template-react-0.7.0.tgz"
 
 Requirements:
 
@@ -67,7 +67,7 @@ Requirements:
 - Do not add NODE_AUTH_TOKEN, a GitHub PAT, or another package-registry secret.
 - Do not replace these dependencies with registry URLs or Git dependencies.
 - Do not modify the SDK archives.
-- Confirm all installed package versions resolve to 0.6.0.
+- Confirm all installed package versions resolve to 0.7.0.
 - Run the existing typecheck and production build.
 - Report changed files and any dependency conflicts before continuing.
 ```
@@ -129,17 +129,16 @@ From @sleinity/template-react:
 - useTemplateSession
 - TemplateSessionProvider
 - useTemplateSessionSnapshot
-- TemplateSessionRenderer
+
+From @sleinity/template-react/editor:
+- TemplateSessionViewport
+- TemplateSessionViewportHandle
+- useTemplateSessionEditableFields
+- useTemplateSessionEditableField
+- useTemplateSessionDiagnosticSummary
 
 - loadTemplateImportConfirmation from @sleinity/template-browser/compatibility
-- snapshot.editableFields
-- snapshot.workingPackage
-- getPackageFieldValue from @sleinity/template-core
-- session.setField
-- session.resetField
 - session.restoreImportedState
-- session.replaceImage
-- session.setImageReplacementMode
 
 Requirements:
 
@@ -147,21 +146,22 @@ Requirements:
 2. Run inspectTemplateRuntimeSupport() before exposing the editor and show its stable blocked or warning codes.
 3. Call loadTemplateImportConfirmation(session, record). It must inspect integrity and atomically rebuild state through loadTemplateState().
 4. Treat applied=false as a blocked reopen and show the inspection issues. Never fall back to the wizard session.
-5. Wrap the editor and TemplateSessionRenderer in TemplateSessionProvider using the fresh session.
-6. Render controls from the freshly rebuilt editable-field descriptors.
+5. Wrap the host editor in TemplateSessionProvider using the fresh session.
+6. Render TemplateSessionViewport and controls from useTemplateSessionEditableFields().
 7. Support text, textarea, number, date, color, and boolean fields.
-8. Read current values with getPackageFieldValue instead of manually guessing node property paths.
-9. Display field labels, constraints, mutation warnings, and rejected updates.
-10. Add reset for each field and restore-all-imported-state.
+8. Read current values from each field controller instead of manually guessing node property paths.
+9. Display controller labels, constraints, target status, mutation warnings, and rejected updates.
+10. Use controller.reset() for each field and session.restoreImportedState() for the complete baseline.
 11. For image fields:
    - validate the selected MIME type and file size;
    - convert the image to a data URL;
    - obtain width and height with createImageBitmap;
-   - call session.replaceImage with MIME type, size, dimensions, and replacement-fill;
-   - expose Fill and Fit mode controls.
+   - call controller.replaceImage with MIME type, size, dimensions, and replacement-fill;
+   - expose Fill and Fit through controller.setImageReplacementMode().
 12. Keep this editor descriptor-driven. Do not hard-code fields for a particular template.
 13. Hosts may add stricter validation, crop tools, transformations, or richer controls before calling the SDK. Final values must still use a supported descriptor and pass SDK constraints.
 14. Arbitrary package-node mutation is not part of the stable editing contract.
+15. Pass the current TemplateSessionViewport snapshot to useTemplateSessionDiagnosticSummary() and present its stable status, counts, messages, and repair guidance without rerunning validation.
 ```
 
 ## Prompt 5 — add browser-local persistence
@@ -192,19 +192,18 @@ Add PNG capture to the Template Platform integration page.
 
 Requirements:
 
-1. Keep a ref to TemplateSessionRendererHandle.
+1. Keep a ref to TemplateSessionViewportHandle and retain the latest viewport snapshot.
 2. Enable Export only when:
-   - the session snapshot status is ready;
-   - a render identity exists for the exact current snapshot revision;
-   - that render identity’s readiness is ready.
-3. Call rendererRef.current.exportPng({ download: false }) only for that ready revision.
+   - the viewport snapshot belongs to the current session revision;
+   - viewport canExport is true.
+3. Call viewportRef.current.exportPng({ download: false }) only for that ready revision.
 4. Handle readiness and export errors visibly.
-5. Capture the returned filename, pngDataUrl, width, height, readiness, and diagnostics.
+5. Capture the returned filename, pngDataUrl, width, height, current viewport identity, and diagnostics.
 6. Show a small exported-image preview and metadata after export.
 7. Expose the successful result through a local callback named onTemplateExportReady.
 8. Include the PNG data URL, filename, dimensions, diagnostics, session revision, and render identity in the callback payload.
 9. Do not upload or publish the PNG yet, and confirm silent capture does not trigger a browser download.
-10. Confirm editing a field invalidates the previous identity and prevents stale export until the new render becomes ready.
+10. Confirm editing a field immediately invalidates viewport export permission until the new render becomes ready.
 ```
 
 ## Prompt 7 — build the acceptance harness

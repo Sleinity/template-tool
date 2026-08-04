@@ -820,3 +820,23 @@ ran.
   `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
   and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
   No approved evidence changed.
+
+## 25. SDK 0.7.0 headless host-editor integration
+
+| Concern | Physical owner | Supported host surface |
+| --- | --- | --- |
+| Session-responsive contain/centre viewport | `packages/template-react/src/editor.tsx` over the existing renderer and preview fitting calculation | `@sleinity/template-react/editor` |
+| Ordered editable-field bindings | React controller projection over core field resolution/target evidence and browser session mutations | `useTemplateSessionEditableFields()` and `useTemplateSessionEditableField()` |
+| Current-revision host diagnostics | React projection over existing package, font, asset, session and viewport evidence | `useTemplateSessionDiagnosticSummary()` |
+| Setup preview | Importer composition over the same internal session viewport | Existing `TemplateImportWizardPreview` contract |
+
+The editor entry is headless and React-owned. Core retains all portable
+descriptor, target and constraint authority; browser retains session state,
+mutation, persistence, font and capture authority; the renderer remains the
+only visual owner. The entry introduces no host forms, image processing,
+autosave policy, navigation, storage or publishing workflow.
+
+The generic template-editor reference is the integration evidence: it uses the
+curated entry after a confirmation is reopened into a fresh session and retains
+only product-level form, image-file, draft and navigation behavior. Studio is
+not a dependency and requires no migration for this milestone.

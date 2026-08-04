@@ -27,15 +27,7 @@ import type {
   TemplateSessionSnapshotV1,
   TemplateSessionV1,
 } from "@sleinity/template-browser/session";
-import {
-  TemplateSessionRenderer,
-  useTemplateSessionSnapshot,
-  type TemplateSessionRendererHandle,
-} from "./session";
-import {
-  fitPreviewBounds,
-  type PreviewViewportTransform,
-} from "./render/previewViewport";
+import { TemplateSessionViewport } from "./editor";
 import {
   TemplateImportFieldRulesEditor,
   TemplateImportValidationSummary,
@@ -125,90 +117,35 @@ export function TemplateImportWizardPreview({
 }: TemplateImportWizardPreviewProps) {
   const wizard = useResolvedWizard(wizardOverride);
   const snapshot = useTemplateImportWizardSnapshot(wizard);
-  const sessionSnapshot = useTemplateSessionSnapshot(wizard.session);
   const assetErrors = useRef<TemplateImportIssueV1[]>([]);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const [viewportTransform, setViewportTransform] =
-    useState<PreviewViewportTransform | null>(null);
-  const canvas = sessionSnapshot.workingPackage?.canvas ?? null;
 
   useEffect(() => {
     assetErrors.current = [];
   }, [snapshot.sessionRevision]);
 
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport || !canvas) {
-      setViewportTransform(null);
-      return;
-    }
-    const refit = () => {
-      const bounds = viewport.getBoundingClientRect();
-      if (bounds.width <= 0 || bounds.height <= 0) return;
-      setViewportTransform(
-        fitPreviewBounds(
-          { width: bounds.width, height: bounds.height },
-          { x: 0, y: 0, width: canvas.width, height: canvas.height },
-          { safePadding: bounds.width < 480 ? 16 : bounds.width < 900 ? 24 : 32 },
-        ),
-      );
-    };
-    const observer = new ResizeObserver(refit);
-    observer.observe(viewport);
-    refit();
-    return () => observer.disconnect();
-  }, [canvas?.height, canvas?.width]);
-
-  const transformStyle = canvas
-    ? ({
-        width: canvas.width,
-        height: canvas.height,
-        transform: viewportTransform
-          ? `translate(${viewportTransform.translateX}px, ${viewportTransform.translateY}px) scale(${viewportTransform.scale})`
-          : undefined,
-        transformOrigin: "0 0",
-        opacity: viewportTransform ? 1 : 0,
-      } satisfies CSSProperties)
-    : undefined;
-
   return (
-    <div
-      ref={viewportRef}
+    <TemplateSessionViewport
+      session={wizard.session}
       className={className}
       style={style}
-    >
-      {canvas ? (
-        <div
-          className="template-importer__preview-transform"
-          style={transformStyle}
-        >
-          <TemplateSessionRenderer
-            session={wizard.session}
-            mode="editor"
-            className="template-importer__preview-renderer"
-            style={{ width: canvas.width, height: canvas.height }}
-            fallback={fallback}
-            onAssetLoadError={(assetId, nodeId) => {
-              assetErrors.current.push({
-                code: "render.asset-load-failed",
-                severity: "error",
-                message: `Asset "${assetId}" could not be loaded for preview.`,
-                details: { assetId, nodeId },
-              });
-            }}
-            onRenderIdentity={(identity) => {
-              wizard.publishRenderValidation({
-                sessionRevision: snapshot.sessionRevision,
-                identity,
-                diagnostics: assetErrors.current,
-              });
-            }}
-          />
-        </div>
-      ) : (
-        fallback
-      )}
-    </div>
+      fallback={fallback}
+      rendererClassName="template-importer__preview-renderer"
+      onAssetLoadError={(assetId, nodeId) => {
+        assetErrors.current.push({
+          code: "render.asset-load-failed",
+          severity: "error",
+          message: `Asset "${assetId}" could not be loaded for preview.`,
+          details: { assetId, nodeId },
+        });
+      }}
+      onRenderIdentity={(identity) => {
+        wizard.publishRenderValidation({
+          sessionRevision: snapshot.sessionRevision,
+          identity,
+          diagnostics: assetErrors.current,
+        });
+      }}
+    />
   );
 }
 

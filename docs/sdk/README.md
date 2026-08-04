@@ -12,7 +12,7 @@ packages:
 | --- | --- | --- |
 | `@sleinity/template-core` | ZIP import, strict validation, diagnostics, canonical/resolved models, and portable field editing | Framework-neutral TypeScript |
 | `@sleinity/template-browser` | Browser session, headless import workflow, assets, fonts, persistence, readiness, and PNG capture | Modern browser/Chromium |
-| `@sleinity/template-react` | React importer bindings/default UI, renderer, inspection viewport, and revision-safe capture handle | React 19 browser app |
+| `@sleinity/template-react` | React importer UI, headless editor bindings, renderer, responsive viewport, and revision-safe capture | React 19 browser app |
 
 ## Installation
 
@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.6.0 \
-  @sleinity/template-browser@0.6.0 \
-  @sleinity/template-react@0.6.0
+pnpm add @sleinity/template-core@0.7.0 \
+  @sleinity/template-browser@0.7.0 \
+  @sleinity/template-react@0.7.0
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0)
+future `sdk-v0.7.0` Release
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -109,9 +109,12 @@ See the [template import workflow](TEMPLATE_IMPORT_WIZARD.md) for default,
 headless, page/modal/drawer, adapter, theming, restart, persistence and
 migration guidance.
 
-See the [0.6 migration guide](SDK_0_6_MIGRATION.md) for stabilized render
-validation, fitted previews, shared validation summaries, and atomic field
-settings.
+See the [0.7 migration guide](SDK_0_7_MIGRATION.md) for the responsive session
+viewport, editable-field controllers, and consolidated diagnostic projection.
+Before the final `sdk-v0.7.0` tag, use the
+[first-host acceptance checklist](FIRST_HOST_ACCEPTANCE.md) with locally packed
+release-candidate archives. The final public Release is regenerated only from
+the packages published by the tag workflow.
 
 React hosts should let `useTemplateSession()` own the lifecycle:
 
@@ -138,6 +141,22 @@ editable fields, working package, resolved tree, and revisions. The session
 supports typed field/image mutation, imported-state restoration, IndexedDB
 save/reload, and revision guards for asynchronous work.
 
+Post-confirmation editors should use the curated React editor entry:
+
+```tsx
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableFields,
+} from "@sleinity/template-react/editor";
+```
+
+The viewport owns responsive contain-and-centre fitting, current-revision
+identity, readiness and safe PNG capture. The hooks expose ordered headless
+field controllers and a deduplicated projection of existing package, font,
+asset, session and renderer evidence. They do not prescribe forms or run a
+second validator.
+
 PNG capture is allowed only for the ready render identity belonging to the
 current session revision:
 
@@ -154,7 +173,7 @@ injected adapters.
 See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) and the focused
 [template editor reference](../../examples/template-editor-integration/README.md).
 The repository verifies both workspace and isolated packed consumers.
-For upgrades, see [Migrating to SDK 0.5](SDK_0_5_MIGRATION.md). Integration
+For upgrades, see [Migrating from SDK 0.6 to 0.7](SDK_0_7_MIGRATION.md). Integration
 failures are organized by stable compatibility code in the
 [troubleshooting guide](TROUBLESHOOTING.md). The committed
 [machine-readable API contract](../../config/sdk-public-api.json) is the

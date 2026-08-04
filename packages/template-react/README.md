@@ -108,7 +108,53 @@ from the session's editable descriptors and may preprocess values with richer
 forms, croppers, or other tools before calling the existing session mutation
 methods. Final values must still pass template constraints.
 
-For application integration, use the StrictMode-safe `useTemplateSession`,
+## Headless host editor
+
+SDK 0.7 adds a curated editor entry for post-confirmation applications:
+
+```tsx
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableFields,
+} from "@sleinity/template-react/editor";
+
+function HostEditor() {
+  const fields = useTemplateSessionEditableFields();
+  const diagnostics = useTemplateSessionDiagnosticSummary();
+
+  return <>
+    <TemplateSessionViewport mode="editor" />
+    {fields.map((controller) => (
+      <input
+        key={controller.field.id}
+        value={String(controller.value ?? "")}
+        onChange={(event) => controller.setValue(event.currentTarget.value)}
+      />
+    ))}
+    <output>{diagnostics.status}</output>
+  </>;
+}
+```
+
+`TemplateSessionViewport` contains, centres, pads and refits the intrinsic
+renderer without changing its DOM or capture dimensions. Its snapshot binds
+measurement, render identity, readiness, issues and export permission to the
+current session revision. The imperative handle performs the existing safe PNG
+capture and rejects pending or stale revisions.
+
+`useTemplateSessionEditableFields()` returns the complete ordered collection;
+`useTemplateSessionEditableField(fieldId)` selects one controller by ID and
+returns `null` when it is absent. Controllers expose the existing descriptor,
+resolved value, target evidence and session mutations. They are bindings, not
+input components. Hosts remain free to provide their own forms and image
+processing before submitting a final supported value.
+
+`useTemplateSessionDiagnosticSummary()` consolidates existing package, font,
+asset, session and current viewport evidence. It does not validate again, and
+transient rejected mutations remain attached to their field controller result.
+
+For low-level application integration, use the StrictMode-safe `useTemplateSession`,
 `TemplateSessionProvider`, `useTemplateSessionSnapshot`, and
 `TemplateSessionRenderer`. The owned-session hook creates one active browser
 session and disposes it after permanent unmount without letting React's

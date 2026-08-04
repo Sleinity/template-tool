@@ -1,4 +1,4 @@
-import { collectTemplatePackageRenderWarnings } from "@sleinity/template-react";
+import { collectTemplatePackageRenderWarnings } from "../../render/packageRenderUtils";
 import type {
   PackageAsset,
   PackagePaint,

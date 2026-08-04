@@ -10,6 +10,7 @@ import type {
   PackageQualityOrigin,
   PackageQualitySeverity,
 } from "@sleinity/template-core/inspection";
+import type { ResolvedProductRenderIdentityV1 } from "../../render/productRenderIdentity";
 export type * from "@sleinity/template-core/inspection";
 
 export interface PackageQualitySupplementalDiagnostic {
@@ -65,7 +66,7 @@ export interface PackageQualityReport {
       availability: "available" | "missing";
       comparison: "not-run-in-product";
     };
-    productRenderIdentity: import("@sleinity/template-react").ResolvedProductRenderIdentityV1 | null;
+    productRenderIdentity: ResolvedProductRenderIdentityV1 | null;
   };
   issues: PackageQualityIssue[];
 }

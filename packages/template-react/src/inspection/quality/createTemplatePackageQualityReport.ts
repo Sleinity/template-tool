@@ -6,7 +6,7 @@ import type {
 } from "@sleinity/template-core/editor";
 import type { PackageExportReadinessResult } from "@sleinity/template-browser/capture";
 import type { TemplatePackageValidationResult } from "@sleinity/template-core";
-import type { TemplatePackageRenderWarning } from "@sleinity/template-react";
+import type { TemplatePackageRenderWarning } from "../../render/packageRenderUtils";
 import type {
   FontReadinessReport,
   ResolvedRenderTreeV1,
@@ -16,7 +16,7 @@ import type {
   TemplateNode,
   TemplatePackageV1,
 } from "@sleinity/template-core";
-import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
+import type { ResolvedProductRenderIdentityV1 } from "../../render/productRenderIdentity";
 import type {
   PackageQualityCategory,
   PackageQualityGate,
