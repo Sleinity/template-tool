@@ -15,6 +15,9 @@ All packages use the same version:
 Start with the [installation guide](INSTALLATION.md). External hosts and coding
 agents should normally use the checksum-verified archives attached to the
 public [`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
+Use the [SDK capability catalog](SDK_CAPABILITIES.md) to see every supported
+entry point and choose between the wizard, headless controllers, editor
+bindings, diagnostics, inspection and executable examples.
 
 ## Choose an integration path
 
@@ -123,6 +126,7 @@ rendering do not require it.
 
 ## Detailed references
 
+- [Capability catalog](SDK_CAPABILITIES.md)
 - [Installation](INSTALLATION.md)
 - [Runtime handoff](RUNTIME_HANDOFF.md)
 - [Template import workflow](TEMPLATE_IMPORT_WIZARD.md)

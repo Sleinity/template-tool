@@ -7,7 +7,9 @@ the default storage registries through the existing adapter interfaces.
 Install the fixed 0.7.0 train through the repository's
 [installation guide](../../docs/sdk/INSTALLATION.md). Use the
 [agent integration prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md) for a
-custom headless host.
+custom headless host, and use the
+[SDK capability catalog](../../docs/sdk/SDK_CAPABILITIES.md) to choose between
+the high-level workflow/session entries and focused browser adapters.
 
 As of 0.4.1 this package physically owns that complete browser runtime. Its
 production modules depend on `@sleinity/template-core` and package-local

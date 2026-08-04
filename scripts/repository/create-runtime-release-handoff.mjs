@@ -112,6 +112,10 @@ Entries named \`renderer-internal\` are unsupported fixed-train repository
 seams. Host applications must use only the documented root and curated entry
 points and must never import those internal entries.
 
+Use the [SDK capability catalog](${releaseDownloadUrl}/SDK-CAPABILITIES.md) to
+choose the smallest supported entry point for importing, setup, field rules,
+editing, rendering, capture, diagnostics, inspection or persistence.
+
 ## Vendored installation
 
 Commit the verified archives under \`vendor/\`, then add:

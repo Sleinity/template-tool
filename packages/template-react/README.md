@@ -10,6 +10,8 @@ Install the fixed 0.7.0 train through the repository's
 [agent integration prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md); the
 existing 0.2 host should use the dedicated
 [Lovable upgrade handoff](../../docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md).
+The [SDK capability catalog](../../docs/sdk/SDK_CAPABILITIES.md) lists the
+recommended wizard, editor, rendering and inspection compositions.
 
 Host applications must use this package's documented root and importer entry
 points. `@sleinity/template-core/renderer-internal` and

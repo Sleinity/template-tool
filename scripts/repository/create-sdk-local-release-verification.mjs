@@ -56,6 +56,10 @@ await Promise.all([
     path.join(output, "SDK-INSTALLATION.md"),
   ),
   cp(
+    path.join(root, "docs/sdk/SDK_CAPABILITIES.md"),
+    path.join(output, "SDK-CAPABILITIES.md"),
+  ),
+  cp(
     path.join(root, "docs/sdk/AGENT_INTEGRATION_PROMPTS.md"),
     path.join(output, "AGENT-INTEGRATION-PROMPTS.md"),
   ),
