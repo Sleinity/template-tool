@@ -9,6 +9,7 @@ import {
   updateTemplatePackageField,
   validateTemplatePackage,
   type EditableFieldBinding,
+  type FontReadinessReport,
   type PackageDiagnostic,
   type PackageDiagnosticCategory,
   type PackageEditorFieldWarning,
@@ -26,6 +27,7 @@ import {
 } from "../fonts/fontRegistry";
 import { findManagedFontCandidates } from "../fonts/fontMatching";
 import { uploadExactManagedFontForRequirement } from "../fonts/fontResolution";
+import { prepareTemplatePackageFonts } from "../fonts/managedFontAssets";
 import {
   runTemplatePackageImportPipeline,
   type PackageImportResult,
@@ -73,7 +75,22 @@ export interface TemplateSessionSnapshotV1 {
   importValidation: TemplateImportValidationReportV1 | null;
   diagnostics: PackageDiagnostic[];
   editableFields: EditableFieldBinding[];
+  fontPreparation: TemplateSessionFontPreparationStateV1;
   error: TemplateSessionErrorV1 | null;
+}
+
+export interface TemplateSessionFontPreparationIssueV1 {
+  code: string;
+  severity: "info" | "warning" | "error";
+  message: string;
+  requirementId?: string;
+}
+
+export interface TemplateSessionFontPreparationStateV1 {
+  status: "idle" | "pending" | "ready" | "warning" | "blocked";
+  revision: number;
+  report: FontReadinessReport | null;
+  issues: TemplateSessionFontPreparationIssueV1[];
 }
 
 export interface TemplateSessionOptions {
@@ -223,6 +240,12 @@ function emptySnapshot(): TemplateSessionSnapshotV1 {
     importValidation: null,
     diagnostics: [],
     editableFields: [],
+    fontPreparation: {
+      status: "idle",
+      revision: 0,
+      report: null,
+      issues: [],
+    },
     error: null,
   };
 }
@@ -322,6 +345,98 @@ export function createTemplateSessionWithDependencies(
     listeners.forEach((listener) => listener());
     return snapshot;
   };
+  const publishFontPreparation = (
+    fontPreparation: TemplateSessionFontPreparationStateV1,
+  ) => {
+    snapshot = { ...snapshot, fontPreparation };
+    listeners.forEach((listener) => listener());
+    return snapshot;
+  };
+  const scheduleFontPreparation = (
+    packageValue: TemplatePackageV1,
+    tree: ResolvedRenderTreeV1,
+    revision: number,
+  ) => {
+    const requirements = packageValue.fontRequirements ?? [];
+    if (!requirements.length) {
+      publishFontPreparation({
+        status: "ready",
+        revision,
+        report: null,
+        issues: [],
+      });
+      return;
+    }
+    publishFontPreparation({
+      status: "pending",
+      revision,
+      report: null,
+      issues: [],
+    });
+    const fontSet = typeof document !== "undefined" ? document.fonts : null;
+    void prepareTemplatePackageFonts(packageValue, tree, fontSet, fontRegistry)
+      .then((report) => {
+        if (
+          disposed ||
+          snapshot.revision !== revision ||
+          snapshot.workingPackage !== packageValue
+        ) return;
+        const exactRequirementIds = new Set(
+          requirements
+            .filter((requirement) =>
+              requirement.resolution?.classification === "exact")
+            .map((requirement) => requirement.id),
+        );
+        const blockedEntries = report.required.filter((entry) =>
+          exactRequirementIds.has(entry.id ?? "") &&
+          (entry.status !== "loaded" || !entry.verified));
+        const issues: TemplateSessionFontPreparationIssueV1[] = blockedEntries.map(
+          (entry) => ({
+            code: "font-preparation.exact-face-unavailable",
+            severity: "error",
+            message: `${entry.family} ${entry.weight} could not be activated for the current preview. Upload the exact font again or verify that browser font loading is allowed.`,
+            requirementId: entry.id,
+          }),
+        );
+        if (!fontSet) {
+          issues.push({
+            code: "font-preparation.browser-font-set-unavailable",
+            severity: "warning",
+            message: "Browser font loading is unavailable in this runtime.",
+          });
+        }
+        publishFontPreparation({
+          status: blockedEntries.length
+            ? "blocked"
+            : report.fallback.length || report.unknown.length || !fontSet
+              ? "warning"
+              : "ready",
+          revision,
+          report,
+          issues,
+        });
+      })
+      .catch((preparationError) => {
+        if (
+          disposed ||
+          snapshot.revision !== revision ||
+          snapshot.workingPackage !== packageValue
+        ) return;
+        publishFontPreparation({
+          status: "blocked",
+          revision,
+          report: null,
+          issues: [{
+            code: "font-preparation.failed",
+            severity: "error",
+            message: errorMessage(
+              preparationError,
+              "The exact fonts could not be prepared for the current preview.",
+            ),
+          }],
+        });
+      });
+  };
   const publishPackage = (input: {
     basePackage: TemplatePackageV1;
     workingPackage: TemplatePackageV1;
@@ -334,7 +449,7 @@ export function createTemplateSessionWithDependencies(
     const workingPackage = input.workingPackage;
     const validation = input.validation ?? dependencies.validate(workingPackage);
     const ready = validation.valid;
-    return publish({
+    const nextSnapshot = publish({
       status: ready ? "ready" : "blocked",
       savedTemplateId: input.savedTemplateId,
       source: input.source,
@@ -345,8 +460,22 @@ export function createTemplateSessionWithDependencies(
       importValidation: input.importValidation ?? snapshot.importValidation,
       diagnostics: input.diagnostics ?? validation.diagnostics,
       editableFields: getEffectiveEditableFields(workingPackage),
+      fontPreparation: {
+        status: ready ? "pending" : "idle",
+        revision: snapshot.revision + 1,
+        report: null,
+        issues: [],
+      },
       error: null,
     });
+    if (ready && nextSnapshot.resolvedTree) {
+      scheduleFontPreparation(
+        workingPackage,
+        nextSnapshot.resolvedTree,
+        nextSnapshot.revision,
+      );
+    }
+    return snapshot;
   };
   const fieldById = (fieldId: string) =>
     snapshot.editableFields.find((field) => field.id === fieldId) ?? null;
@@ -466,6 +595,12 @@ export function createTemplateSessionWithDependencies(
         importValidation: null,
         diagnostics: [],
         editableFields: [],
+        fontPreparation: {
+          status: "idle",
+          revision: snapshot.revision + 1,
+          report: null,
+          issues: [],
+        },
         error: null,
       });
       try {
@@ -502,6 +637,12 @@ export function createTemplateSessionWithDependencies(
             }),
             diagnostics,
             editableFields: result.package ? getEffectiveEditableFields(result.package) : [],
+            fontPreparation: {
+              status: "idle",
+              revision: snapshot.revision + 1,
+              report: null,
+              issues: [],
+            },
             error: null,
           });
         }
@@ -545,6 +686,12 @@ export function createTemplateSessionWithDependencies(
           }),
           diagnostics,
           editableFields: [],
+          fontPreparation: {
+            status: "idle",
+            revision: snapshot.revision + 1,
+            report: null,
+            issues: [],
+          },
           error: {
             code: "import-failed",
             message: errorMessage(error, "The TemplatePackage ZIP could not be imported."),

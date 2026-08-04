@@ -70,11 +70,16 @@ The supported setup UI uses `uploadFont()` as an exact-face gate. It accepts
 only one verified family/PostScript identity with the requested weight or
 variable-axis range, posture, stretch, axes, and complete required text-face
 coverage. Explicit emoji presentation, ZWJ, skin-tone, flag, and keycap
-sequences use the established device emoji fallback and remain a visible
-non-blocking portability note. Ordinary text-style symbols and all other
+sequences use the established device emoji fallback as internal, non-blocking
+evidence rather than setup guidance. Ordinary text-style symbols and all other
 characters remain strict. An exact face already stored in the managed registry is reused
 automatically. Candidate/link/fallback methods remain lower-level compatibility
 APIs for existing packages; the setup wizard does not present them as choices.
+`snapshot.fontPreparation` records pending, ready, warning, or blocked
+activation for the current package revision. Preparation uses the session's
+injected managed-font registry and the active browser `FontFaceSet`; render
+readiness cannot accept a fallback face while a current exact managed face is
+still pending or failed.
 
 Blocked ZIP imports publish ordered structured diagnostics through
 `snapshot.diagnostics`, including source layer/origin evidence in each
@@ -85,10 +90,27 @@ preflight before `session.loadZip()`.
 
 `createTemplateImportWizard()` is the headless, host-neutral seven-step import
 workflow. It owns one session by default, or accepts an injected session that it
-never disposes. Its immutable snapshots expose structured import, exact-font
-and current-revision render reports plus sanitized field rules and explicit
+never disposes. Its immutable snapshots expose structured import, exact-font,
+current-revision render, and field-validation reports plus sanitized rules and explicit
 step readiness. Every attempted import, including a corrupt ZIP, produces
 `importValidation` and a non-null compatibility validation result.
+
+In SDK 0.6, Field Rules configure every field's host-facing order plus only the
+constraints that change input behavior: maximum characters, textarea lines,
+and image format/size/dimensions/aspect/placement policy. Imported labels,
+types, targets and defaults remain read-only; number, date, colour and boolean
+descriptors need no rule panel. Invalid field-rule drafts stay in the wizard snapshot with stable
+per-field blockers while the last valid package remains active. Only a valid
+rule update advances the session revision and makes render validation stale.
+Compatibility inspection reconstructs field-validation evidence when reopening
+confirmations produced before the report existed and ignores legacy
+enabled/help-text setup metadata.
+
+Render validation follows the established routing authority. Routed templates
+require a current stable core settlement; zero-routed compatibility templates
+may become ready through their existing package, font, asset, DOM, revision,
+and export-safety gates. Every blocked render report contains an actionable
+machine-readable issue.
 
 Optional `TemplateFontAdapterV1` and `TemplateImportPersistenceAdapterV1`
 connect host-owned font bytes and post-confirmation storage. Adapters receive

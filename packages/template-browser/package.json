@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-browser",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Browser asset, font, persistence, readiness, and deterministic PNG services for TemplatePackage rendering.",
   "license": "UNLICENSED",
   "repository": {
@@ -61,7 +61,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts --sourcemap --external @sleinity/template-core --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image",
+    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts --sourcemap --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

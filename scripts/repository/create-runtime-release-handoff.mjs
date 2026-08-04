@@ -217,11 +217,20 @@ export function ConfirmedTemplateEditor({
 }
 \`\`\`
 
-The seven-step wizard provides ZIP import, structured package validation,
+The default five-page setup (Package, Fonts, Validate, Fields and Confirm)
+groups the seven-state headless workflow and provides ZIP import, structured package validation,
 exact-font preparation, render validation, diagnostics, field-rule setup and
 current-revision confirmation. Its controller/provider/hooks can also power a
 custom page, modal, drawer or workspace UI. It does not publish or navigate;
 post-confirmation persistence runs only when the host provides an adapter.
+
+The importer entry also exposes shared validation-summary, render-summary and
+field-rules components. Invalid field-rule drafts remain visible with
+structured blockers while the last valid package and preview stay active.
+Zero-routed compatibility templates may complete render validation through the
+existing package, exact-font, asset, DOM, revision and export-safety gates;
+routed templates still require current settlement. Device emoji fallback stays
+internal evidence rather than actionable setup copy.
 
 The wizard session is setup-owned. Store the immutable confirmation only after
 explicit confirmation, return to host navigation, and create a fresh

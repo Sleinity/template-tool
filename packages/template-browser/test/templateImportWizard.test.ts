@@ -96,8 +96,10 @@ await wizard.loadZip({
 assert(
   wizard.getSnapshot().activeStep === "package-validation" &&
     wizard.getSnapshot().importValidation?.importable === true &&
+    wizard.getSnapshot().importValidation?.findings.length === 0 &&
+    wizard.getSnapshot().importValidation?.counts.blockers === 0 &&
     wizard.getSnapshot().packageSummary?.name === packageValue.name,
-  "A valid ZIP should publish package evidence and enter package validation.",
+  "A valid ZIP should publish compact structured package evidence and enter package validation.",
 );
 
 wizard.next();
@@ -132,6 +134,21 @@ function readyIdentity(revision: number): ResolvedProductRenderIdentityV1 {
 
 wizard.publishRenderValidation({
   sessionRevision: wizard.getSnapshot().sessionRevision,
+  identity: {
+    ...readyIdentity(wizard.getSnapshot().sessionRevision),
+    readiness: "unsupported",
+  },
+});
+assert(
+  wizard.getSnapshot().renderValidation.status === "blocked" &&
+    wizard.getSnapshot().renderValidation.blockers.some(
+      (issue) => issue.code === "render.settlement-unsupported",
+    ),
+  "A genuinely unsupported routed render must never publish an empty blocked report.",
+);
+
+wizard.publishRenderValidation({
+  sessionRevision: wizard.getSnapshot().sessionRevision,
   identity: readyIdentity(wizard.getSnapshot().sessionRevision),
 });
 assert(
@@ -147,17 +164,47 @@ assert(
 
 const firstRule = wizard.getSnapshot().fieldRules[0];
 assert(firstRule, "The fixture should expose at least one editable field.");
+const revisionBeforeInvalidDraft = wizard.getSnapshot().sessionRevision;
+const packageBeforeInvalidDraft = structuredClone(
+  wizard.session.getSnapshot().workingPackage,
+);
+const renderBeforeInvalidDraft = wizard.getSnapshot().renderValidation.status;
 wizard.updateFieldRule(firstRule.ruleId, {
-  label: "Customer headline",
-  helpText: "Shown on the main banner.",
+  constraints: {
+    ...firstRule.constraints,
+    maxCharacters: -1,
+  },
 });
 assert(
-  wizard.getSnapshot().renderValidation.status === "stale" &&
-    wizard.getSnapshot().fieldRules[0].label === "Customer headline" &&
-    wizard.getSnapshot().fieldRules[0].helpText ===
-      "Shown on the main banner.",
-  "Field-rule edits should remain sanitized and invalidate render validation.",
+  wizard.getSnapshot().fieldValidation.status === "blocked" &&
+    wizard.getSnapshot().fieldRules[0].validation.blockers.some(
+      (issue) =>
+        issue.code === "field-rule.constraint-positive-integer-required",
+    ) &&
+    wizard.getSnapshot().sessionRevision === revisionBeforeInvalidDraft &&
+    JSON.stringify(wizard.session.getSnapshot().workingPackage) ===
+      JSON.stringify(packageBeforeInvalidDraft) &&
+    wizard.getSnapshot().renderValidation.status === renderBeforeInvalidDraft,
+  "An invalid field-rule draft should stay visible without replacing the last valid package or render report.",
 );
+wizard.updateFieldRule(firstRule.ruleId, {
+  constraints: firstRule.constraints,
+});
+assert(
+  wizard.getSnapshot().fieldValidation.status !== "blocked" &&
+    wizard.getSnapshot().sessionRevision > revisionBeforeInvalidDraft &&
+    wizard.getSnapshot().renderValidation.status === "stale",
+  "Clearing an invalid optional constraint should atomically commit a new valid revision.",
+);
+const secondRule = wizard.getSnapshot().fieldRules[1];
+if (secondRule) {
+  wizard.reorderFieldRule(secondRule.ruleId, 0);
+  assert(
+    wizard.getSnapshot().renderValidation.status === "stale" &&
+      wizard.getSnapshot().fieldRules[0].ruleId === secondRule.ruleId,
+    "Field ordering should remain host-facing configuration and invalidate render validation.",
+  );
+}
 
 wizard.publishRenderValidation({
   sessionRevision: wizard.getSnapshot().sessionRevision,
@@ -171,14 +218,16 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.5.0" &&
+    confirmation.sdkVersion === "0.6.0" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
     confirmation.packageDigest?.algorithm === "sha-256" &&
     confirmation.packageDigest.value.length === 64 &&
     confirmation.sourceName === "wizard.zip" &&
     confirmation.importedAt === "2026-07-30T10:00:00.000Z" &&
-    confirmation.configuredFieldRules[0].helpText ===
-      "Shown on the main banner." &&
+    confirmation.configuredFieldRules.every(
+      (rule) => !("enabled" in rule) && !("helpText" in rule),
+    ) &&
+    confirmation.fieldValidation?.status !== "blocked" &&
     wizard.getSnapshot().status === "completed" &&
     wizard.getSnapshot().persistenceReceipt?.id === "host-template-1",
   "Confirmation should be immutable, host-neutral, fingerprinted, and persistence-aware.",
@@ -234,6 +283,7 @@ const legacyConfirmation = structuredClone(confirmation) as Record<
   unknown
 >;
 delete legacyConfirmation.packageDigest;
+delete legacyConfirmation.fieldValidation;
 legacyConfirmation.sdkVersion = "0.3.0";
 const legacyInspection = await inspectTemplateImportConfirmation(
   legacyConfirmation,
@@ -243,6 +293,7 @@ assert(
   legacyInspection.loadable &&
     legacyInspection.status === "warning" &&
     legacyInspection.digest.status === "legacy-missing" &&
+    legacyInspection.fieldValidation?.valid === true &&
     legacyInspection.issues.some(
       (issue) => issue.code === "confirmation.digest-missing",
     ),
@@ -506,6 +557,13 @@ await blockedWizard.loadZip({
 assert(
   blockedSession.getSnapshot().validation !== null &&
     blockedSession.getSnapshot().importValidation?.status === "blocked" &&
+    blockedSession.getSnapshot().importValidation?.findings.some(
+      (finding) =>
+        finding.code === "bundle.corrupt" &&
+        finding.phase === "zip-files" &&
+        finding.impact.length > 0 &&
+        finding.repairGuidance.length > 0,
+    ) &&
     blockedWizard.getSnapshot().steps["package-validation"].status ===
       "blocked" &&
     blockedWizard.getSnapshot().steps["package-validation"].canContinue ===

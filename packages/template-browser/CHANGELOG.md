@@ -1,5 +1,22 @@
 # @sleinity/template-browser
 
+## 0.6.0
+
+### Minor Changes
+
+- Add structured field-validation evidence to import snapshots, confirmations,
+  compatibility inspection, and legacy-confirmation reopening.
+- Keep invalid setup drafts separate from the last valid package and guarantee
+  actionable diagnostics for blocked render validation.
+- Publish revision-bound managed-font preparation evidence from the session and
+  activate exact managed faces through the injected registry before readiness.
+- Limit wizard field rules to ordering and meaningful host-input constraints;
+  legacy enabled/help-text confirmation metadata remains accepted but ignored.
+- Treat zero-routed compatibility rendering as ready when its established
+  package, font, asset, DOM, and export-safety checks pass.
+- Updated dependencies
+  - @sleinity/template-core@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

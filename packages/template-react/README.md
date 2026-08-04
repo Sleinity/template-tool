@@ -50,8 +50,10 @@ const wizard = useTemplateImportWizard();
 />;
 ```
 
-The fixed ZIP Import → Package Validation → Font Validation → Render Validation
-→ Field Rules → Confirmation → Completed workflow owns no catalogue, cloud
+The default interface presents the headless controller as five focused pages:
+Package → Fonts → Validate → Fields → Confirm. Package and render validation
+remain distinct controller evidence but are grouped into the Package and
+Validate pages, and confirmation returns directly to the host. The workflow owns no catalogue, cloud
 persistence, navigation, authentication, or publishing. A framework-neutral
 controller lives in `template-browser`; this entry provides
 `TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot` and
@@ -61,14 +63,38 @@ supports image constraint and Fill/Fit-default configuration, never
 saves automatically, and completes only for the current validated render
 identity. Required fonts progress only through an
 exact uploaded face with complete required text-face coverage. Explicit emoji
-sequences may use the device emoji font; the wizard shows this as a neutral
-portability note while ordinary text-style symbols and other missing
-characters remain blocking and are identified. The wizard
+sequences may use the device emoji font as internal portability evidence; the
+default setup UI does not turn that established fallback into a warning or
+instruction. Ordinary text-style symbols and other missing characters remain
+blocking and are identified. The wizard
 shows the required family, named weight and numeric weight, omits normal
 upright posture from the label, and shows italic/oblique, stretch, or variable
 axes only when relevant. Previously verified exact files are reused
 automatically; suggestions, open-font retrieval, compatible faces,
 replacements, and system fallback do not bypass or appear in the setup flow.
+
+SDK 0.6 adds reusable `TemplateImportValidationSummary`,
+`TemplateImportRenderValidationSummary`, and
+`TemplateImportFieldRulesEditor` components. The validation summary accepts the
+package report by itself for compatibility, or optional package facts plus font
+and render reports to present one consolidated host-facing result with compact
+checks, actionable findings, and a single technical disclosure. The focused
+render summary remains available for custom compositions.
+
+The field editor keeps invalid
+numeric, MIME, aspect-ratio, or target drafts visible with inline blockers while the
+last valid package and preview stay active. Imported defaults remain read-only,
+and one expandable field-card list owns both order and applicable rules. It exposes only maximum
+characters, textarea lines, and image format/size/dimensions/aspect/placement
+policy plus accessible drag and menu-based keyboard reordering. It does not expose
+enablement, label/help-text mutation, patterns, manual counters, overflow modes,
+node paths, or content editing. Studio keeps its richer native field-card and
+validation presentation instead of importing this host-neutral visual shell.
+
+`TemplateImportWizardPreview` fits the complete intrinsic canvas into a
+responsive, observer-driven frame with protected padding and hidden overflow.
+The intrinsic renderer remains unchanged, so preview fitting does not alter DOM
+output, capture dimensions, or pixels.
 
 Optional font and confirmation-persistence adapters integrate
 host-owned services without weakening SDK validation. The confirmation result

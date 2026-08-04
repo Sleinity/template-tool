@@ -33,6 +33,7 @@ import {
   replacePackageEditableFieldRules,
   updatePackageEditableFieldRule,
 } from "../src/editor/packageFieldRules";
+import { validatePackageEditableFieldRules } from "../src/editor/packageFieldRuleValidation";
 import { validateTemplatePackage } from "../src/validateTemplatePackage";
 import type {
   EditableFieldBinding,
@@ -191,6 +192,79 @@ assert(
   assert(
     duplicateRejected,
     "Duplicate field-rule identities must be rejected before session publication.",
+  );
+
+  const validRules = validatePackageEditableFieldRules(renamed.fields);
+  assert(
+    validRules.valid && validRules.blockers.length === 0,
+    "A supported field-rule configuration should produce a ready validation report.",
+  );
+
+  const invalidTextRule = structuredClone(headline);
+  invalidTextRule.label = "";
+  invalidTextRule.constraints = {
+    minCharacters: 12,
+    maxCharacters: 3.5,
+    pattern: "custom",
+    customPattern: "[",
+  };
+  const invalidTextReport = validatePackageEditableFieldRules([
+    invalidTextRule,
+  ]);
+  assert(
+    !invalidTextReport.valid &&
+      invalidTextReport.blockers.some(
+        (issue) => issue.code === "field-rule.label-required",
+      ) &&
+      invalidTextReport.blockers.some(
+        (issue) =>
+          issue.code === "field-rule.constraint-positive-integer-required",
+      ) &&
+      invalidTextReport.blockers.some(
+        (issue) => issue.code === "field-rule.custom-pattern-invalid",
+      ),
+    "Empty labels, fractional integer limits, and malformed patterns should be explicit blockers.",
+  );
+
+  const invalidImageRule: EditableFieldBinding = {
+    id: "validation-image",
+    type: "image",
+    nodeId: "58:61",
+    property: "image.assetId",
+    defaultValue: "asset:image:21b94426",
+    constraints: {
+      allowedMimeTypes: ["image/png", "image/png", "jpeg"],
+      maxFileSizeMb: -1,
+      minWidth: 2.5,
+      replacementMode: "user-crop",
+    },
+  };
+  const invalidImageReport = validatePackageEditableFieldRules([
+    invalidImageRule,
+    invalidImageRule,
+  ]);
+  assert(
+    !invalidImageReport.valid &&
+      invalidImageReport.blockers.some(
+        (issue) => issue.code === "field-rule.duplicate",
+      ) &&
+      invalidImageReport.blockers.some(
+        (issue) => issue.code === "field-rule.mime-type-invalid",
+      ) &&
+      invalidImageReport.blockers.some(
+        (issue) => issue.code === "field-rule.mime-type-duplicate",
+      ) &&
+      invalidImageReport.blockers.some(
+        (issue) => issue.code === "field-rule.constraint-positive-number-required",
+      ),
+    "Duplicate rules, malformed MIME values, negative sizes, and fractional dimensions should block publication.",
+  );
+
+  const clearedOptionalRule = structuredClone(headline);
+  clearedOptionalRule.constraints = {};
+  assert(
+    validatePackageEditableFieldRules([clearedOptionalRule]).valid,
+    "Clearing optional numeric constraints should remain valid.",
   );
 }
 

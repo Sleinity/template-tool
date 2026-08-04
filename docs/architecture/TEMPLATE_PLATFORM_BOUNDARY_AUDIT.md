@@ -786,3 +786,37 @@ ran.
   `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
   No approved file changed and no reference, fixture, schema, promotion or
   tolerance update command ran.
+
+## 24. SDK 0.6.0 wizard stabilization boundary
+
+- Core's supported `editor` entry owns pure editable-field rule validation.
+  It remains DOM-, React-, storage-, font-activation-, and network-free.
+- Browser owns structured field-validation reports, atomic rule application,
+  confirmation projection/reconstruction, and the compatibility-aware render
+  readiness decision. A zero-routed compatibility tree does not acquire a
+  synthetic settlement blocker; routed trees still require current settlement.
+- React owns the fitted session-preview frame and shared validation/field-rule
+  presentation. The intrinsic `TemplateSessionRenderer` remains the only
+  renderer and is not resized internally or captured during validation.
+- Studio consumes the shared React components inside its existing five-step
+  product workflow. Its catalogue, navigation, advanced diagnostics and
+  persistence remain application-owned.
+- Emoji fallback stays in browser/advanced diagnostic evidence but is filtered
+  from ordinary Studio and wizard setup presentation. Exact non-emoji glyph
+  coverage remains blocking.
+- Cross-device confirmation transport, cloud storage and product-specific
+  content controls remain host responsibilities and are not part of this SDK
+  boundary.
+- Current verification passes package/root TypeScript, portable tests, builds,
+  API/release/docs contracts, boundaries, archive inspection, isolated
+  consumers, browser smokes and the packed generic editor. Core root
+  declarations stay 87,431 bytes at
+  `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`;
+  local core/browser/React archives are 588,525 / 329,221 / 222,511 bytes.
+- The current renderer/scene guards retain only their documented historical and
+  unapproved states, and all 76 current settlement surfaces remain equivalent.
+  Approved renderer, scene and settlement aggregates stay
+  `be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+  `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+  and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+  No approved evidence changed.

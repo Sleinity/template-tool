@@ -471,7 +471,7 @@ ${Object.entries(vendoredDependencies)
   await page.getByRole("heading", { name: "Template dashboard" }).waitFor();
   await page.getByText("No templates have been added.").waitFor();
   await page.getByRole("button", { name: "Add new template" }).click();
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByRole("button", { name: "Templates" }).click();
   await page.getByText("Template setup cancelled.").waitFor();
   await page.getByText("No templates have been added.").waitFor();
   await page.getByRole("button", { name: "Add new template" }).click();
@@ -481,13 +481,16 @@ ${Object.entries(vendoredDependencies)
     mimeType: "application/zip",
     buffer: Buffer.from([0, 1, 2, 3]),
   });
-  await page.locator('.template-importer__status[data-status="blocked"]').waitFor();
-  await page.getByLabel("Import diagnostics").locator("article").first().waitFor();
+  const invalidImportSummary = page.getByLabel("Template validation summary");
+  await invalidImportSummary.waitFor();
+  if (!(await invalidImportSummary.getByText("Template blocked", { exact: true }).isVisible())) {
+    throw new Error("Invalid ZIP did not surface a blocked validation result.");
+  }
 
   await zipInput.setInputFiles(fixturePath);
-  await page.getByRole("heading", { name: "Package validation" }).waitFor();
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.getByRole("heading", { name: "Validate required fonts" }).waitFor();
+  await page.getByRole("heading", { name: "Package", exact: true }).waitFor();
+  await page.getByRole("button", { name: "Import package" }).click();
+  await page.getByRole("heading", { name: "Fonts", exact: true }).waitFor();
   const exactFont = page
     .locator(".template-importer__font")
     .filter({ hasText: "Rethink Sans" });
@@ -495,7 +498,7 @@ ${Object.entries(vendoredDependencies)
     "Rethink Sans — SemiBold (600)",
     { exact: true },
   ).waitFor();
-  const continueFromFonts = page.getByRole("button", { name: "Continue" });
+  const continueFromFonts = page.getByRole("button", { name: "Continue to validation" });
   if (!(await continueFromFonts.isDisabled())) {
     throw new Error("Font progression was enabled before the exact face was ready.");
   }
@@ -512,10 +515,9 @@ ${Object.entries(vendoredDependencies)
   await exactFont.getByLabel("Upload font file").setInputFiles(fontPath);
   await exactFont.getByText("Ready", { exact: true }).waitFor();
   await exactFont.getByText(/Exact font verified/).waitFor();
-  await exactFont.getByText(
-    "Emoji in this template will use the device emoji font.",
-    { exact: true },
-  ).waitFor();
+  if (await page.getByText(/emoji/i).count()) {
+    throw new Error("The default setup UI exposed internal emoji fallback evidence.");
+  }
   if (
     await page.getByText(/replacement|available fonts|open font/i).count()
   ) {
@@ -526,20 +528,19 @@ ${Object.entries(vendoredDependencies)
   await page.getByRole("button", { name: "Add new template" }).click();
   const reloadedZipInput = page.getByLabel(/Choose template ZIP/);
   await reloadedZipInput.setInputFiles(fixturePath);
-  await page.getByRole("heading", { name: "Package validation" }).waitFor();
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.getByRole("heading", { name: "Validate required fonts" }).waitFor();
+  await page.getByRole("heading", { name: "Package", exact: true }).waitFor();
+  await page.getByRole("button", { name: "Import package" }).click();
+  await page.getByRole("heading", { name: "Fonts", exact: true }).waitFor();
   const reusedFont = page
     .locator(".template-importer__font")
     .filter({ hasText: "Rethink Sans" });
   await reusedFont.getByText("Ready", { exact: true }).waitFor();
   await reusedFont.getByText(/Exact font verified/).waitFor();
-  await reusedFont.getByText(
-    "Emoji in this template will use the device emoji font.",
-    { exact: true },
-  ).waitFor();
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.getByRole("heading", { name: "Render validation" }).waitFor();
+  if (await page.getByText(/emoji/i).count()) {
+    throw new Error("Stored exact-font reuse exposed internal emoji fallback evidence.");
+  }
+  await page.getByRole("button", { name: "Continue to validation" }).click();
+  await page.getByRole("heading", { name: "Validate", exact: true }).waitFor();
   await page.locator("[data-template-package-canvas]").waitFor();
   await page.waitForFunction(() => {
     const button = Array.from(document.querySelectorAll("button")).find(
@@ -547,15 +548,187 @@ ${Object.entries(vendoredDependencies)
     );
     return button instanceof HTMLButtonElement && !button.disabled;
   });
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.getByRole("heading", { name: "Configure field rules" }).waitFor();
+  const previewGeometry = await page.locator(".template-importer__preview").evaluate(
+    (preview) => {
+      const layer = preview.querySelector(".template-importer__preview-transform");
+      if (!(layer instanceof HTMLElement)) return null;
+      const outer = preview.getBoundingClientRect();
+      const inner = layer.getBoundingClientRect();
+      const style = getComputedStyle(preview);
+      return {
+        clientWidth: preview.clientWidth,
+        clientHeight: preview.clientHeight,
+        scrollWidth: preview.scrollWidth,
+        scrollHeight: preview.scrollHeight,
+        overflowX: style.overflowX,
+        overflowY: style.overflowY,
+        padding: {
+          left: inner.left - outer.left,
+          right: outer.right - inner.right,
+          top: inner.top - outer.top,
+          bottom: outer.bottom - inner.bottom,
+        },
+        aspectRatio: inner.width / inner.height,
+      };
+    },
+  );
+  if (
+    !previewGeometry ||
+    previewGeometry.scrollWidth > previewGeometry.clientWidth ||
+    previewGeometry.scrollHeight > previewGeometry.clientHeight ||
+    previewGeometry.overflowX !== "hidden" ||
+    previewGeometry.overflowY !== "hidden" ||
+    // The transformed canvas is measured inside a one-pixel preview border, so
+    // a 24px fit margin can resolve to just under 24 device pixels.
+    Object.values(previewGeometry.padding).some((value) => value < 22.5) ||
+    Math.abs(previewGeometry.aspectRatio - 480 / 240) > 0.01
+  ) {
+    throw new Error(
+      `The import preview was not fully fitted with protected padding: ${JSON.stringify(previewGeometry)}.`,
+    );
+  }
+  await page.getByRole("button", { name: "Continue to fields" }).click();
+  await page.locator('[aria-label="Template fields"]').waitFor();
+  for (const viewport of [
+    { name: "wide", width: 1440, height: 900 },
+    { name: "narrow", width: 700, height: 820 },
+    { name: "short", width: 1100, height: 650 },
+  ]) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    const layout = await page.locator(".template-importer").evaluate((root) => {
+      const content = root.querySelector(".template-importer__content");
+      const footer = root.querySelector(".template-importer__actions");
+      const sidebar = root.querySelector(".template-importer__sidebar");
+      const fields = root.querySelector(".template-importer__fields-layout");
+      if (!(content instanceof HTMLElement) ||
+          !(footer instanceof HTMLElement) ||
+          !(sidebar instanceof HTMLElement) ||
+          !(fields instanceof HTMLElement)) return null;
+      const rootBounds = root.getBoundingClientRect();
+      const footerBounds = footer.getBoundingClientRect();
+      return {
+        rootClientWidth: root.clientWidth,
+        rootScrollWidth: root.scrollWidth,
+        contentClientWidth: content.clientWidth,
+        contentScrollWidth: content.scrollWidth,
+        contentOverflowY: getComputedStyle(content).overflowY,
+        rootOverflow: getComputedStyle(root).overflow,
+        sidebarDisplay: getComputedStyle(sidebar).display,
+        fieldColumns: getComputedStyle(fields).gridTemplateColumns.split(" ").length,
+        footerInsideRoot: footerBounds.bottom <= rootBounds.bottom + 0.5,
+      };
+    });
+    const narrow = viewport.width <= 720;
+    if (!layout ||
+        layout.rootScrollWidth > layout.rootClientWidth ||
+        layout.contentScrollWidth > layout.contentClientWidth ||
+        layout.contentOverflowY !== "auto" ||
+        layout.rootOverflow !== "hidden" ||
+        !layout.footerInsideRoot ||
+        (narrow && layout.sidebarDisplay !== "none") ||
+        (narrow && layout.fieldColumns !== 1)) {
+      throw new Error(
+        `${viewport.name} wizard layout did not preserve the fixed shell and responsive field layout: ${JSON.stringify(layout)}.`,
+      );
+    }
+  }
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const orderedFields = page.locator('[aria-label="Template fields"] .template-importer__field');
+  const headlineRuleForDrag = orderedFields.filter({ hasText: "Headline" }).first();
+  const heroImageRuleForDrag = orderedFields.filter({ hasText: "Hero image" }).first();
+  await page.evaluate(() => {
+    const fields = Array.from(document.querySelectorAll(
+      '[aria-label="Template fields"] .template-importer__field',
+    ));
+    const source = fields.find((field) => field.textContent?.includes("Hero image"));
+    if (!source) {
+      throw new Error(`Field cards were unavailable for drag acceptance: ${fields.map((field) => field.textContent?.trim()).join(" | ")}.`);
+    }
+    source.dispatchEvent(new DragEvent("dragstart", {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer: new DataTransfer(),
+    }));
+  });
+  await heroImageRuleForDrag.getAttribute("data-dragging").then((value) => {
+    if (value !== "true") throw new Error("Whole-card drag did not enter a dragging state.");
+  });
+  await page.evaluate(() => {
+    const target = Array.from(document.querySelectorAll(
+      '[aria-label="Template fields"] .template-importer__field',
+    )).find((field) => field.textContent?.includes("Headline"));
+    if (!target) throw new Error("Drop target was unavailable for drag acceptance.");
+    const bounds = target.getBoundingClientRect();
+    target.dispatchEvent(new DragEvent("dragover", {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer: new DataTransfer(),
+      clientY: bounds.top + 1,
+    }));
+  });
+  await headlineRuleForDrag.getAttribute("data-drop-position").then((position) => {
+    if (position !== "before") {
+      throw new Error(`Whole-card drag did not expose a before-drop indicator: ${position}.`);
+    }
+  });
+  await page.evaluate(() => {
+    const fields = Array.from(document.querySelectorAll(
+      '[aria-label="Template fields"] .template-importer__field',
+    ));
+    const target = fields.find((field) => field.textContent?.includes("Headline"));
+    if (!target) throw new Error("Drop target was unavailable for drag acceptance.");
+    target.dispatchEvent(new DragEvent("drop", {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer: new DataTransfer(),
+    }));
+  });
+  await page.waitForFunction(() =>
+    document.querySelector('[aria-label="Template fields"] .template-importer__field')
+      ?.textContent?.includes("Hero image"));
+  if (await orderedFields.first().textContent().then((value) => !value?.includes("Hero image"))) {
+    throw new Error("Whole-card drag did not commit the indicated field order.");
+  }
+  const heroImageMenu = heroImageRuleForDrag.locator(".template-importer__field-menu");
+  await heroImageMenu.locator("summary").click();
+  await heroImageMenu.getByRole("menuitem", { name: "Move down" }).click();
+  await page.waitForFunction(() =>
+    document.querySelector('[aria-label="Template fields"] .template-importer__field')
+      ?.textContent?.includes("Headline"));
+  if (await heroImageRuleForDrag.getAttribute("data-dragging")) {
+    throw new Error("An interactive field control incorrectly initiated whole-card dragging.");
+  }
+  const headlineRule = page
+    .locator(".template-importer__field")
+    .filter({ hasText: "Headline" });
+  let maximumCharacters = headlineRule.getByLabel("Maximum characters");
+  if ((await maximumCharacters.count()) === 0) {
+    await headlineRuleForDrag.getByRole("button", { name: /Headline/ }).click();
+    maximumCharacters = headlineRule.getByLabel("Maximum characters");
+  }
+  await maximumCharacters.fill("-1");
+  await headlineRule.getByRole("alert").waitFor();
+  if (!(await page.getByRole("button", { name: "Continue to confirmation" }).isDisabled())) {
+    throw new Error("An invalid field-rule draft did not block progression.");
+  }
+  const maximumCharactersAfterRejection = headlineRule.getByLabel("Maximum characters");
+  await maximumCharactersAfterRejection.fill("");
+  await page.waitForFunction(() => {
+    const button = Array.from(document.querySelectorAll("button")).find(
+      (item) => item.textContent?.includes("Continue"),
+    );
+    return button instanceof HTMLButtonElement && !button.disabled;
+  });
   const wizardImageField = page
     .locator(".template-importer__field")
     .filter({ hasText: "Hero image" });
-  await wizardImageField.getByLabel("Replacement mode").selectOption("contain");
+  await wizardImageField
+    .getByRole("button", { name: /Hero image/ })
+    .click();
+  await wizardImageField.getByLabel("Image placement").selectOption("contain");
   await page.waitForFunction(() => {
     const select = Array.from(document.querySelectorAll("select")).find(
-      (item) => item.previousElementSibling?.textContent === "Replacement mode",
+      (item) => item.previousElementSibling?.textContent === "Image placement",
     );
     return select instanceof HTMLSelectElement && select.value === "contain";
   });
@@ -565,8 +738,8 @@ ${Object.entries(vendoredDependencies)
     );
     return button instanceof HTMLButtonElement && !button.disabled;
   });
-  await page.getByRole("button", { name: "Continue" }).click();
-  await page.getByRole("heading", { name: "Confirm template" }).waitFor();
+  await page.getByRole("button", { name: "Continue to confirmation" }).click();
+  await page.getByRole("heading", { name: "Confirm", exact: true }).waitFor();
   const useTemplateButton = page.getByRole("button", { name: "Use template" });
   await useTemplateButton.waitFor();
   await page.waitForFunction(() => {
@@ -597,9 +770,14 @@ ${Object.entries(vendoredDependencies)
 
   const headline = page.getByLabel("Headline");
   await headline.fill("Acceptance headline");
-  await page
-    .getByRole("button", { name: "Apply host uppercase transform" })
-    .click();
+  const hostTransform = page.getByRole("button", {
+    name: "Apply host uppercase transform",
+  });
+  if ((await hostTransform.count()) === 0 || !(await hostTransform.isVisible())) {
+    const utilitiesToggle = page.locator(".editor-utilities > summary");
+    await utilitiesToggle.click();
+  }
+  await hostTransform.click();
   if (await headline.inputValue() !== "ACCEPTANCE HEADLINE") {
     throw new Error("The host-owned text transformation was not applied.");
   }

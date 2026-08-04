@@ -3,7 +3,7 @@
 This admin-only React 19 example demonstrates the supported Template Platform
 consumer boundary without importing Template Studio.
 
-It uses the public `@sleinity/template-react/importer` seven-step wizard for
+It uses the public `@sleinity/template-react/importer` five-page setup wizard for
 ZIP import, structured package validation, exact-font preparation, render
 validation, diagnostics, field-rule setup, confirmation and completion. The
 landing view acts as an in-memory dashboard: Add template opens the wizard,

@@ -262,7 +262,6 @@ if (coreEntry.includes("fontCharacterCoverage")) {
 for (const file of [
   "packages/template-browser/src/fonts/fontMatching.ts",
   "packages/template-core/src/resolved/fontReadiness.ts",
-  "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx",
   "packages/template-browser/src/import/templateImportWizard.ts",
 ]) {
   if (!(await read(file)).includes("fontUsesPlatformEmojiFallback") &&
@@ -582,6 +581,7 @@ for (const activeFontUi of [
     "Use replacement",
     "Link font",
     "resolve-open-font",
+    "Emoji in this template will use the device emoji font.",
   ]) {
     if (source.includes(retiredLabel)) {
       violations.push(`${activeFontUi} exposes retired font setup text: ${retiredLabel}`);

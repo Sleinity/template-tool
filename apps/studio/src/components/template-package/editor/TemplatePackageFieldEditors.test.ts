@@ -1,6 +1,5 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import fieldRulesSource from "./TemplatePackageFieldRulesEditor.tsx?raw";
 import figmaPluginV041 from "../../../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import { validatePackageJpgExportReadiness } from "@sleinity/template-browser/capture";
 import { validateTemplatePackage, type EditableFieldBinding, type TemplatePackageV1 } from "@sleinity/template-core";
@@ -316,24 +315,19 @@ const builderMarkup = renderToStaticMarkup(
   }),
 );
 assert(
-  builderMarkup.includes('aria-label="Editor field order"') &&
-    builderMarkup.includes("Maximum characters") &&
+  builderMarkup.includes("Maximum characters") &&
     builderMarkup.includes("Maximum lines") &&
     builderMarkup.includes("Template default") &&
-    builderMarkup.includes("Move up") &&
     !builderMarkup.includes("Maximum words") &&
     !builderMarkup.includes(">Required<") &&
     !builderMarkup.includes("Field filters") &&
     !builderMarkup.includes("Preview linked") &&
-    builderMarkup.includes('<option value="number">Number</option>') &&
-    !builderMarkup.includes('<option value="currency">') &&
-    !builderMarkup.includes("When the limit is reached"),
-  "Fields should expose one ordered list and only canonical V1 constraints.",
-);
-assert(
-  fieldRulesSource.includes("setDragImage(ghost") &&
-    fieldRulesSource.includes('classList.add("field-rule-card--drag-ghost")'),
-  "Native field dragging should use the complete collapsed row as its drag image.",
+    !builderMarkup.includes("Input pattern") &&
+    !builderMarkup.includes("Overflow behavior") &&
+    !builderMarkup.includes(">Enabled<") &&
+    !builderMarkup.includes("Help text") &&
+    !builderMarkup.includes("Node path"),
+  "Fields should expose only meaningful host-input rules without mutable metadata or node paths.",
 );
 const imageBuilderMarkup = renderToStaticMarkup(
   createElement(TemplatePackageFieldRulesEditor, {
@@ -344,9 +338,11 @@ const imageBuilderMarkup = renderToStaticMarkup(
 );
 assert(
   imageBuilderMarkup.includes("Allowed formats") &&
-    imageBuilderMarkup.includes("Preserve original crop") &&
+    imageBuilderMarkup.includes("Default placement") &&
+    imageBuilderMarkup.includes("Host-provided crop") &&
+    !imageBuilderMarkup.includes("Preserve imported crop") &&
     !imageBuilderMarkup.includes(">Required<"),
-  "Image rules should use designer-facing formats and ignore legacy required metadata.",
+  "Image rules should expose portable format and placement policies without content editing.",
 );
 
 const editorPackage = structuredClone(basePackage);

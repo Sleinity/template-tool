@@ -13,16 +13,10 @@ import {
   type PropsWithChildren,
   type ReactNode,
 } from "react";
-import type {
-  PackageImageFieldConstraints,
-  PackageTextFieldConstraints,
-} from "@sleinity/template-core";
 import {
   createTemplateImportWizard,
   formatRequiredFontFace,
   type TemplateImportConfirmationV1,
-  type TemplateImportFieldRulePatchV1,
-  type TemplateImportFieldRuleV1,
   type TemplateImportIssueV1,
   type TemplateImportWizardControllerV1,
   type TemplateImportWizardOptionsV1,
@@ -35,22 +29,31 @@ import type {
 } from "@sleinity/template-browser/session";
 import {
   TemplateSessionRenderer,
+  useTemplateSessionSnapshot,
   type TemplateSessionRendererHandle,
 } from "./session";
+import {
+  fitPreviewBounds,
+  type PreviewViewportTransform,
+} from "./render/previewViewport";
+import {
+  TemplateImportFieldRulesEditor,
+  TemplateImportValidationSummary,
+} from "./importerComponents";
+export {
+  TemplateImportFieldRulesEditor,
+  TemplateImportRenderValidationSummary,
+  TemplateImportValidationSummary,
+} from "./importerComponents";
+export type {
+  TemplateImportFieldRulesEditorProps,
+  TemplateImportRenderValidationSummaryProps,
+  TemplateImportValidationSummaryProps,
+} from "./importerComponents";
 import "./importer.css";
 
 const TemplateImportWizardContext =
   createContext<TemplateImportWizardControllerV1 | null>(null);
-
-const defaultStepTitles: Record<TemplateImportWizardStepId, string> = {
-  "zip-import": "ZIP Import",
-  "package-validation": "Package Validation",
-  "font-validation": "Font Validation",
-  "render-validation": "Render Validation",
-  "field-rules": "Field Rules",
-  confirmation: "Confirmation",
-  completed: "Completed",
-};
 
 export interface TemplateImportWizardProviderProps {
   wizard: TemplateImportWizardControllerV1;
@@ -122,35 +125,90 @@ export function TemplateImportWizardPreview({
 }: TemplateImportWizardPreviewProps) {
   const wizard = useResolvedWizard(wizardOverride);
   const snapshot = useTemplateImportWizardSnapshot(wizard);
+  const sessionSnapshot = useTemplateSessionSnapshot(wizard.session);
   const assetErrors = useRef<TemplateImportIssueV1[]>([]);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [viewportTransform, setViewportTransform] =
+    useState<PreviewViewportTransform | null>(null);
+  const canvas = sessionSnapshot.workingPackage?.canvas ?? null;
 
   useEffect(() => {
     assetErrors.current = [];
   }, [snapshot.sessionRevision]);
 
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || !canvas) {
+      setViewportTransform(null);
+      return;
+    }
+    const refit = () => {
+      const bounds = viewport.getBoundingClientRect();
+      if (bounds.width <= 0 || bounds.height <= 0) return;
+      setViewportTransform(
+        fitPreviewBounds(
+          { width: bounds.width, height: bounds.height },
+          { x: 0, y: 0, width: canvas.width, height: canvas.height },
+          { safePadding: bounds.width < 480 ? 16 : bounds.width < 900 ? 24 : 32 },
+        ),
+      );
+    };
+    const observer = new ResizeObserver(refit);
+    observer.observe(viewport);
+    refit();
+    return () => observer.disconnect();
+  }, [canvas?.height, canvas?.width]);
+
+  const transformStyle = canvas
+    ? ({
+        width: canvas.width,
+        height: canvas.height,
+        transform: viewportTransform
+          ? `translate(${viewportTransform.translateX}px, ${viewportTransform.translateY}px) scale(${viewportTransform.scale})`
+          : undefined,
+        transformOrigin: "0 0",
+        opacity: viewportTransform ? 1 : 0,
+      } satisfies CSSProperties)
+    : undefined;
+
   return (
-    <TemplateSessionRenderer
-      session={wizard.session}
-      mode="editor"
+    <div
+      ref={viewportRef}
       className={className}
       style={style}
-      fallback={fallback}
-      onAssetLoadError={(assetId, nodeId) => {
-        assetErrors.current.push({
-          code: "render.asset-load-failed",
-          severity: "error",
-          message: `Asset "${assetId}" could not be loaded for preview.`,
-          details: { assetId, nodeId },
-        });
-      }}
-      onRenderIdentity={(identity) => {
-        wizard.publishRenderValidation({
-          sessionRevision: snapshot.sessionRevision,
-          identity,
-          diagnostics: assetErrors.current,
-        });
-      }}
-    />
+    >
+      {canvas ? (
+        <div
+          className="template-importer__preview-transform"
+          style={transformStyle}
+        >
+          <TemplateSessionRenderer
+            session={wizard.session}
+            mode="editor"
+            className="template-importer__preview-renderer"
+            style={{ width: canvas.width, height: canvas.height }}
+            fallback={fallback}
+            onAssetLoadError={(assetId, nodeId) => {
+              assetErrors.current.push({
+                code: "render.asset-load-failed",
+                severity: "error",
+                message: `Asset "${assetId}" could not be loaded for preview.`,
+                details: { assetId, nodeId },
+              });
+            }}
+            onRenderIdentity={(identity) => {
+              wizard.publishRenderValidation({
+                sessionRevision: snapshot.sessionRevision,
+                identity,
+                diagnostics: assetErrors.current,
+              });
+            }}
+          />
+        </div>
+      ) : (
+        fallback
+      )}
+    </div>
   );
 }
 
@@ -227,7 +285,9 @@ function DiagnosticList({
   renderDiagnostic?: (issue: TemplateImportIssueV1) => ReactNode;
   hideWhenEmpty?: boolean;
 }) {
-  if (!issues.length) return hideWhenEmpty ? null : <p>No diagnostics.</p>;
+  if (!issues.length) {
+    return hideWhenEmpty ? null : <p>No unresolved diagnostics</p>;
+  }
   return (
     <div
       className={joinClasses("template-importer__diagnostics", className)}
@@ -252,242 +312,12 @@ function DiagnosticList({
   );
 }
 
-function FieldRuleControl({
-  wizard,
-  field,
-  className,
-}: {
-  wizard: TemplateImportWizardControllerV1;
-  field: TemplateImportFieldRuleV1;
-  className?: string;
-}) {
-  const textConstraints = field.constraints as
-    | PackageTextFieldConstraints
-    | undefined;
-  const imageConstraints = field.constraints as
-    | PackageImageFieldConstraints
-    | undefined;
-  const applyPatch = (patch: TemplateImportFieldRulePatchV1) => {
-    wizard.updateFieldRule(field.ruleId, patch);
-  };
-  const updateTextNumber = (
-    property: "maxCharacters" | "maxLines",
-    value: string,
-  ) => {
-    applyPatch({
-      constraints: {
-        ...(textConstraints ?? {}),
-        [property]: value === "" ? undefined : Math.max(1, Number(value)),
-      },
-    });
-  };
-  const updateImageNumber = (
-    property: "maxFileSizeMb" | "minWidth" | "minHeight",
-    value: string,
-  ) => {
-    applyPatch({
-      constraints: {
-        ...(imageConstraints ?? {}),
-        [property]: value === "" ? undefined : Math.max(0, Number(value)),
-      },
-    });
-  };
-  return (
-    <section className={joinClasses("template-importer__field", className)}>
-      <div className="template-importer__field-heading">
-        <strong>{field.label}</strong>
-        <span>{field.type}</span>
-      </div>
-      <div className="template-importer__grid">
-        <label>
-          <span>Enabled</span>
-          <input
-            type="checkbox"
-            checked={field.enabled}
-            onChange={(event) => applyPatch({ enabled: event.target.checked })}
-          />
-        </label>
-        <label>
-          <span>Label</span>
-          <input
-            value={field.label}
-            onChange={(event) => applyPatch({ label: event.target.value })}
-          />
-        </label>
-        <label className="template-importer__wide">
-          <span>Help text</span>
-          <input
-            value={field.helpText ?? ""}
-            onChange={(event) => applyPatch({ helpText: event.target.value })}
-          />
-        </label>
-      </div>
-      {field.targetStatus !== "ready" ? (
-        <p className="template-importer__notice" role="alert">
-          This field remains visible, but its target is {field.targetStatus}.
-        </p>
-      ) : null}
-      {field.warnings.map((warning) => (
-        <p
-          className="template-importer__notice"
-          key={warning.code}
-          role="status"
-        >
-          {warning.message}
-        </p>
-      ))}
-      {field.type === "text" ||
-      field.type === "textarea" ||
-      field.type === "number" ||
-      field.type === "date" ? (
-        <div className="template-importer__grid">
-          <label>
-            <span>Maximum characters</span>
-            <input
-              type="number"
-              min={1}
-              value={textConstraints?.maxCharacters ?? ""}
-              onChange={(event) =>
-                updateTextNumber("maxCharacters", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>Maximum lines</span>
-            <input
-              type="number"
-              min={1}
-              value={textConstraints?.maxLines ?? ""}
-              onChange={(event) =>
-                updateTextNumber("maxLines", event.target.value)}
-            />
-          </label>
-          <label>
-            <span>Pattern</span>
-            <select
-              value={textConstraints?.pattern ?? "free"}
-              onChange={(event) =>
-                applyPatch({
-                  constraints: {
-                    ...(textConstraints ?? {}),
-                    pattern: event.target.value as NonNullable<
-                      PackageTextFieldConstraints["pattern"]
-                    >,
-                  },
-                })}
-            >
-              <option value="free">Free text</option>
-              <option value="number">Number</option>
-              <option value="currency">Currency</option>
-              <option value="percentage">Percentage</option>
-              <option value="date">Date</option>
-              <option value="email">Email</option>
-              <option value="url">URL</option>
-            </select>
-          </label>
-          <label>
-            <span>Overflow</span>
-            <select
-              value={field.behavior?.onOverflow ?? "allow"}
-              onChange={(event) =>
-                applyPatch({
-                  behavior: {
-                    ...(field.behavior ?? {}),
-                    onOverflow: event.target.value as NonNullable<
-                      NonNullable<TemplateImportFieldRuleV1["behavior"]>["onOverflow"]
-                    >,
-                  },
-                })}
-            >
-              <option value="allow">Allow</option>
-              <option value="prevent-input">Prevent input</option>
-              <option value="trim">Trim</option>
-              <option value="warn-only">Warn</option>
-              <option value="clip-preview">Clip preview</option>
-              <option value="shrink-to-fit">Shrink to fit</option>
-            </select>
-          </label>
-        </div>
-      ) : null}
-      {field.type === "image" ? (
-        <>
-          <div className="template-importer__grid">
-            <label>
-              <span>Replacement mode</span>
-              <select
-                value={
-                  imageConstraints?.replacementMode ??
-                  "preserve-original-crop"
-                }
-                onChange={(event) =>
-                  applyPatch({
-                    constraints: {
-                      ...(imageConstraints ?? {}),
-                      replacementMode: event.target.value as NonNullable<
-                        PackageImageFieldConstraints["replacementMode"]
-                      >,
-                    },
-                  })}
-              >
-                <option value="cover">Fill frame</option>
-                <option value="contain">Fit inside frame</option>
-                <option value="preserve-original-crop">
-                  Preserve imported crop
-                </option>
-                <option value="user-crop">Host-provided crop</option>
-              </select>
-            </label>
-            <label>
-              <span>Maximum file size (MB)</span>
-              <input
-                type="number"
-                min={0}
-                step="0.1"
-                value={imageConstraints?.maxFileSizeMb ?? ""}
-                onChange={(event) =>
-                  updateImageNumber("maxFileSizeMb", event.target.value)}
-              />
-            </label>
-            <label>
-              <span>Minimum width</span>
-              <input
-                type="number"
-                min={0}
-                value={imageConstraints?.minWidth ?? ""}
-                onChange={(event) =>
-                  updateImageNumber("minWidth", event.target.value)}
-              />
-            </label>
-            <label>
-              <span>Minimum height</span>
-              <input
-                type="number"
-                min={0}
-                value={imageConstraints?.minHeight ?? ""}
-                onChange={(event) =>
-                  updateImageNumber("minHeight", event.target.value)}
-              />
-            </label>
-            <label className="template-importer__wide">
-              <span>Allowed MIME types</span>
-              <input
-                value={imageConstraints?.allowedMimeTypes?.join(", ") ?? ""}
-                onChange={(event) =>
-                  applyPatch({
-                    constraints: {
-                      ...(imageConstraints ?? {}),
-                      allowedMimeTypes: event.target.value
-                        .split(",")
-                        .map((value) => value.trim())
-                        .filter(Boolean),
-                    },
-                  })}
-              />
-            </label>
-          </div>
-        </>
-      ) : null}
-    </section>
-  );
+function visiblePageIndex(step: TemplateImportWizardStepId): number {
+  if (step === "zip-import" || step === "package-validation") return 0;
+  if (step === "font-validation") return 1;
+  if (step === "render-validation") return 2;
+  if (step === "field-rules") return 3;
+  return 4;
 }
 
 interface TemplateImportWizardContentProps
@@ -516,7 +346,14 @@ const TemplateImportWizardContent = forwardRef<
 ) {
   const snapshot = useTemplateImportWizardSnapshot(wizard);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const titles = { ...defaultStepTitles, ...stepTitles };
+  const contentRef = useRef<HTMLDivElement>(null);
+  const visiblePages = [
+    { id: "package", title: stepTitles["package-validation"] ?? stepTitles["zip-import"] ?? "Package" },
+    { id: "fonts", title: stepTitles["font-validation"] ?? "Fonts" },
+    { id: "validate", title: stepTitles["render-validation"] ?? "Validate" },
+    { id: "fields", title: stepTitles["field-rules"] ?? "Fields" },
+    { id: "confirm", title: stepTitles.confirmation ?? "Confirm" },
+  ] as const;
 
   const loadFile = async (file: File) =>
     wizard.loadZip({
@@ -557,10 +394,12 @@ const TemplateImportWizardContent = forwardRef<
     }
   };
   const active = snapshot.steps[snapshot.activeStep];
-  const showPreview =
-    snapshot.activeStep === "render-validation" ||
-    snapshot.activeStep === "field-rules" ||
-    snapshot.activeStep === "confirmation";
+  const pageIndex = visiblePageIndex(snapshot.activeStep);
+  const currentPage = visiblePages[pageIndex];
+
+  useEffect(() => {
+    if (contentRef.current) contentRef.current.scrollTop = 0;
+  }, [pageIndex]);
 
   return (
     <TemplateImportWizardProvider wizard={wizard}>
@@ -583,97 +422,102 @@ const TemplateImportWizardContent = forwardRef<
           onChange={selectZip}
           hidden
         />
-        <header
-          className={joinClasses(
-            "template-importer__header",
-            classNames.header,
-          )}
-        >
-          <div>
-            <p className="template-importer__eyebrow">
-              {labels.eyebrow ?? "Template Platform"}
-            </p>
-            <h2>{labels.title ?? "Import template"}</h2>
-          </div>
-          <span
-            className="template-importer__status"
-            data-status={active.status}
+        <aside className="template-importer__sidebar">
+          <button
+            type="button"
+            className="template-importer__host-back"
+            onClick={() => {
+              wizard.cancel();
+              onCancel?.();
+            }}
           >
-            {active.status}
-          </span>
-        </header>
-
-        <ol
-          className={joinClasses(
-            "template-importer__steps",
-            classNames.steps,
-          )}
-        >
-          {Object.entries(titles).map(([id, title], index) => {
-            const stepId = id as TemplateImportWizardStepId;
-            const step = snapshot.steps[stepId];
-            return (
+            <span aria-hidden="true">←</span> Templates
+          </button>
+          <div className="template-importer__sidebar-heading">
+            <strong>{labels.title ?? "Import template"}</strong>
+          </div>
+          <ol className={joinClasses("template-importer__steps", classNames.steps)}>
+            {visiblePages.map((page, index) => (
               <li
-                key={stepId}
+                key={page.id}
                 className={joinClasses(
                   "template-importer__step",
                   classNames.step,
-                  stepId === snapshot.activeStep &&
-                    "template-importer__step--active",
-                  stepId === snapshot.activeStep && classNames.activeStep,
+                  index === pageIndex && "template-importer__step--active",
+                  index === pageIndex && classNames.activeStep,
                 )}
-                aria-current={
-                  stepId === snapshot.activeStep ? "step" : undefined
-                }
-                data-status={step.status}
+                aria-current={index === pageIndex ? "step" : undefined}
+                aria-label={`${page.title}, ${index < pageIndex ? "completed" : index === pageIndex ? "current step" : "upcoming"}`}
+                data-status={index < pageIndex ? "ready" : index === pageIndex ? active.status : "idle"}
               >
-                <span>{index + 1}</span>
-                {title}
+                <span className="template-importer__step-marker" aria-hidden="true">{index < pageIndex ? "✓" : index + 1}</span>
+                {page.title}
               </li>
-            );
-          })}
-        </ol>
-
-        {snapshot.error ? (
-          <p className="template-importer__notice" role="alert">
-            {snapshot.error.message}
+            ))}
+          </ol>
+          <p className="template-importer__ownership-note">
+            The SDK checks the package and returns the confirmed template to
+            the host application.
           </p>
-        ) : null}
+        </aside>
 
-        <div
-          className={joinClasses(
-            "template-importer__panel",
-            classNames.panel,
-          )}
-        >
-          {snapshot.activeStep === "zip-import" ? (
-            <>
-              <h3>Import TemplatePackage ZIP</h3>
-              <p>
-                Select or drop the ZIP. It is read once locally and is never
-                uploaded.
+        <div className="template-importer__main">
+          <header className={joinClasses("template-importer__header", classNames.header)}>
+            <div>
+              <p className="template-importer__mobile-step">
+                Step {pageIndex + 1} of 5 · {currentPage.title}
               </p>
+              <h2>{currentPage.title}</h2>
+              <p className="template-importer__supporting-copy">
+                {pageIndex === 0
+                  ? "Choose a TemplatePackage ZIP. It is processed locally and never uploaded."
+                  : pageIndex === 1
+                    ? "Provide each exact font file required for consistent rendering."
+                    : pageIndex === 2
+                      ? "Review package correctness and the current renderer result."
+                      : pageIndex === 3
+                        ? "Drag to set input order. Open a field to set its limits."
+                        : "Review the template before returning it to the host application."}
+              </p>
+            </div>
+          </header>
+
+          <div ref={contentRef} className="template-importer__content">
+            {snapshot.error ? (
+              <p className="template-importer__notice" role="alert">
+                {snapshot.error.message}
+              </p>
+            ) : null}
+
+            <div className={joinClasses("template-importer__panel", classNames.panel)}>
+            {snapshot.activeStep === "zip-import" ? (
+            <section className="template-importer__section" aria-label="Package upload">
               <div
                 className="template-importer__dropzone"
                 onDragOver={(event) => event.preventDefault()}
                 onDrop={dropZip}
               >
-                <strong>{labels.chooseZip ?? "Choose template ZIP"}</strong>
-                <span>Accepts .zip and application/zip.</span>
+                <span className="template-importer__drop-icon" aria-hidden="true">↑</span>
+                <strong>{labels.chooseZip ?? "Drop or choose a TemplatePackage ZIP"}</strong>
+                <span>ZIP only · processed in this browser</span>
                 <button
+                  className="template-importer__secondary-button"
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={snapshot.busy}
                 >
-                  Browse files
+                  Choose ZIP
                 </button>
               </div>
-            </>
+            </section>
           ) : null}
 
           {snapshot.activeStep === "package-validation" ? (
-            <>
-              <h3>Package validation</h3>
+            <section className="template-importer__section">
+              <div className="template-importer__section-heading">
+                <div><h3>Selected package</h3><p>The package is ready for the remaining setup checks.</p></div>
+                <button className="template-importer__secondary-button" type="button" onClick={() => fileInputRef.current?.click()} disabled={snapshot.busy}>Choose another ZIP</button>
+              </div>
               {snapshot.packageSummary ? (
                 <dl
                   className={joinClasses(
@@ -683,11 +527,11 @@ const TemplateImportWizardContent = forwardRef<
                 >
                   <div>
                     <dt>File</dt>
-                    <dd>{snapshot.sourceName}</dd>
+                    <dd title={snapshot.sourceName ?? undefined}>{snapshot.sourceName}</dd>
                   </div>
                   <div>
                     <dt>Package</dt>
-                    <dd>{snapshot.packageSummary.name}</dd>
+                    <dd title={snapshot.packageSummary.name}>{snapshot.packageSummary.name}</dd>
                   </div>
                   <div>
                     <dt>Dimensions</dt>
@@ -710,32 +554,23 @@ const TemplateImportWizardContent = forwardRef<
                   </div>
                 </dl>
               ) : null}
-              <DiagnosticList
-                issues={active.diagnostics}
-                className={classNames.diagnostics}
-                renderDiagnostic={renderDiagnostic}
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={snapshot.busy}
-              >
-                Choose another ZIP
-              </button>
-            </>
+              {snapshot.importValidation?.status !== "ready" ? (
+                <TemplateImportValidationSummary
+                  report={snapshot.importValidation}
+                  className={classNames.diagnostics}
+                  renderIssue={renderDiagnostic}
+                />
+              ) : null}
+            </section>
           ) : null}
 
           {snapshot.activeStep === "font-validation" ? (
-            <>
-              <h3>Validate required fonts</h3>
-              <p>
-                Every text face requires an exact bundled, managed, host, or
-                uploaded font binary.
-              </p>
+            <section className="template-importer__section" aria-label="Required fonts">
               {!snapshot.fontValidation.requirements.length ? (
                 <p>No font files are required.</p>
               ) : (
-                snapshot.fontValidation.requirements.map((requirement) => (
+                <div className="template-importer__font-list">
+                {snapshot.fontValidation.requirements.map((requirement) => (
                   <section
                     className="template-importer__font"
                     key={requirement.requirementId}
@@ -773,12 +608,6 @@ const TemplateImportWizardContent = forwardRef<
                           ? `Exact font verified · ${requirement.fileName}`
                           : "Upload the exact font file specified above."}
                       </p>
-                      {requirement.emojiFallback ? (
-                        <p>
-                          Emoji in this template will use the device emoji
-                          font.
-                        </p>
-                      ) : null}
                     </div>
                     <div className="template-importer__font-actions">
                       {(() => {
@@ -837,85 +666,56 @@ const TemplateImportWizardContent = forwardRef<
                     <DiagnosticList
                       issues={requirement.diagnostics.filter(
                         (diagnostic) =>
-                          diagnostic.code !== "font.emoji-platform-fallback",
+                          diagnostic.code !== "font.emoji-platform-fallback" &&
+                          // This is the expected unresolved state. The status
+                          // and upload action already explain the next step;
+                          // reserving diagnostic space for actual file errors
+                          // keeps the row calm and actionable.
+                          diagnostic.code !== "font.exact-face-required",
                       )}
                       renderDiagnostic={renderDiagnostic}
                       hideWhenEmpty
                     />
                   </section>
-                ))
+                ))}
+                </div>
               )}
-            </>
+            </section>
           ) : null}
 
           {snapshot.activeStep === "render-validation" ? (
-            <>
-              <h3>Render validation</h3>
-              <p>
-                This uses the same renderer and current revision as the editor.
-              </p>
-              <DiagnosticList
-                issues={snapshot.renderValidation.diagnostics}
-                className={classNames.diagnostics}
-                renderDiagnostic={renderDiagnostic}
-              />
-            </>
+            <div className="template-importer__two-column-layout template-importer__validate-layout">
+              <section className="template-importer__section">
+                <TemplateImportValidationSummary
+                  report={snapshot.importValidation}
+                  packageSummary={snapshot.packageSummary}
+                  sourceFilename={snapshot.sourceName}
+                  fontReport={snapshot.fontValidation}
+                  renderReport={snapshot.renderValidation}
+                  className={classNames.diagnostics}
+                  renderIssue={renderDiagnostic}
+                />
+              </section>
+              <section className="template-importer__section template-importer__preview-column" aria-label="Template preview">
+                <TemplateImportWizardPreview className={joinClasses("template-importer__preview", classNames.preview)} />
+              </section>
+            </div>
           ) : null}
 
           {snapshot.activeStep === "field-rules" ? (
-            <>
-              <h3>Configure field rules</h3>
-              <p>
-                Fields remain descriptor-driven; target paths stay internal to
-                the SDK.
-              </p>
-              <div
-                className={joinClasses(
-                  "template-importer__fields",
-                  classNames.fieldList,
-                )}
-              >
-                {snapshot.fieldRules.map((field, index) => (
-                  <div key={field.ruleId}>
-                    <div className="template-importer__order">
-                      <button
-                        type="button"
-                        disabled={index === 0}
-                        onClick={() =>
-                          wizard.reorderFieldRule(field.ruleId, index - 1)}
-                      >
-                        Move up
-                      </button>
-                      <button
-                        type="button"
-                        disabled={index === snapshot.fieldRules.length - 1}
-                        onClick={() =>
-                          wizard.reorderFieldRule(field.ruleId, index + 1)}
-                      >
-                        Move down
-                      </button>
-                    </div>
-                    <FieldRuleControl
-                      wizard={wizard}
-                      field={field}
-                      className={classNames.field}
-                    />
-                  </div>
-                ))}
-                {!snapshot.fieldRules.length ? (
-                  <p>No editable fields were declared or derived.</p>
-                ) : null}
-              </div>
-            </>
+            <div className="template-importer__two-column-layout template-importer__fields-layout">
+              <section className="template-importer__section">
+                <TemplateImportFieldRulesEditor fields={snapshot.fieldRules} onUpdateField={wizard.updateFieldRule} onReorderField={wizard.reorderFieldRule} className={classNames.fieldList} fieldClassName={classNames.field} />
+              </section>
+              <section className="template-importer__section template-importer__preview-column" aria-label="Template preview">
+                <TemplateImportWizardPreview className={joinClasses("template-importer__preview", classNames.preview)} />
+              </section>
+            </div>
           ) : null}
 
           {snapshot.activeStep === "confirmation" ? (
-            <>
-              <h3>Confirm template</h3>
-              <p>
-                Review the package, field, font, and render evidence before
-                handing the result to the host.
-              </p>
+            <div className="template-importer__two-column-layout template-importer__confirmation-layout">
+              <section className="template-importer__section">
               <dl
                 className={joinClasses(
                   "template-importer__summary",
@@ -924,14 +724,13 @@ const TemplateImportWizardContent = forwardRef<
               >
                 <div>
                   <dt>Package</dt>
-                  <dd>{snapshot.packageSummary?.name}</dd>
+                  <dd title={snapshot.packageSummary?.name}>{snapshot.packageSummary?.name}</dd>
                 </div>
                 <div>
                   <dt>Fields</dt>
                   <dd>
                     {
-                      snapshot.fieldRules.filter((field) => field.enabled)
-                        .length
+                      snapshot.fieldRules.length
                     }
                   </dd>
                 </div>
@@ -949,7 +748,11 @@ const TemplateImportWizardContent = forwardRef<
                 className={classNames.diagnostics}
                 renderDiagnostic={renderDiagnostic}
               />
-            </>
+              </section>
+              <section className="template-importer__section template-importer__preview-column" aria-label="Final template preview">
+                <TemplateImportWizardPreview className={joinClasses("template-importer__preview", classNames.preview)} />
+              </section>
+            </div>
           ) : null}
 
           {snapshot.activeStep === "completed" ? (
@@ -966,19 +769,10 @@ const TemplateImportWizardContent = forwardRef<
             </>
           ) : null}
 
-          {showPreview ? (
-            <div
-              className={joinClasses(
-                "template-importer__preview",
-                classNames.preview,
-              )}
-            >
-              <TemplateImportWizardPreview />
             </div>
-          ) : null}
-        </div>
+          </div>
 
-        <footer
+          <footer
           className={joinClasses(
             "template-importer__actions",
             classNames.actions,
@@ -992,25 +786,20 @@ const TemplateImportWizardContent = forwardRef<
             </button>
           ) : (
             <>
-              <button
-                type="button"
-                onClick={() => {
-                  wizard.cancel();
-                  onCancel?.();
-                }}
-              >
-                {labels.cancel ?? "Cancel"}
-              </button>
               <div>
-                <button
-                  type="button"
-                  onClick={wizard.back}
-                  disabled={!active.canGoBack}
-                >
-                  {labels.back ?? "Back"}
-                </button>
+                {snapshot.activeStep !== "zip-import" ? (
+                  <button
+                    className="template-importer__secondary-button"
+                    type="button"
+                    onClick={wizard.back}
+                    disabled={!active.canGoBack}
+                  >
+                    {labels.back ?? "Back"}
+                  </button>
+                ) : null}
                 {snapshot.activeStep === "confirmation" ? (
                   <button
+                    className="template-importer__primary-button"
                     type="button"
                     disabled={!active.canContinue}
                     onClick={() => void finish()}
@@ -1019,17 +808,25 @@ const TemplateImportWizardContent = forwardRef<
                   </button>
                 ) : (
                   <button
+                    className="template-importer__primary-button"
                     type="button"
                     disabled={!active.canContinue}
                     onClick={wizard.next}
                   >
-                    {labels.continue ?? "Continue"}
+                    {labels.continue ?? (
+                      snapshot.activeStep === "zip-import" || snapshot.activeStep === "package-validation" ? "Import package" :
+                      snapshot.activeStep === "font-validation" ? "Continue to validation" :
+                      snapshot.activeStep === "render-validation" ? "Continue to fields" :
+                      snapshot.activeStep === "field-rules" ? "Continue to confirmation" :
+                      "Continue"
+                    )}
                   </button>
                 )}
               </div>
             </>
           )}
-        </footer>
+          </footer>
+        </div>
       </section>
     </TemplateImportWizardProvider>
   );

@@ -1,6 +1,7 @@
 import { createNowHiringResponsiveReflowFixture } from "../../../src/template-package/fixtures/nowHiringResponsiveReflow";
 import { createCircularFillInsideHugFixture } from "../../../src/template-package/fixtures/circularFillInsideHug";
-import { createCanonicalSceneGraph, serializeCanonicalSceneGraph } from "@sleinity/template-core";
+import { createCanonicalSceneGraph, createResolvedRenderTree, serializeCanonicalSceneGraph } from "@sleinity/template-core";
+import { createResolvedProductRenderIdentity } from "../src/render/productRenderIdentity";
 import { createCoreLayoutRoute } from "../src/internal/runtime-routing/createCoreLayoutRoute";
 import { CORE_LAYOUT_PROPERTY_OWNERSHIP } from "../src/internal/runtime-routing/propertyOwnership";
 import { settleCoreLayout } from "../src/internal/runtime-routing/settleCoreLayout";
@@ -107,6 +108,38 @@ const wrapped = structuredClone(scene);
 wrapped.nodes[wrapped.rootNodeId].layout.autoLayout.wrap.value = true;
 const wrappedRoute = createCoreLayoutRoute(wrapped);
 assert(!wrappedRoute.nodes[wrapped.rootNodeId].routed && wrappedRoute.nodes[wrapped.rootNodeId].reasonCodes.includes("layout-wrap-unsupported"), "Unsupported wrapping must select coherent compatibility routing.");
+const compatibilityPackage = structuredClone(packageValue);
+compatibilityPackage.nodes[compatibilityPackage.rootNodeId].layout.wrap = true;
+const compatibilityScene = createCanonicalSceneGraph(compatibilityPackage).graph;
+const compatibilityRoute = createCoreLayoutRoute(compatibilityScene);
+const compatibilitySettlement = settleCoreLayout({
+  scene: compatibilityScene,
+  route: compatibilityRoute,
+  revision: "compatibility-zero-route",
+  textMeasurements: [],
+});
+assert(
+  compatibilityRoute.routedNodeIds.length === 0 &&
+    compatibilitySettlement.readiness === "unsupported",
+  "The readiness regression fixture must exercise an expected zero-routed compatibility settlement.",
+);
+const compatibilityIdentity = createResolvedProductRenderIdentity({
+  packageValue: compatibilityPackage,
+  resolvedTree: createResolvedRenderTree(compatibilityPackage),
+  runtime: {
+    mode: "authoritative",
+    canonicalRevision: "compatibility-canonical",
+    revision: "compatibility-zero-route",
+    route: compatibilityRoute,
+    preliminary: compatibilitySettlement,
+    settled: compatibilitySettlement,
+    publishTextMeasurement() {},
+  },
+});
+assert(
+  compatibilityIdentity.readiness === "ready",
+  "A zero-routed compatibility template must bypass inapplicable core-settlement readiness.",
+);
 const absolute = structuredClone(scene);
 absolute.nodes["product-image"].layout.positioning.value = "ABSOLUTE";
 const absoluteRoute = createCoreLayoutRoute(absolute);

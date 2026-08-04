@@ -32,6 +32,27 @@ assert(
   "Fit template should contain the full root inside safe viewport padding.",
 );
 
+for (const [name, bounds, host] of [
+  ["wide", { x: 0, y: 0, width: 2400, height: 400 }, { width: 720, height: 480 }],
+  ["tall", { x: 0, y: 0, width: 400, height: 2400 }, { width: 720, height: 480 }],
+  ["square", { x: 0, y: 0, width: 900, height: 900 }, { width: 480, height: 720 }],
+  ["small", { x: 0, y: 0, width: 24, height: 16 }, { width: 320, height: 240 }],
+] as const) {
+  const fit = fitPreviewBounds(host, bounds, { safePadding: 26 });
+  const left = fit.translateX;
+  const top = fit.translateY;
+  const right = host.width - (fit.translateX + bounds.width * fit.scale);
+  const bottom = host.height - (fit.translateY + bounds.height * fit.scale);
+  assert(
+    Math.min(left, right, top, bottom) >= 26 - 0.001 &&
+      near(
+        (bounds.width * fit.scale) / (bounds.height * fit.scale),
+        bounds.width / bounds.height,
+      ),
+    `${name} templates should remain centred, proportional, and fully visible after fitting.`,
+  );
+}
+
 const target = { x: 1500, y: 760, width: 180, height: 120 };
 const paddedTarget = expandPreviewBounds(target, 0.18, 24);
 const targetFit = fitPreviewBounds(viewport, paddedTarget, { safePadding: 24 });

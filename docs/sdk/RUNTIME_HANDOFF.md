@@ -1,13 +1,13 @@
-# SDK 0.5.0 runtime handoff
+# SDK 0.6.0 runtime handoff
 
 Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
 application:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.5.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
-| `@sleinity/template-browser@0.5.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
-| `@sleinity/template-react@0.5.0` | React provider, setup wizard, renderer, inspection viewport, capture handle and optional advanced inspection | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.6.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
+| `@sleinity/template-browser@0.6.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
+| `@sleinity/template-react@0.6.0` | React provider, setup wizard, renderer, inspection viewport, capture handle and optional advanced inspection | React 19 and React DOM 19 |
 
 ## Installation
 
@@ -21,9 +21,9 @@ always-auth=true
 ```
 
 ```sh
-pnpm add @sleinity/template-core@0.5.0 \
-  @sleinity/template-browser@0.5.0 \
-  @sleinity/template-react@0.5.0
+pnpm add @sleinity/template-core@0.6.0 \
+  @sleinity/template-browser@0.6.0 \
+  @sleinity/template-react@0.6.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
@@ -31,16 +31,16 @@ pnpm add @sleinity/template-core@0.5.0 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-[`sdk-v0.5.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.5.0).
+[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.5.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.5.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.5.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.6.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.6.0.tgz"
   }
 }
 ```
@@ -50,9 +50,9 @@ same archives:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.5.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.5.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.5.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.6.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.6.0.tgz"
 ```
 
 Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
@@ -76,9 +76,12 @@ are not shipped as SDK APIs.
 
 For complete template setup, use `useTemplateImportWizard()` and render
 `TemplateImportWizard` from `@sleinity/template-react/importer` with its
-`@sleinity/template-react/importer.css` stylesheet. The seven-step workflow
+`@sleinity/template-react/importer.css` stylesheet. The default interface presents
+Package, Fonts, Validate, Fields and Confirm while the seven-state headless workflow
 owns ZIP selection, structured package validation, exact-font validation,
-renderer-backed validation, field rules and confirmation. Handle the immutable
+renderer-backed validation, atomic field rules and confirmation. Shared
+validation-summary and field-editor components are available from the same
+importer entry for custom shells. Handle the immutable
 completion result through existing host services; it does not publish or
 navigate automatically.
 
@@ -107,6 +110,13 @@ publishes lifecycle status,
 validation, ordered diagnostics, editable fields, base and working packages,
 resolved state, and revisions. Mutate fields and images through the session,
 reset individual fields, or restore all imported state.
+
+Zero-routed compatibility templates may complete Render Validation through the
+existing package, exact-font, asset, DOM, revision and export-safety checks;
+routed templates still require current settlement. Invalid field-rule drafts
+remain visible with structured blockers and never replace the last valid
+working package. Device emoji fallback remains internal evidence and is not
+presented as actionable setup guidance.
 
 The host owns every content control and may perform richer validation,
 transformation, cropping, or other processing before calling the supported
@@ -139,6 +149,11 @@ secret is required. Follow the
 [sequential Lovable template editor prompts](LOVABLE_TEMPLATE_EDITOR_PROMPTS.md).
 They first prove the isolated SDK boundary, then connect only to existing host
 services.
+
+Hosts upgrading from the hand-built 0.2.2 setup flow should follow the focused
+[0.6.0 migration guide](SDK_0_6_MIGRATION.md). Adopt the SDK wizard for import
+and confirmation, then reopen the host-owned confirmation in a fresh session;
+retain existing dashboard, editor, image, storage, and export workflows.
 
 ## Verification contract
 

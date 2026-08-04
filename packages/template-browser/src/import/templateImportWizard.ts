@@ -7,12 +7,14 @@ import {
   type PackageEditorFieldWarning,
   type PackageDiagnostic,
   type PackageEditableFieldType,
-  type PackageFieldBehavior,
   type PackageFieldConstraints,
+  type PackageImageFieldConstraints,
+  type PackageTextFieldConstraints,
   type TemplatePackageFontRequirement,
   type TemplatePackageValidationResult,
   type TemplatePackageV1,
 } from "@sleinity/template-core";
+import { validatePackageEditableFieldRules } from "@sleinity/template-core/editor";
 import { fontUsesPlatformEmojiFallback } from "../internal/core";
 import {
   isExactFontRequirementResolved,
@@ -35,7 +37,7 @@ export const TEMPLATE_IMPORT_WIZARD_SCHEMA_VERSION =
   "template-import-wizard-snapshot-v1" as const;
 export const TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-import-confirmation-v1" as const;
-export const TEMPLATE_SDK_VERSION = "0.5.0" as const;
+export const TEMPLATE_SDK_VERSION = "0.6.0" as const;
 
 export const TEMPLATE_IMPORT_WIZARD_STEPS = [
   "zip-import",
@@ -103,21 +105,38 @@ export interface TemplateImportFieldRuleV1 {
   type: PackageEditableFieldType;
   defaultValue: EditableFieldBinding["defaultValue"];
   constraints?: PackageFieldConstraints;
-  behavior?: PackageFieldBehavior;
-  enabled: boolean;
   order: number;
-  helpText?: string;
   targetStatus: "ready" | "missing" | "unsupported";
   warnings: TemplateImportFieldWarningV1[];
   valid: boolean;
+  validation: TemplateImportFieldRuleValidationV1;
+}
+
+export interface TemplateImportFieldRuleValidationV1 {
+  status: "ready" | "warning" | "blocked";
+  blockers: TemplateImportIssueV1[];
+  warnings: TemplateImportIssueV1[];
+}
+
+export interface TemplateImportFieldValidationResultV1 {
+  ruleId: string;
+  fieldId: string;
+  status: "ready" | "warning" | "blocked";
+  blockers: TemplateImportIssueV1[];
+  warnings: TemplateImportIssueV1[];
+}
+
+export interface TemplateImportFieldValidationReportV1 {
+  schemaVersion: "template-import-field-validation-v1";
+  status: "ready" | "warning" | "blocked";
+  revision: number;
+  fields: TemplateImportFieldValidationResultV1[];
+  blockers: TemplateImportIssueV1[];
+  warnings: TemplateImportIssueV1[];
 }
 
 export interface TemplateImportFieldRulePatchV1 {
-  label?: string;
   constraints?: PackageFieldConstraints;
-  behavior?: PackageFieldBehavior;
-  enabled?: boolean;
-  helpText?: string;
 }
 
 export interface TemplateImportFontRequirementReportV1 {
@@ -188,6 +207,7 @@ export interface TemplateImportWizardSnapshotV1 {
   packageValidation: TemplatePackageValidationResult | null;
   fontValidation: TemplateImportFontValidationReportV1;
   renderValidation: TemplateImportRenderValidationReportV1;
+  fieldValidation: TemplateImportFieldValidationReportV1;
   fieldRules: TemplateImportFieldRuleV1[];
   diagnostics: TemplateImportIssueV1[];
   busy: boolean;
@@ -254,6 +274,7 @@ export interface TemplateImportConfirmationV1 {
   validation: TemplatePackageValidationResult;
   fontValidation: TemplateImportFontValidationReportV1;
   renderValidation: TemplateImportRenderValidationReportV1;
+  fieldValidation?: TemplateImportFieldValidationReportV1;
   renderIdentity: ResolvedProductRenderIdentityV1;
   diagnostics: TemplateImportIssueV1[];
   blockers: TemplateImportIssueV1[];
@@ -439,6 +460,46 @@ export function createTemplateImportWizard(
   };
   const sessionSnapshot = () => session.getSnapshot();
 
+  const meaningfulConstraints = (
+    field: Pick<EditableFieldBinding, "type" | "constraints">,
+  ): PackageFieldConstraints | undefined => {
+    if (field.type === "text" || field.type === "textarea") {
+      const source = (field.constraints ?? {}) as PackageTextFieldConstraints;
+      const constraints: PackageTextFieldConstraints = {};
+      if (source.maxCharacters !== undefined) {
+        constraints.maxCharacters = source.maxCharacters;
+      }
+      if (field.type === "textarea" && source.maxLines !== undefined) {
+        constraints.maxLines = source.maxLines;
+      }
+      return Object.keys(constraints).length ? constraints : undefined;
+    }
+    if (field.type === "image") {
+      const source = (field.constraints ?? {}) as PackageImageFieldConstraints;
+      const constraints: PackageImageFieldConstraints = {};
+      for (const key of [
+        "allowedMimeTypes",
+        "maxFileSizeMb",
+        "minWidth",
+        "minHeight",
+        "aspectRatio",
+        "replacementMode",
+      ] as const) {
+        if (source[key] !== undefined) {
+          Object.assign(constraints, { [key]: structuredClone(source[key]) });
+        }
+      }
+      if (
+        constraints.replacementMode !== "contain" &&
+        constraints.replacementMode !== "user-crop"
+      ) {
+        constraints.replacementMode = "cover";
+      }
+      return Object.keys(constraints).length ? constraints : undefined;
+    }
+    return undefined;
+  };
+
   const initializeFieldDrafts = (snapshot: TemplateSessionSnapshotV1) => {
     if (!snapshot.workingPackage) {
       fieldDrafts = [];
@@ -466,13 +527,7 @@ export function createTemplateImportWizard(
           label: field.label?.trim() || field.id,
           type: field.type,
           defaultValue: structuredClone(field.defaultValue),
-          constraints: field.constraints
-            ? structuredClone(field.constraints)
-            : undefined,
-          behavior: field.behavior
-            ? structuredClone(field.behavior)
-            : undefined,
-          enabled: true,
+          constraints: meaningfulConstraints(field),
           order,
           targetStatus: !target?.targetExists
             ? "missing"
@@ -484,6 +539,15 @@ export function createTemplateImportWizard(
             message: warning.message,
           })),
           valid: Boolean(target?.targetExists && target.propertySupported),
+          validation: {
+            status: target?.targetExists && target.propertySupported
+              ? fieldWarnings.length
+                ? "warning"
+                : "ready"
+              : "blocked",
+            blockers: [],
+            warnings: [],
+          },
         },
       };
     });
@@ -507,16 +571,19 @@ export function createTemplateImportWizard(
           requirement.family,
           requirement.characters,
         );
+        const preparationIssues = current.fontPreparation.issues
+          .filter((issue) =>
+            !issue.requirementId || issue.requirementId === requirement.id)
+          .map((issue): TemplateImportIssueV1 => ({
+            code: issue.code,
+            severity: issue.severity,
+            message: issue.message,
+            requirementId: requirement.id,
+          }));
         const diagnostics = adapterError
           ? [adapterError]
-          : resolved && emojiFallback
-            ? [{
-                code: "font.emoji-platform-fallback",
-                severity: "info" as const,
-                message:
-                  "Emoji in this template will use the device emoji font.",
-                requirementId: requirement.id,
-              }]
+          : resolved && preparationIssues.length
+            ? preparationIssues
             : !resolved
               ? [{
                   code: "font.exact-face-required",
@@ -537,10 +604,16 @@ export function createTemplateImportWizard(
             : "unresolved",
           status: fontBusy.has(requirement.id)
             ? "running"
+            : resolved &&
+                current.fontPreparation.revision === current.revision &&
+                current.fontPreparation.status === "pending"
+              ? "running"
+              : resolved &&
+                  current.fontPreparation.revision === current.revision &&
+                  current.fontPreparation.status === "blocked"
+                ? "blocked"
             : resolved
-              ? emojiFallback
-                ? "warning"
-                : "ready"
+              ? "ready"
               : "blocked",
           emojiFallback,
           fileName:
@@ -561,7 +634,9 @@ export function createTemplateImportWizard(
     );
     const warnings = requirements.flatMap((requirement) =>
       requirement.diagnostics.filter(
-        (diagnostic) => diagnostic.severity !== "error",
+        (diagnostic) =>
+          diagnostic.severity !== "error" &&
+          diagnostic.code !== "font.emoji-platform-fallback",
       ),
     );
     return {
@@ -580,29 +655,180 @@ export function createTemplateImportWizard(
     };
   };
 
-  const applyFieldDrafts = () => {
+  const materializeFieldDraft = (draft: FieldRuleDraft): EditableFieldBinding => {
+    const constraints = draft.field.constraints
+      ? structuredClone(draft.field.constraints)
+      : {};
+    if (draft.view.type === "text" || draft.view.type === "textarea") {
+      delete (constraints as PackageTextFieldConstraints).maxCharacters;
+      delete (constraints as PackageTextFieldConstraints).maxLines;
+    } else if (draft.view.type === "image") {
+      const image = constraints as PackageImageFieldConstraints;
+      delete image.allowedMimeTypes;
+      delete image.maxFileSizeMb;
+      delete image.minWidth;
+      delete image.minHeight;
+      delete image.aspectRatio;
+      delete image.replacementMode;
+    }
+    Object.assign(constraints, structuredClone(draft.view.constraints ?? {}));
+    const committedConstraints = Object.keys(constraints).length
+      ? constraints as PackageFieldConstraints
+      : undefined;
+    const behavior = draft.field.behavior
+      ? structuredClone(draft.field.behavior)
+      : undefined;
+    if (draft.view.type === "text" || draft.view.type === "textarea") {
+      const text = (draft.view.constraints ?? {}) as PackageTextFieldConstraints;
+      if (text.maxCharacters !== undefined || text.maxLines !== undefined) {
+        return {
+          ...structuredClone(draft.field),
+          constraints: committedConstraints,
+          behavior: {
+            ...behavior,
+            onOverflow: "prevent-input",
+            showCounter: text.maxCharacters !== undefined,
+            counterType: "characters",
+          },
+        };
+      }
+    }
+    return {
+      ...structuredClone(draft.field),
+      constraints: committedConstraints,
+      behavior,
+    };
+  };
+
+  const materializeFieldDraftForValidation = (
+    draft: FieldRuleDraft,
+  ): EditableFieldBinding => ({
+    ...structuredClone(draft.field),
+    constraints: meaningfulConstraints(draft.view),
+    behavior: undefined,
+  });
+
+  const buildFieldValidationReport = (
+    drafts = fieldDrafts,
+  ): TemplateImportFieldValidationReportV1 => {
     const current = sessionSnapshot();
-    if (!current.workingPackage) return;
-    const enabledFields = fieldDrafts
-      .filter((draft) => draft.view.enabled)
-      .map((draft) => ({
-        ...structuredClone(draft.field),
-        label: draft.view.label.trim() || undefined,
-        constraints: draft.view.constraints
-          ? structuredClone(draft.view.constraints)
-          : undefined,
-        behavior: draft.view.behavior
-          ? structuredClone(draft.view.behavior)
-          : undefined,
-      }));
-    const update = replacePackageEditableFieldRules(
-      current.workingPackage,
-      enabledFields,
+    const portable = validatePackageEditableFieldRules(
+      drafts.map(materializeFieldDraftForValidation),
     );
-    const result = session.replaceWorkingPackage(
-      update.packageValue,
-      current.revision,
-    );
+    const targets = current.workingPackage
+      ? getPackageEditorFieldTargetStatuses(current.workingPackage)
+      : [];
+    const fields = drafts.map((draft): TemplateImportFieldValidationResultV1 => {
+      const portableResult = portable.fields.find(
+        (result) => result.fieldKey === editableFieldRuleKey(draft.field),
+      );
+      const target = targets.find(
+        (candidate) =>
+          editableFieldRuleKey(candidate.field) ===
+          editableFieldRuleKey(draft.field),
+      );
+      const blockers: TemplateImportIssueV1[] = (portableResult?.blockers ?? [])
+        .map((item) => ({
+          code: item.code,
+          severity: "error" as const,
+          message: item.message,
+          fieldId: draft.view.fieldId,
+          details: { property: item.property, nodeId: item.nodeId },
+        }));
+      const warnings: TemplateImportIssueV1[] = (portableResult?.warnings ?? [])
+        .map((item) => ({
+          code: item.code,
+          severity: "warning" as const,
+          message: item.message,
+          fieldId: draft.view.fieldId,
+          details: { property: item.property, nodeId: item.nodeId },
+        }));
+      if (!target?.targetExists || !target.propertySupported) {
+        const targetIssue: TemplateImportIssueV1 = {
+          code: !target?.targetExists
+            ? "field-rule.target-missing"
+            : "field-rule.target-unsupported",
+          severity: "error",
+          message: `${draft.view.label || draft.view.fieldId} cannot be configured because its template target is ${!target?.targetExists ? "missing" : "unsupported"}.`,
+          fieldId: draft.view.fieldId,
+          details: { nodeId: draft.field.nodeId },
+        };
+        blockers.push(targetIssue);
+      }
+      for (const warning of draft.view.warnings) {
+        warnings.push({
+          code: warning.code,
+          severity: "warning",
+          message: warning.message,
+          fieldId: draft.view.fieldId,
+        });
+      }
+      return {
+        ruleId: draft.view.ruleId,
+        fieldId: draft.view.fieldId,
+        status: blockers.length ? "blocked" : warnings.length ? "warning" : "ready",
+        blockers,
+        warnings,
+      };
+    });
+    const blockers = fields.flatMap((field) => field.blockers);
+    const warnings = fields.flatMap((field) => field.warnings);
+    return {
+      schemaVersion: "template-import-field-validation-v1",
+      status: blockers.length ? "blocked" : warnings.length ? "warning" : "ready",
+      revision: current.revision,
+      fields,
+      blockers,
+      warnings,
+    };
+  };
+
+  const projectFieldValidation = (
+    report: TemplateImportFieldValidationReportV1,
+    drafts = fieldDrafts,
+  ) => {
+    for (const draft of drafts) {
+      const result = report.fields.find(
+        (candidate) => candidate.ruleId === draft.view.ruleId,
+      );
+      draft.view.valid = result?.status !== "blocked";
+      draft.view.validation = {
+        status: result?.status ?? "blocked",
+        blockers: (result?.blockers ?? []).map(cloneIssue),
+        warnings: (result?.warnings ?? []).map(cloneIssue),
+      };
+    }
+  };
+
+  const applyFieldDrafts = (
+    drafts = fieldDrafts,
+  ): boolean => {
+    const current = sessionSnapshot();
+    if (!current.workingPackage) return false;
+    const report = buildFieldValidationReport(drafts);
+    projectFieldValidation(report, drafts);
+    if (report.blockers.length) return false;
+    const committedFields = drafts.map(materializeFieldDraft);
+    let result;
+    try {
+      const update = replacePackageEditableFieldRules(
+        current.workingPackage,
+        committedFields,
+      );
+      result = session.replaceWorkingPackage(
+        update.packageValue,
+        current.revision,
+      );
+    } catch (applyError) {
+      error = {
+        code: "field-rules.invalid",
+        severity: "error",
+        message: applyError instanceof Error
+          ? applyError.message
+          : "The field rules could not be applied.",
+      };
+      return false;
+    }
     if (!result.applied) {
       error = {
         code: result.stale
@@ -613,18 +839,14 @@ export function createTemplateImportWizard(
           result.diagnostics[0]?.message ??
           "The field rules could not be applied.",
       };
+      return false;
     }
+    error = null;
+    return true;
   };
 
   const fieldRuleBlockers = (): TemplateImportIssueV1[] =>
-    fieldDrafts
-      .filter((draft) => draft.view.enabled && !draft.view.valid)
-      .map((draft) => ({
-        code: "field-rule.target-unavailable",
-        severity: "error" as const,
-        message: `${draft.view.label} does not have a supported target.`,
-        fieldId: draft.view.fieldId,
-      }));
+    buildFieldValidationReport().blockers;
 
   const updateForSessionRevision = () => {
     const current = sessionSnapshot();
@@ -646,6 +868,7 @@ export function createTemplateImportWizard(
     id: TemplateImportWizardStepId,
     index: number,
     fontValidation: TemplateImportFontValidationReportV1,
+    fieldValidation: TemplateImportFieldValidationReportV1,
   ): TemplateImportStepSnapshotV1 => {
     const current = sessionSnapshot();
     const diagnostics = current.diagnostics.map(issueFromDiagnostic);
@@ -701,14 +924,8 @@ export function createTemplateImportWizard(
       warnings = renderValidation.warnings;
       stepDiagnostics = renderValidation.diagnostics;
     } else if (id === "field-rules") {
-      warnings = fieldDrafts.flatMap((draft) =>
-        draft.view.warnings.map((warning) => ({
-          ...warning,
-          severity: "warning" as const,
-          fieldId: draft.view.fieldId,
-        })),
-      );
-      blockers = fieldRuleBlockers();
+      warnings = fieldValidation.warnings;
+      blockers = fieldValidation.blockers;
       stepDiagnostics = [...blockers, ...warnings];
       stepStatus = blockers.length ? "blocked" : warnings.length ? "warning" : "ready";
       readiness = blockers.length ? "not-ready" : "ready";
@@ -719,7 +936,7 @@ export function createTemplateImportWizard(
         )),
         ...fontValidation.blockers,
         ...renderValidation.blockers,
-        ...fieldRuleBlockers(),
+        ...fieldValidation.blockers,
       ];
       blockers = prerequisiteBlockers;
       warnings = [
@@ -766,10 +983,12 @@ export function createTemplateImportWizard(
     updateForSessionRevision();
     const current = sessionSnapshot();
     const fontValidation = buildFontReport();
+    const fieldValidation = buildFieldValidationReport();
+    projectFieldValidation(fieldValidation);
     const steps = Object.fromEntries(
       TEMPLATE_IMPORT_WIZARD_STEPS.map((id, index) => [
         id,
-        stepSnapshot(id, index, fontValidation),
+        stepSnapshot(id, index, fontValidation, fieldValidation),
       ]),
     ) as TemplateImportWizardSnapshotV1["steps"];
     TEMPLATE_IMPORT_WIZARD_STEPS.forEach((id, index) => {
@@ -787,6 +1006,8 @@ export function createTemplateImportWizard(
       ...fontValidation.blockers,
       ...fontValidation.warnings,
       ...renderValidation.diagnostics,
+      ...fieldValidation.blockers,
+      ...fieldValidation.warnings,
     ];
     cachedSnapshot = {
       schemaVersion: TEMPLATE_IMPORT_WIZARD_SCHEMA_VERSION,
@@ -811,6 +1032,7 @@ export function createTemplateImportWizard(
       packageValidation: current.validation,
       fontValidation,
       renderValidation: structuredClone(renderValidation),
+      fieldValidation: structuredClone(fieldValidation),
       fieldRules: fieldDrafts.map((draft) => structuredClone(draft.view)),
       diagnostics: allDiagnostics.map(cloneIssue),
       busy,
@@ -947,31 +1169,19 @@ export function createTemplateImportWizard(
       assertActive();
       const draft = fieldDrafts.find((item) => item.view.ruleId === nextRuleId);
       if (!draft) throw new Error(`Field rule "${nextRuleId}" was not found.`);
-      if (Object.prototype.hasOwnProperty.call(patch, "label")) {
-        draft.view.label = patch.label?.trim() || draft.view.fieldId;
-      }
       if (Object.prototype.hasOwnProperty.call(patch, "constraints")) {
         draft.view.constraints = patch.constraints
           ? structuredClone(patch.constraints)
           : undefined;
       }
-      if (Object.prototype.hasOwnProperty.call(patch, "behavior")) {
-        draft.view.behavior = patch.behavior
-          ? structuredClone(patch.behavior)
-          : undefined;
+      const applied = applyFieldDrafts();
+      if (applied) {
+        renderValidation = {
+          ...initialRenderReport(),
+          status: "stale",
+          revision: sessionSnapshot().revision,
+        };
       }
-      if (Object.prototype.hasOwnProperty.call(patch, "enabled")) {
-        draft.view.enabled = patch.enabled ?? true;
-      }
-      if (Object.prototype.hasOwnProperty.call(patch, "helpText")) {
-        draft.view.helpText = patch.helpText?.trim() || undefined;
-      }
-      applyFieldDrafts();
-      renderValidation = {
-        ...initialRenderReport(),
-        status: "stale",
-        revision: sessionSnapshot().revision,
-      };
       notify();
       return getSnapshot();
     },
@@ -992,12 +1202,14 @@ export function createTemplateImportWizard(
       fieldDrafts.forEach((item, index) => {
         item.view.order = index;
       });
-      applyFieldDrafts();
-      renderValidation = {
-        ...initialRenderReport(),
-        status: "stale",
-        revision: sessionSnapshot().revision,
-      };
+      const applied = applyFieldDrafts();
+      if (applied) {
+        renderValidation = {
+          ...initialRenderReport(),
+          status: "stale",
+          revision: sessionSnapshot().revision,
+        };
+      }
       notify();
       return getSnapshot();
     },
@@ -1059,6 +1271,30 @@ export function createTemplateImportWizard(
           },
         })),
       ];
+      if (
+        input.identity.readiness === "unsupported" &&
+        !diagnostics.some((diagnostic) => diagnostic.severity === "error")
+      ) {
+        diagnostics.push({
+          code: "render.settlement-unsupported",
+          severity: "error",
+          message:
+            "The current routed layout cannot produce a stable render. Review unsupported layout features or re-export the template.",
+          details: { settlementRevision: input.identity.settlementRevision },
+        });
+      }
+      if (
+        input.identity.exportSafety === "blocked" &&
+        !diagnostics.some((diagnostic) => diagnostic.severity === "error")
+      ) {
+        diagnostics.push({
+          code: "render.export-safety-blocked",
+          severity: "error",
+          message:
+            "The renderer cannot safely complete this revision. Resolve the reported font, asset, or renderer issue before continuing.",
+          details: { identityId: input.identity.identityId },
+        });
+      }
       const blockers = diagnostics.filter(
         (diagnostic) => diagnostic.severity === "error",
       );
@@ -1154,15 +1390,15 @@ export function createTemplateImportWizard(
         importedAt,
         importedPackage: structuredClone(sessionValue.basePackage),
         packageValue: structuredClone(sessionValue.workingPackage),
-        editableFields: fieldDrafts
-          .filter((draft) => draft.view.enabled)
-          .map((draft) => structuredClone(draft.view)),
+        editableFields: fieldDrafts.map((draft) =>
+          structuredClone(draft.view)),
         configuredFieldRules: fieldDrafts.map((draft) =>
           structuredClone(draft.view)),
         importValidation: structuredClone(sessionValue.importValidation),
         validation: structuredClone(sessionValue.validation),
         fontValidation: structuredClone(current.fontValidation),
         renderValidation: structuredClone(renderValidation),
+        fieldValidation: structuredClone(current.fieldValidation),
         renderIdentity: structuredClone(renderValidation.renderIdentity),
         diagnostics: current.diagnostics.map(cloneIssue),
         blockers,

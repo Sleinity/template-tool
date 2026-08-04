@@ -16,6 +16,12 @@ source internals. Studio-specific layout debugging, stress reports, visual
 comparison, fidelity issue packets, and development harness adapters remain
 local to `src/fidelity` and are not SDK exports.
 
+SDK 0.6 keeps Studio's five-step product shell, catalogue workflow, styling,
+and advanced diagnostics while reusing supported package-validation and
+field-rule components from `@sleinity/template-react/importer`. Invalid field
+drafts no longer replace the active package, imported defaults remain reset
+authority, and device-emoji fallback is not presented as setup guidance.
+
 The public packages bundle only their supported entry points. Studio-only
 navigation, import panels, Fields, Validate, and editor controls are not part of
 the published SDK.

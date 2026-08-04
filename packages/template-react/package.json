@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Studio-independent React renderer and inspection integration for TemplatePackage applications.",
   "license": "UNLICENSED",
   "repository": {

@@ -1,16 +1,20 @@
 import {
+  forwardRef,
   StrictMode,
   useCallback,
   useEffect,
   useRef,
   useState,
   type ChangeEvent,
+  type CSSProperties,
+  type ReactNode,
 } from "react";
 import { createRoot } from "react-dom/client";
 import {
   getPackageFieldValue,
   type EditableFieldBinding,
   type PackageImageFieldConstraints,
+  type PackageTextFieldConstraints,
 } from "@sleinity/template-core";
 import type {
   TemplateImportConfirmationV1,
@@ -69,6 +73,92 @@ interface RevisionedIdentity {
   value: ResolvedProductRenderIdentityV1;
 }
 
+interface SessionPreviewViewportProps {
+  session: TemplateSessionV1;
+  compact?: boolean;
+  className?: string;
+  fallback?: ReactNode;
+  onRenderIdentity?(identity: ResolvedProductRenderIdentityV1): void;
+}
+
+const SessionPreviewViewport = forwardRef<
+  TemplateSessionRendererHandle,
+  SessionPreviewViewportProps
+>(function SessionPreviewViewport(
+  {
+    session,
+    compact = false,
+    className,
+    fallback = <span>Preparing preview…</span>,
+    onRenderIdentity,
+  },
+  rendererRef,
+) {
+  const snapshot = useTemplateSessionSnapshot(session);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState<{
+    scale: number;
+    x: number;
+    y: number;
+  } | null>(null);
+  const canvas = snapshot.workingPackage?.canvas ?? null;
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport || !canvas) {
+      setTransform(null);
+      return;
+    }
+    const refit = () => {
+      const bounds = viewport.getBoundingClientRect();
+      const padding = compact ? 20 : bounds.width < 640 ? 16 : 32;
+      const availableWidth = Math.max(1, bounds.width - padding * 2);
+      const availableHeight = Math.max(1, bounds.height - padding * 2);
+      const scale = Math.min(
+        availableWidth / canvas.width,
+        availableHeight / canvas.height,
+      );
+      setTransform({
+        scale,
+        x: bounds.width / 2 - (canvas.width * scale) / 2,
+        y: bounds.height / 2 - (canvas.height * scale) / 2,
+      });
+    };
+    const observer = new ResizeObserver(refit);
+    observer.observe(viewport);
+    refit();
+    return () => observer.disconnect();
+  }, [canvas?.height, canvas?.width, compact]);
+
+  const transformStyle = canvas && transform
+    ? ({
+        width: canvas.width,
+        height: canvas.height,
+        transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
+        transformOrigin: "0 0",
+      } satisfies CSSProperties)
+    : undefined;
+
+  return (
+    <div
+      ref={viewportRef}
+      className={`session-preview${compact ? " session-preview--compact" : ""}${className ? ` ${className}` : ""}`}
+    >
+      {canvas ? (
+        <div className="session-preview__transform" style={transformStyle}>
+          <TemplateSessionRenderer
+            ref={rendererRef}
+            session={session}
+            mode="editor"
+            fallback={fallback}
+            onRenderIdentity={onRenderIdentity}
+          />
+        </div>
+      ) : fallback}
+    </div>
+  );
+});
+
 function fileAsDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -84,6 +174,33 @@ function fileAsDataUrl(file: File): Promise<string> {
 function mutationMessage(result: TemplateSessionMutationResult): string {
   if (!result.applied) return result.warning?.message ?? "The update was rejected.";
   return result.warning?.message ?? "Field updated.";
+}
+
+function fieldConstraintSummary(field: EditableFieldBinding): string {
+  if (field.type === "text" || field.type === "textarea") {
+    const constraints = field.constraints as PackageTextFieldConstraints | undefined;
+    const parts = [
+      constraints?.maxCharacters
+        ? `Maximum ${constraints.maxCharacters} characters`
+        : null,
+      field.type === "textarea" && constraints?.maxLines
+        ? `Maximum ${constraints.maxLines} lines`
+        : null,
+    ].filter(Boolean);
+    return parts.length ? parts.join(" · ") : "No input limits";
+  }
+  if (field.type === "image") {
+    const constraints = field.constraints as PackageImageFieldConstraints | undefined;
+    return [
+      constraints?.allowedMimeTypes?.length
+        ? constraints.allowedMimeTypes.map((mime) => mime.replace("image/", "").toUpperCase()).join("/")
+        : null,
+      constraints?.maxFileSizeMb ? `Maximum ${constraints.maxFileSizeMb} MB` : null,
+    ].filter(Boolean).join(" · ") || "Template image requirements apply";
+  }
+  return field.type === "boolean"
+    ? "On or off"
+    : `${field.type.charAt(0).toUpperCase()}${field.type.slice(1)} input`;
 }
 
 function FieldControl({
@@ -259,10 +376,7 @@ function FieldControl({
     <div className="field">
       <label htmlFor={`field-${field.id}`}>{label}</label>
       {control}
-      <small>{field.type} · {field.property}</small>
-      {field.constraints ? (
-        <small>Constraints: {JSON.stringify(field.constraints)}</small>
-      ) : null}
+      <small>{fieldConstraintSummary(field)}</small>
       <button
         type="button"
         onClick={() => {
@@ -429,75 +543,42 @@ function TemplateEditor({
   };
 
   return (
-    <main>
-      <header>
+    <main className="editor-page">
+      <header className="host-header">
         <div>
-          <p className="eyebrow">Reusable editor reference</p>
-          <h1>Template Platform integration test</h1>
+          <p className="eyebrow">Host-owned editor</p>
+          <h1>{snapshot.workingPackage?.name ?? "Template editor"}</h1>
+          <p className="supporting-copy">The host supplies the controls; the SDK validates values and renders the current revision.</p>
         </div>
-        <span className={`status status-${snapshot.status}`}>{snapshot.status}</span>
-      </header>
-
-      <section className="toolbar">
         <button
+          className="button-secondary"
           type="button"
           onClick={onBack}
         >
           Back to dashboard
         </button>
-        <button
-          type="button"
-          disabled={!snapshot.workingPackage || !firstTextField}
-          onClick={() => {
+      </header>
+
+      <details className="editor-utilities">
+        <summary>Integration utilities</summary>
+        <div className="toolbar">
+          <button type="button" disabled={!snapshot.workingPackage || !firstTextField} onClick={() => {
             if (!snapshot.workingPackage || !firstTextField) return;
-            const current = getPackageFieldValue(
-              snapshot.workingPackage,
-              firstTextField,
-            );
-            const next = String(current ?? "").toLocaleUpperCase();
-            setMessage(
-              mutationMessage(session.setField(firstTextField.id, next)),
-            );
+            const current = getPackageFieldValue(snapshot.workingPackage, firstTextField);
+            setMessage(mutationMessage(session.setField(firstTextField.id, String(current ?? "").toLocaleUpperCase())));
             setExportPreview(null);
-          }}
-        >
-          Apply host uppercase transform
-        </button>
-        <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>
-          Save browser draft
-        </button>
-        <button type="button" onClick={() => void reloadSavedDraft()}>
-          Reload browser draft
-        </button>
-        <button
-          disabled={snapshot.status !== "ready"}
-          onClick={() => {
+          }}>Apply host uppercase transform</button>
+          <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>Save browser draft</button>
+          <button type="button" onClick={() => void reloadSavedDraft()}>Reload browser draft</button>
+          <button disabled={snapshot.status !== "ready"} onClick={() => {
             session.restoreImportedState();
             setExportPreview(null);
             setMessage("Restored all imported values.");
-          }}
-        >
-          Restore imported state
-        </button>
-        <button disabled={!identityReady} onClick={() => void capture()}>
-          Capture latest PNG
-        </button>
-        {acceptanceMode ? (
-          <button
-            type="button"
-            disabled={!identityReady || !firstTextField}
-            onClick={() => void exerciseStaleExport()}
-          >
-            Acceptance stale export
-          </button>
-        ) : null}
-      </section>
-
-      <p className="message">{message}</p>
-      <p className="identity">
-        Revision {snapshot.revision} · render identity{" "}
-        {identityReady ? identity.value.identityId : "pending"}
-      </p>
+          }}>Restore imported state</button>
+          {acceptanceMode ? <button type="button" disabled={!identityReady || !firstTextField} onClick={() => void exerciseStaleExport()}>Acceptance stale export</button> : null}
+        </div>
+        <p className="identity">Revision {snapshot.revision} · render identity {identityReady ? identity.value.identityId : "pending"}</p>
+      </details>
 
       {snapshot.diagnostics.length > 0 ? (
         <section className="diagnostics" aria-label="Template diagnostics">
@@ -513,24 +594,35 @@ function TemplateEditor({
       ) : null}
 
       {snapshot.validation ? (
-        <section
-          className="validation"
+        <p
+          className="validation-status"
           data-testid="validation-status"
           data-valid={String(snapshot.validation.valid)}
         >
-          <h2>Validation</h2>
-          <p>
-            Overall {snapshot.validation.valid ? "valid" : "blocked"} · schema{" "}
-            {snapshot.validation.schemaValid ? "valid" : "invalid"} · semantic{" "}
-            {snapshot.validation.semanticValid ? "valid" : "invalid"}
-          </p>
-          <p>{snapshot.validation.diagnostics.length} validation diagnostics</p>
-        </section>
+          {snapshot.validation.valid ? "✓" : "!"} Template {snapshot.validation.valid ? "valid" : "blocked"} · Schema{" "}
+          {snapshot.validation.schemaValid ? "valid" : "invalid"} · Semantic{" "}
+          {snapshot.validation.semanticValid ? "valid" : "invalid"} · {snapshot.validation.diagnostics.length} diagnostics
+        </p>
       ) : null}
 
+      <p className="editor-feedback" aria-live="polite">{message}</p>
+
       <div className="workspace">
-        <aside>
-          <h2>Editable fields</h2>
+        <section className="preview-panel">
+          <div className="panel-heading">
+            <div><p className="eyebrow">Current revision</p><h2>Live preview</h2></div>
+          </div>
+          <SessionPreviewViewport
+            ref={rendererRef}
+            session={session}
+            fallback={<p>Import a valid ZIP to render the template.</p>}
+            onRenderIdentity={(value) => setIdentity({ revision: snapshot.revision, value })}
+          />
+        </section>
+        <aside className="edit-content">
+          <div className="panel-heading">
+            <div><p className="eyebrow">Host controls</p><h2>Edit content</h2></div>
+          </div>
           {snapshot.editableFields.length === 0 ? (
             <p>No editable fields are available.</p>
           ) : (
@@ -546,17 +638,12 @@ function TemplateEditor({
               />
             ))
           )}
+          <div className="edit-content__footer">
+            <button className="button-primary" disabled={!identityReady} onClick={() => void capture()}>
+              Capture latest PNG
+            </button>
+          </div>
         </aside>
-        <section className="stage">
-          <TemplateSessionRenderer
-            ref={rendererRef}
-            mode="editor"
-            fallback={<p>Import a valid ZIP to render the template.</p>}
-            onRenderIdentity={(value: ResolvedProductRenderIdentityV1) =>
-              setIdentity({ revision: snapshot.revision, value })
-            }
-          />
-        </section>
       </div>
 
       {exportPreview ? (
@@ -596,6 +683,39 @@ createRoot(document.getElementById("root")!).render(
     <ReferenceApplication />
   </StrictMode>,
 );
+
+function DashboardTemplateCard({
+  record,
+  onOpen,
+}: {
+  record: HostTemplateRecord;
+  onOpen(): void;
+}) {
+  const session = useTemplateSession();
+  const snapshot = useTemplateSessionSnapshot(session);
+  useEffect(() => {
+    void loadTemplateImportConfirmation(session, record.confirmation);
+  }, [record, session]);
+  return (
+    <article className="template-card">
+      <div className="template-card__preview" aria-label={`${record.confirmation.packageValue.name} preview`}>
+        <SessionPreviewViewport session={session} compact />
+      </div>
+      <div className="template-card__body">
+        <div className="template-card__title">
+          <h2>{record.confirmation.packageValue.name}</h2>
+          <span className="status">Confirmed</span>
+        </div>
+        <p>
+          {record.confirmation.packageValue.canvas.width} × {record.confirmation.packageValue.canvas.height} · {record.confirmation.editableFields.length} editable fields
+        </p>
+        <button className="button-secondary" type="button" aria-label={`Open template ${record.confirmation.packageValue.name}`} disabled={snapshot.status !== "ready"} onClick={onOpen}>
+          Open editor
+        </button>
+      </div>
+    </article>
+  );
+}
 
 function ReferenceApplication() {
   const acceptanceMode = new URLSearchParams(window.location.search).has(
@@ -692,12 +812,14 @@ function ReferenceApplication() {
           />
         ) : (
           <main className="dashboard">
-            <header>
+            <header className="host-header">
               <div>
-                <p className="eyebrow">HOST APPLICATION</p>
+                <p className="eyebrow">Host application</p>
                 <h1>Template dashboard</h1>
+                <p className="supporting-copy">This dashboard and in-memory catalogue belong to the host. The wizard is a reference implementation built on the SDK.</p>
               </div>
               <button
+                className="button-primary"
                 type="button"
                 onClick={() => {
                   setHostMessage("Template setup opened.");
@@ -707,6 +829,7 @@ function ReferenceApplication() {
                 Add new template
               </button>
             </header>
+            <div className="dashboard-status">
             <p
               className="message"
               data-testid="runtime-support"
@@ -718,6 +841,7 @@ function ReferenceApplication() {
               Runtime compatibility: {runtimeSupport?.status ?? "checking"}.
             </p>
             <p className="message">{hostMessage}</p>
+            </div>
             {records.length === 0 ? (
               <section className="empty-state">
                 <h2>No templates have been added.</h2>
@@ -729,23 +853,10 @@ function ReferenceApplication() {
             ) : (
               <section className="template-list" aria-label="Host templates">
                 {records.map((record) => (
-                  <article key={record.id} className="template-card">
-                    <h2>{record.confirmation.packageValue.name}</h2>
-                    <p>
-                      {record.confirmation.packageValue.canvas.width}×
-                      {record.confirmation.packageValue.canvas.height} ·{" "}
-                      {record.confirmation.editableFields.length} editable fields
-                    </p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedRecordId(record.id);
-                        setView("editor");
-                      }}
-                    >
-                      Open template {record.confirmation.packageValue.name}
-                    </button>
-                  </article>
+                  <DashboardTemplateCard key={record.id} record={record} onOpen={() => {
+                    setSelectedRecordId(record.id);
+                    setView("editor");
+                  }} />
                 ))}
               </section>
             )}

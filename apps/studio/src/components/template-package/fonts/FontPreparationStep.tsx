@@ -6,9 +6,6 @@ import type {
   TemplatePackageV1,
 } from "@sleinity/template-core";
 import {
-  fontUsesPlatformEmojiFallback,
-} from "@sleinity/template-core/fonts";
-import {
   areExactFontRequirementsResolved,
   formatRequiredFontFace,
   isExactFontRequirementResolved,
@@ -248,10 +245,6 @@ export function FontPreparationStep({
       />
       {requirementStates.map(({ requirement, linked, ready, fileName }) => {
         const error = errors[requirement.id];
-        const usesEmojiFallback = fontUsesPlatformEmojiFallback(
-          requirement.family,
-          requirement.characters,
-        );
         const status = busyId === requirement.id
           ? { label: "Checking file…", tone: "neutral" as const }
           : ready
@@ -333,14 +326,6 @@ export function FontPreparationStep({
                     >
                       {fileName ?? "Stored exact font"}
                     </p>
-                    {usesEmojiFallback ? (
-                      <p
-                        className="mt-2 text-xs text-content-muted"
-                        data-testid="font-emoji-fallback-note"
-                      >
-                        Emoji in this template will use the device emoji font.
-                      </p>
-                    ) : null}
                   </>
                 ) : (
                   <p className="text-sm text-content-secondary">
