@@ -38,6 +38,7 @@ function fontFormat(mimeType: string): string {
 async function exportFontSource(
   packageValue: TemplatePackageV1,
   requirement: NonNullable<TemplatePackageV1["fontRequirements"]>[number],
+  registry = getManagedFontRegistry(),
 ): Promise<{ dataUrl: string; mimeType: string } | null> {
   const asset = requirement.assetId
     ? packageValue.assets[requirement.assetId]
@@ -55,7 +56,6 @@ async function exportFontSource(
   }
   const managedFontId = requirement.resolution?.managedFontId;
   const binaryHash = requirement.resolution?.binaryHash;
-  const registry = getManagedFontRegistry();
   if (!managedFontId || !binaryHash || !registry) return null;
   const managedFont = await registry.getManagedFont(managedFontId);
   if (!managedFont || managedFont.assetHash !== binaryHash) return null;
@@ -142,6 +142,7 @@ export async function prepareTemplatePackageFonts(
   packageValue: TemplatePackageV1,
   tree: ResolvedRenderTreeV1,
   fontSet: MutableFontFaceSetLike | null | undefined,
+  registry = getManagedFontRegistry(),
 ): Promise<FontReadinessReport> {
   const requirements = collectTemplatePackageFontRequirements(
     packageValue,
@@ -156,7 +157,6 @@ export async function prepareTemplatePackageFonts(
           ? safeFontSource(packageValue.assets[requirement.assetId])
           : null;
         if (!source && requirement.resolution?.managedFontId) {
-          const registry = getManagedFontRegistry();
           const managedFont = await registry?.getManagedFont(
             requirement.resolution.managedFontId,
           );

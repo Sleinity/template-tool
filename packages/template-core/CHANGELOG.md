@@ -1,5 +1,13 @@
 # @sleinity/template-core
 
+## 0.6.0
+
+### Minor Changes
+
+- Add portable, structured editable-field rule validation through the supported
+  `editor` entry point, including atomic constraint checks for text and image
+  setup rules.
+
 ## 0.5.0
 
 ### Minor Changes

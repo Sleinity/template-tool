@@ -1,6 +1,6 @@
 # Template import workflow
 
-SDK 0.3 provides one host-neutral workflow for importing and preparing a
+SDK 0.6 provides one host-neutral workflow for importing and preparing a
 TemplatePackage. The SDK owns import, validation, exact-font preparation,
 render readiness and editable-field rules. The host continues to own routing,
 authentication, catalogues, cloud storage, publishing and navigation.
@@ -41,23 +41,36 @@ export function AddTemplate() {
 }
 ```
 
-The seven fixed steps are ZIP Import, Package Validation, Font Validation,
-Render Validation, Field Rules, Confirmation and Completed. Each step exposes
+The headless controller retains seven inspectable states: ZIP Import, Package
+Validation, Font Validation, Render Validation, Field Rules, Confirmation and
+Completed. The default reference interface groups that evidence into five
+pages: Package, Fonts, Validate, Fields and Confirm. Each controller state exposes
 status, readiness, revision, blockers, warnings, diagnostics and navigation
 permissions.
 
 ## Public API inventory
 
 `@sleinity/template-browser` exports the controller factory; controller,
-snapshot, step and confirmation contracts; structured import, font and render
-reports; and the font and persistence adapter contracts.
+snapshot, step and confirmation contracts; structured import, font, field and
+render reports; and the font and persistence adapter contracts.
 
 `@sleinity/template-react/importer` exports
 `useTemplateImportWizard`, `TemplateImportWizardProvider`,
 `useTemplateImportWizardSnapshot`, `TemplateImportWizardPreview`,
-`TemplateImportWizard` and `TemplateImportWizardHandle`.
+`TemplateImportWizard` and `TemplateImportWizardHandle`. It also exports the
+optional shared `TemplateImportValidationSummary`,
+`TemplateImportRenderValidationSummary`, and
+`TemplateImportFieldRulesEditor` presentation components.
 `TemplateImporterWizard` and `TemplateImporterCompletionV1` are retained as
 compatibility aliases.
+
+`TemplateImportValidationSummary` remains compatible with a single import
+report. Hosts may also pass `packageSummary`, `sourceFilename`, `fontReport`,
+and `renderReport` to produce the same consolidated validation card used by the
+default wizard. It presents one overall result, compact package/font/renderer
+checks, package facts, unresolved findings with repair guidance, and one
+technical-evidence disclosure. `TemplateImportRenderValidationSummary` remains
+available when a host intentionally wants the render report on its own.
 
 ## Headless composition
 
@@ -118,12 +131,27 @@ phase reports are both available.
 Import and rendering are local. The SDK performs no font-provider, cloud or
 other external runtime request.
 
+The render step uses the editor's renderer and readiness authority. Templates
+with routed core-layout nodes require a current stable settlement. A
+zero-routed compatibility template does not require an inapplicable core
+settlement and may become ready through its package, exact-font, asset, DOM,
+revision, and export-safety evidence. A blocked report always contains a stable
+actionable issue.
+
+The preview keeps the intrinsic renderer unchanged inside a centred fitted
+layer. It observes its host, preserves aspect ratio, protects visible padding,
+and never introduces preview scrollbars.
+
 ## Adapters
 
 `TemplateFontAdapterV1` can return host-owned font bytes. Those bytes must pass
 the same exact family/PostScript, weight, posture, stretch, variable-axis,
 collection-face and glyph checks as a manual upload. CSS or a system-font name
 cannot establish exact authority.
+
+Platform emoji fallback remains internal informational evidence. It does not
+create visible setup guidance or a warning by itself. Missing non-emoji glyphs,
+wrong face identity, corrupt fonts, and unresolved exact fonts remain blocking.
 
 `TemplateImportPersistenceAdapterV1` is optional and only runs after explicit
 confirmation. Success advances to Completed and exposes the host receipt.
@@ -138,14 +166,24 @@ and a current ready or non-blocking-warning render identity. The immutable
 
 - the imported baseline and validated working package;
 - sanitized editable fields and complete configured field rules;
-- import, package, font and render-validation reports;
+- import, package, font, field and render-validation reports;
 - diagnostics, blockers, warnings and the current render identity;
 - a deterministic package fingerprint, SHA-256 package digest, SDK version,
   filename and import time.
 
-Node paths are not exposed through the wizard field projection. Disabled fields
-and help text remain confirmation metadata; enabled field rules are materialized
-into the working package.
+Node paths are not exposed through the wizard field projection. Imported labels,
+types, targets, and defaults are read-only facts. Every declared editable field
+remains available; the wizard confirms only host-facing input order and the
+supported text, textarea, and image constraints materialized into the working
+package. Legacy enabled/help-text confirmation metadata is ignored when an older
+supported confirmation is reopened.
+
+Field-rule controls keep invalid drafts separate from the active package.
+Invalid numeric, MIME, aspect-ratio, duplicate-rule, unsupported-constraint, or
+target values remain visible with per-field blockers; the last valid package
+and preview stay active. Empty optional numbers clear their constraints. Only a
+valid applied rule advances the session revision and invalidates render
+validation. Imported defaults remain read-only reset authority.
 
 ## Restart, cancel and reopen
 

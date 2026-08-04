@@ -90,11 +90,15 @@ export function createResolvedProductRenderIdentity(input: {
     })),
   });
   const exportSafety = aggregateExportSafety(resolvedTree);
-  const readiness: ResolvedProductRenderIdentityV1["readiness"] = runtime.settled.readiness === "ready"
-    ? "ready"
-    : runtime.settled.readiness === "unsupported"
-      ? "unsupported"
-      : "pending";
+  const hasRoutedCoreLayout = runtime.route.routedNodeIds.length > 0;
+  const readiness: ResolvedProductRenderIdentityV1["readiness"] =
+    !hasRoutedCoreLayout
+      ? "ready"
+      : runtime.settled.readiness === "ready"
+        ? "ready"
+        : runtime.settled.readiness === "unsupported"
+          ? "unsupported"
+          : "pending";
   const base = {
     packageId: packageValue.packageId,
     packageRevision,

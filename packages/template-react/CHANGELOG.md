@@ -1,5 +1,24 @@
 # @sleinity/template-react
 
+## 0.6.0
+
+### Minor Changes
+
+- Add compact actionable importer validation summaries, render-validation
+  summary, and a robust atomic host-neutral field-rules editor. Studio retains
+  its richer native validation and field-card presentation.
+- Consolidate package, font, and render evidence into one reusable validation
+  card while retaining the focused summaries for custom compositions.
+- Combine Input Order and type-appropriate Input Rules in one accessible
+  expandable field-card list and remove mutable enabled, label, help-text,
+  pattern, counter, and overflow setup controls.
+- Fit complete intrinsic template canvases into responsive preview frames with
+  protected padding and no scrollbars while preserving renderer output.
+- Keep device emoji fallback as internal evidence rather than setup copy.
+- Updated dependencies
+  - @sleinity/template-core@0.6.0
+  - @sleinity/template-browser@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

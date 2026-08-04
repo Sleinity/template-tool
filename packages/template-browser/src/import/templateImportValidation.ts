@@ -29,6 +29,19 @@ export interface TemplateImportValidationPhaseV1 {
   diagnostics: PackageDiagnostic[];
 }
 
+export interface TemplateImportValidationFindingV1 {
+  code: string;
+  severity: PackageDiagnostic["severity"];
+  phase: TemplateImportValidationPhaseId;
+  target?: {
+    kind: "field" | "asset" | "node" | "path" | "package";
+    id?: string;
+  };
+  impact: string;
+  repairGuidance: string;
+  diagnostic: PackageDiagnostic;
+}
+
 export interface TemplateImportValidationReportV1 {
   schemaVersion: typeof TEMPLATE_IMPORT_VALIDATION_SCHEMA_VERSION;
   status: "ready" | "warning" | "blocked";
@@ -38,6 +51,13 @@ export interface TemplateImportValidationReportV1 {
     TemplateImportValidationPhaseV1
   >;
   diagnostics: PackageDiagnostic[];
+  findings: TemplateImportValidationFindingV1[];
+  counts: {
+    blockers: number;
+    warnings: number;
+    repairs: number;
+    notes: number;
+  };
 }
 
 const phaseIds: TemplateImportValidationPhaseId[] = [
@@ -97,6 +117,30 @@ function phaseStatus(
     return "warning";
   }
   return "ready";
+}
+
+function defaultRepairGuidance(
+  phase: TemplateImportValidationPhaseId,
+): string {
+  return ({
+    zip: "Choose an intact TemplatePackage ZIP and try again.",
+    manifest: "Re-export the package with all required files and manifest entries.",
+    schema: "Export the template with a supported TemplatePackage version.",
+    semantics: "Correct the invalid template values and export the package again.",
+    bindings: "Repair the editable-field declaration or its target in the source template.",
+    assets: "Include the referenced asset with valid metadata and bytes.",
+    features: "Review the affected feature and use a supported template alternative where necessary.",
+  } satisfies Record<TemplateImportValidationPhaseId, string>)[phase];
+}
+
+function findingTarget(diagnostic: PackageDiagnostic): TemplateImportValidationFindingV1["target"] {
+  const fieldId = diagnostic.details?.fieldId;
+  const assetId = diagnostic.details?.assetId;
+  if (typeof fieldId === "string") return { kind: "field", id: fieldId };
+  if (typeof assetId === "string") return { kind: "asset", id: assetId };
+  if (diagnostic.nodeId) return { kind: "node", id: diagnostic.nodeId };
+  if (diagnostic.path) return { kind: "path", id: diagnostic.path };
+  return { kind: "package" };
 }
 
 export function createFailedTemplatePackageValidation(
@@ -166,6 +210,25 @@ export function createTemplateImportValidationReport(input: {
       ? "warning"
       : "ready"
     : "blocked";
+  const findings = diagnostics.map((diagnostic): TemplateImportValidationFindingV1 => {
+    const phase = phaseForDiagnostic(diagnostic);
+    const suggestion = diagnostic.details?.suggestion;
+    return {
+      code: diagnostic.code,
+      severity: diagnostic.severity,
+      phase,
+      target: findingTarget(diagnostic),
+      impact: diagnostic.severity === "error"
+        ? "This prevents the template from being imported."
+        : diagnostic.severity === "warning"
+          ? "The template can continue, but this may affect editing or preview quality."
+          : "This is recorded for review and does not block import.",
+      repairGuidance: typeof suggestion === "string" && suggestion.trim()
+        ? suggestion
+        : defaultRepairGuidance(phase),
+      diagnostic: { ...diagnostic },
+    };
+  });
 
   return {
     schemaVersion: TEMPLATE_IMPORT_VALIDATION_SCHEMA_VERSION,
@@ -173,5 +236,12 @@ export function createTemplateImportValidationReport(input: {
     importable,
     phases,
     diagnostics,
+    findings,
+    counts: {
+      blockers: diagnostics.filter((item) => item.severity === "error").length,
+      warnings: diagnostics.filter((item) => item.severity === "warning").length,
+      repairs: diagnostics.filter((item) => item.details?.repairApplied === true).length,
+      notes: diagnostics.filter((item) => item.severity === "info").length,
+    },
   };
 }

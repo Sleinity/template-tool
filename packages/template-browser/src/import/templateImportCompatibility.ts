@@ -9,6 +9,10 @@ import {
   type TemplatePackageValidationResult,
   type TemplatePackageV1,
 } from "@sleinity/template-core";
+import {
+  validatePackageEditableFieldRules,
+  type PackageFieldRulesValidationReportV1,
+} from "@sleinity/template-core/editor";
 import type {
   TemplateSessionLoadStateResultV1,
   TemplateSessionV1,
@@ -104,6 +108,7 @@ export interface TemplateImportConfirmationCompatibilityReportV1 {
   packageIdentityMatches: boolean;
   importedPackageValidation: TemplatePackageValidationResult | null;
   packageValidation: TemplatePackageValidationResult | null;
+  fieldValidation: PackageFieldRulesValidationReportV1 | null;
   fingerprint: {
     expected: string | null;
     actual: string | null;
@@ -817,6 +822,32 @@ export async function inspectTemplateImportConfirmation(
     : { fonts: [], issues: [] };
   issues.push(...fontInspection.issues);
 
+  const fieldValidation = packageValue
+    ? validatePackageEditableFieldRules(packageValue.editableFields ?? [])
+    : null;
+  for (const blocker of fieldValidation?.blockers ?? []) {
+    issues.push({
+      code: `confirmation.${blocker.code}`,
+      severity: "error",
+      message: blocker.message,
+      details: {
+        fieldId: blocker.fieldId,
+        property: blocker.property,
+      },
+    });
+  }
+  for (const warning of fieldValidation?.warnings ?? []) {
+    issues.push({
+      code: `confirmation.${warning.code}`,
+      severity: "warning",
+      message: warning.message,
+      details: {
+        fieldId: warning.fieldId,
+        property: warning.property,
+      },
+    });
+  }
+
   const status = reportStatus(
     issues.map((issue) =>
       issue.severity === "error"
@@ -835,6 +866,7 @@ export async function inspectTemplateImportConfirmation(
     packageIdentityMatches,
     importedPackageValidation,
     packageValidation,
+    fieldValidation,
     fingerprint: {
       expected: expectedFingerprint,
       actual: actualFingerprint,

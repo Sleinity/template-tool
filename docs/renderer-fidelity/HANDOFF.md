@@ -1,5 +1,105 @@
 # Renderer Fidelity Handoff
 
+## 2026-08-04 — SDK 0.6.0 release closeout
+
+### Result
+
+- Froze the fixed core/browser/React `0.6.0` contract after manual Studio and
+  standalone-wizard review.
+- Completed the host-neutral reference flow from dashboard through wizard
+  confirmation to fresh-session reopening, host-owned editing, persistence and
+  revision-safe PNG capture.
+- Added a focused 0.2.2 migration path and an evidence gate for future
+  host-editor primitives without exporting additional Studio workflow.
+- Preserved exact-font authority, structured validation, atomic field rules,
+  renderer output, package schemas, persistence records and public APIs.
+
+### Verification boundary
+
+Current-run portable tests, root/package TypeScript, all builds/declarations,
+API/release/docs/boundary checks, archives, DOM-free core, packed consumers,
+generic editor acceptance, session/Studio browser smokes, exact-font evidence,
+source-authoritative capture and all 19 appearance projections pass. The
+generic acceptance proves supported and restricted CSP, invalid/valid ZIP,
+font rejection/upload/reuse, confirmation, fresh-session reopening, host
+editing, offline drafts, stale-export rejection, silent PNG and zero external
+SDK requests.
+
+Core declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local archives are 588,525 / 334,193 / 235,621 bytes for core/browser/React;
+the packed consumer is 882,405 / 258,577 gzip bytes.
+
+Renderer comparison `2026-08-04T12-52-50-241Z` reproduces the documented 31
+approved passes, 17 historical/environment-sensitive differences and 28
+unapproved surfaces. Scene retains four historical and 15 unapproved states;
+settlement retains its documented matrix. Approved renderer, scene and
+settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No approved evidence or guarded policy changed.
+
+### Next boundary
+
+Publish through the reviewed `sdk-v0.6.0` tag workflow and verify the
+registry-derived archives in authenticated and secret-free consumers. After a
+real external migration, extract only recurring host boilerplate also present
+in Studio and the reference; the responsive session viewport is the strongest
+current candidate.
+
+## 2026-08-03 — SDK 0.6.0 RC2 import experience and field rules
+
+### Result
+
+- Corrected product readiness for zero-routed compatibility templates without
+  changing routing, rendering, DOM output, capture, or pixels.
+- Guaranteed actionable structured evidence for blocked render validation.
+- Fitted the complete intrinsic canvas into a responsive, no-scroll preview
+  frame with protected padding.
+- Removed emoji-fallback setup copy while retaining internal evidence.
+- Kept Studio's established validation workbench and native field-card
+  presentation; the generic validation duplication was removed.
+- Added a compact actionable SDK validation projection and a host-neutral field
+  editor limited to ordering plus meaningful text, textarea and image rules.
+- Added revision-bound session font-preparation evidence so exact uploaded faces
+  activate in the same preview and readiness path used by the editor.
+
+### Review boundary
+
+Publication is intentionally held until the detached Studio and standalone SDK
+wizard pass manual review. Cross-device template transport remains host-owned
+and outside this milestone.
+
+### Verification boundary
+
+Portable tests, direct root/core/browser/React/Studio typechecks, package and
+Studio/example builds, API/release/docs/boundary contracts, and archive
+inspection pass. Manual browser review passed the real deal-of-the-week banner
+through package validation, exact Rethink Sans upload, current-revision Render
+Validation, meaningful Field Rules, and Studio's native Validate/Fields views.
+The preview uses the private exact runtime family, fits completely with protected
+padding, and has no scrollbars or emoji setup copy. Invalid field drafts remain
+separate from the last valid package. The packed generic browser acceptance
+command did not complete in this run, so it remains a release-gate rerun rather
+than a claimed pass.
+
+Core root declarations remain 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 588,525 / 333,849 / 223,413 bytes. Studio
+is 1,000.83 / 290.99 gzip kB and the generic example is 892.71 / 261.29 gzip
+kB.
+
+Appearance remains deterministic for 19 fixtures. Renderer run
+`sdk-0-6-rc2-verification` is repeat-stable and retains the documented approved,
+historical/environment-sensitive and unapproved states. Fresh scene and
+settlement comparisons retain their documented historical/unapproved matrices.
+Approved renderer, scene, and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No reference, fixture, schema, promotion, or tolerance update ran.
+
 ## 2026-08-02 — Milestone 2G Studio contract adoption / SDK 0.5.0
 
 ### Result

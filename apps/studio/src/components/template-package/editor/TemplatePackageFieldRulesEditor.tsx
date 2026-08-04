@@ -31,7 +31,7 @@ interface TemplatePackageFieldRulesEditorProps {
   onSelectField?: (field: EditableFieldBinding | null) => void;
 }
 
-const textFieldTypes = new Set(["text", "textarea", "number", "date"]);
+const textFieldTypes = new Set(["text", "textarea"]);
 const imageFormats = [
   { label: "JPEG", mimeType: "image/jpeg" },
   { label: "PNG", mimeType: "image/png" },
@@ -86,7 +86,8 @@ function replacementModeLabel(
 ): string {
   if (value === "cover") return "Fill frame";
   if (value === "contain") return "Fit inside frame";
-  return "Preserve original crop";
+  if (value === "user-crop") return "Host-provided crop";
+  return "Fill frame";
 }
 
 function imageFormatLabel(mimeType: string): string {
@@ -104,23 +105,59 @@ function fieldSummary(field: EditableFieldBinding): string {
     const characters = constraints.maxCharacters
       ? `${constraints.maxCharacters} characters`
       : "No character limit";
-    const lineLimit = constraints.maxLines
+    const lineLimit = field.type === "textarea" && constraints.maxLines
       ? constraints.maxLines === 1
         ? "1 line"
         : `${constraints.maxLines} lines`
-      : "No line limit";
-    return `${characters} · ${lineLimit}`;
+      : null;
+    return lineLimit ? `${characters} · ${lineLimit}` : characters;
   }
   return editableFieldTypeLabel(field.type);
 }
 
-function positiveInteger(value: string): number | undefined {
-  if (value === "") return undefined;
-  if (!/^\d+$/.test(value)) return undefined;
-  const parsed = Number(value);
-  return Number.isSafeInteger(parsed) && parsed > 0 && parsed <= 10000
-    ? parsed
-    : undefined;
+function ConstraintNumberInput({
+  label,
+  value,
+  integer = false,
+  onCommit,
+}: {
+  label: string;
+  value: number | undefined;
+  integer?: boolean;
+  onCommit(value: number | undefined): void;
+}) {
+  const [draft, setDraft] = useState(value === undefined ? "" : String(value));
+  useEffect(() => {
+    setDraft(value === undefined ? "" : String(value));
+  }, [value]);
+  const parsed = draft === "" ? undefined : Number(draft);
+  const invalid = draft !== "" && (
+    !Number.isFinite(parsed) ||
+    Number(parsed) <= 0 ||
+    (integer && !Number.isSafeInteger(parsed))
+  );
+  return (
+    <Input
+      label={label}
+      type="number"
+      min={integer ? 1 : 0.1}
+      step={integer ? 1 : 0.1}
+      value={draft}
+      placeholder="No limit"
+      error={invalid ? `${label} must be ${integer ? "a whole number" : "a number"} greater than zero.` : undefined}
+      onChange={(event) => {
+        const next = event.target.value;
+        setDraft(next);
+        if (next === "") onCommit(undefined);
+        else {
+          const number = Number(next);
+          if (Number.isFinite(number) && number > 0 && (!integer || Number.isSafeInteger(number))) {
+            onCommit(number);
+          }
+        }
+      }}
+    />
+  );
 }
 
 function cleanLegacyConstraints(field: EditableFieldBinding): void {
@@ -280,6 +317,7 @@ export function TemplatePackageFieldRulesEditor({
           const expanded = expandedFieldKey === fieldKey;
           const target = targets.find((item) => editableFieldSelectionKey(item.field) === fieldKey);
           const targetLinked = Boolean(target?.targetExists && target.propertySupported);
+          const configurable = field.type === "text" || field.type === "textarea" || field.type === "image";
           const textConstraints = (field.constraints ?? {}) as PackageTextFieldConstraints;
           const imageConstraints = (field.constraints ?? {}) as PackageImageFieldConstraints;
           const node = packageValue.nodes[field.nodeId];
@@ -307,7 +345,9 @@ export function TemplatePackageFieldRulesEditor({
           });
           const selectAndToggle = () => {
             onSelectField?.(field);
-            setExpandedFieldKey((current) => current === fieldKey ? null : fieldKey);
+            if (configurable) {
+              setExpandedFieldKey((current) => current === fieldKey ? null : fieldKey);
+            }
           };
 
           return (
@@ -362,8 +402,8 @@ export function TemplatePackageFieldRulesEditor({
                 <button
                   type="button"
                   className="field-rule-card__select"
-                  aria-expanded={expanded}
-                  aria-controls={`field-rules-${fieldKey}`}
+                  aria-expanded={configurable ? expanded : undefined}
+                  aria-controls={configurable ? `field-rules-${fieldKey}` : undefined}
                   aria-pressed={selected}
                   onClick={selectAndToggle}
                 >
@@ -376,7 +416,7 @@ export function TemplatePackageFieldRulesEditor({
                     <Status tone="neutral" className="field-rule-card__type">
                       {editableFieldTypeLabel(field.type)}
                     </Status>
-                    <ChevronDown className="field-rule-card__chevron" aria-hidden="true" size={18} />
+                    {configurable ? <ChevronDown className="field-rule-card__chevron" aria-hidden="true" size={18} /> : null}
                   </span>
                 </button>
                 <div className="field-rule-card__reorder-actions" aria-label={`Reorder ${formatEditableFieldLabel(field)}`}>
@@ -389,7 +429,7 @@ export function TemplatePackageFieldRulesEditor({
                 </div>
               </div>
 
-              {expanded ? (
+              {expanded && configurable ? (
                 <div id={`field-rules-${fieldKey}`} className="field-rule-card__content space-y-4">
                   <DefaultValue packageValue={packageValue} field={field} />
                   {field.type === "image" ? (
@@ -406,14 +446,22 @@ export function TemplatePackageFieldRulesEditor({
                         </div>
                       ) : null}
                       <div className="field-rules-two-column">
-                        <Input label="Maximum file size (MB)" type="number" min={0.1} step={0.1} value={imageConstraints.maxFileSizeMb ?? ""} placeholder="No limit" onChange={(event) => updateImageConstraint("maxFileSizeMb", event.target.value === "" ? undefined : Math.max(0.1, Number(event.target.value)))} />
-                        <Input label="Minimum width" type="number" min={1} step={1} value={imageConstraints.minWidth ?? ""} placeholder="No limit" onChange={(event) => updateImageConstraint("minWidth", positiveInteger(event.target.value))} />
-                        <Input label="Minimum height" type="number" min={1} step={1} value={imageConstraints.minHeight ?? ""} placeholder="No limit" onChange={(event) => updateImageConstraint("minHeight", positiveInteger(event.target.value))} />
-                        <Select label="Replacement mode" value={imageConstraints.replacementMode ?? "preserve-original-crop"} onChange={(event) => updateImageConstraint("replacementMode", event.target.value as PackageImageFieldConstraints["replacementMode"])}>
-                          <option value="preserve-original-crop">Preserve original crop</option>
+                        <ConstraintNumberInput label="Maximum file size (MB)" value={imageConstraints.maxFileSizeMb} onCommit={(value) => updateImageConstraint("maxFileSizeMb", value)} />
+                        <ConstraintNumberInput label="Minimum width" integer value={imageConstraints.minWidth} onCommit={(value) => updateImageConstraint("minWidth", value)} />
+                        <ConstraintNumberInput label="Minimum height" integer value={imageConstraints.minHeight} onCommit={(value) => updateImageConstraint("minHeight", value)} />
+                        <Select label="Default placement" value={imageConstraints.replacementMode === "contain" || imageConstraints.replacementMode === "user-crop" ? imageConstraints.replacementMode : "cover"} onChange={(event) => updateImageConstraint("replacementMode", event.target.value as PackageImageFieldConstraints["replacementMode"])}>
                           <option value="cover">Fill frame</option>
                           <option value="contain">Fit inside frame</option>
+                          <option value="user-crop">Host-provided crop</option>
                         </Select>
+                        <Select label="Aspect ratio" value={typeof imageConstraints.aspectRatio === "number" ? "custom" : imageConstraints.aspectRatio ?? "preserve-frame"} onChange={(event) => updateImageConstraint("aspectRatio", event.target.value === "custom" ? 1 : event.target.value as "preserve-frame" | "free")}>
+                          <option value="preserve-frame">Match template frame</option>
+                          <option value="free">Any ratio</option>
+                          <option value="custom">Custom ratio</option>
+                        </Select>
+                        {typeof imageConstraints.aspectRatio === "number" ? (
+                          <ConstraintNumberInput label="Custom aspect ratio" value={imageConstraints.aspectRatio} onCommit={(value) => updateImageConstraint("aspectRatio", value ?? "preserve-frame")} />
+                        ) : null}
                       </div>
                       <fieldset className="field-format-options">
                         <legend className="ui-field__label">Allowed formats</legend>
@@ -435,27 +483,16 @@ export function TemplatePackageFieldRulesEditor({
                         </div>
                       </fieldset>
                     </>
-                  ) : textFieldTypes.has(field.type) ? (
+                  ) : field.type === "text" || field.type === "textarea" ? (
                     <>
                       <div className="field-rules-two-column field-rules-two-column--narrow">
-                        <Input label="Maximum characters" type="number" inputMode="numeric" min={1} step={1} max={10000} value={textConstraints.maxCharacters ?? ""} placeholder="No limit" helpText="Blank means unrestricted." onChange={(event) => updateTextConstraint("maxCharacters", positiveInteger(event.target.value))} />
-                        <Input label="Maximum lines" type="number" inputMode="numeric" min={1} step={1} max={1000} value={textConstraints.maxLines ?? ""} placeholder="No limit" helpText="Automatic wrapping counts toward this limit." onChange={(event) => updateTextConstraint("maxLines", positiveInteger(event.target.value))} />
+                        <ConstraintNumberInput label="Maximum characters" integer value={textConstraints.maxCharacters} onCommit={(value) => updateTextConstraint("maxCharacters", value)} />
+                        {field.type === "textarea" ? (
+                          <ConstraintNumberInput label="Maximum lines" integer value={textConstraints.maxLines} onCommit={(value) => updateTextConstraint("maxLines", value)} />
+                        ) : null}
                       </div>
-                      <Select label="Input format" value={textConstraints.pattern ?? "free"} onChange={(event) => updateTextConstraint("pattern", event.target.value as PackageTextFieldConstraints["pattern"])}>
-                        <option value="free">Free text</option>
-                        <option value="number">Number</option>
-                        <option value="date">Date</option>
-                      </Select>
                     </>
-                  ) : (
-                    <p className="text-sm text-content-secondary">
-                      This field uses its imported configuration.
-                    </p>
-                  )}
-                  <details className="border-t border-line-subtle pt-3">
-                    <summary className="cursor-pointer text-sm text-content-muted">Technical target</summary>
-                    <p className="mt-2 break-words font-mono text-xs text-content-muted">{field.nodeId} · {field.property}</p>
-                  </details>
+                  ) : null}
                 </div>
               ) : null}
             </article>

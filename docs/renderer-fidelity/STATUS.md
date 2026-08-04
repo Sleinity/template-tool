@@ -1,8 +1,111 @@
 # Renderer Fidelity Status
 
-Status date: 2026-08-02
-Current milestone: Milestone 2G Studio contract adoption / SDK 0.5.0
+Status date: 2026-08-04
+Current milestone: SDK 0.6.0 release closeout and external-adoption gate
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.6.0 — release closeout
+
+The fixed core/browser/React train is release-ready at `0.6.0`. The standalone
+reference now demonstrates the complete host-neutral Package, Fonts, Validate,
+Fields and Confirm workflow, returns confirmation to a host-owned dashboard,
+and reopens the record in a fresh session for host-owned editing, persistence
+and current-revision PNG capture. The 0.2.2 migration guide preserves existing
+host dashboards, controls, image workflows, storage and export pipelines while
+replacing only the hand-built importer/setup flow.
+
+Current-run package/root TypeScript, portable tests, package/Studio/example
+builds, declarations, API/release/docs/boundary contracts, archive inspection,
+DOM-free core, packed React consumer, packed generic-editor acceptance,
+TemplateSession browser smoke and Studio browser smoke pass. The browser
+acceptance covers supported/restricted CSP, invalid/valid ZIPs, exact-font
+rejection/upload/reuse, compact validation, field rules, fresh confirmation
+hydration, host text/image editing, Fill/Fit/reset, offline persistence,
+stale-export rejection, silent PNG capture, disposal and zero external SDK
+requests.
+
+Core root declarations remain exactly 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local archives are core 588,525, browser 334,193 and React 235,621 bytes; the
+isolated consumer is 882,405 / 258,577 gzip bytes. Registry-derived hashes are
+recorded only after tag publication.
+
+Exact-font evidence passes, source-authoritative capture is repeat-stable and
+appearance remains deterministic for all 19 fixtures. Renderer comparison
+`2026-08-04T12-52-50-241Z` retains 31 approved passes, 17 documented
+historical/environment-sensitive differences and 28 unapproved surfaces.
+Scene retains four documented historical differences and 15 unapproved
+fixtures; settlement retains its documented matrix. Approved renderer, scene
+and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No fixture, schema, tolerance, promotion, reference-update or approved-evidence
+command ran.
+
+External adoption now gates the next public feature milestone. Only recurring
+boilerplate independently evidenced in Studio, the reference and a real host
+qualifies for a future host-editor primitive.
+
+## SDK 0.6.0 RC2 — import experience and field rules
+
+The fixed train is prepared at `0.6.0` for manual Studio and standalone-wizard
+review before publication. Zero-routed compatibility templates now bypass the
+inapplicable core-settlement readiness gate while retaining all existing
+package, font, asset, DOM, revision and export-safety checks. The real
+deal-of-the-week banner completes Render Validation with its approved renderer
+path and no renderer pixel change.
+
+The importer preview uses the existing viewport fitting model around the
+intrinsic session renderer, with observer-driven refitting, protected padding,
+centred aspect-preserving output and hidden overflow. Exact emoji fallback is
+still machine-readable but is no longer presented as a setup warning.
+
+Core owns portable field-rule validation through its supported `editor` entry.
+Browser wizard snapshots and confirmations expose a structured field report and
+apply only valid drafts. React's host-neutral wizard now separates Input Order
+from type-appropriate Input Rules. Studio retains its native field cards and
+two-column preview instead of embedding the generic SDK presentation. Imported
+labels, types, targets and defaults are read-only; content editing remains
+host-owned.
+
+The generic validation rows introduced in the first 0.6 candidate were removed
+from Studio, whose existing fidelity workbench remains the single validation
+presentation. The SDK wizard now projects existing validation authority into a
+compact result, counts, package facts, affected areas and actionable repair
+guidance, with successful phases and technical details collapsed.
+
+Managed-font preparation is now session lifecycle evidence bound to the current
+package, registry and session revision. The real Rethink Sans SemiBold upload
+was browser-verified under private runtime family
+`__template_font_cc5cf4e24fef00ce_0_static` at weight 600 in the rendered
+preview. Font and render validation wait for that current-revision activation.
+
+Current root/package TypeScript, portable tests, Studio and generic-example
+production builds, API/release/docs/boundary checks, archive inspection and
+manual Studio/wizard browser review pass. The real banner reaches
+current-revision Render Validation, Continue is enabled, and its intrinsic
+1920×1080 canvas fits without scrollbars with 26px horizontal and about 39px
+vertical preview padding in the reviewed container. Core root declarations
+remain exactly 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local core/browser/React archives are 588,525 / 333,849 / 223,413 bytes. Studio
+is 1,000.83 / 290.99 gzip kB and the generic example is 892.71 / 261.29 gzip
+kB. The packed generic browser acceptance command did not complete in the
+current run and is not claimed as passing; archive inspection and the equivalent
+workspace browser flow both passed.
+
+Appearance is deterministic for all 19 fixtures. Fresh renderer run
+`sdk-0-6-rc2-verification` is repeat-stable and retains the documented mix of
+approved passes, historical/environment-sensitive differences and unapproved
+surfaces. Fresh scene and settlement comparisons retain their documented
+historical/unapproved matrices; no update command ran. Approved identities
+remain renderer 96 /
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+scene 4 / `b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and settlement 80 /
+`c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No approved evidence or guarded policy changed.
 
 ## Milestone 2G — Studio contract adoption and advanced inspection
 

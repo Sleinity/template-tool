@@ -90,6 +90,24 @@ export default defineConfig(({ mode }) => {
           ),
         },
         {
+          find: "@sleinity/template-react/importer.css",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-react/src/importer.css",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
+          find: "@sleinity/template-react/importer",
+          replacement: fileURLToPath(
+            new URL(
+              "../../packages/template-react/src/importerComponents.tsx",
+              import.meta.url,
+            ),
+          ),
+        },
+        {
           find: /^@sleinity\/template-core$/,
           replacement: fileURLToPath(
           new URL("../../packages/template-core/src/index.ts", import.meta.url),

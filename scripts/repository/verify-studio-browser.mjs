@@ -106,10 +106,9 @@ try {
     exactFontPath,
   );
   await page.locator('[data-font-ui-status="Ready"]').waitFor();
-  await page.getByText(
-    "Emoji in this template will use the device emoji font.",
-    { exact: true },
-  ).waitFor();
+  if (await page.getByText(/emoji/i).count()) {
+    throw new Error("Studio exposed internal emoji fallback evidence.");
+  }
   const verifiedHash = await page
     .locator("[data-font-linked-binary-hash]")
     .getAttribute("data-font-linked-binary-hash");

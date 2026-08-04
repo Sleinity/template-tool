@@ -1,10 +1,10 @@
 {
   "schemaVersion": "template-sdk-public-api-contract-v1",
-  "sdkVersion": "0.5.0",
+  "sdkVersion": "0.6.0",
   "packages": [
     {
       "name": "@sleinity/template-core",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "entries": [
         {
           "path": ".",
@@ -319,6 +319,9 @@
             "PackageEditableFieldRulesResult",
             "PackageEditorFieldTargetStatus",
             "PackageEditorFieldWarning",
+            "PackageFieldRulesValidationReportV1",
+            "PackageFieldRuleValidationIssueV1",
+            "PackageFieldRuleValidationResultV1",
             "PackageFieldUpdateOptions",
             "PackageFieldUpdateResult",
             "PackageImageActivePlacementState",
@@ -339,6 +342,7 @@
             "updatePackageEditableFieldRule",
             "updateTemplatePackageField",
             "validateImageReplacement",
+            "validatePackageEditableFieldRules",
             "validatePackageFieldConstraints",
             "validateTextFieldValue",
             "withTextFieldConstraint"
@@ -521,7 +525,7 @@
     },
     {
       "name": "@sleinity/template-browser",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "entries": [
         {
           "path": ".",
@@ -755,6 +759,9 @@
             "TemplateImportConfirmationV1",
             "TemplateImportFieldRulePatchV1",
             "TemplateImportFieldRuleV1",
+            "TemplateImportFieldRuleValidationV1",
+            "TemplateImportFieldValidationReportV1",
+            "TemplateImportFieldValidationResultV1",
             "TemplateImportFieldWarningV1",
             "TemplateImportFontCompatibilityV1",
             "TemplateImportFontRequirementReportV1",
@@ -766,6 +773,7 @@
             "TemplateImportRenderValidationReportV1",
             "TemplateImportStepSnapshotV1",
             "TemplateImportStepStatus",
+            "TemplateImportValidationFindingV1",
             "TemplateImportValidationPhaseId",
             "TemplateImportValidationPhaseStatus",
             "TemplateImportValidationPhaseV1",
@@ -790,7 +798,9 @@
             "TemplateSaveStatus",
             "TemplateSessionErrorV1",
             "TemplateSessionFontLinkOptions",
+            "TemplateSessionFontPreparationIssueV1",
             "TemplateSessionFontPreparationResult",
+            "TemplateSessionFontPreparationStateV1",
             "TemplateSessionFontUploadInput",
             "TemplateSessionImageReplacementInput",
             "TemplateSessionLoadStateInputV1",
@@ -1051,6 +1061,9 @@
             "TemplateImportConfirmationV1",
             "TemplateImportFieldRulePatchV1",
             "TemplateImportFieldRuleV1",
+            "TemplateImportFieldRuleValidationV1",
+            "TemplateImportFieldValidationReportV1",
+            "TemplateImportFieldValidationResultV1",
             "TemplateImportFieldWarningV1",
             "TemplateImportFontRequirementReportV1",
             "TemplateImportFontValidationReportV1",
@@ -1061,6 +1074,7 @@
             "TemplateImportRenderValidationReportV1",
             "TemplateImportStepSnapshotV1",
             "TemplateImportStepStatus",
+            "TemplateImportValidationFindingV1",
             "TemplateImportValidationPhaseId",
             "TemplateImportValidationPhaseStatus",
             "TemplateImportValidationPhaseV1",
@@ -1142,7 +1156,9 @@
             "TEMPLATE_SESSION_SCHEMA_VERSION",
             "TemplateSessionErrorV1",
             "TemplateSessionFontLinkOptions",
+            "TemplateSessionFontPreparationIssueV1",
             "TemplateSessionFontPreparationResult",
+            "TemplateSessionFontPreparationStateV1",
             "TemplateSessionFontUploadInput",
             "TemplateSessionImageReplacementInput",
             "TemplateSessionLoadStateInputV1",
@@ -1161,7 +1177,7 @@
     },
     {
       "name": "@sleinity/template-react",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "entries": [
         {
           "path": ".",
@@ -1207,6 +1223,12 @@
             "TemplateImporterWizard",
             "TemplateImporterWizardProps",
             "TemplateImporterWizardStep",
+            "TemplateImportFieldRulesEditor",
+            "TemplateImportFieldRulesEditorProps",
+            "TemplateImportRenderValidationSummary",
+            "TemplateImportRenderValidationSummaryProps",
+            "TemplateImportValidationSummary",
+            "TemplateImportValidationSummaryProps",
             "TemplateImportWizard",
             "TemplateImportWizardClassNames",
             "TemplateImportWizardHandle",

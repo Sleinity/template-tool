@@ -24,9 +24,9 @@ Configure the `@sleinity` scope with
 [`.npmrc.example`](../../.npmrc.example), then install:
 
 ```sh
-pnpm add @sleinity/template-core@0.5.0 \
-  @sleinity/template-browser@0.5.0 \
-  @sleinity/template-react@0.5.0
+pnpm add @sleinity/template-core@0.6.0 \
+  @sleinity/template-browser@0.6.0 \
+  @sleinity/template-react@0.6.0
 ```
 
 GitHub's npm registry requires authentication. Use a classic personal access
@@ -35,7 +35,7 @@ token with `read:packages` and access to the package.
 ### Vendored Release archives
 
 The public
-[`sdk-v0.5.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.5.0)
+[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0)
 contains registry-derived archives and `SHA256SUMS`. Verify and commit the
 three archives under `vendor/`, then declare exact `file:` dependencies. This
 path requires no package-registry secret and is the supported Lovable Business
@@ -97,7 +97,8 @@ const wizard = useTemplateImportWizard();
 />;
 ```
 
-The seven-step wizard provides ZIP import, structured package validation,
+The default five-page setup groups the headless seven-state workflow into
+Package, Fonts, Validate, Fields and Confirm. It provides ZIP import, structured package validation,
 exact-font validation, render validation, field-rule setup, confirmation and a
 revision-safe completion result. Hosts may use its default UI or compose their
 own through the controller, provider, snapshot hook and preview bridge. It does
@@ -107,6 +108,10 @@ explicitly provided for post-confirmation storage.
 See the [template import workflow](TEMPLATE_IMPORT_WIZARD.md) for default,
 headless, page/modal/drawer, adapter, theming, restart, persistence and
 migration guidance.
+
+See the [0.6 migration guide](SDK_0_6_MIGRATION.md) for stabilized render
+validation, fitted previews, shared validation summaries, and atomic field
+settings.
 
 React hosts should let `useTemplateSession()` own the lifecycle:
 

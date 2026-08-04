@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-core",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Framework-neutral TemplatePackage ZIP importer, validator, canonical scene, resolver, and field override API.",
   "license": "UNLICENSED",
   "repository": {
