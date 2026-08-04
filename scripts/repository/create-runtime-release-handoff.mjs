@@ -282,12 +282,12 @@ The PNG result contains \`filename\`, \`pngDataUrl\`, dimensions, readiness,
 and diagnostics. Use \`exportPng({ download: false })\` when the host consumes
 the returned output without initiating a browser download.
 
-## Lovable Business recipe
+## Implementation guides
 
-Lovable Business consumers use the vendored installation above because the
-private-registry build secret is unavailable. Follow
-\`LOVABLE-TEMPLATE-EDITOR-PROMPTS.md\` one prompt at a time after committing
-the checksum-verified archives.
+Start with \`SDK-INSTALLATION.md\`. Coding agents use
+\`AGENT-INTEGRATION-PROMPTS.md\` and select only the required core, headless or
+React tracks. The existing SDK 0.2 host uses
+\`SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md\` for its in-place Lovable migration.
 
 ## Acceptance
 

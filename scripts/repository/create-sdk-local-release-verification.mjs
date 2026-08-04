@@ -10,7 +10,7 @@ const root = process.cwd();
 const version = await resolveFixedRuntimeVersion(root);
 const runId = new Date().toISOString().replaceAll(/[:.]/gu, "-");
 const requestedOutput = process.argv[2] ??
-  path.join("release-candidate-artifacts", `sdk-v${version}-rc-${runId}`);
+  path.join("release-verification-artifacts", `sdk-v${version}-${runId}`);
 const output = path.resolve(root, requestedOutput);
 const packages = await loadRuntimePackageDefinitions(root);
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
@@ -52,20 +52,24 @@ await Promise.all([
     path.join(output, "SDK-0.7-MIGRATION.md"),
   ),
   cp(
-    path.join(root, "docs/sdk/LOVABLE_TEMPLATE_EDITOR_PROMPTS.md"),
-    path.join(output, "LOVABLE-TEMPLATE-EDITOR-PROMPTS.md"),
+    path.join(root, "docs/sdk/INSTALLATION.md"),
+    path.join(output, "SDK-INSTALLATION.md"),
   ),
   cp(
-    path.join(root, "docs/sdk/FIRST_HOST_ACCEPTANCE.md"),
-    path.join(output, "FIRST-HOST-ACCEPTANCE.md"),
+    path.join(root, "docs/sdk/AGENT_INTEGRATION_PROMPTS.md"),
+    path.join(output, "AGENT-INTEGRATION-PROMPTS.md"),
+  ),
+  cp(
+    path.join(root, "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md"),
+    path.join(output, "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md"),
   ),
 ]);
 await writeFile(
-  path.join(output, "RELEASE-CANDIDATE.md"),
-  `# SDK ${version} release candidate\n\n` +
-    `These locally packed archives are for the bounded first-host acceptance ` +
-    `trial only. They are not the published GitHub Release. After acceptance, ` +
-    `the sdk-v${version} tag workflow publishes the fixed train and regenerates ` +
-    `the final handoff from registry-derived archives.\n`,
+  path.join(output, "LOCAL-RELEASE-VERIFICATION.md"),
+  `# SDK ${version} local release verification\n\n` +
+    `These locally packed archives verify the source tree before publication. ` +
+    `They are not public delivery artifacts. The sdk-v${version} tag workflow ` +
+    `publishes the fixed train and creates the final handoff only from archives ` +
+    `downloaded back from GitHub Packages.\n`,
 );
-console.log(`Created SDK ${version} release candidate at ${output}.`);
+console.log(`Created SDK ${version} local release verification at ${output}.`);

@@ -68,7 +68,7 @@
     "published-core:verify": "node scripts/repository/verify-core-release-consumer.mjs --published",
     "vendored-core:verify": "node scripts/repository/verify-core-release-consumer.mjs --archive",
     "runtime-handoff:create": "node scripts/repository/create-runtime-release-handoff.mjs release-artifacts release-artifacts",
-    "release-candidate:create": "node scripts/repository/create-sdk-release-candidate.mjs",
+    "release-local:verify": "node scripts/repository/create-sdk-local-release-verification.mjs",
     "vendored-runtime:verify": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-artifacts",
     "template-editor:acceptance": "node scripts/repository/verify-template-editor-reference.mjs",
     "api:contract": "node scripts/repository/sdk-api-contract.mjs --check",

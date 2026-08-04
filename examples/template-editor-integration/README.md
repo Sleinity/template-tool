@@ -3,6 +3,12 @@
 This admin-only React 19 example demonstrates the supported Template Platform
 consumer boundary without importing Template Studio.
 
+External hosts should install the SDK through the
+[0.7.0 installation guide](../../docs/sdk/INSTALLATION.md). Coding agents can
+adapt this example with the
+[provider-neutral prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md); copy
+the SDK lifecycle, not this example's in-memory dashboard.
+
 It uses the public `@sleinity/template-react/importer` five-page setup wizard for
 ZIP import, structured package validation, exact-font preparation, render
 validation, diagnostics, field-rule setup, confirmation and completion. The

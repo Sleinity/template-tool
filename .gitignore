@@ -24,6 +24,7 @@ coverage/
 *.tgz
 .changeset/pre.json
 release-candidate-artifacts/
+release-verification-artifacts/
 
 # Local-only fixture and font directories. The committed manifests retain
 # hash-gated identities; real source binaries remain external unless their

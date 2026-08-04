@@ -4,7 +4,7 @@ Status date: 2026-08-04
 Current milestone: SDK 0.7.0 headless host-editor integration
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
 
-## SDK 0.7.0 — release hardening and first-host candidate
+## SDK 0.7.0 — release hardening and documentation closeout
 
 The public feature contract is frozen at the three-package fixed `0.7.0`
 train. A checked entry-point inventory now drives API classification, Studio
@@ -27,11 +27,11 @@ Current-run `ci:portable`, archive inspection, npm/pnpm vendored consumers,
 session and Studio browser smokes, realistic-ZIP coverage and packed generic
 template-editor acceptance pass. The packed flow passed under normal and
 restricted CSP with no unexpected requests, downloads or console errors.
-Local archives are core 588,525, browser 334,022 and React 246,656 bytes. The
-release-candidate hashes are respectively
-`f8bb1eddc8710d6971faabac3614425dc9ba66ae528547e117fec13082e1311f`,
-`692979bdeb0228ec9ca3735fb5c2732de992f06106671ccd4a00bea4ecb688c2`, and
-`2bb7df4629b70a5ec24c364936b5c10c5f5ec3ba0ec79516b9f217bb81b9af68`.
+Local archives are core 588,594, browser 334,134 and React 246,857 bytes. The
+local-verification hashes are respectively
+`5d3711ed44d26a76dcf7a19f199ecb5440af045ac5eb6049210639262f338a2f`,
+`67691794d44329428dbc065ab20edc81f9e9c48d35b3a5a787e92dd77c28ed93`, and
+`92021f705681394211696179dad3a66b8a2dd6c57dcc203867093995b79668c0`.
 
 Renderer run `2026-08-04T16-09-07-981Z` is repeat-stable for all 19 fixtures.
 Comparison `2026-08-04T16-09-54-633Z` retains the documented 31 approved
@@ -45,12 +45,14 @@ available in this checkout, so the before/after stroke source-evidence script
 cannot be replayed honestly; current stroke capture is stable. No fixture,
 schema, tolerance, reference update or promotion command ran.
 
-A local release-candidate bundle contains all three archives, checksum
-manifests, runtime/core handoffs, migration guidance, Lovable prompts and the
-first-host checklist. Final tag and publication remain intentionally blocked
-until a real host completes that checklist using only these archives. Registry-
-derived checks and the public GitHub Release remain post-tag workflow authority;
-local archives are not a substitute.
+A local verification bundle contains all three archives, checksum manifests,
+runtime/core handoffs, one installation authority, provider-neutral agent
+prompts, a dedicated in-place SDK 0.2→0.7 Lovable handoff and migration
+guidance. The obsolete pre-release first-host checklist and duplicated general
+Lovable prompts are retired. SDK 0.7.0 is a normal stable release; external
+implementation is post-release adoption rather than a publication gate.
+Registry-derived checks and the public GitHub Release remain post-tag workflow
+authority, and local archives are not a substitute.
 
 ## SDK 0.7.0 — headless host-editor integration
 

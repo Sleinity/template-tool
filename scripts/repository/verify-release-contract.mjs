@@ -9,6 +9,9 @@ import {
 const root = process.cwd();
 const retiredActivePaths = [
   "docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md",
+  "docs/sdk/FIRST_HOST_ACCEPTANCE.md",
+  "docs/sdk/LOVABLE_TEMPLATE_EDITOR_PROMPTS.md",
+  "scripts/repository/create-sdk-release-candidate.mjs",
   "examples/narrowcasting-integration/package.json",
   "examples/narrowcasting-integration/src/main.tsx",
   "scripts/repository/verify-narrowcasting-reference.mjs",
@@ -38,6 +41,7 @@ const activeRoots = [
   ".github/workflows/release.yml",
   "scripts/repository/create-core-release-handoff.mjs",
   "scripts/repository/create-runtime-release-handoff.mjs",
+  "scripts/repository/create-sdk-local-release-verification.mjs",
   "scripts/repository/sdk-runtime-manifest.mjs",
   "scripts/repository/verify-template-editor-reference.mjs",
 ];
@@ -72,23 +76,34 @@ for (const activeRoot of activeRoots) {
   }
 }
 
-const lovablePrompts = await readFile(
-  path.join(root, "docs", "sdk", "LOVABLE_TEMPLATE_EDITOR_PROMPTS.md"),
+const agentPrompts = await readFile(
+  path.join(root, "docs", "sdk", "AGENT_INTEGRATION_PROMPTS.md"),
   "utf8",
 );
 if (
-  /From @sleinity\/template-react\/importer:\n(?:- [^\n]+\n)*- TemplateImportConfirmationV1/mu
-    .test(lovablePrompts) ||
-  /TemplateSessionProvider using wizard\.session/u.test(lovablePrompts) ||
-  !lovablePrompts.includes("loadTemplateImportConfirmation()") ||
-  !lovablePrompts.includes(
-    "TemplateImportConfirmationV1 as a type from @sleinity/template-browser/importer",
-  ) ||
-  !lovablePrompts.includes("Do not import an entry named `renderer-internal`")
+  !agentPrompts.includes("core-only ZIP import and validation") ||
+  !agentPrompts.includes("createTemplateImportWizard") ||
+  !agentPrompts.includes("TemplateImportWizard") ||
+  !agentPrompts.includes("TemplateSessionViewport") ||
+  !agentPrompts.includes("loadTemplateImportConfirmation") ||
+  !agentPrompts.includes("renderer-internal")
 ) {
   throw new Error(
-    "Lovable handoff must import confirmation from template-browser and reopen it in a fresh session.",
+    "Agent prompts must cover core, headless and React lifecycle contracts.",
   );
+}
+const lovableMigration = await readFile(
+  path.join(root, "docs", "sdk", "SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md"),
+  "utf8",
+);
+if (
+  !lovableMigration.includes("Upgrade it in place") ||
+  !lovableMigration.includes("rollback commit") ||
+  !lovableMigration.includes("requiring one-time ZIP re-import") ||
+  !lovableMigration.includes("TemplateSessionViewport") ||
+  !lovableMigration.includes("renderer-internal")
+) {
+  throw new Error("The SDK 0.2 Lovable handoff is incomplete.");
 }
 const runtimeHandoff = await readFile(
   path.join(root, "docs", "sdk", "RUNTIME_HANDOFF.md"),
@@ -134,6 +149,27 @@ if (
   );
 }
 
+const localVerificationGenerator = await readFile(
+  path.join(
+    root,
+    "scripts",
+    "repository",
+    "create-sdk-local-release-verification.mjs",
+  ),
+  "utf8",
+);
+for (const required of [
+  "SDK-INSTALLATION.md",
+  "AGENT-INTEGRATION-PROMPTS.md",
+  "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md",
+  "SDK-0.7-MIGRATION.md",
+  "LOCAL-RELEASE-VERIFICATION.md",
+]) {
+  if (!localVerificationGenerator.includes(required)) {
+    throw new Error(`Local release verification is missing ${required}.`);
+  }
+}
+
 const workflow = await readFile(
   path.join(root, ".github", "workflows", "release.yml"),
   "utf8",
@@ -172,9 +208,10 @@ for (const required of [
   "verify-template-editor-reference.mjs",
   "SDK-CORE-HANDOFF.md",
   "SDK-RUNTIME-HANDOFF.md",
-  "LOVABLE-TEMPLATE-EDITOR-PROMPTS.md",
+  "SDK-INSTALLATION.md",
+  "AGENT-INTEGRATION-PROMPTS.md",
+  "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md",
   "SDK-0.7-MIGRATION.md",
-  "FIRST-HOST-ACCEPTANCE.md",
   "SDK_RELEASE_VISIBILITY",
   "SDK_LICENSE_POLICY",
   "SDK_AUTHORIZED_USE",

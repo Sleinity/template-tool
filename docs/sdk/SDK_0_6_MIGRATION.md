@@ -1,5 +1,8 @@
 # SDK 0.6.0 migration
 
+> Historical guide for the 0.6 release. New integrations should start with the
+> [SDK 0.7 documentation](README.md).
+
 SDK 0.6.0 preserves every 0.5.0 package entry and existing import, session,
 renderer, persistence, and capture API. Upgrade the fixed core/browser/React
 train together.

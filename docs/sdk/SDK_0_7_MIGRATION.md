@@ -4,7 +4,9 @@ SDK 0.7 keeps the 0.6 importer, session, renderer, persistence and PNG APIs.
 The new `@sleinity/template-react/editor` entry replaces repeated host glue
 after a confirmed template is reopened in a fresh session.
 
-Upgrade all packages together:
+Upgrade all packages together. Follow the
+[installation guide](INSTALLATION.md) for credential-free Release archives or
+authenticated GitHub Packages.
 
 ```sh
 pnpm add @sleinity/template-core@0.7.0 \
@@ -86,3 +88,7 @@ publishing and authentication in the host. Keep using the 0.6 wizard for setup,
 store its confirmation only after explicit confirmation, and reopen it through
 `loadTemplateImportConfirmation()` in a fresh `useTemplateSession()` before
 mounting the editor primitives.
+
+Hosts upgrading a working SDK 0.2 integration should use the dedicated
+[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md) instead of applying
+the 0.6 delta in isolation.

@@ -94,12 +94,14 @@ jobs:
           node scripts/repository/create-core-release-handoff.mjs \
             "release-artifacts/sleinity-template-core-${SDK_VERSION}.tgz" \
             release-artifacts
-          cp docs/sdk/LOVABLE_TEMPLATE_EDITOR_PROMPTS.md \
-            release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md
+          cp docs/sdk/INSTALLATION.md \
+            release-artifacts/SDK-INSTALLATION.md
+          cp docs/sdk/AGENT_INTEGRATION_PROMPTS.md \
+            release-artifacts/AGENT-INTEGRATION-PROMPTS.md
+          cp docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md \
+            release-artifacts/SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md
           cp docs/sdk/SDK_0_7_MIGRATION.md \
             release-artifacts/SDK-0.7-MIGRATION.md
-          cp docs/sdk/FIRST_HOST_ACCEPTANCE.md \
-            release-artifacts/FIRST-HOST-ACCEPTANCE.md
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
@@ -152,9 +154,10 @@ jobs:
             release-artifacts/CORE-SHA256SUMS \
             release-artifacts/SDK-CORE-HANDOFF.md \
             release-artifacts/SDK-RUNTIME-HANDOFF.md \
-            release-artifacts/LOVABLE-TEMPLATE-EDITOR-PROMPTS.md \
+            release-artifacts/SDK-INSTALLATION.md \
+            release-artifacts/AGENT-INTEGRATION-PROMPTS.md \
+            release-artifacts/SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md \
             release-artifacts/SDK-0.7-MIGRATION.md \
-            release-artifacts/FIRST-HOST-ACCEPTANCE.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

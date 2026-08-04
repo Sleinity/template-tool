@@ -1,6 +1,6 @@
 # Renderer Fidelity Handoff
 
-## 2026-08-04 — SDK 0.7.0 release hardening and first-host candidate
+## 2026-08-04 — SDK 0.7.0 release hardening and documentation closeout
 
 ### Result
 
@@ -12,8 +12,10 @@
 - Corrected Studio importer source parity and removed React implementation
   self-imports that could resolve through an installed or stale package build.
 - Added archive bundle probes for five representative adoption profiles and a
-  local release-candidate handoff generator with checksums and first-host
-  acceptance instructions.
+  local verification handoff generator with checksums.
+- Replaced the pre-release first-host gate and duplicated general Lovable flow
+  with one installation authority, provider-neutral agent tracks and a focused
+  in-place SDK 0.2→0.7 Lovable handoff.
 - Preserved broad roots, compatibility forwarders, renderer ownership, schemas,
   fixtures and approved evidence.
 
@@ -25,11 +27,11 @@ session and Studio browser smokes and packed template-editor acceptance pass.
 The packed acceptance covers normal/restricted CSP and reports no unexpected
 network requests, downloads or console errors.
 
-Local archives are 588,525 / 334,022 / 246,656 bytes for core/browser/React.
-Their release-candidate SHA-256 values are
-`f8bb1eddc8710d6971faabac3614425dc9ba66ae528547e117fec13082e1311f`,
-`692979bdeb0228ec9ca3735fb5c2732de992f06106671ccd4a00bea4ecb688c2`, and
-`2bb7df4629b70a5ec24c364936b5c10c5f5ec3ba0ec79516b9f217bb81b9af68`.
+Local archives are 588,594 / 334,134 / 246,857 bytes for core/browser/React.
+Their local-verification SHA-256 values are
+`5d3711ed44d26a76dcf7a19f199ecb5440af045ac5eb6049210639262f338a2f`,
+`67691794d44329428dbc065ab20edc81f9e9c48d35b3a5a787e92dd77c28ed93`, and
+`92021f705681394211696179dad3a66b8a2dd6c57dcc203867093995b79668c0`.
 Curated core, browser, React renderer, React importer and React editor bundle
 probes pass within their recorded initial baselines.
 
@@ -45,14 +47,12 @@ tolerance, reference update or promotion command ran.
 
 ### Open release gate
 
-The generated local candidate is ready for the real first host. That host must
-complete `docs/sdk/FIRST_HOST_ACCEPTANCE.md` using only the three archives and
-record installation, lifecycle, offline reopening, current-revision capture and
-zero repository/internal imports. Do not create or push `sdk-v0.7.0` until this
-external gate passes. After it passes, the tag-only workflow must publish the
-fixed train, redownload registry archives, repeat secret-free npm/pnpm and
-browser acceptance, verify public repository visibility and create the GitHub
-Release from those registry-derived artifacts.
+Complete the active installation, provider-neutral agent and existing-0.2-host
+handoffs, then publish SDK 0.7.0 as a normal stable release. The tag-only
+workflow must publish the fixed train, redownload registry archives, repeat
+secret-free npm/pnpm and browser acceptance, verify public repository
+visibility and create the GitHub Release from those registry-derived artifacts.
+External host implementation is post-release adoption, not a publication gate.
 
 ## 2026-08-04 — SDK 0.7.0 headless host-editor integration
 

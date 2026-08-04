@@ -1,5 +1,8 @@
 # Migrating to SDK 0.4.2
 
+> Historical guide for the 0.4.2 release. New integrations should start with
+> the [SDK 0.7 documentation](README.md).
+
 SDK 0.4.2 is a behavior-preserving ownership and packaging patch. Upgrade the
 fixed core, browser, and React train together:
 

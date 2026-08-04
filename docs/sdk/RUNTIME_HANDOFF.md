@@ -31,7 +31,7 @@ pnpm add @sleinity/template-core@0.7.0 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-future `sdk-v0.7.0` Release.
+[`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
@@ -155,18 +155,16 @@ Use only the documented root and curated entry points above. Entries named
 and compatibility forwarders; they are not supported host APIs and must not be
 imported by an application.
 
-## Lovable Business recipe
+## Implementation guides
 
-Lovable Business uses the vendored-archive installation above, so no build
-secret is required. Follow the
-[sequential Lovable template editor prompts](LOVABLE_TEMPLATE_EDITOR_PROMPTS.md).
-They first prove the isolated SDK boundary, then connect only to existing host
-services.
+Use the [installation guide](INSTALLATION.md) as the single source for
+credential-free and authenticated installation. Coding agents should follow
+the [provider-neutral integration prompts](AGENT_INTEGRATION_PROMPTS.md).
 
-Hosts upgrading from the hand-built 0.2.2 setup flow should follow the focused
-[0.7.0 migration guide](SDK_0_7_MIGRATION.md). Adopt the SDK wizard for import
-and confirmation, then reopen the host-owned confirmation in a fresh session;
-retain existing dashboard, editor, image, storage, and export workflows.
+The existing SDK 0.2 host has a dedicated
+[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md). It upgrades the
+working integration in place while preserving the host dashboard, forms, image
+processing, storage and publishing.
 
 ## Verification contract
 
@@ -189,11 +187,9 @@ Package publication runs only for an exact `sdk-v*` tag. Manual workflow
 dispatch may refresh handoff assets from an already-published fixed version,
 but cannot publish packages.
 
-Before that final tag, `pnpm release-candidate:create` creates a local,
-credential-free candidate containing the archives, checksums, handoffs,
-migration guide and [first-host acceptance checklist](FIRST_HOST_ACCEPTANCE.md).
-Those local bytes are trial inputs only. Final Release assets are always
-downloaded back from GitHub Packages after successful publication.
+Local package archives are verification inputs only. Public Release assets are
+always downloaded back from GitHub Packages after successful tag publication,
+then rechecked in credential-free npm, pnpm and browser consumers.
 
 The package manifests remain `UNLICENSED`. The `sleinity-tools-only` policy
 authorizes use in Sleinity-owned applications only.
