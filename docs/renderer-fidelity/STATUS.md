@@ -1,8 +1,107 @@
 # Renderer Fidelity Status
 
 Status date: 2026-08-04
-Current milestone: SDK 0.6.0 release closeout and external-adoption gate
+Current milestone: SDK 0.7.0 headless host-editor integration
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## SDK 0.7.0 — release hardening and documentation closeout
+
+The public feature contract is frozen at the three-package fixed `0.7.0`
+train. A checked entry-point inventory now drives API classification, Studio
+source aliases, package-boundary checks and archive verification. It covers
+every supported root/subpath and the fixed-train internal renderer seams without
+changing a published entry name. Studio's React importer alias now resolves the
+same `src/importer.tsx` entry that packed consumers receive, and React inspection
+implementation uses package-relative imports rather than self-resolving through
+an installed or stale archive.
+
+React builds all five TypeScript entries in one declaration-aware build while
+keeping importer CSS separate. Curated archive bundle probes now exercise core
+import/validation, browser session/importer, React rendering, React importer UI
+plus CSS and the React editor entry. Their initial guarded byte/gzip baselines
+are 336,679 / 80,490; 622,821 / 151,279; 641,719 / 156,786; 947,513 / 228,361;
+and 658,317 / 160,688 respectively. The probes reject Studio or root-source
+paths, embedded credentials and duplicated React runtime markers.
+
+Current-run `ci:portable`, archive inspection, npm/pnpm vendored consumers,
+session and Studio browser smokes, realistic-ZIP coverage and packed generic
+template-editor acceptance pass. The packed flow passed under normal and
+restricted CSP with no unexpected requests, downloads or console errors.
+Local archives are core 588,594, browser 334,134 and React 246,857 bytes. The
+local-verification hashes are respectively
+`5d3711ed44d26a76dcf7a19f199ecb5440af045ac5eb6049210639262f338a2f`,
+`67691794d44329428dbc065ab20edc81f9e9c48d35b3a5a787e92dd77c28ed93`, and
+`92021f705681394211696179dad3a66b8a2dd6c57dcc203867093995b79668c0`.
+
+Renderer run `2026-08-04T16-09-07-981Z` is repeat-stable for all 19 fixtures.
+Comparison `2026-08-04T16-09-54-633Z` retains the documented 31 approved
+passes, 17 historical/environment-sensitive differences and 28 unapproved
+surfaces. Scene retains four historical differences and 15 unapproved fixtures;
+settlement retains its documented matrix. Appearance, runtime routing, exact
+fonts, vertical trim, mask and primitive browser scenarios pass. Current mask,
+primitive, linear-gradient and ordered-SOLID source evidence was reproduced.
+The historical `milestone-7-2-compatibility-before` stroke candidate is not
+available in this checkout, so the before/after stroke source-evidence script
+cannot be replayed honestly; current stroke capture is stable. No fixture,
+schema, tolerance, reference update or promotion command ran.
+
+A local verification bundle contains all three archives, checksum manifests,
+runtime/core handoffs, one installation authority, provider-neutral agent
+prompts, a dedicated in-place SDK 0.2→0.7 Lovable handoff and migration
+guidance. The obsolete pre-release first-host checklist and duplicated general
+Lovable prompts are retired. SDK 0.7.0 is a normal stable release; external
+implementation is post-release adoption rather than a publication gate.
+Registry-derived checks and the public GitHub Release remain post-tag workflow
+authority, and local archives are not a substitute.
+
+## SDK 0.7.0 — headless host-editor integration
+
+The fixed core/browser/React train is prepared at `0.7.0`. The new curated
+`@sleinity/template-react/editor` entry supplies a session-bound responsive
+viewport, ordered editable-field controllers, singular field selection and a
+current-revision diagnostic projection. These are headless bindings over the
+existing session, renderer, mutation, validation, font, asset and capture
+authorities; they do not add a form system or another validator.
+
+`TemplateImportWizardPreview` and the generic template-editor reference now use
+the same viewport implementation. The reference also uses the field controllers
+and diagnostic projection after reopening a confirmation in a fresh session.
+Host image processing, navigation, persistence services and publishing remain
+outside the SDK.
+
+Current-run portable tests, root/package TypeScript, package/Studio/example
+builds, API/release/docs/boundary contracts, archive inspection, the isolated
+React consumer and the packed generic-editor browser acceptance pass. The
+browser gate covers the shared responsive viewport, current-revision identity
+and silent capture, ordered plural/singular field-controller parity, compact
+diagnostics, wizard confirmation, fresh-session reopening, host edits, offline
+drafts, StrictMode, restricted CSP and zero external SDK requests.
+
+Core root declarations remain exactly 87,431 bytes /
+`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+Local archives are core 588,525, browser 334,022 and React 245,268 bytes. The
+isolated curated-entry consumer is 893,788 / 261,806 gzip bytes; the generic
+example is 911.17 / 266.41 gzip kB and Studio remains 1,000.85 / 290.99 gzip
+kB.
+
+Exact-font/source-authoritative evidence is stable, appearance is deterministic
+for all 19 fixtures, and renderer run `2026-08-04T14-20-55-464Z` is
+repeat-stable. Renderer comparison `2026-08-04T14-21-58-135Z` retains 31
+approved passes, 17 documented historical/environment-sensitive differences
+and 28 unapproved surfaces. Scene retains four documented historical differences
+and 15 unapproved fixtures; settlement retains its documented matrix. Approved
+renderer, scene and settlement identities remain
+`be6047fe9a3a84d711d4dee3fc125a1de741c8a8179fcb7d704590e1b0389f08`,
+`b788f6f11f8cf3bb319ee22eae81182380c493dd0a4db359c0e70f5edc59f54b`,
+and `c8295ff446039e68e12bc6067fc7420da4694c5aee5263dbcc733238cc7e296e`.
+No fixture, schema, tolerance, promotion, reference-update or approved-evidence
+command ran.
+
+The packed browser acceptance passed after the controller-identity correction.
+The final source-only stale-callback guard then passed React typecheck, build and
+archive inspection. A second clean-install replay was attempted but could not
+download public consumer dependencies because the registry was unavailable
+(`ENOTFOUND`); no additional browser pass is claimed for that replay.
 
 ## SDK 0.6.0 — release closeout
 

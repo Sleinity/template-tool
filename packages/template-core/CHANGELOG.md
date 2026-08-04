@@ -1,5 +1,12 @@
 # @sleinity/template-core
 
+## 0.7.0
+
+### Patch Changes
+
+- Freeze the fixed-train core contract and verify every published root/subpath
+  against the shared SDK entry-point and packed-archive inventories.
+
 ## 0.6.0
 
 ### Minor Changes

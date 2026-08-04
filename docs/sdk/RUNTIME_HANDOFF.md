@@ -1,13 +1,13 @@
-# SDK 0.6.0 runtime handoff
+# SDK 0.7.0 runtime handoff
 
 Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
 application:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.6.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
-| `@sleinity/template-browser@0.6.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
-| `@sleinity/template-react@0.6.0` | React provider, setup wizard, renderer, inspection viewport, capture handle and optional advanced inspection | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.7.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
+| `@sleinity/template-browser@0.7.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
+| `@sleinity/template-react@0.7.0` | React setup wizard, headless host-editor bindings, renderer, responsive viewport and capture | React 19 and React DOM 19 |
 
 ## Installation
 
@@ -21,9 +21,9 @@ always-auth=true
 ```
 
 ```sh
-pnpm add @sleinity/template-core@0.6.0 \
-  @sleinity/template-browser@0.6.0 \
-  @sleinity/template-react@0.6.0
+pnpm add @sleinity/template-core@0.7.0 \
+  @sleinity/template-browser@0.7.0 \
+  @sleinity/template-react@0.7.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
@@ -31,16 +31,16 @@ pnpm add @sleinity/template-core@0.6.0 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0).
+[`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.6.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.6.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.7.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.7.0.tgz"
   }
 }
 ```
@@ -50,9 +50,9 @@ same archives:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.6.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.6.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.7.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.7.0.tgz"
 ```
 
 Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
@@ -101,6 +101,19 @@ creation and permanent-unmount disposal. Compose it with:
 - `TemplateSessionRenderer`
 - `TemplateSessionRendererHandle`
 
+For ordinary post-confirmation editors, prefer the curated
+`@sleinity/template-react/editor` entry:
+
+- `TemplateSessionViewport` contains and refits the intrinsic renderer,
+  publishes current-revision readiness and performs safe PNG capture;
+- `useTemplateSessionEditableFields()` returns every ordered field controller;
+- `useTemplateSessionEditableField(fieldId)` selects one controller or `null`;
+- `useTemplateSessionDiagnosticSummary()` consolidates existing package, font,
+  asset, session and current renderer evidence without validating again.
+
+These primitives are headless. Hosts still own their forms, image preparation,
+layout, navigation and product actions.
+
 Run `inspectTemplateRuntimeSupport()` before presenting template workflows.
 After confirmation, create a fresh session and reopen the host record with
 `loadTemplateImportConfirmation()`. It verifies confirmation schema, package
@@ -142,18 +155,16 @@ Use only the documented root and curated entry points above. Entries named
 and compatibility forwarders; they are not supported host APIs and must not be
 imported by an application.
 
-## Lovable Business recipe
+## Implementation guides
 
-Lovable Business uses the vendored-archive installation above, so no build
-secret is required. Follow the
-[sequential Lovable template editor prompts](LOVABLE_TEMPLATE_EDITOR_PROMPTS.md).
-They first prove the isolated SDK boundary, then connect only to existing host
-services.
+Use the [installation guide](INSTALLATION.md) as the single source for
+credential-free and authenticated installation. Coding agents should follow
+the [provider-neutral integration prompts](AGENT_INTEGRATION_PROMPTS.md).
 
-Hosts upgrading from the hand-built 0.2.2 setup flow should follow the focused
-[0.6.0 migration guide](SDK_0_6_MIGRATION.md). Adopt the SDK wizard for import
-and confirmation, then reopen the host-owned confirmation in a fresh session;
-retain existing dashboard, editor, image, storage, and export workflows.
+The existing SDK 0.2 host has a dedicated
+[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md). It upgrades the
+working integration in place while preserving the host dashboard, forms, image
+processing, storage and publishing.
 
 ## Verification contract
 
@@ -175,6 +186,10 @@ The release gate:
 Package publication runs only for an exact `sdk-v*` tag. Manual workflow
 dispatch may refresh handoff assets from an already-published fixed version,
 but cannot publish packages.
+
+Local package archives are verification inputs only. Public Release assets are
+always downloaded back from GitHub Packages after successful tag publication,
+then rechecked in credential-free npm, pnpm and browser consumers.
 
 The package manifests remain `UNLICENSED`. The `sleinity-tools-only` policy
 authorizes use in Sleinity-owned applications only.

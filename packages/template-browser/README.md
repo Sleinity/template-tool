@@ -4,6 +4,11 @@ Private browser runtime for TemplatePackage assets, managed fonts, measurement,
 persistence, revision-bound readiness, and PNG export. Consumers may replace
 the default storage registries through the existing adapter interfaces.
 
+Install the fixed 0.7.0 train through the repository's
+[installation guide](../../docs/sdk/INSTALLATION.md). Use the
+[agent integration prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md) for a
+custom headless host.
+
 As of 0.4.1 this package physically owns that complete browser runtime. Its
 production modules depend on `@sleinity/template-core` and package-local
 contracts; they do not compile implementation from the repository root,

@@ -136,6 +136,13 @@ import {
   useTemplateSessionSnapshot,
 } from "@sleinity/template-react";
 import { TemplateImportWizard } from "@sleinity/template-react/importer";
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableField,
+  useTemplateSessionEditableFields,
+  type TemplateSessionViewportSnapshotV1,
+} from "@sleinity/template-react/editor";
 import type { FieldConstraintValidation } from "@sleinity/template-core/editor";
 import type { PackageAssetSafetyIssue } from "@sleinity/template-core/assets";
 import type { FontRequirement } from "@sleinity/template-core/fonts";
@@ -168,7 +175,15 @@ const session = createTemplateSession();
 
 function Player() {
   const snapshot = useTemplateSessionSnapshot();
+  const fields = useTemplateSessionEditableFields();
+  const firstField = useTemplateSessionEditableField(fields[0]?.field.id ?? "missing");
+  const diagnostics = useTemplateSessionDiagnosticSummary();
+  const viewportSnapshot: TemplateSessionViewportSnapshotV1 | null = null;
+  void firstField;
+  void viewportSnapshot;
   return <main data-status={snapshot.status}>
+    <output data-diagnostic-status={diagnostics.status}>{fields.length}</output>
+    <TemplateSessionViewport mode="editor" fallback={<p>Waiting</p>} />
     <TemplateSessionRenderer mode="static" fallback={<p>Waiting</p>} />
     {snapshot.workingPackage ? <>
       <TemplateInspectionPreview packageValue={snapshot.workingPackage} showControls={false} />
@@ -216,7 +231,13 @@ createRoot(document.getElementById("root")!).render(<App />);
       }
     }
     if (packageName === "template-react") {
-      for (const fileName of ["importer.js", "importer.d.ts", "importer.css"]) {
+      for (const fileName of [
+        "importer.js",
+        "importer.d.ts",
+        "importer.css",
+        "editor.js",
+        "editor.d.ts",
+      ]) {
         const source = await readFile(path.join(installed, fileName), "utf8");
         if (
           /(?:from|import)\s*["']\.\.\/\.\.\/src\//.test(source) ||

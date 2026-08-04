@@ -6,37 +6,10 @@ import {
   loadRuntimePackageDefinitions,
   resolveFixedRuntimeVersion,
 } from "./sdk-runtime-manifest.mjs";
+import { sdkEntryPointByPackage } from "./sdk-entry-points.mjs";
 
 const root = process.cwd();
 const contractPath = path.join(root, "config", "sdk-public-api.json");
-const classifications = {
-  "@sleinity/template-core": {
-    ".": "supported-low-level-adapter",
-    "./assets": "supported-low-level-adapter",
-    "./editor": "supported-low-level-adapter",
-    "./fonts": "supported-low-level-adapter",
-    "./inspection": "supported-advanced-inspection",
-    "./motion": "supported-low-level-adapter",
-  },
-  "@sleinity/template-browser": {
-    ".": "supported-low-level-adapter",
-    "./session": "recommended-high-level-integration",
-    "./importer": "recommended-high-level-integration",
-    "./compatibility": "recommended-high-level-integration",
-    "./assets": "supported-low-level-adapter",
-    "./fonts": "supported-low-level-adapter",
-    "./persistence": "supported-low-level-adapter",
-    "./capture": "supported-low-level-adapter",
-    "./enrichment": "supported-low-level-adapter",
-  },
-  "@sleinity/template-react": {
-    ".": "recommended-high-level-integration",
-    "./importer": "recommended-high-level-integration",
-    "./importer.css": "recommended-high-level-integration",
-    "./inspection": "supported-advanced-inspection",
-  },
-};
-
 function publicSymbols(source, fileName) {
   const sourceFile = ts.createSourceFile(
     fileName,
@@ -74,6 +47,7 @@ function publicSymbols(source, fileName) {
 
 async function createContract() {
   const version = await resolveFixedRuntimeVersion(root);
+  const entryInventory = await sdkEntryPointByPackage(root);
   const packages = [];
   for (const definition of await loadRuntimePackageDefinitions(root)) {
     const packageRoot = path.join(root, "packages", definition.directory);
@@ -81,6 +55,12 @@ async function createContract() {
       await readFile(path.join(packageRoot, "package.json"), "utf8"),
     );
     const internalExports = new Set(manifest.sdkInternalExports ?? []);
+    const inventoryEntries = new Map(
+      (entryInventory.get(definition.name)?.entries ?? []).map((entry) => [
+        entry.path,
+        entry,
+      ]),
+    );
     const entries = [];
     for (const [exportPath, target] of Object.entries(manifest.exports ?? {})) {
       if (internalExports.has(exportPath)) continue;
@@ -88,8 +68,7 @@ async function createContract() {
         target && typeof target === "object" && typeof target.types === "string"
           ? target.types
           : null;
-      const classification =
-        classifications[definition.name]?.[exportPath] ?? null;
+      const classification = inventoryEntries.get(exportPath)?.classification ?? null;
       if (!classification) {
         throw new Error(
           `Public export ${definition.name}${exportPath} has no API classification.`,
@@ -107,6 +86,22 @@ async function createContract() {
         types: typesPath,
         symbols,
       });
+    }
+    const manifestEntryPaths = new Set(Object.keys(manifest.exports ?? {}));
+    for (const inventoryEntry of inventoryEntries.values()) {
+      if (!manifestEntryPaths.has(inventoryEntry.path)) {
+        throw new Error(
+          `SDK entry inventory contains missing manifest export ${definition.name}${inventoryEntry.path}.`,
+        );
+      }
+      if (
+        inventoryEntry.classification === "sdk-internal" &&
+        !internalExports.has(inventoryEntry.path)
+      ) {
+        throw new Error(
+          `SDK internal entry ${definition.name}${inventoryEntry.path} is not declared internal by its manifest.`,
+        );
+      }
     }
     packages.push({
       name: definition.name,

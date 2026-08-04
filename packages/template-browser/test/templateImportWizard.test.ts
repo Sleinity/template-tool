@@ -218,7 +218,7 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.6.0" &&
+    confirmation.sdkVersion === "0.7.0" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
     confirmation.packageDigest?.algorithm === "sha-256" &&
     confirmation.packageDigest.value.length === 64 &&

@@ -3,12 +3,14 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { loadRuntimePackageDefinitions } from "./sdk-runtime-manifest.mjs";
+import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
 
 const root = process.cwd();
 const output = await mkdtemp(path.join(os.tmpdir(), "template-sdk-pack-"));
 const packages = (await loadRuntimePackageDefinitions(root)).map(
   (item) => item.directory,
 );
+const entryInventory = await loadSdkEntryPointInventory(root);
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const forbidden = [
   /^package\/src\//,
@@ -119,6 +121,17 @@ try {
       throw new Error(`Could not inspect package.json in ${archive}.`);
     }
     const manifest = JSON.parse(manifestSource.stdout);
+    const packageEntries = entryInventory.packages.find(
+      (item) => item.name === manifest.name,
+    );
+    if (!packageEntries) {
+      throw new Error(`${archive} is absent from the SDK entry-point inventory.`);
+    }
+    const expectedExportPaths = packageEntries.entries.map((entry) => entry.path).sort();
+    const archiveExportPaths = Object.keys(manifest.exports ?? {}).sort();
+    if (JSON.stringify(expectedExportPaths) !== JSON.stringify(archiveExportPaths)) {
+      throw new Error(`${archive} export paths differ from the SDK entry-point inventory.`);
+    }
     if (JSON.stringify(manifest).includes("workspace:")) {
       throw new Error(`${archive} contains a workspace dependency.`);
     }

@@ -150,7 +150,7 @@ APIs.
 ## Supported application contract
 
 \`\`\`tsx
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type {
   TemplateImportConfirmationV1,
 } from "@sleinity/template-browser/importer";
@@ -160,9 +160,14 @@ import {
 } from "@sleinity/template-browser/compatibility";
 import {
   TemplateSessionProvider,
-  TemplateSessionRenderer,
   useTemplateSession,
 } from "@sleinity/template-react";
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableFields,
+  type TemplateSessionViewportSnapshotV1,
+} from "@sleinity/template-react/editor";
 import {
   TemplateImportWizard,
   useTemplateImportWizard,
@@ -199,6 +204,8 @@ export function ConfirmedTemplateEditor({
   record: TemplateImportConfirmationV1;
 }) {
   const session = useTemplateSession();
+  const [viewport, setViewport] =
+    useState<TemplateSessionViewportSnapshotV1 | null>(null);
   useEffect(() => {
     void loadTemplateImportConfirmation(session, record).then((result) => {
       if (!result.applied) {
@@ -209,9 +216,26 @@ export function ConfirmedTemplateEditor({
     });
   }, [record, session]);
 
+  const fields = useTemplateSessionEditableFields(session);
+  const diagnostics = useTemplateSessionDiagnosticSummary({
+    session,
+    viewportSnapshot: viewport,
+  });
+
   return (
     <TemplateSessionProvider session={session}>
-      <TemplateSessionRenderer mode="editor" />
+      <TemplateSessionViewport
+        mode="editor"
+        onViewportSnapshot={setViewport}
+      />
+      {fields.map((field) => (
+        <input
+          key={field.field.id}
+          value={String(field.value ?? "")}
+          onChange={(event) => field.setValue(event.currentTarget.value)}
+        />
+      ))}
+      <output>{diagnostics.status}</output>
     </TemplateSessionProvider>
   );
 }
@@ -242,10 +266,10 @@ resolved/editable state, and publishes a fresh revision. Run
 restricted browser or CSP environments fail with stable structured codes.
 
 The host owns forms, croppers, transformations, AI features, and other content
-workflows. Read \`snapshot.editableFields\` and deliver final supported values
-through \`session.setField()\`, \`session.replaceImage()\`,
-\`session.setImageReplacementMode()\`, reset, and restore. Template constraints
-remain the minimum safety and fidelity authority.
+workflows. The curated React editor entry supplies a revision-bound responsive
+viewport, ordered editable-field controllers, and a consolidated diagnostic
+projection. It does not prescribe host controls. Template constraints remain
+the minimum safety and fidelity authority.
 
 Use \`session.save()\` / \`loadSavedTemplate()\` for browser-local persistence,
 and the renderer handle's \`exportPng()\` only when the current render identity
@@ -258,12 +282,12 @@ The PNG result contains \`filename\`, \`pngDataUrl\`, dimensions, readiness,
 and diagnostics. Use \`exportPng({ download: false })\` when the host consumes
 the returned output without initiating a browser download.
 
-## Lovable Business recipe
+## Implementation guides
 
-Lovable Business consumers use the vendored installation above because the
-private-registry build secret is unavailable. Follow
-\`LOVABLE-TEMPLATE-EDITOR-PROMPTS.md\` one prompt at a time after committing
-the checksum-verified archives.
+Start with \`SDK-INSTALLATION.md\`. Coding agents use
+\`AGENT-INTEGRATION-PROMPTS.md\` and select only the required core, headless or
+React tracks. The existing SDK 0.2 host uses
+\`SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md\` for its in-place Lovable migration.
 
 ## Acceptance
 

@@ -1,5 +1,19 @@
 # @sleinity/template-react
 
+## 0.7.0
+
+### Minor Changes
+
+- Add the headless host-editor entry point with a session-bound responsive viewport, editable-field controllers, and a consolidated revision-safe diagnostic projection. Reuse the viewport in the importer and generic template-editor reference.
+
+### Patch Changes
+
+- Align Studio's source aliases with the published importer entry, build all
+  TypeScript entries together for declaration parity, and verify renderer,
+  importer/CSS and editor bundles from packed archives.
+- @sleinity/template-core@0.7.0
+- @sleinity/template-browser@0.7.0
+
 ## 0.6.0
 
 ### Minor Changes

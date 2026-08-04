@@ -1,9 +1,9 @@
-# Core importer 0.6.0 handoff
+# Core importer 0.7.0 handoff
 
 ## Contract
 
 - Package: `@sleinity/template-core`
-- Version: `0.6.0`
+- Version: `0.7.0`
 - Supported importer export: `importTemplatePackage`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
@@ -41,9 +41,9 @@ export async function importTemplateZip(file: File) {
 ## Vendored installation
 
 Download these files from the public
-[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0):
+[`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0):
 
-- `sleinity-template-core-0.6.0.tgz`
+- `sleinity-template-core-0.7.0.tgz`
 - `SHA256SUMS`
 - `SDK-CORE-HANDOFF.md`
 
@@ -52,7 +52,7 @@ Verify the archive, commit it to the private consumer repository, and declare:
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.6.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz"
   }
 }
 ```
@@ -62,9 +62,10 @@ secret. Test one valid ZIP and require `importable === true`. Test invalid ZIP
 bytes and require structured source diagnostics. Confirm the importer makes no
 network requests.
 
-Lovable Business consumers use this same vendored route. The complete
-[runtime handoff](RUNTIME_HANDOFF.md) covers import, editing, rendering,
-persistence, and PNG capture with all three packages.
+Agent-built consumers use this same vendored route. The authoritative
+[installation guide](INSTALLATION.md) covers npm, pnpm and GitHub Packages;
+the complete [runtime handoff](RUNTIME_HANDOFF.md) covers import, editing,
+rendering, persistence and PNG capture with all three packages.
 
 ## Optional direct registry installation
 
@@ -75,7 +76,7 @@ always-auth=true
 ```
 
 ```sh
-npm install @sleinity/template-core@0.6.0
+npm install @sleinity/template-core@0.7.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with

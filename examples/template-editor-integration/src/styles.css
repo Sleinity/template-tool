@@ -60,7 +60,6 @@ p { font-weight: 400; }
 
 .session-preview { position: relative; width: 100%; height: clamp(420px, 62vh, 700px); min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--subtle); contain: layout paint; }
 .session-preview--compact { height: 220px; border: 0; border-radius: 0; }
-.session-preview__transform { position: absolute; inset: 0 auto auto 0; will-change: transform; }
 
 .editor-page { padding-bottom: 48px; }
 .editor-utilities { margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--subtle); color: var(--secondary); }

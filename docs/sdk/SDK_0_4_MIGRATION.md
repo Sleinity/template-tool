@@ -1,5 +1,8 @@
 # Migrating to SDK 0.4
 
+> Historical guide for the 0.4 release. New integrations should start with the
+> [SDK 0.7 documentation](README.md).
+
 Upgrade `template-core`, `template-browser`, and `template-react` together.
 Existing 0.3 root imports remain supported; no existing session, renderer,
 editing, persistence, or PNG API was removed.

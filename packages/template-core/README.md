@@ -96,27 +96,26 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.6.0
+npm install @sleinity/template-core@0.7.0
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
 `read:packages`. The token's user must also have read access to the private
 package or its linked repository.
 
-## Lovable Business
+## Credential-free archive installation
 
-Lovable Business cannot inject the private-registry build secret required for
-GitHub Packages. Use the checksum-verified archive attached to the public
-`sdk-v0.6.0` GitHub Release instead:
+Hosts and coding agents that cannot inject a private-registry secret use the
+checksum-verified archive attached to the public `sdk-v0.7.0` GitHub Release:
 
-1. Verify `sleinity-template-core-0.6.0.tgz` against `SHA256SUMS`.
-2. Commit it to the private Lovable-synced repository under `vendor/`.
+1. Verify `sleinity-template-core-0.7.0.tgz` against `SHA256SUMS`.
+2. Commit it to the consuming repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.6.0.tgz"`.
+   "file:vendor/sleinity-template-core-0.7.0.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
-No `.npmrc` or GitHub token belongs in the Lovable repository. The release
+No `.npmrc` or GitHub token belongs in the vendored consumer. The release
 archive is downloaded from the published GitHub Packages version before it is
 attached, so it is not an independently rebuilt artifact.
 
@@ -126,5 +125,9 @@ applies text/color/visibility/image edits and field-rule configuration, and
 restores imported state without
 repository fixtures, and rejects DOM, CSS, storage, font and network global
 access. The built public declaration is
-locked to the SDK 0.6.0 root contract at 87,431 bytes and SHA-256
+locked to the SDK 0.7.0 root contract at 87,431 bytes and SHA-256
 `7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+
+See the repository's
+[installation guide](../../docs/sdk/INSTALLATION.md) for the complete npm and
+pnpm archive configuration.

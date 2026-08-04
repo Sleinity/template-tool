@@ -1,10 +1,10 @@
 {
   "schemaVersion": "template-sdk-public-api-contract-v1",
-  "sdkVersion": "0.6.0",
+  "sdkVersion": "0.7.0",
   "packages": [
     {
       "name": "@sleinity/template-core",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "entries": [
         {
           "path": ".",
@@ -525,7 +525,7 @@
     },
     {
       "name": "@sleinity/template-browser",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "entries": [
         {
           "path": ".",
@@ -1177,7 +1177,7 @@
     },
     {
       "name": "@sleinity/template-react",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "entries": [
         {
           "path": ".",
@@ -1212,6 +1212,27 @@
             "useTemplateRuntime",
             "useTemplateSession",
             "useTemplateSessionSnapshot"
+          ]
+        },
+        {
+          "path": "./editor",
+          "classification": "recommended-high-level-integration",
+          "types": "./dist/editor.d.ts",
+          "symbols": [
+            "TemplateSessionDiagnosticIssueV1",
+            "TemplateSessionDiagnosticStatus",
+            "TemplateSessionDiagnosticSummaryOptions",
+            "TemplateSessionDiagnosticSummaryV1",
+            "TemplateSessionEditableFieldControllerV1",
+            "TemplateSessionViewport",
+            "TemplateSessionViewportHandle",
+            "TemplateSessionViewportIssueV1",
+            "TemplateSessionViewportProps",
+            "TemplateSessionViewportReadiness",
+            "TemplateSessionViewportSnapshotV1",
+            "useTemplateSessionDiagnosticSummary",
+            "useTemplateSessionEditableField",
+            "useTemplateSessionEditableFields"
           ]
         },
         {

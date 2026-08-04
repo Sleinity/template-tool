@@ -1,84 +1,60 @@
-# Template Platform SDK
+# Template Platform SDK 0.7.0
 
-The Template Platform SDK is the reusable technical foundation used by
-Template Studio and other Sleinity-owned React/TypeScript applications. Its
-physical boundaries and migration order are recorded in the
-[Template Platform boundary audit](../architecture/TEMPLATE_PLATFORM_BOUNDARY_AUDIT.md).
+Template Platform is the reusable SDK used by Template Studio and other
+Sleinity-owned applications. It imports, validates, edits, renders and captures
+technical template packages without requiring Studio.
 
-The public monorepo contains one reference application and three fixed-version
-packages:
+All packages use the same version:
 
-| Package | Responsibility | Environment |
+| Package | Owns | Runtime |
 | --- | --- | --- |
-| `@sleinity/template-core` | ZIP import, strict validation, diagnostics, canonical/resolved models, and portable field editing | Framework-neutral TypeScript |
-| `@sleinity/template-browser` | Browser session, headless import workflow, assets, fonts, persistence, readiness, and PNG capture | Modern browser/Chromium |
-| `@sleinity/template-react` | React importer bindings/default UI, renderer, inspection viewport, and revision-safe capture handle | React 19 browser app |
+| `@sleinity/template-core` | ZIP import, strict validation, package/scene models and portable field operations | Framework-neutral TypeScript |
+| `@sleinity/template-browser` | Browser sessions, headless setup, assets, fonts, persistence, readiness and capture | Modern browser |
+| `@sleinity/template-react` | React setup UI, renderer, responsive viewport and headless editor bindings | React 19 browser app |
 
-## Installation
+Start with the [installation guide](INSTALLATION.md). External hosts and coding
+agents should normally use the checksum-verified archives attached to the
+public [`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
 
-All three packages use the same version and must be upgraded together.
+## Choose an integration path
 
-### GitHub Packages
+### Import and validate a ZIP only
 
-Configure the `@sleinity` scope with
-[`.npmrc.example`](../../.npmrc.example), then install:
-
-```sh
-pnpm add @sleinity/template-core@0.6.0 \
-  @sleinity/template-browser@0.6.0 \
-  @sleinity/template-react@0.6.0
-```
-
-GitHub's npm registry requires authentication. Use a classic personal access
-token with `read:packages` and access to the package.
-
-### Vendored Release archives
-
-The public
-[`sdk-v0.6.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.6.0)
-contains registry-derived archives and `SHA256SUMS`. Verify and commit the
-three archives under `vendor/`, then declare exact `file:` dependencies. This
-path requires no package-registry secret and is the supported Lovable Business
-recipe.
-
-See [Runtime handoff](RUNTIME_HANDOFF.md) for npm and pnpm configuration and
-[Lovable template editor prompts](LOVABLE_TEMPLATE_EDITOR_PROMPTS.md) for the
-sequential consumer workflow.
-
-## Core-only importer
-
-Consumers that only need ZIP import, normalization, strict validation, source
-evidence, and an editable package may install only `template-core`:
+Install `@sleinity/template-core` and call `importTemplatePackage()` when the
+host needs portable import/validation but no browser session or SDK renderer.
 
 ```ts
 import { importTemplatePackage } from "@sleinity/template-core";
 
 const result = importTemplatePackage(await file.arrayBuffer(), file.name);
-
 if (!result.importable || !result.workingPackage) {
-  console.error(result.source.diagnostics, result.validation);
+  showImportErrors(result.source.diagnostics, result.validation);
 } else {
   useTemplate(result.workingPackage);
 }
 ```
 
-The importer runs directly in a modern browser and in Node. It has no peer
-dependencies, server route, runtime secret, or network requirement. See the
+The core importer runs in a browser or modern Node without a server route,
+runtime secret, DOM, storage or network request. See the
 [core importer handoff](CORE_IMPORTER_HANDOFF.md).
 
-## React runtime contract
+### Build a custom headless workflow
 
-New integrations should use the curated browser entry points:
+Use these curated browser entries when the host owns all presentation:
 
-- `@sleinity/template-browser/session` for session ownership and mutation;
-- `@sleinity/template-browser/importer` for the headless import workflow and
-  confirmation types;
-- `@sleinity/template-browser/compatibility` for runtime preflight,
-  confirmation inspection and atomic reopening.
+- `@sleinity/template-browser/compatibility`
+- `@sleinity/template-browser/importer`
+- `@sleinity/template-browser/session`
 
-The broad browser root remains compatible for existing 0.3 integrations.
+Run `inspectTemplateRuntimeSupport()` first, own one
+`createTemplateImportWizard()` controller per mounted setup flow, retain the
+immutable confirmation in host state/storage, then reopen it in a fresh session
+with `loadTemplateImportConfirmation()`.
 
-For a complete host-neutral setup flow, use the importer subpath:
+### Use the React setup and editor building blocks
+
+Use the SDK's five-page setup UI when the host wants Package, Fonts, Validate,
+Fields and Confirm without building those screens:
 
 ```tsx
 import {
@@ -91,108 +67,75 @@ const wizard = useTemplateImportWizard();
 
 <TemplateImportWizard
   wizard={wizard}
-  onComplete={(result) => {
-    // Hand result.packageValue to existing host services.
-  }}
+  onComplete={(confirmation) => storeInHost(confirmation)}
 />;
 ```
 
-The default five-page setup groups the headless seven-state workflow into
-Package, Fonts, Validate, Fields and Confirm. It provides ZIP import, structured package validation,
-exact-font validation, render validation, field-rule setup, confirmation and a
-revision-safe completion result. Hosts may use its default UI or compose their
-own through the controller, provider, snapshot hook and preview bridge. It does
-not save, publish or navigate unless an optional host persistence adapter is
-explicitly provided for post-confirmation storage.
-
-See the [template import workflow](TEMPLATE_IMPORT_WIZARD.md) for default,
-headless, page/modal/drawer, adapter, theming, restart, persistence and
-migration guidance.
-
-See the [0.6 migration guide](SDK_0_6_MIGRATION.md) for stabilized render
-validation, fitted previews, shared validation summaries, and atomic field
-settings.
-
-React hosts should let `useTemplateSession()` own the lifecycle:
+The wizard session is setup-only. After confirmation, create a fresh
+`useTemplateSession()`, reopen through `loadTemplateImportConfirmation()`, and
+compose the host editor with:
 
 ```tsx
-const session = useTemplateSession();
-
-await session.loadZip({ bytes, sourceName: file.name });
-session.setField("headline", "Updated headline");
-
-<TemplateSessionProvider session={session}>
-  <TemplateSessionRenderer ref={rendererRef} mode="editor" />
-</TemplateSessionProvider>
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableFields,
+} from "@sleinity/template-react/editor";
 ```
 
-Before presenting template workflows, run
-`inspectTemplateRuntimeSupport()` from the compatibility entry point. After
-confirmation, retain the immutable result in host state, create a fresh
-session, and reopen it with `loadTemplateImportConfirmation()`. This verifies
-identity and digest evidence before delegating to the session's fresh,
-atomic `loadTemplateState()` rebuild.
+These are headless editor bindings. The host still owns forms, layout, image
+processing, navigation, storage and publishing. Capture through the viewport
+handle only when its current-revision snapshot reports `canExport`.
 
-Use `useTemplateSessionSnapshot()` for lifecycle, validation, diagnostics,
-editable fields, working package, resolved tree, and revisions. The session
-supports typed field/image mutation, imported-state restoration, IndexedDB
-save/reload, and revision guards for asynchronous work.
+### Adapt the reference example
 
-PNG capture is allowed only for the ready render identity belonging to the
-current session revision:
+The [template editor reference](../../examples/template-editor-integration/README.md)
+is executable documentation for the complete browser lifecycle: setup,
+confirmation, fresh-session reopening, descriptor-driven editing, image
+Fill/Fit, local/offline drafts and silent PNG capture. Copy its SDK composition,
+not its in-memory dashboard presentation.
 
-```ts
-const output = await rendererRef.current?.exportPng({ download: false });
-```
+## Agent-assisted implementation
 
-The SDK owns template import, validation, editable state, browser persistence,
-rendering, readiness, and capture. The host owns product navigation,
-authentication, catalogues, collaboration, cloud storage, publishing, and
-other domain workflows. Integrate those through existing host services or
-injected adapters.
+Use the [provider-neutral agent prompts](AGENT_INTEGRATION_PROMPTS.md) with
+Codex, Lovable, Cursor, Claude or another coding agent. Select only the tracks
+needed by the host and review evidence after each prompt.
 
-See [Consumer compatibility](CONSUMER_COMPATIBILITY.md) and the focused
-[template editor reference](../../examples/template-editor-integration/README.md).
-The repository verifies both workspace and isolated packed consumers.
-For upgrades, see [Migrating to SDK 0.5](SDK_0_5_MIGRATION.md). Integration
-failures are organized by stable compatibility code in the
-[troubleshooting guide](TROUBLESHOOTING.md). The committed
-[machine-readable API contract](../../config/sdk-public-api.json) is the
-authoritative public export inventory.
+The first host upgrading its existing SDK 0.2 implementation should instead
+follow the dedicated
+[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md).
 
-Recommended high-level APIs are the curated browser subpaths and React entry
-points. The broad core/browser roots remain supported low-level adapter
-surfaces. SDK 0.5 also provides supported advanced inspection entries:
+## Ownership boundary
 
-- `@sleinity/template-core/inspection` for UI-independent canonical,
-  appearance, dependency, measurement, settlement, comparison, and diagnostic
-  evidence;
-- `@sleinity/template-react/inspection` for renderer feature coverage,
-  fidelity risk, quality reports, and diagnostic presentation.
+The SDK owns template import, validation, diagnostics, editable session state,
+browser-local persistence, rendering, readiness and PNG capture. The host owns
+product navigation, authentication, forms, image processing, catalogues,
+collaboration, cloud storage and publishing.
 
-The advanced entries are optional and report existing authority. Ordinary
-importing, editing, and rendering do not require them. Studio-only debug
-panels, visual-difference tooling, fidelity issue packets, and development
-harnesses stay outside package export maps.
-The `@sleinity/template-core/renderer-internal` and
-`@sleinity/template-react/renderer-internal` entries are reserved for
-fixed-train renderer/repository composition; external applications and Studio
-must not import them directly.
+Studio-only screens, layout debugging, fidelity issue packets, visual
+comparison, stress tooling and development harnesses are not SDK APIs. Never
+import Studio code, repository paths, package `src/` files or an entry named
+`renderer-internal`.
 
-## Offline and network behavior
+Advanced inspection is opt-in through `@sleinity/template-core/inspection`
+and `@sleinity/template-react/inspection`; ordinary importing, editing and
+rendering do not require it.
 
-ZIP import and rendering require no external runtime requests. Assets and
-managed fonts remain package- or browser-storage-backed. Default persistence is
-browser-local IndexedDB; shared persistence is a host adapter concern.
+## Detailed references
 
-## Release and authorization
+- [Installation](INSTALLATION.md)
+- [Runtime handoff](RUNTIME_HANDOFF.md)
+- [Template import workflow](TEMPLATE_IMPORT_WIZARD.md)
+- [Consumer compatibility](CONSUMER_COMPATIBILITY.md)
+- [Troubleshooting](TROUBLESHOOTING.md)
+- [Migrating from 0.6 to 0.7](SDK_0_7_MIGRATION.md)
+- [Machine-readable public API contract](../../config/sdk-public-api.json)
 
-Package bundles contain no Template Studio screens, workspace aliases, or
-repository-relative source imports. A fixed `sdk-v*` tag publishes the package
-train; manual release workflow runs can only recreate assets from an already
-published version.
+Older migration guides remain version-specific historical records and are not
+the starting point for a new 0.7 integration.
 
-The repository and Release assets are publicly downloadable, but package
-manifests remain `UNLICENSED`. The current `sleinity-tools-only` policy
-authorizes use in Sleinity-owned applications only. Public visibility is not a
-general reuse grant.
+## Distribution policy
+
+The GitHub Release archives are public and require no download credential.
+Package manifests remain `UNLICENSED`; policy authorizes use only in
+Sleinity-owned applications. Public visibility is not a general reuse grant.

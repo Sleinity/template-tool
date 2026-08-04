@@ -222,6 +222,30 @@ try {
       },
     },
   );
+  const referenceSource = await readFile(
+    path.join(consumerDirectory, "src", "main.tsx"),
+    "utf8",
+  );
+  for (const required of [
+    'from "@sleinity/template-react/editor"',
+    "TemplateSessionViewport",
+    "useTemplateSessionEditableFields",
+    "useTemplateSessionEditableField",
+    "useTemplateSessionDiagnosticSummary",
+  ]) {
+    if (!referenceSource.includes(required)) {
+      throw new Error(`The generic reference does not adopt ${required}.`);
+    }
+  }
+  for (const retiredGlue of [
+    "function SessionPreviewViewport",
+    "getPackageFieldValue",
+    "ResizeObserver",
+  ]) {
+    if (referenceSource.includes(retiredGlue)) {
+      throw new Error(`The generic reference retains host glue: ${retiredGlue}.`);
+    }
+  }
   await mkdir(vendorDirectory, { recursive: true });
   await writeFile(
     path.join(consumerDirectory, ".npmrc-public-only"),
@@ -359,6 +383,8 @@ ${Object.entries(vendoredDependencies)
         "importer.js",
         "importer.d.ts",
         "importer.css",
+        "editor.js",
+        "editor.d.ts",
       ]) {
         const source = await readFile(
           path.join(installedRoot, "dist", fileName),
@@ -550,7 +576,7 @@ ${Object.entries(vendoredDependencies)
   });
   const previewGeometry = await page.locator(".template-importer__preview").evaluate(
     (preview) => {
-      const layer = preview.querySelector(".template-importer__preview-transform");
+      const layer = preview.querySelector("[data-template-session-viewport-transform='true']");
       if (!(layer instanceof HTMLElement)) return null;
       const outer = preview.getBoundingClientRect();
       const inner = layer.getBoundingClientRect();
@@ -757,6 +783,30 @@ ${Object.entries(vendoredDependencies)
     .getByRole("button", { name: /^Open template / })
     .click();
   await page.locator('[data-testid="validation-status"][data-valid="true"]').waitFor();
+  await page.locator('[data-template-session-viewport-readiness="ready"]').last().waitFor();
+  const diagnosticStatus = await page
+    .locator('[data-testid="validation-status"]')
+    .getAttribute("data-diagnostic-status");
+  if (diagnosticStatus !== "ready" && diagnosticStatus !== "needs-review") {
+    throw new Error(
+      `The current-revision diagnostic summary stayed ${diagnosticStatus ?? "unpublished"} after the viewport became ready.`,
+    );
+  }
+  const fieldHookAcceptance = page.locator('[data-testid="field-hook-acceptance"]');
+  const fieldHookEvidence = {
+    stable: await fieldHookAcceptance.getAttribute("data-controller-stable"),
+    parity: await fieldHookAcceptance.getAttribute("data-field-parity"),
+    missing: await fieldHookAcceptance.getAttribute("data-missing-field-null"),
+  };
+  if (
+    fieldHookEvidence.stable !== "true" ||
+    fieldHookEvidence.parity !== "true" ||
+    fieldHookEvidence.missing !== "true"
+  ) {
+    throw new Error(
+      `Plural and singular editable-field hooks did not expose stable parity: ${JSON.stringify(fieldHookEvidence)}.`,
+    );
+  }
   const captureButton = page.getByRole("button", {
     name: "Capture latest PNG",
   });

@@ -1,20 +1,15 @@
 import {
-  forwardRef,
   StrictMode,
   useCallback,
   useEffect,
   useRef,
   useState,
   type ChangeEvent,
-  type CSSProperties,
-  type ReactNode,
 } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  getPackageFieldValue,
-  type EditableFieldBinding,
-  type PackageImageFieldConstraints,
-  type PackageTextFieldConstraints,
+import type {
+  PackageImageFieldConstraints,
+  PackageTextFieldConstraints,
 } from "@sleinity/template-core";
 import type {
   TemplateImportConfirmationV1,
@@ -31,12 +26,19 @@ import {
 } from "@sleinity/template-browser/compatibility";
 import {
   TemplateSessionProvider,
-  TemplateSessionRenderer,
   useTemplateSession,
   useTemplateSessionSnapshot,
   type ResolvedProductRenderIdentityV1,
-  type TemplateSessionRendererHandle,
 } from "@sleinity/template-react";
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableField,
+  useTemplateSessionEditableFields,
+  type TemplateSessionEditableFieldControllerV1,
+  type TemplateSessionViewportHandle,
+  type TemplateSessionViewportSnapshotV1,
+} from "@sleinity/template-react/editor";
 import {
   TemplateImportWizard,
   TemplateImportWizardProvider,
@@ -68,97 +70,6 @@ export interface TemplateExportReadyPayload {
   }>;
 }
 
-interface RevisionedIdentity {
-  revision: number;
-  value: ResolvedProductRenderIdentityV1;
-}
-
-interface SessionPreviewViewportProps {
-  session: TemplateSessionV1;
-  compact?: boolean;
-  className?: string;
-  fallback?: ReactNode;
-  onRenderIdentity?(identity: ResolvedProductRenderIdentityV1): void;
-}
-
-const SessionPreviewViewport = forwardRef<
-  TemplateSessionRendererHandle,
-  SessionPreviewViewportProps
->(function SessionPreviewViewport(
-  {
-    session,
-    compact = false,
-    className,
-    fallback = <span>Preparing preview…</span>,
-    onRenderIdentity,
-  },
-  rendererRef,
-) {
-  const snapshot = useTemplateSessionSnapshot(session);
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState<{
-    scale: number;
-    x: number;
-    y: number;
-  } | null>(null);
-  const canvas = snapshot.workingPackage?.canvas ?? null;
-
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport || !canvas) {
-      setTransform(null);
-      return;
-    }
-    const refit = () => {
-      const bounds = viewport.getBoundingClientRect();
-      const padding = compact ? 20 : bounds.width < 640 ? 16 : 32;
-      const availableWidth = Math.max(1, bounds.width - padding * 2);
-      const availableHeight = Math.max(1, bounds.height - padding * 2);
-      const scale = Math.min(
-        availableWidth / canvas.width,
-        availableHeight / canvas.height,
-      );
-      setTransform({
-        scale,
-        x: bounds.width / 2 - (canvas.width * scale) / 2,
-        y: bounds.height / 2 - (canvas.height * scale) / 2,
-      });
-    };
-    const observer = new ResizeObserver(refit);
-    observer.observe(viewport);
-    refit();
-    return () => observer.disconnect();
-  }, [canvas?.height, canvas?.width, compact]);
-
-  const transformStyle = canvas && transform
-    ? ({
-        width: canvas.width,
-        height: canvas.height,
-        transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
-        transformOrigin: "0 0",
-      } satisfies CSSProperties)
-    : undefined;
-
-  return (
-    <div
-      ref={viewportRef}
-      className={`session-preview${compact ? " session-preview--compact" : ""}${className ? ` ${className}` : ""}`}
-    >
-      {canvas ? (
-        <div className="session-preview__transform" style={transformStyle}>
-          <TemplateSessionRenderer
-            ref={rendererRef}
-            session={session}
-            mode="editor"
-            fallback={fallback}
-            onRenderIdentity={onRenderIdentity}
-          />
-        </div>
-      ) : fallback}
-    </div>
-  );
-});
-
 function fileAsDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -176,7 +87,9 @@ function mutationMessage(result: TemplateSessionMutationResult): string {
   return result.warning?.message ?? "Field updated.";
 }
 
-function fieldConstraintSummary(field: EditableFieldBinding): string {
+function fieldConstraintSummary(
+  field: TemplateSessionEditableFieldControllerV1["field"],
+): string {
   if (field.type === "text" || field.type === "textarea") {
     const constraints = field.constraints as PackageTextFieldConstraints | undefined;
     const parts = [
@@ -204,23 +117,21 @@ function fieldConstraintSummary(field: EditableFieldBinding): string {
 }
 
 function FieldControl({
-  field,
-  session,
+  controller,
   onMessage,
 }: {
-  field: EditableFieldBinding;
-  session: TemplateSessionV1;
+  controller: TemplateSessionEditableFieldControllerV1;
   onMessage(message: string): void;
 }) {
   const snapshot = useTemplateSessionSnapshot();
   const imageReadRevision = useRef(0);
   const packageValue = snapshot.workingPackage;
   if (!packageValue) return null;
-  const value = getPackageFieldValue(packageValue, field);
+  const { field, value } = controller;
   const label = field.label ?? field.id;
   const setValue = (next: unknown) => {
     try {
-      onMessage(mutationMessage(session.setField(field.id, next)));
+      onMessage(mutationMessage(controller.setValue(next)));
     } catch (error) {
       onMessage(error instanceof Error ? error.message : "The field update failed.");
     }
@@ -321,7 +232,7 @@ function FieldControl({
               const width = bitmap.width;
               const height = bitmap.height;
               bitmap.close();
-              const result = session.replaceImage(field.id, {
+              const result = controller.replaceImage?.({
                 dataUrl,
                 mimeType: file.type,
                 sizeBytes: file.size,
@@ -329,7 +240,7 @@ function FieldControl({
                 height,
                 placementState: "replacement-fill",
               });
-              onMessage(mutationMessage(result));
+              if (result) onMessage(mutationMessage(result));
             } catch (error) {
               onMessage(error instanceof Error ? error.message : "Image replacement failed.");
             }
@@ -340,7 +251,7 @@ function FieldControl({
           onClick={() =>
             onMessage(
               mutationMessage(
-                session.setImageReplacementMode(field.id, "replacement-fill"),
+                controller.setImageReplacementMode!("replacement-fill"),
               ),
             )
           }
@@ -352,7 +263,7 @@ function FieldControl({
           onClick={() =>
             onMessage(
               mutationMessage(
-                session.setImageReplacementMode(field.id, "replacement-fit"),
+                controller.setImageReplacementMode!("replacement-fit"),
               ),
             )
           }
@@ -381,7 +292,7 @@ function FieldControl({
         type="button"
         onClick={() => {
           imageReadRevision.current += 1;
-          onMessage(mutationMessage(session.resetField(field.id)));
+          onMessage(mutationMessage(controller.reset()));
         }}
       >
         Reset
@@ -464,17 +375,22 @@ function TemplateEditor({
   acceptanceMode: boolean;
 }) {
   const snapshot = useTemplateSessionSnapshot();
-  const rendererRef = useRef<TemplateSessionRendererHandle>(null);
-  const [identity, setIdentity] = useState<RevisionedIdentity | null>(null);
+  const fieldControllers = useTemplateSessionEditableFields(session);
+  const rendererRef = useRef<TemplateSessionViewportHandle>(null);
+  const [viewportSnapshot, setViewportSnapshot] =
+    useState<TemplateSessionViewportSnapshotV1 | null>(null);
+  const diagnosticSummary = useTemplateSessionDiagnosticSummary({
+    session,
+    viewportSnapshot,
+  });
   const [message, setMessage] = useState(
     "Host-owned controls are connected to the hydrated template session.",
   );
   const [exportPreview, setExportPreview] = useState<TemplateExportReadyPayload | null>(null);
-  const identityReady =
-    identity?.revision === snapshot.revision &&
-    identity.value.readiness === "ready";
-  const firstTextField = snapshot.editableFields.find(
-    (field) => field.type === "text" || field.type === "textarea",
+  const identityReady = viewportSnapshot?.canExport === true;
+  const firstTextField = fieldControllers.find(
+    (controller) =>
+      controller.field.type === "text" || controller.field.type === "textarea",
   );
 
   const reloadSavedDraft = useCallback(async () => {
@@ -515,7 +431,7 @@ function TemplateEditor({
         width: result.width,
         height: result.height,
         sessionRevision: snapshot.revision,
-        renderIdentity: identity.value,
+        renderIdentity: viewportSnapshot!.renderIdentity!,
         diagnostics: result.diagnostics,
       };
       setExportPreview(payload);
@@ -528,10 +444,8 @@ function TemplateEditor({
 
   const exerciseStaleExport = async () => {
     if (!snapshot.workingPackage || !firstTextField) return;
-    const current = getPackageFieldValue(snapshot.workingPackage, firstTextField);
-    session.setField(
-      firstTextField.id,
-      `${String(current ?? "")} · acceptance stale check`,
+    firstTextField.setValue(
+      `${String(firstTextField.value ?? "")} · acceptance stale check`,
     );
     setExportPreview(null);
     try {
@@ -564,8 +478,7 @@ function TemplateEditor({
         <div className="toolbar">
           <button type="button" disabled={!snapshot.workingPackage || !firstTextField} onClick={() => {
             if (!snapshot.workingPackage || !firstTextField) return;
-            const current = getPackageFieldValue(snapshot.workingPackage, firstTextField);
-            setMessage(mutationMessage(session.setField(firstTextField.id, String(current ?? "").toLocaleUpperCase())));
+            setMessage(mutationMessage(firstTextField.setValue(String(firstTextField.value ?? "").toLocaleUpperCase())));
             setExportPreview(null);
           }}>Apply host uppercase transform</button>
           <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>Save browser draft</button>
@@ -577,15 +490,15 @@ function TemplateEditor({
           }}>Restore imported state</button>
           {acceptanceMode ? <button type="button" disabled={!identityReady || !firstTextField} onClick={() => void exerciseStaleExport()}>Acceptance stale export</button> : null}
         </div>
-        <p className="identity">Revision {snapshot.revision} · render identity {identityReady ? identity.value.identityId : "pending"}</p>
+        <p className="identity">Revision {snapshot.revision} · render identity {identityReady ? viewportSnapshot?.renderIdentity?.identityId : "pending"}</p>
       </details>
 
-      {snapshot.diagnostics.length > 0 ? (
+      {diagnosticSummary.issues.length > 0 ? (
         <section className="diagnostics" aria-label="Template diagnostics">
           <h2>Diagnostics</h2>
           <ul>
-            {snapshot.diagnostics.map((diagnostic, index) => (
-              <li key={`${diagnostic.code}-${diagnostic.path ?? ""}-${index}`}>
+            {diagnosticSummary.issues.map((diagnostic, index) => (
+              <li key={`${diagnostic.code}-${diagnostic.target ?? ""}-${index}`}>
                 <strong>{diagnostic.code}</strong>: {diagnostic.message}
               </li>
             ))}
@@ -598,39 +511,47 @@ function TemplateEditor({
           className="validation-status"
           data-testid="validation-status"
           data-valid={String(snapshot.validation.valid)}
+          data-diagnostic-status={diagnosticSummary.status}
         >
           {snapshot.validation.valid ? "✓" : "!"} Template {snapshot.validation.valid ? "valid" : "blocked"} · Schema{" "}
           {snapshot.validation.schemaValid ? "valid" : "invalid"} · Semantic{" "}
-          {snapshot.validation.semanticValid ? "valid" : "invalid"} · {snapshot.validation.diagnostics.length} diagnostics
+          {snapshot.validation.semanticValid ? "valid" : "invalid"} · {diagnosticSummary.counts.blockers + diagnosticSummary.counts.warnings} unresolved diagnostics
         </p>
       ) : null}
 
       <p className="editor-feedback" aria-live="polite">{message}</p>
+
+      {acceptanceMode && firstTextField ? (
+        <FieldHookAcceptance
+          fieldId={firstTextField.field.id}
+          collectionValue={firstTextField.value}
+        />
+      ) : null}
 
       <div className="workspace">
         <section className="preview-panel">
           <div className="panel-heading">
             <div><p className="eyebrow">Current revision</p><h2>Live preview</h2></div>
           </div>
-          <SessionPreviewViewport
+          <TemplateSessionViewport
             ref={rendererRef}
             session={session}
+            className="session-preview"
             fallback={<p>Import a valid ZIP to render the template.</p>}
-            onRenderIdentity={(value) => setIdentity({ revision: snapshot.revision, value })}
+            onViewportSnapshot={setViewportSnapshot}
           />
         </section>
         <aside className="edit-content">
           <div className="panel-heading">
             <div><p className="eyebrow">Host controls</p><h2>Edit content</h2></div>
           </div>
-          {snapshot.editableFields.length === 0 ? (
+          {fieldControllers.length === 0 ? (
             <p>No editable fields are available.</p>
           ) : (
-            snapshot.editableFields.map((field) => (
+            fieldControllers.map((controller) => (
               <FieldControl
-                key={field.id}
-                field={field}
-                session={session}
+                key={controller.field.id}
+                controller={controller}
                 onMessage={(next) => {
                   setExportPreview(null);
                   setMessage(next);
@@ -656,6 +577,32 @@ function TemplateEditor({
         </section>
       ) : null}
     </main>
+  );
+}
+
+function FieldHookAcceptance({
+  fieldId,
+  collectionValue,
+}: {
+  fieldId: string;
+  collectionValue: unknown;
+}) {
+  const controller = useTemplateSessionEditableField(fieldId);
+  const missing = useTemplateSessionEditableField("acceptance:missing-field");
+  const previous = useRef(controller);
+  const stable = previous.current === controller;
+  previous.current = controller;
+  return (
+    <output
+      hidden
+      data-testid="field-hook-acceptance"
+      data-controller-stable={String(stable)}
+      data-field-parity={String(
+        controller?.field.id === fieldId &&
+        Object.is(controller.value, collectionValue),
+      )}
+      data-missing-field-null={String(missing === null)}
+    />
   );
 }
 
@@ -699,7 +646,11 @@ function DashboardTemplateCard({
   return (
     <article className="template-card">
       <div className="template-card__preview" aria-label={`${record.confirmation.packageValue.name} preview`}>
-        <SessionPreviewViewport session={session} compact />
+        <TemplateSessionViewport
+          session={session}
+          className="session-preview session-preview--compact"
+          padding={20}
+        />
       </div>
       <div className="template-card__body">
         <div className="template-card__title">

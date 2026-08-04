@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "template-sdk-bundle-baselines-v1",
+  "profiles": {
+    "core-import-validation": {
+      "baselineBytes": 336679,
+      "baselineGzipBytes": 80490,
+      "maxBytes": 353513,
+      "maxGzipBytes": 84515
+    },
+    "browser-session-importer": {
+      "baselineBytes": 622821,
+      "baselineGzipBytes": 151279,
+      "maxBytes": 653963,
+      "maxGzipBytes": 158843
+    },
+    "react-renderer": {
+      "baselineBytes": 641719,
+      "baselineGzipBytes": 156786,
+      "maxBytes": 673805,
+      "maxGzipBytes": 164626
+    },
+    "react-importer": {
+      "baselineBytes": 947513,
+      "baselineGzipBytes": 228361,
+      "maxBytes": 994889,
+      "maxGzipBytes": 239780
+    },
+    "react-editor": {
+      "baselineBytes": 658317,
+      "baselineGzipBytes": 160688,
+      "maxBytes": 691233,
+      "maxGzipBytes": 168723
+    }
+  }
+}

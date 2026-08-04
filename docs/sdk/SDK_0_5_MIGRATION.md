@@ -1,5 +1,8 @@
 # Migrating to SDK 0.5
 
+> Historical guide for the 0.5 release. New integrations should start with the
+> [SDK 0.7 documentation](README.md).
+
 SDK 0.5.0 preserves all SDK 0.4.2 root and curated imports. Existing hosts may
 upgrade the fixed train without changing their runtime code:
 

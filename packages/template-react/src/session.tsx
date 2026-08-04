@@ -1,15 +1,12 @@
 import {
-  createContext,
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
   useSyncExternalStore,
   type CSSProperties,
-  type PropsWithChildren,
   type ReactNode,
 } from "react";
 import {
@@ -29,12 +26,15 @@ import {
   type TemplatePackageRenderMode,
 } from "./render/TemplatePackageRenderer";
 import type { ResolvedProductRenderIdentityV1 } from "./render/productRenderIdentity";
+import {
+  TemplateSessionProvider,
+  useResolvedTemplateSession,
+} from "./internal/templateSessionContext";
 
-const TemplateSessionContext = createContext<TemplateSessionV1 | null>(null);
-
-export interface TemplateSessionProviderProps {
-  session: TemplateSessionV1;
-}
+export {
+  TemplateSessionProvider,
+  type TemplateSessionProviderProps,
+} from "./internal/templateSessionContext";
 
 /**
  * Owns one browser session for the mounted React workspace. Disposal is
@@ -54,28 +54,6 @@ export function useTemplateSession(
       });
     };
   }, [session]);
-  return session;
-}
-
-export function TemplateSessionProvider({
-  session,
-  children,
-}: PropsWithChildren<TemplateSessionProviderProps>) {
-  return (
-    <TemplateSessionContext.Provider value={session}>
-      {children}
-    </TemplateSessionContext.Provider>
-  );
-}
-
-function useResolvedTemplateSession(override?: TemplateSessionV1): TemplateSessionV1 {
-  const context = useContext(TemplateSessionContext);
-  const session = override ?? context;
-  if (!session) {
-    throw new Error(
-      "A TemplateSession is required. Pass session or use TemplateSessionProvider.",
-    );
-  }
   return session;
 }
 
