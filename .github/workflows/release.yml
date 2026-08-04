@@ -96,6 +96,8 @@ jobs:
             release-artifacts
           cp docs/sdk/INSTALLATION.md \
             release-artifacts/SDK-INSTALLATION.md
+          cp docs/sdk/SDK_CAPABILITIES.md \
+            release-artifacts/SDK-CAPABILITIES.md
           cp docs/sdk/AGENT_INTEGRATION_PROMPTS.md \
             release-artifacts/AGENT-INTEGRATION-PROMPTS.md
           cp docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md \
@@ -155,6 +157,7 @@ jobs:
             release-artifacts/SDK-CORE-HANDOFF.md \
             release-artifacts/SDK-RUNTIME-HANDOFF.md \
             release-artifacts/SDK-INSTALLATION.md \
+            release-artifacts/SDK-CAPABILITIES.md \
             release-artifacts/AGENT-INTEGRATION-PROMPTS.md \
             release-artifacts/SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md \
             release-artifacts/SDK-0.7-MIGRATION.md \

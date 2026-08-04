@@ -5,6 +5,11 @@ Cursor and Claude. Use only the tracks the host needs. Give an agent one prompt
 at a time and review its changed files, test evidence and blockers before
 continuing.
 
+Before selecting a track, give the agent the copyable context in the
+[SDK capability catalog](SDK_CAPABILITIES.md). The catalog explains all
+supported entry points, components, headless alternatives, diagnostics and
+examples; these prompts then implement the selected path.
+
 The SDK owns template ZIP import, validation, diagnostics, editable session
 state, browser-local persistence, rendering, readiness and PNG capture. The
 host owns navigation, forms, authentication, image processing, cloud storage,

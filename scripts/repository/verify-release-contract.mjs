@@ -5,6 +5,7 @@ import {
   loadRuntimePackageDefinitions,
   resolveFixedRuntimeVersion,
 } from "./sdk-runtime-manifest.mjs";
+import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
 
 const root = process.cwd();
 const retiredActivePaths = [
@@ -142,6 +143,7 @@ if (
     'from "@sleinity/template-browser/importer";',
   ) ||
   !runtimeHandoffGenerator.includes("Focused and advanced entries") ||
+  !runtimeHandoffGenerator.includes("SDK-CAPABILITIES.md") ||
   !runtimeHandoffGenerator.includes("must never import those internal entries")
 ) {
   throw new Error(
@@ -160,6 +162,7 @@ const localVerificationGenerator = await readFile(
 );
 for (const required of [
   "SDK-INSTALLATION.md",
+  "SDK-CAPABILITIES.md",
   "AGENT-INTEGRATION-PROMPTS.md",
   "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md",
   "SDK-0.7-MIGRATION.md",
@@ -209,6 +212,7 @@ for (const required of [
   "SDK-CORE-HANDOFF.md",
   "SDK-RUNTIME-HANDOFF.md",
   "SDK-INSTALLATION.md",
+  "SDK-CAPABILITIES.md",
   "AGENT-INTEGRATION-PROMPTS.md",
   "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md",
   "SDK-0.7-MIGRATION.md",
@@ -239,6 +243,82 @@ if (
 ) {
   throw new Error("The committed SDK public API contract is missing or stale.");
 }
+
+const capabilityCatalog = await readFile(
+  path.join(root, "docs", "sdk", "SDK_CAPABILITIES.md"),
+  "utf8",
+);
+const catalogStart = "<!-- sdk-capability-entry-points:start -->";
+const catalogEnd = "<!-- sdk-capability-entry-points:end -->";
+const catalogStartIndex = capabilityCatalog.indexOf(catalogStart);
+const catalogEndIndex = capabilityCatalog.indexOf(catalogEnd);
+if (catalogStartIndex < 0 || catalogEndIndex <= catalogStartIndex) {
+  throw new Error("The SDK capability catalog checked inventory is missing.");
+}
+const catalogInventory = capabilityCatalog.slice(
+  catalogStartIndex + catalogStart.length,
+  catalogEndIndex,
+);
+const catalogRows = new Map();
+const catalogRowPattern =
+  /^\| (?:core|browser|react) \| `([^`]+)` \| `([^`]+)` \| (.+) \|$/gmu;
+for (const match of catalogInventory.matchAll(catalogRowPattern)) {
+  const [, entryPath, classification, representativeExports] = match;
+  if (catalogRows.has(entryPath)) {
+    throw new Error(`Duplicate SDK capability catalog entry: ${entryPath}.`);
+  }
+  catalogRows.set(entryPath, { classification, representativeExports });
+}
+
+const entryPointInventory = await loadSdkEntryPointInventory(root);
+const expectedCatalogEntries = new Map();
+for (const packageValue of entryPointInventory.packages) {
+  const contractPackage = apiContract.packages.find(
+    (candidate) => candidate.name === packageValue.name,
+  );
+  for (const entry of packageValue.entries) {
+    const publicPath = entry.path === "."
+      ? packageValue.name
+      : `${packageValue.name}/${entry.path.slice(2)}`;
+    expectedCatalogEntries.set(publicPath, entry);
+    const row = catalogRows.get(publicPath);
+    if (!row || row.classification !== entry.classification) {
+      throw new Error(
+        `SDK capability catalog classification is missing or stale for ${publicPath}.`,
+      );
+    }
+    if (entry.classification === "sdk-internal") {
+      if (!row.representativeExports.includes("Prohibited for host applications")) {
+        throw new Error(`Internal SDK entry is not prohibited: ${publicPath}.`);
+      }
+      continue;
+    }
+    const contractEntry = contractPackage?.entries?.find(
+      (candidate) => candidate.path === entry.path,
+    );
+    const namedSymbols = [...row.representativeExports.matchAll(/`([^`]+)`/gu)]
+      .map((symbolMatch) => symbolMatch[1]);
+    if (entry.path !== "./importer.css" && namedSymbols.length === 0) {
+      throw new Error(`SDK capability catalog needs a named API for ${publicPath}.`);
+    }
+    for (const symbol of namedSymbols) {
+      if (!contractEntry?.symbols?.includes(symbol)) {
+        throw new Error(
+          `SDK capability catalog names missing API ${symbol} from ${publicPath}.`,
+        );
+      }
+    }
+  }
+}
+for (const catalogPath of catalogRows.keys()) {
+  if (!expectedCatalogEntries.has(catalogPath)) {
+    throw new Error(`SDK capability catalog contains unknown entry: ${catalogPath}.`);
+  }
+}
+if (catalogRows.size !== expectedCatalogEntries.size) {
+  throw new Error("SDK capability catalog does not cover every SDK entry point.");
+}
+
 for (const item of await loadRuntimePackageDefinitions(root)) {
   const manifest = JSON.parse(
     await readFile(

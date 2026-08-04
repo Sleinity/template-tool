@@ -130,4 +130,6 @@ locked to the SDK 0.7.0 root contract at 87,431 bytes and SHA-256
 
 See the repository's
 [installation guide](../../docs/sdk/INSTALLATION.md) for the complete npm and
-pnpm archive configuration.
+pnpm archive configuration. The
+[SDK capability catalog](../../docs/sdk/SDK_CAPABILITIES.md) maps this package's
+root and focused entries to host integration outcomes.

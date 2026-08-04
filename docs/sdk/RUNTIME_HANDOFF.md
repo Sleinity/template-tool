@@ -60,6 +60,9 @@ consumer.
 
 ## Focused and advanced entries
 
+The [SDK capability catalog](SDK_CAPABILITIES.md) maps each supported entry to
+its intended outcome, runtime, ownership boundary and representative APIs.
+
 Ordinary hosts can use the existing root, session, importer, compatibility,
 and React contracts. Focused integrations may additionally import core
 `editor`/`assets`/`fonts`/`motion`, browser
