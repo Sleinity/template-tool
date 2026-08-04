@@ -1,10 +1,10 @@
 # Renderer Fidelity Status
 
 Status date: 2026-08-04
-Current milestone: SDK 0.7.0 headless host-editor integration
+Current milestone: SDK 0.7.0 published stable release and first-implementation handoff
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
 
-## SDK 0.7.0 — release hardening and documentation closeout
+## SDK 0.7.0 — published stable release
 
 The public feature contract is frozen at the three-package fixed `0.7.0`
 train. A checked entry-point inventory now drives API classification, Studio
@@ -27,11 +27,11 @@ Current-run `ci:portable`, archive inspection, npm/pnpm vendored consumers,
 session and Studio browser smokes, realistic-ZIP coverage and packed generic
 template-editor acceptance pass. The packed flow passed under normal and
 restricted CSP with no unexpected requests, downloads or console errors.
-Local archives are core 588,594, browser 334,134 and React 246,857 bytes. The
-local-verification hashes are respectively
-`5d3711ed44d26a76dcf7a19f199ecb5440af045ac5eb6049210639262f338a2f`,
-`67691794d44329428dbc065ab20edc81f9e9c48d35b3a5a787e92dd77c28ed93`, and
-`92021f705681394211696179dad3a66b8a2dd6c57dcc203867093995b79668c0`.
+Registry-derived archives are core 588,594, browser 334,134 and React 246,857
+bytes. Their published SHA-256 values are respectively
+`431011bfb0160f416d62ecf5ef49b0338d0cc9dc81819c251ac6615f052d462d`,
+`446e8f6745b1ab5fe328bf9a9f434f3173e5a63e26fa583d85fe690102202bac`, and
+`ef883f46fbc51e445a79ba2004daa645027f0365e9d61b88d914c1e176466063`.
 
 Renderer run `2026-08-04T16-09-07-981Z` is repeat-stable for all 19 fixtures.
 Comparison `2026-08-04T16-09-54-633Z` retains the documented 31 approved
@@ -45,14 +45,17 @@ available in this checkout, so the before/after stroke source-evidence script
 cannot be replayed honestly; current stroke capture is stable. No fixture,
 schema, tolerance, reference update or promotion command ran.
 
-A local verification bundle contains all three archives, checksum manifests,
-runtime/core handoffs, one installation authority, provider-neutral agent
-prompts, a dedicated in-place SDK 0.2→0.7 Lovable handoff and migration
-guidance. The obsolete pre-release first-host checklist and duplicated general
-Lovable prompts are retired. SDK 0.7.0 is a normal stable release; external
-implementation is post-release adoption rather than a publication gate.
-Registry-derived checks and the public GitHub Release remain post-tag workflow
-authority, and local archives are not a substitute.
+PR 18 merged as `b19d0e3`; annotated tag `sdk-v0.7.0` points to that merge.
+Workflow run `30933771024` published the fixed train, downloaded the packages
+back from GitHub Packages, passed core, npm, pnpm and packed browser consumers,
+verified public visibility and created the public
+[GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
+The Release
+contains all three archives, checksum manifests, runtime/core handoffs, one
+installation authority, provider-neutral agent prompts, a dedicated in-place
+SDK 0.2→0.7 Lovable handoff and migration guidance. Independently downloaded
+Release assets passed both checksum manifests. External implementation is now
+ordinary post-release adoption.
 
 ## SDK 0.7.0 — headless host-editor integration
 

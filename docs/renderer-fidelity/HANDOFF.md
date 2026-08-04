@@ -1,6 +1,6 @@
 # Renderer Fidelity Handoff
 
-## 2026-08-04 — SDK 0.7.0 release hardening and documentation closeout
+## 2026-08-04 — SDK 0.7.0 published stable release
 
 ### Result
 
@@ -18,6 +18,9 @@
   in-place SDK 0.2→0.7 Lovable handoff.
 - Preserved broad roots, compatibility forwarders, renderer ownership, schemas,
   fixtures and approved evidence.
+- Published the fixed train from annotated tag `sdk-v0.7.0` at merge commit
+  `b19d0e3` and created the public registry-derived
+  [GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
 
 ### Verification boundary
 
@@ -27,11 +30,11 @@ session and Studio browser smokes and packed template-editor acceptance pass.
 The packed acceptance covers normal/restricted CSP and reports no unexpected
 network requests, downloads or console errors.
 
-Local archives are 588,594 / 334,134 / 246,857 bytes for core/browser/React.
-Their local-verification SHA-256 values are
-`5d3711ed44d26a76dcf7a19f199ecb5440af045ac5eb6049210639262f338a2f`,
-`67691794d44329428dbc065ab20edc81f9e9c48d35b3a5a787e92dd77c28ed93`, and
-`92021f705681394211696179dad3a66b8a2dd6c57dcc203867093995b79668c0`.
+Published archives are 588,594 / 334,134 / 246,857 bytes for core/browser/React.
+Their registry-derived SHA-256 values are
+`431011bfb0160f416d62ecf5ef49b0338d0cc9dc81819c251ac6615f052d462d`,
+`446e8f6745b1ab5fe328bf9a9f434f3173e5a63e26fa583d85fe690102202bac`, and
+`ef883f46fbc51e445a79ba2004daa645027f0365e9d61b88d914c1e176466063`.
 Curated core, browser, React renderer, React importer and React editor bundle
 probes pass within their recorded initial baselines.
 
@@ -45,14 +48,15 @@ mask/primitive browser and current source-evidence gates pass. The historical
 before/after source-evidence script is not claimed. No fixture, schema,
 tolerance, reference update or promotion command ran.
 
-### Open release gate
+### Published result
 
-Complete the active installation, provider-neutral agent and existing-0.2-host
-handoffs, then publish SDK 0.7.0 as a normal stable release. The tag-only
-workflow must publish the fixed train, redownload registry archives, repeat
-secret-free npm/pnpm and browser acceptance, verify public repository
-visibility and create the GitHub Release from those registry-derived artifacts.
-External host implementation is post-release adoption, not a publication gate.
+PR 18 and workflow run `30933771024` passed. The tag-only workflow published
+all three packages, redownloaded registry archives, repeated core, secret-free
+npm/pnpm and packed browser acceptance, verified public repository visibility
+and uploaded the complete handoff. Independently downloaded Release assets pass
+`SHA256SUMS` and `CORE-SHA256SUMS`. The first SDK 0.2→0.7 host migration is now
+post-release implementation work; only a genuine SDK compatibility defect
+should produce a fixed-train 0.7.1 patch.
 
 ## 2026-08-04 — SDK 0.7.0 headless host-editor integration
 
