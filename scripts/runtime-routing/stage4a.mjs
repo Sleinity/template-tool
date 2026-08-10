@@ -107,7 +107,7 @@ page.on("pageerror", (error) => consoleMessages.push({ type: "pageerror", text: 
 
 const results = [];
 try {
-  await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`, { waitUntil: "domcontentloaded" });
   await page.getByTestId("zip-package-input").setInputFiles(verified.path);
   await page.getByRole("button", { name: "Import template" }).click();
   await page.getByTestId("package-step-prepare-fonts").waitFor();

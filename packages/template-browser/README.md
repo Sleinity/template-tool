@@ -4,7 +4,7 @@ Private browser runtime for TemplatePackage assets, managed fonts, measurement,
 persistence, revision-bound readiness, and PNG export. Consumers may replace
 the default storage registries through the existing adapter interfaces.
 
-Install the fixed 0.7.0 train through the repository's
+Install the fixed 0.8.0 train through the repository's
 [installation guide](../../docs/sdk/INSTALLATION.md). Use the
 [agent integration prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md) for a
 custom headless host, and use the
@@ -35,6 +35,14 @@ New hosts should import from the curated entry points:
 - `@sleinity/template-browser/enrichment`
 
 The broad package root remains supported for existing integrations.
+
+SDK 0.8 adds Template Families through these same entries. The `importer`
+entry exports `createTemplateFamilyImportWizard()` plus confirmation and
+reviewable reimport contracts. The `session` entry exports
+`createTemplateFamilySession()`, which owns one shared content state and
+composes one existing render session. The `persistence` entry adds dedicated
+family/family-draft repositories and lazy one-variant projections of legacy
+0.7 records.
 
 The five functional entries above expose the existing browser adapters and
 services without requiring consumers to depend on the broad root. Enrichment
@@ -135,3 +143,11 @@ PNG export keeps its existing download default. Hosts that pass the returned
 PNG to an existing storage or publishing service use
 `exportPng({ download: false })` to capture the same ready revision without
 initiating a browser download.
+
+`TemplateFamilySessionV1` materializes only the selected variant. Shared image
+bytes are stored once and projected into variant-local asset references, even
+when imported variants use different local asset IDs.
+Content, selection, import and reimport operations are revision-bound; stale
+work cannot replace newer state. Family save/dispose/offline reopening use the
+same injectable browser services as a normal session. Existing
+`TemplateSessionV1` and repository APIs do not flatten multi-variant families.

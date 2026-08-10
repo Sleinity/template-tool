@@ -1,4 +1,4 @@
-# SDK 0.7.0 capability catalog
+# SDK 0.8.0 capability catalog
 
 Use this catalog to choose the smallest supported SDK surface for a host
 application. It describes the available building blocks and their ownership;
@@ -9,13 +9,16 @@ the linked guides remain the detailed implementation authorities.
 | I need to… | Start with | Runtime | Classification |
 | --- | --- | --- | --- |
 | Read and validate a ZIP without rendering | `importTemplatePackage()` from `@sleinity/template-core` | Modern Node or browser; no DOM | Supported low-level adapter |
+| Define or validate shared fields across ZIP variants | `createTemplateFamilyFromPackage()` and `validateTemplateFamily()` from `@sleinity/template-core/family` | Modern Node or browser; no DOM | Recommended high-level integration |
 | Build a setup flow without React | `createTemplateImportWizard()` from `@sleinity/template-browser/importer` | Browser | Recommended high-level integration |
+| Build a family setup flow without React | `createTemplateFamilyImportWizard()` from `@sleinity/template-browser/importer` | Browser | Recommended high-level integration |
 | Use the complete setup interface | `TemplateImportWizard` and `useTemplateImportWizard()` from `@sleinity/template-react/importer`, plus `@sleinity/template-react/importer.css` | React 19 and modern browser | Recommended high-level integration |
 | Put the setup workflow in custom React UI | `TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot()` and `TemplateImportWizardPreview` | React 19 and modern browser | Recommended high-level integration |
 | Reopen and edit a confirmed template | `loadTemplateImportConfirmation()`, `useTemplateSession()` and the React editor entry | React 19 and modern browser | Recommended high-level integration |
 | Build a non-React editor | `createTemplateSession()` from `@sleinity/template-browser/session` | Browser | Recommended high-level integration |
+| Edit shared family content in React or headlessly | `createTemplateFamilySession()` or `useTemplateFamilyEditor()` | Browser; React 19 for the hook | Recommended high-level integration |
 | Inspect technical quality or fidelity risk | The core or React `inspection` entry | Depends on selected entry | Supported advanced inspection |
-| Learn from a working integration | `examples/minimal-renderer` or `examples/template-editor-integration` | Browser example | Executable documentation |
+| Learn from a working integration | `examples/minimal-renderer`, `examples/template-editor-integration` or `examples/template-family-integration` | Browser example | Executable documentation |
 
 Prefer a recommended high-level entry. Use a low-level adapter only when the
 host needs to replace or compose that specific responsibility. Compatibility
@@ -68,6 +71,73 @@ framework-neutral presentation, subscribe to the controller returned by
 permanently removed. The host owns the modal, page, navigation and completion
 action. The [import workflow guide](TEMPLATE_IMPORT_WIZARD.md) defines the full
 lifecycle and adapter contracts.
+
+## Template Families
+
+Template Families are additive. Use them only when several unmodified
+`TemplatePackageV1` ZIP variants should share stable host-facing fields and one
+content state. The portable contract lives at
+`@sleinity/template-core/family`:
+
+```ts
+import {
+  createTemplateFamilyFromPackage,
+  materializeTemplateFamilyVariant,
+  parseTemplateFamilyContentStateV1,
+  parseTemplateFamilyV1,
+  resolveTemplateFamilyVariant,
+  updateTemplateFamilyContentField,
+  validateTemplateFamily,
+} from "@sleinity/template-core/family";
+```
+
+The first strictly imported package seeds stable family fields. Structurally
+parse stored or network-delivered family JSON with `parseTemplateFamilyV1()`
+and `parseTemplateFamilyContentStateV1()` before loading it; package payloads
+inside a family must still originate from the strict ZIP import boundary.
+Additional variants use exact field bindings; uncertain label/name matches
+remain review suggestions. `planTemplateFamilyFieldMatches()` also exposes imported rule
+differences and sparse override suggestions without applying them. Common rules
+provide defaults and sparse variant overrides replace or explicitly clear
+individual properties. Shared values—including image values backed by stable
+asset references—are preserved even when one variant reports them as invalid.
+Use `updateTemplateFamilyContentField()` for a portable type-checked content
+mutation; it never trims or rejects a correctly typed value because of one
+variant's input limit.
+
+For a headless browser setup, use
+`createTemplateFamilyImportWizard()` from the existing `importer` entry. For
+runtime editing, use `createTemplateFamilySession()` from the existing
+`session` entry. The family session owns one shared content state and composes
+one ordinary `TemplateSessionV1`:
+
+```ts
+import { createTemplateFamilySession } from "@sleinity/template-browser/session";
+
+const familySession = createTemplateFamilySession();
+familySession.load({ family, content, sharedImageAssets });
+familySession.setField(familyFieldId, "Shared headline");
+familySession.selectVariant(nextVariantId);
+
+const renderSession = familySession.renderSession;
+```
+
+Only the selected variant is materialized and rendered. Families without
+groups resolve from a stable `variantId`; generic group helpers resolve exact
+option tuples but do not assign domain meaning to group titles.
+The host owns selector UI, navigation, product policy and publishing.
+
+React setup uses `TemplateFamilyImportWizardProvider`,
+`TemplateFamilyZipInput` and `TemplateFamilyImportPreview` from the existing
+React `importer` entry. React editing uses `TemplateFamilySessionProvider`,
+`useTemplateFamilyEditor()`, family field controllers and selection hooks from
+the existing React `editor` entry. Render `familySession.renderSession` through
+the same `TemplateSessionViewport`; there is no family renderer.
+
+Reimport is review-first: `planTemplateFamilyVariantReimport()` reports exact,
+added, removed, incompatible and unresolved targets before
+`applyTemplateFamilyVariantReimport()` performs an expected-revision atomic
+update. Capture remains current-variant only.
 
 ## Field rules and editing
 
@@ -183,6 +253,10 @@ not a requirement to adopt the host's product storage policy.
   is executable documentation for setup, confirmation, fresh-session reopening,
   descriptor-driven editing, local/offline drafts and silent PNG capture. Copy
   its SDK composition, not its in-memory dashboard or product presentation.
+- [Template Family integration](../../examples/template-family-integration/README.md)
+  demonstrates two real ZIP inputs, shared content, generic selection,
+  diagnostics, persistence/offline reopening, current-variant PNG capture and
+  reviewable reimport. It is executable documentation for family adoption.
 
 Neither example authorizes repository-relative, package-source, Studio, or
 `renderer-internal` imports in an external host.
@@ -201,6 +275,7 @@ remain supported, but focused entries reduce accidental coupling.
 | core | `@sleinity/template-core` | `supported-low-level-adapter` | `importTemplatePackage`, `validateTemplatePackage`, `createResolvedRenderTree` |
 | core | `@sleinity/template-core/assets` | `supported-low-level-adapter` | `inspectPackageAssetSafety`, `resolvePackageAssetReference` |
 | core | `@sleinity/template-core/editor` | `supported-low-level-adapter` | `validatePackageEditableFieldRules`, `updateTemplatePackageField`, `replaceTemplatePackageImage` |
+| core | `@sleinity/template-core/family` | `recommended-high-level-integration` | `TemplateFamilyV1`, `parseTemplateFamilyV1`, `parseTemplateFamilyContentStateV1`, `updateTemplateFamilyContentField`, `validateTemplateFamily`, `resolveTemplateFamilyVariant`, `materializeTemplateFamilyVariant` |
 | core | `@sleinity/template-core/fonts` | `supported-low-level-adapter` | `collectTemplatePackageFontRequirements`, `checkResolvedFontReadiness` |
 | core | `@sleinity/template-core/inspection` | `supported-advanced-inspection` | `createCanonicalSceneGraph`, `createMeasurementSnapshot`, `settleSceneGraph` |
 | core | `@sleinity/template-core/motion` | `supported-low-level-adapter` | `linkPackageMotionJson`, `evaluatePackageMotion` |
@@ -211,12 +286,12 @@ remain supported, but focused entries reduce accidental coupling.
 | browser | `@sleinity/template-browser/compatibility` | `recommended-high-level-integration` | `inspectTemplateRuntimeSupport`, `inspectTemplateImportConfirmation`, `loadTemplateImportConfirmation` |
 | browser | `@sleinity/template-browser/enrichment` | `supported-low-level-adapter` | `enrichTemplatePackage`, `enrichTemplatePackageWithProvider` |
 | browser | `@sleinity/template-browser/fonts` | `supported-low-level-adapter` | `inspectOpenTypeFontBinary`, `uploadExactManagedFontForRequirement` |
-| browser | `@sleinity/template-browser/importer` | `recommended-high-level-integration` | `createTemplateImportWizard`, `TemplateImportConfirmationV1` |
-| browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `IndexedDbTemplateRepository`, `InMemoryTemplateRepository` |
-| browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSession`, `TemplateSessionV1` |
+| browser | `@sleinity/template-browser/importer` | `recommended-high-level-integration` | `createTemplateImportWizard`, `TemplateImportConfirmationV1`, `createTemplateFamilyImportWizard`, `TemplateFamilyImportConfirmationV1`, `planTemplateFamilyVariantReimport` |
+| browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `IndexedDbTemplateRepository`, `InMemoryTemplateRepository`, `getTemplateFamilyRepository`, `listTemplateFamiliesIncludingLegacy` |
+| browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSession`, `TemplateSessionV1`, `createTemplateFamilySession`, `TemplateFamilySessionV1` |
 | react | `@sleinity/template-react` | `recommended-high-level-integration` | `useTemplateSession`, `TemplateSessionProvider`, `TemplateSessionRenderer`, `TemplatePackageRenderer` |
-| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateSessionViewport`, `useTemplateSessionEditableField`, `useTemplateSessionEditableFields`, `useTemplateSessionDiagnosticSummary` |
-| react | `@sleinity/template-react/importer` | `recommended-high-level-integration` | `TemplateImportWizard`, `useTemplateImportWizard`, `TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot`, `TemplateImportWizardPreview`, `TemplateImportFieldRulesEditor`, `TemplateImportValidationSummary`, `TemplateImportRenderValidationSummary` |
+| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateSessionViewport`, `useTemplateSessionEditableField`, `useTemplateSessionEditableFields`, `useTemplateSessionDiagnosticSummary`, `TemplateFamilySessionProvider`, `useTemplateFamilyEditor`, `useTemplateFamilyEditableFields` |
+| react | `@sleinity/template-react/importer` | `recommended-high-level-integration` | `TemplateImportWizard`, `useTemplateImportWizard`, `TemplateFamilyImportWizardProvider`, `useTemplateFamilyImportWizard`, `TemplateFamilyZipInput`, `TemplateFamilyImportPreview` |
 | react | `@sleinity/template-react/importer.css` | `recommended-high-level-integration` | Stylesheet for the default importer interface |
 | react | `@sleinity/template-react/inspection` | `supported-advanced-inspection` | `analyzeRendererFeatureCoverage`, `createTemplatePackageQualityReport`, `analyzeFidelityRisk` |
 | react | `@sleinity/template-react/renderer-internal` | `sdk-internal` | Prohibited for host applications |
@@ -228,9 +303,12 @@ Copy this block into Codex, Lovable, Cursor, Claude or another coding agent
 before asking it to design or change an integration:
 
 ```text
-Integrate Sleinity Template Platform SDK 0.7.0 using only published package
+Integrate Sleinity Template Platform SDK 0.8.0 using only published package
 entry points. Read docs/sdk/SDK_CAPABILITIES.md first, choose the smallest
-recommended high-level integration for the requested outcome, and follow its
+recommended high-level integration for the requested outcome. If several ZIP
+variants share content, use @sleinity/template-core/family plus the family
+APIs in the existing browser importer/session and React importer/editor entries.
+Otherwise preserve the simpler single-template route. Follow the selected
 linked detailed guide. Prefer @sleinity/template-browser/importer, /session and
 /compatibility plus @sleinity/template-react, /importer and /editor. Use
 low-level adapters only when the host explicitly owns that responsibility.
@@ -242,7 +320,10 @@ navigation, authentication, forms, image preparation, cloud persistence and
 publishing. The SDK owns import, validation, template session state, rendering,
 readiness and safe capture. Retain the immutable import confirmation in
 host-owned storage, reopen it in a fresh session, respect current-revision
-readiness, and dispose owned controllers and sessions.
+readiness, and dispose owned controllers and sessions. A family must render
+only its selected variant through TemplateSessionViewport; never create hidden
+variant renderers or flatten a multi-variant family into a single-template
+record.
 
 Before modifying code, report the chosen path, exact package imports, host/SDK
 ownership boundary and lifecycle. After implementation, prove there are zero

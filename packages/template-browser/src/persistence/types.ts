@@ -2,11 +2,20 @@ import type {
   TemplatePackageValidationResult,
   TemplatePackageV1,
 } from "@sleinity/template-core";
+import type {
+  TemplateFamilyContentStateV1,
+  TemplateFamilyValidationReportV1,
+  TemplateFamilyV1,
+} from "@sleinity/template-core/family";
 import type { SavedAssetRecord } from "../storage/contentAddressedBinary";
 export type { SavedAssetRecord } from "../storage/contentAddressedBinary";
 
 export const SAVED_TEMPLATE_SCHEMA_VERSION = "1.0" as const;
 export const SAVED_OUTPUT_DRAFT_SCHEMA_VERSION = "1.0" as const;
+export const SAVED_TEMPLATE_FAMILY_SCHEMA_VERSION =
+  "saved-template-family-v1" as const;
+export const SAVED_TEMPLATE_FAMILY_DRAFT_SCHEMA_VERSION =
+  "saved-template-family-draft-v1" as const;
 
 export interface SavedTemplateSourceMetadata {
   type: "package-zip";
@@ -51,6 +60,39 @@ export interface SavedOutputDraftRecord {
   updatedAt: string;
   assetReferences: string[];
   fontReferences: string[];
+}
+
+export interface SavedTemplateFamilyRecord {
+  schemaVersion: typeof SAVED_TEMPLATE_FAMILY_SCHEMA_VERSION;
+  id: string;
+  name: string;
+  description?: string;
+  family: TemplateFamilyV1;
+  validation: TemplateFamilyValidationReportV1;
+  sharedImageAssets: TemplatePackageV1["assets"];
+  createdAt: string;
+  updatedAt: string;
+  assetReferences: string[];
+  fontReferences: string[];
+  migratedFromTemplateId?: string;
+}
+
+export interface SavedTemplateFamilyDraftRecord {
+  schemaVersion: typeof SAVED_TEMPLATE_FAMILY_DRAFT_SCHEMA_VERSION;
+  id: string;
+  familyId: string;
+  familyName: string;
+  name: string;
+  content: TemplateFamilyContentStateV1;
+  validation: TemplateFamilyValidationReportV1;
+  selectedVariantId: string;
+  sharedImageAssets: TemplatePackageV1["assets"];
+  createdAt: string;
+  updatedAt: string;
+  assetReferences: string[];
+  fontReferences: string[];
+  /** Present only for an in-memory projection of a legacy 0.7 output draft. */
+  migratedFromDraftId?: string;
 }
 
 export interface SavedAssetReference {
@@ -115,4 +157,18 @@ export interface TemplateRepository {
     packageValue: TemplatePackageV1,
   ): Promise<SavedOutputDraftRecord>;
   deleteDraft(id: string): Promise<void>;
+}
+
+export interface TemplateFamilyRepository {
+  listFamilies(): Promise<SavedTemplateFamilyRecord[]>;
+  getFamily(id: string): Promise<SavedTemplateFamilyRecord | null>;
+  saveFamily(record: SavedTemplateFamilyRecord): Promise<SavedTemplateFamilyRecord>;
+  deleteFamily(id: string): Promise<void>;
+  listFamilyDrafts(): Promise<SavedTemplateFamilyDraftRecord[]>;
+  getFamilyDraft(id: string): Promise<SavedTemplateFamilyDraftRecord | null>;
+  saveFamilyDraft(
+    record: SavedTemplateFamilyDraftRecord,
+  ): Promise<SavedTemplateFamilyDraftRecord>;
+  deleteFamilyDraft(id: string): Promise<void>;
+  getManagedAsset(hash: string): Promise<SavedAssetRecord | null>;
 }

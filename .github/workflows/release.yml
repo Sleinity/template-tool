@@ -39,6 +39,7 @@ jobs:
       - name: Install pinned Chromium for packed reference acceptance
         run: pnpm exec playwright install chromium
       - run: pnpm template-editor:acceptance
+      - run: pnpm template-family:acceptance
       - run: pnpm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -100,10 +101,8 @@ jobs:
             release-artifacts/SDK-CAPABILITIES.md
           cp docs/sdk/AGENT_INTEGRATION_PROMPTS.md \
             release-artifacts/AGENT-INTEGRATION-PROMPTS.md
-          cp docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md \
-            release-artifacts/SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md
-          cp docs/sdk/SDK_0_7_MIGRATION.md \
-            release-artifacts/SDK-0.7-MIGRATION.md
+          cp docs/sdk/SDK_0_8_MIGRATION.md \
+            release-artifacts/SDK-0.8-MIGRATION.md
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
@@ -125,6 +124,12 @@ jobs:
       - name: Verify packed template editor reference from published archives
         run: >-
           node scripts/repository/verify-template-editor-reference.mjs
+          --archives release-artifacts
+        env:
+          TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Verify packed Template Family reference from published archives
+        run: >-
+          node scripts/repository/verify-template-family-reference.mjs
           --archives release-artifacts
         env:
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
@@ -159,8 +164,7 @@ jobs:
             release-artifacts/SDK-INSTALLATION.md \
             release-artifacts/SDK-CAPABILITIES.md \
             release-artifacts/AGENT-INTEGRATION-PROMPTS.md \
-            release-artifacts/SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md \
-            release-artifacts/SDK-0.7-MIGRATION.md \
+            release-artifacts/SDK-0.8-MIGRATION.md \
             --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

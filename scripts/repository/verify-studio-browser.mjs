@@ -21,6 +21,8 @@ const exactFontPath = path.join(
 await writeFile(fixturePath, fixture.bytes);
 let browser;
 
+const waitForPath = (page, pathname) => page.waitForURL((url) => url.pathname === pathname);
+
 try {
   await server.listen();
   const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");
@@ -71,16 +73,23 @@ try {
   page.on("pageerror", (error) => consoleErrors.push(error.message));
 
   await page.goto(`${baseUrl}/`);
-  await page.waitForURL(`${baseUrl}/templates`);
+  await waitForPath(page, "/templates");
+  await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
+  await page.getByText("Reusable Template Families and their shared-content drafts.").waitFor();
+  await page.getByRole("button", { name: "Add template" }).first().click();
+  await waitForPath(page, "/templates/new");
+  await page.getByText("Choose first TemplatePackage ZIP").waitFor();
+
+  await page.goto(`${baseUrl}/templates?studio-mode=single-template-fidelity`);
   await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
 
   await page.getByRole("button", { name: "Add template" }).first().click();
-  await page.waitForURL(`${baseUrl}/templates/new`);
+  await waitForPath(page, "/templates/new");
   await page.getByTestId("zip-package-input").waitFor();
   await page.goBack();
-  await page.waitForURL(`${baseUrl}/templates`);
+  await waitForPath(page, "/templates");
   await page.goForward();
-  await page.waitForURL(`${baseUrl}/templates/new`);
+  await waitForPath(page, "/templates/new");
 
   await page.getByTestId("zip-package-input").setInputFiles(fixturePath);
   await page.getByRole("button", { name: "Import template" }).click();
@@ -127,7 +136,7 @@ try {
   ) {
     throw new Error("An invalid replacement changed the verified exact font.");
   }
-  await page.reload();
+  await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`);
   await page.getByTestId("zip-package-input").setInputFiles(fixturePath);
   await page.getByRole("button", { name: "Import template" }).click();
   await page.getByTestId("package-step-prepare-fonts").waitFor();
@@ -166,15 +175,15 @@ try {
   await page.waitForFunction((previous) =>
     document.querySelector(".inspection-preview-transform")?.getAttribute("style") !== previous,
   beforeResize);
-  await page.goto(`${baseUrl}/templates`);
+  await page.goto(`${baseUrl}/templates?studio-mode=single-template-fidelity`);
   await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
 
   for (const path of [
     "/templates/missing-template/settings",
     "/drafts/missing-draft",
   ]) {
-    await page.goto(`${baseUrl}${path}`);
-    await page.waitForURL(`${baseUrl}/templates`);
+    await page.goto(`${baseUrl}${path}?studio-mode=single-template-fidelity`);
+    await waitForPath(page, "/templates");
     await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
   }
 

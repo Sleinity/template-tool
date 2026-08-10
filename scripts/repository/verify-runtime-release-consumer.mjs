@@ -223,7 +223,14 @@ import { createRoot } from "react-dom/client";
 import {
   getPackageFieldValue,
 } from "@sleinity/template-core";
-import type { TemplateSessionV1 } from "@sleinity/template-browser/session";
+import {
+  validateTemplateFamily,
+  wrapLegacyTemplatePackageAsFamily,
+} from "@sleinity/template-core/family";
+import {
+  TEMPLATE_FAMILY_SESSION_SCHEMA_VERSION,
+  type TemplateSessionV1,
+} from "@sleinity/template-browser/session";
 import {
   TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION,
 } from "@sleinity/template-browser/importer";
@@ -238,6 +245,10 @@ import {
   type ResolvedProductRenderIdentityV1,
   type TemplateSessionRendererHandle,
 } from "@sleinity/template-react";
+import {
+  TemplateFamilySessionProvider,
+  useTemplateFamilyEditor,
+} from "@sleinity/template-react/editor";
 
 interface RevisionedIdentity {
   revision: number;
@@ -258,6 +269,17 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
   const identityReady =
     identity?.revision === snapshot.revision &&
     identity.value.readiness === "ready";
+  const familyProjection = snapshot.basePackage && snapshot.workingPackage
+    ? wrapLegacyTemplatePackageAsFamily({
+        templateId: snapshot.workingPackage.packageId,
+        title: snapshot.workingPackage.name,
+        sourcePackage: snapshot.basePackage,
+        workingPackage: snapshot.workingPackage,
+      })
+    : null;
+  const familyDefinitionValid = familyProjection
+    ? validateTemplateFamily(familyProjection.family, familyProjection.content).definitionValid
+    : false;
 
   useEffect(() => {
     void inspectTemplateRuntimeSupport({ pngCapture: true }).then((report) => {
@@ -363,6 +385,14 @@ function RuntimeTest({ session }: { session: TemplateSessionV1 }) {
       <p className="session-error">{snapshot.error?.code ?? "no-error"}</p>
       <p className="identity">
         {identityReady ? \`ready:\${identity.revision}\` : "not-ready"}
+      </p>
+      <p
+        className="family-contract"
+        data-family-schema={TEMPLATE_FAMILY_SESSION_SCHEMA_VERSION}
+        data-family-valid={familyDefinitionValid}
+        data-family-react={typeof TemplateFamilySessionProvider === "function" && typeof useTemplateFamilyEditor === "function"}
+      >
+        {familyProjection ? familyProjection.family.variants.length : 0}
       </p>
       <TemplateSessionRenderer
         ref={rendererRef}
@@ -582,6 +612,7 @@ createRoot(document.getElementById("root")!).render(
   await page.waitForFunction(() =>
     document.querySelector(".identity")?.textContent?.startsWith("ready:"),
   );
+  await page.locator('.family-contract[data-family-valid="true"][data-family-react="true"]').waitFor();
 
   await page
     .getByRole("button", { name: "Edit and check stale export" })

@@ -26,6 +26,7 @@ jobs:
       - name: Install pinned Chromium for packed reference acceptance
         run: pnpm exec playwright install chromium
       - run: pnpm template-editor:acceptance
+      - run: pnpm template-family:acceptance
 
   protected-references:
     runs-on: ubuntu-latest

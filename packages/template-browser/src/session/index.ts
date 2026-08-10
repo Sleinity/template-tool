@@ -19,3 +19,5 @@ export {
   type TemplateSessionStatus,
   type TemplateSessionV1,
 } from "./templateSession";
+
+export * from "./templateFamilySession";

@@ -1,13 +1,13 @@
-# SDK 0.7.0 runtime handoff
+# SDK 0.8.0 runtime handoff
 
 Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
 application:
 
 | Package | Responsibility | Consumer requirement |
 | --- | --- | --- |
-| `@sleinity/template-core@0.7.0` | ZIP import, strict validation, diagnostics, portable fields, package models and optional advanced inspection | No peer dependencies |
-| `@sleinity/template-browser@0.7.0` | Browser session, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
-| `@sleinity/template-react@0.7.0` | React setup wizard, headless host-editor bindings, renderer, responsive viewport and capture | React 19 and React DOM 19 |
+| `@sleinity/template-core@0.8.0` | ZIP import, strict validation, diagnostics, portable fields, Template Families, package models and optional advanced inspection | No peer dependencies |
+| `@sleinity/template-browser@0.8.0` | Single/family sessions and importers, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
+| `@sleinity/template-react@0.8.0` | React single/family setup, shared-content editor bindings, renderer, responsive viewport and capture | React 19 and React DOM 19 |
 
 ## Installation
 
@@ -21,9 +21,9 @@ always-auth=true
 ```
 
 ```sh
-pnpm add @sleinity/template-core@0.7.0 \
-  @sleinity/template-browser@0.7.0 \
-  @sleinity/template-react@0.7.0
+pnpm add @sleinity/template-core@0.8.0 \
+  @sleinity/template-browser@0.8.0 \
+  @sleinity/template-react@0.8.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
@@ -31,16 +31,16 @@ pnpm add @sleinity/template-core@0.7.0 \
 
 For a credential-free installation, download the three archives and combined
 `SHA256SUMS` from the public
-[`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
+[`sdk-v0.8.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0).
 The archives are the exact bytes downloaded from GitHub Packages. Verify them,
 commit them under `vendor/`, and declare:
 
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.7.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.7.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
   }
 }
 ```
@@ -50,9 +50,9 @@ same archives:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.7.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.7.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.7.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
 ```
 
 Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
@@ -65,7 +65,7 @@ its intended outcome, runtime, ownership boundary and representative APIs.
 
 Ordinary hosts can use the existing root, session, importer, compatibility,
 and React contracts. Focused integrations may additionally import core
-`editor`/`assets`/`fonts`/`motion`, browser
+`family`/`editor`/`assets`/`fonts`/`motion`, browser
 `assets`/`fonts`/`persistence`/`capture`/`enrichment`, plus
 `@sleinity/template-core/inspection` and
 `@sleinity/template-react/inspection`. Inspection entries expose technical evidence and
@@ -117,6 +117,27 @@ For ordinary post-confirmation editors, prefer the curated
 These primitives are headless. Hosts still own their forms, image preparation,
 layout, navigation and product actions.
 
+## Template Family runtime
+
+Template Families are an additive orchestration layer for shared content
+across unmodified ZIP variants. Use `@sleinity/template-core/family` for the
+portable definition, group resolution, rule inheritance, matching, validation
+and materialization contracts. Use `createTemplateFamilyImportWizard()` from
+the browser `importer` entry and `createTemplateFamilySession()` from the
+browser `session` entry.
+
+The family session composes one existing `TemplateSessionV1`. Only the selected
+variant is materialized, and hosts pass `familySession.renderSession` to the
+ordinary `TemplateSessionViewport`. React importer/editor entries expose the
+family provider, snapshots, shared field controllers, selectors and diagnostic
+projection. There is no family renderer, hidden comparison surface or batch
+capture API.
+
+Browser persistence uses dedicated family/family-draft stores and can project
+0.7 template records and drafts as deterministic one-variant families in
+memory. Legacy records are not rewritten until an explicit family save. Use a
+reviewable reimport plan before atomically replacing a variant.
+
 Run `inspectTemplateRuntimeSupport()` before presenting template workflows.
 After confirmation, create a fresh session and reopen the host record with
 `loadTemplateImportConfirmation()`. It verifies confirmation schema, package
@@ -164,10 +185,9 @@ Use the [installation guide](INSTALLATION.md) as the single source for
 credential-free and authenticated installation. Coding agents should follow
 the [provider-neutral integration prompts](AGENT_INTEGRATION_PROMPTS.md).
 
-The existing SDK 0.2 host has a dedicated
-[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md). It upgrades the
-working integration in place while preserving the host dashboard, forms, image
-processing, storage and publishing.
+Use the [0.7→0.8 migration guide](SDK_0_8_MIGRATION.md) for additive family
+adoption. The earlier [0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md)
+remains a historical record.
 
 ## Verification contract
 
@@ -179,6 +199,8 @@ The release gate:
 - copies the committed
   [template editor reference](../../examples/template-editor-integration/README.md)
   into an isolated packed consumer;
+- builds and browser-checks the packed
+  [Template Family reference](../../examples/template-family-integration/README.md);
 - browser-tests invalid and valid import, rejected and exact font uploads,
   explicit emoji fallback, automatic exact-face reuse, validation, diagnostics, field-rule and image setup,
   downstream field/image editing, Fill/Fit/reset, offline save/reload,

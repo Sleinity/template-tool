@@ -116,7 +116,7 @@ page.on("console", (message) => {
 page.on("pageerror", (error) => consoleMessages.push({ type: "pageerror", text: error.message }));
 
 try {
-  await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`, { waitUntil: "domcontentloaded" });
   await installFonts(page);
   await page.getByTestId("zip-package-input").setInputFiles(verified.path);
   await page.getByRole("button", { name: "Import template" }).click();
