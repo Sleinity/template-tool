@@ -48,8 +48,8 @@ run(process.execPath, [
 ]);
 await Promise.all([
   cp(
-    path.join(root, "docs/sdk/SDK_0_7_MIGRATION.md"),
-    path.join(output, "SDK-0.7-MIGRATION.md"),
+    path.join(root, "docs/sdk/SDK_0_8_MIGRATION.md"),
+    path.join(output, "SDK-0.8-MIGRATION.md"),
   ),
   cp(
     path.join(root, "docs/sdk/INSTALLATION.md"),
@@ -62,10 +62,6 @@ await Promise.all([
   cp(
     path.join(root, "docs/sdk/AGENT_INTEGRATION_PROMPTS.md"),
     path.join(output, "AGENT-INTEGRATION-PROMPTS.md"),
-  ),
-  cp(
-    path.join(root, "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md"),
-    path.join(output, "SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md"),
   ),
 ]);
 await writeFile(

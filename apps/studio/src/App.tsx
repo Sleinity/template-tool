@@ -18,6 +18,7 @@ import type { TemplatePackageCreateMetadata } from "./views/TemplatePackageImpor
 import { TemplatePackageImportFlow } from "./views/TemplatePackageImportFlow";
 import { TemplateOverviewPage } from "./views/TemplateOverviewPage";
 import { TemplatePackageEditorPage } from "./views/TemplatePackageEditorPage";
+import { TemplateFamilyApp } from "./TemplateFamilyApp";
 
 function AppContent() {
   const [route, setRoute] = useState<AppRoute>(() =>
@@ -418,8 +419,12 @@ function AppContent() {
 }
 
 export default function App() {
+  const [rendererFidelityMode] = useState(() =>
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("studio-mode") === "single-template-fidelity",
+  );
   useEffect(() => {
     void recordSemanticRendererMvpMigration();
   }, []);
-  return <AppContent />;
+  return rendererFidelityMode ? <AppContent /> : <TemplateFamilyApp />;
 }

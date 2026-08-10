@@ -102,7 +102,7 @@ async function capture(page, scenario, surface, index) {
 }
 
 async function advanceToEditor(page, installAtStart) {
-  await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
+  await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`, { waitUntil: "domcontentloaded" });
   if (installAtStart) await installFonts(page);
   await page.getByTestId("zip-package-input").setInputFiles(verified.path);
   await page.getByRole("button", { name: "Import template" }).click();

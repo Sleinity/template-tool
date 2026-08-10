@@ -1,7 +1,9 @@
 export const TEMPLATE_PLATFORM_DB_NAME = "template-package-platform";
-export const TEMPLATE_PLATFORM_DB_VERSION = 3;
+export const TEMPLATE_PLATFORM_DB_VERSION = 4;
 export const TEMPLATE_STORE = "templates";
 export const OUTPUT_DRAFT_STORE = "outputDrafts";
+export const TEMPLATE_FAMILY_STORE = "templateFamilies";
+export const TEMPLATE_FAMILY_DRAFT_STORE = "templateFamilyDrafts";
 export const ASSET_STORE = "assets";
 export const ASSET_REFERENCE_STORE = "assetReferences";
 export const METADATA_STORE = "metadata";
@@ -24,6 +26,12 @@ export function openTemplatePlatformDatabase(): Promise<IDBDatabase> {
       }
       if (!database.objectStoreNames.contains(OUTPUT_DRAFT_STORE)) {
         database.createObjectStore(OUTPUT_DRAFT_STORE, { keyPath: "id" });
+      }
+      if (!database.objectStoreNames.contains(TEMPLATE_FAMILY_STORE)) {
+        database.createObjectStore(TEMPLATE_FAMILY_STORE, { keyPath: "id" });
+      }
+      if (!database.objectStoreNames.contains(TEMPLATE_FAMILY_DRAFT_STORE)) {
+        database.createObjectStore(TEMPLATE_FAMILY_DRAFT_STORE, { keyPath: "id" });
       }
       if (!database.objectStoreNames.contains(ASSET_STORE)) {
         database.createObjectStore(ASSET_STORE, { keyPath: "hash" });

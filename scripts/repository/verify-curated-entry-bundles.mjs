@@ -23,10 +23,29 @@ const profiles = {
   "core-import-validation": `
 export { importTemplatePackage, validateTemplatePackage } from "@sleinity/template-core";
 `,
+  "core-family": `
+export {
+  createTemplateFamilyFromPackage,
+  validateTemplateFamily,
+  resolveTemplateFamilyVariant,
+  materializeTemplateFamilyVariant,
+} from "@sleinity/template-core/family";
+`,
   "browser-session-importer": `
 export { createTemplateSession } from "@sleinity/template-browser/session";
 export { createTemplateImportWizard } from "@sleinity/template-browser/importer";
 export { inspectTemplateRuntimeSupport } from "@sleinity/template-browser/compatibility";
+`,
+  "browser-family": `
+export { createTemplateFamilySession } from "@sleinity/template-browser/session";
+export {
+  createTemplateFamilyImportWizard,
+  planTemplateFamilyVariantReimport,
+} from "@sleinity/template-browser/importer";
+export {
+  getTemplateFamilyRepository,
+  listTemplateFamiliesIncludingLegacy,
+} from "@sleinity/template-browser/persistence";
 `,
   "react-renderer": `
 export { TemplatePackageRenderer, TemplateSessionProvider, TemplateSessionRenderer } from "@sleinity/template-react";
@@ -41,6 +60,19 @@ export {
   useTemplateSessionDiagnosticSummary,
   useTemplateSessionEditableField,
   useTemplateSessionEditableFields,
+} from "@sleinity/template-react/editor";
+`,
+  "react-family": `
+export {
+  TemplateFamilyImportWizardProvider,
+  TemplateFamilyImportPreview,
+  useTemplateFamilyImportWizard,
+} from "@sleinity/template-react/importer";
+export {
+  TemplateFamilySessionProvider,
+  useTemplateFamilyEditor,
+  useTemplateFamilyEditableFields,
+  useTemplateFamilyDiagnosticSummary,
 } from "@sleinity/template-react/editor";
 `,
 };

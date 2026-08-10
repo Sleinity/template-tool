@@ -37,6 +37,8 @@ import type { TemplatePackageRenderMode } from "./render/TemplatePackageRenderer
 import type { ResolvedProductRenderIdentityV1 } from "./render/productRenderIdentity";
 import type { PackagePngExportResult } from "@sleinity/template-browser/capture";
 
+export * from "./familyEditor";
+
 export type TemplateSessionViewportReadiness =
   | "idle"
   | "pending"

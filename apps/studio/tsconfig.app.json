@@ -7,6 +7,7 @@
       "@sleinity/template-core": ["../../packages/template-core/src/index.ts"],
       "@sleinity/template-core/assets": ["../../packages/template-core/src/assets.ts"],
       "@sleinity/template-core/editor": ["../../packages/template-core/src/editor.ts"],
+      "@sleinity/template-core/family": ["../../packages/template-core/src/family.ts"],
       "@sleinity/template-core/fonts": ["../../packages/template-core/src/fonts.ts"],
       "@sleinity/template-core/inspection": ["../../packages/template-core/src/inspection.ts"],
       "@sleinity/template-core/motion": ["../../packages/template-core/src/motion.ts"],
@@ -18,7 +19,10 @@
       "@sleinity/template-browser/fonts": ["../../packages/template-browser/src/fonts.ts"],
       "@sleinity/template-browser/importer": ["../../packages/template-browser/src/importer.ts"],
       "@sleinity/template-browser/persistence": ["../../packages/template-browser/src/persistence.ts"],
+      "@sleinity/template-browser/session": ["../../packages/template-browser/src/session.ts"],
       "@sleinity/template-react": ["../../packages/template-react/src/index.ts"],
+      "@sleinity/template-react/editor": ["../../packages/template-react/src/editor.tsx"],
+      "@sleinity/template-react/importer": ["../../packages/template-react/src/importer.tsx"],
       "@sleinity/template-react/inspection": ["../../packages/template-react/src/inspection.ts"],
       "@sleinity/template-react/renderer-internal": ["../../packages/template-react/src/renderer-internal.ts"]
     },

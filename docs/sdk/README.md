@@ -1,4 +1,4 @@
-# Template Platform SDK 0.7.0
+# Template Platform SDK 0.8.0
 
 Template Platform is the reusable SDK used by Template Studio and other
 Sleinity-owned applications. It imports, validates, edits, renders and captures
@@ -8,18 +8,35 @@ All packages use the same version:
 
 | Package | Owns | Runtime |
 | --- | --- | --- |
-| `@sleinity/template-core` | ZIP import, strict validation, package/scene models and portable field operations | Framework-neutral TypeScript |
-| `@sleinity/template-browser` | Browser sessions, headless setup, assets, fonts, persistence, readiness and capture | Modern browser |
-| `@sleinity/template-react` | React setup UI, renderer, responsive viewport and headless editor bindings | React 19 browser app |
+| `@sleinity/template-core` | ZIP import, strict validation, package/scene models, portable fields and Template Family definitions | Framework-neutral TypeScript |
+| `@sleinity/template-browser` | Single-template and family sessions, headless setup, assets, fonts, persistence, readiness and capture | Modern browser |
+| `@sleinity/template-react` | React setup UI, family/editor bindings, renderer and responsive viewport | React 19 browser app |
 
 Start with the [installation guide](INSTALLATION.md). External hosts and coding
 agents should normally use the checksum-verified archives attached to the
-public [`sdk-v0.7.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.7.0).
+public [`sdk-v0.8.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0).
 Use the [SDK capability catalog](SDK_CAPABILITIES.md) to see every supported
 entry point and choose between the wizard, headless controllers, editor
 bindings, diagnostics, inspection and executable examples.
 
 ## Choose an integration path
+
+### Share content across several ZIP variants
+
+Use Template Families when several imported ZIPs should share one content
+record while keeping their own dimensions, assets, fonts, rules and renderer
+result. Start with `@sleinity/template-core/family`, then compose
+`createTemplateFamilyImportWizard()` and `createTemplateFamilySession()` from
+the existing browser `importer` and `session` entries. React hosts use the
+family hooks and components already exported by the existing `importer` and
+`editor` entries.
+
+Only the selected variant is materialized into an ordinary
+`TemplatePackageV1`; it then uses the unchanged session, viewport, renderer and
+capture pipeline. A one-variant family is valid, so 0.7 records can appear in
+the same host experience without immediate storage conversion. See the
+[0.7→0.8 migration guide](SDK_0_8_MIGRATION.md) and the
+[family reference example](../../examples/template-family-integration/README.md).
 
 ### Import and validate a ZIP only
 
@@ -98,15 +115,20 @@ confirmation, fresh-session reopening, descriptor-driven editing, image
 Fill/Fit, local/offline drafts and silent PNG capture. Copy its SDK composition,
 not its in-memory dashboard presentation.
 
+The [Template Family reference](../../examples/template-family-integration/README.md)
+demonstrates two ZIP variants, shared fields and images, generic selection,
+diagnostics, current-variant capture, persistence, offline reopening and
+reimport planning. It is the recommended starting point for a family host.
+
 ## Agent-assisted implementation
 
 Use the [provider-neutral agent prompts](AGENT_INTEGRATION_PROMPTS.md) with
 Codex, Lovable, Cursor, Claude or another coding agent. Select only the tracks
 needed by the host and review evidence after each prompt.
 
-The first host upgrading its existing SDK 0.2 implementation should instead
-follow the dedicated
-[0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md).
+The former [0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md)
+remains a historical upgrade record. Apply the current 0.7→0.8 migration after
+that upgrade when adopting families.
 
 ## Ownership boundary
 
@@ -132,11 +154,12 @@ rendering do not require it.
 - [Template import workflow](TEMPLATE_IMPORT_WIZARD.md)
 - [Consumer compatibility](CONSUMER_COMPATIBILITY.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
+- [Migrating from 0.7 to 0.8](SDK_0_8_MIGRATION.md)
 - [Migrating from 0.6 to 0.7](SDK_0_7_MIGRATION.md)
 - [Machine-readable public API contract](../../config/sdk-public-api.json)
 
 Older migration guides remain version-specific historical records and are not
-the starting point for a new 0.7 integration.
+the starting point for a new 0.8 integration.
 
 ## Distribution policy
 

@@ -8,6 +8,7 @@
         { "path": ".", "source": "src/index.ts", "classification": "supported-low-level-adapter" },
         { "path": "./assets", "source": "src/assets.ts", "classification": "supported-low-level-adapter" },
         { "path": "./editor", "source": "src/editor.ts", "classification": "supported-low-level-adapter" },
+        { "path": "./family", "source": "src/family.ts", "classification": "recommended-high-level-integration" },
         { "path": "./fonts", "source": "src/fonts.ts", "classification": "supported-low-level-adapter" },
         { "path": "./inspection", "source": "src/inspection.ts", "classification": "supported-advanced-inspection" },
         { "path": "./motion", "source": "src/motion.ts", "classification": "supported-low-level-adapter" },

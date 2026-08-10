@@ -1,5 +1,16 @@
 # @sleinity/template-react
 
+## 0.8.0
+
+### Minor Changes
+
+- Add family importer components and family editor hooks through the existing
+  `importer` and `editor` entries while continuing to render the selected
+  variant through `TemplateSessionViewport`.
+- Updated dependencies
+  - @sleinity/template-core@0.8.0
+  - @sleinity/template-browser@0.8.0
+
 ## 0.7.0
 
 ### Minor Changes

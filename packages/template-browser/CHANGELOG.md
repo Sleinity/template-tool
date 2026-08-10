@@ -1,5 +1,16 @@
 # @sleinity/template-browser
 
+## 0.8.0
+
+### Minor Changes
+
+- Add a revision-safe `TemplateFamilySessionV1`, family confirmation/reimport
+  controller, headless family wizard, and dedicated family persistence stores.
+- Present 0.7 templates and drafts as deterministic one-variant families in
+  memory without eagerly rewriting or deleting legacy records.
+- Updated dependencies
+  - @sleinity/template-core@0.8.0
+
 ## 0.7.0
 
 ### Patch Changes

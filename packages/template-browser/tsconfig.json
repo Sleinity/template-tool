@@ -6,6 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@sleinity/template-core": ["../template-core/src/index.ts"],
+      "@sleinity/template-core/editor": ["../template-core/src/editor.ts"],
+      "@sleinity/template-core/family": ["../template-core/src/family.ts"],
       "@sleinity/template-core/inspection": ["../template-core/src/inspection.ts"]
     }
   },

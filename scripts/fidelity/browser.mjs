@@ -616,7 +616,7 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
       const fixtureResult = { fixtureId: fixture.id, surfaces: {}, fontDecisions: [], route: null };
       try {
         fixtureResult.phase = "open-import";
-        await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
+        await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`, { waitUntil: "domcontentloaded" });
         const importStarted = performance.now();
         await page.getByTestId("zip-package-input").setInputFiles(fixture.path);
         await page.getByRole("button", { name: "Import template" }).click();

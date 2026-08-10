@@ -113,8 +113,9 @@ seams. Host applications must use only the documented root and curated entry
 points and must never import those internal entries.
 
 Use the [SDK capability catalog](${releaseDownloadUrl}/SDK-CAPABILITIES.md) to
-choose the smallest supported entry point for importing, setup, field rules,
-editing, rendering, capture, diagnostics, inspection or persistence.
+choose the smallest supported entry point for importing, setup, Template
+Families, field rules, editing, rendering, capture, diagnostics, inspection or
+persistence.
 
 ## Vendored installation
 
@@ -144,7 +145,7 @@ ${overrideRows}
 
 Ordinary hosts use the existing root, session, importer, compatibility, and
 React contracts. Focused integrations may additionally import core
-\`editor\`/\`assets\`/\`fonts\`/\`motion\`, browser
+\`family\`/\`editor\`/\`assets\`/\`fonts\`/\`motion\`, browser
 \`assets\`/\`fonts\`/\`persistence\`/\`capture\`/\`enrichment\`, and advanced
 core or React \`inspection\` entries. Inspection is optional evidence and does
 not select rendering authority. Studio-only debug components, stress reports,
@@ -282,6 +283,23 @@ is ready.
 Blocked imports publish structured diagnostics directly through the session
 snapshot. Consumers do not need to parse a ZIP twice.
 
+## Additive Template Family contract
+
+When several ZIP variants share one content state, use
+\`@sleinity/template-core/family\`,
+\`createTemplateFamilyImportWizard()\` from the browser importer entry and
+\`createTemplateFamilySession()\` from the browser session entry. React family
+setup and shared-field hooks are exported from the existing importer/editor
+entries. The family session owns exactly one ordinary render session; pass its
+\`renderSession\` to \`TemplateSessionViewport\` and capture only the selected
+current revision. Never mount hidden variant renderers or flatten a
+multi-variant family into a single-template record.
+
+Dedicated browser family/family-draft stores preserve shared content and image
+bytes. Existing 0.7 records remain available as deterministic one-variant
+families without eager conversion. Reimport is review-first and applies only
+against the expected family revision.
+
 The PNG result contains \`filename\`, \`pngDataUrl\`, dimensions, readiness,
 and diagnostics. Use \`exportPng({ download: false })\` when the host consumes
 the returned output without initiating a browser download.
@@ -290,8 +308,8 @@ the returned output without initiating a browser download.
 
 Start with \`SDK-INSTALLATION.md\`. Coding agents use
 \`AGENT-INTEGRATION-PROMPTS.md\` and select only the required core, headless or
-React tracks. The existing SDK 0.2 host uses
-\`SDK-0.2-TO-0.7-LOVABLE-HANDOFF.md\` for its in-place Lovable migration.
+React or Template Family tracks. Existing 0.7 hosts use
+\`SDK-0.8-MIGRATION.md\` for the additive family adoption path.
 
 ## Acceptance
 
@@ -307,9 +325,11 @@ React tracks. The existing SDK 0.2 host uses
 - PNG export uses the current ready revision.
 - Import, render, persistence, and export make no external runtime requests.
 - A vendored build succeeds without GitHub credentials.
+- A family keeps shared text/image content across variant switching, save,
+  disposal and offline reopening while only one render session is active.
 
-The committed generic template editor reference is the implementation and
-browser-acceptance authority for this release.
+The committed generic template editor and Template Family references are the
+implementation and browser-acceptance authorities for this release.
 `,
 );
 

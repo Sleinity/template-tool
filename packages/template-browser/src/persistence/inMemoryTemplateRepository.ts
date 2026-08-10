@@ -1,15 +1,27 @@
 import type { TemplatePackageV1 } from "@sleinity/template-core";
-import { collectSavedAssets, hydratePackageAssets } from "./assetRepository";
 import {
+  collectSavedAssetMap,
+  collectSavedAssets,
+  collectSavedTemplateFamilyAssets,
+  hydrateAssetMap,
+  hydratePackageAssets,
+  hydrateTemplateFamilyAssets,
+} from "./assetRepository";
+import {
+  validateCurrentSavedTemplateFamilyDraftRecord,
+  validateCurrentSavedTemplateFamilyRecord,
   validateCurrentSavedOutputDraftRecord,
   validateCurrentSavedTemplateRecord,
 } from "./savedRecordValidation";
 import type {
   SavedAssetRecord,
+  SavedTemplateFamilyDraftRecord,
+  SavedTemplateFamilyRecord,
   SavedOutputDraftRecord,
   SavedTemplateRecord,
   SavedTemplateWriteOptions,
   TemplateRepository,
+  TemplateFamilyRepository,
 } from "./types";
 
 function nextId(): string {
@@ -21,6 +33,8 @@ export interface InMemoryTemplateRepositoryStorage {
   drafts: Map<string, SavedOutputDraftRecord>;
   assets: Map<string, SavedAssetRecord>;
   references: Map<string, Set<string>>;
+  families?: Map<string, SavedTemplateFamilyRecord>;
+  familyDrafts?: Map<string, SavedTemplateFamilyDraftRecord>;
 }
 
 export function createInMemoryTemplateRepositoryStorage(): InMemoryTemplateRepositoryStorage {
@@ -29,14 +43,18 @@ export function createInMemoryTemplateRepositoryStorage(): InMemoryTemplateRepos
     drafts: new Map(),
     assets: new Map(),
     references: new Map(),
+    families: new Map(),
+    familyDrafts: new Map(),
   };
 }
 
-export class InMemoryTemplateRepository implements TemplateRepository {
+export class InMemoryTemplateRepository implements TemplateRepository, TemplateFamilyRepository {
   private templates: Map<string, SavedTemplateRecord>;
   private drafts: Map<string, SavedOutputDraftRecord>;
   private assets: Map<string, SavedAssetRecord>;
   private references: Map<string, Set<string>>;
+  private families: Map<string, SavedTemplateFamilyRecord>;
+  private familyDrafts: Map<string, SavedTemplateFamilyDraftRecord>;
 
   constructor(
     storage: InMemoryTemplateRepositoryStorage =
@@ -46,6 +64,8 @@ export class InMemoryTemplateRepository implements TemplateRepository {
     this.drafts = storage.drafts;
     this.assets = storage.assets;
     this.references = storage.references;
+    this.families = storage.families ?? new Map();
+    this.familyDrafts = storage.familyDrafts ?? new Map();
   }
 
   async listTemplates(): Promise<SavedTemplateRecord[]> {
@@ -221,6 +241,102 @@ export class InMemoryTemplateRepository implements TemplateRepository {
   async deleteDraft(id: string): Promise<void> {
     this.drafts.delete(id);
     this.deleteOwnerReferences(id);
+  }
+
+  async listFamilies(): Promise<SavedTemplateFamilyRecord[]> {
+    return Array.from(this.families.values())
+      .map(validateCurrentSavedTemplateFamilyRecord)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  }
+
+  async getFamily(id: string): Promise<SavedTemplateFamilyRecord | null> {
+    const stored = this.families.get(id);
+    if (!stored) return null;
+    const record = validateCurrentSavedTemplateFamilyRecord(stored);
+    const hydrated = await hydrateTemplateFamilyAssets(
+      record.family,
+      record.sharedImageAssets,
+      async (hash) => this.assets.get(hash) ?? null,
+    );
+    record.family = hydrated.family;
+    record.sharedImageAssets = hydrated.sharedImageAssets;
+    return record;
+  }
+
+  async saveFamily(
+    record: SavedTemplateFamilyRecord,
+  ): Promise<SavedTemplateFamilyRecord> {
+    const current = validateCurrentSavedTemplateFamilyRecord(record);
+    const collected = await collectSavedTemplateFamilyAssets(
+      current.family,
+      current.sharedImageAssets,
+    );
+    collected.assets.forEach((asset) => this.assets.set(asset.hash, asset));
+    this.replaceOwnerReferences(`family-record:${current.id}`, collected.hashes);
+    const stored: SavedTemplateFamilyRecord = {
+      ...current,
+      family: collected.family,
+      sharedImageAssets: collected.sharedImageAssets,
+      assetReferences: collected.hashes,
+      fontReferences: collected.fontHashes,
+      updatedAt: new Date().toISOString(),
+    };
+    this.families.set(stored.id, stored);
+    return (await this.getFamily(stored.id))!;
+  }
+
+  async deleteFamily(id: string): Promise<void> {
+    this.families.delete(id);
+    this.deleteOwnerReferences(`family-record:${id}`);
+  }
+
+  async listFamilyDrafts(): Promise<SavedTemplateFamilyDraftRecord[]> {
+    return Array.from(this.familyDrafts.values())
+      .map(validateCurrentSavedTemplateFamilyDraftRecord)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  }
+
+  async getFamilyDraft(id: string): Promise<SavedTemplateFamilyDraftRecord | null> {
+    const stored = this.familyDrafts.get(id);
+    if (!stored) return null;
+    const record = validateCurrentSavedTemplateFamilyDraftRecord(stored);
+    record.sharedImageAssets = await hydrateAssetMap(
+      record.sharedImageAssets,
+      async (hash) => this.assets.get(hash) ?? null,
+    );
+    return record;
+  }
+
+  async saveFamilyDraft(
+    record: SavedTemplateFamilyDraftRecord,
+  ): Promise<SavedTemplateFamilyDraftRecord> {
+    const current = validateCurrentSavedTemplateFamilyDraftRecord(record);
+    const collected = await collectSavedAssetMap(current.sharedImageAssets);
+    collected.assets.forEach((asset) => this.assets.set(asset.hash, asset));
+    this.replaceOwnerReferences(`family-draft:${current.id}`, collected.hashes);
+    const stored: SavedTemplateFamilyDraftRecord = {
+      ...current,
+      sharedImageAssets: collected.assetMap,
+      assetReferences: collected.hashes,
+      fontReferences: collected.fontHashes,
+      updatedAt: new Date().toISOString(),
+    };
+    this.familyDrafts.set(stored.id, stored);
+    return (await this.getFamilyDraft(stored.id))!;
+  }
+
+  async deleteFamilyDraft(id: string): Promise<void> {
+    this.familyDrafts.delete(id);
+    this.deleteOwnerReferences(`family-draft:${id}`);
+  }
+
+  private replaceOwnerReferences(id: string, hashes: readonly string[]): void {
+    this.references.forEach((owners) => owners.delete(id));
+    hashes.forEach((hash) => {
+      const owners = this.references.get(hash) ?? new Set<string>();
+      owners.add(id);
+      this.references.set(hash, owners);
+    });
   }
 
   private deleteOwnerReferences(id: string): void {

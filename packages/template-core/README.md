@@ -28,6 +28,9 @@ must import supported contracts from `@sleinity/template-core`.
 
 - `@sleinity/template-core/editor` — field discovery, mutation, rules,
   constraints, counters, and validation.
+- `@sleinity/template-core/family` — portable family identity, shared fields,
+  generic groups, matching, typed rule inheritance, validation and selected
+  variant materialization.
 - `@sleinity/template-core/assets` — portable asset safety, references, and
   source resolution.
 - `@sleinity/template-core/fonts` — requirements, readiness, and character
@@ -83,6 +86,26 @@ variable, secret, DOM, storage, font, or network access. The package has no peer
 dependencies. Its `ajv` and `fflate` runtime dependencies are installed
 transitively.
 
+## Template Families
+
+`TemplateFamilyV1` does not change or wrap the strict ZIP schema. Each variant
+retains an unmodified `TemplatePackageV1`; shared content, bindings, generic
+groups and sparse per-variant rule overrides live in a separate serializable
+definition. `materializeTemplateFamilyVariant()` produces one ordinary package
+for the existing session/renderer pipeline and never trims a shared value to
+fit one variant.
+
+Use `validateTemplateFamily()`, `resolveTemplateFamilyVariant()`,
+`getTemplateFamilyOptionAvailability()`,
+`updateTemplateFamilyContentField()`,
+`resolveTemplateFamilyFieldRule()` and
+`planTemplateFamilyFieldMatches()` for framework-neutral orchestration. Match
+plans keep imported rule differences as reviewable sparse-override suggestions.
+Use `parseTemplateFamilyV1()` and `parseTemplateFamilyContentStateV1()` at JSON
+trust boundaries. Image defaults use stable family asset references and can be
+projected into variants with different package-local asset IDs. The core entry
+remains DOM-, React-, storage- and network-free.
+
 ## Install from GitHub Packages
 
 Configure the scoped registry without committing a token:
@@ -96,7 +119,7 @@ always-auth=true
 Then install the exact reviewed version:
 
 ```sh
-npm install @sleinity/template-core@0.7.0
+npm install @sleinity/template-core@0.8.0
 ```
 
 `NODE_AUTH_TOKEN` must be a GitHub personal access token (classic) with
@@ -106,13 +129,13 @@ package or its linked repository.
 ## Credential-free archive installation
 
 Hosts and coding agents that cannot inject a private-registry secret use the
-checksum-verified archive attached to the public `sdk-v0.7.0` GitHub Release:
+checksum-verified archive attached to the public `sdk-v0.8.0` GitHub Release:
 
-1. Verify `sleinity-template-core-0.7.0.tgz` against `SHA256SUMS`.
+1. Verify `sleinity-template-core-0.8.0.tgz` against `SHA256SUMS`.
 2. Commit it to the consuming repository under `vendor/`.
 3. Declare
    `"@sleinity/template-core":
-   "file:vendor/sleinity-template-core-0.7.0.tgz"`.
+   "file:vendor/sleinity-template-core-0.8.0.tgz"`.
 4. Run `npm install` and commit the lockfile.
 
 No `.npmrc` or GitHub token belongs in the vendored consumer. The release
@@ -124,9 +147,9 @@ by package name, loads an inline ZIP, creates resolved/backend projections,
 applies text/color/visibility/image edits and field-rule configuration, and
 restores imported state without
 repository fixtures, and rejects DOM, CSS, storage, font and network global
-access. The built public declaration is
-locked to the SDK 0.7.0 root contract at 87,431 bytes and SHA-256
-`7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033`.
+access. The generated release handoff records the exact archive and declaration
+hashes for SDK 0.8.0; consumers should verify those release-derived values
+instead of copying a source-worktree checksum.
 
 See the repository's
 [installation guide](../../docs/sdk/INSTALLATION.md) for the complete npm and

@@ -44,6 +44,8 @@ export type {
 } from "./importerComponents";
 import "./importer.css";
 
+export * from "./familyImporter";
+
 const TemplateImportWizardContext =
   createContext<TemplateImportWizardControllerV1 | null>(null);
 

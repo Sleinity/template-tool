@@ -5,11 +5,13 @@ Private Studio-independent React integration exposing the proven
 context. It deliberately excludes Template Studio routes, settings, Validate,
 Fields, and product editor controls.
 
-Install the fixed 0.7.0 train through the repository's
+Install the fixed 0.8.0 train through the repository's
 [installation guide](../../docs/sdk/INSTALLATION.md). New hosts can use the
 [agent integration prompts](../../docs/sdk/AGENT_INTEGRATION_PROMPTS.md); the
 existing 0.2 host should use the dedicated
-[Lovable upgrade handoff](../../docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md).
+[Lovable upgrade handoff](../../docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md),
+then the additive [0.7→0.8 migration](../../docs/sdk/SDK_0_8_MIGRATION.md) if
+it adopts Template Families.
 The [SDK capability catalog](../../docs/sdk/SDK_CAPABILITIES.md) lists the
 recommended wizard, editor, rendering and inspection compositions.
 
@@ -161,6 +163,21 @@ processing before submitting a final supported value.
 `useTemplateSessionDiagnosticSummary()` consolidates existing package, font,
 asset, session and current viewport evidence. It does not validate again, and
 transient rejected mutations remain attached to their field controller result.
+
+## Template Family bindings
+
+SDK 0.8 adds family setup components to the existing `importer` entry and
+family editing hooks to the existing `editor` entry. Use
+`TemplateFamilyImportWizardProvider`, `TemplateFamilyZipInput` and
+`TemplateFamilyImportPreview` for a host-styled setup. Use
+`TemplateFamilySessionProvider`, `useTemplateFamilyEditor()`,
+`useTemplateFamilyEditableFields()`, `useTemplateFamilySelection()` and
+`useTemplateFamilyDiagnosticSummary()` for shared-content editing.
+
+These bindings never render all variants. Pass the current
+`familySession.renderSession` to `TemplateSessionViewport`, retain host-owned
+forms and selectors, and capture only the selected current revision. Generic
+group titles have no SDK-defined meaning.
 
 For low-level application integration, use the StrictMode-safe `useTemplateSession`,
 `TemplateSessionProvider`, `useTemplateSessionSnapshot`, and

@@ -71,6 +71,7 @@
     "release-local:verify": "node scripts/repository/create-sdk-local-release-verification.mjs",
     "vendored-runtime:verify": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-artifacts",
     "template-editor:acceptance": "node scripts/repository/verify-template-editor-reference.mjs",
+    "template-family:acceptance": "node scripts/repository/verify-template-family-reference.mjs",
     "api:contract": "node scripts/repository/sdk-api-contract.mjs --check",
     "release:contract": "node scripts/repository/verify-release-contract.mjs",
     "session:browser-smoke": "node scripts/repository/verify-session-browser.mjs",

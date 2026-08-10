@@ -1,17 +1,29 @@
 import type { TemplatePackageV1 } from "@sleinity/template-core";
 import type { ManagedFontRecord } from "../fonts/fontRegistryTypes";
-import { collectSavedAssets, hydratePackageAssets } from "./assetRepository";
 import {
+  collectSavedAssetMap,
+  collectSavedAssets,
+  collectSavedTemplateFamilyAssets,
+  hydrateAssetMap,
+  hydratePackageAssets,
+  hydrateTemplateFamilyAssets,
+} from "./assetRepository";
+import {
+  validateCurrentSavedTemplateFamilyDraftRecord,
+  validateCurrentSavedTemplateFamilyRecord,
   validateCurrentSavedOutputDraftRecord,
   validateCurrentSavedTemplateRecord,
 } from "./savedRecordValidation";
 import type {
   SavedAssetRecord,
   SavedAssetReference,
+  SavedTemplateFamilyDraftRecord,
+  SavedTemplateFamilyRecord,
   SavedOutputDraftRecord,
   SavedTemplateRecord,
   SavedTemplateWriteOptions,
   TemplateRepository,
+  TemplateFamilyRepository,
 } from "./types";
 import {
   ASSET_REFERENCE_STORE as REFERENCES,
@@ -19,6 +31,8 @@ import {
   MANAGED_FONT_STORE as MANAGED_FONTS,
   openTemplatePlatformDatabase,
   OUTPUT_DRAFT_STORE as DRAFTS,
+  TEMPLATE_FAMILY_DRAFT_STORE as FAMILY_DRAFTS,
+  TEMPLATE_FAMILY_STORE as FAMILIES,
   TEMPLATE_STORE as TEMPLATES,
 } from "../storage/indexedDb";
 
@@ -51,7 +65,7 @@ function nextId(): string {
   return `template:${crypto.randomUUID()}`;
 }
 
-export class IndexedDbTemplateRepository implements TemplateRepository {
+export class IndexedDbTemplateRepository implements TemplateRepository, TemplateFamilyRepository {
   private open(): Promise<IDBDatabase> {
     return openTemplatePlatformDatabase();
   }
@@ -319,6 +333,171 @@ export class IndexedDbTemplateRepository implements TemplateRepository {
           .objectStore(REFERENCES)
           .index("hash")
           .getAllKeys(reference.hash),
+      );
+      if (
+        remaining.length === 0 &&
+        !(await managedFontOwnsHash(transaction, reference.hash))
+      ) {
+        transaction.objectStore(ASSETS).delete(reference.hash);
+      }
+    }
+    await transactionDone(transaction);
+  }
+
+  async listFamilies(): Promise<SavedTemplateFamilyRecord[]> {
+    const database = await this.open();
+    const transaction = database.transaction(FAMILIES, "readonly");
+    const records = await requestValue<SavedTemplateFamilyRecord[]>(
+      transaction.objectStore(FAMILIES).getAll(),
+    );
+    return records
+      .map(validateCurrentSavedTemplateFamilyRecord)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  }
+
+  async getFamily(id: string): Promise<SavedTemplateFamilyRecord | null> {
+    const database = await this.open();
+    const transaction = database.transaction(FAMILIES, "readonly");
+    const stored = await requestValue<SavedTemplateFamilyRecord | undefined>(
+      transaction.objectStore(FAMILIES).get(id),
+    );
+    if (!stored) return null;
+    const record = validateCurrentSavedTemplateFamilyRecord(stored);
+    const hydrated = await hydrateTemplateFamilyAssets(
+      record.family,
+      record.sharedImageAssets,
+      (hash) => this.getManagedAsset(hash),
+    );
+    record.family = hydrated.family;
+    record.sharedImageAssets = hydrated.sharedImageAssets;
+    return record;
+  }
+
+  async saveFamily(
+    record: SavedTemplateFamilyRecord,
+  ): Promise<SavedTemplateFamilyRecord> {
+    const current = validateCurrentSavedTemplateFamilyRecord(record);
+    const collected = await collectSavedTemplateFamilyAssets(
+      current.family,
+      current.sharedImageAssets,
+    );
+    const ownerId = `family-record:${current.id}`;
+    const database = await this.open();
+    const transaction = database.transaction(
+      [FAMILIES, ASSETS, REFERENCES],
+      "readwrite",
+    );
+    const referenceStore = transaction.objectStore(REFERENCES);
+    const existing = await requestValue<SavedAssetReference[]>(
+      referenceStore.index("templateId").getAll(ownerId),
+    );
+    existing.forEach((reference) => referenceStore.delete(reference.id));
+    collected.assets.forEach((asset) => transaction.objectStore(ASSETS).put(asset));
+    collected.hashes.forEach((hash) => referenceStore.put({
+      id: `${ownerId}:${hash}`,
+      templateId: ownerId,
+      hash,
+    } satisfies SavedAssetReference));
+    const stored: SavedTemplateFamilyRecord = {
+      ...current,
+      family: collected.family,
+      sharedImageAssets: collected.sharedImageAssets,
+      assetReferences: collected.hashes,
+      fontReferences: collected.fontHashes,
+      updatedAt: new Date().toISOString(),
+    };
+    transaction.objectStore(FAMILIES).put(stored);
+    await transactionDone(transaction);
+    return (await this.getFamily(stored.id))!;
+  }
+
+  async deleteFamily(id: string): Promise<void> {
+    await this.deleteFamilyOwner(FAMILIES, id, `family-record:${id}`);
+  }
+
+  async listFamilyDrafts(): Promise<SavedTemplateFamilyDraftRecord[]> {
+    const database = await this.open();
+    const transaction = database.transaction(FAMILY_DRAFTS, "readonly");
+    const records = await requestValue<SavedTemplateFamilyDraftRecord[]>(
+      transaction.objectStore(FAMILY_DRAFTS).getAll(),
+    );
+    return records
+      .map(validateCurrentSavedTemplateFamilyDraftRecord)
+      .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
+  }
+
+  async getFamilyDraft(id: string): Promise<SavedTemplateFamilyDraftRecord | null> {
+    const database = await this.open();
+    const transaction = database.transaction(FAMILY_DRAFTS, "readonly");
+    const stored = await requestValue<SavedTemplateFamilyDraftRecord | undefined>(
+      transaction.objectStore(FAMILY_DRAFTS).get(id),
+    );
+    if (!stored) return null;
+    const record = validateCurrentSavedTemplateFamilyDraftRecord(stored);
+    record.sharedImageAssets = await hydrateAssetMap(
+      record.sharedImageAssets,
+      (hash) => this.getManagedAsset(hash),
+    );
+    return record;
+  }
+
+  async saveFamilyDraft(
+    record: SavedTemplateFamilyDraftRecord,
+  ): Promise<SavedTemplateFamilyDraftRecord> {
+    const current = validateCurrentSavedTemplateFamilyDraftRecord(record);
+    const collected = await collectSavedAssetMap(current.sharedImageAssets);
+    const ownerId = `family-draft:${current.id}`;
+    const database = await this.open();
+    const transaction = database.transaction(
+      [FAMILY_DRAFTS, ASSETS, REFERENCES],
+      "readwrite",
+    );
+    const referenceStore = transaction.objectStore(REFERENCES);
+    const existing = await requestValue<SavedAssetReference[]>(
+      referenceStore.index("templateId").getAll(ownerId),
+    );
+    existing.forEach((reference) => referenceStore.delete(reference.id));
+    collected.assets.forEach((asset) => transaction.objectStore(ASSETS).put(asset));
+    collected.hashes.forEach((hash) => referenceStore.put({
+      id: `${ownerId}:${hash}`,
+      templateId: ownerId,
+      hash,
+    } satisfies SavedAssetReference));
+    const stored: SavedTemplateFamilyDraftRecord = {
+      ...current,
+      sharedImageAssets: collected.assetMap,
+      assetReferences: collected.hashes,
+      fontReferences: collected.fontHashes,
+      updatedAt: new Date().toISOString(),
+    };
+    transaction.objectStore(FAMILY_DRAFTS).put(stored);
+    await transactionDone(transaction);
+    return (await this.getFamilyDraft(stored.id))!;
+  }
+
+  async deleteFamilyDraft(id: string): Promise<void> {
+    await this.deleteFamilyOwner(FAMILY_DRAFTS, id, `family-draft:${id}`);
+  }
+
+  private async deleteFamilyOwner(
+    storeName: string,
+    id: string,
+    ownerId: string,
+  ): Promise<void> {
+    const database = await this.open();
+    const transaction = database.transaction(
+      [storeName, ASSETS, REFERENCES, MANAGED_FONTS],
+      "readwrite",
+    );
+    const references = await requestValue<SavedAssetReference[]>(
+      transaction.objectStore(REFERENCES).index("templateId").getAll(ownerId),
+    );
+    transaction.objectStore(storeName).delete(id);
+    references.forEach((reference) =>
+      transaction.objectStore(REFERENCES).delete(reference.id));
+    for (const reference of references) {
+      const remaining = await requestValue<IDBValidKey[]>(
+        transaction.objectStore(REFERENCES).index("hash").getAllKeys(reference.hash),
       );
       if (
         remaining.length === 0 &&

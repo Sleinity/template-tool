@@ -1,5 +1,15 @@
 # @sleinity/template-core
 
+## 0.8.0
+
+### Minor Changes
+
+- Add the portable `family` entry with stable family/field/variant identity,
+  shared content, generic groups, typed rule inheritance, binding plans,
+  validation, reimport evidence, and pure single-variant materialization.
+- Preserve the strict single-ZIP `TemplatePackageV1` schema and every existing
+  core entry unchanged.
+
 ## 0.7.0
 
 ### Patch Changes
