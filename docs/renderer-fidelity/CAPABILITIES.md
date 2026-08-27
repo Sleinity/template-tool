@@ -14,6 +14,8 @@ Milestone 4 adds runtime-authority evidence without broadly changing registry su
 
 Milestone 5.1 adds evidence-backed `CAP_HEIGHT` vertical trim for eligible single-style text. The exact source property, managed font metrics, routed settlement, inspection bounds, edits/reset, dependent HUG/FILL/image slots, and hidden PNG are covered. Unknown trim modes, mixed metric runs, and unverified fallback faces remain compatibility-owned. Renderer-reference promotion remains open.
 
+Exact managed-font activation supports both the standard `FontFace`/`FontFaceSet.add()` route and a bounded embedded-browser CSS route. The latter retains hash-owned private-family identity and requires stable cross-fallback geometry evidence before readiness; CSS presence or `document.fonts.check()` alone is not support evidence.
+
 Milestone 5.2 corrects the glyph-paint origin within that semantic box. Exact managed faces now prove first-cap-top/final-baseline placement, HUG vertical-alignment bypass, fixed-box wrapper alignment, delayed/cached activation, all-surface paint identity, and source-preview positions. This extends TXT-016 evidence but does not promote renderer references or change another capability family.
 
 The Milestone 5 approval review verifies exact Geist Mono 500 glyph identity, line width, spacing, trim, and PNG painting across all four now-hiring surfaces. Exact private fonts are embedded into the `html-to-image` clone only for PNG capture; replacement/fallback profiles preserve compatibility behavior. The four reviewed references are approved. MED-003/MED-007 remain separate incomplete work because the now-hiring crop/placement still differs materially from the source reference.

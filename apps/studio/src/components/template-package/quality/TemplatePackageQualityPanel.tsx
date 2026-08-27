@@ -1,6 +1,6 @@
 import { ChevronDown, RotateCcw } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { Button, FilterChip, Input, Select, Status, type StatusTone } from "../../ui";
+import { Button, Disclosure, FilterChip, Input, Select, Status, type StatusTone } from "../../ui";
 import {
   filterPackageQualityIssues,
   getPackageQualityAreaCounts,
@@ -39,9 +39,13 @@ const healthStatusTone: Record<PackageQualityHealth, StatusTone> = {
 
 const healthLabels: Record<PackageQualityHealth, string> = {
   ready: "Ready",
-  review: "Review",
+  review: "Needs attention",
   blocked: "Blocked",
 };
+
+function presentationLabel(state: keyof typeof diagnosticPresentationLabels): string {
+  return state === "review" ? "Needs attention" : diagnosticPresentationLabels[state];
+}
 
 const presentationDot = {
   blocked: "bg-[var(--color-status-blocked-icon)]",
@@ -152,7 +156,7 @@ function GroupRow({
                 <span className="min-w-0 flex-1 text-sm font-semibold text-content-primary">
                   {getPackageQualityIssueTitle(issue)}
                 </span>
-                <Status tone={statusTone(issue)}>{diagnosticPresentationLabels[state]}</Status>
+                <Status tone={statusTone(issue)}>{presentationLabel(state)}</Status>
                 <span className="text-xs text-content-muted">
                   {packageQualityCategoryLabels[issue.category]}
                 </span>
@@ -269,22 +273,16 @@ export function TemplatePackageQualityPanel({
     setTechnical("all");
   };
 
-  const statusTitle = report.status === "blocked" ? "Blocked" : report.status === "review" ? "Review recommended" : "Ready";
-  const unresolvedCount = workspaceCounts.blockers + workspaceCounts.warnings;
-
+  const statusTitle = report.status === "blocked" ? "Blocked" : report.status === "review" ? "Needs attention" : "Ready";
   return (
     <section data-testid="package-quality-report" className="package-quality-panel rounded-lg border border-line-subtle bg-surface-secondary p-5">
       <div className="package-quality-panel__header">
         <Status tone={healthStatusTone[report.status]}>{statusTitle}</Status>
-        <p className="mt-2 text-sm leading-6 text-content-secondary">
-          {report.status === "blocked"
-            ? `${workspaceCounts.blockers} ${workspaceCounts.blockers === 1 ? "issue blocks" : "issues block"} this template. Resolve the blocked items before continuing.`
-            : report.status === "review"
-              ? `${workspaceCounts.warnings} ${workspaceCounts.warnings === 1 ? "issue may" : "issues may"} affect preview quality or editing. Import and available export paths remain usable unless marked blocked.`
-              : "No unresolved issues require review. The template is ready to continue."}
-        </p>
         <p className="mt-1 text-sm font-medium text-content-primary">
-          {unresolvedCount} {unresolvedCount === 1 ? "item" : "items"} to review · {workspaceCounts.repaired} repaired · {workspaceCounts.info} notes
+          {workspaceCounts.blockers ? `${workspaceCounts.blockers} blocked · ` : ""}
+          {workspaceCounts.warnings} {workspaceCounts.warnings === 1 ? "item needs" : "items need"} attention
+          {workspaceCounts.repaired ? ` · ${workspaceCounts.repaired} repaired` : ""}
+          {workspaceCounts.info ? ` · ${workspaceCounts.info} notes` : ""}
         </p>
       </div>
 
@@ -296,32 +294,23 @@ export function TemplatePackageQualityPanel({
         <ReadinessButton label="Export" value={report.health.export} active={area === "export"} onClick={() => setArea(area === "export" ? "all" : "export")} />
       </div>
 
-      <div className="mt-4 rounded-lg border border-line-subtle bg-surface-primary p-3" data-testid="rendering-health-summary">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+      <Disclosure summary="Technical details" className="package-quality-technical-details">
+        <div data-testid="rendering-health-summary">
           <p className="text-sm font-medium text-content-primary">Rendering health</p>
-          <Status tone={report.renderingHealth.reviewFallbackRegionCount || report.renderingHealth.unsupportedCapabilities.length ? "attention" : "repaired"}>
-            {report.renderingHealth.semanticCapabilityFamilies.length} semantic families
-          </Status>
+          <p className="mt-1 text-xs leading-5 text-content-muted">
+            {report.renderingHealth.semanticCapabilityFamilies.length} semantic families · {report.renderingHealth.reviewFallbackRegionCount} fallback regions needing attention · {report.renderingHealth.preservedOnlyRegionCount} preserved-only regions · {report.renderingHealth.unsupportedCapabilities.length} unsupported capabilities
+          </p>
+          {report.renderingHealth.compatibilityRegionCount ? (
+            <p className="mt-1 text-xs text-content-muted">{report.renderingHealth.compatibilityRegionCount} regions use an established export-safe compatibility owner.</p>
+          ) : null}
+          <p className="mt-1 text-xs leading-5 text-content-muted">
+            Source reference {report.renderingHealth.sourceReference.availability}. Visual comparison remains in the fidelity harness.
+          </p>
+          {report.renderingHealth.productRenderIdentity ? (
+            <code className="mt-2 block break-all text-[11px] text-content-muted">{report.renderingHealth.productRenderIdentity.identityId}</code>
+          ) : null}
         </div>
-        <p className="mt-1 text-xs leading-5 text-content-muted">
-          {report.renderingHealth.reviewFallbackRegionCount} fallback regions require review · {report.renderingHealth.preservedOnlyRegionCount} preserved-only regions · {report.renderingHealth.unsupportedCapabilities.length} unsupported capabilities
-        </p>
-        {report.renderingHealth.compatibilityRegionCount ? (
-          <details className="mt-1 text-xs text-content-muted">
-            <summary className="cursor-pointer">Technical compatibility ownership</summary>
-            <p className="mt-1">{report.renderingHealth.compatibilityRegionCount} regions use an established export-safe compatibility owner.</p>
-          </details>
-        ) : null}
-        <p className="mt-1 text-xs leading-5 text-content-muted">
-          Source reference {report.renderingHealth.sourceReference.availability}. Visual comparison is not run in the product; reviewed comparisons remain in the fidelity harness.
-        </p>
-        {report.renderingHealth.productRenderIdentity ? (
-          <details className="mt-2">
-            <summary className="cursor-pointer text-xs text-content-muted">Product render identity</summary>
-            <code className="mt-1 block break-all text-[11px] text-content-muted">{report.renderingHealth.productRenderIdentity.identityId}</code>
-          </details>
-        ) : null}
-      </div>
+      </Disclosure>
 
       <div className="package-quality-panel__filters mt-4 space-y-3">
         <Input
@@ -337,7 +326,7 @@ export function TemplatePackageQualityPanel({
             {workspaceCounts.blockers > 0 ? (
               <FilterButton active={severity === "unresolved" || severity === "blockers"} label="Blocked" count={workspaceCounts.blockers} onClick={() => setSeverity("blockers")} />
             ) : null}
-            <FilterButton active={severity === "unresolved" || severity === "review"} label="Review" count={workspaceCounts.warnings} onClick={() => setSeverity("review")} />
+            <FilterButton active={severity === "unresolved" || severity === "review"} label="Needs attention" count={workspaceCounts.warnings} onClick={() => setSeverity("review")} />
             <FilterButton active={severity === "repaired"} label="Repaired" count={workspaceCounts.repaired} onClick={() => setSeverity("repaired")} />
             <FilterButton active={severity === "info"} label="Information" count={workspaceCounts.info} onClick={() => setSeverity("info")} />
             <FilterButton active={severity === "all"} label="All" count={allVisibleCount} onClick={() => setSeverity("all")} />

@@ -50,18 +50,26 @@ export function Menu({
   accessibleLabel,
   children,
   className,
+  panelRole = "menu",
+  panelLabel,
 }: {
   label: ReactNode;
   accessibleLabel: string;
   children: ReactNode;
   className?: string;
+  panelRole?: "menu" | "group";
+  panelLabel?: string;
 }) {
   return (
     <details className={cx("ui-menu", className)}>
       <summary className="ui-menu__trigger" aria-label={accessibleLabel}>
         {label}
       </summary>
-      <div className="ui-menu__panel" role="menu">
+      <div
+        className="ui-menu__panel"
+        role={panelRole}
+        aria-label={panelLabel}
+      >
         {children}
       </div>
     </details>

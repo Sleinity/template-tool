@@ -66,6 +66,23 @@ export function TemplateFamilyApp() {
     if (previous && previous !== next) previous.dispose();
   }, []);
 
+  const saveCurrentSession = useCallback(async () => {
+    const current = sessionRef.current;
+    if (!current) return;
+    setSaveStatus("saving");
+    try {
+      await current.saveDraft();
+      setSaveStatus("saved");
+      await refresh();
+      setError(null);
+    } catch (cause) {
+      const message = cause instanceof Error ? cause.message : "The template draft could not be saved.";
+      setSaveStatus("error");
+      setError(message);
+      throw cause;
+    }
+  }, [refresh]);
+
   useEffect(() => {
     void refresh();
   }, [refresh]);
@@ -95,22 +112,14 @@ export function TemplateFamilyApp() {
       if (timer) clearTimeout(timer);
       setSaveStatus("saving");
       timer = setTimeout(() => {
-        void session.saveDraft()
-          .then(() => {
-            setSaveStatus("saved");
-            return refresh();
-          })
-          .catch((cause) => {
-            setSaveStatus("error");
-            setError(cause instanceof Error ? cause.message : "The family draft could not be saved.");
-          });
+        void saveCurrentSession().catch(() => undefined);
       }, 350);
     });
     return () => {
       unsubscribe();
       if (timer) clearTimeout(timer);
     };
-  }, [refresh, session]);
+  }, [saveCurrentSession, session]);
 
   const createSession = useCallback(() => createTemplateFamilySession({
     familyRepository,
@@ -134,14 +143,14 @@ export function TemplateFamilyApp() {
     try {
       const loaded = await loadFamilyDefinition(familyId);
       const snapshot = loaded.session.getSnapshot();
-      if (!snapshot.family || !snapshot.content) throw new Error("The family could not be opened.");
+      if (!snapshot.family || !snapshot.content) throw new Error("The template could not be opened.");
       const draft = await loaded.session.saveDraft();
       replaceSession(loaded.session);
       setSaveStatus("saved");
       await refresh();
       navigate({ kind: "draft-workspace", draftId: draft.id });
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "The family could not be opened.");
+      setError(cause instanceof Error ? cause.message : "The template could not be opened.");
     }
   }, [loadFamilyDefinition, navigate, refresh, replaceSession]);
 
@@ -155,7 +164,7 @@ export function TemplateFamilyApp() {
           await next.loadSavedFamily(savedFamily.id, savedDraft.id);
         } else {
           const legacyTemplate = await templateRepository.getTemplate(savedDraft.familyId);
-          if (!legacyTemplate) throw new Error("The family definition for this draft was not found.");
+          if (!legacyTemplate) throw new Error("The template for this draft was not found.");
           const converted = createLegacyTemplateFamilyRecord(legacyTemplate);
           next.load({
             family: converted.record.family,
@@ -170,7 +179,7 @@ export function TemplateFamilyApp() {
         }
       } else {
         const legacyDraft = await templateRepository.getDraft(draftId);
-        if (!legacyDraft) throw new Error("The family draft was not found.");
+        if (!legacyDraft) throw new Error("The template draft was not found.");
         const legacyTemplate = await templateRepository.getTemplate(legacyDraft.templateId);
         if (!legacyTemplate) throw new Error("The legacy template for this draft was not found.");
         const converted = createLegacyTemplateFamilyRecord({
@@ -192,7 +201,7 @@ export function TemplateFamilyApp() {
         });
       }
       if (next.getSnapshot().status === "blocked") {
-        throw new Error(next.getSnapshot().error?.message ?? "The family draft is blocked.");
+        throw new Error(next.getSnapshot().error?.message ?? "The template draft is blocked.");
       }
       replaceSession(next);
       setSaveStatus("saved");
@@ -201,7 +210,7 @@ export function TemplateFamilyApp() {
       setError(null);
     } catch (cause) {
       next.dispose();
-      setError(cause instanceof Error ? cause.message : "The family draft could not be opened.");
+      setError(cause instanceof Error ? cause.message : "The template draft could not be opened.");
       if (!updateRoute) navigate({ kind: "templates" }, true);
     }
   }, [createSession, familyRepository, navigate, refresh, replaceSession, templateRepository]);
@@ -210,12 +219,12 @@ export function TemplateFamilyApp() {
     try {
       const saved = await familyRepository.getFamily(familyId);
       const record = saved ?? records.find((candidate) => candidate.id === familyId) ?? null;
-      if (!record) throw new Error("The Template Family was not found.");
+      if (!record) throw new Error("The template was not found.");
       setSettingsRecord(record);
       if (updateRoute) navigate({ kind: "template-settings", templateId: familyId });
       setError(null);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Family settings could not be opened.");
+      setError(cause instanceof Error ? cause.message : "Template settings could not be opened.");
       if (!updateRoute) navigate({ kind: "templates" }, true);
     }
   }, [familyRepository, navigate, records]);
@@ -257,7 +266,7 @@ export function TemplateFamilyApp() {
         drafts={drafts}
         error={error}
         onCreate={() => navigate({ kind: "new-template" })}
-        onOpen={(familyId) => void startDraft(familyId)}
+        onStartNew={(familyId) => void startDraft(familyId)}
         onOpenDraft={(draftId) => void openDraft(draftId)}
         onSettings={(familyId) => void openSettings(familyId)}
         onDelete={async (familyId) => {
@@ -301,16 +310,29 @@ export function TemplateFamilyApp() {
       <TemplateFamilyEditorPage
         session={session}
         saveStatus={saveStatus}
-        onBack={() => {
-          replaceSession(null);
-          navigate({ kind: "templates" });
+        onRetrySave={saveCurrentSession}
+        onBack={async () => {
+          try {
+            await saveCurrentSession();
+            replaceSession(null);
+            navigate({ kind: "templates" });
+          } catch {
+            // Keep the editor open so the user can retry the failed save.
+          }
         }}
-        onSettings={() => {
-          if (familyId) void openSettings(familyId);
+        onSettings={async () => {
+          if (!familyId) return;
+          try {
+            await saveCurrentSession();
+            replaceSession(null);
+            await openSettings(familyId);
+          } catch {
+            // Keep the current draft open until its pending changes are safe.
+          }
         }}
       />
     );
   }
 
-  return <div className="app-route-loading" role="status">Loading Template Family…</div>;
+  return <div className="app-route-loading" role="status">Loading template…</div>;
 }

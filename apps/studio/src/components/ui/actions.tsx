@@ -1,5 +1,6 @@
 import type {
   ButtonHTMLAttributes,
+  InputHTMLAttributes,
   ReactNode,
 } from "react";
 import { cx } from "./utils";
@@ -133,5 +134,48 @@ export function FilterChip({
       <span>{label}</span>
       {count !== undefined ? <CountBadge count={count} label={label} /> : null}
     </button>
+  );
+}
+
+export interface FilePickerButtonProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "onChange" | "onSelect" | "size"> {
+  children: ReactNode;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  leadingIcon?: ReactNode;
+  onSelect: (file: File | undefined) => void;
+}
+
+export function FilePickerButton({
+  children,
+  variant = "secondary",
+  size = "medium",
+  leadingIcon,
+  onSelect,
+  disabled,
+  className,
+  ...inputProps
+}: FilePickerButtonProps) {
+  return (
+    <label
+      className={cx("ui-button", "ui-file-picker-button", className)}
+      data-size={size}
+      data-variant={variant}
+      data-disabled={disabled || undefined}
+      aria-disabled={disabled || undefined}
+    >
+      {leadingIcon}
+      <span>{children}</span>
+      <input
+        {...inputProps}
+        className="ui-visually-hidden"
+        type="file"
+        disabled={disabled}
+        onChange={(event) => {
+          onSelect(event.currentTarget.files?.[0]);
+          event.currentTarget.value = "";
+        }}
+      />
+    </label>
   );
 }

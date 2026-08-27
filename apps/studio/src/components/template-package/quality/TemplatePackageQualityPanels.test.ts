@@ -439,6 +439,36 @@ assert(
     ),
   "Runtime-only diagnostics should remain visible without changing layered import eligibility.",
 );
+const createBlockingSupplementBaseline = createTemplatePackageQualityReport({
+  packageValue,
+  validation,
+});
+const createBlockingSupplementReport = createTemplatePackageQualityReport({
+  packageValue,
+  validation,
+  supplementalDiagnostics: [{
+    code: "family.binding-target-missing",
+    severity: "error",
+    category: "fields",
+    message: "A family target is not connected.",
+    fieldId: "headline",
+    blocks: ["create"],
+  }],
+});
+assert(
+  createBlockingSupplementReport.status === "blocked",
+  "A supplemental create gate must block the overall creation status.",
+);
+assert(
+  createBlockingSupplementReport.health.import === createBlockingSupplementBaseline.health.import,
+  "A supplemental create gate must not change package-import health.",
+);
+assert(
+  createBlockingSupplementReport.issues.some(
+    (issue) => issue.blocks.includes("create") && !issue.blocksImport,
+  ),
+  "A supplemental create gate must remain distinct from an import blocker.",
+);
 
 const convergedRendererReport = createTemplatePackageQualityReport({
   packageValue,
@@ -868,15 +898,16 @@ assert(
 );
 assert(
   selectedPanelMarkup.includes("Diagnostic status filters") &&
-    selectedPanelMarkup.includes("Review") &&
+    selectedPanelMarkup.includes("Needs attention") &&
     selectedPanelMarkup.includes("Repaired") &&
     selectedPanelMarkup.includes("Information"),
-  "The quality panel should expose the canonical status filters without Needs action terminology.",
+  "The quality panel should map review findings to the user-facing Needs attention status while retaining the other canonical filters.",
 );
 
 const contextMarkup = renderToStaticMarkup(
   createElement(TemplatePackageDiagnosticContext, {
     packageValue,
+    resolvedTree: reportTree,
     issue: rendererIssue,
     instances: [rendererIssue],
   }),
@@ -886,9 +917,34 @@ assert(
     contextMarkup.includes("Impact") &&
     contextMarkup.includes("Fit template") &&
     contextMarkup.includes("Fit affected layer") &&
+    contextMarkup.includes("Reproducible issue packet") &&
     contextMarkup.includes("Issue technical details") &&
     contextMarkup.match(/Copy technical details/g)?.length === 1,
   "Selected diagnostic details should render once in the contextual panel with preview navigation and secondary technical details.",
+);
+const injectedContextMarkup = renderToStaticMarkup(
+  createElement(TemplatePackageDiagnosticContext, {
+    packageValue,
+    issue: rendererIssue,
+    instances: [rendererIssue],
+    preview: createElement("div", { "data-testid": "family-session-preview" }, "One family preview"),
+    supplementalDetails: [
+      { label: "Variant", value: "Gray" },
+      { label: "Field scope", value: "Gray only" },
+    ],
+    customAction: {
+      label: "Open Field rules",
+      onClick: () => undefined,
+    },
+  }),
+);
+assert(
+  injectedContextMarkup.includes('data-testid="family-session-preview"') &&
+    injectedContextMarkup.includes('data-testid="quality-supplemental-context"') &&
+    injectedContextMarkup.includes("Gray only") &&
+    injectedContextMarkup.includes("Open Field rules") &&
+    !injectedContextMarkup.includes("Fit affected layer"),
+  "Family validation should inject its single session preview and variant context without mounting the package inspection preview.",
 );
 const backendContextIssue = backendIssues[0];
 const backendContextMarkup = renderToStaticMarkup(

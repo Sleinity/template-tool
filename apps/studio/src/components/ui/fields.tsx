@@ -6,6 +6,7 @@ import {
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from "react";
+import { ChevronDown } from "lucide-react";
 import { cx } from "./utils";
 
 interface FieldFrameProps {
@@ -218,17 +219,22 @@ export function Select({
       error={error}
       warning={warning}
     >
-      <select
-        {...props}
-        id={id}
-        required={required}
-        aria-describedby={descriptionId}
-        aria-invalid={Boolean(error)}
-        data-warning={Boolean(warning) || undefined}
-        className={cx("ui-select", className)}
-      >
-        {children}
-      </select>
+      <div className="ui-select-control">
+        <select
+          {...props}
+          id={id}
+          required={required}
+          aria-describedby={descriptionId}
+          aria-invalid={Boolean(error)}
+          data-warning={Boolean(warning) || undefined}
+          className={cx("ui-select", className)}
+        >
+          {children}
+        </select>
+        <span className="ui-select__indicator" aria-hidden="true">
+          <ChevronDown size={18} strokeWidth={2.25} />
+        </span>
+      </div>
     </FieldFrame>
   );
 }

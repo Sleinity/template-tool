@@ -422,7 +422,7 @@ const settingsMarkup = renderToStaticMarkup(
 );
 assert(
   settingsMarkup.includes("Rendering health") &&
-    settingsMarkup.includes("Visual comparison is not run in the product") &&
+    settingsMarkup.includes("Visual comparison remains in the fidelity harness") &&
     !settingsMarkup.includes("Motion JSON") &&
     !settingsMarkup.includes("Replace Motion JSON") &&
     !settingsMarkup.includes("Remove Motion") &&

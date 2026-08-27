@@ -22,7 +22,7 @@ export function Status({
 } & Omit<HTMLAttributes<HTMLSpanElement>, "children">) {
   return (
     <span {...props} className={cx("ui-status", className)} data-tone={tone}>
-      {icon ? <span aria-hidden="true">{icon}</span> : null}
+      <span aria-hidden="true">{icon}</span>
       <span>{children}</span>
     </span>
   );
@@ -44,8 +44,14 @@ export function Alert({
 } & Omit<HTMLAttributes<HTMLDivElement>, "title" | "children">) {
   const role = tone === "blocked" ? "alert" : "status";
   return (
-    <div {...props} className={cx("ui-alert", className)} data-tone={tone} role={role}>
-      <span aria-hidden="true">{icon}</span>
+    <div
+      {...props}
+      className={cx("ui-alert", className)}
+      data-tone={tone}
+      data-has-icon={icon ? true : undefined}
+      role={role}
+    >
+      {icon ? <span aria-hidden="true">{icon}</span> : null}
       <div>
         <p className="ui-alert__title">{title}</p>
         {children ? <div>{children}</div> : null}

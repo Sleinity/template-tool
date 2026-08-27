@@ -90,13 +90,14 @@ transitively.
 
 `TemplateFamilyV1` does not change or wrap the strict ZIP schema. Each variant
 retains an unmodified `TemplatePackageV1`; shared content, bindings, generic
-groups and sparse per-variant rule overrides live in a separate serializable
+selection properties and sparse per-variant rule overrides live in a separate serializable
 definition. `materializeTemplateFamilyVariant()` produces one ordinary package
 for the existing session/renderer pipeline and never trims a shared value to
 fit one variant.
 
 Use `validateTemplateFamily()`, `resolveTemplateFamilyVariant()`,
-`getTemplateFamilyOptionAvailability()`,
+`getTemplateFamilyOptionAvailability()`, `getTemplateFamilyControlOrder()`,
+`getTemplateFamilyFieldScope()`, `getTemplateFamilyFieldsForVariant()`,
 `updateTemplateFamilyContentField()`,
 `resolveTemplateFamilyFieldRule()` and
 `planTemplateFamilyFieldMatches()` for framework-neutral orchestration. Match
@@ -105,6 +106,22 @@ Use `parseTemplateFamilyV1()` and `parseTemplateFamilyContentStateV1()` at JSON
 trust boundaries. Image defaults use stable family asset references and can be
 projected into variants with different package-local asset IDs. The core entry
 remains DOM-, React-, storage- and network-free.
+
+Field applicability is derived from bindings. A field may be family-wide,
+shared by a subset of variants, or variant-specific; an unbound family field is
+invalid. Materialization and rule/content validation skip fields that do not
+apply to the selected variant, while the content state retains their values for
+later selection. The family mutation helpers add and remove exact targets or
+create stable variant-specific and subset-shared fields without persisting a
+separate scope property.
+
+Selection properties contain stable option IDs, and every concrete variant
+assigns one option for every property. A complete option tuple resolves to at
+most one ZIP variant; missing Cartesian combinations are valid. Use
+`getTemplateFamilyOptionAvailability()` to disable choices that cannot resolve
+with the other current selections without silently changing those selections.
+Property-free families use direct variant selection. The optional control order
+interleaves every active selector and editable field exactly once.
 
 ## Install from GitHub Packages
 

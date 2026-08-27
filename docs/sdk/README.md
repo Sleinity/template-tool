@@ -31,6 +31,10 @@ the existing browser `importer` and `session` entries. React hosts use the
 family hooks and components already exported by the existing `importer` and
 `editor` entries.
 
+Each independent selection property assigns one stable option to every
+concrete ZIP variant. Complete option tuples resolve one ZIP; unavailable
+combinations remain explicit and never silently change another selection.
+
 Only the selected variant is materialized into an ordinary
 `TemplatePackageV1`; it then uses the unchanged session, viewport, renderer and
 capture pipeline. A one-variant family is valid, so 0.7 records can appear in

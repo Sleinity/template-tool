@@ -1,5 +1,6 @@
 import "../apps/studio/src/packageOnlyArchitecture.test";
 import "../apps/studio/src/designSystem.test";
+import "../apps/studio/src/components/template-family/ContextPreviewDock.test";
 import "../apps/studio/src/routing/appRoutes.test";
 import "./template-package/analysis/templatePackageAnalysis.test";
 import "./template-package/appearance-contracts/appearanceContracts.test";
@@ -28,6 +29,7 @@ import "./template-package/masks/packageMaskRelationships.test";
 import "./template-package/primitives/primitiveAppearance.test";
 import "./template-package/primitives/linearGradient.test";
 import "../apps/studio/src/components/template-package/quality/TemplatePackageQualityPanels.test";
+import "../apps/studio/src/quality/createTemplateFamilyVariantQualityReport.test";
 import "../apps/studio/src/fidelity/fidelityIssuePacket.test";
 import "../packages/template-browser/test/templateRepository.test";
 import "../packages/template-browser/test/draftAutosaveCoordinator.test";

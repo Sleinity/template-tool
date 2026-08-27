@@ -1,13 +1,16 @@
 import type { PackageImageAsset, TemplatePackageV1 } from "@sleinity/template-core";
 import {
   TEMPLATE_FAMILY_CONTENT_SCHEMA_VERSION,
+  getTemplateFamilyOptionAvailability,
   materializeTemplateFamilyVariant,
+  resolveTemplateFamilyVariant,
   updateTemplateFamilyContentField,
   validateTemplateFamily,
   type TemplateFamilyContentStateV1,
   type TemplateFamilyContentValueV1,
   type TemplateFamilyImageValueV1,
   type TemplateFamilyMaterializationV1,
+  type TemplateFamilyOptionAvailabilityV1,
   type TemplateFamilyValidationReportV1,
   type TemplateFamilyV1,
   type TemplateFamilyVariantFieldBindingV1,
@@ -27,8 +30,10 @@ import type {
 } from "../persistence/types";
 import {
   applyTemplateFamilyVariantReimport,
+  applyTemplateFamilyVariantReimportState,
   planTemplateFamilyVariantReimport,
   type TemplateFamilyReimportPlanV1,
+  type TemplateFamilyReimportStateOptionsV1,
 } from "../import/templateFamilyReimport";
 import {
   createTemplateSession,
@@ -71,6 +76,7 @@ export interface TemplateFamilySessionSnapshotV1 {
   family: TemplateFamilyV1 | null;
   content: TemplateFamilyContentStateV1 | null;
   selectedVariantId: string | null;
+  groupSelections: Record<string, string>;
   validation: TemplateFamilyValidationReportV1 | null;
   materialization: TemplateFamilyMaterializationV1 | null;
   sharedImageAssets: TemplatePackageV1["assets"];
@@ -81,6 +87,7 @@ export interface TemplateFamilySessionLoadInputV1 {
   family: TemplateFamilyV1;
   content?: TemplateFamilyContentStateV1;
   selectedVariantId?: string;
+  groupSelections?: Record<string, string>;
   sharedImageAssets?: TemplatePackageV1["assets"];
   savedFamilyId?: string;
   savedDraftId?: string;
@@ -108,12 +115,20 @@ export interface TemplateFamilySessionOptionsV1
 export interface TemplateFamilySessionV1 {
   readonly renderSession: TemplateSessionV1;
   getSnapshot(): TemplateFamilySessionSnapshotV1;
+  getOptionAvailability(
+    groupSelections?: Record<string, string>,
+  ): TemplateFamilyOptionAvailabilityV1[];
   subscribe(listener: () => void): () => void;
   load(input: TemplateFamilySessionLoadInputV1): TemplateFamilySessionMutationResultV1;
   loadSavedFamily(id: string, draftId?: string): Promise<TemplateFamilySessionSnapshotV1>;
   loadLegacyTemplate(id: string, draftId?: string): Promise<TemplateFamilySessionSnapshotV1>;
   selectVariant(
     variantId: string,
+    expectedOperationRevision?: number,
+  ): TemplateFamilySessionMutationResultV1;
+  selectOption(
+    groupId: string,
+    optionId: string,
     expectedOperationRevision?: number,
   ): TemplateFamilySessionMutationResultV1;
   setField(
@@ -148,6 +163,11 @@ export interface TemplateFamilySessionV1 {
     resolvedBindings?: readonly TemplateFamilyVariantFieldBindingV1[],
     expectedOperationRevision?: number,
   ): TemplateFamilySessionMutationResultV1;
+  applyVariantReimportState(
+    plan: TemplateFamilyReimportPlanV1,
+    options?: TemplateFamilyReimportStateOptionsV1,
+    expectedOperationRevision?: number,
+  ): TemplateFamilySessionMutationResultV1;
   save(options?: TemplateFamilySessionSaveOptionsV1): Promise<SavedTemplateFamilyRecord>;
   saveDraft(name?: string): Promise<SavedTemplateFamilyDraftRecord>;
   reset(): TemplateFamilySessionSnapshotV1;
@@ -169,6 +189,7 @@ function emptySnapshot(): TemplateFamilySessionSnapshotV1 {
     family: null,
     content: null,
     selectedVariantId: null,
+    groupSelections: {},
     validation: null,
     materialization: null,
     sharedImageAssets: {},
@@ -185,6 +206,20 @@ function defaultContent(family: TemplateFamilyV1): TemplateFamilyContentStateV1 
       family.fields.map((field) => [field.id, structuredClone(field.defaultValue)]),
     ),
   };
+}
+
+function selectionsForVariant(
+  family: TemplateFamilyV1,
+  variantId: string,
+): Record<string, string> {
+  const variant = family.variants.find((candidate) => candidate.id === variantId);
+  if (!variant) return {};
+  return Object.fromEntries(
+    family.variantGroups.flatMap((group) => {
+      const optionId = variant.groupAssignments[group.id];
+      return optionId ? [[group.id, optionId]] : [];
+    }),
+  );
 }
 
 function errorMessage(error: unknown, fallback: string): string {
@@ -205,7 +240,8 @@ function createSharedImageAsset(
   input: TemplateSessionImageReplacementInput,
 ): PackageImageAsset {
   const field = family.fields.find((candidate) => candidate.id === fieldId);
-  const target = family.variants[0]?.bindings
+  const target = family.variants
+    .flatMap((variant) => variant.bindings)
     .find((binding) => binding.familyFieldId === fieldId)?.targets[0];
   if (!field || field.type !== "image" || !target) {
     throw new Error(`Shared image field "${fieldId}" was not found.`);
@@ -267,6 +303,7 @@ export function createTemplateFamilySession(
     family: TemplateFamilyV1;
     content: TemplateFamilyContentStateV1;
     selectedVariantId: string;
+    groupSelections?: Record<string, string>;
     sharedImageAssets: TemplatePackageV1["assets"];
   }): {
     materialization: TemplateFamilyMaterializationV1 | null;
@@ -344,6 +381,7 @@ export function createTemplateFamilySession(
     family: TemplateFamilyV1;
     content: TemplateFamilyContentStateV1;
     selectedVariantId: string;
+    groupSelections?: Record<string, string>;
     sharedImageAssets: TemplatePackageV1["assets"];
     savedFamilyId?: string | null;
     savedDraftId?: string | null;
@@ -362,6 +400,10 @@ export function createTemplateFamilySession(
           : input.family,
         content: structuredClone(input.content),
         selectedVariantId: input.selectedVariantId,
+        groupSelections: input.groupSelections ?? selectionsForVariant(
+          input.family,
+          input.selectedVariantId,
+        ),
         validation,
         materialization: null,
         sharedImageAssets: input.sharedAssetsChanged
@@ -389,6 +431,10 @@ export function createTemplateFamilySession(
         : input.family,
       content: structuredClone(input.content),
       selectedVariantId: input.selectedVariantId,
+      groupSelections: input.groupSelections ?? selectionsForVariant(
+        input.family,
+        input.selectedVariantId,
+      ),
       validation,
       materialization: rendered.materialization,
       sharedImageAssets: input.sharedAssetsChanged
@@ -418,6 +464,14 @@ export function createTemplateFamilySession(
   const api: TemplateFamilySessionV1 = {
     renderSession,
     getSnapshot: () => snapshot,
+    getOptionAvailability(groupSelections = snapshot.groupSelections) {
+      assertActive();
+      if (!snapshot.family) return [];
+      return getTemplateFamilyOptionAvailability(snapshot.family, {
+        variantId: snapshot.selectedVariantId ?? undefined,
+        groupSelections,
+      });
+    },
     subscribe(listener) {
       assertActive();
       listeners.add(listener);
@@ -428,7 +482,14 @@ export function createTemplateFamilySession(
       if (!checkExpected(input.expectedOperationRevision)) return staleResult();
       const family = structuredClone(input.family);
       const content = input.content ? structuredClone(input.content) : defaultContent(family);
-      const selectedVariantId = input.selectedVariantId ?? family.variants[0]?.id;
+      const selectedFromGroups = input.groupSelections
+        ? resolveTemplateFamilyVariant(family, {
+            groupSelections: input.groupSelections,
+          })
+        : null;
+      const selectedVariantId = selectedFromGroups?.status === "resolved"
+        ? selectedFromGroups.variantId
+        : input.selectedVariantId ?? family.variants[0]?.id;
       if (!selectedVariantId || !family.variants.some((item) => item.id === selectedVariantId)) {
         publish({
           status: "blocked",
@@ -437,6 +498,7 @@ export function createTemplateFamilySession(
           family,
           content,
           selectedVariantId: null,
+          groupSelections: {},
           validation: validateTemplateFamily(family, content),
           error: { code: "variant-not-found", message: "Select an existing family variant." },
         });
@@ -446,6 +508,7 @@ export function createTemplateFamilySession(
         family,
         content,
         selectedVariantId,
+        groupSelections: input.groupSelections,
         sharedImageAssets: structuredClone(input.sharedImageAssets ?? {}),
         savedFamilyId: input.savedFamilyId ?? null,
         savedDraftId: input.savedDraftId ?? null,
@@ -561,6 +624,33 @@ export function createTemplateFamilySession(
       }
       return publishFamily({ ...current, selectedVariantId: variantId, selectionChanged: true });
     },
+    selectOption(groupId, optionId, expectedOperationRevision) {
+      const current = requireLoaded();
+      if (!checkExpected(expectedOperationRevision)) return staleResult();
+      const group = current.family.variantGroups.find((candidate) => candidate.id === groupId);
+      if (!group?.options.some((option) => option.id === optionId)) {
+        return { applied: false, stale: false, snapshot };
+      }
+      const groupSelections = {
+        ...snapshot.groupSelections,
+        [groupId]: optionId,
+      };
+      const resolved = resolveTemplateFamilyVariant(current.family, {
+        groupSelections,
+      });
+      if (resolved.status !== "resolved") {
+        return { applied: false, stale: false, snapshot };
+      }
+      if (resolved.variantId === current.selectedVariantId) {
+        return { applied: false, stale: false, snapshot };
+      }
+      return publishFamily({
+        ...current,
+        selectedVariantId: resolved.variantId,
+        groupSelections,
+        selectionChanged: true,
+      });
+    },
     setField(fieldId, value, expectedOperationRevision) {
       const current = requireLoaded();
       if (!checkExpected(expectedOperationRevision)) return staleResult();
@@ -657,6 +747,23 @@ export function createTemplateFamilySession(
       return publishFamily({
         ...current,
         family,
+        familyChanged: true,
+      });
+    },
+    applyVariantReimportState(plan, reimportOptions, expectedOperationRevision) {
+      const current = requireLoaded();
+      if (!checkExpected(expectedOperationRevision)) return staleResult();
+      const applied = applyTemplateFamilyVariantReimportState(
+        current.family,
+        current.content,
+        plan,
+        snapshot.familyRevision,
+        reimportOptions,
+      );
+      return publishFamily({
+        ...current,
+        family: applied.family,
+        content: applied.content,
         familyChanged: true,
       });
     },

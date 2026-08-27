@@ -9,6 +9,7 @@ import {
   type ResolvedRenderTreeV1,
   type TemplatePackageV1,
 } from "@sleinity/template-core";
+import { textFaceCoverageCharacters } from "@sleinity/template-core/fonts";
 import { getManagedFontRegistry } from "./fontRegistry";
 import { matchManagedFont } from "./fontMatching";
 
@@ -18,6 +19,7 @@ interface MutableFontFaceSetLike extends FontFaceSetLike {
 
 const loadedManagedFaces = new Map<string, Promise<boolean>>();
 const managedFontUrls = new Map<string, string>();
+const managedFontStyleNodes = new Map<string, HTMLStyleElement>();
 
 function arrayBufferToDataUrl(source: ArrayBuffer, mimeType: string): string {
   const bytes = new Uint8Array(source);
@@ -116,26 +118,151 @@ async function loadManagedFace(
   weight: number,
   style: "normal" | "italic" | "oblique",
   source: string,
+  sample: string,
 ): Promise<boolean> {
-  if (typeof FontFace === "undefined" || !fontSet.add) return false;
-  const key = `${family.toLowerCase()}:${weight}:${style}:${source}`;
+  const faceKey = `${family.toLowerCase()}:${weight}:${style}:${source}`;
+  const key = `${faceKey}:${sample}`;
   const existing = loadedManagedFaces.get(key);
   if (existing) return existing;
   const pending = (async () => {
-    try {
-      const face = new FontFace(family, `url("${source}")`, {
-        weight: String(weight),
-        style,
-      });
-      const loaded = await face.load();
-      fontSet.add?.(loaded);
-      return true;
-    } catch {
-      return false;
+    if (typeof FontFace !== "undefined" && fontSet.add) {
+      try {
+        const face = new FontFace(family, `url("${source}")`, {
+          weight: String(weight),
+          style,
+        });
+        const loaded = await face.load();
+        fontSet.add(loaded);
+        return true;
+      } catch {
+        // Some embedded browsers can render @font-face rules but do not expose
+        // a usable FontFaceSet.add(). Fall through to the exact CSS path.
+      }
     }
+    return activateManagedFaceWithCss(faceKey, family, weight, style, source, sample);
   })();
   loadedManagedFaces.set(key, pending);
   return pending;
+}
+
+function cssManagedFontActivationAvailable(): boolean {
+  return typeof document !== "undefined" &&
+    Boolean(document.head && document.body) &&
+    typeof document.createElement === "function" &&
+    typeof requestAnimationFrame === "function";
+}
+
+function measureProbeWidths(
+  container: HTMLElement,
+  family: string,
+  weight: number,
+  style: "normal" | "italic" | "oblique",
+  sample: string,
+): number[] {
+  return ["serif", "sans-serif", "monospace"].map((fallback) => {
+    const probe = document.createElement("span");
+    probe.textContent = sample;
+    probe.style.display = "inline-block";
+    probe.style.fontFamily = `${JSON.stringify(family)}, ${fallback}`;
+    probe.style.fontSize = "48px";
+    probe.style.fontStyle = style;
+    probe.style.fontWeight = String(weight);
+    probe.style.fontVariant = "normal";
+    probe.style.letterSpacing = "normal";
+    probe.style.whiteSpace = "pre";
+    container.append(probe);
+    return probe.getBoundingClientRect().width;
+  });
+}
+
+function widthSpread(widths: number[]): number {
+  return Math.max(...widths) - Math.min(...widths);
+}
+
+function nextAnimationFrame(): Promise<void> {
+  return new Promise((resolve) => requestAnimationFrame(() => resolve()));
+}
+
+/**
+ * Activate an exact, hash-owned private face in runtimes that implement CSS
+ * @font-face but omit the JavaScript FontFace registration API. Readiness is
+ * published only after the private face produces stable, identical metrics
+ * across deliberately different fallback stacks. The missing-family control
+ * must continue to produce different widths, proving that fallback metrics are
+ * observable in this runtime. document.fonts.check() is not used as authority.
+ */
+async function activateManagedFaceWithCss(
+  faceKey: string,
+  family: string,
+  weight: number,
+  style: "normal" | "italic" | "oblique",
+  source: string,
+  sample: string,
+): Promise<boolean> {
+  if (!cssManagedFontActivationAvailable()) return false;
+  const probeText = `${sample || "Template"} WWWWW iiiii 0123456789`;
+  const container = document.createElement("div");
+  container.setAttribute("aria-hidden", "true");
+  container.style.position = "fixed";
+  container.style.top = "-10000px";
+  container.style.left = "-10000px";
+  container.style.visibility = "hidden";
+  container.style.pointerEvents = "none";
+  container.style.contain = "layout style paint";
+  document.body.append(container);
+
+  const missingFamily = `__template_font_probe_missing_${faceKey.length}`;
+  const baseline = measureProbeWidths(
+    container,
+    missingFamily,
+    weight,
+    style,
+    probeText,
+  );
+  if (widthSpread(baseline) < 0.5) {
+    container.remove();
+    return false;
+  }
+
+  const existingStyleNode = managedFontStyleNodes.get(faceKey);
+  const createdStyleNode = !existingStyleNode?.isConnected;
+  let styleNode: HTMLStyleElement;
+  if (createdStyleNode) {
+    styleNode = document.createElement("style");
+    styleNode.dataset.templateManagedFont = family;
+    styleNode.textContent = `@font-face{font-family:${JSON.stringify(family)};src:url(${JSON.stringify(source)});font-style:${style};font-weight:${weight};font-display:block;}`;
+    document.head.append(styleNode);
+  } else {
+    styleNode = existingStyleNode!;
+  }
+
+  let previousSignature = "";
+  let stableFrames = 0;
+  try {
+    for (let frame = 0; frame < 90; frame += 1) {
+      await nextAnimationFrame();
+      container.replaceChildren();
+      const widths = measureProbeWidths(
+        container,
+        family,
+        weight,
+        style,
+        probeText,
+      );
+      const signature = widths.map((value) => value.toFixed(3)).join(":");
+      const converged = widths.every((value) => value > 0) && widthSpread(widths) <= 0.05;
+      stableFrames = converged && signature === previousSignature ? stableFrames + 1 : 0;
+      previousSignature = signature;
+      if (stableFrames >= 2) {
+        managedFontStyleNodes.set(faceKey, styleNode);
+        return true;
+      }
+    }
+    if (createdStyleNode) styleNode.remove();
+    return false;
+  } finally {
+    container.remove();
+  }
 }
 
 export async function prepareTemplatePackageFonts(
@@ -202,6 +329,10 @@ export async function prepareTemplatePackageFonts(
             requirement.weight,
             requirement.style,
             source,
+            textFaceCoverageCharacters(
+              requirement.family,
+              requirement.characters,
+            ) || "Template",
           )
         ) {
           loadedManifest.push({

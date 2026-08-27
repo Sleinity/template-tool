@@ -105,16 +105,18 @@ session. Do not copy Studio screens or rebuild the wizard steps.
 ## Family track A — audit variants without changing the host
 
 ```text
-Audit this host for an SDK 0.8 Template Family integration without modifying
+Audit this host for a Template Family integration without modifying
 files. Identify the ZIP variants, fields expected to share content, exact
 local field/node/property identities, rule differences, and host-owned
 selector vocabulary. Treat labels and node names as suggestions, never stable
 identity. Report whether a single-template workflow is still the simpler
 correct choice.
 
-Do not invent domain-specific family APIs. The SDK supports generic groups,
-options and assignments; the host owns meanings such as format, colour or
-language. Do not inspect or import renderer-internal APIs.
+Identify independent selection properties such as Colour or Dimension and the
+stable option assigned to every concrete ZIP for each property. Do not infer
+property names or assignments from filenames, dimensions or package content.
+Missing combinations are valid, but incomplete assignments and duplicate
+complete tuples are blockers. Do not inspect or import renderer-internal APIs.
 ```
 
 ## Family track B — headless family setup
@@ -124,10 +126,11 @@ Build a custom Template Family setup UI with
 createTemplateFamilyImportWizard from @sleinity/template-browser/importer.
 Import the first ZIP, add variants, present exact automatic field matches and
 require explicit review of suggestions/conflicts. Let users configure optional
-generic groups, common rules and sparse variant overrides. Preview variants
+selection properties, reusable options and exactly one assignment per property
+for every concrete variant, plus common rules and sparse variant overrides. Preview variants
 sequentially through the controller's single familySession; never mount hidden
 comparison renderers. Retain TemplateFamilyImportConfirmationV1 only after all
-bindings, group assignments, rule validation and selected-variant readiness
+bindings, complete unique option tuples, rule validation and selected-variant readiness
 are confirmed. Dispose the wizard when its owning flow ends.
 ```
 
@@ -138,7 +141,7 @@ Compose the family controller with TemplateFamilyImportWizardProvider,
 TemplateFamilyZipInput, useTemplateFamilyImportWizardSnapshot and
 TemplateFamilyImportPreview from @sleinity/template-react/importer. Use the
 host design system for navigation and forms. Do not copy Studio setup screens
-and do not turn generic group titles into SDK semantics. Confirm through the
+and do not turn user-authored selection-property titles into SDK semantics. Confirm through the
 headless controller and retain its immutable family/content/assets result in
 host-owned storage.
 ```
@@ -149,14 +152,25 @@ host-owned storage.
 Create one TemplateFamilySessionV1 and load the retained family, shared
 content and shared image assets. In React, compose
 TemplateFamilySessionProvider, useTemplateFamilyEditor,
-useTemplateFamilyEditableFields, useTemplateFamilySelection and
+useTemplateFamilyVisibleFields, useTemplateFamilySelection and
 useTemplateFamilyDiagnosticSummary from @sleinity/template-react/editor.
 
-Render familySession.renderSession through TemplateSessionViewport. Keep one
-shared control per family field and preserve shared values when selecting a
-variant. Show per-variant validation without trimming or discarding invalid
-shared content. Capture only the selected current revision. Do not create a
-family renderer, hidden variant renderers or independent content copies.
+Render controls from editor.visibleFields and label each controller.scope as
+family-wide, shared across some variants, or variant-specific. Keep
+editor.fields as the complete inventory for family management and diagnostics.
+Render `editor.controls` in its declared order so selection-property controls
+and fields can be interleaved. Switching the resolved variant must hide non-applicable controls without deleting,
+resetting or forking their stored values. Render familySession.renderSession
+through TemplateSessionViewport. Show per-variant validation without trimming
+or discarding invalid shared content. Capture only the selected current
+revision. Do not create a family renderer, hidden variant renderers or
+independent content copies.
+
+When selection properties exist, render one control per property and call
+`selectOption(groupId, optionId)`. Use each option's availability to disable a
+choice that cannot resolve with the other current selections; never silently
+change another property. With multiple variants and no properties, render the
+direct variant selector. Do not recreate tuple resolution outside the SDK.
 ```
 
 ## Family track E — persistence, legacy records and reimport
@@ -164,7 +178,11 @@ family renderer, hidden variant renderers or independent content copies.
 ```text
 Use the family repository APIs from @sleinity/template-browser/persistence.
 Present existing 0.7 saved templates and drafts as deterministic one-variant
-families in memory. Do not eagerly rewrite or delete legacy stores. Write a
+families in memory. Load existing 0.8 family properties, options and assignments
+without changing their stable identities. Do not eagerly rewrite or delete
+legacy stores. Reject the unpublished collection-shaped development format
+unless the operator explicitly invokes a development-data recovery path; never
+invent property names or assignments. Write a
 family record only after an explicit family save and verify disposal/offline
 reopening with shared text and images intact.
 
@@ -247,9 +265,10 @@ imports; zero SDK runtime network requests; and no registry credential in a
 vendored host. Run typecheck, tests and production build. Report automated and
 manual evidence separately and list any unverified scenario explicitly.
 
-When the host adopts families, additionally cover two real ZIP variants,
-exact/suggested/conflicting field matches, sparse rule inheritance, group
-tuple resolution, shared text/image identity through switching, one-variant
+When the host adopts families, additionally cover concrete ZIP variants across
+at least two independent selection properties, exact/suggested/conflicting field
+matches, sparse rule inheritance, incomplete and duplicate tuple blocking,
+unavailable missing combinations, shared text/image identity through switching, one-variant
 legacy reopening, atomic reimport, selected-variant capture and permanent
 family-session disposal. Prove that only one render session is active.
 ```

@@ -7,16 +7,20 @@
 - Explain persistent problems inline. Use transient notifications only for completed actions.
 - State what happened, the consequence, and the next useful action without blaming the user.
 - Keep identifiers, paths, source types, and raw values inside **Technical details**.
+- Use one useful sentence for supporting copy. Remove explanations of SDK or
+  storage architecture from normal task pages.
 
 ## Product terminology
 
 | Concept | Use | Avoid in the main UI |
 | --- | --- | --- |
 | Saved reusable design | Template | Template package document |
+| Related designs within a template | Variants | Template Family in normal Studio UI |
 | Imported ZIP file | Template ZIP, package file | Loaded source object |
 | Template selection action | Use template | Open package |
 | Content editor | Edit content | Post content, editable content |
-| Field setup | Fields, Configure fields | Review |
+| Field mapping | Fields | Bindings, target map |
+| Editing constraints | Field rules | Common-rule authority |
 | Template validation | Template check, Diagnostics | Loaded source diagnostic report |
 | Visual rendering condition | Preview status | Render readiness |
 | Animated preview | Motion preview | Motion JSON, motion metadata |
@@ -24,6 +28,11 @@
 | Internal graph/debug data | Technical details | Resolved template graph |
 
 ## Severity model
+
+The setup vocabulary is **Ready**, **Needs attention**, **Blocked**, **Not
+checked**, **Checking**, and **Stale**. Field scope such as shared across all,
+shared across some variants, or variant-specific is informational and must not
+use warning language unless the mapping is unresolved or invalid.
 
 ### Blocked
 
@@ -63,17 +72,44 @@ Codes, IDs, paths, origins, layers, and raw payloads remain collapsed under **Te
 | --- | --- |
 | Dashboard card | Template name, Use template, Settings |
 | Empty dashboard | Add a template to start creating reusable content. |
-| Package action | Import template |
+| Setup navigation | Variants, Fonts, Fields, Field rules, Validate, Review |
+| First ZIP action | Choose ZIP |
+| Additional ZIP action | Add variant |
+| Optional variant selection | Add property, Choose or type a value, Remove property |
 | Fonts heading | Fonts |
 | Missing-font action | Add missing fonts |
-| Font statuses | Missing, Added, Replaced, Ready |
-| Validate result | Ready, Ready with warnings, Blocked |
+| Font statuses | Missing, Mismatched, Checking, Ready |
+| Validate result | Ready, Needs attention, Blocked, Not checked, Checking, Stale |
 | Validation workspace | Diagnostics |
-| Fields heading | Configure fields |
+| Fields description | Decide which fields share content across variants. |
+| Field rules description | Set editor order and input limits. |
 | Editor heading | Edit content |
 | Editor diagnostics action | Open diagnostics |
 | Motion control | Motion preview |
 | Final creation action | Add template |
+| Existing-settings action | Save changes |
+
+## Typography and action hierarchy
+
+- The setup header contains the page title. Do not repeat it inside the body.
+- Use page description, section title, subsection title, control-group title,
+  field label, supporting copy, and metadata/technical detail consistently.
+- Use one primary action per page region. Use secondary for reversible
+  alternatives, quiet for low-priority actions, and destructive only inside a
+  confirmed overflow menu.
+- Buttons name their result: **Add variant**, **Continue to fonts**, **Check all
+  variants**, **Review template**, **Add template**, and **Save changes**.
+- A disabled forward action is accompanied by the reason it is unavailable.
+- Use the compact preview dock on Fields, Field rules, Validate and Review.
+  It sits below the preview pixels, keeps one selected variant across pages and
+  opens a searchable list instead of adding horizontal page tabs. Status is
+  shown in the dock only where it helps validation or review.
+- Each setup page has one sentence of supporting copy: **Add one ZIP for each
+  design and define how people choose between them.**, **Verify the exact fonts
+  used by every variant.**, **Decide which fields share content across
+  variants.**, **Set editor order and input limits.**, **Check every variant
+  before saving.**, or **Name and save the template.** Do not add a second
+  architectural explainer below it.
 
 ## System states
 

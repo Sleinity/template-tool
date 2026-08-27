@@ -82,6 +82,8 @@ content state. The portable contract lives at
 ```ts
 import {
   createTemplateFamilyFromPackage,
+  getTemplateFamilyFieldScope,
+  getTemplateFamilyFieldsForVariant,
   materializeTemplateFamilyVariant,
   parseTemplateFamilyContentStateV1,
   parseTemplateFamilyV1,
@@ -105,6 +107,16 @@ Use `updateTemplateFamilyContentField()` for a portable type-checked content
 mutation; it never trims or rejects a correctly typed value because of one
 variant's input limit.
 
+A family field does not need to exist in every variant. Applicability is
+derived from bindings, never stored separately: `family-wide` means every
+variant, `variant-subset` means more than one but not all, `variant-specific`
+means exactly one, and `unbound` is invalid. Use
+`getTemplateFamilyFieldScope(family, fieldId)` to label a field and
+`getTemplateFamilyFieldsForVariant(family, variantId)` to build a
+variant-aware form. Each field still has one stable identity and persisted
+value, so selecting another variant hides non-applicable controls without
+deleting their content.
+
 For a headless browser setup, use
 `createTemplateFamilyImportWizard()` from the existing `importer` entry. For
 runtime editing, use `createTemplateFamilySession()` from the existing
@@ -117,22 +129,31 @@ import { createTemplateFamilySession } from "@sleinity/template-browser/session"
 const familySession = createTemplateFamilySession();
 familySession.load({ family, content, sharedImageAssets });
 familySession.setField(familyFieldId, "Shared headline");
-familySession.selectVariant(nextVariantId);
+familySession.selectOption(colourPropertyId, blueOptionId);
+familySession.selectOption(dimensionPropertyId, portraitOptionId);
 
 const renderSession = familySession.renderSession;
 ```
 
 Only the selected variant is materialized and rendered. Families without
-groups resolve from a stable `variantId`; generic group helpers resolve exact
-option tuples but do not assign domain meaning to group titles.
+selection properties resolve from a stable `variantId`. With properties, every
+variant assigns one stable option per property and a complete tuple resolves
+at most one ZIP. Missing Cartesian combinations remain valid; option
+availability lets the host disable impossible choices without changing another
+selection.
 The host owns selector UI, navigation, product policy and publishing.
 
 React setup uses `TemplateFamilyImportWizardProvider`,
 `TemplateFamilyZipInput` and `TemplateFamilyImportPreview` from the existing
 React `importer` entry. React editing uses `TemplateFamilySessionProvider`,
 `useTemplateFamilyEditor()`, family field controllers and selection hooks from
-the existing React `editor` entry. Render `familySession.renderSession` through
-the same `TemplateSessionViewport`; there is no family renderer.
+the existing React `editor` entry. `editor.fields` and
+`useTemplateFamilyEditableFields()` retain the complete family inventory;
+`editor.visibleFields` and `useTemplateFamilyVisibleFields()` include only
+fields applicable to the selected variant. Controllers expose their derived
+`scope`, all-family `issues` and `selectedVariantIssues`. Render
+`familySession.renderSession` through the same `TemplateSessionViewport`; there
+is no family renderer.
 
 Reimport is review-first: `planTemplateFamilyVariantReimport()` reports exact,
 added, removed, incompatible and unresolved targets before
@@ -275,7 +296,7 @@ remain supported, but focused entries reduce accidental coupling.
 | core | `@sleinity/template-core` | `supported-low-level-adapter` | `importTemplatePackage`, `validateTemplatePackage`, `createResolvedRenderTree` |
 | core | `@sleinity/template-core/assets` | `supported-low-level-adapter` | `inspectPackageAssetSafety`, `resolvePackageAssetReference` |
 | core | `@sleinity/template-core/editor` | `supported-low-level-adapter` | `validatePackageEditableFieldRules`, `updateTemplatePackageField`, `replaceTemplatePackageImage` |
-| core | `@sleinity/template-core/family` | `recommended-high-level-integration` | `TemplateFamilyV1`, `parseTemplateFamilyV1`, `parseTemplateFamilyContentStateV1`, `updateTemplateFamilyContentField`, `validateTemplateFamily`, `resolveTemplateFamilyVariant`, `materializeTemplateFamilyVariant` |
+| core | `@sleinity/template-core/family` | `recommended-high-level-integration` | `TemplateFamilyV1`, `parseTemplateFamilyV1`, `parseTemplateFamilyContentStateV1`, `getTemplateFamilyOptionAvailability`, `getTemplateFamilyControlOrder`, `updateTemplateFamilyContentField`, `validateTemplateFamily`, `resolveTemplateFamilyVariant`, `materializeTemplateFamilyVariant` |
 | core | `@sleinity/template-core/fonts` | `supported-low-level-adapter` | `collectTemplatePackageFontRequirements`, `checkResolvedFontReadiness` |
 | core | `@sleinity/template-core/inspection` | `supported-advanced-inspection` | `createCanonicalSceneGraph`, `createMeasurementSnapshot`, `settleSceneGraph` |
 | core | `@sleinity/template-core/motion` | `supported-low-level-adapter` | `linkPackageMotionJson`, `evaluatePackageMotion` |
@@ -290,7 +311,7 @@ remain supported, but focused entries reduce accidental coupling.
 | browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `IndexedDbTemplateRepository`, `InMemoryTemplateRepository`, `getTemplateFamilyRepository`, `listTemplateFamiliesIncludingLegacy` |
 | browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSession`, `TemplateSessionV1`, `createTemplateFamilySession`, `TemplateFamilySessionV1` |
 | react | `@sleinity/template-react` | `recommended-high-level-integration` | `useTemplateSession`, `TemplateSessionProvider`, `TemplateSessionRenderer`, `TemplatePackageRenderer` |
-| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateSessionViewport`, `useTemplateSessionEditableField`, `useTemplateSessionEditableFields`, `useTemplateSessionDiagnosticSummary`, `TemplateFamilySessionProvider`, `useTemplateFamilyEditor`, `useTemplateFamilyEditableFields` |
+| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateSessionViewport`, `useTemplateSessionEditableField`, `useTemplateSessionEditableFields`, `useTemplateSessionDiagnosticSummary`, `TemplateFamilySessionProvider`, `useTemplateFamilyEditor`, `useTemplateFamilyEditableFields`, `useTemplateFamilyVisibleFields` |
 | react | `@sleinity/template-react/importer` | `recommended-high-level-integration` | `TemplateImportWizard`, `useTemplateImportWizard`, `TemplateFamilyImportWizardProvider`, `useTemplateFamilyImportWizard`, `TemplateFamilyZipInput`, `TemplateFamilyImportPreview` |
 | react | `@sleinity/template-react/importer.css` | `recommended-high-level-integration` | Stylesheet for the default importer interface |
 | react | `@sleinity/template-react/inspection` | `supported-advanced-inspection` | `analyzeRendererFeatureCoverage`, `createTemplatePackageQualityReport`, `analyzeFidelityRisk` |

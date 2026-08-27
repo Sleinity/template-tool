@@ -166,17 +166,30 @@ transient rejected mutations remain attached to their field controller result.
 
 ## Template Family bindings
 
-SDK 0.8 adds family setup components to the existing `importer` entry and
-family editing hooks to the existing `editor` entry. Use
+Template Families provide family setup components through the existing `importer` entry and family
+editing hooks through the existing `editor` entry. Use
 `TemplateFamilyImportWizardProvider`, `TemplateFamilyZipInput` and
 `TemplateFamilyImportPreview` for a host-styled setup. Use
 `TemplateFamilySessionProvider`, `useTemplateFamilyEditor()`,
-`useTemplateFamilyEditableFields()`, `useTemplateFamilySelection()` and
-`useTemplateFamilyDiagnosticSummary()` for shared-content editing.
+`useTemplateFamilyEditableFields()`, `useTemplateFamilyVisibleFields()`,
+`useTemplateFamilySelection()` and `useTemplateFamilyDiagnosticSummary()` for
+shared-content editing. The complete inventory remains available through
+`editor.fields`; render controls from `editor.visibleFields` so fields bound
+only to the selected variant disappear and reappear without losing their one
+persisted family value. Every controller exposes a derived `scope`, all-family
+issues and selected-variant issues. `editor.controls` is the ordered inventory
+of selection-property, direct-variant and field controls; it can interleave
+selectors with content fields while the existing field inventories remain supported.
+
+When selection properties exist, `useTemplateFamilySelection()` exposes each
+property, its stable options, the current option value and option availability.
+Selecting a complete available tuple resolves one concrete variant. With no
+properties, multi-variant families expose direct variant selection. The family
+session continues to materialize one existing render session at a time.
 
 These bindings never render all variants. Pass the current
 `familySession.renderSession` to `TemplateSessionViewport`, retain host-owned
-forms and selectors, and capture only the selected current revision. Generic
+forms and selectors, and capture only the selected current revision. Selection
 group titles have no SDK-defined meaning.
 
 For low-level application integration, use the StrictMode-safe `useTemplateSession`,

@@ -36,13 +36,16 @@ New hosts should import from the curated entry points:
 
 The broad package root remains supported for existing integrations.
 
-SDK 0.8 adds Template Families through these same entries. The `importer`
-entry exports `createTemplateFamilyImportWizard()` plus confirmation and
+Template Families continue through these same entries. The `importer` entry exports
+`createTemplateFamilyImportWizard()` plus confirmation and
 reviewable reimport contracts. The `session` entry exports
 `createTemplateFamilySession()`, which owns one shared content state and
 composes one existing render session. The `persistence` entry adds dedicated
 family/family-draft repositories and lazy one-variant projections of legacy
-0.7 records.
+0.7 records. Independent selection properties resolve their combined option
+values to one concrete variant. Unavailable combinations are reported without
+silently changing another property, and unchanged per-variant renderer evidence
+is retained when only property labels or assignments change.
 
 The five functional entries above expose the existing browser adapters and
 services without requiring consumers to depend on the broad root. Enrichment

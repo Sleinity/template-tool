@@ -203,8 +203,8 @@ function supplementalIssue(
     ),
     suggestedFix:
       diagnostic.suggestion ?? suggestedFix(diagnostic.code),
-    blocks: [],
-    blocksImport: false,
+    blocks: diagnostic.blocks ?? [],
+    blocksImport: diagnostic.blocks?.includes("import") ?? false,
     path: diagnostic.path,
     file: diagnostic.file,
     nodeId: diagnostic.nodeId,
@@ -894,7 +894,13 @@ export function createTemplatePackageQualityReport({
         ? "blocked"
         : health(issues, "export", "export"),
   } satisfies PackageQualityReport["health"];
-  const status = derivePackageQualityOverallStatus(reportHealth);
+  const status = issues.some(
+    (issue) =>
+      issue.blocks.includes("create") &&
+      getDiagnosticAudience(issue) === "user",
+  )
+    ? "blocked"
+    : derivePackageQualityOverallStatus(reportHealth);
   const decisions = resolvedTree?.nodeOrder.map((nodeId) => resolvedTree.nodes[nodeId].backendDecision) ?? [];
   const semanticCapabilityFamilies = Array.from(new Set(decisions.flatMap((decision) =>
     decision.selectedBackend === "compatibility" || decision.selectedBackend === "unsupported"

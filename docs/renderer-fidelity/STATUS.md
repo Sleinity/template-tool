@@ -1193,6 +1193,8 @@ Asset-free lifecycle correction: explicitly approved by the user on 2026-07-18. 
 
 `workingPackage` remains canonical editing authority and `basePackage` preserves the imported baseline. `CanonicalSceneGraphV1` owns semantic geometry/appearance/provenance. `ResolvedRenderTreeV1` remains the primary rendering projection. `CoreLayoutSettlementV1` owns capability-routed layout geometry; `PrimitiveAppearanceV1` owns only its source-certified appearance subset. Browser pixels remain DOM/SVG/CSS output rather than one global settled appearance graph, so ADR 0010 remains Proposed.
 
+Exact managed fonts now retain the same binary-hash/private-family authority in embedded browsers that implement CSS `@font-face` but omit the JavaScript `FontFace` registration API. Readiness is published only after stable cross-fallback geometry proves the private face is active; `document.fonts.check()` remains supporting evidence only. This is an activation compatibility correction, not a font-matching, renderer, measurement, or fidelity-authority change.
+
 For eligible axis-aligned FRAME/RECTANGLE nodes, the primitive route now supports:
 
 - zero or one opaque ordinary SOLID fill;

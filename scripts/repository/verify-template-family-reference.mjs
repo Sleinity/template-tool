@@ -79,7 +79,7 @@ async function createServer(contentSecurityPolicy) {
   });
 }
 
-function createFamilyFixture() {
+function createFamilyFixture({ includeVariantField = false } = {}) {
   const files = unzipSync(compactFixture.bytes);
   const packageValue = JSON.parse(new TextDecoder().decode(files["template.json"]));
   packageValue.nodes.headline.text.fontFamily = "system-ui";
@@ -151,6 +151,38 @@ function createFamilyFixture() {
     defaultValue: assetId,
     constraints: { allowedMimeTypes: ["image/png"], replacementMode: "cover" },
   });
+  if (includeVariantField) {
+    packageValue.packageId = "sdk-session-browser-smoke-with-variant-field";
+    packageValue.name = "SDK Variant with note";
+    packageValue.nodes.root.children.push("variant-note");
+    packageValue.nodes["variant-note"] = {
+      ...structuredClone(packageValue.nodes.headline),
+      id: "variant-note",
+      name: "Variant note",
+      bounds: {
+        absolute: { x: 40, y: 160, width: 240, height: 40 },
+        relative: { x: 40, y: 160, width: 240, height: 40 },
+      },
+      sizing: {
+        horizontal: { mode: "FIXED", value: 240, min: null, max: null },
+        vertical: { mode: "FIXED", value: 40, min: null, max: null },
+      },
+      text: {
+        ...structuredClone(packageValue.nodes.headline.text),
+        characters: "Only in this variant",
+        fontSize: 18,
+        lineHeight: { value: 24, unit: "PIXELS" },
+      },
+    };
+    packageValue.editableFields.push({
+      id: "variant-note",
+      type: "text",
+      nodeId: "variant-note",
+      property: "text.characters",
+      label: "Variant note",
+      defaultValue: "Only in this variant",
+    });
+  }
   return zipSync({
     "template.json": strToU8(JSON.stringify(packageValue)),
     "assets.json": strToU8(JSON.stringify({ version: 1, assets: [] })),
@@ -158,6 +190,7 @@ function createFamilyFixture() {
 }
 
 const fixture = createFamilyFixture();
+const fixtureWithVariantField = createFamilyFixture({ includeVariantField: true });
 
 try {
   await cp(path.join(root, "examples/template-family-integration"), consumerDirectory, {
@@ -179,6 +212,7 @@ try {
     'from "@sleinity/template-react/editor"',
     "TemplateFamilyImportPreview",
     "useTemplateFamilyEditor",
+    "editor.controls",
     "TemplateSessionViewport",
     "planTemplateFamilyVariantReimport",
   ]) {
@@ -305,10 +339,18 @@ try {
   await page.getByLabel("Add variant ZIP").setInputFiles({
     name: "family-b.zip",
     mimeType: "application/zip",
-    buffer: Buffer.from(fixture),
+    buffer: Buffer.from(fixtureWithVariantField),
   });
-  const addGroupButton = page.getByRole("button", { name: /Add generic.*Format.*group/ });
-  if (!await addGroupButton.count()) {
+  const acceptSpecificButton = page.getByRole("button", {
+    name: /Keep unmatched fields variant-specific \(1\)/,
+  });
+  await acceptSpecificButton.waitFor();
+  await acceptSpecificButton.click();
+  await page.locator('[data-testid="family-field-scopes"]', {
+    hasText: "Variant note:variant-specific",
+  }).waitFor();
+  const addPropertyButton = page.getByRole("button", { name: /Add.*Design.*property/ });
+  if (!await addPropertyButton.count()) {
     throw new Error(
       `The packed family example stopped before group setup. Page=${await page.locator("body").innerText()} Errors=${consoleErrors.join(" | ") || "none"}.`,
     );
@@ -316,10 +358,10 @@ try {
   try {
     await page.waitForFunction(() => {
       const button = Array.from(document.querySelectorAll("button"))
-        .find((candidate) => candidate.textContent?.includes("Add generic"));
+        .find((candidate) => candidate.textContent?.includes("Design"));
       return button instanceof HTMLButtonElement && !button.disabled;
     }, undefined, { timeout: 60_000 });
-    await addGroupButton.click({ timeout: 60_000 });
+    await addPropertyButton.click({ timeout: 60_000 });
   } catch (error) {
     throw new Error(
       `The packed family example could not complete the second variant import. Page=${await page.locator("body").innerText()} Errors=${consoleErrors.join(" | ") || "none"}.`,
@@ -352,11 +394,26 @@ try {
 
   const headline = page.getByLabel("Headline", { exact: true });
   await headline.fill("Shared family acceptance");
-  const selector = page.getByLabel("Current family variant");
+  const selector = page.getByLabel("Design", { exact: true });
   await selector.selectOption({ index: 0 });
+  const variantNote = page.locator("label", {
+    hasText: "Variant note (variant-specific)",
+  }).locator("input");
+  if (await variantNote.count() !== 0) {
+    throw new Error("A variant-specific control remained visible in an inapplicable variant.");
+  }
   await selector.selectOption({ index: 1 });
   if (await headline.inputValue() !== "Shared family acceptance") {
     throw new Error("Shared family text was lost while switching variants.");
+  }
+  await variantNote.fill("Retained variant-only value");
+  await selector.selectOption({ index: 0 });
+  if (await variantNote.count() !== 0) {
+    throw new Error("The variant-specific control did not hide after selection changed.");
+  }
+  await selector.selectOption({ index: 1 });
+  if (await variantNote.inputValue() !== "Retained variant-only value") {
+    throw new Error("The variant-specific value was lost while its control was hidden.");
   }
   const imageStatus = page.locator('[data-testid^="family-image-"]');
   const originalImageReference = await imageStatus.textContent();
@@ -390,6 +447,10 @@ try {
   }
   if (await headline.inputValue() !== "Shared family acceptance") {
     throw new Error("Shared family text was lost after offline reopening.");
+  }
+  await selector.selectOption({ index: 1 });
+  if (await variantNote.inputValue() !== "Retained variant-only value") {
+    throw new Error("The variant-specific value was lost after offline reopening.");
   }
   if (await imageStatus.textContent() !== sharedImageReference) {
     throw new Error("Shared family image identity was lost after offline reopening.");
@@ -443,7 +504,7 @@ try {
   await restrictedPage.getByRole("alert").filter({ hasText: /dynamic|content security|import/i }).waitFor();
   await restrictedContext.close();
 
-  console.log(`Verified packed Template Family reference: two variants, shared switching, confirmation, offline reopening, reimport inspection, current capture, disposal, supported/restricted CSP, and zero external requests (${archiveEvidence.map((item) => `${item.directory}=${item.sha256}`).join(", ")}).`);
+  console.log(`Verified packed Template Family reference: two variants, property-option switching, ordered controls, shared switching, confirmation, offline reopening, reimport inspection, current capture, disposal, supported/restricted CSP, and zero external requests (${archiveEvidence.map((item) => `${item.directory}=${item.sha256}`).join(", ")}).`);
 } finally {
   await browser?.close();
   await restrictedServer?.close();

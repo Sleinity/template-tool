@@ -14,6 +14,7 @@ import {
   validateCurrentSavedOutputDraftRecord,
   validateCurrentSavedTemplateRecord,
 } from "./savedRecordValidation";
+import { filterReadableSavedTemplateFamilyRecords } from "./readableFamilyRecords";
 import type {
   SavedAssetRecord,
   SavedAssetReference,
@@ -350,8 +351,7 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
     const records = await requestValue<SavedTemplateFamilyRecord[]>(
       transaction.objectStore(FAMILIES).getAll(),
     );
-    return records
-      .map(validateCurrentSavedTemplateFamilyRecord)
+    return filterReadableSavedTemplateFamilyRecords(records)
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
   }
 

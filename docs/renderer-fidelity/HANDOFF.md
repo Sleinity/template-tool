@@ -1980,6 +1980,18 @@ Current-run verification:
 
 No production schema, canonical normalization, resolver, renderer, runtime owner, fixture manifest, candidate, or approved reference was changed. Broader production suites were not run because only documentation and intake evidence changed.
 
+## Embedded-browser exact-font activation correction
+
+- The standard exact-font path still parses and matches the uploaded binary, binds its SHA-256 and face identity to a private runtime family, loads a `FontFace`, and registers it with `document.fonts`.
+- A runtime that exposes CSS font loading and `document.fonts` but omits `FontFace` or `FontFaceSet.add()` now installs the same exact private family through a local `@font-face` rule.
+- That CSS path becomes ready only when the private family is stable across animation frames and produces identical widths over serif, sans-serif, and monospace fallback stacks while a deliberately missing-family control remains divergent. This keeps fallback substitution observable and does not treat `document.fonts.check()` as sufficient authority.
+- The style uses only the already verified package or managed-registry source. CSP/font-load failure remains blocking. PNG export continues embedding the exact binary in the cloned capture document.
+- This correction does not change matching, glyph coverage, family display identity, renderer routing, measurement ownership, fixtures, tolerances, scenes, settlements, or approved pixels.
+- Current-run verification on 2026-08-18: package and repository TypeScript checks passed; core/browser/React/Studio builds passed; the portable suite, SDK API contract, package-boundary check, documentation links, and Studio browser smoke passed. The smoke retained exact-font rejection, upload, atomic replacement and reuse coverage.
+- The in-app embedded browser that reproduced the defect exposes neither `FontFace` nor `FontFaceSet.add/load`. With the exact CSS path active, both family variants reported `Media & fonts: Ready` and `Export: Ready`, the prior duplicate missing-font blockers disappeared, and sequential all-variant validation completed through the existing single viewport.
+- `pnpm runtime-routing:fonts` passed at `fidelity/runtime-routing/font-evidence/font-evidence-2026-08-18T15-14-09-983Z`. The source-authoritative baseline was stable on all four surfaces at `fidelity/candidates/2026-08-18T15-14-34-849Z`.
+- Guarded comparisons were also run and deliberately not promoted. The source-authoritative comparison failed all four now-hiring surfaces against the current approved profile. The full 19-fixture baseline was repeat-stable, while the full approved comparison retained a mixture of pass, fail, and unapproved results, including Fields-surface dimension changes in the current dirty UI worktree. No reference, fixture, scene, settlement, tolerance, or approved evidence was updated.
+
 ## SDK 0.7.0 headless host-editor boundary
 
 - React owns the supported `editor` entry. `TemplateSessionViewport` composes

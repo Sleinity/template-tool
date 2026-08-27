@@ -216,6 +216,8 @@ export function PackageTechnicalDetails({
   validation,
   assetIngestionDiagnostics = [],
   qualityReport,
+  additionalEvidence,
+  additionalEvidenceLabel = "Additional validation evidence",
 }: {
   packageValue: TemplatePackageV1;
   source?: LoadedTemplatePackageSource;
@@ -224,6 +226,8 @@ export function PackageTechnicalDetails({
   validation?: TemplatePackageValidationResult | null;
   assetIngestionDiagnostics?: TemplatePackageBundleDiagnostic[];
   qualityReport?: PackageQualityReport | null;
+  additionalEvidence?: Record<string, unknown>;
+  additionalEvidenceLabel?: string;
 }) {
   const fileInventory = source
     ? [
@@ -265,6 +269,7 @@ export function PackageTechnicalDetails({
                 pluginDiagnostics: validation?.pluginDiagnostics ?? [],
                 assetIngestionDiagnostics,
                 packageQuality: qualityReport,
+                additionalEvidence,
               }),
             )
           }
@@ -294,6 +299,16 @@ export function PackageTechnicalDetails({
             </summary>
             <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap text-[10px] leading-5 text-content-muted">
               {technicalJson(technicalTrace)}
+            </pre>
+          </details>
+        ) : null}
+        {additionalEvidence ? (
+          <details className="border-t border-line-subtle pt-3">
+            <summary className="cursor-pointer text-sm font-medium text-content-secondary">
+              {additionalEvidenceLabel}
+            </summary>
+            <pre className="mt-2 max-h-80 overflow-auto whitespace-pre-wrap text-[10px] leading-5 text-content-muted">
+              {technicalJson(additionalEvidence)}
             </pre>
           </details>
         ) : null}

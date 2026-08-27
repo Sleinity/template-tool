@@ -1,5 +1,5 @@
 import { Check, Clipboard, PackageOpen } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { Button, Status } from "../../ui";
 import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
 import { TemplateInspectionPreview } from "../TemplateInspectionPreview";
@@ -28,11 +28,25 @@ interface TemplatePackageDiagnosticContextProps {
   instances?: PackageQualityIssue[];
   onSelectInstance?: (issue: PackageQualityIssue) => void;
   onAction?: (action: DiagnosticUserAction, issue: PackageQualityIssue) => void;
+  preview?: ReactNode;
+  supplementalDetails?: Array<{
+    label: string;
+    value?: string | number | null;
+  }>;
+  customAction?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
 function statusTone(issue: PackageQualityIssue) {
   const state = getDiagnosticPresentationState(issue);
   return state === "blocked" ? "blocked" : state === "review" ? "attention" : state === "repaired" ? "repaired" : "info";
+}
+
+function diagnosticLabel(issue: PackageQualityIssue): string {
+  const state = getDiagnosticPresentationState(issue);
+  return state === "review" ? "Needs attention" : diagnosticPresentationLabels[state];
 }
 
 function Detail({ label, value }: { label: string; value?: string | number | null }) {
@@ -62,6 +76,9 @@ export function TemplatePackageDiagnosticContext({
   instances = [],
   onSelectInstance,
   onAction,
+  preview,
+  supplementalDetails = [],
+  customAction,
 }: TemplatePackageDiagnosticContextProps) {
   const [copied, setCopied] = useState(false);
   const [packetDescription, setPacketDescription] = useState("");
@@ -103,7 +120,9 @@ export function TemplatePackageDiagnosticContext({
         <p className="text-sm leading-6 text-content-muted">
           No unresolved diagnostic is selected. Repaired items and technical notes remain available through filters.
         </p>
-        <TemplateInspectionPreview packageValue={packageValue} dimUnselected={false} onRenderIdentity={onRenderIdentity} />
+        {preview ?? (
+          <TemplateInspectionPreview packageValue={packageValue} dimUnselected={false} onRenderIdentity={onRenderIdentity} />
+        )}
       </section>
     );
   }
@@ -121,7 +140,7 @@ export function TemplatePackageDiagnosticContext({
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <h2 className="ui-section-title">{getPackageQualityIssueTitle(issue)}</h2>
           <Status tone={statusTone(issue)}>
-            {diagnosticPresentationLabels[getDiagnosticPresentationState(issue)]}
+            {diagnosticLabel(issue)}
           </Status>
         </div>
         {targetName ? <p className="mt-1 text-sm font-medium text-content-secondary">{targetName}</p> : null}
@@ -132,7 +151,11 @@ export function TemplatePackageDiagnosticContext({
             <p className="mt-1 text-sm leading-6 text-content-primary">{presentation.userImpact}</p>
           </div>
         ) : null}
-        {presentation.userAction && onAction ? (
+        {customAction ? (
+          <Button className="mt-4" variant={getDiagnosticPresentationState(issue) === "blocked" ? "primary" : "secondary"} onClick={customAction.onClick}>
+            {customAction.label}
+          </Button>
+        ) : presentation.userAction && onAction ? (
           <Button className="mt-4" variant={getDiagnosticPresentationState(issue) === "blocked" ? "primary" : "secondary"} onClick={() => onAction(presentation.userAction!, issue)}>
             {presentation.userAction.label}
           </Button>
@@ -141,21 +164,26 @@ export function TemplatePackageDiagnosticContext({
 
       {hasVisualTarget ? (
         <div ref={previewRef}>
-        <TemplateInspectionPreview
-          packageValue={packageValue}
-          targetNodeIds={visualTargetIds}
-          targetFitLabel="Fit affected layer"
-          mode={issue.modes?.includes("editor") ? "editor" : "static"}
-          onRenderIdentity={onRenderIdentity}
-        />
+          {preview ?? (
+            <TemplateInspectionPreview
+              packageValue={packageValue}
+              targetNodeIds={visualTargetIds}
+              targetFitLabel="Fit affected layer"
+              mode={issue.modes?.includes("editor") ? "editor" : "static"}
+              onRenderIdentity={onRenderIdentity}
+            />
+          )}
         </div>
       ) : (
-        <div className="diagnostic-no-target">
-          <p className="font-medium text-content-primary">No visual area is affected</p>
-          <p className="mt-1 text-sm leading-6 text-content-muted">
-            This diagnostic concerns {context.type === "asset" ? "media metadata" : context.type === "font" ? "font availability" : context.type === "field" ? "field configuration" : "package metadata"} and does not point to a specific rendered layer.
-          </p>
-        </div>
+        <>
+          <div className="diagnostic-no-target">
+            <p className="font-medium text-content-primary">No visual area is affected</p>
+            <p className="mt-1 text-sm leading-6 text-content-muted">
+              This diagnostic concerns {context.type === "asset" ? "media metadata" : context.type === "font" ? "font availability" : context.type === "field" ? "field configuration" : "package metadata"} and does not point to a specific rendered layer.
+            </p>
+          </div>
+          {preview ? <div ref={previewRef}>{preview}</div> : null}
+        </>
       )}
 
       {context.type === "asset" ? (
@@ -188,6 +216,14 @@ export function TemplatePackageDiagnosticContext({
         </dl>
       ) : null}
 
+      {supplementalDetails.some((detail) => detail.value !== undefined && detail.value !== null && detail.value !== "") ? (
+        <dl className="diagnostic-context-grid" data-testid="quality-supplemental-context">
+          {supplementalDetails.map((detail) => (
+            <Detail key={detail.label} label={detail.label} value={detail.value} />
+          ))}
+        </dl>
+      ) : null}
+
       {instances.length > 1 ? (
         <details className="border-t border-line-subtle pt-3">
           <summary className="cursor-pointer text-sm text-content-secondary">Affected targets ({instances.length})</summary>
@@ -202,8 +238,9 @@ export function TemplatePackageDiagnosticContext({
       ) : null}
 
       {resolvedTree ? (
-        <section className="border-t border-line-subtle pt-3" aria-label="Fidelity issue packet">
-          <h3 className="text-sm font-medium text-content-primary">Reproducible issue packet</h3>
+        <details className="border-t border-line-subtle pt-3" aria-label="Fidelity issue packet">
+          <summary className="cursor-pointer text-sm font-medium text-content-primary">Reproducible issue packet</summary>
+          <div className="pt-2">
           <p className="mt-1 text-xs leading-5 text-content-muted">
             Export bounded local evidence for this finding. Raw package and asset bytes are never included.
           </p>
@@ -262,7 +299,8 @@ export function TemplatePackageDiagnosticContext({
           </Button>
           {packetState === "complete" ? <p className="mt-2 text-xs text-content-muted">Issue packet downloaded.</p> : null}
           {packetState === "failed" ? <p className="mt-2 text-xs text-[var(--color-status-blocked-fg)]">The packet could not be created. Check preview readiness and try again.</p> : null}
-        </section>
+          </div>
+        </details>
       ) : null}
 
       <details className="border-t border-line-subtle pt-3">

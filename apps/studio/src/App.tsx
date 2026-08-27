@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { appRoutePath, parseAppRoute, type AppRoute } from "./routing/appRoutes";
 import type { TemplatePackageEditorSession } from "@sleinity/template-core/editor";
 import {
@@ -19,6 +26,13 @@ import { TemplatePackageImportFlow } from "./views/TemplatePackageImportFlow";
 import { TemplateOverviewPage } from "./views/TemplateOverviewPage";
 import { TemplatePackageEditorPage } from "./views/TemplatePackageEditorPage";
 import { TemplateFamilyApp } from "./TemplateFamilyApp";
+
+const WayfindingFoundationPreview = import.meta.env.DEV
+  ? lazy(async () => {
+      const module = await import("./components/ui/DesignSystemShowcase");
+      return { default: module.DesignSystemShowcase };
+    })
+  : null;
 
 function AppContent() {
   const [route, setRoute] = useState<AppRoute>(() =>
@@ -423,8 +437,21 @@ export default function App() {
     typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("studio-mode") === "single-template-fidelity",
   );
+  const [wayfindingFoundationPreview] = useState(() =>
+    import.meta.env.DEV &&
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("studio-design-system") ===
+      "wayfinding",
+  );
   useEffect(() => {
     void recordSemanticRendererMvpMigration();
   }, []);
+  if (wayfindingFoundationPreview && WayfindingFoundationPreview) {
+    return (
+      <Suspense fallback={<div className="app-route-loading">Loading showcase…</div>}>
+        <WayfindingFoundationPreview />
+      </Suspense>
+    );
+  }
   return rendererFidelityMode ? <AppContent /> : <TemplateFamilyApp />;
 }

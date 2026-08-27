@@ -1,6 +1,9 @@
 import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import {
   createTemplateFamilyFromPackage,
+  getTemplateFamilyControlOrder,
+  getTemplateFamilyFieldsForVariant,
+  getTemplateFamilyFieldScope,
   getTemplateFamilyOptionAvailability,
   materializeTemplateFamilyVariant,
   parseTemplateFamilyContentStateV1,
@@ -8,6 +11,7 @@ import {
   planTemplateFamilyFieldMatches,
   resolveTemplateFamilyFieldRule,
   resolveTemplateFamilyVariant,
+  setTemplateFamilyControlOrder,
   updateTemplateFamilyContentField,
   validateTemplateFamily,
   wrapLegacyTemplatePackageAsFamily,
@@ -44,6 +48,28 @@ assert(
       JSON.stringify(created.content),
   "Serializable family definitions and content must round-trip without identity changes.",
 );
+for (const staleTupleValue of [
+  {
+    ...structuredClone(created.family),
+    variants: created.family.variants.map(({ groupAssignments: _ignored, ...variant }) => variant),
+  },
+  {
+    ...structuredClone(created.family),
+    variantGroups: [{
+      id: "group:stale",
+      title: "Stale",
+      variantIds: [created.family.variants[0]!.id],
+    }],
+  },
+]) {
+  let rejected = false;
+  try {
+    parseTemplateFamilyV1(staleTupleValue);
+  } catch {
+    rejected = true;
+  }
+  assert(rejected, "Template Family V1 must reject missing assignments and the unpublished collection shape.");
+}
 
 const headline = created.family.fields[0];
 assert(headline, "The family fixture requires a shared headline field.");
@@ -142,6 +168,83 @@ assert(
   "Materialization must not trim shared content to a variant rule.",
 );
 
+const scopeMatrixFamily = structuredClone(created.family);
+const portrait = structuredClone(scopeMatrixFamily.variants[0]);
+portrait.id = "variant:portrait-blue";
+portrait.title = "Portrait Blue";
+scopeMatrixFamily.variants.push(portrait);
+const subsetField = scopeMatrixFamily.fields[1];
+const specificField = scopeMatrixFamily.fields[2];
+assert(subsetField && specificField, "The family fixture requires three editable fields.");
+for (const [variant, field] of [
+  [portrait, subsetField],
+  [scopeMatrixFamily.variants[1], specificField],
+  [portrait, specificField],
+] as const) {
+  const removedTargets = variant.bindings.find(
+    (binding) => binding.familyFieldId === field.id,
+  )?.targets ?? [];
+  variant.bindings = variant.bindings.filter(
+    (binding) => binding.familyFieldId !== field.id,
+  );
+  variant.packageValue.editableFields = variant.packageValue.editableFields.filter(
+    (packageField) => !removedTargets.some(
+      (removed) =>
+        removed.fieldId === packageField.id &&
+        removed.nodeId === packageField.nodeId &&
+        removed.property === packageField.property,
+    ),
+  );
+}
+assert(
+  getTemplateFamilyFieldScope(scopeMatrixFamily, headline.id).kind === "family-wide" &&
+    getTemplateFamilyFieldScope(scopeMatrixFamily, subsetField.id).kind === "variant-subset" &&
+    getTemplateFamilyFieldScope(scopeMatrixFamily, specificField.id).kind === "variant-specific" &&
+    validateTemplateFamily(scopeMatrixFamily, created.content).definitionValid,
+  "Fields bound to all, some, or one variant must all be structurally valid with derived scope metadata.",
+);
+
+const sparseFamily = structuredClone(created.family);
+const sparseVariant = sparseFamily.variants[1];
+sparseVariant.bindings = sparseVariant.bindings.filter(
+  (binding) => binding.familyFieldId !== headline.id,
+);
+delete sparseVariant.ruleOverrides[headline.id];
+sparseVariant.packageValue.editableFields =
+  sparseVariant.packageValue.editableFields.filter(
+    (field) => field.id !== target?.fieldId || field.nodeId !== target?.nodeId,
+  );
+const sparseReport = validateTemplateFamily(sparseFamily, created.content);
+const sparseScope = getTemplateFamilyFieldScope(sparseFamily, headline.id);
+const sparseMaterialized = materializeTemplateFamilyVariant(
+  sparseFamily,
+  sparseVariant.id,
+  created.content,
+);
+assert(
+  sparseReport.definitionValid &&
+    sparseScope.kind === "variant-specific" &&
+    sparseScope.variantIds[0] === square.id &&
+    !getTemplateFamilyFieldsForVariant(sparseFamily, sparseVariant.id)
+      .some((field) => field.id === headline.id) &&
+    !sparseMaterialized.effectiveFields.some(
+      (field) => field.id === target?.fieldId && field.nodeId === target?.nodeId,
+    ) &&
+    !sparseMaterialized.issues.some((issue) => issue.code === "family.binding-missing"),
+  "A field bound to one variant must remain valid and disappear cleanly from other materializations.",
+);
+const orphanedFamily = structuredClone(sparseFamily);
+orphanedFamily.variants[0].bindings = orphanedFamily.variants[0].bindings.filter(
+  (binding) => binding.familyFieldId !== headline.id,
+);
+assert(
+  getTemplateFamilyFieldScope(orphanedFamily, headline.id).kind === "unbound" &&
+    validateTemplateFamily(orphanedFamily).issues.some(
+      (issue) => issue.code === "family.field-unbound",
+    ),
+  "A family field that applies to no variant must remain a structural blocker.",
+);
+
 const imagePackage = fixture();
 imagePackage.editableFields = [{
   id: "hero-image",
@@ -221,12 +324,21 @@ assert(
 );
 
 const grouped = structuredClone(created.family) as TemplateFamilyV1;
+const redPortrait = structuredClone(grouped.variants[0]);
+redPortrait.id = "variant:portrait-red";
+redPortrait.title = "Red Portrait";
+const redLandscape = structuredClone(grouped.variants[1]);
+redLandscape.id = "variant:landscape-red";
+redLandscape.title = "Red Landscape";
+grouped.variants[0].title = "Blue Portrait";
+grouped.variants[1].title = "Blue Landscape";
+grouped.variants.push(redPortrait, redLandscape);
 grouped.variantGroups = [
   {
-    id: "group:format",
-    title: "Format",
+    id: "group:dimension",
+    title: "Dimension",
     options: [
-      { id: "option:square", title: "Square" },
+      { id: "option:portrait", title: "Portrait" },
       { id: "option:landscape", title: "Landscape" },
     ],
   },
@@ -240,45 +352,123 @@ grouped.variantGroups = [
   },
 ];
 grouped.variants[0].groupAssignments = {
-  "group:format": "option:square",
+  "group:dimension": "option:portrait",
   "group:colour": "option:blue",
 };
 grouped.variants[1].groupAssignments = {
-  "group:format": "option:landscape",
+  "group:dimension": "option:landscape",
   "group:colour": "option:blue",
 };
-const selection = resolveTemplateFamilyVariant(grouped, {
-  groupSelections: {
-    "group:format": "option:landscape",
-    "group:colour": "option:blue",
-    "group:removed-host-state": "option:stale",
-  },
-});
-assert(
-  selection.status === "resolved" && selection.variantId === landscape.id,
-  "A complete unique group tuple must resolve to one variant while ignoring stale host state for removed groups.",
-);
-const missingCombination = resolveTemplateFamilyVariant(grouped, {
-  groupSelections: {
-    "group:format": "option:square",
-    "group:colour": "option:red",
-  },
-});
-assert(
-  missingCombination.status === "no-match" &&
-    getTemplateFamilyOptionAvailability(grouped, {
-      groupSelections: { "group:format": "option:square" },
-    }).some((item) => item.optionId === "option:red" && !item.available),
-  "Missing Cartesian combinations must remain valid and discoverable as unavailable.",
-);
-grouped.variants[1].groupAssignments = {
-  ...grouped.variants[0].groupAssignments,
+redPortrait.groupAssignments = {
+  "group:dimension": "option:portrait",
+  "group:colour": "option:red",
 };
+redLandscape.groupAssignments = {
+  "group:dimension": "option:landscape",
+  "group:colour": "option:red",
+};
+const expectedTuples = [
+  ["option:blue", "option:portrait", grouped.variants[0].id],
+  ["option:blue", "option:landscape", grouped.variants[1].id],
+  ["option:red", "option:portrait", redPortrait.id],
+  ["option:red", "option:landscape", redLandscape.id],
+] as const;
 assert(
-  validateTemplateFamily(grouped).issues.some(
+  expectedTuples.every(([colour, dimension, variantId]) => {
+    const selection = resolveTemplateFamilyVariant(grouped, {
+      groupSelections: {
+        "group:colour": colour,
+        "group:dimension": dimension,
+      },
+    });
+    return selection.status === "resolved" && selection.variantId === variantId;
+  }),
+  "Colour and Dimension tuples must resolve the intended concrete ZIP variants.",
+);
+const incompleteSelection = resolveTemplateFamilyVariant(grouped, {
+  groupSelections: { "group:colour": "option:blue" },
+});
+assert(
+  incompleteSelection.status === "incomplete" &&
+    incompleteSelection.missingGroupIds.includes("group:dimension"),
+  "A selection must remain incomplete until every configured property has a value.",
+);
+const availability = getTemplateFamilyOptionAvailability(grouped, {
+  groupSelections: { "group:dimension": "option:landscape" },
+});
+assert(
+  availability.find((item) => item.optionId === "option:red")?.available === true &&
+    validateTemplateFamily(grouped).definitionValid,
+  "Option availability must report combinations backed by a concrete variant.",
+);
+const missingCombinationFamily = structuredClone(grouped);
+missingCombinationFamily.variants = missingCombinationFamily.variants.filter(
+  (variant) => variant.id !== redLandscape.id,
+);
+assert(
+  validateTemplateFamily(missingCombinationFamily).definitionValid &&
+    resolveTemplateFamilyVariant(missingCombinationFamily, {
+      groupSelections: {
+        "group:dimension": "option:landscape",
+        "group:colour": "option:red",
+      },
+    }).status === "no-match" &&
+    getTemplateFamilyOptionAvailability(missingCombinationFamily, {
+      groupSelections: { "group:dimension": "option:landscape" },
+    }).find((option) => option.optionId === "option:red")?.available === false,
+  "Missing Cartesian combinations must remain valid while resolving explicitly to no-match.",
+);
+const duplicateTupleFamily = structuredClone(grouped);
+duplicateTupleFamily.variants.push({
+  ...structuredClone(grouped.variants[0]),
+  id: "variant:duplicate",
+  title: "Duplicate tuple",
+});
+assert(
+  validateTemplateFamily(duplicateTupleFamily).issues.some(
     (item) => item.code === "family.group-tuple-duplicate",
   ),
-  "Duplicate group tuples must block a confirmed family.",
+  "Two variants using the same complete property tuple must be blocked.",
+);
+const incompleteTupleFamily = structuredClone(grouped);
+delete incompleteTupleFamily.variants[3].groupAssignments["group:colour"];
+assert(
+  validateTemplateFamily(incompleteTupleFamily).issues.some(
+    (item) => item.code === "family.group-assignment-missing",
+  ),
+  "Every confirmed concrete variant must assign one option for every property.",
+);
+const renamedTupleFamily = structuredClone(grouped);
+const colourId = renamedTupleFamily.variantGroups[1].id;
+const redId = renamedTupleFamily.variantGroups[1].options[1].id;
+const redVariantId = renamedTupleFamily.variants[2].id;
+renamedTupleFamily.variantGroups[1].title = "Palette";
+renamedTupleFamily.variantGroups[1].options[1].title = "Crimson";
+renamedTupleFamily.variants[2].title = "Crimson Portrait";
+assert(
+  renamedTupleFamily.variantGroups[1].id === colourId &&
+    renamedTupleFamily.variantGroups[1].options[1].id === redId &&
+    renamedTupleFamily.variants[2].id === redVariantId &&
+    resolveTemplateFamilyVariant(renamedTupleFamily, {
+      groupSelections: {
+        "group:colour": redId,
+        "group:dimension": "option:portrait",
+      },
+    }).status === "resolved",
+  "Renaming a property, option, or variant must preserve stable selection identities.",
+);
+
+const ordered = setTemplateFamilyControlOrder(grouped, [
+  { kind: "selection-property", groupId: "group:colour" },
+  { kind: "field", fieldId: grouped.fields[0].id },
+  { kind: "selection-property", groupId: "group:dimension" },
+  ...grouped.fields.slice(1).map((field) => ({ kind: "field" as const, fieldId: field.id })),
+]);
+assert(
+  getTemplateFamilyControlOrder(ordered)[0]?.kind === "selection-property" &&
+    getTemplateFamilyControlOrder(ordered)[1]?.kind === "field" &&
+    validateTemplateFamily(ordered).definitionValid,
+  "Selection properties and editable fields must share one stable editor order.",
 );
 
 const legacy = wrapLegacyTemplatePackageAsFamily({

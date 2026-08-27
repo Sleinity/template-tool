@@ -13,6 +13,7 @@ import {
   validateCurrentSavedOutputDraftRecord,
   validateCurrentSavedTemplateRecord,
 } from "./savedRecordValidation";
+import { filterReadableSavedTemplateFamilyRecords } from "./readableFamilyRecords";
 import type {
   SavedAssetRecord,
   SavedTemplateFamilyDraftRecord,
@@ -244,8 +245,7 @@ export class InMemoryTemplateRepository implements TemplateRepository, TemplateF
   }
 
   async listFamilies(): Promise<SavedTemplateFamilyRecord[]> {
-    return Array.from(this.families.values())
-      .map(validateCurrentSavedTemplateFamilyRecord)
+    return filterReadableSavedTemplateFamilyRecords(Array.from(this.families.values()))
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
   }
 
