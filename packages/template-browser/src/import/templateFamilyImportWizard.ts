@@ -1,3 +1,4 @@
+import { sdkVersion } from "../internal/sdkVersion";
 import {
   createTemplateFamilyFromPackage,
   parseTemplateFamilyContentStateV1,
@@ -16,9 +17,9 @@ import type { AssetStorageAdapter } from "../assets/assetReliability";
 import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
 import {
   createTemplateFamilySession,
-  type TemplateFamilySessionSnapshotV1,
   type TemplateFamilySessionV1,
-} from "../session/templateFamilySession";
+} from "../session/publicFamilySession";
+import type { TemplateFamilySessionSnapshotV1 } from "../session/templateFamilySession";
 import { runTemplatePackageImportPipeline } from "./runTemplatePackageImportPipeline";
 import {
   createTemplateImportValidationReport,
@@ -36,7 +37,7 @@ export const TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-family-import-confirmation-v1" as const;
 export const TEMPLATE_FAMILY_DIGEST_SCHEMA_VERSION =
   "template-family-digest-v1" as const;
-export const TEMPLATE_FAMILY_SDK_VERSION = "0.9.0" as const;
+export const TEMPLATE_FAMILY_SDK_VERSION = sdkVersion;
 
 export const TEMPLATE_FAMILY_IMPORT_STEPS = [
   "family-variants",
@@ -205,7 +206,7 @@ export async function verifyTemplateFamilyImportConfirmation(
   try {
     if (
       confirmation.schemaVersion !== TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION ||
-      confirmation.sdkVersion !== TEMPLATE_FAMILY_SDK_VERSION
+      typeof confirmation.sdkVersion !== "string" || !confirmation.sdkVersion.trim()
     ) return false;
     const family = parseTemplateFamilyV1(confirmation.family);
     const content = parseTemplateFamilyContentStateV1(confirmation.content);
@@ -303,7 +304,9 @@ export function createTemplateFamilyImportWizard(
 ): TemplateFamilyImportWizardV1 {
   const familySession = options.familySession ?? createTemplateFamilySession({
     assetStorage: options.assetStorage,
-    fontRegistry: options.fontRegistry,
+    ...(Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+      ? { fontRegistry: options.fontRegistry }
+      : {}),
   });
   const listeners = new Set<() => void>();
   let disposed = false;
@@ -400,7 +403,9 @@ export function createTemplateFamilyImportWizard(
       sourceName: input.sourceName,
       figmaUrl: input.figmaUrl,
       assetStorage: options.assetStorage,
-      fontRegistry: options.fontRegistry,
+      ...(Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+        ? { fontRegistry: options.fontRegistry }
+        : {}),
     });
     if (!result.package || !result.validation?.valid) {
       throw new Error(

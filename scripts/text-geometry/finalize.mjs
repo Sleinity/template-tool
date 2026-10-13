@@ -1,0 +1,44 @@
+/** Certify identities and retain both timing profiles; no reference writes. */
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import {decodePacket} from './packets.mjs';
+const dir=process.argv[2]??'fidelity/evidence/text-geometry-final-d';
+const path=process.argv[3]??'docs/architecture/evidence/text-geometry-20261009.json';
+const read=p=>JSON.parse(readFileSync(p)),hash=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const record=read(path),packetPath=dir+'/latency/production-paired.json',packet=decodePacket(read(packetPath));
+assert.equal(packet.instrumentationProfile,'latency-minimal');
+assert.equal(packet.mode,'production');assert.equal(packet.phase,'paired');assert.equal(packet.trials,5);
+assert.equal(packet.rows.length,120);assert.deepEqual(packet.failures,[]);
+for(const [source,expected]of Object.entries(record.implementation)){
+ assert.equal(hash(source),expected,source);assert.equal(packet.current[source],expected,'Timing must use the final implementation: '+source);
+ assert.equal(record.implementationSourceIdentity.files[source].sha256,expected);
+}
+for(const [source,identity]of Object.entries(record.baselineSourceIdentity))assert.deepEqual(packet.baseline[source],identity);
+for(const key of ['browser','node','platform','arch','viewport','deviceScaleFactor','fixtures','fonts'])assert.deepEqual(packet[key],record.modes.production.environment[key],key);
+assert(record.commands.commands.every(c=>c.exitCode===0));assert(record.release.commands.every(c=>c.exitCode===0));
+record.supplemental=read(dir+'/supplemental.json');assert.equal(record.supplemental.length,5);assert(record.supplemental.every(c=>c.exitCode===0));
+const analysisPath=dir+'/latency/decision-input.json';
+writeFileSync(analysisPath,JSON.stringify({instrumentationProfile:packet.instrumentationProfile,modes:{production:{rows:packet.rows.map(({trace,state,measurementEvents,priorMeasurementEvents,publicationEvents,...row})=>({...row,...state}))}}},null,2)+'\n');
+const result=spawnSync(process.execPath,['scripts/text-geometry/assess-performance.mjs',analysisPath],{encoding:'utf8'});
+writeFileSync(dir+'/latency/analysis.log',(result.stdout??'')+(result.stderr??''));
+assert([0,1].includes(result.status));
+const latency=read(analysisPath);
+assert(latency.performanceDecision,"Incomplete timing analysis must not become a disposition");
+record.detailedTraceAnalysis=record.detailedTraceAnalysis??record.performanceDecision;
+record.performanceDecision={...latency.performanceDecision,instrumentationProfile:packet.instrumentationProfile,detailedTraceSignalRetained:record.detailedTraceAnalysis.repeatableHandlerIncreases,interpretation:'Production handler acceptance uses the unmodified production source workload, without source-injected measurement logging, native-publication logging or full DOM-frame sampling. Detailed traces establish dependencies, geometry, current publication and call counts; their timing signal remains separately visible. The statistical criterion is identical in both profiles.'};
+record.latencyOnly={path:packetPath,sha256:hash(packetPath),current:packet.current,instrumentationProfile:packet.instrumentationProfile,summary:packet.summary,rows:packet.rows.map(r=>({scenario:r.scenario,trial:r.trial,version:r.version,workload:r.workload,inputHandlerMs:r.inputHandlerMs,inputPaintOpportunityMs:r.inputPaintOpportunityMs,inputEvents:r.trace.inputs,previewCatchUpMs:r.previewCatchUpMs,intermediateDuringTyping:r.intermediateDuringTyping,acceptances:r.state.acceptances,readiness:r.state.readiness,status:r.status,longTasks:r.trace.longTasks}))};
+record.analysisRepair={cause:'The recursion was seeded with the complete input array, generating one sample instead of enumerating 3125 bootstrap resamples. Narrow single-median intervals were invalid.',correction:'Seed with the empty sample; assert 5^5 samples and expected [1,5] / [-.2,.2] intervals. Keep the predeclared interval/percentile/positive-lower-endpoint criterion.',historicalDisposition:'Single-median analyses in intermediate b/c/read/minimal packets are invalid analysis evidence, not demonstrated runtime regressions. Original raw observations remain unchanged and reproducible.',test:'scripts/text-geometry/assess-performance.mjs executable interval assertions'};
+record.styleReadReduction=read('fidelity/evidence/text-geometry-read-confirmation/style-read-equivalence.json');
+for(const tool of ['scripts/text-geometry/finalize.mjs','scripts/text-geometry/pairedTimingAnalysis.mjs','scripts/text-geometry/pairedTimingAnalysis.test.mjs','scripts/text-geometry/supplement.mjs','scripts/run-tests.mjs'])record.toolingSha256[tool]=hash(tool);
+record.toolingSha256['scripts/text-geometry/verify-style-reads.mjs']=hash('scripts/text-geometry/verify-style-reads.mjs');
+for(const [tool,expected]of Object.entries(record.toolingSha256))assert.equal(hash(tool),expected,'Tool identity: '+tool);
+record.storedCaptureInspection={runId:record.gate.runId,surfaces:['validate','fields','editor','png-export'],fixtureIds:packet.fixtures.map(f=>f.id),method:'Personally viewed all twelve current stored captures. Twelve surfaces additionally match previously source-reviewed PNG bytes. This is stored inspection, not manual live typing or a new source approval.'};
+record.manualLiveReview=false;
+record.complete=result.status===0;
+record.remainingDecision=record.complete?null:'Production timing shows a repeatable handler increase; retain no-go until bounded diagnosis or a separately scoped performance repair.';
+record.completionDecision=record.complete?'Bounded text-geometry milestone complete under the recorded Chromium/source-authoritative profile; full release and fidelity gate pass.':'No-go: geometry and fidelity pass, but production timing acceptance remains blocked.';
+writeFileSync(path,JSON.stringify(record,null,2)+'\n');
+console.log(JSON.stringify({runId:record.gate.runId,complete:record.complete,performanceSignals:record.performanceDecision.repeatableHandlerIncreases,detailedTraceSignals:record.detailedTraceAnalysis.repeatableHandlerIncreases,protectedArtifactsUnchanged:record.protectedArtifactsUnchanged,decision:record.completionDecision},null,2));
+if(!record.complete)process.exitCode=1;

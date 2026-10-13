@@ -54,6 +54,8 @@ import {
   resolveBackendDecision,
   resolvedBackendAvailability,
 } from "../backend-decision";
+import { resolveSourceCompositing } from "../compositing/resolveSourceCompositing";
+import type { ResolvedSourceCompositingV1 } from "../compositing/resolveSourceCompositing";
 
 const justifyMap: ResolvedRenderLayout["justifyContent"][] = [
   "flex-start",
@@ -526,6 +528,7 @@ function resolveAppearance(
   packageValue: TemplatePackageV1,
   maskRelationships: ReturnType<typeof resolvePackageMaskRelationships>["relationships"],
   primitiveAppearance: ReturnType<typeof resolvePrimitiveAppearance>,
+  compositing: ResolvedSourceCompositingV1 | null,
 ): ResolvedRenderAppearance {
   const maskRelationship = maskRelationships.find((relationship) => relationship.maskSourceId === node.id);
   const fills = node.appearance.fills
@@ -536,6 +539,8 @@ function resolveAppearance(
       ...(packageValue.maskRelationships ? {
         paintRole: maskRelationship
           ? "mask-input" as const
+          : compositing?.kind === "paint-stack"
+            ? "ordinary-visible" as const
           : paint.blendMode && !["NORMAL", "PASS_THROUGH"].includes(paint.blendMode.toUpperCase())
             ? "unsupported-compositing-input" as const
             : "ordinary-visible" as const,
@@ -1059,19 +1064,13 @@ function resolveImage(
       feature: "image",
     });
   }
-  if (activePlacementState === "editor-crop") {
-    warnings.push({
-      code: "resolved-editor-crop-reserved",
-      message: "Editor-authored crop is reserved and not implemented; deterministic replacement Fill is used.",
-      nodeId: node.id,
-      feature: "image",
-    });
-  }
   const placementRevision = explicitPlacement?.revision ?? 0;
   const replacementMode = activePlacementState === "replacement-fit"
     ? "contain"
-    : activePlacementState === "replacement-fill" || activePlacementState === "editor-crop"
+    : activePlacementState === "replacement-fill"
       ? "cover"
+      : activePlacementState === "editor-crop"
+        ? "user-crop"
       : null;
   const sourceScaleMode =
     node.image?.scaleMode ??
@@ -1082,8 +1081,10 @@ function resolveImage(
   const scaleMode = (
     activePlacementState === "replacement-fit"
       ? "FIT"
-      : activePlacementState === "replacement-fill" || activePlacementState === "editor-crop"
+      : activePlacementState === "replacement-fill"
         ? "FILL"
+        : activePlacementState === "editor-crop"
+          ? "CROP"
         : sourceScaleMode
   ).toUpperCase();
   const scaleModeSource: ResolvedRenderImage["propertySources"]["scaleMode"] =
@@ -1174,6 +1175,9 @@ function resolveImage(
       transformOrigin: "source-top-left",
       sourceTransform: imageTransform,
       activeCropTransform: transformMatrix ? activeCropTransform : null,
+      ...(activePlacementState === "editor-crop"
+        ? { cropAspectPolicy: "cover-within-canonical" as const }
+        : {}),
       transformApplicability: scaleMode === "CROP"
         ? transformMatrix
           ? "active-crop"
@@ -1194,7 +1198,9 @@ function resolveImage(
     cropMode: explicitPosition
       ? "objectPosition"
       : scaleMode === "CROP" && transformMatrix
-        ? "figmaImageTransform"
+        ? activePlacementState === "editor-crop"
+          ? "editorCropTransform"
+          : "figmaImageTransform"
         : scaleMode === "CROP"
           ? "unknown"
           : "objectFitOnly",
@@ -1326,13 +1332,47 @@ function resolveTransform(node: TemplateNode): ResolvedRenderTransform {
   };
 }
 
+// The existing CSS media owner already paints one NORMAL image above its
+// opaque solid background. Primitive SVG-stack ineligibility is not a failed
+// media capability. Keep this recognition narrow; never generalize it to an
+// arbitrary mixed stack or discard the primitive's technical evidence.
+function hasEstablishedMediaSolidUnderlay(
+  node: TemplateNode,
+  image: ResolvedRenderImage | undefined,
+  primitive: ReturnType<typeof resolvePrimitiveAppearance>,
+): boolean {
+  const [solid, imagePaint] = node.appearance.fills;
+  const unsupportedPaints = figmaMetadata(node)?.unsupportedPaints;
+  return Boolean(
+    (node.type === "RECTANGLE" || node.type === "FRAME") &&
+    node.children.length === 0 && !node.vector && node.image &&
+    image?.source && !image.missingAsset &&
+    (image.scaleMode === "FILL" || image.scaleMode === "FIT") &&
+    (image.renderMode === "object-fit-cover" || image.renderMode === "object-fit-contain") &&
+    node.appearance.fills.length === 2 && solid?.type === "SOLID" && imagePaint?.type === "IMAGE" &&
+    solid.visible !== false && imagePaint.visible !== false &&
+    (solid.blendMode ?? "NORMAL") === "NORMAL" && (imagePaint.blendMode ?? "NORMAL") === "NORMAL" &&
+    solid.color.a === 1 && (solid.opacity ?? 1) === 1 && (imagePaint.opacity ?? 1) === 1 &&
+    node.appearance.opacity === 1 && node.appearance.strokes.length === 0 &&
+    node.appearance.effects.length === 0 && !node.mask?.isMask &&
+    primitive.geometry.axisAligned && primitive.geometry.corner.effective.every(value => value === 0) &&
+    primitive.fallbackReasons.every(reason =>
+      reason === "ordered-solid-stack-unsupported-geometry-owner" ||
+      reason === "ordered-normal-paint-stack-unsupported-layer-pattern") &&
+    (!Array.isArray(unsupportedPaints) || unsupportedPaints.length === 0)
+  );
+}
+
 function resolveNode(
   node: TemplateNode,
   packageValue: TemplatePackageV1,
   warnings: ResolvedRenderWarning[],
   missingFonts: Set<string>,
   maskRelationships: ReturnType<typeof resolvePackageMaskRelationships>["relationships"],
-): Omit<ResolvedRenderNode, "backendDecision"> {
+  compositing: ResolvedSourceCompositingV1 | null,
+): Omit<ResolvedRenderNode, "backendDecision"> & {
+  compositing: ResolvedSourceCompositingV1 | null;
+} {
   const diagnostics: ResolvedFidelityDiagnostic[] = [];
   const fields = packageValue.editableFields.filter(
     (field) => field.nodeId === node.id,
@@ -1401,13 +1441,28 @@ function resolveNode(
   const primitiveAppearance = resolvePrimitiveAppearance(node, {
     packageId: packageValue.packageId,
     rootNodeId: packageValue.rootNodeId,
+    source: packageValue.source,
     maskInput: node.mask?.isMask === true,
     hasMaskRelationship: hasPrimitiveMaskRelationship(packageValue, node.id),
     ancestorClipChain: collectPrimitiveAncestorClipChain(packageValue, node),
   });
   const orderedSolidStack = primitiveAppearance.paints.orderedSolidStack;
   const orderedNormalPaintStack = primitiveAppearance.paints.orderedNormalPaintStack;
-  if (orderedSolidStack) {
+  if (compositing?.kind === "mixed-image-gradient") {
+    diagnostics.push({
+      code: "resolved-mixed-image-gradient-supported",
+      message: "Source-certified SOLID, IMAGE, and DARKEN linear gradient use one ordered mixed-paint owner.",
+      nodeId: node.id,
+      severity: "info",
+    });
+  } else if (compositing?.kind === "paint-stack") {
+    diagnostics.push({
+      code: "resolved-source-compositing-supported",
+      message: "Source-certified SOLID blend paints use one ordered DOM paint owner.",
+      nodeId: node.id,
+      severity: "info",
+    });
+  } else if (orderedSolidStack) {
     diagnostics.push({
       code: orderedSolidStack.capability === "source-certified-ordered-solid-stack"
         ? "resolved-ordered-solid-stack-supported"
@@ -1417,6 +1472,13 @@ function resolveNode(
         : `Ordered SOLID stack remains compatibility-owned: ${orderedSolidStack.fallbackReasons.join(", ") || "unsupported source data"}.`,
       nodeId: node.id,
       severity: orderedSolidStack.capability === "source-certified-ordered-solid-stack" ? "info" : "warning",
+    });
+  } else if (hasEstablishedMediaSolidUnderlay(node, image, primitiveAppearance)) {
+    diagnostics.push({
+      code: "resolved-media-solid-underlay-supported",
+      message: "The established media owner paints one NORMAL image above its opaque SOLID background in source order.",
+      nodeId: node.id,
+      severity: "info",
     });
   } else if (node.appearance.fills.length >= 2) {
     diagnostics.push(orderedNormalPaintStack?.capability === "source-certified-solid-linear-normal-stack"
@@ -1434,6 +1496,7 @@ function resolveNode(
         });
   }
   for (const paint of primitiveAppearance.paints.layers) {
+    if (compositing?.kind === "mixed-image-gradient" && paint.sourceIndex === compositing.gradientSourceIndex) continue;
     if (!paint.linearGradient) continue;
     diagnostics.push({
       code: paint.linearGradient.capability === "source-certified-linear-gradient"
@@ -1466,8 +1529,10 @@ function resolveNode(
     sourcePositioning: positioningMode(node),
     renderPositioning: renderPositioning(node, packageValue),
     layout: resolveLayout(node),
-    appearance: resolveAppearance(node, warnings, packageValue, maskRelationships, primitiveAppearance),
+    appearance: resolveAppearance(node, warnings, packageValue, maskRelationships, primitiveAppearance,
+      compositing),
     primitiveAppearance,
+    compositing,
     text:
       node.type === "TEXT"
         ? resolveText(node, packageValue, warnings, missingFonts, diagnostics)
@@ -1479,7 +1544,7 @@ function resolveNode(
     editableFields: fields.map((field) => ({ ...field })),
     fieldTargetIds: fields.map((field) => field.id),
     fieldMarkers: fields.map(
-      (field) => `field:${field.type}:${field.id}`,
+      (field) => `field:${field.type}:${field.id.replace(new RegExp(`^${field.type}:`, "u"), "")}`,
     ),
     fidelityDiagnostics: diagnostics,
     renderStrategy: fallbackReason
@@ -1500,6 +1565,7 @@ export function createResolvedRenderTree(
   ];
   const missingFonts = new Set<string>();
   const maskResolution = resolvePackageMaskRelationships(packageValue);
+  const compositing = resolveSourceCompositing(packageValue);
   const currentPrimitiveTreeRevision = primitiveTreeRevision(packageValue);
   for (const relationship of maskResolution.relationships) {
     if (relationship.renderStrategy !== "css-clip-path") {
@@ -1514,7 +1580,8 @@ export function createResolvedRenderTree(
   const unresolvedNodes = Object.fromEntries(
     Object.values(packageValue.nodes).map((node) => [
       node.id,
-      resolveNode(node, packageValue, warnings, missingFonts, maskResolution.relationships),
+      resolveNode(node, packageValue, warnings, missingFonts, maskResolution.relationships,
+        compositing[node.id] ?? null),
     ]),
   );
   const sourceDecisionRevision = `${packageValue.packageId}:${currentPrimitiveTreeRevision}`;
@@ -1538,6 +1605,7 @@ export function createResolvedRenderTree(
               : "compatibility"
             : null,
           maskCapability: maskRelationship?.capability ?? null,
+          compositing: node.compositing,
         }),
       }];
     }),

@@ -13,6 +13,7 @@ const LOCAL_FILE_HEADER_SIGNATURE = 0x04034b50;
 const DEFAULT_MAX_ARCHIVE_BYTES = 150 * 1024 * 1024;
 const DEFAULT_MAX_ENTRY_COMPRESSED_BYTES = 50 * 1024 * 1024;
 const DEFAULT_MAX_ENTRY_UNCOMPRESSED_BYTES = 100 * 1024 * 1024;
+const DEFAULT_MAX_TOTAL_UNCOMPRESSED_BYTES = 512 * 1024 * 1024;
 const GLOBAL_BLOCKING_DIAGNOSTIC_CODES = new Set([
   "zip.multi-disk-unsupported",
   "zip.central-directory-out-of-range",
@@ -32,6 +33,8 @@ export interface ZipBundleReaderOptions extends TemplatePackageBundleLoadOptions
   maxArchiveBytes?: number;
   maxEntryCompressedBytes?: number;
   maxEntryUncompressedBytes?: number;
+  /** Cumulative decoded bytes across reads, including repeated reads. */
+  maxTotalUncompressedBytes?: number;
 }
 
 export interface ZipBundleReadResult<T> {
@@ -83,12 +86,14 @@ export class ZipBundleReader {
 
   private readonly bytes: Uint8Array;
   private readonly view: DataView;
+  private decodedBytes = 0;
   private readonly options: Required<
     Pick<
       ZipBundleReaderOptions,
       | "maxArchiveBytes"
       | "maxEntryCompressedBytes"
       | "maxEntryUncompressedBytes"
+      | "maxTotalUncompressedBytes"
     >
   >;
 
@@ -108,7 +113,12 @@ export class ZipBundleReader {
         options.maxEntryCompressedBytes ?? DEFAULT_MAX_ENTRY_COMPRESSED_BYTES,
       maxEntryUncompressedBytes:
         options.maxEntryUncompressedBytes ?? DEFAULT_MAX_ENTRY_UNCOMPRESSED_BYTES,
+      maxTotalUncompressedBytes:
+        options.maxTotalUncompressedBytes ?? DEFAULT_MAX_TOTAL_UNCOMPRESSED_BYTES,
     };
+    for (const [name, value] of Object.entries(this.options)) {
+      if (!Number.isSafeInteger(value) || value < 0) throw new RangeError(`${name} must be a nonnegative safe integer.`);
+    }
     this.bundle = loadTemplatePackageZipBundle(source, options);
   }
 
@@ -175,10 +185,24 @@ export class ZipBundleReader {
     }
 
     try {
+      const remaining = this.options.maxTotalUncompressedBytes - this.decodedBytes;
+      if (resolved.entry.uncompressedSize > remaining) {
+        return { ok: false, diagnostics: [...resolved.diagnostics, diagnostic(
+          "zip.total-decoded-size-exceeded", "error", "ZIP reads exceed the cumulative decoded-byte limit.", resolved.entry.normalizedPath,
+        )] };
+      }
+      // fflate's explicit output buffer never grows. The extra byte detects
+      // dishonest declared sizes instead of accepting silently truncated data.
+      // This bounds output allocation during inflation, not merely afterward.
+      const capacity = Math.min(resolved.entry.uncompressedSize, this.options.maxEntryUncompressedBytes, remaining);
+      // A corrupt stream may throw after writing output. Reserve its capacity
+      // first so failed reads cannot repeatedly bypass the aggregate budget.
+      this.decodedBytes += capacity;
       const decompressed =
         resolved.entry.compressionMethod === 0
           ? compressed.value
-          : inflateSync(compressed.value);
+          : inflateSync(compressed.value, { out: new Uint8Array(capacity + 1) });
+      this.decodedBytes += decompressed.byteLength - capacity;
       if (decompressed.byteLength !== resolved.entry.uncompressedSize) {
         return {
           ok: false,
@@ -187,7 +211,9 @@ export class ZipBundleReader {
             diagnostic(
               "zip.entry-size-mismatch",
               "error",
-              `ZIP entry decompressed to ${decompressed.byteLength} bytes, expected ${resolved.entry.uncompressedSize}.`,
+              decompressed.byteLength > resolved.entry.uncompressedSize
+                ? `ZIP entry exceeds its declared decoded size of ${resolved.entry.uncompressedSize} bytes; bounded output was rejected.`
+                : `ZIP entry decompressed to ${decompressed.byteLength} bytes, expected ${resolved.entry.uncompressedSize}.`,
               resolved.entry.normalizedPath,
             ),
           ],

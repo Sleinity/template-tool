@@ -1,3 +1,5 @@
+import type { TemplateRepository } from "../persistence/publicRepositories";
+import { retainSessionAssetUrls } from "./sessionAssetUrlLeases";
 import type { AssetStorageAdapter } from "../assets";
 import {
   clearTemplatePackageImageOverride,
@@ -44,7 +46,6 @@ import {
 import type {
   SavedTemplateRecord,
   SavedTemplateSourceMetadata,
-  TemplateRepository,
 } from "../persistence/types";
 
 export const TEMPLATE_SESSION_SCHEMA_VERSION = "template-session-snapshot-v1" as const;
@@ -324,6 +325,17 @@ export function createTemplateSessionWithDependencies(
   let snapshot = emptySnapshot();
   let operationRevision = 0;
   let disposed = false;
+  let saveTail: Promise<void> = Promise.resolve();
+  let recordGeneration = 0;
+  let reservedSaveId: string | null = null;
+  let releaseImport: (() => void) | undefined;
+  const replaceRecord = () => {
+    recordGeneration += 1;
+    reservedSaveId = null;
+    const release = releaseImport;
+    releaseImport = undefined;
+    release?.();
+  };
   const listeners = new Set<() => void>();
   const repository = options.repository ?? getTemplateRepository();
   const fontRegistry = Object.prototype.hasOwnProperty.call(options, "fontRegistry")
@@ -583,6 +595,7 @@ export function createTemplateSessionWithDependencies(
     },
     async loadZip(input) {
       assertActive();
+      replaceRecord();
       const candidateRevision = ++operationRevision;
       publish({
         status: "loading",
@@ -612,7 +625,11 @@ export function createTemplateSessionWithDependencies(
           assetStorage: options.assetStorage,
           fontRegistry: options.fontRegistry,
         });
-        if (disposed || candidateRevision !== operationRevision) return snapshot;
+        if (disposed || candidateRevision !== operationRevision) {
+          result.dispose?.();
+          return snapshot;
+        }
+        releaseImport = result.dispose?.bind(result);
         const basePackage = result.loadedSource?.originalPackageValue ?? result.package;
         if (!basePackage || !result.package || !result.validation?.valid) {
           const diagnostics = blockedImportDiagnostics(result);
@@ -789,6 +806,10 @@ export function createTemplateSessionWithDependencies(
         };
       }
 
+      const retainIncoming = retainSessionAssetUrls([...Object.values(importedPackage.assets), ...Object.values(packageValue.assets)]
+        .flatMap(asset => asset.stableUrl ? [asset.stableUrl] : []));
+      replaceRecord();
+      releaseImport = retainIncoming;
       operationRevision += 1;
       const source = input.source ? structuredClone(input.source) : null;
       const originalImportValidation =
@@ -820,6 +841,7 @@ export function createTemplateSessionWithDependencies(
     },
     async loadSavedTemplate(id) {
       assertActive();
+      replaceRecord();
       const candidateRevision = ++operationRevision;
       publish({
         ...snapshotPayload(snapshot),
@@ -870,25 +892,38 @@ export function createTemplateSessionWithDependencies(
         throw new Error("Only a valid ready TemplateSession can be saved.");
       }
       const capturedRevision = snapshot.revision;
-      const record = snapshot.savedTemplateId
-        ? await repository.updateTemplateSettings(snapshot.savedTemplateId, {
-            name: saveOptions.name ?? snapshot.workingPackage.name,
-            description: saveOptions.description,
-            workingPackage: snapshot.workingPackage,
-            validation: snapshot.validation,
-          })
-        : await repository.saveTemplate(createSavedTemplateRecord({
-            name: saveOptions.name ?? snapshot.workingPackage.name,
-            description: saveOptions.description,
-            packageValue: snapshot.basePackage,
-            workingPackageValue: snapshot.workingPackage,
-            validation: snapshot.validation,
-            source: snapshot.source ?? undefined,
-          }));
-      if (!disposed && snapshot.revision === capturedRevision) {
-        publish({ ...snapshotPayload(snapshot), savedTemplateId: record.id });
+      const generation = recordGeneration;
+      const record = createSavedTemplateRecord({
+        name: saveOptions.name ?? snapshot.workingPackage.name,
+        description: saveOptions.description,
+        packageValue: snapshot.basePackage,
+        workingPackageValue: snapshot.workingPackage,
+        validation: snapshot.validation,
+        source: snapshot.source ?? undefined,
+      });
+      record.id = reservedSaveId ?? snapshot.savedTemplateId ?? record.id;
+      reservedSaveId = record.id;
+      const releaseSave = retainSessionAssetUrls([...Object.values(record.originalPackage.assets), ...Object.values(record.workingPackage.assets)]
+        .flatMap(asset => asset.stableUrl ? [asset.stableUrl] : []));
+      const write = saveTail.then(async () => {
+        assertActive();
+        if (generation !== recordGeneration) throw new Error("Save cancelled because another template was loaded or the session was reset.");
+        const existing = await repository.getTemplate(record.id);
+        assertActive();
+        if (generation !== recordGeneration) throw new Error("Save cancelled because another template was loaded or the session was reset.");
+        return existing
+          ? repository.updateTemplateSettings(record.id, {
+              name: record.name, description: record.description,
+              workingPackage: record.workingPackage, validation: record.validation,
+            })
+          : repository.saveTemplate(record);
+      }).finally(releaseSave);
+      saveTail = write.then(() => undefined, () => undefined);
+      const saved = await write;
+      if (!disposed && generation === recordGeneration && snapshot.revision === capturedRevision) {
+        publish({ ...snapshotPayload(snapshot), savedTemplateId: saved.id });
       }
-      return record;
+      return saved;
     },
     setField(fieldId, value, fieldOptions = {}) {
       return applyMutation(fieldId, (packageValue, field) =>
@@ -985,6 +1020,7 @@ export function createTemplateSessionWithDependencies(
     },
     reset() {
       assertActive();
+      replaceRecord();
       operationRevision += 1;
       return publish({
         ...snapshotPayload(emptySnapshot()),
@@ -993,6 +1029,7 @@ export function createTemplateSessionWithDependencies(
     dispose() {
       if (disposed) return;
       disposed = true;
+      replaceRecord();
       operationRevision += 1;
       publish({
         ...snapshotPayload(snapshot),

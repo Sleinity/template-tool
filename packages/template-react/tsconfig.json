@@ -14,7 +14,8 @@
       "@sleinity/template-browser/assets": ["../template-browser/src/assets.ts"],
       "@sleinity/template-browser/capture": ["../template-browser/src/capture.ts"],
       "@sleinity/template-browser/importer": ["../template-browser/src/importer.ts"],
-      "@sleinity/template-browser/session": ["../template-browser/src/session.ts"]
+      "@sleinity/template-browser/session": ["../template-browser/src/session.ts"],
+      "@sleinity/template-browser/session-internal": ["../template-browser/src/session-internal.ts"]
     }
   },
   "include": ["src", "test"]

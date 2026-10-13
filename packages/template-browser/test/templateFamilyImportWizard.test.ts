@@ -190,6 +190,11 @@ assert(
     await verifyTemplateFamilyImportConfirmation(confirmation),
   "Confirmation must freeze the family and verify every package plus the family-level digest.",
 );
+const historical = { ...structuredClone(confirmation), sdkVersion: "0.9.0" };
+assert(await verifyTemplateFamilyImportConfirmation(historical), "Historical 0.9.0 Family confirmations remain accepted without rewriting their digests.");
+assert(await verifyTemplateFamilyImportConfirmation({ ...historical, sdkVersion: "0.10.0" }), "Release metadata does not invalidate an otherwise supported confirmation schema and digest.");
+assert(!await verifyTemplateFamilyImportConfirmation({ ...historical, sdkVersion: "" }), "A confirmation must identify its producing release.");
+assert(confirmation.sdkVersion === "0.8.0", "New Family confirmations identify the actual SDK release.");
 const tampered = structuredClone(confirmation);
 tampered.family.title = "Tampered family";
 assert(

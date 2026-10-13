@@ -31,6 +31,7 @@ import {
 export interface TemplateFamilyOverviewPageProps {
   records: readonly SavedTemplateFamilyRecord[];
   drafts: readonly SavedTemplateFamilyDraftRecord[];
+  previewUrls?: Readonly<Record<string, string>>;
   error?: string | null;
   onCreate: () => void;
   onStartNew: (familyId: string) => void;
@@ -51,7 +52,11 @@ function formatDate(value: string): string {
   return Number.isNaN(date.getTime()) ? "Date unavailable" : `Updated ${dateFormatter.format(date)}`;
 }
 
-function safeCardPreview(record: SavedTemplateFamilyRecord): string | undefined {
+function safeCardPreview(
+  record: SavedTemplateFamilyRecord,
+  managedPreviewUrl?: string,
+): string | undefined {
+  if (managedPreviewUrl) return managedPreviewUrl;
   const packageValue = record.family.variants[0]?.packageValue;
   const preview = packageValue?.referencePreview;
   const source = preview?.assetId
@@ -77,16 +82,18 @@ function FamilyCard({
   onOpen,
   onSettings,
   onDelete,
+  previewUrl,
 }: {
   record: SavedTemplateFamilyRecord;
   onOpen: () => void;
   onSettings: () => void;
   onDelete: () => Promise<void>;
+  previewUrl?: string;
 }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const counts = fieldCounts(record);
   const first = record.family.variants[0]?.packageValue;
-  const preview = safeCardPreview(record);
+  const preview = safeCardPreview(record, previewUrl);
   return (
     <article className="template-card family-template-card" data-testid="family-template-card">
       <button
@@ -173,6 +180,7 @@ function DraftRow({
 export function TemplateFamilyOverviewPage({
   records,
   drafts,
+  previewUrls = {},
   error,
   onCreate,
   onStartNew,
@@ -232,6 +240,7 @@ export function TemplateFamilyOverviewPage({
                   <FamilyCard
                     key={record.id}
                     record={record}
+                    previewUrl={previewUrls[record.id]}
                     onOpen={() => requestOpen(record.id)}
                     onSettings={() => onSettings(record.id)}
                     onDelete={() => onDelete(record.id)}

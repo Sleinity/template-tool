@@ -1,3 +1,4 @@
+import { retainSessionAssetUrls } from "./sessionAssetUrlLeases";
 import type { PackageImageAsset, TemplatePackageV1 } from "@sleinity/template-core";
 import {
   TEMPLATE_FAMILY_CONTENT_SCHEMA_VERSION,
@@ -267,11 +268,27 @@ export function createTemplateFamilySession(
   const templateRepository = options.templateRepository ?? getTemplateRepository();
   const renderSession = options.renderSession ?? createTemplateSession({
     assetStorage: options.assetStorage,
-    fontRegistry: options.fontRegistry,
     repository: templateRepository,
+    ...(Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+      ? { fontRegistry: options.fontRegistry }
+      : {}),
   });
   let snapshot = emptySnapshot();
   let disposed = false;
+  let saveTail: Promise<void> = Promise.resolve();
+  let recordGeneration = 0;
+  let reservedDraftId: string | null = null;
+  const replaceRecord = () => { recordGeneration += 1; reservedDraftId = null; };
+  const enqueueSave = <T,>(generation: number, assets: readonly TemplatePackageV1["assets"][string][], write: () => Promise<T>) => {
+    const releaseSave = retainSessionAssetUrls(assets.flatMap(asset => asset.stableUrl ? [asset.stableUrl] : []));
+    const pending = saveTail.then(() => {
+      assertActive();
+      if (generation !== recordGeneration) throw new Error("Save cancelled because another family was loaded or the session was reset.");
+      return write();
+    }).finally(releaseSave);
+    saveTail = pending.then(() => undefined, () => undefined);
+    return pending;
+  };
   let suppressRenderNotification = false;
   const listeners = new Set<() => void>();
 
@@ -480,6 +497,7 @@ export function createTemplateFamilySession(
     load(input) {
       assertActive();
       if (!checkExpected(input.expectedOperationRevision)) return staleResult();
+      replaceRecord();
       const family = structuredClone(input.family);
       const content = input.content ? structuredClone(input.content) : defaultContent(family);
       const selectedFromGroups = input.groupSelections
@@ -519,6 +537,7 @@ export function createTemplateFamilySession(
     },
     async loadSavedFamily(id, draftId) {
       assertActive();
+      replaceRecord();
       const captured = snapshot.operationRevision;
       try {
         const record = await familyRepository.getFamily(id);
@@ -567,6 +586,7 @@ export function createTemplateFamilySession(
     },
     async loadLegacyTemplate(id, draftId) {
       assertActive();
+      replaceRecord();
       const captured = snapshot.operationRevision;
       try {
         const template = await templateRepository.getTemplate(id);
@@ -773,56 +793,50 @@ export function createTemplateFamilySession(
         throw new Error("Resolve family definition blockers before saving.");
       }
       const captured = snapshot.operationRevision;
-      const existing = snapshot.savedFamilyId
-        ? await familyRepository.getFamily(snapshot.savedFamilyId)
-        : null;
-      const record = existing
-        ? {
-            ...existing,
-            name: saveOptions.name?.trim() || current.family.title,
-            description: saveOptions.description?.trim(),
-            family: structuredClone(current.family),
-            validation: validateTemplateFamily(current.family),
-            sharedImageAssets: structuredClone(current.sharedImageAssets),
-          }
-        : createSavedTemplateFamilyRecord({
-            family: current.family,
-            name: saveOptions.name,
-            description: saveOptions.description,
-            sharedImageAssets: current.sharedImageAssets,
-          });
-      const saved = await familyRepository.saveFamily(record);
-      if (!disposed && captured === snapshot.operationRevision) publish({ savedFamilyId: saved.id });
+      const generation = recordGeneration;
+      const record = createSavedTemplateFamilyRecord({
+        family: current.family, name: saveOptions.name, description: saveOptions.description,
+        sharedImageAssets: current.sharedImageAssets,
+      });
+      record.id = snapshot.savedFamilyId ?? record.id;
+      const saved = await enqueueSave(generation, [...current.family.variants.flatMap(variant => Object.values(variant.packageValue.assets)), ...Object.values(current.sharedImageAssets)], async () => {
+        const existing = await familyRepository.getFamily(record.id);
+        assertActive();
+        if (generation !== recordGeneration) throw new Error("Save cancelled because another family was loaded or the session was reset.");
+        return familyRepository.saveFamily(existing ? {
+          ...existing, name: record.name, description: record.description,
+          family: record.family, validation: record.validation, sharedImageAssets: record.sharedImageAssets,
+        } : record);
+      });
+      if (!disposed && generation === recordGeneration && captured === snapshot.operationRevision) publish({ savedFamilyId: saved.id });
       return saved;
     },
     async saveDraft(name) {
       const current = requireLoaded();
       const captured = snapshot.operationRevision;
-      const existing = snapshot.savedDraftId
-        ? await familyRepository.getFamilyDraft(snapshot.savedDraftId)
-        : null;
-      const record = existing
-        ? {
-            ...existing,
-            name: name?.trim() || existing.name,
-            content: structuredClone(current.content),
-            validation: validateTemplateFamily(current.family, current.content),
-            selectedVariantId: current.selectedVariantId,
-            sharedImageAssets: structuredClone(current.sharedImageAssets),
-          }
-        : createSavedTemplateFamilyDraftRecord({
-            family: current.family,
-            content: current.content,
-            selectedVariantId: current.selectedVariantId,
-            name,
-            sharedImageAssets: current.sharedImageAssets,
-          });
-      const saved = await familyRepository.saveFamilyDraft(record);
-      if (!disposed && captured === snapshot.operationRevision) publish({ savedDraftId: saved.id });
+      const generation = recordGeneration;
+      const record = createSavedTemplateFamilyDraftRecord({
+        family: current.family, content: current.content, selectedVariantId: current.selectedVariantId,
+        name, sharedImageAssets: current.sharedImageAssets,
+      });
+      record.id = reservedDraftId ?? snapshot.savedDraftId ?? record.id;
+      reservedDraftId = record.id;
+      const saved = await enqueueSave(generation, [...current.family.variants.flatMap(variant => Object.values(variant.packageValue.assets)), ...Object.values(current.sharedImageAssets)], async () => {
+        const existing = await familyRepository.getFamilyDraft(record.id);
+        assertActive();
+        if (generation !== recordGeneration) throw new Error("Save cancelled because another family was loaded or the session was reset.");
+        return familyRepository.saveFamilyDraft(existing ? {
+          ...existing, name: name?.trim() || existing.name, content: record.content,
+          validation: record.validation, selectedVariantId: record.selectedVariantId,
+          sharedImageAssets: record.sharedImageAssets,
+        } : record);
+      });
+      if (!disposed && generation === recordGeneration && captured === snapshot.operationRevision) publish({ savedDraftId: saved.id });
       return saved;
     },
     reset() {
       assertActive();
+      replaceRecord();
       suppressRenderNotification = true;
       renderSession.reset();
       suppressRenderNotification = false;
@@ -837,6 +851,7 @@ export function createTemplateFamilySession(
     dispose() {
       if (disposed) return;
       disposed = true;
+      replaceRecord();
       renderUnsubscribe();
       renderSession.dispose();
       publish({

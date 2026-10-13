@@ -6,6 +6,7 @@ import { invalidateDependencyGraph } from "../../src/template-package/settlement
 import { createMeasurementSnapshot } from "../../src/template-package/settlement/measurement";
 import { normalizeDependencyGraph, normalizeMeasurementSnapshot, normalizeSettledSceneGraph, settlementTrace } from "../../src/template-package/settlement/serializeSettlement";
 import { settleSceneGraph } from "../../src/template-package/settlement/settleSceneGraph";
+import { resolvePackageMaskRelationships } from "../../packages/template-core/src/masks/packageMaskRelationships";
 
 const clock = () => typeof performance !== "undefined" ? performance.now() : Date.now();
 
@@ -40,6 +41,18 @@ function applyScenario(packageValue, scenario) {
   }
   if (scenario.type === "font-state") return { event: { type: "font-state-change", fontId: scenario.fontId }, revisionChanges: { fonts: 1 } };
   if (scenario.type === "asset-state") return { event: { type: "asset-state-change", assetId: scenario.assetId }, revisionChanges: { assets: 1 } };
+  if (scenario.type === "mask-state") {
+    const relationship = packageValue.maskRelationships?.[0];
+    if (!relationship) throw new Error(`Scenario ${scenario.id} requires a declared mask relationship.`);
+    const nodeId = scenario.target === "affected" ? relationship.affectedSiblingIds[0] : relationship.maskSourceId;
+    const node = packageValue.nodes[nodeId];
+    if (scenario.property === "opacity") node.appearance.opacity = scenario.value;
+    else if (scenario.property === "width") {
+      node.bounds.relative.width = scenario.value;
+      node.bounds.absolute.width = scenario.value;
+    } else throw new Error(`Unknown mask scenario property ${scenario.property}.`);
+    return { event: { type: "property-change", nodeId, property: scenario.property === "opacity" ? "appearance.opacity" : "bounds" }, revisionChanges: { package: 1 } };
+  }
   throw new Error(`Unknown settlement scenario type ${scenario.type}.`);
 }
 
@@ -73,7 +86,8 @@ export async function resolveFixtureSettlement(bytes, sourceName, fixture, obser
   const profile = observation?.environmentProfile || "synthetic-test";
   const measurements = observation ? createMeasurementSnapshot({ ...observation, fixture, revision }) : syntheticMeasurement(scene, fixture, scenario?.id || "synthetic", profile, revision);
   const settlementStart = clock();
-  const settled = settleSceneGraph({ schemaVersion: "settlement-input-v1", fixture, surface: measurements.surface, environmentProfile: profile, scene, dependencies, measurements, revision });
+  const maskResolution = resolvePackageMaskRelationships(imported.package);
+  const settled = settleSceneGraph({ schemaVersion: "settlement-input-v1", fixture, surface: measurements.surface, environmentProfile: profile, scene, dependencies, measurements, revision, maskResolution });
   const settlementMs = clock() - settlementStart;
   if (scenarioResult.event) settled.invalidation = invalidateDependencyGraph(dependencies, [scenarioResult.event]);
   const comparison = compareSettlementToMeasurements(settled, measurements);
@@ -84,6 +98,8 @@ export async function resolveFixtureSettlement(bytes, sourceName, fixture, obser
     settled: normalizeSettledSceneGraph(settled),
     trace: settlementTrace(settled),
     comparison,
+    maskResolution,
+    maskEvidence: Object.fromEntries(Object.entries(settled.nodes).filter(([, node]) => node.mask.relationships).map(([id, node]) => [id, node.mask])),
     scenario: scenario ? { definition: scenario, result: scenarioResult } : null,
     performance: { importMs, sceneMs, dependencyMs, settlementMs, inputZipBytes: array.byteLength, sceneBytes: new TextEncoder().encode(JSON.stringify(scene)).byteLength, dependencyBytes: new TextEncoder().encode(JSON.stringify(dependencies)).byteLength, settledBytes: new TextEncoder().encode(JSON.stringify(settled)).byteLength, approximateHeapUsedBytes: typeof process !== "undefined" ? process.memoryUsage().heapUsed : null },
   };

@@ -53,8 +53,12 @@ function initialBounds(scene: CanonicalSceneGraphV1, measurements: Map<string, I
 function layoutParent(scene: CanonicalSceneGraphV1, route: CoreLayoutRouteV1, parentId: string, bounds: Map<string, Rect>): void {
   const parent = scene.nodes[parentId];
   if (!parent || !route.nodes[parentId]?.routed || parent.layout.autoLayout.mode.value === "NONE") return;
-  const participants = parent.identity.children.map((id) => scene.nodes[id]).filter((child): child is CanonicalSceneNodeV1 => Boolean(child && route.nodes[child.identity.id]?.routed && child.layout.positioning.value !== "ABSOLUTE"));
-  if (!participants.length) return;
+  const participants = parent.identity.children.map((id) => scene.nodes[id]).filter((child): child is CanonicalSceneNodeV1 => Boolean(
+    child &&
+    route.nodes[child.identity.id]?.participation === "active" &&
+    route.nodes[child.identity.id]?.routed &&
+    child.layout.positioning.value !== "ABSOLUTE",
+  ));
   const parentRect = bounds.get(parentId)!;
   const vertical = parent.layout.autoLayout.mode.value === "VERTICAL";
   const padding = parent.layout.autoLayout.padding.value;
@@ -65,12 +69,17 @@ function layoutParent(scene: CanonicalSceneGraphV1, route: CoreLayoutRouteV1, pa
   const gap = parent.layout.autoLayout.gap.value;
 
   if (parent.layout.sizing.horizontal.mode.value === "HUG") {
-    parentRect.width = padding.left + padding.right + (vertical ? Math.max(...participants.map((child) => bounds.get(child.identity.id)!.width)) : participants.reduce((sum, child) => sum + bounds.get(child.identity.id)!.width, 0) + gap * Math.max(0, participants.length - 1));
+    parentRect.width = padding.left + padding.right + (vertical
+      ? (participants.length ? Math.max(...participants.map((child) => bounds.get(child.identity.id)!.width)) : 0)
+      : participants.reduce((sum, child) => sum + bounds.get(child.identity.id)!.width, 0) + gap * Math.max(0, participants.length - 1));
   }
   if (parent.layout.sizing.vertical.mode.value === "HUG") {
-    parentRect.height = padding.top + padding.bottom + (vertical ? participants.reduce((sum, child) => sum + bounds.get(child.identity.id)!.height, 0) + gap * Math.max(0, participants.length - 1) : Math.max(...participants.map((child) => bounds.get(child.identity.id)!.height)));
+    parentRect.height = padding.top + padding.bottom + (vertical
+      ? participants.reduce((sum, child) => sum + bounds.get(child.identity.id)!.height, 0) + gap * Math.max(0, participants.length - 1)
+      : (participants.length ? Math.max(...participants.map((child) => bounds.get(child.identity.id)!.height)) : 0));
   }
   applyAxisLimits(parent, parentRect);
+  if (!participants.length) return;
 
   const availableMain = Math.max(0, axis(parentRect, vertical, "main") - mainBefore - mainAfter);
   const fixedMain = participants.reduce((sum, child) => {
@@ -107,13 +116,26 @@ export function settleCoreLayout(input: {
   scene: CanonicalSceneGraphV1;
   route: CoreLayoutRouteV1;
   revision: string;
+  publicationGeneration?: number;
   textMeasurements?: IntrinsicTextMeasurementV1[];
   maxIterations?: number;
   tolerance?: number;
 }): CoreLayoutSettlementV1 {
   const started = typeof performance !== "undefined" ? performance.now() : Date.now();
-  const textMeasurements = new Map((input.textMeasurements ?? []).filter((measurement) => measurement.revision === input.revision).map((measurement) => [measurement.nodeId, measurement]));
-  const staleMeasurements = (input.textMeasurements ?? []).filter((measurement) => measurement.revision !== input.revision);
+  const publicationGeneration = input.publicationGeneration ?? 0;
+  const textMeasurements = new Map((input.textMeasurements ?? []).filter((measurement) =>
+    measurement.revision === input.revision &&
+    measurement.publicationGeneration === publicationGeneration &&
+    input.route.nodes[measurement.nodeId]?.participation === "active",
+  ).map((measurement) => [measurement.nodeId, measurement]));
+  const staleMeasurements = (input.textMeasurements ?? []).filter((measurement) =>
+    measurement.revision !== input.revision || measurement.publicationGeneration !== publicationGeneration,
+  );
+  const excludedMeasurements = (input.textMeasurements ?? []).filter((measurement) =>
+    measurement.revision === input.revision &&
+    measurement.publicationGeneration === publicationGeneration &&
+    input.route.nodes[measurement.nodeId]?.participation !== "active",
+  );
   const bounds = initialBounds(input.scene, textMeasurements);
   const maximum = input.maxIterations ?? 12;
   const tolerance = input.tolerance ?? 0.001;
@@ -184,6 +206,7 @@ export function settleCoreLayout(input: {
     schemaVersion: "core-layout-settlement-v1",
     settlementId: `core-${stableHash(identityInput)}`,
     revision: input.revision,
+    ...(publicationGeneration ? { publicationGeneration } : {}),
     rootNodeId: input.scene.rootNodeId,
     nodeOrder: [...input.scene.nodeOrder],
     nodes,
@@ -195,10 +218,14 @@ export function settleCoreLayout(input: {
     recomputedNodeIds: [...input.route.routedNodeIds],
     routedNodeCount: input.route.routedNodeIds.length,
     compatibilityNodeCount: input.route.compatibilityNodeIds.length,
+    ...(input.route.excludedNodeIds.length
+      ? { excludedNodeCount: input.route.excludedNodeIds.length }
+      : {}),
     fallbackBoundaries: input.route.fallbackBoundaries,
     diagnostics: [
       ...missingMeasurements.map((nodeId) => ({ code: "runtime-routing.measurement-pending", nodeId, message: "A current intrinsic text measurement is required before this route is ready." })),
-      ...staleMeasurements.map((measurement) => ({ code: "runtime-routing.stale-measurement-rejected", nodeId: measurement.nodeId, message: `Measurement revision ${measurement.revision} does not match ${input.revision}.` })),
+      ...staleMeasurements.map((measurement) => ({ code: "runtime-routing.stale-measurement-rejected", nodeId: measurement.nodeId, message: `Measurement identity ${measurement.revision}@${measurement.publicationGeneration} does not match ${input.revision}@${publicationGeneration}.` })),
+      ...excludedMeasurements.map((measurement) => ({ code: "runtime-routing.excluded-measurement-rejected", nodeId: measurement.nodeId, message: "A structurally excluded node cannot publish intrinsic measurement evidence." })),
       ...input.route.fallbackBoundaries.map((boundary) => ({ code: "runtime-routing.compatibility-boundary", nodeId: boundary.nodeId, message: boundary.reasonCodes.join(", ") })),
     ],
   };

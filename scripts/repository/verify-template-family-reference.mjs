@@ -435,7 +435,7 @@ try {
   }
 
   await context.setOffline(true);
-  await page.getByRole("button", { name: "Save, reset and reopen offline" }).click();
+  await page.getByRole("button", { name: "Save session checkpoint and reopen offline" }).click();
   await page.waitForFunction(() => {
     const status = document.querySelector('[data-testid="family-persistence-status"]')?.textContent;
     return status === "reopened" || status === "blocked";

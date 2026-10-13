@@ -1,0 +1,60 @@
+name: Frozen SDK candidate certification
+on:
+  push:
+    branches: ['codex/sdk-1-certification-20261013c']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sdk-candidate-${{ github.sha }}
+  cancel-in-progress: false
+jobs:
+  inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Transfer frozen candidate and encrypted fixtures
+        uses: actions/upload-artifact@v4
+        with:
+          name: frozen-candidate-inputs
+          path: .certification-input/
+          include-hidden-files: true
+          retention-days: 3
+          if-no-files-found: error
+  linux:
+    needs: inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - uses: actions/download-artifact@v4
+        with:
+          name: frozen-candidate-inputs
+          path: ${{ runner.temp }}/candidate-inputs
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Verify candidate before decrypting fixtures
+        run: node scripts/candidate-certification/frozen.mjs verify "$RUNNER_TEMP/candidate-inputs/archives" --sources
+      - name: Restore authenticated exact fixtures
+        run: node scripts/candidate-certification/fixtures.mjs restore "$RUNNER_TEMP/candidate-inputs/fixtures.enc" "$RUNNER_TEMP/sdk-fixtures"
+        env:
+          SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY_20261013C }}
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Functional acceptance of supplied archives only
+        run: node scripts/candidate-certification/run.mjs --archives "$RUNNER_TEMP/candidate-inputs/archives" --output "$RUNNER_TEMP/candidate-results"
+      - name: Remove decrypted fixtures
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: linux-candidate-results
+          path: ${{ runner.temp }}/candidate-results/
+          retention-days: 3
+          if-no-files-found: warn

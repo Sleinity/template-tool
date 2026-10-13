@@ -76,13 +76,15 @@ export async function createSavedAssetRecord(
   };
 }
 
-export async function collectSavedAssets(
-  packages: TemplatePackageV1[],
+type AssetBearingPackage = { assets: Record<string, PackageAsset> };
+
+export async function collectSavedAssets<PackageValue extends AssetBearingPackage>(
+  packages: readonly PackageValue[],
 ): Promise<{
   assets: SavedAssetRecord[];
   hashes: string[];
   fontHashes: string[];
-  packages: TemplatePackageV1[];
+  packages: PackageValue[];
 }> {
   const nextPackages = packages.map((item) => structuredClone(item));
   const records = new Map<string, SavedAssetRecord>();
@@ -172,10 +174,10 @@ export async function collectSavedAssetMap(
   };
 }
 
-export async function hydratePackageAssets(
-  packageValue: TemplatePackageV1,
+export async function hydratePackageAssets<PackageValue extends AssetBearingPackage>(
+  packageValue: PackageValue,
   getAsset: (hash: string) => Promise<SavedAssetRecord | null>,
-): Promise<TemplatePackageV1> {
+): Promise<PackageValue> {
   const hydrated = structuredClone(packageValue);
   for (const asset of Object.values(hydrated.assets)) {
     if (!asset.hash) continue;
@@ -216,7 +218,13 @@ export async function hydrateAssetMap(
 
 export function stripRuntimeAssetUrls(
   packageValue: TemplatePackageV1,
-): TemplatePackageV1 {
+): TemplatePackageV1;
+export function stripRuntimeAssetUrls<PackageValue extends AssetBearingPackage>(
+  packageValue: PackageValue,
+): PackageValue;
+export function stripRuntimeAssetUrls<PackageValue extends AssetBearingPackage>(
+  packageValue: PackageValue,
+): PackageValue {
   const next = structuredClone(packageValue);
   Object.values(next.assets).forEach((asset) => {
     if (asset.stableUrl?.startsWith("blob:")) delete asset.stableUrl;

@@ -18,6 +18,7 @@ import type {
   SavedAssetRecord,
   SavedTemplateFamilyDraftRecord,
   SavedTemplateFamilyRecord,
+  SavedTemplateFamilyWriteOptions,
   SavedOutputDraftRecord,
   SavedTemplateRecord,
   SavedTemplateWriteOptions,
@@ -265,6 +266,7 @@ export class InMemoryTemplateRepository implements TemplateRepository, TemplateF
 
   async saveFamily(
     record: SavedTemplateFamilyRecord,
+    options: SavedTemplateFamilyWriteOptions = {},
   ): Promise<SavedTemplateFamilyRecord> {
     const current = validateCurrentSavedTemplateFamilyRecord(record);
     const collected = await collectSavedTemplateFamilyAssets(
@@ -272,12 +274,21 @@ export class InMemoryTemplateRepository implements TemplateRepository, TemplateF
       current.sharedImageAssets,
     );
     collected.assets.forEach((asset) => this.assets.set(asset.hash, asset));
-    this.replaceOwnerReferences(`family-record:${current.id}`, collected.hashes);
+    Object.entries(options.variantPreviewAssets ?? {}).forEach(([variantId, asset]) => {
+      if (current.variantPreviewAssetHashes?.[variantId] === asset.hash) {
+        this.assets.set(asset.hash, asset);
+      }
+    });
+    const referencedHashes = new Set(collected.hashes);
+    Object.values(current.variantPreviewAssetHashes ?? {}).forEach((hash) =>
+      referencedHashes.add(hash),
+    );
+    this.replaceOwnerReferences(`family-record:${current.id}`, [...referencedHashes]);
     const stored: SavedTemplateFamilyRecord = {
       ...current,
       family: collected.family,
       sharedImageAssets: collected.sharedImageAssets,
-      assetReferences: collected.hashes,
+      assetReferences: [...referencedHashes],
       fontReferences: collected.fontHashes,
       updatedAt: new Date().toISOString(),
     };
@@ -331,11 +342,20 @@ export class InMemoryTemplateRepository implements TemplateRepository, TemplateF
   }
 
   private replaceOwnerReferences(id: string, hashes: readonly string[]): void {
+    const previousHashes = [...this.references.entries()]
+      .filter(([, owners]) => owners.has(id))
+      .map(([hash]) => hash);
     this.references.forEach((owners) => owners.delete(id));
     hashes.forEach((hash) => {
       const owners = this.references.get(hash) ?? new Set<string>();
       owners.add(id);
       this.references.set(hash, owners);
+    });
+    previousHashes.forEach((hash) => {
+      const owners = this.references.get(hash);
+      if (owners && owners.size > 0) return;
+      this.references.delete(hash);
+      this.assets.delete(hash);
     });
   }
 

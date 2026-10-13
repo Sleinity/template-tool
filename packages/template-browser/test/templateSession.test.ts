@@ -495,3 +495,87 @@ try {
   disposedMutationRejected = true;
 }
 assert(disposedMutationRejected, "Disposed sessions must reject further mutations.");
+
+// Save invocation order is a repository contract, not just a snapshot guard.
+{
+  const storage = new InMemoryTemplateRepository();
+  const write = storage.saveTemplate.bind(storage);
+  const entered = deferred<void>(); const release = deferred<void>();
+  let writes = 0;
+  storage.saveTemplate = async record => { writes++; if (writes === 1) { entered.resolve(); await release.promise; } return write(record); };
+  const owned = createTemplateSessionWithDependencies({ repository: storage }, dependencies);
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  const first = owned.save({ name: "First" }); await entered.promise;
+  const changedField = importedPackage.editableFields[0];
+  owned.setField(changedField.id, "Captured newer text");
+  const second = owned.save({ name: "Second" });
+  assert(writes === 1, "Overlapping saves must not enter storage concurrently.");
+  release.resolve();
+  const [a, b] = await Promise.all([first, second]);
+  assert(a.id === b.id && (await storage.getTemplate(a.id))?.name === "Second", "First-save identity is reserved and later invocation wins.");
+  assert((await storage.getTemplate(a.id))?.workingPackage.nodes[changedField.nodeId].text?.characters === "Captured newer text", "Later captured edits survive an earlier write completing late.");
+  owned.dispose();
+}
+for (const end of ["reset", "dispose"] as const) {
+  const storage = new InMemoryTemplateRepository();
+  const entered = deferred<void>(); const release = deferred<void>();
+  let writes = 0;
+  storage.saveTemplate = async record => { writes++; entered.resolve(); await release.promise; return record; };
+  const owned = createTemplateSessionWithDependencies({ repository: storage }, dependencies);
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  const active = owned.save(); await entered.promise;
+  const queued = owned.save().then(() => false, () => true);
+  owned[end](); release.resolve(); await active;
+  assert(await queued && writes === 1, `${end} cancels queued writes and prevents stale publication.`);
+  assert(owned.getSnapshot().savedTemplateId === null, "Completion cannot attach an old identity after reset/disposal.");
+  owned.dispose();
+}
+{
+  const storage = new InMemoryTemplateRepository();
+  const original = storage.saveTemplate.bind(storage); let calls = 0;
+  storage.saveTemplate = async record => { if (++calls === 1) throw new Error("Expected storage failure"); return original(record); };
+  const owned = createTemplateSessionWithDependencies({ repository: storage }, dependencies);
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  const failed = owned.save().then(() => false, () => true);
+  const retry = owned.save();
+  assert(await failed && (await retry).id === owned.getSnapshot().savedTemplateId, "Failed saves do not poison the queue.");
+  owned.dispose();
+}
+for (const end of ["reset", "dispose"] as const) {
+  const pending = deferred<PackageImportResult>(); let released = 0;
+  const owned = createTemplateSessionWithDependencies({}, { ...dependencies, importZip: () => pending.promise });
+  const load = owned.loadZip({ bytes: new ArrayBuffer(0) }); owned[end]();
+  pending.resolve({ ...successfulImport(), dispose: () => { released++; } }); await load;
+  assert(released === 1, "An import completed after cancellation releases its resources.");
+  owned.dispose();
+}
+{
+  let released = 0;
+  const owned = createTemplateSessionWithDependencies({}, { ...dependencies, importZip: async () => ({ ...successfulImport(), dispose: () => { released++; } }) });
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  assert(released === 0, "Accepted import resources remain alive while the session owns them.");
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  assert(Number(released) === 1, "Replacing a source releases the previous import.");
+  owned.dispose(); owned.dispose();
+  assert(Number(released) === 2, "Disposal releases the accepted import exactly once.");
+}
+{
+  const { sessionAssetUrlLeases } = await import("../src/session/sessionAssetUrlLeases");
+  const storage = new InMemoryTemplateRepository();
+  const entered = deferred<void>(); const release = deferred<void>(); let revocations = 0;
+  storage.saveTemplate = async record => { entered.resolve(); await release.promise; return record; };
+  const result = successfulImport();
+  const asset = Object.values(result.package!.assets)[0];
+  asset.stableUrl = "blob:legacy-save-resource";
+  sessionAssetUrlLeases.set(asset.stableUrl, { count: 1, revoke: () => { revocations++; } });
+  result.dispose = () => {
+    const lease = sessionAssetUrlLeases.get(asset.stableUrl!)!;
+    if (--lease.count === 0) { sessionAssetUrlLeases.delete(asset.stableUrl!); lease.revoke(); }
+  };
+  const owned = createTemplateSessionWithDependencies({ repository: storage }, { ...dependencies, importZip: async () => result });
+  await owned.loadZip({ bytes: new ArrayBuffer(0) });
+  const saving = owned.save(); await entered.promise; owned.dispose();
+  assert(revocations === 0, "An active repository write pins the imported asset beyond session disposal.");
+  release.resolve(); await saving;
+  assert(Number(revocations) === 1, "Completing the final write releases its last resource lease.");
+}

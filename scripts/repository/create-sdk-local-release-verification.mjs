@@ -1,10 +1,16 @@
-import { cp, mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import {
   loadRuntimePackageDefinitions,
   resolveFixedRuntimeVersion,
+  runtimeArchiveName,
 } from "./sdk-runtime-manifest.mjs";
+import { candidateManifestName, fileIdentity, sourceIdentity, validateCandidateManifest } from "./local-sdk-candidate.mjs";
+import { generateDeliveryBundle, deliveryManifestName } from "../release-delivery/bundle.mjs";
+import { loadManifest, verifyFixture } from "../fidelity/core.mjs";
+import { selectSdkGateFixtures } from "../fidelity/gate-profile.mjs";
+import { loadExactFontManifest } from "../fidelity/fonts.mjs";
 
 const root = process.cwd();
 const version = await resolveFixedRuntimeVersion(root);
@@ -31,45 +37,37 @@ function run(command, args, options = {}) {
 
 await mkdir(path.dirname(output), { recursive: true });
 await mkdir(output, { recursive: false });
+// Build before consumers inspect distribution files; pack/prepack remains sequential.
+for (const packageValue of packages) run(pnpmExecutable, ["--filter", packageValue.name, "build"]);
+const source = await sourceIdentity(root);
+const fixtureManifest = loadManifest();
+const fixtures = selectSdkGateFixtures(fixtureManifest);
+for (const fixture of fixtures) verifyFixture(fixtureManifest, fixture);
+const fonts = loadExactFontManifest(fixtures.flatMap(item => item.requiredFonts ?? [])).fonts;
 for (const packageValue of packages) {
   run(pnpmExecutable, ["pack", "--pack-destination", output], {
     cwd: path.join(root, "packages", packageValue.directory),
   });
 }
-run(process.execPath, [
-  path.join(root, "scripts/repository/create-runtime-release-handoff.mjs"),
-  output,
-  output,
-]);
-run(process.execPath, [
-  path.join(root, "scripts/repository/create-core-release-handoff.mjs"),
-  path.join(output, `sleinity-template-core-${version}.tgz`),
-  output,
-]);
-await Promise.all([
-  cp(
-    path.join(root, "docs/sdk/SDK_0_8_MIGRATION.md"),
-    path.join(output, "SDK-0.8-MIGRATION.md"),
-  ),
-  cp(
-    path.join(root, "docs/sdk/INSTALLATION.md"),
-    path.join(output, "SDK-INSTALLATION.md"),
-  ),
-  cp(
-    path.join(root, "docs/sdk/SDK_CAPABILITIES.md"),
-    path.join(output, "SDK-CAPABILITIES.md"),
-  ),
-  cp(
-    path.join(root, "docs/sdk/AGENT_INTEGRATION_PROMPTS.md"),
-    path.join(output, "AGENT-INTEGRATION-PROMPTS.md"),
-  ),
-]);
-await writeFile(
-  path.join(output, "LOCAL-RELEASE-VERIFICATION.md"),
-  `# SDK ${version} local release verification\n\n` +
-    `These locally packed archives verify the source tree before publication. ` +
-    `They are not public delivery artifacts. The sdk-v${version} tag workflow ` +
-    `publishes the fixed train and creates the final handoff only from archives ` +
-    `downloaded back from GitHub Packages.\n`,
-);
+const delivery = await generateDeliveryBundle({ archivesDirectory: output, outputDirectory: output,
+  root, version, mode: "local", provenance: "local-pack" });
+const candidateId = `unpublished-${version}-${source.filesSha256}`;
+const archives = [];
+for (const item of packages) {
+  const manifest = JSON.parse(await readFile(path.join(root, "packages", item.directory, "package.json"), "utf8"));
+  archives.push({ ...await fileIdentity(output, runtimeArchiveName(item, version)), name: item.name, version,
+    dependencies: manifest.dependencies ?? {}, peerDependencies: manifest.peerDependencies ?? {},
+    supportedEntries: Object.keys(manifest.exports).filter(entry => !manifest.sdkInternalExports?.includes(entry)),
+    restrictedEntries: manifest.sdkInternalExports ?? [] });
+}
+const documentNames = [...delivery.files.map(item => item.file), deliveryManifestName];
+const manifest = validateCandidateManifest({ schemaVersion: "local-sdk-candidate-v1", candidateId, version, published: false,
+  certification: "not-yet-verified", createdAt: new Date().toISOString(), source,
+  environment: { node: process.version, platform: process.platform, arch: process.arch,
+    packageManager: spawnSync(pnpmExecutable, ["--version"], { encoding: "utf8" }).stdout.trim() },
+  archives, documents: await Promise.all(documentNames.map(file => fileIdentity(output, file))),
+  fixtures: fixtures.map(item => ({ id: item.id, zipSha256: item.zipSha256, templateJsonSha256: item.templateJsonSha256, embeddedPreviewSha256: item.embeddedPreview.sha256 })),
+  fonts: fonts.map(({ id, sha256, byteSize, family, style, weight }) => ({ id, sha256, byteSize, family, style, weight })),
+}, packages, version);
+await writeFile(path.join(output, candidateManifestName), JSON.stringify(manifest, null, 2) + "\n");
 console.log(`Created SDK ${version} local release verification at ${output}.`);

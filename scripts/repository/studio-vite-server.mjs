@@ -1,5 +1,7 @@
 import path from "node:path";
 import { createServer } from "vite";
+import { r07RetainedPlugin } from "../r07/retained-plugin.mjs";
+import { retainedSourcePlugin } from "../text-geometry/retained-source-plugin.mjs";
 
 export const studioRoot = path.resolve(
   import.meta.dirname,
@@ -13,9 +15,13 @@ export function createStudioViteServer({
   port = 0,
   strictPort = false,
   logLevel = "error",
+  plugins = [],
 } = {}) {
   return createServer({
     root: studioRoot,
+    plugins: [...plugins, ...(process.env.R07_RETAINED_VARIANT ? [r07RetainedPlugin(process.env.R07_RETAINED_VARIANT)] : []), ...(process.env.EDITOR_RETAINED_SOURCE_IDENTITY
+      ? [retainedSourcePlugin(process.env.EDITOR_RETAINED_SOURCE_IDENTITY)]
+      : [])],
     logLevel,
     define: {
       "import.meta.env.VITE_TEMPLATE_PACKAGE_FONT_SETUP_HARNESS":

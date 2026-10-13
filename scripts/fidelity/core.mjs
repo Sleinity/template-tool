@@ -45,6 +45,14 @@ export function fixtureDirectory(manifest, environment = process.env) {
 }
 
 export function resolveFixture(manifest, fixture, environment = process.env) {
+  if (typeof fixture.sourcePath === "string" && fixture.sourcePath.length > 0) {
+    const expanded = fixture.sourcePath.replace(/\$\{([A-Z0-9_]+)\}/g, (_match, name) => {
+      if (environment[name]) return environment[name];
+      if (name === manifest.fixtureDirectoryEnv) return fixtureDirectory(manifest, environment);
+      throw new Error(`Fixture ${fixture.id} sourcePath requires missing environment variable ${name}.`);
+    });
+    return resolve(expanded);
+  }
   return join(fixtureDirectory(manifest, environment), fixture.filename);
 }
 
@@ -53,7 +61,7 @@ function packageMetadataFromZip(bytes) {
   const templateBytes = entries["template.json"];
   if (!templateBytes) throw new Error("ZIP is missing template.json.");
   const template = JSON.parse(new TextDecoder().decode(templateBytes));
-  return { entries, template };
+  return { entries, template, templateBytes };
 }
 
 export function verifyFixture(manifest, fixture, environment = process.env) {
@@ -70,7 +78,10 @@ export function verifyFixture(manifest, fixture, environment = process.env) {
   if (actualHash !== fixture.zipSha256) {
     throw new Error(`Fixture ${fixture.id} ZIP hash mismatch: expected ${fixture.zipSha256}, received ${actualHash}.`);
   }
-  const { entries, template } = packageMetadataFromZip(bytes);
+  const { entries, template, templateBytes } = packageMetadataFromZip(bytes);
+  if (fixture.templateJsonSha256 && sha256(templateBytes) !== fixture.templateJsonSha256) {
+    throw new Error(`Fixture ${fixture.id} template.json hash mismatch.`);
+  }
   const preview = fixture.embeddedPreview?.entry ? entries[fixture.embeddedPreview.entry] : null;
   const previewHash = preview ? sha256(preview) : null;
   if (fixture.embeddedPreview?.sha256 && previewHash !== fixture.embeddedPreview.sha256) {
@@ -185,6 +196,12 @@ export function compareGeometry(expected, actual, tolerances = {}) {
   return { equal, tolerances: tolerance, missingNodes, extraNodes, reorderedNodes, geometryChanges, textMeasurementChanges, textGeometryChanges, imagePlacementChanges };
 }
 
+function normalizeFontReadinessForComparison(readiness) {
+  if (!readiness) return readiness;
+  return { ...readiness, fonts: [...(readiness.fonts ?? [])].sort((a, b) =>
+    stableStringify(a).localeCompare(stableStringify(b))) };
+}
+
 export function createRepeatabilityReport(captures) {
   const reports = [];
   for (let index = 1; index < captures.length; index += 1) {
@@ -195,7 +212,7 @@ export function createRepeatabilityReport(captures) {
       pixel: current.pixelRepeat ?? null,
       geometry: compareGeometry(normalizeStructuralSnapshot(previous.structure), normalizeStructuralSnapshot(current.structure)),
       timingVariationMs: Object.fromEntries(Object.keys(current.timings ?? {}).map((key) => [key, rounded((current.timings?.[key] ?? 0) - (previous.timings?.[key] ?? 0), 2)])),
-      fontReadinessChanged: stableStringify(previous.fontReadiness ?? null) !== stableStringify(current.fontReadiness ?? null),
+      fontReadinessChanged: stableStringify(normalizeFontReadinessForComparison(previous.fontReadiness ?? null)) !== stableStringify(normalizeFontReadinessForComparison(current.fontReadiness ?? null)),
     });
   }
   return { repeatCount: captures.length, stable: reports.every((item) => item.pixel?.equal !== false && item.geometry.equal && !item.fontReadinessChanged), comparisons: reports };

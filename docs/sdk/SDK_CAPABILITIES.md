@@ -1,28 +1,34 @@
-# SDK 0.8.0 capability catalog
+# SDK capability catalog — current contract
 
 Use this catalog to choose the smallest supported SDK surface for a host
 application. It describes the available building blocks and their ownership;
 the linked guides remain the detailed implementation authorities.
 
-## Start with the outcome
+## Start with the current V2 path
 
-| I need to… | Start with | Runtime | Classification |
-| --- | --- | --- | --- |
-| Read and validate a ZIP without rendering | `importTemplatePackage()` from `@sleinity/template-core` | Modern Node or browser; no DOM | Supported low-level adapter |
-| Define or validate shared fields across ZIP variants | `createTemplateFamilyFromPackage()` and `validateTemplateFamily()` from `@sleinity/template-core/family` | Modern Node or browser; no DOM | Recommended high-level integration |
-| Build a setup flow without React | `createTemplateImportWizard()` from `@sleinity/template-browser/importer` | Browser | Recommended high-level integration |
-| Build a family setup flow without React | `createTemplateFamilyImportWizard()` from `@sleinity/template-browser/importer` | Browser | Recommended high-level integration |
-| Use the complete setup interface | `TemplateImportWizard` and `useTemplateImportWizard()` from `@sleinity/template-react/importer`, plus `@sleinity/template-react/importer.css` | React 19 and modern browser | Recommended high-level integration |
-| Put the setup workflow in custom React UI | `TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot()` and `TemplateImportWizardPreview` | React 19 and modern browser | Recommended high-level integration |
-| Reopen and edit a confirmed template | `loadTemplateImportConfirmation()`, `useTemplateSession()` and the React editor entry | React 19 and modern browser | Recommended high-level integration |
-| Build a non-React editor | `createTemplateSession()` from `@sleinity/template-browser/session` | Browser | Recommended high-level integration |
-| Edit shared family content in React or headlessly | `createTemplateFamilySession()` or `useTemplateFamilyEditor()` | Browser; React 19 for the hook | Recommended high-level integration |
-| Inspect technical quality or fidelity risk | The core or React `inspection` entry | Depends on selected entry | Supported advanced inspection |
-| Learn from a working integration | `examples/minimal-renderer`, `examples/template-editor-integration` or `examples/template-family-integration` | Browser example | Executable documentation |
+This catalog describes the **unpublished workspace candidate**, whose packages
+still carry version 0.8.0. Published installation/migration instructions remain
+historical. Use the candidate manifest and exact archives to identify current
+behavior. See [V2 integration](V2_INTEGRATION.md) and
+[release preparation](RELEASE_PREPARATION.md).
 
-Prefer a recommended high-level entry. Use a low-level adapter only when the
-host needs to replace or compose that specific responsibility. Compatibility
-entries are supported reopening and runtime checks, not a second renderer.
+| I need to… | Start with | Owner |
+| --- | --- | --- |
+| Read a ZIP without browser resources | `importTemplatePackage()` from Core, then `parseTemplatePackageV2()` | Portable source reading/normalization/validation |
+| Import a canonical V2 ZIP in a browser | `runTemplatePackageImportPipelineV2()` from Browser `/importer` | Import/parse evidence, preview and explicit candidate disposal |
+| Assemble, promote or append Family designs | Browser `/importer` authoring operations | Isolated accepted-configuration transactions and source identities |
+| Edit one design | `createTemplateSessionV2()` or React `useTemplateSessionV2()` | Native single canonical lifecycle |
+| Edit a Family | `createTemplateFieldFamilySessionV2()` or React `useTemplateFieldFamilySessionV2()` | Shared content, selected effective package and placement overrides |
+| Render fields and export PNG | `TemplateFieldSessionRendererV2`, snapshot/controller hooks from React `/editor` | Current evidence, readiness and selected output |
+| Retain unfinished editing | Browser `/persistence` template recovery | One token-protected recovery slot per template; no draft catalogue |
+| Prepare exact fonts | Browser `/fonts` | Verified binary identity, explicit linking and private face activation |
+| Inspect technical quality | Core or React `/inspection` | Existing diagnostics and observational evidence |
+
+Choose the single path unless several designs actually share content. Hosts own
+forms, navigation, font acquisition choices, local-input coordination and delivery.
+SDK-internal entries are prohibited for hosts. The V1 wizard, confirmation and
+session examples below remain supported compatibility guidance; they are not the
+recommended new V2 ingestion/editing path.
 
 ## Import and validation
 
@@ -45,7 +51,7 @@ resolution and scene projections. It has no DOM, storage, React, runtime secret,
 or network requirement. It does not activate fonts, persist browser records,
 render UI, or capture PNGs. See the [core importer handoff](CORE_IMPORTER_HANDOFF.md).
 
-## Setup wizard
+## Compatibility setup wizard
 
 The default React wizard owns Package, Fonts, Validate, Fields and Confirm:
 
@@ -193,7 +199,7 @@ they are not input components. The host owns forms, labels, image preparation,
 cropping UI and product actions. Core `editor` exports are supported low-level
 validation and mutation tools for non-React compositions.
 
-## Session, confirmation and reopening
+## Compatibility session, confirmation and reopening
 
 `createTemplateSession()` owns one revision-safe editable runtime. In React,
 prefer `useTemplateSession()` for StrictMode-safe creation and disposal. A
@@ -217,7 +223,7 @@ Reopening revalidates the package and rebuilds derived state. Dispose sessions,
 wizard controllers, object URLs and subscriptions when their owning host
 lifecycle ends.
 
-## Rendering and PNG capture
+## Compatibility rendering and PNG capture
 
 For an ordinary React editor, `TemplateSessionViewport` is the preferred
 render-and-capture boundary. It fits the intrinsic renderer without changing
@@ -272,7 +278,7 @@ not a requirement to adopt the host's product storage policy.
   provider/session/renderer relationship.
 - [Template editor integration](../../examples/template-editor-integration/README.md)
   is executable documentation for setup, confirmation, fresh-session reopening,
-  descriptor-driven editing, local/offline drafts and silent PNG capture. Copy
+  descriptor-driven editing, generic save/reload and template-scoped recovery and silent PNG capture. Copy
   its SDK composition, not its in-memory dashboard or product presentation.
 - [Template Family integration](../../examples/template-family-integration/README.md)
   demonstrates two real ZIP inputs, shared content, generic selection,
@@ -307,11 +313,12 @@ remain supported, but focused entries reduce accidental coupling.
 | browser | `@sleinity/template-browser/compatibility` | `recommended-high-level-integration` | `inspectTemplateRuntimeSupport`, `inspectTemplateImportConfirmation`, `loadTemplateImportConfirmation` |
 | browser | `@sleinity/template-browser/enrichment` | `supported-low-level-adapter` | `enrichTemplatePackage`, `enrichTemplatePackageWithProvider` |
 | browser | `@sleinity/template-browser/fonts` | `supported-low-level-adapter` | `inspectOpenTypeFontBinary`, `uploadExactManagedFontForRequirement` |
-| browser | `@sleinity/template-browser/importer` | `recommended-high-level-integration` | `createTemplateImportWizard`, `TemplateImportConfirmationV1`, `createTemplateFamilyImportWizard`, `TemplateFamilyImportConfirmationV1`, `planTemplateFamilyVariantReimport` |
-| browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `IndexedDbTemplateRepository`, `InMemoryTemplateRepository`, `getTemplateFamilyRepository`, `listTemplateFamiliesIncludingLegacy` |
-| browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSession`, `TemplateSessionV1`, `createTemplateFamilySession`, `TemplateFamilySessionV1` |
+| browser | `@sleinity/template-browser/importer` | `recommended-high-level-integration` | `runTemplatePackageImportPipelineV2`, `appendTemplateSourcesV2`, `mutateTemplateFamilyV2`, `createTemplateFieldFamilyFromSourcesV2` |
+| browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `InMemoryTemplateSessionRepositoryV2`, `createIndexedDbTemplateRecoveryRepository`, `TemplateRecoveryRepository` |
+| browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSessionV2`, `TemplateSessionV2`, `createTemplateFieldFamilySessionV2`, `TemplateFieldFamilySessionV2` |
+| browser | `@sleinity/template-browser/session-internal` | `sdk-internal` | Prohibited for host applications |
 | react | `@sleinity/template-react` | `recommended-high-level-integration` | `useTemplateSession`, `TemplateSessionProvider`, `TemplateSessionRenderer`, `TemplatePackageRenderer` |
-| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateSessionViewport`, `useTemplateSessionEditableField`, `useTemplateSessionEditableFields`, `useTemplateSessionDiagnosticSummary`, `TemplateFamilySessionProvider`, `useTemplateFamilyEditor`, `useTemplateFamilyEditableFields`, `useTemplateFamilyVisibleFields` |
+| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateFieldSessionRendererV2`, `useTemplateFieldSessionV2Snapshot`, `useTemplateFieldControllersV2` |
 | react | `@sleinity/template-react/importer` | `recommended-high-level-integration` | `TemplateImportWizard`, `useTemplateImportWizard`, `TemplateFamilyImportWizardProvider`, `useTemplateFamilyImportWizard`, `TemplateFamilyZipInput`, `TemplateFamilyImportPreview` |
 | react | `@sleinity/template-react/importer.css` | `recommended-high-level-integration` | Stylesheet for the default importer interface |
 | react | `@sleinity/template-react/inspection` | `supported-advanced-inspection` | `analyzeRendererFeatureCoverage`, `createTemplatePackageQualityReport`, `analyzeFidelityRisk` |
@@ -320,38 +327,26 @@ remain supported, but focused entries reduce accidental coupling.
 
 ## Context for a coding agent
 
-Copy this block into Codex, Lovable, Cursor, Claude or another coding agent
-before asking it to design or change an integration:
-
 ```text
-Integrate Sleinity Template Platform SDK 0.8.0 using only published package
-entry points. Read docs/sdk/SDK_CAPABILITIES.md first, choose the smallest
-recommended high-level integration for the requested outcome. If several ZIP
-variants share content, use @sleinity/template-core/family plus the family
-APIs in the existing browser importer/session and React importer/editor entries.
-Otherwise preserve the simpler single-template route. Follow the selected
-linked detailed guide. Prefer @sleinity/template-browser/importer, /session and
-/compatibility plus @sleinity/template-react, /importer and /editor. Use
-low-level adapters only when the host explicitly owns that responsibility.
+Integrate the exact unpublished Sleinity SDK candidate supplied by the host.
+Read SDK-V2-INTEGRATION.md and LOCAL-CANDIDATE-MANIFEST.json first. Verify all
+archive checksums and install the complete fixed dependency closure. Do not
+mix published 0.8.0 archives with same-version local candidate archives.
 
-Never import from apps/studio, repository-relative source, package src/
-directories, root compatibility forwarders, or any renderer-internal entry.
-Do not copy Studio product UI or fidelity tooling into the host. Preserve host
-navigation, authentication, forms, image preparation, cloud persistence and
-publishing. The SDK owns import, validation, template session state, rendering,
-readiness and safe capture. Retain the immutable import confirmation in
-host-owned storage, reopen it in a fresh session, respect current-revision
-readiness, and dispose owned controllers and sessions. A family must render
-only its selected variant through TemplateSessionViewport; never create hidden
-variant renderers or flatten a multi-variant family into a single-template
-record.
+Use Browser /importer runTemplatePackageImportPipelineV2 and accept only ready
+results. Keep source and V2 parse evidence separate; dispose candidates after
+successful ownership handoff or abandoned review. Use native single/Family V2
+sessions, typed controllers, atomic authoring/configuration transactions and
+React /editor TemplateFieldSessionRendererV2 for current readiness and PNG.
+Retain exact managed-font identity and canonical Choice/Color/Image semantics.
+Use template-scoped recovery for unfinished work; no draft catalogue.
 
-Before modifying code, report the chosen path, exact package imports, host/SDK
-ownership boundary and lifecycle. After implementation, prove there are zero
-Studio, repository-source or renderer-internal imports.
+Hosts own product UI, navigation, input flush, font acquisition and delivery.
+Never import Studio, package src/, repository aliases, session-internal,
+renderer-internal or architectural experiments. Do not manufacture renderer
+line/font evidence or bypass readiness. Report chosen boundaries, ownership,
+installed archive identities, tests and any unverified scenarios.
 ```
 
-For staged implementation prompts, continue with the
-[provider-neutral agent tracks](AGENT_INTEGRATION_PROMPTS.md). For installation,
-archive verification and package-manager configuration, use the
-[installation guide](INSTALLATION.md).
+Continue with [agent prompts](AGENT_INTEGRATION_PROMPTS.md). Published-version
+archive installation remains in [INSTALLATION.md](INSTALLATION.md).

@@ -120,13 +120,15 @@ export function resolveLinearGradientGeometry(
   paint: PackageGradientPaint,
   sourceIndex: number,
   bounds: PackageRect,
+  options: { allowDarkenBlend?: boolean } = {},
 ): ResolvedLinearGradientGeometryV1 {
   const source = paint.linearGradientSource;
   if (!source || source.schemaVersion !== "linear-gradient-source-v1" || source.pairing !== "source-index" || source.sourceIndex !== sourceIndex) {
     return unsupported(paint, sourceIndex, bounds, "linear-gradient-canonical-source-missing");
   }
   if (source.conflicts.length > 0) return unsupported(paint, sourceIndex, bounds, "linear-gradient-source-conflict");
-  if ((paint.blendMode?.toUpperCase() ?? "NORMAL") !== "NORMAL") {
+  const blendMode = paint.blendMode?.toUpperCase() ?? "NORMAL";
+  if (blendMode !== "NORMAL" && !(options.allowDarkenBlend && blendMode === "DARKEN")) {
     return unsupported(paint, sourceIndex, bounds, "linear-gradient-blend-mode-unsupported");
   }
   const paintOpacity = paint.opacity ?? 1;

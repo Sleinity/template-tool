@@ -1,6 +1,7 @@
 import type { PackageAsset } from "./Assets";
 import type { PackageColor } from "./Appearance";
 import type { EditableFieldBinding } from "./EditableFieldBinding";
+import type { EditableFieldDefinitionV2 } from "./EditableFieldDefinitionV2";
 import type { PackageMotion } from "./PackageMotion";
 import type { TemplatePackageFontRequirement } from "./Fonts";
 import type { TemplateNode } from "./TemplateNode";
@@ -27,7 +28,8 @@ export interface TemplatePackageReferencePreview {
 
 export interface TemplatePackageSource {
   type?: "figma";
-  packageContract?: "template-package-v1";
+  /** Source contract provenance; normalization does not rewrite history. */
+  packageContract?: "template-package-v1" | "template-package-v2";
   pluginVersion?: string;
   fileKey?: string;
   url?: string;
@@ -84,4 +86,17 @@ export interface TemplatePackageV1 {
   maskRelationships?: PackageMaskRelationship[];
 }
 
-export type TemplatePackage = TemplatePackageV1;
+/** Strict canonical package contract targeted by the Field Rules V2 migration. */
+export interface TemplatePackageV2
+  extends Omit<TemplatePackageV1, "schemaVersion" | "editableFields"> {
+  schemaVersion: "2.2";
+  editableFields: EditableFieldDefinitionV2[];
+  /** Portable editor order; it has no renderer/layout authority. */
+  editableFieldOrder: string[];
+}
+
+/**
+ * The installed runtime remains V1 until the Milestone 2 semantic-kernel
+ * cutover. New integrations should target TemplatePackageV2 explicitly.
+ */
+export type TemplatePackage = TemplatePackageV1 | TemplatePackageV2;

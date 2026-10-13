@@ -1,4 +1,5 @@
 import type { CanonicalSceneGraphV1 } from "@sleinity/template-core";
+import type { StructuralParticipationStateV1 } from "./structuralParticipation";
 
 export type RuntimePropertyOwnershipState =
   | "settled-authoritative"
@@ -14,6 +15,8 @@ export interface CoreLayoutRouteNodeV1 {
   routed: boolean;
   boundaryRootId: string | null;
   reasonCodes: string[];
+  participation: StructuralParticipationStateV1;
+  exclusionRootId: string | null;
 }
 
 export interface CoreLayoutRouteV1 {
@@ -23,6 +26,9 @@ export interface CoreLayoutRouteV1 {
   nodes: Record<string, CoreLayoutRouteNodeV1>;
   routedNodeIds: string[];
   compatibilityNodeIds: string[];
+  activeNodeIds: string[];
+  excludedNodeIds: string[];
+  exclusionRootIds: string[];
   fallbackBoundaries: Array<{ nodeId: string; reasonCodes: string[] }>;
   circularDependencies: Array<{
     nodeId: string;
@@ -74,6 +80,15 @@ export interface IntrinsicTextMeasurementV1 {
   };
   metricSource: "canvas-and-dom-calibration" | "range-line-box";
   revision: string;
+  publicationGeneration: number;
+}
+
+export interface RenderedTextLineObservationV1 {
+  nodeId: string;
+  lineCount: number;
+  fontState: IntrinsicTextMeasurementV1["fontState"];
+  revision: string;
+  publicationGeneration: number;
 }
 
 export type VerticalTextTrimMode =
@@ -94,6 +109,7 @@ export interface CoreLayoutSettlementV1 {
   schemaVersion: "core-layout-settlement-v1";
   settlementId: string;
   revision: string;
+  publicationGeneration?: number;
   rootNodeId: string;
   nodeOrder: string[];
   nodes: Record<string, CoreLayoutSettledNodeV1>;
@@ -105,6 +121,7 @@ export interface CoreLayoutSettlementV1 {
   recomputedNodeIds: string[];
   routedNodeCount: number;
   compatibilityNodeCount: number;
+  excludedNodeCount?: number;
   fallbackBoundaries: CoreLayoutRouteV1["fallbackBoundaries"];
   diagnostics: Array<{ code: string; nodeId?: string; message: string }>;
 }

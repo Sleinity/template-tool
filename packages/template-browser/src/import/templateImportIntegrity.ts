@@ -1,4 +1,4 @@
-import type { TemplatePackageV1 } from "@sleinity/template-core";
+import type { TemplatePackageV1, TemplatePackageV2 } from "@sleinity/template-core";
 
 export const TEMPLATE_PACKAGE_DIGEST_SCHEMA_VERSION =
   "template-package-digest-v1" as const;
@@ -20,13 +20,13 @@ function stableValue(value: unknown): unknown {
 }
 
 export function serializeTemplatePackageForIntegrity(
-  packageValue: TemplatePackageV1,
+  packageValue: TemplatePackageV1 | TemplatePackageV2,
 ): string {
   return JSON.stringify(stableValue(packageValue));
 }
 
 export function createTemplatePackageFingerprint(
-  packageValue: TemplatePackageV1,
+  packageValue: TemplatePackageV1 | TemplatePackageV2,
 ): string {
   const value = serializeTemplatePackageForIntegrity(packageValue);
   let hash = 0x811c9dc5;
@@ -38,7 +38,7 @@ export function createTemplatePackageFingerprint(
 }
 
 export async function createTemplatePackageDigest(
-  packageValue: TemplatePackageV1,
+  packageValue: TemplatePackageV1 | TemplatePackageV2,
 ): Promise<TemplatePackageDigestV1> {
   if (!globalThis.crypto?.subtle) {
     throw new Error(

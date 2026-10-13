@@ -7,6 +7,7 @@ import {
   type ChangeEvent,
 } from "react";
 import { createRoot } from "react-dom/client";
+import { FieldRulesV2Host } from "./FieldRulesV2Host";
 import type {
   PackageImageFieldConstraints,
   PackageTextFieldConstraints,
@@ -396,15 +397,15 @@ function TemplateEditor({
   const reloadSavedDraft = useCallback(async () => {
     const savedId = localStorage.getItem(SAVED_TEMPLATE_KEY);
     if (!savedId) {
-      setMessage("No browser-local draft has been saved.");
+      setMessage("No browser-local session has been saved.");
       return;
     }
     const result = await session.loadSavedTemplate(savedId);
     setExportPreview(null);
     setMessage(
       result.status === "ready"
-        ? "Reloaded the browser-local draft."
-        : result.error?.message ?? "The browser-local draft could not be reloaded.",
+        ? "Reloaded the browser-local session."
+        : result.error?.message ?? "The browser-local session could not be reloaded.",
     );
   }, [session]);
 
@@ -412,7 +413,7 @@ function TemplateEditor({
     try {
       const record = await session.save({ name: snapshot.workingPackage?.name });
       localStorage.setItem(SAVED_TEMPLATE_KEY, record.id);
-      setMessage(`Saved browser-local draft ${record.id}.`);
+      setMessage(`Saved browser-local session ${record.id}.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Saving failed.");
     }
@@ -481,8 +482,8 @@ function TemplateEditor({
             setMessage(mutationMessage(firstTextField.setValue(String(firstTextField.value ?? "").toLocaleUpperCase())));
             setExportPreview(null);
           }}>Apply host uppercase transform</button>
-          <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>Save browser draft</button>
-          <button type="button" onClick={() => void reloadSavedDraft()}>Reload browser draft</button>
+          <button disabled={snapshot.status !== "ready"} onClick={() => void save()}>Save session snapshot</button>
+          <button type="button" onClick={() => void reloadSavedDraft()}>Reload session snapshot</button>
           <button disabled={snapshot.status !== "ready"} onClick={() => {
             session.restoreImportedState();
             setExportPreview(null);
@@ -627,7 +628,7 @@ function TemplateImportWorkspace({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ReferenceApplication />
+    {new URLSearchParams(window.location.search).get("compatibility") === "v1" ? <ReferenceApplication /> : <FieldRulesV2Host />}
   </StrictMode>,
 );
 

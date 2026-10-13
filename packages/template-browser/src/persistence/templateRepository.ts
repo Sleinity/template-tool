@@ -108,6 +108,7 @@ export function createSavedTemplateFamilyRecord(input: {
   name?: string;
   description?: string;
   sharedImageAssets?: TemplatePackageV1["assets"];
+  variantPreviewAssetHashes?: Record<string, string>;
   migratedFromTemplateId?: string;
 }): SavedTemplateFamilyRecord {
   const now = new Date().toISOString();
@@ -124,6 +125,9 @@ export function createSavedTemplateFamilyRecord(input: {
     updatedAt: now,
     assetReferences: [],
     fontReferences: [],
+    variantPreviewAssetHashes: input.variantPreviewAssetHashes
+      ? structuredClone(input.variantPreviewAssetHashes)
+      : undefined,
     migratedFromTemplateId: input.migratedFromTemplateId,
   };
 }
@@ -245,8 +249,8 @@ export function createLegacyTemplateFamilyDraftRecord(
 }
 
 export async function listTemplateFamiliesIncludingLegacy(
-  families: TemplateFamilyRepository = getTemplateFamilyRepository(),
-  templates: TemplateRepository = getTemplateRepository(),
+  families: import("./publicRepositories").TemplateFamilyRepository = getTemplateFamilyRepository(),
+  templates: import("./publicRepositories").TemplateRepository = getTemplateRepository(),
 ): Promise<SavedTemplateFamilyRecord[]> {
   const familyRecords = await families.listFamilies();
   const migratedLegacyIds = new Set(

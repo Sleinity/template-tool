@@ -1,5 +1,6 @@
 import {
   useId,
+  useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
   type ReactNode,
@@ -378,7 +379,7 @@ export function MediaInput({
     >
       <div className="ui-media-input__preview" aria-hidden={previewAlt ? undefined : true}>
         {previewSrc ? (
-          <img src={previewSrc} alt={previewAlt} />
+          <MediaPreview key={previewSrc} src={previewSrc} alt={previewAlt} />
         ) : (
           emptyPreview ?? <span>No image</span>
         )}
@@ -414,4 +415,9 @@ export function MediaInput({
       </div>
     </div>
   );
+}
+
+function MediaPreview({ src, alt }: { src: string; alt: string }) {
+  const [state, setState] = useState<"loading" | "ready" | "unavailable">("loading");
+  return <>{state !== "unavailable" && <img src={src} alt={alt} onLoad={() => setState("ready")} onError={() => setState("unavailable")} />}{state !== "ready" && <span className="ui-media-input__preview-status">{state === "loading" ? "Loading image…" : "Image unavailable"}</span>}</>;
 }

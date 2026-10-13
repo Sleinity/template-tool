@@ -2,6 +2,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   type DragEvent,
 } from "react";
 import {
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 import {
   createResolvedRenderTree,
+  createZipBundleReader,
   getPackageEditorFieldWarnings,
   validateTemplatePackage,
   type FontReadinessReport,
@@ -124,6 +126,7 @@ export interface TemplateFamilySetupPageProps {
   onSave: (
     confirmation: TemplateFamilyImportConfirmationV1,
     previous?: SavedTemplateFamilyRecord | null,
+    variantPreviewBlobs?: Readonly<Record<string, Blob | null>>,
   ) => Promise<void>;
 }
 
@@ -395,6 +398,8 @@ export function TemplateFamilySetupPage({
   onSave,
 }: TemplateFamilySetupPageProps) {
   const wizard = useTemplateFamilyImportWizard();
+  const pendingVariantPreviewBlobsRef = useRef<Record<string, Blob | null>>({});
+  const inspectedReimportPreviewBlobsRef = useRef<Record<string, Blob | null>>({});
   const snapshot = useTemplateFamilyImportWizardSnapshot(wizard);
   const renderSessionSnapshot = useTemplateSessionSnapshot(
     wizard.familySession.renderSession,
@@ -694,8 +699,9 @@ export function TemplateFamilySetupPage({
     file: File,
     mode: "first" | "add-variant",
   ) => {
+    const bytes = await file.arrayBuffer();
     const input = {
-      bytes: await file.arrayBuffer(),
+      bytes,
       sourceName: file.name,
       title: file.name.replace(/\.zip$/i, ""),
     };
@@ -711,6 +717,13 @@ export function TemplateFamilySetupPage({
     const added = nextFamily?.variants.find((variant) => !beforeIds.has(variant.id));
     const nextSelected = added?.id ?? nextFamily?.variants[0]?.id;
     if (nextSelected) {
+      const reader = createZipBundleReader(bytes, { sourceName: file.name });
+      const previewFile = reader.bundle.index.optional["preview.png"];
+      const preview = previewFile
+        ? reader.readBlob(previewFile.normalizedPath, "image/png")
+        : null;
+      pendingVariantPreviewBlobsRef.current[nextSelected] =
+        preview?.ok && preview.value ? preview.value : null;
       setSelectedVariantId(nextSelected);
       if (next.validation?.definitionValid) wizard.selectPreviewVariant(nextSelected);
     }
@@ -750,6 +763,8 @@ export function TemplateFamilySetupPage({
     }
     wizard.replaceFamily(nextFamily);
     wizard.replaceContent(nextContent);
+    delete pendingVariantPreviewBlobsRef.current[variantId];
+    delete inspectedReimportPreviewBlobsRef.current[variantId];
     setConfirmRemoveVariantId(null);
     setSelectedVariantId(nextFamily.variants[0]?.id ?? null);
   };
@@ -944,9 +959,10 @@ export function TemplateFamilySetupPage({
 
   const inspectReimport = async (variantId: string, file: File) => {
     if (!family) return;
+    const bytes = await file.arrayBuffer();
     const result = await runTemplatePackageImportPipeline({
       format: "zip",
-      buffer: await file.arrayBuffer(),
+      buffer: bytes,
       sourceName: file.name,
     });
     if (!result.package) throw new Error("The replacement ZIP is not importable.");
@@ -969,6 +985,13 @@ export function TemplateFamilySetupPage({
     }));
     setReimportFieldChoices((current) => ({ ...current, [variantId]: {} }));
     setReimportOrphanRemovals((current) => ({ ...current, [variantId]: [] }));
+    const reader = createZipBundleReader(bytes, { sourceName: file.name });
+    const previewFile = reader.bundle.index.optional["preview.png"];
+    const preview = previewFile
+      ? reader.readBlob(previewFile.normalizedPath, "image/png")
+      : null;
+    inspectedReimportPreviewBlobsRef.current[variantId] =
+      preview?.ok && preview.value ? preview.value : null;
   };
 
   const applyReimport = (variantId: string) => {
@@ -1024,6 +1047,9 @@ export function TemplateFamilySetupPage({
     );
     wizard.replaceFamily(applied.family);
     wizard.replaceContent(applied.content);
+    pendingVariantPreviewBlobsRef.current[variantId] =
+      inspectedReimportPreviewBlobsRef.current[variantId] ?? null;
+    delete inspectedReimportPreviewBlobsRef.current[variantId];
     setReimportPlans((current) => {
       const next = { ...current };
       delete next[variantId];
@@ -1197,7 +1223,11 @@ export function TemplateFamilySetupPage({
     try {
       if (family.title !== title) wizard.replaceFamily({ ...family, title });
       const confirmation = await wizard.confirm();
-      await onSave(confirmation, savedFamily);
+      await onSave(
+        confirmation,
+        savedFamily,
+        pendingVariantPreviewBlobsRef.current,
+      );
     } finally {
       setSaving(false);
     }

@@ -67,6 +67,47 @@ export function invertNormalizedImageTransform(
   ];
 }
 
+/**
+ * Derive a cover crop for a new slot aspect by shrinking only within the
+ * canonical crop. Centre and source-space axes are retained, so switching
+ * variants never mutates or widens the host-authored crop.
+ */
+export function adaptNormalizedImageCropToSlotAspect(
+  value: number[][] | null,
+  slotWidth: number,
+  slotHeight: number,
+  intrinsicWidth: number,
+  intrinsicHeight: number,
+): number[][] | null {
+  const matrix = normalizedTransform(value);
+  if (
+    !matrix ||
+    !finitePositive(slotWidth) ||
+    !finitePositive(slotHeight) ||
+    !finitePositive(intrinsicWidth) ||
+    !finitePositive(intrinsicHeight)
+  ) return null;
+  const [a, b, c, d, tx, ty] = matrix;
+  const axisXLength = Math.hypot(a * intrinsicWidth, b * intrinsicHeight);
+  const axisYLength = Math.hypot(c * intrinsicWidth, d * intrinsicHeight);
+  const sourceAspect = axisXLength / axisYLength;
+  const targetAspect = slotWidth / slotHeight;
+  if (!finitePositive(sourceAspect) || !finitePositive(targetAspect)) return null;
+
+  const scaleX = targetAspect < sourceAspect ? targetAspect / sourceAspect : 1;
+  const scaleY = targetAspect > sourceAspect ? sourceAspect / targetAspect : 1;
+  const nextA = a * scaleX;
+  const nextB = b * scaleX;
+  const nextC = c * scaleY;
+  const nextD = d * scaleY;
+  const centerX = tx + (a + c) / 2;
+  const centerY = ty + (b + d) / 2;
+  return [
+    [nextA, nextC, centerX - (nextA + nextC) / 2],
+    [nextB, nextD, centerY - (nextB + nextD) / 2],
+  ];
+}
+
 function sourceGeometry(
   rect: { x: number; y: number; width: number; height: number },
   intrinsicWidth: number,
@@ -273,8 +314,17 @@ export function resolveImagePlacementGeometry(
   }
 
   if (intent.fitMode === "CROP") {
-    const raw = normalizedTransform(intent.activeCropTransform);
-    const inverse = invertNormalizedImageTransform(intent.activeCropTransform);
+    const effectiveCrop = intent.cropAspectPolicy === "cover-within-canonical"
+      ? adaptNormalizedImageCropToSlotAspect(
+          intent.activeCropTransform,
+          slotWidth,
+          slotHeight,
+          intrinsicWidth,
+          intrinsicHeight,
+        )
+      : intent.activeCropTransform;
+    const raw = normalizedTransform(effectiveCrop);
+    const inverse = invertNormalizedImageTransform(effectiveCrop);
     if (!raw || !inverse) {
       return invalidGeometry(slotWidth, slotHeight, intrinsicWidth, intrinsicHeight, "CROP has no invertible imageTransform.");
     }

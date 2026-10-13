@@ -2,52 +2,64 @@
   "schemaVersion": "template-sdk-bundle-baselines-v1",
   "profiles": {
     "core-import-validation": {
-      "baselineBytes": 336679,
-      "baselineGzipBytes": 80490,
-      "maxBytes": 353513,
-      "maxGzipBytes": 84515
+      "baselineBytes": 355601,
+      "baselineGzipBytes": 85230,
+      "maxBytes": 373382,
+      "maxGzipBytes": 89492
     },
     "core-family": {
-      "baselineBytes": 40027,
-      "baselineGzipBytes": 10301,
-      "maxBytes": 42029,
-      "maxGzipBytes": 10817
+      "baselineBytes": 42808,
+      "baselineGzipBytes": 10854,
+      "maxBytes": 44949,
+      "maxGzipBytes": 11397
     },
     "browser-session-importer": {
-      "baselineBytes": 635374,
-      "baselineGzipBytes": 153322,
-      "maxBytes": 667143,
-      "maxGzipBytes": 160989
+      "baselineBytes": 672875,
+      "baselineGzipBytes": 160950,
+      "maxBytes": 706519,
+      "maxGzipBytes": 168998
+    },
+    "browser-field-session-v2": {
+      "baselineBytes": 761130,
+      "baselineGzipBytes": 164202,
+      "maxBytes": 799187,
+      "maxGzipBytes": 172413
     },
     "browser-family": {
-      "baselineBytes": 699250,
-      "baselineGzipBytes": 163285,
-      "maxBytes": 734213,
-      "maxGzipBytes": 171450
+      "baselineBytes": 733602,
+      "baselineGzipBytes": 171560,
+      "maxBytes": 770283,
+      "maxGzipBytes": 180138
     },
     "react-renderer": {
-      "baselineBytes": 641931,
-      "baselineGzipBytes": 156814,
-      "maxBytes": 674028,
-      "maxGzipBytes": 164655
+      "baselineBytes": 676937,
+      "baselineGzipBytes": 165009,
+      "maxBytes": 710784,
+      "maxGzipBytes": 173260
     },
     "react-importer": {
-      "baselineBytes": 960086,
-      "baselineGzipBytes": 230475,
-      "maxBytes": 1008091,
-      "maxGzipBytes": 241999
+      "baselineBytes": 1017947,
+      "baselineGzipBytes": 242478,
+      "maxBytes": 1068845,
+      "maxGzipBytes": 254602
     },
     "react-editor": {
-      "baselineBytes": 658539,
-      "baselineGzipBytes": 160775,
-      "maxBytes": 691466,
-      "maxGzipBytes": 168814
+      "baselineBytes": 693542,
+      "baselineGzipBytes": 168833,
+      "maxBytes": 728220,
+      "maxGzipBytes": 177275
+    },
+    "react-field-session-v2": {
+      "baselineBytes": 1019080,
+      "baselineGzipBytes": 229618,
+      "maxBytes": 1070034,
+      "maxGzipBytes": 241099
     },
     "react-family": {
-      "baselineBytes": 1011293,
-      "baselineGzipBytes": 241765,
-      "maxBytes": 1061858,
-      "maxGzipBytes": 253854
+      "baselineBytes": 1068322,
+      "baselineGzipBytes": 254975,
+      "maxBytes": 1121739,
+      "maxGzipBytes": 267724
     }
   }
 }

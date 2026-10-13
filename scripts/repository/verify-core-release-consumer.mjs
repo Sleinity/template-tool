@@ -1,3 +1,4 @@
+import { historicalCoreDeclarationContract } from "./core-declaration-contract.mjs";
 import {
   copyFile,
   mkdir,
@@ -308,9 +309,8 @@ if (invalid.importable || invalid.source.valid || invalid.source.diagnostics.len
     .update(declaration)
     .digest("hex");
   if (
-    declaration.byteLength !== 87_431 ||
-    declarationHash !==
-      "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
+    declaration.byteLength !== historicalCoreDeclarationContract.bytes ||
+    declarationHash !== historicalCoreDeclarationContract.sha256
   ) {
     throw new Error(
       `Released core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}.`,

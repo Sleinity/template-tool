@@ -641,3 +641,51 @@ assert(
     session.renderSession.getSnapshot().status === "disposed",
   "Disposing a family session must dispose its single owned render session.",
 );
+
+for (const draft of [false, true]) {
+  const storage = new InMemoryTemplateRepository();
+  let enter!: () => void; let unblock!: () => void;
+  const entered = new Promise<void>(resolve => { enter = resolve; });
+  const release = new Promise<void>(resolve => { unblock = resolve; });
+  let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  const original = storage[method].bind(storage);
+  (storage[method] as any) = async (record: any) => { calls++; if (calls === 1) { enter(); await release; } return original(record); };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = (name: string) => draft ? owned.saveDraft(name) : owned.save({ name });
+  const first = save("First"); await entered;
+  const second = save("Second");
+  assert(calls === 1, "Family and draft writes are serialized."); unblock();
+  const [a, b] = await Promise.all([first, second]);
+  const stored = draft ? await storage.getFamilyDraft(a.id) : await storage.getFamily(a.id);
+  assert(a.id === b.id && stored?.name === "Second", "Family and draft first-save identities remain stable across overlap.");
+  owned.dispose();
+}
+for (const draft of [false, true]) for (const end of ["reset", "dispose"] as const) {
+  const storage = new InMemoryTemplateRepository();
+  let enter!: () => void; let unblock!: () => void;
+  const entered = new Promise<void>(resolve => { enter = resolve; });
+  const release = new Promise<void>(resolve => { unblock = resolve; }); let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  (storage[method] as any) = async (record: any) => { calls++; enter(); await release; return record; };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = () => draft ? owned.saveDraft() : owned.save();
+  const first = save(); await entered; const queued = save().then(() => false, () => true);
+  owned[end](); unblock(); await first;
+  assert(await queued && calls === 1, "Family reset/disposal cancels queued template and draft writes.");
+  owned.dispose();
+}
+for (const draft of [false, true]) {
+  const storage = new InMemoryTemplateRepository(); let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  const original = storage[method].bind(storage);
+  (storage[method] as any) = async (record: any) => { if (++calls === 1) throw new Error("Expected failure"); return original(record); };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = () => draft ? owned.saveDraft() : owned.save();
+  const failed = save().then(() => false, () => true); const retry = save();
+  assert(await failed && (await retry).id, "Family failures cannot poison subsequent template or draft saves.");
+  owned.dispose();
+}

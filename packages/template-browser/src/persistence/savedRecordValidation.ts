@@ -43,10 +43,23 @@ export function validateCurrentSavedTemplateFamilyRecord(
     );
   }
   const family = parseTemplateFamilyV1(input.family);
+  const variantIds = new Set(family.variants.map((variant) => variant.id));
+  const variantPreviewAssetHashes = isRecord(input.variantPreviewAssetHashes)
+    ? Object.fromEntries(
+        Object.entries(input.variantPreviewAssetHashes).filter(
+          (entry): entry is [string, string] =>
+            variantIds.has(entry[0]) && typeof entry[1] === "string" && entry[1].length > 0,
+        ),
+      )
+    : undefined;
   return {
     ...(structuredClone(input) as unknown as SavedTemplateFamilyRecord),
     family,
     validation: validateTemplateFamily(family),
+    variantPreviewAssetHashes:
+      variantPreviewAssetHashes && Object.keys(variantPreviewAssetHashes).length > 0
+        ? variantPreviewAssetHashes
+        : undefined,
   };
 }
 

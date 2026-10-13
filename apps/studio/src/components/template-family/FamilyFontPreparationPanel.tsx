@@ -1,8 +1,10 @@
+import { blockedStorageCause, studioFailureMessage } from "../../workspace/storageFailure";
 import { FileUp } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   TemplatePackageFontRequirement,
 } from "@sleinity/template-core";
+import { createResolvedRenderTree } from "@sleinity/template-core";
 import type { TemplateFamilyV1 } from "@sleinity/template-core/family";
 import {
   autoLinkManagedFonts,
@@ -10,13 +12,15 @@ import {
   formatRequiredFontFace,
   getManagedFontRegistry,
   isExactFontRequirementResolved,
+  prepareTemplatePackageFonts,
   uploadExactManagedFontForRequirement,
 } from "@sleinity/template-browser/fonts";
 import {
-  Disclosure,
+  Button,
+  ConnectedList,
+  ConnectedListItem,
   FilePickerButton,
   Status,
-  Surface,
 } from "../ui";
 
 interface FamilyFontUsage {
@@ -50,13 +54,19 @@ function familyFontSignature(family: TemplateFamilyV1): string {
 export function FamilyFontPreparationPanel({
   family,
   onFamilyChange,
+  compact = false,
 }: {
+  compact?: boolean;
   family: TemplateFamilyV1;
   onFamilyChange: (family: TemplateFamilyV1) => void;
 }) {
   const [busyKey, setBusyKey] = useState<string | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const attemptedAutoLink = useRef<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, unknown>>({});
+  const [registryRetry, setRegistryRetry] = useState(0);
+  const [retryUpload, setRetryUpload] = useState<{ group: FamilyFontGroup; file: File; family: TemplateFamilyV1 } | null>(null);
+  const scope = useRef(0);
+  useEffect(() => { scope.current++; setRetryUpload(null); setErrors({}); setBusyKey(null); return () => { scope.current++; }; }, [family]);
+  const pickFamily = useRef<TemplateFamilyV1 | null>(null);
   const currentFamily = useRef(family);
   currentFamily.current = family;
 
@@ -84,15 +94,16 @@ export function FamilyFontPreparationPanel({
   useEffect(() => {
     const registry = getManagedFontRegistry();
     if (!registry || groups.length === 0) return;
-    const signature = familyFontSignature(family);
-    if (attemptedAutoLink.current === signature) return;
-    attemptedAutoLink.current = signature;
+    let cancelled = false;
+    const revision = scope.current;
+    const current = () => !cancelled && revision === scope.current && currentFamily.current === family;
+    setErrors(errors => { const next = { ...errors }; delete next.__registry; return next; });
     const captured = family;
     void Promise.all(family.variants.map(async (variant) => ({
       id: variant.id,
       packageValue: await autoLinkManagedFonts(variant.packageValue, registry),
     }))).then((linked) => {
-      if (currentFamily.current !== captured) return;
+      if (!current()) return;
       const next = structuredClone(captured);
       for (const item of linked) {
         const variant = next.variants.find((candidate) => candidate.id === item.id);
@@ -101,14 +112,10 @@ export function FamilyFontPreparationPanel({
       }
       if (familyFontSignature(next) !== familyFontSignature(captured)) onFamilyChange(next);
     }).catch((error) => {
-      setErrors((current) => ({
-        ...current,
-        __registry: error instanceof Error
-          ? error.message
-          : "Previously uploaded fonts could not be checked.",
-      }));
+      if (current()) setErrors(errors => ({ ...errors, __registry: error }));
     });
-  }, [family, groups.length, onFamilyChange]);
+    return () => { cancelled = true; };
+  }, [family, groups.length, registryRetry]);
 
   const upload = async (group: FamilyFontGroup, file: File | undefined) => {
     if (!file || busyKey) return;
@@ -116,6 +123,9 @@ export function FamilyFontPreparationPanel({
     const variant = family.variants.find((candidate) => candidate.id === representative.variantId);
     if (!variant) return;
     const captured = family;
+    const revision = scope.current;
+    const current = () => revision === scope.current && currentFamily.current === captured;
+    setRetryUpload(null);
     setBusyKey(group.key);
     setErrors((current) => {
       const next = { ...current };
@@ -135,7 +145,7 @@ export function FamilyFontPreparationPanel({
           reason: "Uploaded in the Studio family font setup flow.",
         },
       );
-      if (currentFamily.current !== captured) return;
+      if (!current()) return;
       const registry = getManagedFontRegistry();
       const linked = await Promise.all(captured.variants.map(async (candidate) => ({
         id: candidate.id,
@@ -144,7 +154,27 @@ export function FamilyFontPreparationPanel({
           registry,
         ),
       })));
-      if (currentFamily.current !== captured) return;
+      for (const item of linked) {
+        const exactRequirementIds = new Set(
+          (item.packageValue.fontRequirements ?? [])
+            .filter((requirement) => requirement.resolution?.classification === "exact")
+            .map((requirement) => requirement.id),
+        );
+        if (exactRequirementIds.size === 0) continue;
+        const readiness = await prepareTemplatePackageFonts(
+          item.packageValue,
+          createResolvedRenderTree(item.packageValue),
+          document.fonts,
+          registry,
+        );
+        if (readiness.required.some((entry) =>
+          exactRequirementIds.has(entry.id ?? "") &&
+          (entry.status !== "loaded" || !entry.verified)
+        )) {
+          throw new Error("The exact font was linked but could not be activated in this preview.");
+        }
+      }
+      if (!current()) return;
       const next = structuredClone(captured);
       for (const item of linked) {
         const candidate = next.variants.find((value) => value.id === item.id);
@@ -152,30 +182,27 @@ export function FamilyFontPreparationPanel({
       }
       onFamilyChange(next);
     } catch (error) {
-      if (currentFamily.current !== captured) return;
-      setErrors((current) => ({
-        ...current,
-        [group.key]: error instanceof Error ? error.message : "The font upload failed.",
-      }));
+      if (!current()) return;
+      if (blockedStorageCause(error)) setRetryUpload({ group, file, family: captured });
+      setErrors(errors => ({ ...errors, [group.key]: error }));
     } finally {
-      setBusyKey((current) => current === group.key ? null : current);
+      if (current()) setBusyKey(key => key === group.key ? null : key);
     }
   };
 
   if (groups.length === 0) {
     return (
-      <Surface className="family-font-empty family-font-empty--compact" tone="secondary">
-        <Status tone="repaired">Ready</Status>
+      <div className="family-font-empty family-font-empty--compact">
         <div>
           <h2 className="ui-subsection-title">No font files required</h2>
         </div>
-      </Surface>
+      </div>
     );
   }
 
   return (
-    <div className="family-font-list" data-testid="family-font-preparation">
-      {groups.map((group) => {
+    <ConnectedList label="Required fonts" className="family-font-list" data-testid="family-font-preparation">
+      {[...groups].sort((a, b) => Number(a.usages.every(usage => isExactFontRequirementResolved(family.variants.find(variant => variant.id === usage.variantId)!.packageValue, usage.requirement))) - Number(b.usages.every(usage => isExactFontRequirementResolved(family.variants.find(variant => variant.id === usage.variantId)!.packageValue, usage.requirement)))).map((group) => {
         const usageStates = group.usages.map((usage) => {
           const variant = family.variants.find((candidate) => candidate.id === usage.variantId)!;
           return {
@@ -187,53 +214,39 @@ export function FamilyFontPreparationPanel({
         const error = errors[group.key];
         const checking = busyKey === group.key;
         return (
-          <Surface as="section" className="family-font-row" data-ready={ready || undefined} key={group.key}>
+          <ConnectedListItem className="family-font-row" data-ready={ready || undefined} tone={!ready ? "attention" : "neutral"} key={group.key}>
             <div className="family-font-row__heading">
               <div>
                 <h2 className="ui-subsection-title">{group.label}</h2>
-                <div className="family-font-row__variants" aria-label="Used by variants">
-                  {usageStates.map((usage) => (
-                    <span key={`${usage.variantId}:${usage.requirement.id}`}>
-                      {usage.variantTitle}
-                    </span>
-                  ))}
-                </div>
+                {ready ? <span className="ui-metadata">Available</span> : null}
               </div>
-              <Status tone={checking ? "neutral" : ready ? "repaired" : error ? "blocked" : "attention"}>
-                {checking ? "Checking" : ready ? "Ready" : error ? "Mismatched" : "Missing"}
-              </Status>
+              {!ready || checking ? <Status tone={checking ? "neutral" : error ? "blocked" : "attention"}>
+                {checking ? "Checking" : error ? blockedStorageCause(error) ? "Storage blocked" : "Mismatched" : "Missing"}
+              </Status> : null}
             </div>
             <div className="family-font-row__actions">
               {!ready ? (
-                <p className="ui-supporting-copy">Upload this face once to use it in every compatible variant.</p>
+                <p className="ui-supporting-copy">Upload this face once to use it in every compatible design.</p>
               ) : <span />}
               <FilePickerButton
+                key={family.id + ":" + group.key}
+                onClick={() => { pickFamily.current = family; setRetryUpload(null); }}
                 accept=".woff2,.woff,.ttf,.otf,font/woff2,font/woff,font/ttf,font/otf"
                 disabled={busyKey !== null}
                 variant={ready ? "quiet" : "secondary"}
                 size="small"
                 leadingIcon={<FileUp size={16} />}
-                onSelect={(file) => void upload(group, file)}
+                onSelect={(file) => { if (pickFamily.current === family) void upload(group, file); }}
               >
                 {ready ? "Replace font" : "Upload font"}
               </FilePickerButton>
             </div>
-            {error ? <p className="ui-field__error" role="alert">{error}</p> : null}
-            <Disclosure summary="Technical details">
-              <div className="family-font-technical-list">
-                {usageStates.map((usage) => (
-                  <div key={`${usage.variantId}:${usage.requirement.id}`}>
-                    <strong>{usage.variantTitle}</strong>
-                    <span>{usage.ready ? "Exact binary verified" : "Exact binary required"}</span>
-                    <code>{usage.requirement.id}</code>
-                  </div>
-                ))}
-              </div>
-            </Disclosure>
-          </Surface>
+            {error ? <p className="ui-field__error" role="alert">{studioFailureMessage(error)}{retryUpload?.group.key === group.key && retryUpload.family === family && <><Button size="small" variant="secondary" disabled={busyKey !== null} onClick={() => void upload(retryUpload.group, retryUpload.file)}>Retry upload</Button><Button size="small" variant="quiet" onClick={() => { pickFamily.current = family; setRetryUpload(null); }}>Cancel</Button></>}</p> : null}
+
+          </ConnectedListItem>
         );
       })}
-      {errors.__registry ? <p className="ui-field__error" role="alert">{errors.__registry}</p> : null}
-    </div>
+      {Boolean(errors.__registry) ? <p className="ui-field__error" role="alert">{blockedStorageCause(errors.__registry) && <strong>Storage blocked. </strong>}{studioFailureMessage(errors.__registry)}<Button size="small" variant="secondary" disabled={busyKey !== null} onClick={() => setRegistryRetry(value => value + 1)}>Retry font check</Button></p> : null}
+    </ConnectedList>
   );
 }

@@ -64,12 +64,14 @@ export interface IconButtonProps
   label: string;
   icon: ReactNode;
   loading?: boolean;
+  size?: ButtonSize;
 }
 
 export function IconButton({
   label,
   icon,
   loading = false,
+  size = "medium",
   className,
   disabled,
   type = "button",
@@ -82,6 +84,7 @@ export function IconButton({
       aria-label={label}
       aria-busy={loading || undefined}
       className={cx("ui-icon-button", className)}
+      data-size={size}
       disabled={disabled || loading}
       title={label}
     >

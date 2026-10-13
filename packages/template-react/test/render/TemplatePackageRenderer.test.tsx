@@ -195,6 +195,33 @@ const editedReflowMarkup = renderToStaticMarkup(
   }),
 );
 
+const fillInsideHugPackage = structuredClone(reflowPackage);
+fillInsideHugPackage.nodes.label.sizing.horizontal = {
+  mode: "FILL",
+  value: null,
+  min: null,
+  max: 300,
+};
+if (fillInsideHugPackage.nodes.label.type === "TEXT" &&
+    "characters" in fillInsideHugPackage.nodes.label.text) {
+  fillInsideHugPackage.nodes.label.text.characters = "A longer badge label";
+  fillInsideHugPackage.nodes.label.text.styleRanges = [{
+    start: 0,
+    end: 3,
+    family: "Arial",
+    style: "Bold",
+    cssStyle: "normal",
+    weight: 700,
+    postScriptName: null,
+  }];
+}
+const fillInsideHugMarkup = renderToStaticMarkup(
+  createElement(TemplatePackageRenderer, {
+    packageValue: fillInsideHugPackage,
+    mode: "editor",
+  }),
+);
+
 function openingTag(markupValue: string, nodeId: string): string {
   const marker = `data-package-node-id="${nodeId}"`;
   const markerIndex = markupValue.indexOf(marker);
@@ -207,6 +234,30 @@ function openingTag(markupValue: string, nodeId: string): string {
 function hasStandaloneStyle(tag: string, property: string): boolean {
   return new RegExp(`(?:style="|;)${property}:`).test(tag);
 }
+
+const editorCropPackage = structuredClone(packageValue);
+const editorCropNode = editorCropPackage.nodes["58:61"];
+if (!editorCropNode?.image) {
+  throw new Error("Renderer crop coverage requires the fixture's editable Image node.");
+}
+editorCropNode.image.activePlacement = { state: "editor-crop", revision: 1 };
+editorCropNode.image.scaleMode = "CROP";
+editorCropNode.image.imageTransform = [[0.8, 0, 0.1], [0, 0.8, 0.1]];
+const editorCropMarkup = renderToStaticMarkup(
+  createElement(TemplatePackageRenderer, {
+    packageValue: editorCropPackage,
+    mode: "editor",
+  }),
+);
+const editorCropTag = openingTag(editorCropMarkup, editorCropNode.id);
+assert(
+  editorCropTag.includes('data-package-image-active-state="editor-crop"') &&
+    editorCropTag.includes('data-package-image-crop-mode="editorCropTransform"') &&
+    editorCropTag.includes('data-package-image-placement-strategy="crop-transform"') &&
+    editorCropTag.includes('data-package-image-preserves-aspect-ratio="true"') &&
+    !editorCropTag.includes('data-package-image-placement-fallback='),
+  "Editor Crop should render through the ordinary affine Image owner without a Fill fallback.",
+);
 
 const nowHiringPackage = createNowHiringResponsiveReflowFixture();
 assert(
@@ -989,6 +1040,17 @@ assert(
   ) &&
     openingTag(editedReflowMarkup, "badge").includes("width:fit-content"),
   "Edited text should render through the live HUG parent layout.",
+);
+const fillInsideHugLabelTag = openingTag(fillInsideHugMarkup, "label");
+assert(
+  fillInsideHugLabelTag.includes("flex-grow:1") &&
+    fillInsideHugLabelTag.includes("flex-shrink:1") &&
+    fillInsideHugLabelTag.includes("flex-basis:auto"),
+  "A FILL text child inside a HUG parent must contribute its intrinsic width before shrinking at the parent cap.",
+);
+assert(
+  fillInsideHugMarkup.replace(/<[^>]+>/g, "").includes("A longer badge label"),
+  "Edited text beyond imported style-range endpoints must remain visible to rendering and layout.",
 );
 
 const editorFixedTag = openingTag(editorMarkup, "fixed");
@@ -3500,6 +3562,63 @@ assert(
   "Vector wrappers should preserve node opacity without painting the aggregate vector fill as a box background.",
 );
 
+const strokedSvgVectorPackage = structuredClone(vectorPackage);
+const strokedSvgNode = strokedSvgVectorPackage.nodes.overlay;
+strokedSvgNode.appearance.strokes = [{
+  type: "SOLID",
+  color: { r: 0.09, g: 0.09, b: 0.09, a: 1 },
+  opacity: 1,
+  visible: true,
+  blendMode: "NORMAL",
+}];
+strokedSvgNode.appearance.strokeWeight = 3.2;
+strokedSvgNode.appearance.strokeAlign = "CENTER";
+strokedSvgVectorPackage.assets["asset:svg:generic"].svgString =
+  '<svg viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg"><path d="M1 10h38" stroke="#171717" stroke-width="3.2"/></svg>';
+const sourceStroke = structuredClone(strokedSvgNode.appearance.strokes);
+for (const mode of ["static", "editor"] as const) {
+  const strokedMarkup = renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+    packageValue: strokedSvgVectorPackage,
+    mode,
+  }));
+  const strokedTag = openingTag(strokedMarkup, "overlay");
+  assert(
+    (strokedMarkup.match(/data-package-vector-source="svg-string"/g)?.length ?? 0) === 1 &&
+      !strokedTag.includes("border:") &&
+      !strokedTag.includes("box-shadow:") &&
+      JSON.stringify(strokedSvgNode.appearance.strokes) === JSON.stringify(sourceStroke),
+    `${mode} SVG-backed vectors must paint the embedded stroke once and retain canonical stroke evidence.`,
+  );
+}
+const missingStrokedSvgPackage = structuredClone(strokedSvgVectorPackage);
+delete missingStrokedSvgPackage.assets["asset:svg:generic"];
+assert(
+  openingTag(renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+    packageValue: missingStrokedSvgPackage,
+    mode: "static",
+  })), "overlay").includes("border:"),
+  "A missing SVG source must keep the existing compatibility stroke fallback.",
+);
+const semanticShapeStrokePackage = structuredClone(strokedSvgVectorPackage);
+semanticShapeStrokePackage.nodes.overlay.vector!.renderMode = "SEMANTIC_SHAPE";
+assert(
+  openingTag(renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+    packageValue: semanticShapeStrokePackage,
+    mode: "static",
+  })), "overlay").includes("border:"),
+  "Semantic-shape vectors must keep their existing stroke path.",
+);
+const ordinaryStrokePackage = structuredClone(strokedSvgVectorPackage);
+ordinaryStrokePackage.nodes.overlay.type = "FRAME";
+delete ordinaryStrokePackage.nodes.overlay.vector;
+assert(
+  openingTag(renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+    packageValue: ordinaryStrokePackage,
+    mode: "static",
+  })), "overlay").includes("border:"),
+  "Ordinary non-vector stroke rendering must remain unchanged.",
+);
+
 const vectorDataUrlPackage = structuredClone(vectorPackage);
 delete vectorDataUrlPackage.assets["asset:svg:generic"].svgString;
 const vectorDataUrlMarkup = renderToStaticMarkup(
@@ -3543,14 +3662,29 @@ assert(
 
 const hiddenVectorPackage = structuredClone(vectorPackage);
 hiddenVectorPackage.nodes.overlay.appearance.visible = false;
+const hiddenVectorMarkup = renderToStaticMarkup(
+  createElement(TemplatePackageRenderer, {
+    packageValue: hiddenVectorPackage,
+  }),
+);
 assert(
-  openingTag(
-    renderToStaticMarkup(
-      createElement(TemplatePackageRenderer, {
-        packageValue: hiddenVectorPackage,
-      }),
-    ),
-    "overlay",
-  ).includes("display:none"),
-  "Vector nodes should inherit normal package visibility behavior.",
+  !hiddenVectorMarkup.includes('data-package-node-id="overlay"'),
+  "Structurally hidden V1 nodes should not mount renderer content.",
+);
+
+const hiddenSubtreePackage = createNowHiringResponsiveReflowFixture();
+hiddenSubtreePackage.nodes.hero.appearance.visible = false;
+const hiddenSubtreeMarkup = renderToStaticMarkup(
+  createElement(TemplatePackageRenderer, {
+    packageValue: hiddenSubtreePackage,
+    onAssetLoadError() {},
+  }),
+);
+assert(
+  !hiddenSubtreeMarkup.includes('data-package-node-id="hero"') &&
+    !hiddenSubtreeMarkup.includes('data-package-node-id="product-image"') &&
+    !hiddenSubtreeMarkup.includes('data-package-asset-preload="asset:image:product"') &&
+    hiddenSubtreeMarkup.includes('data-package-structural-excluded-count="2"') &&
+    hiddenSubtreeMarkup.includes('data-package-structural-exclusion-roots="hero"'),
+  "Structural exclusion must prune the complete subtree and its media preload before hooks or content mount.",
 );

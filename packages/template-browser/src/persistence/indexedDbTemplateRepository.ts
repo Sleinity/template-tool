@@ -18,13 +18,19 @@ import { filterReadableSavedTemplateFamilyRecords } from "./readableFamilyRecord
 import type {
   SavedAssetRecord,
   SavedAssetReference,
+  SavedTemplateFieldFamilyRecordV2,
   SavedTemplateFamilyDraftRecord,
   SavedTemplateFamilyRecord,
+  SavedTemplateFamilyWriteOptions,
   SavedOutputDraftRecord,
   SavedTemplateRecord,
   SavedTemplateWriteOptions,
   TemplateRepository,
   TemplateFamilyRepository,
+} from "./types";
+import {
+  SAVED_TEMPLATE_FIELD_FAMILY_V2_SCHEMA_VERSION,
+  SAVED_TEMPLATE_SCHEMA_VERSION,
 } from "./types";
 import {
   ASSET_REFERENCE_STORE as REFERENCES,
@@ -88,6 +94,7 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
       transaction.objectStore(TEMPLATES).getAll(),
     );
     return records
+      .filter((record) => record.schemaVersion === SAVED_TEMPLATE_SCHEMA_VERSION)
       .map(validateCurrentSavedTemplateRecord)
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
   }
@@ -99,6 +106,7 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
       transaction.objectStore(TEMPLATES).get(id),
     );
     if (!stored) return null;
+    if (stored.schemaVersion !== SAVED_TEMPLATE_SCHEMA_VERSION) return null;
     const record = validateCurrentSavedTemplateRecord(stored);
     record.originalPackage = await hydratePackageAssets(
       record.originalPackage,
@@ -348,20 +356,24 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
   async listFamilies(): Promise<SavedTemplateFamilyRecord[]> {
     const database = await this.open();
     const transaction = database.transaction(FAMILIES, "readonly");
-    const records = await requestValue<SavedTemplateFamilyRecord[]>(
+    const records = await requestValue<Array<SavedTemplateFamilyRecord | SavedTemplateFieldFamilyRecordV2>>(
       transaction.objectStore(FAMILIES).getAll(),
     );
-    return filterReadableSavedTemplateFamilyRecords(records)
+    return filterReadableSavedTemplateFamilyRecords(
+      records.filter((record): record is SavedTemplateFamilyRecord =>
+        record.schemaVersion !== SAVED_TEMPLATE_FIELD_FAMILY_V2_SCHEMA_VERSION),
+    )
       .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
   }
 
   async getFamily(id: string): Promise<SavedTemplateFamilyRecord | null> {
     const database = await this.open();
     const transaction = database.transaction(FAMILIES, "readonly");
-    const stored = await requestValue<SavedTemplateFamilyRecord | undefined>(
+    const stored = await requestValue<SavedTemplateFamilyRecord | SavedTemplateFieldFamilyRecordV2 | undefined>(
       transaction.objectStore(FAMILIES).get(id),
     );
     if (!stored) return null;
+    if (stored.schemaVersion === SAVED_TEMPLATE_FIELD_FAMILY_V2_SCHEMA_VERSION) return null;
     const record = validateCurrentSavedTemplateFamilyRecord(stored);
     const hydrated = await hydrateTemplateFamilyAssets(
       record.family,
@@ -375,6 +387,7 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
 
   async saveFamily(
     record: SavedTemplateFamilyRecord,
+    options: SavedTemplateFamilyWriteOptions = {},
   ): Promise<SavedTemplateFamilyRecord> {
     const current = validateCurrentSavedTemplateFamilyRecord(record);
     const collected = await collectSavedTemplateFamilyAssets(
@@ -384,7 +397,7 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
     const ownerId = `family-record:${current.id}`;
     const database = await this.open();
     const transaction = database.transaction(
-      [FAMILIES, ASSETS, REFERENCES],
+      [FAMILIES, ASSETS, REFERENCES, MANAGED_FONTS],
       "readwrite",
     );
     const referenceStore = transaction.objectStore(REFERENCES);
@@ -392,17 +405,39 @@ export class IndexedDbTemplateRepository implements TemplateRepository, Template
       referenceStore.index("templateId").getAll(ownerId),
     );
     existing.forEach((reference) => referenceStore.delete(reference.id));
-    collected.assets.forEach((asset) => transaction.objectStore(ASSETS).put(asset));
-    collected.hashes.forEach((hash) => referenceStore.put({
+    const assetStore = transaction.objectStore(ASSETS);
+    collected.assets.forEach((asset) => assetStore.put(asset));
+    Object.entries(options.variantPreviewAssets ?? {}).forEach(([variantId, asset]) => {
+      if (current.variantPreviewAssetHashes?.[variantId] === asset.hash) {
+        assetStore.put(asset);
+      }
+    });
+    const referencedHashes = new Set(collected.hashes);
+    Object.values(current.variantPreviewAssetHashes ?? {}).forEach((hash) =>
+      referencedHashes.add(hash),
+    );
+    referencedHashes.forEach((hash) => referenceStore.put({
       id: `${ownerId}:${hash}`,
       templateId: ownerId,
       hash,
     } satisfies SavedAssetReference));
+    for (const reference of existing) {
+      if (referencedHashes.has(reference.hash)) continue;
+      const remaining = await requestValue<IDBValidKey[]>(
+        referenceStore.index("hash").getAllKeys(reference.hash),
+      );
+      if (
+        remaining.length === 0 &&
+        !(await managedFontOwnsHash(transaction, reference.hash))
+      ) {
+        assetStore.delete(reference.hash);
+      }
+    }
     const stored: SavedTemplateFamilyRecord = {
       ...current,
       family: collected.family,
       sharedImageAssets: collected.sharedImageAssets,
-      assetReferences: collected.hashes,
+      assetReferences: [...referencedHashes],
       fontReferences: collected.fontHashes,
       updatedAt: new Date().toISOString(),
     };

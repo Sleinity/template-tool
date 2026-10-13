@@ -299,15 +299,22 @@ function FamilyExample() {
               disabled={!snapshot.family}
               onClick={() => {
                 setPersistenceStatus("saving");
+                const accepted = wizard.familySession.getSnapshot();
                 void wizard.familySession.save().then(async (family) => {
-                  const draft = await wizard.familySession.saveDraft();
+                  // This legacy host demonstrates an explicit session checkpoint,
+                  // not an output catalogue. Current V2 hosts use SDK recovery.
+                  const key = `family-example-session:${family.id}`;
+                  localStorage.setItem(key, JSON.stringify({ content: accepted.content, selectedVariantId: accepted.selectedVariantId }));
                   wizard.familySession.reset();
-                  await wizard.familySession.loadSavedFamily(family.id, draft.id);
+                  const restored = await wizard.familySession.loadSavedFamily(family.id);
+                  const checkpoint = JSON.parse(localStorage.getItem(key)!);
+                  if (!restored.family) throw new Error("Saved family is unavailable.");
+                  wizard.familySession.load({ family: restored.family, content: checkpoint.content, selectedVariantId: checkpoint.selectedVariantId, sharedImageAssets: restored.sharedImageAssets, savedFamilyId: family.id });
                   setPersistenceStatus("reopened");
                 }).catch(() => setPersistenceStatus("blocked"));
               }}
             >
-              Save, reset and reopen offline
+              Save session checkpoint and reopen offline
             </button>
             <p data-testid="family-persistence-status">{persistenceStatus}</p>
           </section>

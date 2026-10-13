@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {pairedMedianInterval as interval} from './pairedTimingAnalysis.mjs';
+assert.deepEqual(interval([1,2,3,4,5]),[1,5],'Seeding recursion with a complete sample produces an invalid [3,3] interval');
+assert.deepEqual(interval([-.2,-.2,.1,.2,.2]),[-.2,.2]);
+assert.deepEqual(interval([-5,-4,-3,-2,-1]),[-5,-1]);
+assert.deepEqual(interval([0,0,0,0,0]),[0,0]);
+assert.deepEqual(interval([2,2,2,2,2]),[2,2]);
+assert.throws(()=>interval([1,2,3,4]));
+assert.throws(()=>interval([1,2,3,4,NaN]));
+console.log('Exact five-pair timing intervals enumerate all 3125 resamples.');

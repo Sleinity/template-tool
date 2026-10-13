@@ -27,6 +27,56 @@
       "source": "Locally installed Inter Tight variable font",
       "sourceUrl": null,
       "license": "Unverified in this run"
+    },
+    {
+      "id": "rethink-sans-600-normal",
+      "family": "Rethink Sans",
+      "weight": 600,
+      "style": "normal",
+      "sourcePath": "apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+      "byteSize": 59080,
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+      "source": "Repository bundled Studio font",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "id": "funnel-display-400-normal",
+      "family": "Funnel Display",
+      "weight": 400,
+      "style": "normal",
+      "sourcePath": "${FUNNEL_DISPLAY_FIDELITY_FONT_PATH}",
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "byteSize": 55900,
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "source": "Locally installed variable font; parsed family and 300\u2013800 weight axis verified",
+      "sourceUrl": null,
+      "license": "SIL Open Font License 1.1 (embedded name record)"
+    },
+    {
+      "id": "funnel-sans-400-normal",
+      "family": "Funnel Sans",
+      "weight": 400,
+      "style": "normal",
+      "sourcePath": "${FUNNEL_SANS_FIDELITY_FONT_PATH}",
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelSans[wght].ttf",
+      "byteSize": 55508,
+      "sha256": "998a4eb52c6d2e718517f9dcfee774b09db1daca10971cee3ec7bd15602b8c3e",
+      "source": "Locally installed variable font; parsed family and 300\u2013800 weight axis verified",
+      "sourceUrl": null,
+      "license": "SIL Open Font License 1.1 (embedded name record)"
+    },
+    {
+      "id": "funnel-display-500-normal",
+      "family": "Funnel Display",
+      "weight": 500,
+      "style": "normal",
+      "sourcePath": "${FUNNEL_DISPLAY_FIDELITY_FONT_PATH}",
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "byteSize": 55900,
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "source": "Locally installed variable font; parsed family and 300\u2013800 weight axis verified",
+      "sourceUrl": null,
+      "license": "SIL Open Font License 1.1 (embedded name record)"
     }
   ]
 }

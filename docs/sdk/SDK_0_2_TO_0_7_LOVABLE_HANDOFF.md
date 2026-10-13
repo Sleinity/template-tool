@@ -22,7 +22,7 @@ records contain the complete 0.2 confirmation or only selected package data.
 
 Report the exact in-place migration order, likely compatibility risks and the
 rollback commit to retain. Do not recommend a fresh application or imports from
-Studio, repository source, package src directories or renderer-internal.
+Studio, repository source, package src directories or renderer-internal/session-internal.
 ```
 
 Checkpoint: confirm the inventory accounts for every existing SDK import and
@@ -141,7 +141,7 @@ Run typecheck, tests and production build. Browser-test invalid/valid ZIP,
 fonts, confirmation, fresh reopening, migrated or re-imported records, text
 edit/reset, image replacement, Fill/Fit, save/reload, offline reopening,
 stale-export rejection and silent PNG capture. Confirm no Studio,
-repository-source, package-src or renderer-internal imports, no external SDK
+repository-source, package-src or renderer-internal/session-internal imports, no external SDK
 requests, no downloads and no console errors.
 
 Report automated and manual evidence separately, the final changed-file list,

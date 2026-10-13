@@ -1,6 +1,7 @@
 export * from "./Appearance";
 export * from "./Assets";
 export * from "./EditableFieldBinding";
+export * from "./EditableFieldDefinitionV2";
 export * from "./Enrichment";
 export * from "./Fonts";
 export * from "./Layout";

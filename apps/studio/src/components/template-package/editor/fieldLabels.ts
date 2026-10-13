@@ -1,7 +1,7 @@
 import type { EditableFieldBinding } from "@sleinity/template-core";
 
 export function formatEditableFieldLabel(field: EditableFieldBinding): string {
-  const source = field.label?.trim() || field.id;
+  const source = field.label?.trim() || field.id.replace(/^(?:text|textarea|image|color|number|date|boolean):/u, "");
   if (/^enddate$/i.test(source)) return "End date";
   if (/^cta$/i.test(source)) return "CTA";
   return source
