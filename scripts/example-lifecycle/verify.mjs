@@ -1,7 +1,7 @@
 import { readDeliveryArchives } from '../release-delivery/bundle.mjs';
 /** Actual copied example against installed supported entries, not a reconstructed UI. */
 import {verifyDeliveryBundle} from '../release-delivery/bundle.mjs';
-import assert from 'node:assert/strict';import{readFile,writeFile,mkdir,mkdtemp,cp,rm,realpath}from'node:fs/promises';import{resolve,join}from'node:path';import{tmpdir}from'node:os';import{spawnSync}from'node:child_process';import{createHash}from'node:crypto';import{build,preview}from'vite';import{launchBrowser}from'../fidelity/browser.mjs';import{loadManifest,verifyFixture}from'../fidelity/core.mjs';import{loadExactFontManifest}from'../fidelity/fonts.mjs';import{createRequire}from'node:module';import{pathToFileURL}from'node:url';import{unzipSync}from'fflate';
+import assert from 'node:assert/strict';import{readFile,writeFile,mkdir,mkdtemp,cp,rm,realpath}from'node:fs/promises';import{resolve,join}from'node:path';import{tmpdir}from'node:os';import{spawnSync}from'node:child_process';import{createHash}from'node:crypto';import{build,preview}from'vite';import{launchBrowser}from'../fidelity/browser.mjs';import{loadManifest,verifyFixture}from'../fidelity/core.mjs';import{loadExactFontManifest}from'../fidelity/fonts.mjs';import{loadInstalledCoreNormalizer}from'./installed-core.mjs';import{unzipSync}from'fflate';
 const args=process.argv.slice(2),option=(k,d)=>args.includes(k)?args[args.indexOf(k)+1]:d,archives=option('--archives','release-verification-artifacts/v2-example-lifecycle-20261013'),manager=option('--manager','pnpm'),out=resolve(option('--output',`docs/architecture/evidence/v2-example-lifecycle-20261013/packed-${manager}`));
 const temp=await realpath(await mkdtemp(join(tmpdir(),'v2-example-packed-'))),sha=b=>createHash('sha256').update(b).digest('hex'),rows=[],archiveHashes=[];let server,browser,activePage;
 const run=(cmd,argv)=>{const r=spawnSync(cmd,argv,{cwd:temp,env:{...process.env,CI:'true',NPM_CONFIG_USERCONFIG:join(temp,'.npmrc')},encoding:'utf8'});assert.equal(r.status,0,r.stdout+r.stderr);};
@@ -15,7 +15,7 @@ try{
  for(const name of['react','react-dom','@types/react','@types/react-dom','typescript'])deps[name]=JSON.parse(await readFile(`node_modules/${name}/package.json`,'utf8')).version;
  await writeFile(join(temp,'package.json'),JSON.stringify({private:true,type:'module',dependencies:deps}));await writeFile(join(temp,'.npmrc'),'registry=https://registry.npmjs.org\n');await writeFile(join(temp,'pnpm-workspace.yaml'),`packages:\n - .\noverrides:\n${Object.entries(deps).filter(([k])=>k.startsWith('@sleinity/')).map(([k,v])=>` "${k}": "${v}"`).join('\n')}\n`);
  run(manager,manager==='npm'?['install','--ignore-scripts','--no-audit','--no-fund']:['install','--prefer-offline']);run(process.execPath,[join(temp,'node_modules/typescript/bin/tsc'),'--noEmit']);
- const {normalizeTemplatePackageV1ToV2}=await import(pathToFileURL(createRequire(join(temp,'package.json')).resolve('@sleinity/template-core')).href);
+ const normalizeTemplatePackageV1ToV2=await loadInstalledCoreNormalizer(temp);
  const synthetic=normalizeTemplatePackageV1ToV2(JSON.parse(await readFile('src/template-package/fixtures/figma-plugin-v0.4.1.json','utf8'))).package;synthetic.name='Seven type synthetic';synthetic.fontRequirements=[];
 for(const n of Object.values(synthetic.nodes))if(n.type==='TEXT'){n.text.fontFamily='sans-serif';if(n.extensions?.figma?.style)n.extensions.figma.style.fontFamily='sans-serif';}
 synthetic.editableFields=[

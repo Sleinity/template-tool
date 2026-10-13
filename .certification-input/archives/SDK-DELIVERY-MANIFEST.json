@@ -26,8 +26,8 @@
       "file": "sleinity-template-react-1.0.0.tgz",
       "name": "@sleinity/template-react",
       "version": "1.0.0",
-      "bytes": 289360,
-      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b"
+      "bytes": 289357,
+      "sha256": "6d7e82d80e4c8457420a6793699b778ed638237bd17c50bb46833ff12a63b584"
     }
   ],
   "files": [
@@ -125,7 +125,7 @@
       "classification": "current",
       "sourceSha256": "cce9765d047c69f0e2cc2c3a8629973fa1476a7b791805e89823ef55580e14e9",
       "bytes": 2736,
-      "sha256": "a95946c8cd843b121b1690f7d288fee13c375ec8c50336ad481a059af8b5e4d2"
+      "sha256": "ce275ea1285ceccc190258a1277879d9ead9e0502c4c344e0152ee98ce46827d"
     },
     {
       "file": "TEMPLATE-IMPORT-WIZARD.md",
@@ -315,7 +315,7 @@
       "file": "SHA256SUMS",
       "classification": "checksums",
       "bytes": 301,
-      "sha256": "0edb9f2e671b57cfcadf145bd4ed99c209d301b0f5e4f9f2a79137d58c13ada3"
+      "sha256": "c22d96aef7d7ada5d04738f1e10bb47e7b99009cb8057b1430c64da795ae0187"
     },
     {
       "file": "CORE-SHA256SUMS",
