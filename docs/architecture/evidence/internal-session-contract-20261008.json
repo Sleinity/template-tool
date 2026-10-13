@@ -1,0 +1,1225 @@
+{
+  "schemaVersion": "internal-session-contract-evidence-v1",
+  "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "worktree": " M apps/studio/README.md\n M apps/studio/src/App.tsx\n D apps/studio/src/TemplateFamilyApp.tsx\n M apps/studio/src/components/EditorLayout.tsx\n M apps/studio/src/components/template-family/FamilyFontPreparationPanel.tsx\n M apps/studio/src/components/template-package/editor/FieldRuleCardShell.tsx\n M apps/studio/src/components/template-package/editor/fieldLabels.ts\n M apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx\n M apps/studio/src/components/template-package/quality/TemplatePackageDiagnosticContext.tsx\n M apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx\n M apps/studio/src/components/ui/actions.tsx\n M apps/studio/src/components/ui/foundation.tsx\n M apps/studio/src/components/ui/layout.tsx\n M apps/studio/src/components/ui/surfaces.tsx\n M apps/studio/src/designSystem.test.tsx\n M apps/studio/src/packageOnlyArchitecture.test.tsx\n M apps/studio/src/routing/appRoutes.test.ts\n M apps/studio/src/routing/appRoutes.ts\n M apps/studio/src/styles.css\n M apps/studio/src/views/TemplateFamilyOverviewPage.tsx\n M apps/studio/src/views/TemplateFamilySetupPage.tsx\n M apps/studio/src/views/TemplateOverviewPage.test.tsx\n M apps/studio/src/views/TemplatePackageImportFlow.test.tsx\n M config/sdk-bundle-baselines.json\n M config/sdk-public-api.json\n M docs/figma-exporter/IMPORTER_BOUNDARY.md\n M docs/renderer-fidelity/APPEARANCE_CONTRACTS.md\n M docs/renderer-fidelity/CAPABILITIES.md\n M docs/renderer-fidelity/CURRENT_ARCHITECTURE.md\n M docs/renderer-fidelity/DUPLICATE_INTERPRETATIONS.md\n M docs/renderer-fidelity/ENVIRONMENT_POLICY.md\n M docs/renderer-fidelity/FIXTURES.md\n M docs/renderer-fidelity/FONT_IDENTITY.md\n M docs/renderer-fidelity/HANDOFF.md\n M docs/renderer-fidelity/HARNESS.md\n M docs/renderer-fidelity/IMAGE_PLACEMENT.md\n M docs/renderer-fidelity/IMAGE_REPLACEMENT_EVIDENCE.md\n M docs/renderer-fidelity/MASK_SOURCE_CONTRACT.md\n M docs/renderer-fidelity/ORDERED_SOLID_LINEAR_RUNTIME_AUTHORITY.md\n M docs/renderer-fidelity/ORDERED_SOLID_STACK_RUNTIME_AUTHORITY.md\n M docs/renderer-fidelity/PRIMITIVE_PAINTS.md\n M docs/renderer-fidelity/PROPERTY_AUTHORITY.md\n M docs/renderer-fidelity/README.md\n M docs/renderer-fidelity/RUNTIME_ROUTING.md\n M docs/renderer-fidelity/SETTLEMENT.md\n M docs/renderer-fidelity/SETTLEMENT_HARNESS.md\n M docs/renderer-fidelity/STATUS.md\n M docs/renderer-fidelity/decisions/README.md\n M examples/template-editor-integration/README.md\n M examples/template-editor-integration/src/main.tsx\n M examples/template-family-integration/src/main.tsx\n M fidelity/evidence/milestone-7-alpha-mask/report.md\n M fidelity/fixtures.json\n M fidelity/fonts.json\n M package.json\n M packages/template-browser/README.md\n M packages/template-browser/package.json\n M packages/template-browser/src/assets/assetReliability.ts\n M packages/template-browser/src/assets/indexedDbAssetStore.ts\n M packages/template-browser/src/enrichment/captureTemplatePackagePreview.ts\n M packages/template-browser/src/enrichment/comparePackageToFigmaMetadata.ts\n M packages/template-browser/src/export/pngExport.ts\n M packages/template-browser/src/fonts/managedFontAssets.ts\n M packages/template-browser/src/import/index.ts\n M packages/template-browser/src/import/runTemplatePackageImportPipeline.ts\n M packages/template-browser/src/import/templateFamilyImportWizard.ts\n M packages/template-browser/src/import/templateImportIntegrity.ts\n M packages/template-browser/src/import/templateImportWizard.ts\n M packages/template-browser/src/importer.ts\n M packages/template-browser/src/persistence/assetRepository.ts\n M packages/template-browser/src/persistence/inMemoryTemplateRepository.ts\n M packages/template-browser/src/persistence/index.ts\n M packages/template-browser/src/persistence/indexedDbTemplateRepository.ts\n M packages/template-browser/src/persistence/savedRecordValidation.ts\n M packages/template-browser/src/persistence/templateRepository.ts\n M packages/template-browser/src/persistence/types.ts\n M packages/template-browser/src/session/index.ts\n M packages/template-browser/src/session/templateFamilySession.ts\n M packages/template-browser/src/session/templateSession.ts\n M packages/template-browser/src/storage/indexedDb.ts\n M packages/template-browser/test/templateFamilyImportWizard.test.ts\n M packages/template-browser/test/templateFamilySession.test.ts\n M packages/template-browser/test/templateImportWizard.test.ts\n M packages/template-browser/test/templateRepository.test.ts\n M packages/template-browser/test/templateSession.test.ts\n M packages/template-core/README.md\n M packages/template-core/package.json\n M packages/template-core/src/backend-decision/resolveBackendDecision.ts\n M packages/template-core/src/bundle/normalizeTemplatePackageBundle.ts\n M packages/template-core/src/bundle/previewReference.ts\n M packages/template-core/src/bundle/zipBundleReader.ts\n M packages/template-core/src/editor/fieldConstraints.ts\n M packages/template-core/src/family/index.ts\n M packages/template-core/src/index.ts\n M packages/template-core/src/inspection/settlement/createDependencyGraph.ts\n M packages/template-core/src/inspection/settlement/invalidateDependencyGraph.ts\n M packages/template-core/src/inspection/settlement/serializeSettlement.ts\n M packages/template-core/src/inspection/settlement/settleSceneGraph.ts\n M packages/template-core/src/inspection/settlement/types.ts\n M packages/template-core/src/primitives/linearGradient.ts\n M packages/template-core/src/primitives/resolvePrimitiveAppearance.ts\n M packages/template-core/src/renderer-internal.ts\n M packages/template-core/src/resolved/createResolvedRenderTree.ts\n M packages/template-core/src/resolved/imagePlacement.ts\n M packages/template-core/src/resolved/types.ts\n M packages/template-core/src/scene/createCanonicalSceneGraph.ts\n M packages/template-core/src/types/TemplatePackage.ts\n M packages/template-core/src/types/index.ts\n M packages/template-core/test/imagePlacement.test.ts\n M packages/template-react/README.md\n M packages/template-react/package.json\n M packages/template-react/src/editor.tsx\n M packages/template-react/src/inspection/analysis/featureCoverage.ts\n M packages/template-react/src/internal/runtime-routing/createCoreLayoutRoute.ts\n M packages/template-react/src/internal/runtime-routing/index.ts\n M packages/template-react/src/internal/runtime-routing/settleCoreLayout.ts\n M packages/template-react/src/internal/runtime-routing/types.ts\n M packages/template-react/src/internal/runtime-routing/useCoreLayoutRuntime.ts\n M packages/template-react/src/internal/runtime-routing/verticalTextTrim.ts\n M packages/template-react/src/render/TemplatePackageRenderer.tsx\n M packages/template-react/src/render/packageRenderUtils.ts\n M packages/template-react/src/render/productRenderIdentity.ts\n M packages/template-react/src/session.tsx\n M packages/template-react/test/render/TemplatePackageRenderer.test.tsx\n M packages/template-react/test/runtimeRouting.test.ts\n M scripts/fidelity/browser.mjs\n M scripts/fidelity/cli.mjs\n M scripts/fidelity/core.mjs\n M scripts/fidelity/fidelity.test.mjs\n M scripts/fidelity/fonts.mjs\n M scripts/primitives/browser-scenarios.mjs\n M scripts/repository/verify-core-release-consumer.mjs\n M scripts/repository/verify-curated-entry-bundles.mjs\n M scripts/repository/verify-package-boundaries.mjs\n M scripts/repository/verify-packed-consumer.mjs\n M scripts/repository/verify-packed-core-node.mjs\n M scripts/repository/verify-studio-browser.mjs\n M scripts/repository/verify-template-editor-reference.mjs\n M scripts/repository/verify-template-family-reference.mjs\n M scripts/run-tests.mjs\n M scripts/runtime-routing/font-evidence.mjs\n M scripts/runtime-routing/font-manifest.test.mjs\n M scripts/runtime-routing/text-trim.mjs\n M scripts/scene-graph/cli.mjs\n M scripts/settlement/browser-scenarios.mjs\n M scripts/settlement/cli.mjs\n M scripts/settlement/core.mjs\n M scripts/settlement/model-entry.mjs\n M scripts/settlement/settlement.test.mjs\n M src/template-package/bundle/templatePackageBundle.test.ts\n M src/template-package/masks/packageMaskRelationships.test.tsx\n M src/template-package/primitives/linearGradient.test.tsx\n M src/template-package/primitives/primitiveAppearance.test.tsx\n M src/template-package/settlement/settlement.test.ts\n M src/test-suite.ts\n?? .changeset/field-rules-closure-corrections.md\n?? .changeset/focused-sdk-hardening.md\n?? .changeset/live-full-parent-mask-clip.md\n?? .changeset/singular-image-replacement-policy.md\n?? .changeset/studio-family-selection-parity.md\n?? .changeset/studio-v2-authoring-host-proof.md\n?? .changeset/template-recovery-lifecycle.md\n?? .changeset/typed-field-contracts-v2.md\n?? .changeset/v2-zip-production-import.md\n?? apps/studio/src/field-rules/\n?? apps/studio/src/setup/\n?? apps/studio/src/workspace/\n?? docs/architecture/definition-instance-projection.md\n?? docs/architecture/evidence/\n?? docs/architecture/fidelity-reference-review-20260930.md\n?? docs/architecture/internal-compiler-result.md\n?? docs/architecture/internal-session-contract.md\n?? docs/architecture/sdk-061-architecture-gate.md\n?? docs/architecture/sdk-061-three-export-baseline.md\n?? docs/architecture/template-recovery.md\n?? docs/field-rules/\n?? docs/renderer-fidelity/OBSERVATIONAL_MASK_SETTLEMENT.md\n?? docs/renderer-fidelity/PHASE_9_COMPOSITING_SOURCE_GATE.md\n?? docs/renderer-fidelity/PHASE_9_GROUP_CONTROL_SOURCE_GATE.md\n?? docs/renderer-fidelity/decisions/0074-exporter-061-canonical-solid-opacity-is-native-source-evidence.md\n?? docs/renderer-fidelity/decisions/0075-template-package-v2-field-semantics-and-canonical-content-authority.md\n?? docs/renderer-fidelity/decisions/0076-v2-field-content-reducer-and-materializer-are-single-core-authorities.md\n?? docs/renderer-fidelity/decisions/0077-v2-browser-session-persists-only-canonical-field-authority.md\n?? docs/renderer-fidelity/decisions/0078-boolean-visibility-is-structural-participation-with-generation-safe-publication.md\n?? docs/renderer-fidelity/decisions/0079-family-image-framing-is-shared-content-with-sparse-variant-placement.md\n?? docs/renderer-fidelity/decisions/0080-textarea-visual-lines-come-from-the-current-painted-text-layout.md\n?? docs/renderer-fidelity/decisions/0081-studio-and-custom-hosts-share-v2-configuration-and-content-authority.md\n?? docs/renderer-fidelity/decisions/0082-boolean-fields-may-control-multiple-structural-targets.md\n?? docs/renderer-fidelity/decisions/0083-type-qualified-field-identity-and-shared-boolean-controls.md\n?? docs/renderer-fidelity/decisions/0084-full-parent-alpha-mask-owns-stable-parent-clip-boundary.md\n?? docs/renderer-fidelity/decisions/0085-singular-image-replacement-policy.md\n?? docs/renderer-fidelity/decisions/0086-svg-vector-assets-own-their-embedded-strokes.md\n?? docs/renderer-fidelity/decisions/0087-phase9-matrix-cover-source-does-not-certify-isolation.md\n?? docs/renderer-fidelity/decisions/0088-matched-matrix-group-control-certifies-bounded-isolation.md\n?? docs/renderer-fidelity/decisions/0089-live-figma-matrix2-confirms-paint-stack-and-bounded-overlay.md\n?? docs/renderer-fidelity/decisions/0090-bounded-opaque-source-compositing-owner.md\n?? docs/renderer-fidelity/decisions/0091-cover-mixed-image-gradient-owner.md\n?? docs/renderer-fidelity/decisions/0092-observational-mask-settlement-delegates-existing-authority.md\n?? docs/sdk-hardening/\n?? docs/studio/\n?? examples/template-editor-integration/src/FieldRulesV2Host.tsx\n?? fidelity/gates/\n?? fidelity/references/approved/exporter-061-carrousel/\n?? fidelity/references/approved/exporter-061-cover/\n?? fidelity/references/approved/exporter-061-linear-and-mixed-paints/\n?? fidelity/references/approved/exporter-061-now-hiring/\n?? fidelity/references/approved/exporter-061-solid-opacity/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-cover/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/\n?? fidelity/settlement/snapshots/approved/exporter-061-carrousel/\n?? fidelity/settlement/snapshots/approved/exporter-061-cover/\n?? fidelity/settlement/snapshots/approved/exporter-061-now-hiring/\n?? packages/template-browser/src/import/familySourcePreparationV2.ts\n?? packages/template-browser/src/import/runTemplatePackageImportPipelineV2.ts\n?? packages/template-browser/src/import/templateReimportV2.ts\n?? packages/template-browser/src/import/templateSourceAssemblyV2.ts\n?? packages/template-browser/src/internal/compilerResult/\n?? packages/template-browser/src/internal/sdkVersion.ts\n?? packages/template-browser/src/internal/sessionContract/\n?? packages/template-browser/src/persistence/platformMemory.ts\n?? packages/template-browser/src/persistence/publicRepositories.ts\n?? packages/template-browser/src/persistence/savedRecordValidationV2.ts\n?? packages/template-browser/src/persistence/templateRecovery.ts\n?? packages/template-browser/src/persistence/templateSessionRepositoryV2.ts\n?? packages/template-browser/src/persistence/v2SessionRepositories.ts\n?? packages/template-browser/src/session/activeFieldControllersV2.ts\n?? packages/template-browser/src/session/imageSourceDimensionsV2.ts\n?? packages/template-browser/src/session/publicFamilySession.ts\n?? packages/template-browser/src/session/sessionAssetUrlLeases.ts\n?? packages/template-browser/src/session/templateFieldFamilySessionV2.ts\n?? packages/template-browser/src/session/templateSessionV2.ts\n?? packages/template-browser/test/compilerResult.integration.ts\n?? packages/template-browser/test/compilerResult.test.ts\n?? packages/template-browser/test/definitionProjection.integration.test.ts\n?? packages/template-browser/test/familyAuthoringBaseline.ts\n?? packages/template-browser/test/familySourcePreparation.integration.ts\n?? packages/template-browser/test/familySourcePreparation.test.ts\n?? packages/template-browser/test/importPipelineV2.test.ts\n?? packages/template-browser/test/sdkResourceLifetime.test.ts\n?? packages/template-browser/test/sessionContract.async.test.ts\n?? packages/template-browser/test/sessionContract.fixtures.ts\n?? packages/template-browser/test/sessionContract.integration.ts\n?? packages/template-browser/test/sessionContract.test.ts\n?? packages/template-browser/test/sessionResourceLifecycle.test.ts\n?? packages/template-browser/test/templateRecovery.test.ts\n?? packages/template-browser/test/templateSessionV2.test.ts\n?? packages/template-core/src/compositing/\n?? packages/template-core/src/family/configurationV2.ts\n?? packages/template-core/src/family/fieldRulesV2.ts\n?? packages/template-core/src/fieldSemanticKernelV2.ts\n?? packages/template-core/src/fieldValidationV2.ts\n?? packages/template-core/src/fieldValuesV2.ts\n?? packages/template-core/src/inspection/settlement/settleMaskEvidence.ts\n?? packages/template-core/src/internal/\n?? packages/template-core/src/materializeTemplateFieldContentV2.ts\n?? packages/template-core/src/migrateTemplatePackageV2_1.ts\n?? packages/template-core/src/normalizeTemplatePackageV2.ts\n?? packages/template-core/src/parseTemplatePackageV2.ts\n?? packages/template-core/src/schema/template-field-content-v1.schema.json\n?? packages/template-core/src/schema/template-package-v2.schema.json\n?? packages/template-core/src/sourceColorField.ts\n?? packages/template-core/src/sourceDateField.ts\n?? packages/template-core/src/sourceNumberField.ts\n?? packages/template-core/src/templateFieldContentV2.ts\n?? packages/template-core/src/types/EditableFieldDefinitionV2.ts\n?? packages/template-core/src/validateTemplateFieldContentStateV1.ts\n?? packages/template-core/src/validateTemplatePackageV2.ts\n?? packages/template-core/test/definitionProjection.fixtures.ts\n?? packages/template-core/test/definitionProjection.test.ts\n?? packages/template-core/test/sourceCompositing.test.ts\n?? packages/template-core/test/templateFieldSemanticKernelV2.test.ts\n?? packages/template-core/test/templatePackageV2Contract.test.ts\n?? packages/template-react/src/fieldSessionV2.tsx\n?? packages/template-react/src/internal/runtime-routing/structuralParticipation.ts\n?? packages/template-react/test/fieldSessionV2.test.tsx\n?? packages/template-react/test/render/sourceCompositingRender.test.tsx\n?? packages/template-react/test/sessionLifecycle.browser.tsx\n?? scripts/compositing/\n?? scripts/fidelity/capture-integrity.mjs\n?? scripts/fidelity/capture-integrity.test.mjs\n?? scripts/fidelity/gate-disposition.mjs\n?? scripts/fidelity/gate-evidence.mjs\n?? scripts/fidelity/gate-profile.mjs\n?? scripts/fidelity/gate-profile.test.mjs\n?? scripts/fidelity/legacy/\n?? scripts/fidelity/output-lifecycle.mjs\n?? scripts/fidelity/output-lifecycle.test.mjs\n?? scripts/fidelity/reference-review.mjs\n?? scripts/fidelity/review-readiness.mjs\n?? scripts/fidelity/review-readiness.test.mjs\n?? scripts/fidelity/sdk-gate.mjs\n?? scripts/fidelity/write-gate-dispositions.mjs\n?? scripts/field-rules/\n?? scripts/repository/core-declaration-contract.mjs\n?? scripts/repository/core-declaration-contract.test.mjs\n?? scripts/repository/internal-experiment-boundaries.mjs\n?? scripts/repository/internal-experiment-boundaries.test.mjs\n?? scripts/repository/measure-v2-edits-workload.mjs\n?? scripts/repository/measure-v2-edits.mjs\n?? scripts/repository/sdk-061-family-profile.mjs\n?? scripts/repository/sdk-061-family-profile.test.mjs\n?? scripts/repository/verify-compiler-result.mjs\n?? scripts/repository/verify-family-preparation.mjs\n?? scripts/repository/verify-font-reactivation.mjs\n?? scripts/repository/verify-sdk-061-color-browser.mjs\n?? scripts/repository/verify-sdk-061-family-host.mjs\n?? scripts/repository/verify-sdk-061-single-host.mjs\n?? scripts/repository/verify-sdk-hardening-regression.mjs\n?? scripts/repository/verify-session-contract-browser.mjs\n?? scripts/repository/verify-session-contract.mjs\n?? scripts/repository/verify-v2-import-host.mjs\n?? scripts/runtime-routing/boolean-structural-visibility.mjs\n?? scripts/runtime-routing/textarea-max-lines-harness.tsx\n?? scripts/runtime-routing/textarea-max-lines.mjs\n?? scripts/settlement/mask-source-evidence.mjs\n",
+  "worktreeDiffSha256": "c1ae695a1ae605102e8f39cf61a5f3d5b90572f7cfc33dc284fa1d1bb42bbb0d",
+  "implementationSha256": {
+    "packages/template-browser/src/session/templateSessionV2.ts": "e2ba0d65c6ac07cafe6debe2e795f2ef8028d36de0ff6872269e64fa5cf12859",
+    "packages/template-browser/src/internal/sessionContract/types.ts": "b3693663289baada627acf9297b7cb2c72af1eebd3b61b208b4d7d1cb725c9ef",
+    "packages/template-browser/src/internal/sessionContract/adapt.ts": "96998ad4a3d7c88833c42d0b96bc3339ab578596bb230f229dc0ff0d78d6f01f",
+    "packages/template-browser/test/sessionContract.fixtures.ts": "2ae5d7901f7b092c28f71c30dfa2dbf6acb3f8bf5d7fcf76fc26af80769df238",
+    "packages/template-browser/test/sessionResourceLifecycle.test.ts": "f495ede709c3064a7bea33e8df37e09abf4d7b8640bd1a6be8cc4d37906bfa4c",
+    "packages/template-browser/test/sessionContract.test.ts": "7b999c54ae251fbb5f5bc0d0731c802558a2138e8bb62b5fe5b90c871afa3a28",
+    "packages/template-browser/test/sessionContract.async.test.ts": "458a456656b780cc87d75236293c0c5dce4cca3c12ff2e32b31834eec62091cf",
+    "packages/template-browser/test/sessionContract.integration.ts": "07ec720914e50094ca300210b30b65b43d95d78175f1642b4565a2bd7f2660e6",
+    "packages/template-react/test/sessionLifecycle.browser.tsx": "ca3124972657b4513df67e75eafa8b9d3e73d9d9eebee401415c7c04ddeb0f5e",
+    "scripts/repository/verify-session-contract.mjs": "391659f96c301418a2ce5ce3e93c1e83586c47af9da0ac23335956c3bf1e3e7e",
+    "scripts/repository/verify-session-contract-browser.mjs": "1da38ae93736a8199a5bcd788d2618f76c978bb53b556ab80791c6f2690e4c04",
+    "scripts/repository/internal-experiment-boundaries.mjs": "1e35b85ce92077350170191dc5e422c7d3cfe5630ef760982d81604dfbba5699",
+    "scripts/repository/internal-experiment-boundaries.test.mjs": "2412db85b3edb816f987894453b1dcca7a1d8cd9f9e1183fdbc92ac707b3dc45",
+    "scripts/repository/verify-package-boundaries.mjs": "189fe7d70eadb263d65ccf31a660c142ed2a1a49d645a0f69f88e007b655cbe8",
+    "src/test-suite.ts": "98bfe29d89e4c661fbd476f3e1b6a8f09ea26f16c91717250c975e895eed06a3"
+  },
+  "packageVersions": {
+    "core": "0.8.0",
+    "browser": "0.8.0",
+    "react": "0.8.0"
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "pnpmActual": "11.25.0",
+    "browserProfile": "headless Chromium, source-authoritative fonts",
+    "gateEnvironmentSha256": "ff8bd3c39e68bcc213e2a1ebc0052f2b9467ae37adf2f6d624cd911c5e98d43e"
+  },
+  "fixtures": [
+    {
+      "id": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30"
+    },
+    {
+      "id": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336"
+    },
+    {
+      "id": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "geist-mono-500-normal",
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "byteSize": 149328
+    },
+    {
+      "id": "inter-tight-700-normal",
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "byteSize": 580572
+    },
+    {
+      "id": "rethink-sans-600-normal",
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+      "byteSize": 59080
+    },
+    {
+      "id": "funnel-display-400-normal",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "byteSize": 55900
+    }
+  ],
+  "regressions": {
+    "partialRestore": [
+      "Failed before fix: Partial restore failure releases the acquired URL.",
+      "Acquired temporary URLs now released on storage failure, replacement and disposal."
+    ],
+    "sharedReplacement": [
+      "Failed before fix: First reset retains the surviving image asset.",
+      "Embedded/Blob, equal-hash, Reset/replacement, reload and final-owner handoff passed."
+    ]
+  },
+  "measurementRunId": "session-contract-20261008c",
+  "measurementRegenerate": "node scripts/repository/verify-session-contract.mjs --run-id <fresh-id>",
+  "measurementScope": "Direct calls from Browser sessions into canonical, projection, tree and persistence-record authorities; nested Core calls and wall-clock scheduling are not attributed.",
+  "measurements": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "kind": "single",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 3.408915999999863,
+          "adapterMedianMs": 3.2152500000001965,
+          "directCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.06041600000025937,
+          "adapterMedianMs": 0.09237499999971988,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 18.016125000000102,
+          "adapterMedianMs": 16.757500000000164,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 5,
+            "materializeSingle": 5,
+            "materializeFamily": 0,
+            "rendererProjection": 5,
+            "resolvedTree": 5,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 5,
+            "materializeSingle": 5,
+            "materializeFamily": 0,
+            "rendererProjection": 5,
+            "resolvedTree": 5,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 2.8311670000000504,
+          "adapterMedianMs": 1.315458000000035,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          }
+        },
+        "restore": {
+          "directMedianMs": 3.5652909999998883,
+          "adapterMedianMs": 3.7638749999996435,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "kind": "family",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 4.188583999999992,
+          "adapterMedianMs": 5.068750000000136,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.04983299999958035,
+          "adapterMedianMs": 0.07437499999969077,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 26.97945800000025,
+          "adapterMedianMs": 23.49133299999994,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 5,
+            "materializeSingle": 0,
+            "materializeFamily": 5,
+            "rendererProjection": 5,
+            "resolvedTree": 5,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 5,
+            "materializeSingle": 0,
+            "materializeFamily": 5,
+            "rendererProjection": 5,
+            "resolvedTree": 5,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 0.30333299999983865,
+          "adapterMedianMs": 0.2195000000001528,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          }
+        },
+        "restore": {
+          "directMedianMs": 5.586416000000099,
+          "adapterMedianMs": 6.186333999999988,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "kind": "single",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 9.015667000000121,
+          "adapterMedianMs": 9.332334000000174,
+          "directCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.05033400000002075,
+          "adapterMedianMs": 0.07670800000005329,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 33.974334,
+          "adapterMedianMs": 24.857708000000002,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 4,
+            "materializeSingle": 4,
+            "materializeFamily": 0,
+            "rendererProjection": 4,
+            "resolvedTree": 4,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 4,
+            "materializeSingle": 4,
+            "materializeFamily": 0,
+            "rendererProjection": 4,
+            "resolvedTree": 4,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 3.266542000000072,
+          "adapterMedianMs": 2.491958000000068,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          }
+        },
+        "restore": {
+          "directMedianMs": 7.392334000000119,
+          "adapterMedianMs": 7.743125000000418,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "kind": "family",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 8.4197079999999,
+          "adapterMedianMs": 7.754667000000154,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.05054199999995035,
+          "adapterMedianMs": 0.07670800000005329,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 37.01666699999987,
+          "adapterMedianMs": 38.071249999999964,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 4,
+            "materializeSingle": 0,
+            "materializeFamily": 4,
+            "rendererProjection": 4,
+            "resolvedTree": 4,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 4,
+            "materializeSingle": 0,
+            "materializeFamily": 4,
+            "rendererProjection": 4,
+            "resolvedTree": 4,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 0.5975409999996373,
+          "adapterMedianMs": 0.4614160000000993,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          }
+        },
+        "restore": {
+          "directMedianMs": 10.471083999999792,
+          "adapterMedianMs": 11.064499999999953,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "kind": "single",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 5.70049999999992,
+          "adapterMedianMs": 6.215875000000324,
+          "directCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 1,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.051124999999956344,
+          "adapterMedianMs": 0.078125,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 46.73062499999969,
+          "adapterMedianMs": 46.526208000000224,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 8,
+            "materializeSingle": 8,
+            "materializeFamily": 0,
+            "rendererProjection": 8,
+            "resolvedTree": 8,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 8,
+            "materializeSingle": 8,
+            "materializeFamily": 0,
+            "rendererProjection": 8,
+            "resolvedTree": 8,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 2.5160829999999805,
+          "adapterMedianMs": 2.1469170000000304,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 1,
+            "captureFamily": 0
+          }
+        },
+        "restore": {
+          "directMedianMs": 8.137708000000202,
+          "adapterMedianMs": 7.176500000000033,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 1,
+            "materializeFamily": 0,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "kind": "family",
+      "trials": 3,
+      "operations": {
+        "load": {
+          "directMedianMs": 7.911375000000135,
+          "adapterMedianMs": 7.652625000000171,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "snapshot10000": {
+          "directMedianMs": 0.04800000000022919,
+          "adapterMedianMs": 0.07600000000002183,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "acceptedEdits": {
+          "directMedianMs": 70.32558399999971,
+          "adapterMedianMs": 68.33412499999986,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 8,
+            "materializeSingle": 0,
+            "materializeFamily": 8,
+            "rendererProjection": 8,
+            "resolvedTree": 8,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 8,
+            "materializeSingle": 0,
+            "materializeFamily": 8,
+            "rendererProjection": 8,
+            "resolvedTree": 8,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        },
+        "saveCapture": {
+          "directMedianMs": 0.5037500000003092,
+          "adapterMedianMs": 0.4109579999999369,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 0,
+            "rendererProjection": 0,
+            "resolvedTree": 0,
+            "captureSingle": 0,
+            "captureFamily": 1
+          }
+        },
+        "restore": {
+          "directMedianMs": 10.057542000000012,
+          "adapterMedianMs": 10.315874999999778,
+          "directCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          },
+          "adapterCalls": {
+            "parse": 0,
+            "validate": 0,
+            "mutation": 0,
+            "materializeSingle": 0,
+            "materializeFamily": 1,
+            "rendererProjection": 1,
+            "resolvedTree": 1,
+            "captureSingle": 0,
+            "captureFamily": 0
+          }
+        }
+      }
+    }
+  ],
+  "threeSourceFamily": {
+    "variantIds": [
+      "variant-1",
+      "variant-2",
+      "variant-3"
+    ],
+    "sourcePackageIds": [
+      "pkg_987_6755_1790344506540",
+      "pkg_987_6771_1790344493057",
+      "pkg_987_6810_1790344468814"
+    ],
+    "selections": [
+      {
+        "variantId": "variant-1",
+        "calls": {
+          "parse": 0,
+          "validate": 0,
+          "mutation": 0,
+          "materializeSingle": 0,
+          "materializeFamily": 1,
+          "rendererProjection": 1,
+          "resolvedTree": 1,
+          "captureSingle": 0,
+          "captureFamily": 0
+        }
+      },
+      {
+        "variantId": "variant-2",
+        "calls": {
+          "parse": 0,
+          "validate": 0,
+          "mutation": 0,
+          "materializeSingle": 0,
+          "materializeFamily": 1,
+          "rendererProjection": 1,
+          "resolvedTree": 1,
+          "captureSingle": 0,
+          "captureFamily": 0
+        }
+      },
+      {
+        "variantId": "variant-3",
+        "calls": {
+          "parse": 0,
+          "validate": 0,
+          "mutation": 0,
+          "materializeSingle": 0,
+          "materializeFamily": 1,
+          "rendererProjection": 1,
+          "resolvedTree": 1,
+          "captureSingle": 0,
+          "captureFamily": 0
+        }
+      }
+    ],
+    "equivalent": true
+  },
+  "commands": [
+    {
+      "command": "pnpm test:portable",
+      "exitCode": 0,
+      "logSha256": "4c3f8225a4c7d68fdefc4157c6a51a650bce3dce4116724f8384154a5c9e93a3"
+    },
+    {
+      "command": "pnpm sdk:verify",
+      "exitCode": 0,
+      "logSha256": "a43dc1da1e73a57fbdf390d109efb0aad3f1edd057c3ee27ca887fd8bfef7d84"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "logSha256": "ade6c1b7ecdb278f71ef37cc8d3dba3699239b89dab5a1a859972edb3dfc7376"
+    },
+    {
+      "command": "pnpm exec tsc -b apps/studio/tsconfig.json --pretty false",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/repository/verify-session-contract.mjs --run-id session-contract-20261008c",
+      "exitCode": 0
+    },
+    {
+      "label": "public-v2",
+      "command": "node scripts/repository/verify-v2-import-host.mjs",
+      "started": "2026-10-08T14:29:45.490Z",
+      "finished": "2026-10-08T14:29:46.061Z",
+      "exitCode": 0,
+      "logSha256": "60a2cef7307fd490f816dfb0bb679e2c910ee8c4d262da2936f6495448fbe89c"
+    },
+    {
+      "label": "react-lifecycle",
+      "command": "node scripts/repository/verify-session-contract-browser.mjs",
+      "started": "2026-10-08T14:29:46.062Z",
+      "finished": "2026-10-08T14:29:48.505Z",
+      "exitCode": 0,
+      "logSha256": "d57320c52c6479f6498a8f002dffa6328d496ad27a1c1a6b1c9c19c04c465356"
+    },
+    {
+      "label": "font-lifecycle",
+      "command": "node scripts/repository/verify-font-reactivation.mjs",
+      "started": "2026-10-08T14:29:48.505Z",
+      "finished": "2026-10-08T14:29:50.981Z",
+      "exitCode": 0,
+      "logSha256": "ed5a02fe80c5f839f21009eb85f2c1f6781d1ac294ea1e46460a481bcbf8cf1e"
+    },
+    {
+      "label": "studio-setup",
+      "command": "node scripts/field-rules/studio-setup.mjs",
+      "started": "2026-10-08T14:29:50.982Z",
+      "finished": "2026-10-08T14:30:08.095Z",
+      "exitCode": 0,
+      "logSha256": "3a9ab986f90ce64bc5d0fb8ed6be84152bdd98f7525aa2a227ae17e2090cdd27"
+    },
+    {
+      "label": "studio-drafts",
+      "command": "node scripts/field-rules/studio-drafts.mjs",
+      "started": "2026-10-08T14:30:08.095Z",
+      "finished": "2026-10-08T14:30:43.606Z",
+      "exitCode": 0,
+      "logSha256": "7491a45f93182ab3ab08c7761379e834e8342bb08b9c75cb427f6f3c79ff0ddf"
+    },
+    {
+      "label": "field-rules",
+      "command": "node scripts/field-rules/studio-v2.mjs",
+      "started": "2026-10-08T14:30:43.607Z",
+      "finished": "2026-10-08T14:31:00.740Z",
+      "exitCode": 0,
+      "logSha256": "45fcfddbbb03c36a86f02ca1dfb47c5e9bddc022cb2e9e5bb75f48dae849006b"
+    },
+    {
+      "label": "family-parity",
+      "command": "node scripts/field-rules/studio-drafts.mjs --family-parity",
+      "started": "2026-10-08T14:31:00.741Z",
+      "finished": "2026-10-08T14:31:36.892Z",
+      "exitCode": 0,
+      "logSha256": "1315c8d7ca22cbd6e58c41fbe0ec8cc2161c6443a8f613888ccd18bec2054192"
+    },
+    {
+      "label": "workflow-acceptance",
+      "command": "node scripts/field-rules/studio-workflow-acceptance.mjs",
+      "started": "2026-10-08T14:31:36.892Z",
+      "finished": "2026-10-08T14:31:52.551Z",
+      "exitCode": 0,
+      "logSha256": "65f6f93a4f94fcde673ea4397c75c2a36e4e27e9ad47dcfe5047c948527489f1"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "logSha256": "c8e7a49c8858e295adf2848894df125313e1416a5bd4a53f821fabf2d49ef041"
+    },
+    {
+      "command": "pnpm api:contract",
+      "exitCode": 0,
+      "logSha256": "0f8a13ddf612786aafbefc722613150b1cf439c76f72b0bfed6d398cb8e01cc3"
+    },
+    {
+      "command": "pnpm boundaries:check",
+      "exitCode": 0,
+      "logSha256": "357b05d56b495eb176840c0b69c66a0ad9857d0b95e98f95d7c5ec64a5b6b8d3"
+    },
+    {
+      "command": "node scripts/fidelity/sdk-gate.mjs --run-id sdk-061-session-contract-20261008b --assess-existing",
+      "exitCode": 0,
+      "logSha256": "f0c37009cf79e5c345661545641ef36d583c578a70c412de8fa322c895f68668"
+    }
+  ],
+  "nonFinalAttempts": [
+    {
+      "command": "pnpm --filter @sleinity/template-studio typecheck",
+      "result": "No such script; corrected to the actual Studio TypeScript build command."
+    },
+    {
+      "runId": "sdk-061-session-contract-20261008a",
+      "result": "Comparisons passed, source disposition pending. Final run was recaptured after all package and Studio builds completed."
+    },
+    {
+      "runId": "sdk-061-session-contract-20261008b",
+      "result": "Initial NO-GO due to cross-run source disposition; all captures/comparisons passed. Bound individually unchanged reviewed evidence, then reassessed GO."
+    },
+    {
+      "test": "Choice configuration probe",
+      "result": "Duplicate normalized text choices correctly rejected by existing authority; test now asserts atomic rejection instead of expecting acceptance."
+    }
+  ],
+  "bundle": {
+    "reactFieldSessionV2": {
+      "raw": 869271,
+      "gzip": 205667,
+      "limits": {
+        "raw": 1070034,
+        "gzip": 241099
+      }
+    },
+    "allTenProfilesPassed": true
+  },
+  "protected": {
+    "files": 321,
+    "approvedReferenceAndSnapshotFiles": 283,
+    "sha256OfSortedHashMap": "3997113ca178404e94fa4b2163e11fcedb42d94fd4f3bf9658307d72421b7364",
+    "changed": [],
+    "publicApiBaselineSha256": "db23cd1646d1c390d36a27f5e6bc4a91d30c0a157491442a0776c9d06d67146c",
+    "protectedDeclarationSha256": {
+      "packages/template-core/dist/motion.d.ts": "97d1dfe09fd7f0bea89c6e7907bbcbbdf9d804a4b30cba7b44f20db7165c4eaa",
+      "packages/template-core/dist/family.d.ts": "77ffe51278b83ae762a130abb221d320edd475dcb174f43111bfab6a45ee78f9",
+      "packages/template-core/dist/packageDiagnostics-C3Ou5qHU.d.ts": "58db95f108b8c142fad8ed4908960407d333fc489aff144c64b600c369e0da42",
+      "packages/template-core/dist/editor.d.ts": "8cc30263b9edf783ccb529d1f59aaf32bb045b861a9de89f618f41ca17b1ebef",
+      "packages/template-core/dist/fonts.d.ts": "eeb0fdfc0df9286285b623f9fc6bbcba920800d89d21501cd2f2fa36915b3986",
+      "packages/template-core/dist/assets.d.ts": "6660b427fe3511f5a44223151e592584475aa284754b6701e465e43818e41c77",
+      "packages/template-core/dist/index.d.ts": "dbd67c76ff75a1c56e05413e53b73c49b44bba8f33d499dd5ce3f79e4d137e32",
+      "packages/template-core/dist/inspection.d.ts": "1e02b07071b54383355d799e3e60257f79d14fbfd4e6449f83cbf2263f82c426",
+      "packages/template-core/dist/renderer-internal.d.ts": "4783402e61956c6819029ab4b15ee3eaa52bde7ce01d10eba1476b58073b8b5b",
+      "packages/template-core/dist/TemplatePackage-XM8Jn1t1.d.ts": "0224429f930996b185aeffca1f08a6e57e9c340c4e4143f3fe52fdeb94e17ce2",
+      "packages/template-browser/dist/session.d.ts": "9ead937886afe3362196f9e2167eca34216cfe024caf6ad566e4d1fe0513811b",
+      "packages/template-browser/dist/session-DdWKZlE_.d.ts": "657c2600bfb63d9b3b3cef5411380dd10d52ed8723a51f32663dd88807abceaf",
+      "packages/template-browser/dist/capture.d.ts": "6c4fa4f0c42d67f075c6cb95f932bd18bf4ff3295f4d1037f6b67fa6db7ffbf7",
+      "packages/template-browser/dist/compatibility.d.ts": "f605e3780e60481b78688843c7b16ea62f43a75847512d4c9860ae66e3e39361",
+      "packages/template-browser/dist/templateSession-Bg24iAgb.d.ts": "fc4b9749c3ce5723887c65d8b894fc4180b6863c06014b25668be27092512be7",
+      "packages/template-browser/dist/templateImportWizard-BqSnPfHC.d.ts": "a7a81e78adf201c5b790aec659d077a1a98a91a4e52a40af2c0d708ac6077572",
+      "packages/template-browser/dist/enrichment.d.ts": "40f3605d4885df32f96fcb5044f0a7f75c5d2de44ef25f54d6e1da52c6683f20",
+      "packages/template-browser/dist/fonts.d.ts": "24beb96ce27d50497b34116b33c280b4284df8ea5d5a20f3a2b68536490144e1",
+      "packages/template-browser/dist/assets.d.ts": "411ae6d74a1075324354d25bcb54196659ea0c3f2a472f7f8501355f1082e3ec",
+      "packages/template-browser/dist/index.d.ts": "521550f228a855ab966a752f4268a0624d95f044830592489f0c440ff0a355ce",
+      "packages/template-browser/dist/importer.d.ts": "98ee1cad50251c38842ce5767c84a5b2047f3d850e060ee8f8a4e05bde0c78a5",
+      "packages/template-browser/dist/exactFontSetup-Jb8OBb7S.d.ts": "b4c2d1def5ce32ce529b9856ff40e8052f75b0ebed5cd69aaee62d0280daa1db",
+      "packages/template-browser/dist/assetReliability-Dl3bgyNy.d.ts": "e05382bf33d4c526252674d4a6022e779fcf0e72a9f27d2008527a5efa2a3618",
+      "packages/template-browser/dist/persistence.d.ts": "e92c4f8e50e2a889e87d610008008c1a7dc1da2c29c818ba0543ac9acd8b00ae",
+      "packages/template-react/dist/TemplatePackageRenderer-CS5vqi6q.d.ts": "10f71779dd15e780b3aa5cd2ff95ab803489e90ea157809191415b704a86fcec",
+      "packages/template-react/dist/productRenderIdentity-CtMf-hOf.d.ts": "1e5a03d0e035c1065a481f4cbf3003881341e05ab3aac62165f20eadcde5bdd2",
+      "packages/template-react/dist/editor.d.ts": "7792e1c6e120f4fa293a24bdbfff68dcd70d5bd3e6acca9a3a8269240f95c125",
+      "packages/template-react/dist/TemplateInspectionViewport-DlufJJz0.d.ts": "d37ea85c83f077f48ce86859eeedbdbaab9d2bd0c6219a06df574884089a95df",
+      "packages/template-react/dist/index.d.ts": "50ffb169c7436ef6b91925e4272664b8c22d792a7bf74ff573fbcd78b5f31a6d",
+      "packages/template-react/dist/inspection.d.ts": "949f78f9002aca2079c281dfb6e923b23b1ff754f6d536af32d8d95cc74f21a0",
+      "packages/template-react/dist/renderer-internal.d.ts": "d25f17e0c7c4eb49175a430aa900e1359f88e8e60d0795632082ce4cdc9ff2e3",
+      "packages/template-react/dist/packageRenderUtils-BuH5UFO8.d.ts": "843d093fad63a583fd0aeca3d6ffb0ea55d844a04edef7ab8d85d038db4705c7",
+      "packages/template-react/dist/importer.d.ts": "9c15c56c65d59ac46c66d068c126a7976d9ee6f3ed112f1962961ab58fe3f392",
+      "packages/template-react/dist/session-Dk6nyW1L.d.ts": "a9ceec8cdf67581dd40124ec0188e7258d211f63b73927223a35dde904e32998"
+    }
+  },
+  "gate": {
+    "runId": "sdk-061-session-contract-20261008b",
+    "completeStableCaptures": 24,
+    "rendererComparisons": 12,
+    "sceneComparisons": 3,
+    "settlementComparisons": 12,
+    "go": true,
+    "regenerate": "node scripts/fidelity/sdk-gate.mjs --run-id <fresh-id>",
+    "sameReviewedPngIdentities": 12,
+    "priorReviewedRun": "sdk-061-release-verification-20261008a",
+    "sourceReviewPolicy": "Exact prior individually reviewed candidate identities plus unchanged approved structure/scene/settlement; no reference promotion.",
+    "results": [
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "public-single"
+      },
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "public-family"
+      },
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "color-browser"
+      },
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "renderer-existing"
+      },
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "scene-existing"
+      },
+      {
+        "error": null,
+        "exitCode": 0,
+        "label": "settlement-existing"
+      }
+    ]
+  },
+  "review": {
+    "automatedBrowser": true,
+    "manualLiveSourceReview": false,
+    "storedIdentityReview": true,
+    "environmentDifferences": "Invocation label reads declared pnpm@11.9.0 without npm user-agent; actual pnpm remains 11.25.0. Only timing/memory/timestamp and invocation-label metadata differs; font decisions equal excluding upload timings."
+  },
+  "productionConsumers": [],
+  "publicApiChanged": false,
+  "referencesPromoted": false,
+  "tolerancesChanged": false,
+  "completion": "complete",
+  "nextCandidate": "Separately scoped React snapshot-reading consumer; no session unification or persistence migration.",
+  "testSourceTypecheck": {
+    "passed": true,
+    "configuration": {
+      "extends": "/Users/niels/Documents/Projects/template-tool/packages/template-browser/tsconfig.json",
+      "include": [
+        "/Users/niels/Documents/Projects/template-tool/packages/template-browser/test/sessionContract.fixtures.ts",
+        "/Users/niels/Documents/Projects/template-tool/packages/template-browser/test/sessionResourceLifecycle.test.ts",
+        "/Users/niels/Documents/Projects/template-tool/packages/template-browser/test/sessionContract.test.ts",
+        "/Users/niels/Documents/Projects/template-tool/packages/template-browser/test/sessionContract.integration.ts",
+        "/Users/niels/Documents/Projects/template-tool/packages/template-browser/test/sessionContract.async.test.ts",
+        "/Users/niels/Documents/Projects/template-tool/packages/template-react/test/sessionLifecycle.browser.tsx"
+      ]
+    },
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "reactBrowserEvidenceSha256": "96c3df14abc86e2fb7a5fa0f5424c00a9174b951ec90bffdec6af5695ccf4d05"
+}

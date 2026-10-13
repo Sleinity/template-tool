@@ -1,3 +1,4 @@
+import { sdkVersion } from "../internal/sdkVersion";
 import {
   editableFieldRuleKey,
   getPackageEditorFieldTargetStatuses,
@@ -37,7 +38,7 @@ export const TEMPLATE_IMPORT_WIZARD_SCHEMA_VERSION =
   "template-import-wizard-snapshot-v1" as const;
 export const TEMPLATE_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-import-confirmation-v1" as const;
-export const TEMPLATE_SDK_VERSION = "0.8.0" as const;
+export const TEMPLATE_SDK_VERSION = sdkVersion;
 
 export const TEMPLATE_IMPORT_WIZARD_STEPS = [
   "zip-import",
@@ -524,7 +525,7 @@ export function createTemplateImportWizard(
         view: {
           ruleId: ruleId(field),
           fieldId: field.id,
-          label: field.label?.trim() || field.id,
+          label: field.label?.trim() || field.id.replace(/^[^:]+:/u, ""),
           type: field.type,
           defaultValue: structuredClone(field.defaultValue),
           constraints: meaningfulConstraints(field),

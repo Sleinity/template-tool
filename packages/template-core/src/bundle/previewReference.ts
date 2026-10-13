@@ -14,6 +14,8 @@ export interface PackagePreviewReference {
   width?: number;
   height?: number;
   dimensionsAvailable: boolean;
+  /** Import-lifetime decoded bytes, reused by browser preview consumers. */
+  bytes?: ArrayBuffer;
 }
 
 function diagnostic(
@@ -87,6 +89,7 @@ export function createPackagePreviewReference(reader: ZipBundleReader): {
   return {
     preview: {
       exists: true,
+      bytes: read.value,
       path: file.path,
       normalizedPath: file.normalizedPath,
       mimeType: "image/png",

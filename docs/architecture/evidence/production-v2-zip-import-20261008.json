@@ -1,0 +1,496 @@
+{
+  "milestone": "First production compiler consumer: V2 ZIP import",
+  "recordedAt": "2026-10-08T08:57:16.658148+00:00",
+  "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "worktreeDiffSha256": "1a2cb322a41a9f02fabd0e5b76ebd99dff4ae8e413a0791150265602a403edbc",
+  "worktreeNote": "Pre-existing tracked and untracked changes retained. Implementation hashes identify this milestone within the dirty checkout; full compiler run retains the tested status inventory.",
+  "implementationSha256": {
+    "packages/template-browser/src/import/runTemplatePackageImportPipelineV2.ts": "4298bba2db3ff530291705c476b34bd8f8a5e51e88098e65aed5a5ef18cc7c9f",
+    "packages/template-browser/src/importer.ts": "7aad48b07f3ae5ec1007465fe130f6f3b6e8115cc239af3d8ff824c069b849c5",
+    "apps/studio/src/setup/setupSources.ts": "0aabb5c56f37e43f6cd6a244023f24375c31e64bfd8da51586adc61018beae08",
+    "apps/studio/src/setup/setupSourceOwnership.ts": "60dd651b991025ec31fd71f686f3279e326f987e5740502b36836240536f97af",
+    "apps/studio/src/setup/StudioSetupWizard.tsx": "3f1bcdb29a95dd224c3592616ed9988939308d00773dbb0bd2288fa6fc1e593b",
+    "apps/studio/src/field-rules/StudioFieldRulesV2.tsx": "9683e124c37df774283c12b26b13f635c1d9efc7044d5d79ea7449281d54311e",
+    "packages/template-browser/test/importPipelineV2.test.ts": "7846bdb5a6d80ea35cb09a6441161e506342101fa8f5c02e42da4490b2eb660c",
+    "packages/template-browser/test/compilerResult.integration.ts": "eb5e3b13f49711af96ba09eb4246bce78984bbf0b103108ce49328a9e42069ae",
+    "apps/studio/src/setup/setupSourceOwnership.test.ts": "c236e926efff8b50877049dc536784abaf8f8361c27171c3375f3fde27af242f",
+    "scripts/repository/verify-compiler-result.mjs": "f5f9371b38b37a10ca8532bf41f1b7fe075101aa0f9d560f73a8d8ff9e7e4773",
+    "scripts/repository/verify-packed-consumer.mjs": "1fecd38c262db198ff9205ddb56978d8593c2d908a449fecd3f23b741fc12cf6",
+    "scripts/repository/internal-experiment-boundaries.mjs": "4ca674e7a22ebb252f707343116045088a2e646e72a17f10b62256cd55fcae13",
+    "scripts/repository/internal-experiment-boundaries.test.mjs": "342ddc49c8541d88d1428af9bafcf67a1e1dea4eed34c060aabf7cc86432d7d4",
+    "scripts/repository/verify-package-boundaries.mjs": "f5412301bb469d2d7eb57e52fc4f6bec27c56a3ea142399aae9881419f5d6413",
+    "scripts/repository/verify-v2-import-host.mjs": "395c660f6bf0dc82e23cfeb356a4d30f00e6c61b848a01c32112e86bddb1fce1",
+    "scripts/repository/verify-sdk-061-single-host.mjs": "bda87ef7a1457ca08105f389bc308c6558d5a4ae8238b55d743d657477bdc6ed",
+    "scripts/field-rules/studio-drafts.mjs": "3c287c95e7601aab720fcd5f23fbeb70804e3b720b72af5985fb56e5906d7918",
+    "config/sdk-public-api.json": "db23cd1646d1c390d36a27f5e6bc4a91d30c0a157491442a0776c9d06d67146c"
+  },
+  "packageVersions": {
+    "core": "0.8.0",
+    "browser": "0.8.0",
+    "react": "0.8.0"
+  },
+  "publicApiAddition": {
+    "entry": "@sleinity/template-browser/importer",
+    "symbols": [
+      "runTemplatePackageImportPipelineV2",
+      "TemplatePackageImportPipelineInputV2",
+      "TemplatePackageImportResultV2",
+      "TemplatePackageImportFailureV2"
+    ],
+    "rootExport": false,
+    "privateCompilerTypesExported": false,
+    "changeset": ".changeset/v2-zip-production-import.md"
+  },
+  "compilerEvidence": {
+    "runId": "compiler-production-20261008b",
+    "localReport": "fidelity/evidence/compiler-result/compiler-production-20261008b/report.json",
+    "reportSha256": "57f13a5b8c20b4a7a932c4a01a9e3c0b0a50f89a380c21506ee4e2723e73081b",
+    "regenerate": "node scripts/repository/verify-compiler-result.mjs --run-id <unique-id>",
+    "fonts": [
+      {
+        "id": "geist-mono-500-normal",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "byteSize": 149328
+      },
+      {
+        "id": "inter-tight-700-normal",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "byteSize": 580572
+      },
+      {
+        "id": "rethink-sans-600-normal",
+        "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "byteSize": 59080
+      },
+      {
+        "id": "funnel-display-400-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "byteSize": 55900
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "exporter-061-now-hiring",
+        "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+        "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+        "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+        "timingsMsMedian": {
+          "adapterImportMs": 3.1915,
+          "adapterParseMs": 0.8189,
+          "publicFacadeOverheadMs": 0.0084,
+          "standaloneValidationMs": 0.5028,
+          "authoringAcceptanceMs": 3.4109,
+          "sessionAcceptanceMs": 2.9276
+        },
+        "delegateCalls": {
+          "imports": 1,
+          "parses": 1,
+          "assemblies": 1
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "fields": {
+            "candidatePngSha256": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "png-export": {
+            "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "validate": {
+            "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          }
+        }
+      },
+      {
+        "id": "exporter-061-cover",
+        "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+        "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+        "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+        "timingsMsMedian": {
+          "adapterImportMs": 7.4315,
+          "adapterParseMs": 1.6741,
+          "publicFacadeOverheadMs": 0.0112,
+          "standaloneValidationMs": 1.1142,
+          "authoringAcceptanceMs": 8.9471,
+          "sessionAcceptanceMs": 8.8131
+        },
+        "delegateCalls": {
+          "imports": 1,
+          "parses": 1,
+          "assemblies": 1
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "fields": {
+            "candidatePngSha256": "3e24815d1e50b315d3ea9e34c5fe96333b3aa607e76caf21da86f696832ecb61",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "png-export": {
+            "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "validate": {
+            "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          }
+        }
+      },
+      {
+        "id": "exporter-061-carrousel",
+        "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+        "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+        "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+        "timingsMsMedian": {
+          "adapterImportMs": 5.0997,
+          "adapterParseMs": 1.9398,
+          "publicFacadeOverheadMs": 0.0103,
+          "standaloneValidationMs": 1.0567,
+          "authoringAcceptanceMs": 7.79,
+          "sessionAcceptanceMs": 6.2732
+        },
+        "delegateCalls": {
+          "imports": 1,
+          "parses": 1,
+          "assemblies": 1
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "efa8b3b84c7730ae2b18f3e63c09926c6849b36baf0a539d78ab73a1d774e9db",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "fields": {
+            "candidatePngSha256": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "png-export": {
+            "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          },
+          "validate": {
+            "candidatePngSha256": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+            "review": "reviewed-source-faithful",
+            "comparison": "pass"
+          }
+        }
+      }
+    ],
+    "timingLimit": "Three sequential trials. Authoring/session acceptance include validation and materialization; standalone validation is measured separately and totals are not additive production costs."
+  },
+  "ownershipCoverage": [
+    "Idempotent public disposal",
+    "Two loaded sessions retain shared import URLs until the final session releases",
+    "Caller stores stay caller-owned",
+    "Failed batches await late peers and release all successful candidates",
+    "Stale/cancelled/superseded candidates release ownership",
+    "Pending assignment/replacement reviews retain resources until accepted or abandoned",
+    "Replacement/removal releases obsolete source ownership after session handoff",
+    "Unmount and StrictMode cleanup remain reusable",
+    "Cleanup attempts every lease when a callback fails"
+  ],
+  "fidelity": {
+    "runId": "sdk-061-production-import-20261008b",
+    "decision": "GO",
+    "captures": 24,
+    "stableSurfaces": 12,
+    "rendererPasses": 12,
+    "scenePasses": 3,
+    "settlementPasses": 12,
+    "environment": {
+      "approximateProcessMemoryBytes": 901890048,
+      "approximateSystemMemoryBytes": 17179869184,
+      "architecture": "arm64",
+      "browser": "Chromium",
+      "browserVersion": "149.0.7827.55",
+      "buildIdentifier": "14f8e573f013d0bd7ddfc91e667ac713b443d95c208df9116063d14059c29264",
+      "captureScale": 1,
+      "devicePixelRatio": 1,
+      "fallbackFonts": [],
+      "fontDecisions": [
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+          "byteSize": 149328,
+          "classification": "exact",
+          "fontId": "geist-mono-500-normal",
+          "requestedFamily": "Geist Mono",
+          "requestedStyle": "normal",
+          "requestedWeight": 500,
+          "requirementId": "font:geist-mono:medium",
+          "source": "Official Vercel Geist v1.7.2 release asset",
+          "uploadAndLinkMs": 117.92858399999977
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+          "byteSize": 580572,
+          "classification": "exact",
+          "fontId": "inter-tight-700-normal",
+          "requestedFamily": "Inter Tight",
+          "requestedStyle": "normal",
+          "requestedWeight": 700,
+          "requirementId": "font:inter-tight:bold",
+          "source": "Locally installed Inter Tight variable font",
+          "uploadAndLinkMs": 138.55633399999988
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+          "byteSize": 55900,
+          "classification": "exact",
+          "fontId": "funnel-display-400-normal",
+          "requestedFamily": "Funnel Display",
+          "requestedStyle": "normal",
+          "requestedWeight": 400,
+          "requirementId": "font:funnel-display:regular",
+          "source": "Locally installed variable font; parsed family and 300\u2013800 weight axis verified",
+          "uploadAndLinkMs": 94.86858299999949
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+          "byteSize": 59080,
+          "classification": "exact",
+          "fontId": "rethink-sans-600-normal",
+          "requestedFamily": "Rethink Sans",
+          "requestedStyle": "normal",
+          "requestedWeight": 600,
+          "requirementId": "font:rethink-sans:semibold",
+          "source": "Repository bundled Studio font",
+          "uploadAndLinkMs": 115.92124999999942
+        }
+      ],
+      "fontProfile": "source-authoritative",
+      "fontSources": [
+        {
+          "byteSize": 149328,
+          "family": "Geist Mono",
+          "id": "geist-mono-500-normal",
+          "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+          "style": "normal",
+          "weight": 500
+        },
+        {
+          "byteSize": 580572,
+          "family": "Inter Tight",
+          "id": "inter-tight-700-normal",
+          "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+          "style": "normal",
+          "weight": 700
+        },
+        {
+          "byteSize": 59080,
+          "family": "Rethink Sans",
+          "id": "rethink-sans-600-normal",
+          "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+          "style": "normal",
+          "weight": 600
+        },
+        {
+          "byteSize": 55900,
+          "family": "Funnel Display",
+          "id": "funnel-display-400-normal",
+          "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+          "style": "normal",
+          "weight": 400
+        }
+      ],
+      "gitCommit": null,
+      "loadedFonts": [
+        {
+          "family": "Rethink Sans",
+          "status": "unloaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "100 900"
+        },
+        {
+          "family": "__template_font_90b15711dc3779b2_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "__template_font_4b8ef9ed255ebe73_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "__template_font_9062978ead3d7a3e_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "600"
+        }
+      ],
+      "locale": "en-US",
+      "nodeVersion": "v24.19.0",
+      "operatingSystem": "darwin 25.5.0",
+      "packageManager": "pnpm/11.25.0 npm/? node/v24.19.0 darwin arm64",
+      "schemaVersion": 1,
+      "testTimestamp": "2026-10-08T08:53:20.725Z",
+      "timezone": "UTC",
+      "viewport": {
+        "height": 1600,
+        "width": 1440
+      }
+    },
+    "environmentSha256": "7e1bfe303cd46195127d6ee8746ae3746b32b0810f3494bafcd8a982598e7689",
+    "comparisonsSha256": {
+      "renderer": "2f7bc37812fc2bc6310b5b5f87ce906a047a0c89f8745ae2186ecd953b8d25bf",
+      "scene": "1d871fae29f94d061a7350236e9455fd2e9139a5ee726b4eefa8787dd03dc815",
+      "settlement": "93fb71e87a54292b4ab1e4baff24d02314ba1cf73c56ca1e012a0c88fa1d4b84",
+      "aggregate": "ec14fc546bc06ab59545cb596cc719737a09b406bd8d86a1814c1b0ef79bf8f6"
+    },
+    "sourceReview": "Every PNG hash matches the previous individually reviewed candidate, with unchanged exact ZIP/template/preview identities and passing approved scene/settlement evidence. Repeat stability alone did not supply approval. Prior run-bound disposition records are archived.",
+    "currentReview": "Automated browser workflows, captures, stored hashes and structures. No new manual live visual source review.",
+    "commands": [
+      "pnpm fidelity:compare -- --gate sdk-061 --run-id sdk-061-production-import-20261008b --font-profile source-authoritative --repeat 2",
+      "pnpm scene:compare -- --gate sdk-061 --run-id sdk-061-production-import-20261008b --fidelity-run sdk-061-production-import-20261008b",
+      "pnpm settlement:compare -- --gate sdk-061 --run-id sdk-061-production-import-20261008b --fidelity-run sdk-061-production-import-20261008b",
+      "pnpm sdk:gate:061 -- --run-id sdk-061-production-import-20261008b --assess-existing"
+    ]
+  },
+  "protectedEvidence": {
+    "approvedFileCount": 283,
+    "approvedFileSetSha256": "5e428730d8feae61ac4f9e22e2a5ee7b7922050cbe7b64a8ae2ecbe9a692ce38",
+    "unchanged": true,
+    "contractHashes": {
+      "fidelity/fixtures.json": "e68e24a1d1e97113e21b6735f10d92e87ad242fdf72bdbc5e54490a010404e7d",
+      "fidelity/fonts.json": "8ac875d74fb88b1c3c8b8179667bca2155fc56f2d068672c08338ab8e34090d9",
+      "fidelity/gates/sdk-061.json": "35ae3294ec99779035e83ec1dbafa8a7dde7ecfdbf38fa38dce7fc63f188d100",
+      "scripts/fidelity/image.mjs": "52161b2860f3205ed9597065dfd2622a81bef77758358f091dba045237e5ac74"
+    },
+    "referencesPromoted": false,
+    "tolerancesChanged": false
+  },
+  "automatedChecks": [
+    {
+      "command": "pnpm test:portable",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-portable.log",
+      "logSha256": "cb4943a1a1b4ccf9ab2ff79556ab3d1208841e6d97039d2543c177ff42559ed1"
+    },
+    {
+      "command": "pnpm packages:typecheck",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-types.log",
+      "logSha256": "d9ac445e94e77738ab6e8cf6456aae52fdb4a664542ec892144bf37be6ae5fe3"
+    },
+    {
+      "command": "pnpm build",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-build.log",
+      "logSha256": "b05d2fd900265d483b60652e96862dd69346c6b337ea9f57052da9001bb4a1f4"
+    },
+    {
+      "command": "pnpm exec tsc -b apps/studio/tsconfig.json --pretty false",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-studio-types.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "pnpm api:contract",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-api.log",
+      "logSha256": "0f8a13ddf612786aafbefc722613150b1cf439c76f72b0bfed6d398cb8e01cc3"
+    },
+    {
+      "command": "pnpm boundaries:check",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-boundaries.log",
+      "logSha256": "357b05d56b495eb176840c0b69c66a0ad9857d0b95e98f95d7c5ec64a5b6b8d3"
+    },
+    {
+      "command": "pnpm packed-consumer:verify",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-packed.log",
+      "logSha256": "ddecd5a8be2177adc847ec64de42b668706124913addc56ec11d4996edc84956"
+    },
+    {
+      "command": "node scripts/repository/verify-v2-import-host.mjs",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-host.log",
+      "logSha256": "beb7420c20e6f538b990fd50eb3c7cb80c1f95d10ccdd2e1e02e0c0b2a6c3d7d"
+    },
+    {
+      "command": "pnpm studio:setup",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-setup-final.log",
+      "logSha256": "0199a9bdc640489c6d776f87cf5bb90d72905898fe71af7c46a850afd17ef8ec"
+    },
+    {
+      "command": "pnpm studio:drafts",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-drafts-final.log",
+      "logSha256": "1b6d0faba906a7f0db1a0e7b9c43aad684f09702f2db26bf8a28cd36fa0b5013"
+    },
+    {
+      "command": "pnpm field-rules:studio",
+      "result": "pass",
+      "localLog": "/tmp/v2-field-rules-studio-final.log",
+      "logSha256": "d3ec1f7a82f7c2fac87f805d7979b17d90e8a84c29170e238c4ab67846871388"
+    },
+    {
+      "command": "pnpm studio:family-parity",
+      "result": "pass",
+      "localLog": "/tmp/v2-studio-family-parity.log",
+      "logSha256": "c2a272cc61d1f9f2f9ba75b25c8192ed64740544776da866478f430961c991a3"
+    },
+    {
+      "command": "pnpm studio:workflow-acceptance",
+      "result": "pass",
+      "localLog": "/tmp/v2-studio-workflow-acceptance.log",
+      "logSha256": "78525dee92988d49a2b56c93c0ab5b2460de78640f0ff1aa4fa1736a6c540938"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "result": "pass",
+      "localLog": "/tmp/v2-import-docs.log",
+      "logSha256": "51ec1fdb88f900159db4eef1e27b92f916cb60ffa3f64e24f2a6461dde9418c2"
+    }
+  ],
+  "preliminaryFailures": [
+    "Sandbox server/network restrictions were rerun with approved local execution.",
+    "Package clean builds raced checks against dist; checks passed when sequenced after builds.",
+    "An isolated draft navigation timeout did not reproduce on retry.",
+    "Relative-delay typing driver accumulated timing overhead; final measured absolute-cadence harness passes unchanged runtime thresholds.",
+    "Packed synthetic ZIP lacked assets.json; complete manifest and asset bytes restore the required input contract.",
+    "Initial final-run disposition assessment ran before source-review records were complete and correctly returned NO-GO; final completed records and assessment return GO."
+  ],
+  "scopeLimits": [
+    "No renderer/session/persistence/schema changes",
+    "Family compiler assembly remains test-only",
+    "Definition/Instance projection remains independent and test-consumed",
+    "No compatibility cleanup",
+    "Existing authoring and session boundary validation retained"
+  ]
+}

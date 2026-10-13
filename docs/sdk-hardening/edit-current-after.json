@@ -1,0 +1,130 @@
+{
+  "node": "v24.19.0",
+  "source": {
+    "id": "field-rules-boolean-structural-visibility",
+    "sha256": "47a109f442348043a6c295b4072d38bdbffa658b80846b528dd64a552a79b6ac"
+  },
+  "syntheticVolume": true,
+  "results": [
+    {
+      "variants": 1,
+      "nodesPerDesign": 20,
+      "edits": 20,
+      "clonesPerEdit": 181,
+      "medianMs": 5.853,
+      "p95Ms": 6.484,
+      "work": {
+        "schemaEvaluations": 40,
+        "validateTemplatePackageV2": {
+          "calls": 40,
+          "ms": 35.189588000000185
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 43.719166999999516
+        }
+      },
+      "outputHash": "fc487c2d47f54ee463356ebfceaef7565590a8ce2714f5de337a75d4165bb9d2"
+    },
+    {
+      "variants": 5,
+      "nodesPerDesign": 20,
+      "edits": 20,
+      "clonesPerEdit": 207,
+      "medianMs": 7.59,
+      "p95Ms": 9.416,
+      "work": {
+        "schemaEvaluations": 80,
+        "validateTemplatePackageV2": {
+          "calls": 100,
+          "ms": 74.91091600000118
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 44.22533399999975
+        }
+      },
+      "outputHash": "ab975081341f9cf5c86078bba777af9cc9384898b3818c7fc244c5922b522ec3"
+    },
+    {
+      "variants": 20,
+      "nodesPerDesign": 20,
+      "edits": 20,
+      "clonesPerEdit": 207,
+      "medianMs": 7.27,
+      "p95Ms": 9.541,
+      "work": {
+        "schemaEvaluations": 80,
+        "validateTemplatePackageV2": {
+          "calls": 100,
+          "ms": 72.91054500000041
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 40.13799900000049
+        }
+      },
+      "outputHash": "ab975081341f9cf5c86078bba777af9cc9384898b3818c7fc244c5922b522ec3"
+    },
+    {
+      "variants": 1,
+      "nodesPerDesign": 80,
+      "edits": 20,
+      "clonesPerEdit": 541,
+      "medianMs": 16.631,
+      "p95Ms": 19.383,
+      "work": {
+        "schemaEvaluations": 40,
+        "validateTemplatePackageV2": {
+          "calls": 40,
+          "ms": 84.76633100000095
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 140.3422510000005
+        }
+      },
+      "outputHash": "e6f0d2e6fb36e33563475503bf259c36ac956b4f5a0fefd9f2bc48a92369f6d8"
+    },
+    {
+      "variants": 5,
+      "nodesPerDesign": 80,
+      "edits": 20,
+      "clonesPerEdit": 567,
+      "medianMs": 24.611,
+      "p95Ms": 25.978,
+      "work": {
+        "schemaEvaluations": 80,
+        "validateTemplatePackageV2": {
+          "calls": 100,
+          "ms": 231.8962059999949
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 137.6965849999997
+        }
+      },
+      "outputHash": "03c5c3110dc985d43684fed1af7b4a74dfd663a90026c92320a33d6b7f8da169"
+    },
+    {
+      "variants": 20,
+      "nodesPerDesign": 80,
+      "edits": 20,
+      "clonesPerEdit": 567,
+      "medianMs": 24.675,
+      "p95Ms": 26.435,
+      "work": {
+        "schemaEvaluations": 80,
+        "validateTemplatePackageV2": {
+          "calls": 100,
+          "ms": 225.8680440000021
+        },
+        "materializeTemplateFieldContentV2": {
+          "calls": 20,
+          "ms": 137.63274899999942
+        }
+      },
+      "outputHash": "03c5c3110dc985d43684fed1af7b4a74dfd663a90026c92320a33d6b7f8da169"
+    }
+  ]
+}

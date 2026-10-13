@@ -9,7 +9,7 @@ import {
   type TemplatePackageRenderMode,
 } from "@sleinity/template-react";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
-import { Button, IconButton } from "../ui";
+import { IconButton } from "../ui";
 
 export interface TemplateInspectionPreviewProps {
   packageValue: TemplatePackageV1;
@@ -55,31 +55,39 @@ export function TemplateInspectionPreview({
     <div className={`template-inspection-preview ${className ?? ""}`} data-focus-mode={snapshot.focusMode}>
       {showControls ? (
         <div className="inspection-preview-toolbar" aria-label="Preview controls">
-          <Button
-            variant="quiet"
-            size="small"
-            leadingIcon={<Maximize2 size={15} />}
-            aria-pressed={snapshot.focusMode === "template"}
-            onClick={() => runViewportAction((viewport) => viewport.fitTemplate())}
-          >
-            Fit template
-          </Button>
-          <Button
-            variant="quiet"
-            size="small"
-            leadingIcon={<Focus size={15} />}
-            aria-pressed={snapshot.focusMode === "target"}
-            disabled={!snapshot.canFitTarget}
-            onClick={() => runViewportAction((viewport) => viewport.fitTarget())}
-          >
-            {targetFitLabel}
-          </Button>
+          <div className="inspection-preview-toolbar__fit" aria-label="Fit preview">
+            <IconButton
+              className="inspection-preview-toolbar__action"
+              label="Fit template"
+              icon={<Maximize2 size={16} />}
+              aria-pressed={snapshot.focusMode === "template"}
+              onClick={() => runViewportAction((viewport) => viewport.fitTemplate())}
+            />
+            <IconButton
+              className="inspection-preview-toolbar__action"
+              label={targetFitLabel}
+              icon={<Focus size={16} />}
+              aria-pressed={snapshot.focusMode === "target"}
+              disabled={!snapshot.canFitTarget}
+              onClick={() => runViewportAction((viewport) => viewport.fitTarget())}
+            />
+          </div>
           <div className="inspection-preview-toolbar__zoom">
-            <IconButton label="Zoom out" icon={<ZoomOut size={16} />} onClick={() => runViewportAction((viewport) => viewport.zoomBy(0.8))} />
-            <span className="min-w-12 text-center text-xs text-content-muted" aria-live="polite">
+            <IconButton
+              className="inspection-preview-toolbar__action"
+              label="Zoom out"
+              icon={<ZoomOut size={16} />}
+              onClick={() => runViewportAction((viewport) => viewport.zoomBy(0.8))}
+            />
+            <span className="inspection-preview-toolbar__scale" aria-live="polite">
               {Math.round(snapshot.scale * 100)}%
             </span>
-            <IconButton label="Zoom in" icon={<ZoomIn size={16} />} onClick={() => runViewportAction((viewport) => viewport.zoomBy(1.25))} />
+            <IconButton
+              className="inspection-preview-toolbar__action"
+              label="Zoom in"
+              icon={<ZoomIn size={16} />}
+              onClick={() => runViewportAction((viewport) => viewport.zoomBy(1.25))}
+            />
           </div>
         </div>
       ) : null}

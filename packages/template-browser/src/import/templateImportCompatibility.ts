@@ -319,6 +319,13 @@ export async function inspectTemplateRuntimeSupport(
     requirements.persistence === "indexeddb" ? await probeIndexedDb() : true;
   const canvasAvailable = needsImages ? probeCanvas() : true;
   const inlineStyleAvailable = needsDom ? probeInlineStyle() : true;
+  const cssManagedFontActivationAvailable = Boolean(
+    hasDom &&
+    document.head &&
+    document.body &&
+    typeof document.createElement === "function" &&
+    typeof requestAnimationFrame === "function",
+  );
 
   const capabilities: TemplateRuntimeCapabilityV1[] = [
     capability(
@@ -394,9 +401,11 @@ export async function inspectTemplateRuntimeSupport(
     capability(
       "font-face",
       requirements.managedFonts,
-      typeof FontFace !== "undefined",
-      "FontFace is available.",
-      "FontFace is required for exact managed-font activation.",
+      typeof FontFace !== "undefined" || cssManagedFontActivationAvailable,
+      typeof FontFace !== "undefined"
+        ? "FontFace is available."
+        : "Exact CSS font activation and metric verification are available.",
+      "FontFace or exact CSS font activation is required for managed fonts.",
     ),
     capability(
       "font-face-set",

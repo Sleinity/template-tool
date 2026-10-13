@@ -1,5 +1,16 @@
 # `@sleinity/template-react`
 
+For the current unpublished workspace candidate, prefer the
+[V2 integration guide](../../docs/sdk/V2_INTEGRATION.md) and ordinary
+`TemplateFieldSessionRendererV2` bridge. Identify archives by source/checksum;
+do not mix them with published 0.8.0 archives of the same package version.
+
+The [public-only V2 host example](../../examples/template-editor-integration/src/FieldRulesV2Host.tsx)
+demonstrates custom brand controls, canonical Number/Date/Crop and guarded PNG
+through `TemplateFieldSessionRendererV2`. Publishing leases are acquired on
+committed mounts, including StrictMode, and async work checks session operation
+currentness. See [Studio and external hosts](../../docs/field-rules/STUDIO_AND_HOSTS.md).
+
 Private Studio-independent React integration exposing the proven
 `TemplatePackageRenderer`, composable inspection primitives, and a small runtime
 context. It deliberately excludes Template Studio routes, settings, Validate,
@@ -17,7 +28,8 @@ recommended wizard, editor, rendering and inspection compositions.
 
 Host applications must use this package's documented root and importer entry
 points. `@sleinity/template-core/renderer-internal` and
-`@sleinity/template-react/renderer-internal` are unsupported fixed-train seams
+`@sleinity/template-react/renderer-internal` and
+`@sleinity/template-browser/session-internal` are unsupported fixed-train seams
 reserved for repository composition and compatibility forwarders; Studio and
 external applications must never import them directly.
 
@@ -120,6 +132,49 @@ methods. Final values must still pass template constraints.
 
 ## Headless host editor
 
+Field Rules V2 hosts can compose controls without importing Studio UI:
+
+```tsx
+import {
+  TemplateFieldSessionV2Provider,
+  useTemplateFieldControllersV2,
+  useTemplateSessionV2,
+} from "@sleinity/template-react";
+
+function Fields() {
+  const fields = useTemplateFieldControllersV2();
+  return fields.map((field) => (
+    <output key={field.id} data-type={field.type}>
+      {field.label}: {String(field.value)}
+    </output>
+  ));
+}
+
+function Editor() {
+  const session = useTemplateSessionV2();
+  return <TemplateFieldSessionV2Provider session={session}><Fields /></TemplateFieldSessionV2Provider>;
+}
+```
+
+`TemplateFieldSessionRendererV2` renders that session through the ordinary
+package renderer and publishes current Textarea visual-line validation and
+runtime readiness. Hosts read `renderValidation` from controllers rather than
+measuring or submitting line counts.
+
+The returned union is discriminated by `field.type`, so a host receives typed
+`setValue`, choice, image replacement/placement, and reset methods. Descriptors
+include configuration and optional `controlRole`, but omit renderer bindings.
+Unknown roles have no semantic effect. Template Field Family sessions use the
+same provider/hook through `useTemplateFieldFamilySessionV2()`. Their Image
+controller adds variant-placement set/reset methods while retaining one shared
+asset and the ordinary renderer path.
+
+Boolean `false` uses the shared renderer's structural-participation path: the
+controlled node/subtree is removed before supported Auto Layout settlement, so
+gaps, HUG, and FILL recompute. It is not rendered with opacity or a late
+`display:none`. Publication is guarded by semantic revision plus a monotonic
+renderer generation; the public Boolean controller API is unchanged.
+
 SDK 0.7 adds a curated editor entry for post-confirmation applications:
 
 ```tsx
@@ -166,17 +221,30 @@ transient rejected mutations remain attached to their field controller result.
 
 ## Template Family bindings
 
-SDK 0.8 adds family setup components to the existing `importer` entry and
-family editing hooks to the existing `editor` entry. Use
+Template Families provide family setup components through the existing `importer` entry and family
+editing hooks through the existing `editor` entry. Use
 `TemplateFamilyImportWizardProvider`, `TemplateFamilyZipInput` and
 `TemplateFamilyImportPreview` for a host-styled setup. Use
 `TemplateFamilySessionProvider`, `useTemplateFamilyEditor()`,
-`useTemplateFamilyEditableFields()`, `useTemplateFamilySelection()` and
-`useTemplateFamilyDiagnosticSummary()` for shared-content editing.
+`useTemplateFamilyEditableFields()`, `useTemplateFamilyVisibleFields()`,
+`useTemplateFamilySelection()` and `useTemplateFamilyDiagnosticSummary()` for
+shared-content editing. The complete inventory remains available through
+`editor.fields`; render controls from `editor.visibleFields` so fields bound
+only to the selected variant disappear and reappear without losing their one
+persisted family value. Every controller exposes a derived `scope`, all-family
+issues and selected-variant issues. `editor.controls` is the ordered inventory
+of selection-property, direct-variant and field controls; it can interleave
+selectors with content fields while the existing field inventories remain supported.
+
+When selection properties exist, `useTemplateFamilySelection()` exposes each
+property, its stable options, the current option value and option availability.
+Selecting a complete available tuple resolves one concrete variant. With no
+properties, multi-variant families expose direct variant selection. The family
+session continues to materialize one existing render session at a time.
 
 These bindings never render all variants. Pass the current
 `familySession.renderSession` to `TemplateSessionViewport`, retain host-owned
-forms and selectors, and capture only the selected current revision. Generic
+forms and selectors, and capture only the selected current revision. Selection
 group titles have no SDK-defined meaning.
 
 For low-level application integration, use the StrictMode-safe `useTemplateSession`,

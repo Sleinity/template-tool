@@ -18,7 +18,7 @@ Milestone 5 adds observational contracts derived from `CanonicalSceneGraphV1`. T
 
 | Contract | Preserved authority | Deliberate unresolved state |
 | --- | --- | --- |
-| `MediaPlacementV1` | asset, slot, intrinsic size, fit, transform, focal, active replacement state/revision, adjustments | unsupported TILE/adjustment/editor-crop rendering |
+| `MediaPlacementV1` | asset, slot, intrinsic size, fit, transform, focal, active replacement state/revision, adjustments | unsupported TILE/adjustment rendering; editor Crop is supported through the affine owner |
 | `GeometryShapeV1` | type, bounds, path/shape evidence, radii, smoothing, arc/polygon/star data | tessellation/backend |
 | `PaintStackV1` | paint order, type, stops, transforms, opacity, blend evidence | compositing implementation |
 | `StrokeStackV1` | stroke order, paint, weight, alignment, raw dash/cap/join evidence | expansion and raster rules |

@@ -1,11 +1,13 @@
 import {
   useId,
+  useState,
   type ButtonHTMLAttributes,
   type InputHTMLAttributes,
   type ReactNode,
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from "react";
+import { ChevronDown } from "lucide-react";
 import { cx } from "./utils";
 
 interface FieldFrameProps {
@@ -218,17 +220,22 @@ export function Select({
       error={error}
       warning={warning}
     >
-      <select
-        {...props}
-        id={id}
-        required={required}
-        aria-describedby={descriptionId}
-        aria-invalid={Boolean(error)}
-        data-warning={Boolean(warning) || undefined}
-        className={cx("ui-select", className)}
-      >
-        {children}
-      </select>
+      <div className="ui-select-control">
+        <select
+          {...props}
+          id={id}
+          required={required}
+          aria-describedby={descriptionId}
+          aria-invalid={Boolean(error)}
+          data-warning={Boolean(warning) || undefined}
+          className={cx("ui-select", className)}
+        >
+          {children}
+        </select>
+        <span className="ui-select__indicator" aria-hidden="true">
+          <ChevronDown size={18} strokeWidth={2.25} />
+        </span>
+      </div>
     </FieldFrame>
   );
 }
@@ -372,7 +379,7 @@ export function MediaInput({
     >
       <div className="ui-media-input__preview" aria-hidden={previewAlt ? undefined : true}>
         {previewSrc ? (
-          <img src={previewSrc} alt={previewAlt} />
+          <MediaPreview key={previewSrc} src={previewSrc} alt={previewAlt} />
         ) : (
           emptyPreview ?? <span>No image</span>
         )}
@@ -408,4 +415,9 @@ export function MediaInput({
       </div>
     </div>
   );
+}
+
+function MediaPreview({ src, alt }: { src: string; alt: string }) {
+  const [state, setState] = useState<"loading" | "ready" | "unavailable">("loading");
+  return <>{state !== "unavailable" && <img src={src} alt={alt} onLoad={() => setState("ready")} onError={() => setState("unavailable")} />}{state !== "ready" && <span className="ui-media-input__preview-status">{state === "loading" ? "Loading image…" : "Image unavailable"}</span>}</>;
 }

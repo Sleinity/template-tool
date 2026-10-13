@@ -70,6 +70,73 @@ function pngHeader(width: number, height: number): Uint8Array {
 
 const packageWithoutDeclaredFonts = structuredClone(simpleFixedPoster) as any;
 delete packageWithoutDeclaredFonts.fontRequirements;
+
+function numberSource(displayed: string, format?: Record<string, unknown>): any {
+  const packageValue = structuredClone(simpleFixedPoster) as any;
+  const node = Object.values(packageValue.nodes).find((candidate: any) => candidate.type === "TEXT") as any;
+  node.text.characters = displayed;
+  packageValue.editableFields = [{
+    id: "discount",
+    type: "number",
+    nodeId: node.id,
+    property: "text.characters",
+    defaultValue: displayed,
+    ...(format ? { format } : {}),
+  }];
+  return packageValue;
+}
+
+const formattedNumberSource = numberSource("Up to 40.00% off");
+const formattedNumberRaw = structuredClone(formattedNumberSource);
+const formattedNumberNormalization = normalizeTemplatePackageBundleTemplate(formattedNumberSource);
+const formattedNumberField = (formattedNumberNormalization.normalizedTemplateJson as any).editableFields[0];
+assert(
+  formattedNumberField.defaultValue === 40 &&
+    formattedNumberField.format.prefix === "Up to " &&
+    formattedNumberField.format.suffix === "% off" &&
+    formattedNumberField.format.decimalPlaces === 2 &&
+    formattedNumberNormalization.diagnostics.some((item) =>
+      item.code === "NUMBER_FIELD_DEFAULT_NORMALIZED" &&
+      item.path === "/editableFields/0/defaultValue" &&
+      item.details?.originalValue === "Up to 40.00% off" &&
+      item.details?.canonicalValue === 40
+    ) &&
+    JSON.stringify(formattedNumberSource) === JSON.stringify(formattedNumberRaw),
+  "ZIP normalization should preserve raw source while deriving a numeric default and source-faithful display format.",
+);
+const explicitNumberNormalization = normalizeTemplatePackageBundleTemplate(numberSource("€-12.50 total", {
+  prefix: "Explicit ", suffix: " units", decimalPlaces: 1,
+}));
+const explicitNumberField = (explicitNumberNormalization.normalizedTemplateJson as any).editableFields[0];
+assert(
+  explicitNumberField.defaultValue === -12.5 &&
+    explicitNumberField.format.prefix === "Explicit " &&
+    explicitNumberField.format.suffix === " units" &&
+    explicitNumberField.format.decimalPlaces === 1,
+  "Explicit Number format properties should remain authoritative over inferred affixes and precision.",
+);
+const unicodeNumberField = (normalizeTemplatePackageBundleTemplate(numberSource("Save ✨ 12.5% 🎉")).normalizedTemplateJson as any).editableFields[0];
+assert(
+  unicodeNumberField.defaultValue === 12.5 &&
+    unicodeNumberField.format.prefix === "Save ✨ " &&
+    unicodeNumberField.format.suffix === "% 🎉",
+  "Number normalization should preserve Unicode affixes exactly.",
+);
+for (const invalid of ["", "1,234", "12,5", "from 10 to 20", "Infinity"]) {
+  const result = normalizeTemplatePackageBundleTemplate(numberSource(invalid));
+  const field = (result.normalizedTemplateJson as any).editableFields[0];
+  assert(
+    field.defaultValue === invalid &&
+      !result.diagnostics.some((item) => item.code === "NUMBER_FIELD_DEFAULT_NORMALIZED"),
+    `Ambiguous or unsupported Number source text must remain strict-invalid: ${invalid}`,
+  );
+}
+const bareNumberField = (normalizeTemplatePackageBundleTemplate(numberSource("40")).normalizedTemplateJson as any).editableFields[0];
+assert(
+  bareNumberField.defaultValue === 40 && bareNumberField.format === undefined,
+  "A bare numeric string should normalize without manufacturing affixes.",
+);
+
 const inferredFontSource = normalizeTemplatePackageBundleTemplate(
   packageWithoutDeclaredFonts,
 );
@@ -113,6 +180,72 @@ assert(
       (item) => item.code === "FONT_REQUIREMENTS_INFERRED",
     ),
   "Explicit exporter font requirements should remain authoritative.",
+);
+const styledFontPackage = structuredClone(simpleFixedPoster) as any;
+const styledTextNode = Object.values(styledFontPackage.nodes).find(
+  (node: any) => node.type === "TEXT",
+) as any;
+styledTextNode.text = {
+  characters: "Ab",
+  fontFamily: "Face A",
+  fontStyle: "Regular",
+  fontWeight: 400,
+  fontSize: 24,
+  lineHeight: { value: 100, unit: "PERCENT" },
+  letterSpacing: { value: 0, unit: "PIXELS" },
+  textAlignHorizontal: "LEFT",
+  textAlignVertical: "TOP",
+  textAutoResize: "HEIGHT",
+  paragraphSpacing: 0,
+  textDecoration: "NONE",
+  textCase: "ORIGINAL",
+  leadingTrim: "NONE",
+};
+styledTextNode.text.styleRanges = [
+  { start: 0, end: 1, family: "Face A", style: "Regular", cssStyle: "normal", weight: 400, postScriptName: null },
+  { start: 1, end: 2, family: "Face B", style: "SemiBold", cssStyle: "normal", weight: 600, postScriptName: null },
+];
+styledTextNode.extensions = {
+  ...(styledTextNode.extensions ?? {}),
+  figma: {
+    ...(styledTextNode.extensions?.figma ?? {}),
+    textStyleSegments: [
+      { start: 0, end: 1, fontFamily: "Face A", fontStyle: "Regular", fontWeight: 400, fontSize: 24, textCase: "ORIGINAL" },
+      { start: 1, end: 2, fontFamily: "Face B", fontStyle: "SemiBold", fontWeight: 600, fontSize: 24, letterSpacing: { value: 1, unit: "PIXELS" } },
+    ],
+  },
+};
+styledFontPackage.fontRequirements = [
+  { id: "font:face-a", family: "Face A", style: "Regular", cssStyle: "normal", weight: 400, postScriptName: null, usedBy: [styledTextNode.id], characters: "A", editable: true, mixedStyle: true, source: "figma", availableInFigma: true },
+  { id: "font:face-b", family: "Face B", style: "SemiBold", cssStyle: "normal", weight: 600, postScriptName: null, usedBy: [styledTextNode.id], characters: "b", editable: true, mixedStyle: true, source: "figma", availableInFigma: false },
+];
+const expectedStyledRanges = structuredClone(styledTextNode.text.styleRanges);
+const expectedRichSegments = structuredClone(styledTextNode.extensions.figma.textStyleSegments);
+const styledFontSource = normalizeTemplatePackageBundleTemplate(styledFontPackage);
+const normalizedStyledFontPackage = styledFontSource.normalizedTemplateJson as any;
+assert(
+  JSON.stringify(normalizedStyledFontPackage.nodes[styledTextNode.id].text.styleRanges) ===
+    JSON.stringify(expectedStyledRanges),
+  "Canonical style ranges must survive source normalization unchanged.",
+);
+assert(
+  JSON.stringify(normalizedStyledFontPackage.nodes[styledTextNode.id].extensions.figma.textStyleSegments) ===
+    JSON.stringify(expectedRichSegments),
+  "Rich Figma text segments must survive as source provenance.",
+);
+assert(
+  normalizedStyledFontPackage.fontRequirements.length === 2 &&
+    normalizedStyledFontPackage.fontRequirements[0].characters === "A" &&
+    normalizedStyledFontPackage.fontRequirements[1].characters === "b" &&
+    normalizedStyledFontPackage.fontRequirements.every((requirement: any) =>
+      requirement.usedBy[0] === styledTextNode.id && requirement.mixedStyle === true
+    ) &&
+    !styledFontSource.diagnostics.some((item) => item.code === "FONT_REQUIREMENTS_INFERRED"),
+  "Explicit multi-face requirements must retain per-face coverage and bypass inference.",
+);
+assert(
+  validateTemplatePackage(normalizedStyledFontPackage).valid,
+  `Explicit multi-face style ranges and requirements must remain canonical. ${JSON.stringify(validateTemplatePackage(normalizedStyledFontPackage).diagnostics)}`,
 );
 
 const videoSourcePackage = structuredClone(simpleFixedPoster) as any;
@@ -387,6 +520,49 @@ assert(
       .extensions.figma.rawFills[0]) === JSON.stringify(rawSolidPaint) &&
     validateTemplatePackage(normalizedRawSolidPackage).valid,
   "Raw Figma SolidPaint opacity must remain preserved and authoritative without inventing color alpha.",
+);
+
+const nativeSolidPackage = structuredClone(mirroredSolidPackage) as any;
+nativeSolidPackage.source = {
+  ...(nativeSolidPackage.source ?? {}),
+  type: "figma",
+  pluginVersion: "0.6.1",
+};
+const nativeSolidNode = nativeSolidPackage.nodes[nativeSolidPackage.rootNodeId];
+nativeSolidNode.appearance.fills[0] = {
+  type: "SOLID",
+  color: { r: 0.2, g: 0.3, b: 0.4, a: 1 },
+  opacity: 0.45,
+  visible: true,
+  blendMode: "NORMAL",
+};
+nativeSolidNode.extensions = {
+  ...(nativeSolidNode.extensions ?? {}),
+  figma: {
+    ...(nativeSolidNode.extensions?.figma ?? {}),
+    rawFills: [{
+      type: "SOLID",
+      color: { r: 0.2001, g: 0.3001, b: 0.4001 },
+      opacity: 0.45,
+      visible: true,
+      blendMode: "NORMAL",
+    }],
+  },
+};
+const nativeSolidSource = normalizeTemplatePackageBundleTemplate(nativeSolidPackage);
+const normalizedNativeSolid = (nativeSolidSource.normalizedTemplateJson as any)
+  .nodes[nativeSolidPackage.rootNodeId].appearance.fills[0];
+assert(
+  normalizedNativeSolid.color.a === 1 &&
+    normalizedNativeSolid.opacity === 0.45 &&
+    normalizedNativeSolid.solidPaintSource === undefined &&
+    !nativeSolidSource.diagnostics.some((item) => [
+      "SOLID_PAINT_OPACITY_ALIAS_NORMALIZED",
+      "SOLID_PAINT_OPACITY_AMBIGUOUS",
+      "SOLID_PAINT_RAW_OPACITY_CANONICALIZED",
+    ].includes(item.code)) &&
+    validateTemplatePackage(nativeSolidSource.normalizedTemplateJson as any).valid,
+  "Exporter-0.6.1 canonical SOLID opacity must survive unchanged without entering the historical 0.6.0 adapter.",
 );
 const videoWithoutFallback = structuredClone(videoSourcePackage) as any;
 const videoOnlyNode = videoWithoutFallback.nodes[videoWithoutFallback.rootNodeId];
@@ -1339,7 +1515,7 @@ assert(
     richDescriptorReport.canImport &&
     richDescriptorSource.packageValue?.editableFields.some(
       (field) =>
-        field.id === "product" &&
+        field.id === "image:product" &&
         field.assetRef === "asset_product_image_001" &&
         field.typedRef === "asset:image:abc123" &&
         field.constraints &&
@@ -1438,7 +1614,7 @@ assert(
 assert(
   loadedSource.rootNode?.id === "root" &&
     loadedSource.nodes["hero-image"] !== undefined &&
-    loadedSource.editableFields.some((field) => field.id === "productImage"),
+    loadedSource.editableFields.some((field) => field.id === "image:productImage"),
   "Loaded ZIP sources should expose root node, node registry, and editable fields as first-class accessors.",
 );
 assert(
@@ -1962,3 +2138,25 @@ assert(
     ),
   "Unmatched motion nodes should be layered warnings rather than import blockers.",
 );
+
+// Bounds apply to decoded output, not just untrusted central-directory sizes.
+{
+  const bytes = createStoredZip([{ path: "template.json", data: new Uint8Array(1024 * 1024), compressionMethod: 8 }]);
+  const view = new DataView(bytes.buffer);
+  const directory = view.getUint32(bytes.length - 6, true);
+  view.setUint32(22, 1, true);
+  view.setUint32(directory + 24, 1, true);
+  const result = createZipBundleReader(bytes, { maxEntryUncompressedBytes: 16 }).readArrayBuffer("template.json");
+  assert(!result.ok && result.diagnostics.some(item => item.code === "zip.entry-size-mismatch"), "Forged small sizes cannot return truncated inflated data.");
+}
+for (const compressionMethod of [0, 8]) {
+  const bytes = createStoredZip([
+    { path: "template.json", data: "1234", compressionMethod },
+    { path: "assets.json", data: "5678", compressionMethod },
+  ]);
+  const bounded = createZipBundleReader(bytes, { maxEntryUncompressedBytes: 4, maxTotalUncompressedBytes: 8 });
+  assert(bounded.readText("template.json").value === "1234" && bounded.readText("assets.json").value === "5678", "Exact per-entry and aggregate boundaries remain readable.");
+  assert(bounded.readText("template.json").diagnostics.some(item => item.code === "zip.total-decoded-size-exceeded"), "Repeated reads consume the same aggregate budget.");
+  const tooSmall = createZipBundleReader(bytes, { maxTotalUncompressedBytes: 7 });
+  assert(tooSmall.readText("template.json").ok && !tooSmall.readText("assets.json").ok, "Aggregate budget prevents the next allocation.");
+}

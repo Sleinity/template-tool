@@ -1,0 +1,21 @@
+{
+  "baselineGate": "sdk-061-host-font-authority-20261012b",
+  "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "worktree": "existing dirty worktree retained",
+  "originalSources": {
+    "packages/template-browser/src/storage/indexedDb.ts": "dadbc1904ff668318d5d1ac80c72211e3a5090bdde10e39fb6cce3f9b32c7052",
+    "apps/studio/src/workspace/draftAutosave.ts": "e9d626fb008f16ee23e403bc6a3cf9c4eaeab8a4eeeedf3da9264f2311ee333b",
+    "apps/studio/src/workspace/DraftEditor.tsx": "eba671b655ecfa4a9921135dbaeea72051a78dab6af2ff07b69cdd4afd9eba7a",
+    "apps/studio/src/workspace/StudioLibrary.tsx": "ea66570e555e4d859cc8c3ace9572c0ddc69ac69bb8874844910277ae24f6d50",
+    "apps/studio/src/setup/StudioSetupWizard.tsx": "80923c91d7fa9fc3390830618a2dee4ef9dca3e032f6bec87cf71ac5e97204f6",
+    "apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx": "f7e1f758dacd8d829e1de59b7f85298ad8c3c350d38b5dd68f4f4325eb9f08db",
+    "config/sdk-public-api.json": "db23cd1646d1c390d36a27f5e6bc4a91d30c0a157491442a0776c9d06d67146c",
+    "apps/studio/src/components/template-family/FamilyFontPreparationPanel.tsx": "e56a76c76ede9e1ab5784356956d51296a0b9540421aa44a01af14228a29940d"
+  },
+  "archivesDirectory": "release-verification-artifacts/host-font-after-20261012b",
+  "archives": {
+    "sleinity-template-react-0.8.0.tgz": "f7c50d68d04f3de8df6d0e70a2b80adcdc6b5775927aabde48f00ded29e9100a",
+    "sleinity-template-core-0.8.0.tgz": "4f804cb26d9aa6fa97e2c2cd745e93c6699730143bdc36778528bffa231be32e",
+    "sleinity-template-browser-0.8.0.tgz": "f45c09352d65c1d1819bea232744245dd1abc42222e57a403749974db1907a82"
+  }
+}

@@ -72,6 +72,21 @@ export function compareSettlementDirectory(expectedDirectory, actualDirectory) {
 
 export function promoteSettlementDirectory({ fixtureId, surface, candidateDirectory, reason, approvedRoot = approvedSettlementRoot, evidenceRoot = join(settlementRoot, "update-evidence"), timestamp = new Date().toISOString() }) {
   const updateReason = requireSettlementUpdateReason(reason);
+  // Preflight the complete bundle before creating or modifying approved evidence.
+  const bundle = Object.fromEntries(settlementFiles.map((file) => {
+    const candidate = join(candidateDirectory, file);
+    if (!existsSync(candidate)) throw new Error(`Missing settlement candidate ${candidate}`);
+    const value = JSON.parse(readFileSync(candidate, "utf8"));
+    if (value.metadata?.fixture?.id !== fixtureId || value.metadata?.surface !== surface) {
+      throw new Error(`Settlement candidate identity mismatch: ${fixtureId}/${surface}/${file}`);
+    }
+    return [file, value];
+  }));
+  const graph = bundle["settled.json"].graph;
+  if (graph?.stable !== true || graph.readiness !== "ready" || !Array.isArray(graph.unresolvedDependencies) || graph.unresolvedDependencies.length ||
+      bundle["comparison.json"].comparison?.equivalentWithinTolerance !== true) {
+    throw new Error(`Settlement candidate is not ready for approval: ${fixtureId}/${surface}`);
+  }
   const approvedDirectory = settlementSnapshotDirectory(approvedRoot, fixtureId, surface);
   const evidenceDirectory = join(resolve(evidenceRoot), safeSegment(timestamp.replace(/[:.]/g, "-")), safeSegment(fixtureId), safeSegment(surface));
   mkdirSync(approvedDirectory, { recursive: true });

@@ -1,7 +1,8 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
-import { createHash } from "node:crypto";
+import { assertCoreDeclaration } from "./core-declaration-contract.mjs";
 import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
+import { internalExperimentViolations } from "./internal-experiment-boundaries.mjs";
 
 const root = process.cwd();
 const violations = [];
@@ -27,6 +28,15 @@ async function sourceFiles(directory) {
     else if (/\.(?:ts|tsx|js|mjs)$/.test(entry.name)) files.push(resolved);
   }
   return files;
+}
+
+// The architectural projection is observational only: no production consumer
+// or public barrel may import/re-export it during the equivalence milestone.
+for (const sourceRoot of ["packages/template-core/src", "packages/template-browser/src", "packages/template-react/src", "apps/studio/src", "src"]) {
+  for (const file of await sourceFiles(path.join(root, sourceRoot))) {
+    const relative = path.relative(root, file).replaceAll("\\", "/");
+    violations.push(...internalExperimentViolations(relative, await readFile(file, "utf8")));
+  }
 }
 
 const coreEntry = await read("packages/template-core/src/index.ts");
@@ -419,6 +429,7 @@ for (const searchRoot of ["apps/studio", "examples", "packages/template-browser/
     for (const internalEntry of [
       "@sleinity/template-core/renderer-internal",
       "@sleinity/template-react/renderer-internal",
+      "@sleinity/template-browser/session-internal",
     ]) {
       if (
         source.includes(internalEntry) &&
@@ -431,6 +442,10 @@ for (const searchRoot of ["apps/studio", "examples", "packages/template-browser/
   }
 }
 const browserManifest = JSON.parse(await read("packages/template-browser/package.json"));
+if (JSON.stringify(browserManifest.sdkInternalExports) !== JSON.stringify(["./session-internal"]) || !browserManifest.exports?.["./session-internal"]) {
+  violations.push("template-browser must declare exactly one restricted session-internal entry");
+}
+
 for (const entry of ["./assets", "./fonts", "./persistence", "./capture", "./enrichment"]) {
   if (!browserManifest.exports?.[entry]) {
     violations.push(`template-browser is missing curated entry ${entry}`);
@@ -885,14 +900,10 @@ try {
 const coreDeclarationPath = path.join(root, "packages/template-core/dist/index.d.ts");
 try {
   const declaration = await readFile(coreDeclarationPath);
-  const declarationHash = createHash("sha256").update(declaration).digest("hex");
-  if (declaration.byteLength !== 87431 || declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033") {
-    violations.push(
-      `template-core public declaration drifted from the protected SDK 0.3.0 baseline: ${declaration.byteLength} bytes / ${declarationHash}`,
-    );
-  }
-} catch {
-  violations.push("template-core must build dist/index.d.ts before declaration verification");
+  const version = JSON.parse(await readFile(path.join(root, "packages/template-core/package.json"), "utf8")).version;
+  assertCoreDeclaration(version, declaration);
+} catch (error) {
+  violations.push(`template-core declaration verification failed: ${error.message}`);
 }
 
 for (const entryPoint of ["session", "importer", "compatibility"]) {
@@ -908,6 +919,9 @@ for (const entryPoint of ["session", "importer", "compatibility"]) {
     );
     try {
       const source = await readFile(browserBundlePath, "utf8");
+      if (extension === "d.ts" && /storedAssetHydration|createStoredAssetHydration|session-internal|useFieldSessionSnapshotV2|createSingleSessionSnapshotReader|createFamilySessionSnapshotReader|sessionContract|\b(?:InternalSessionView|SingleSessionView|FamilySessionView|InternalSessionAdapter|SingleSessionAdapter|FamilySessionAdapter|adaptSingleSession|adaptFamilySession)\b|familySourcePreparationV2|\b(?:prepareInitialFamilyV2|prepareAppendedFamilyV2)\b|compilerResult|\b(?:CompiledSingleResult|CompiledFamilyResult|CompiledSourceRecord|CompilerSourceInput|CompilerFailure|CompilerContractError|CompilerDelegates|CompilerResourceHandle|ReadonlyData|createV2ImportOperation)\b/.test(source)) {
+        violations.push(`template-browser ${fileName} leaks private architecture declarations`);
+      }
       for (const forbidden of [
         "apps/studio",
         "components/ui",

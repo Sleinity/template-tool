@@ -1,0 +1,160 @@
+{
+  "status": "pass",
+  "effect": "isolated copy only; workspace package versions/dependencies/lockfile unchanged",
+  "statusLog": "",
+  "versionLog": "🦋  All files have been updated. Review them and commit at your leisure\n",
+  "releases": [
+    {
+      "name": "@sleinity/template-browser",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "field-rules-closure-corrections",
+        "focused-sdk-hardening",
+        "fresh-groups-select",
+        "singular-image-replacement-policy",
+        "studio-family-selection-parity",
+        "studio-v2-authoring-host-proof",
+        "template-recovery-lifecycle",
+        "typed-field-contracts-v2",
+        "v2-zip-production-import"
+      ],
+      "newVersion": "1.0.0"
+    },
+    {
+      "name": "@sleinity/template-core",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "focused-sdk-hardening",
+        "fresh-groups-select",
+        "singular-image-replacement-policy",
+        "studio-family-selection-parity",
+        "studio-v2-authoring-host-proof",
+        "typed-field-contracts-v2"
+      ],
+      "newVersion": "1.0.0"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "fresh-groups-select",
+        "live-full-parent-mask-clip",
+        "singular-image-replacement-policy",
+        "studio-v2-authoring-host-proof",
+        "typed-field-contracts-v2"
+      ],
+      "newVersion": "1.0.0"
+    }
+  ],
+  "allWorkspacePlans": [
+    {
+      "name": "@sleinity/template-browser",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "field-rules-closure-corrections",
+        "focused-sdk-hardening",
+        "fresh-groups-select",
+        "singular-image-replacement-policy",
+        "studio-family-selection-parity",
+        "studio-v2-authoring-host-proof",
+        "template-recovery-lifecycle",
+        "typed-field-contracts-v2",
+        "v2-zip-production-import"
+      ],
+      "newVersion": "1.0.0"
+    },
+    {
+      "name": "@sleinity/template-core",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "focused-sdk-hardening",
+        "fresh-groups-select",
+        "singular-image-replacement-policy",
+        "studio-family-selection-parity",
+        "studio-v2-authoring-host-proof",
+        "typed-field-contracts-v2"
+      ],
+      "newVersion": "1.0.0"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "type": "major",
+      "oldVersion": "0.8.0",
+      "changesets": [
+        "fresh-groups-select",
+        "live-full-parent-mask-clip",
+        "singular-image-replacement-policy",
+        "studio-v2-authoring-host-proof",
+        "typed-field-contracts-v2"
+      ],
+      "newVersion": "1.0.0"
+    },
+    {
+      "name": "@sleinity/template-studio",
+      "type": "none",
+      "oldVersion": "0.1.0",
+      "changesets": [],
+      "newVersion": "0.1.0"
+    },
+    {
+      "name": "@sleinity/template-minimal-renderer",
+      "type": "none",
+      "oldVersion": "0.1.0",
+      "changesets": [],
+      "newVersion": "0.1.0"
+    },
+    {
+      "name": "@sleinity/template-editor-integration",
+      "type": "patch",
+      "oldVersion": "0.1.2",
+      "changesets": [],
+      "newVersion": "0.1.3"
+    },
+    {
+      "name": "@sleinity/template-family-integration",
+      "type": "patch",
+      "oldVersion": "0.8.0",
+      "changesets": [],
+      "newVersion": "0.8.1"
+    }
+  ],
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "version": "1.0.0",
+      "dependencies": {
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3"
+      }
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "version": "1.0.0",
+      "dependencies": {
+        "@sleinity/template-core": "workspace:*",
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3",
+        "html-to-image": "^1.11.13"
+      }
+    },
+    {
+      "name": "@sleinity/template-react",
+      "version": "1.0.0",
+      "dependencies": {
+        "@sleinity/template-browser": "workspace:*",
+        "@sleinity/template-core": "workspace:*"
+      }
+    }
+  ],
+  "R06Required": [
+    "Apply fixed-train version and lockfile once during release certification.",
+    "Reconcile sdk-public-api.json/sdkVersion and version-specific declaration expectations without changing exported semantics.",
+    "Rebuild/pack 1.0.0; verify all supplied archives/current guidance and publication environments.",
+    "Registry round-trip, tag and upload remain outside this milestone."
+  ]
+}

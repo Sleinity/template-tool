@@ -22,7 +22,9 @@ The embedded preview isolates repeated source-over composition and makes the pre
 `ResolvedOrderedNormalPaintStackV1` is created only when all of these are true:
 
 - exactly two fills exist in source order;
-- source index 0 is a SOLID with current unambiguous `solid-paint-source-v1` apply-once opacity provenance;
+- source index 0 is a SOLID with current unambiguous apply-once opacity evidence:
+  either `solid-paint-source-v1` or ADR 0074's bounded native exporter-0.6.1
+  canonical authority;
 - source index 1 is a current source-certified `GRADIENT_LINEAR`;
 - both paints are visible and `NORMAL`;
 - the node is an eligible axis-aligned FRAME or RECTANGLE at node opacity 1;
@@ -53,4 +55,3 @@ The source preview is evidence, not an approved renderer reference. No approved 
 - source comparison: 0 changed pixels in the 710×880 target region and 0 changed pixels over the full 1000×1500 canvas;
 - all-surface identity: equal across Validate, Fields, editor, and PNG;
 - repeatability: two captures per surface are stable.
-

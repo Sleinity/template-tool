@@ -48,21 +48,14 @@ export function materializeTemplateFamilyVariant(
     const binding = variant.bindings.find(
       (item) => item.familyFieldId === familyField.id,
     );
+    if (!binding || binding.targets.length === 0) {
+      continue;
+    }
     const resolvedRule = resolveTemplateFamilyFieldRule(
       familyField.rule,
       variant.ruleOverrides[familyField.id],
     );
     resolvedRules[familyField.id] = resolvedRule;
-    if (!binding || binding.targets.length === 0) {
-      issues.push({
-        code: "family.binding-missing",
-        severity: "error",
-        message: `Shared field "${familyField.title}" has no target in this variant.`,
-        fieldId: familyField.id,
-        variantId,
-      });
-      continue;
-    }
     const value = Object.prototype.hasOwnProperty.call(content.values, familyField.id)
       ? content.values[familyField.id]
       : familyField.defaultValue;

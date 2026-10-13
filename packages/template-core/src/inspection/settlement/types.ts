@@ -1,4 +1,5 @@
 import type { CanonicalSceneGraphV1, SceneConfidence } from "../../scene/types";
+import type { PackageMaskResolution } from "../../masks/packageMaskRelationships";
 
 export const MEASUREMENT_SNAPSHOT_VERSION = "measurement-snapshot-v1" as const;
 export const DEPENDENCY_GRAPH_VERSION = "dependency-graph-v1" as const;
@@ -120,6 +121,8 @@ export interface SettlementInputV1 {
   scene: CanonicalSceneGraphV1;
   dependencies: DependencyGraphV1;
   measurements: MeasurementSnapshotV1;
+  /** Existing canonical mask authority; absent evidence keeps active masks unresolved. */
+  maskResolution?: PackageMaskResolution;
   revision: RevisionVectorV1;
   previous?: SettledSceneGraphV1 | null;
   options?: { maxIterations?: number; geometryTolerance?: number };
@@ -143,7 +146,23 @@ export interface SettledNodeV1 {
   textMeasurement: { width: number; height: number; scrollWidth: number | null; scrollHeight: number | null } | null;
   mediaPlacement: SettledMediaPlacementV1 | null;
   clip: { strategy: string; bounds: { x: number; y: number; width: number; height: number } } | null;
-  mask: { status: "not-applicable" | "unresolved"; dependencyKeys: string[] };
+  mask: {
+    status: "not-applicable" | "unresolved" | "resolved";
+    dependencyKeys: string[];
+    relationships?: Array<{
+      relationshipId: string;
+      maskRevision: string;
+      role: "source" | "affected";
+      maskSourceId: string;
+      parentId: string;
+      affectedSiblingIds: string[];
+      capability: "exact-opaque-rectangular-alpha";
+      renderStrategy: "css-clip-path";
+      maskBounds: { x: number; y: number; width: number; height: number };
+      affected: Array<{ nodeId: string; clipInsets: { top: number; right: number; bottom: number; left: number } }>;
+      provenance: NonNullable<CanonicalSceneGraphV1["maskRelationships"]>[number]["provenance"];
+    }>;
+  };
   effects: { status: "not-applicable" | "unresolved"; dependencyKeys: string[] };
   readiness: ReadinessState;
   unresolved: string[];

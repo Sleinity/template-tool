@@ -245,6 +245,7 @@ export interface ResolvedRenderImage {
   placement: ResolvedImagePlacementIntentV1;
   cropMode:
     | "figmaImageTransform"
+    | "editorCropTransform"
     | "objectPosition"
     | "objectFitOnly"
     | "unknown";
@@ -289,6 +290,8 @@ export interface ResolvedImagePlacementIntentV1 {
   transformOrigin: "source-top-left";
   sourceTransform: number[][] | null;
   activeCropTransform: number[][] | null;
+  /** Editor crops shrink within their canonical region for a new slot aspect. */
+  cropAspectPolicy?: "cover-within-canonical";
   transformApplicability:
     | "active-crop"
     | "compatibility-legacy-fill-transform"

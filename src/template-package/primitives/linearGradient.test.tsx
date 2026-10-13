@@ -198,6 +198,101 @@ assert(
     solidThenGradientAppearance.paints.orderedNormalPaintStack.visiblePaintIndices.join(",") === "0,1",
   "The certified SOLID-below-linear-gradient NORMAL pattern must select one ordered SVG owner.",
 );
+
+const nativeSolidThenGradient = structuredClone(solidThenGradient);
+const nativeSolid = nativeSolidThenGradient.appearance.fills[0];
+if (nativeSolid.type === "SOLID") delete nativeSolid.solidPaintSource;
+nativeSolidThenGradient.extensions = {
+  ...nativeSolidThenGradient.extensions,
+  figma: {
+    ...(nativeSolidThenGradient.extensions?.figma ?? {}),
+    rawFills: [{
+      type: "SOLID",
+      color: { r: 0.975, g: 1, b: 0.383 },
+      opacity: 1,
+      visible: true,
+      blendMode: "NORMAL",
+    }],
+  },
+};
+const nativeSolidThenGradientAppearance = resolvePrimitiveAppearance(
+  nativeSolidThenGradient,
+  {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.1" },
+  },
+);
+assert(
+  nativeSolidThenGradientAppearance.paints.orderedNormalPaintStack?.capability ===
+    "source-certified-solid-linear-normal-stack" &&
+    (nativeSolidThenGradientAppearance.paints.orderedNormalPaintStack.orderedLayers[0]
+      .solid?.provenance as any).sourceAuthority === "native-canonical-source" &&
+    (nativeSolidThenGradientAppearance.paints.orderedNormalPaintStack.orderedLayers[0]
+      .solid?.provenance as any).opacityDisposition === "canonical-paint-opacity" &&
+    (nativeSolidThenGradientAppearance.paints.orderedNormalPaintStack.orderedLayers[0]
+      .solid?.provenance as any).normalizationRevision === null,
+  "A clean exporter-0.6.1 canonical SOLID must enter the existing bounded mixed owner without fabricated compatibility provenance.",
+);
+assert(
+  resolvePrimitiveAppearance(nativeSolidThenGradient, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+  }).fallbackReasons.includes("ordered-solid-stack-ambiguous-opacity-provenance") &&
+  resolvePrimitiveAppearance(nativeSolidThenGradient, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.0" },
+  }).fallbackReasons.includes("ordered-solid-stack-ambiguous-opacity-provenance"),
+  "Native canonical opacity authority must remain bounded to the identified exporter-0.6.1 representation.",
+);
+const conflictingNativeSolid = structuredClone(nativeSolidThenGradient);
+const conflictingRawFills = conflictingNativeSolid.extensions?.figma?.rawFills as Array<Record<string, unknown>>;
+conflictingRawFills[0] = { ...conflictingRawFills[0], opacity: 0.5 };
+assert(
+  resolvePrimitiveAppearance(conflictingNativeSolid, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.1" },
+  }).fallbackReasons.includes("ordered-solid-stack-ambiguous-opacity-provenance"),
+  "Contradictory same-index raw SOLID opacity must block native capability admission.",
+);
+const conflictingNativeSolidColor = structuredClone(nativeSolidThenGradient);
+const conflictingColorRawFills = conflictingNativeSolidColor.extensions?.figma?.rawFills as Array<Record<string, any>>;
+conflictingColorRawFills[0] = {
+  ...conflictingColorRawFills[0],
+  color: { ...conflictingColorRawFills[0].color, r: 0.9753222465515137 },
+};
+assert(
+  resolvePrimitiveAppearance(conflictingNativeSolidColor, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.1" },
+  }).fallbackReasons.includes("ordered-solid-stack-ambiguous-opacity-provenance"),
+  "Contradictory same-index raw SOLID color must block native capability admission.",
+);
+const conflictingNativeSolidType = structuredClone(nativeSolidThenGradient);
+const conflictingTypeRawFills = conflictingNativeSolidType.extensions?.figma?.rawFills as Array<Record<string, unknown>>;
+conflictingTypeRawFills[0] = { ...conflictingTypeRawFills[0], type: "IMAGE" };
+assert(
+  resolvePrimitiveAppearance(conflictingNativeSolidType, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.1" },
+  }).fallbackReasons.includes("ordered-solid-stack-ambiguous-opacity-provenance"),
+  "Contradictory same-index raw paint type must block native capability admission.",
+);
+const absentRawNativeSolid = structuredClone(nativeSolidThenGradient);
+delete absentRawNativeSolid.extensions?.figma?.rawFills;
+assert(
+  resolvePrimitiveAppearance(absentRawNativeSolid, {
+    packageId: "linear-gradient-test",
+    rootNodeId: "root",
+    source: { type: "figma", pluginVersion: "0.6.1" },
+  }).paints.orderedNormalPaintStack?.capability ===
+    "source-certified-solid-linear-normal-stack",
+  "A complete canonical exporter-0.6.1 SOLID must remain sufficient when raw SOLID provenance is absent.",
+);
 const solidThenGradientPackage = packageWithGradient();
 solidThenGradientPackage.nodes.gradient = solidThenGradient;
 const solidThenGradientTree = createResolvedRenderTree(solidThenGradientPackage);

@@ -7,6 +7,11 @@ import {
   sanitizePngExportFilename,
 } from "./pngExport";
 import type { PackageExportReadinessResult } from "./packageExportReadiness";
+import {
+  getManagedFontRegistry,
+  InMemoryManagedFontRegistry,
+  setManagedFontRegistryForTests,
+} from "../../../packages/template-browser/src/fonts";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);
@@ -176,3 +181,35 @@ assert(
     blockedError.diagnostics.some((item) => item.code === "asset.missing"),
   "Blocked readiness should surface export diagnostics.",
 );
+
+// A host adapter must remain the authority for the whole asynchronous export,
+// even if its request or the default registry changes while readiness is read.
+const originalRegistry = getManagedFontRegistry();
+const defaultRegistry = new InMemoryManagedFontRegistry();
+const customRegistry = new InMemoryManagedFontRegistry();
+try {
+  for (const supplied of [undefined, defaultRegistry, customRegistry, null]) {
+    setManagedFontRegistryForTests(defaultRegistry);
+    const expected = supplied === undefined ? defaultRegistry : supplied;
+    const request = Object.assign({ packageValue, node: {} as HTMLElement, renderMode: "editor" as const, download: false }, { fontRegistry: supplied });
+    let captures = 0;
+    await exportTemplatePackagePng(request, {
+      checkReadiness: async (readinessRequest) => {
+        assert(readinessRequest.fontRegistry === expected, "Readiness must receive the resolved host registry, including explicit null.");
+        request.fontRegistry = new InMemoryManagedFontRegistry();
+        setManagedFontRegistryForTests(new InMemoryManagedFontRegistry());
+        return readyReadiness;
+      },
+      waitForAssets: async () => [],
+      capture: async (_node, _package, options) => {
+        assert(options?.fontRegistry === expected, "PNG capture must retain the invocation's registry rather than re-resolving the default.");
+        captures++;
+        return { pngDataUrl: "data:image/png;base64,c2lsZW50", fontReadiness };
+      },
+      download: () => { throw new Error("Silent registry capture must not download."); },
+    });
+    assert(captures === 1, "Registry propagation must not add a second capture.");
+  }
+} finally {
+  setManagedFontRegistryForTests(originalRegistry);
+}

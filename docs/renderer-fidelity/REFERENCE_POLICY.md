@@ -14,6 +14,18 @@ For replacement updates, evidence includes the previous approved PNG, candidate 
 
 Golden changes require a fidelity reason and review. Never update references merely to make comparison green. If the intended change is uncertain, retain the failure artifacts and leave the approved reference untouched.
 
+## R07 viewport-history review, 2026-10-13
+
+The [R07 record](../architecture/r07-carrousel-raster.md) authorizes only the
+Carrousel/editor replacement after source-asset/placement/clip/font inspection
+and reversible initial-zoom experiments. Current Studio intentionally starts at
+40%; its native thumbnail raster after Fit differs from the historical Fit
+startup. Every editor delta is bounded to the two source-image footprints;
+all other source-reviewed rasters remain unchanged. This is a reviewed capture
+environment transition, not a general allowance for stable differences or
+embedded-preview similarity. Retain the generated promotion evidence and
+recapture the full gate after promotion. Scene/settlement approvals are separate.
+
 ## Reviewed source-fidelity corrections
 
 An approved renderer reference is a regression baseline, not perpetual visual authority over stronger source evidence. When a historical baseline is known to preserve an incorrect renderer interpretation, a fidelity milestone may classify a candidate as a **reviewed source-fidelity correction**. This classification does not promote it automatically.

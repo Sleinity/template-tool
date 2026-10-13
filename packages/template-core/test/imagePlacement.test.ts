@@ -1,5 +1,8 @@
 import type { ResolvedImagePlacementIntentV1 } from "../src/resolved/types";
-import { resolveImagePlacementGeometry } from "../src/resolved/imagePlacement";
+import {
+  adaptNormalizedImageCropToSlotAspect,
+  resolveImagePlacementGeometry,
+} from "../src/resolved/imagePlacement";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);
@@ -103,6 +106,57 @@ const resizedCrop = resolveImagePlacementGeometry(
 );
 near(resizedCrop?.visibleSourceRect.normalized.x ?? 0, 0.25, "Slot resize must not alter the source crop rectangle.");
 near(resizedCrop?.destinationBounds.width ?? 0, 900, "Slot resize should recompute destination placement.");
+
+const canonicalEditorCrop = [[0.8, 0, 0.1], [0, 0.8, 0.1]];
+const canonicalEditorCropSnapshot = JSON.stringify(canonicalEditorCrop);
+const squareEditorCrop = adaptNormalizedImageCropToSlotAspect(
+  canonicalEditorCrop,
+  800,
+  800,
+  1000,
+  1000,
+);
+near(squareEditorCrop?.[0]?.[0] ?? 0, 0.8, "A square slot should retain a square canonical crop width.");
+near(squareEditorCrop?.[1]?.[1] ?? 0, 0.8, "A square slot should retain a square canonical crop height.");
+const portraitEditorCrop = adaptNormalizedImageCropToSlotAspect(
+  canonicalEditorCrop,
+  400,
+  800,
+  1000,
+  1000,
+);
+near(portraitEditorCrop?.[0]?.[0] ?? 0, 0.4, "Portrait adaptation should shrink only the crop width.");
+near(portraitEditorCrop?.[0]?.[2] ?? 0, 0.3, "Portrait adaptation should retain the canonical crop centre.");
+near(portraitEditorCrop?.[1]?.[1] ?? 0, 0.8, "Portrait adaptation should retain canonical crop height.");
+const landscapeEditorCrop = adaptNormalizedImageCropToSlotAspect(
+  canonicalEditorCrop,
+  800,
+  400,
+  1000,
+  1000,
+);
+near(landscapeEditorCrop?.[0]?.[0] ?? 0, 0.8, "Landscape adaptation should retain canonical crop width.");
+near(landscapeEditorCrop?.[1]?.[1] ?? 0, 0.4, "Landscape adaptation should shrink only the crop height.");
+near(landscapeEditorCrop?.[1]?.[2] ?? 0, 0.3, "Landscape adaptation should retain the canonical crop centre.");
+assert(JSON.stringify(canonicalEditorCrop) === canonicalEditorCropSnapshot, "Aspect adaptation must not mutate canonical crop state.");
+const adaptedPortraitGeometry = resolveImagePlacementGeometry(
+  intent("CROP", {
+    sourceTransform: canonicalEditorCrop,
+    activeCropTransform: canonicalEditorCrop,
+    cropAspectPolicy: "cover-within-canonical",
+    transformApplicability: "active-crop",
+  }),
+  400,
+  800,
+  1000,
+  1000,
+);
+assert(
+  adaptedPortraitGeometry?.strategy === "crop-transform" &&
+    adaptedPortraitGeometry.preservesAspectRatio &&
+    (adaptedPortraitGeometry.visibleSourceRect.normalized.width ?? 1) <= 0.4 + 1e-6,
+  "Editor crop adaptation should preserve aspect ratio without revealing source outside the canonical crop.",
+);
 
 const invalidCrop = resolveImagePlacementGeometry(
   intent("CROP", {

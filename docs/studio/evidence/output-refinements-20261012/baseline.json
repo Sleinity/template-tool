@@ -1,0 +1,18 @@
+{
+  "apps/studio/src/workspace/DraftEditor.tsx": {
+    "path": "docs/studio/evidence/output-refinements-20261012/baseline/apps/studio/src/workspace/DraftEditor.tsx",
+    "sha256": "2c712a4101dc69fa5e881d1d18d21338f5e3c2732412fb1669a84cc05d99cb03"
+  },
+  "apps/studio/src/workspace/outputEditor.css": {
+    "path": "docs/studio/evidence/output-refinements-20261012/baseline/apps/studio/src/workspace/outputEditor.css",
+    "sha256": "aae12d544f25875a9de91ab1758aac0a96422ffe200e335bf1b332e485cb483b"
+  },
+  "apps/studio/src/setup/SetupPreview.tsx": {
+    "path": "docs/studio/evidence/output-refinements-20261012/baseline/apps/studio/src/setup/SetupPreview.tsx",
+    "sha256": "79ffca1300ea45dc7193bcf9a8e9324c8e525dac9489c28ece97a1563a8745ab"
+  },
+  "apps/studio/src/components/EditorLayout.tsx": {
+    "path": "docs/studio/evidence/output-refinements-20261012/baseline/apps/studio/src/components/EditorLayout.tsx",
+    "sha256": "8bb801fd009a72893b4667a3164e5e9f18655c498f4149faa38d8cecf3d057f3"
+  }
+}

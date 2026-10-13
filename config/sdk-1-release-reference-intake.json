@@ -1,0 +1,627 @@
+{
+  "schemaVersion": "reviewed-release-reference-intake-v1",
+  "baseCommit": "88510e5f16d16e119692a25c59f1b712acf905a3",
+  "candidate": "sdk-1-candidate-20261013k",
+  "review": "docs/architecture/release-source-baseline.md",
+  "priorCertification": "docs/architecture/versioned-candidate-certification.md",
+  "files": [
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/editor/reference.png",
+      "sha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+      "bytes": 192792,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/editor/structure.json",
+      "sha256": "c6106b12ae914ff2245d57094ac728879a33f00a6d47cd02e61c9c21bac36b60",
+      "bytes": 247134,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/fields/reference.png",
+      "sha256": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+      "bytes": 49768,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/fields/structure.json",
+      "sha256": "49219e88c1444c2f7794fe6f9ce199556af2fd2cedc175518e7fee2e5eb8587d",
+      "bytes": 245018,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/png-export/reference.png",
+      "sha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "bytes": 912022,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/png-export/structure.json",
+      "sha256": "08f6cda069ea354ad51cf7ec952c8ce5a5da45877ef8b60cc58a24e2f1435e2e",
+      "bytes": 247540,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/validate/reference.png",
+      "sha256": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+      "bytes": 49702,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-carrousel/validate/structure.json",
+      "sha256": "17becde47f726e1ee90c4e9d12158f5f844ff6e809ea670311a60d6c7aa2dd39",
+      "bytes": 244970,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/editor/reference.png",
+      "sha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+      "bytes": 294549,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/editor/structure.json",
+      "sha256": "2d343e58eaf42f3fd46188daf1979c8176451dc7fdc7cab3a9d088258059ed93",
+      "bytes": 278372,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/fields/reference.png",
+      "sha256": "3e24815d1e50b315d3ea9e34c5fe96333b3aa607e76caf21da86f696832ecb61",
+      "bytes": 55945,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/fields/structure.json",
+      "sha256": "87c4014f2f19b6de34a0a2f8e113e62d050d9421da7d2eb31796a5b0646ae5d9",
+      "bytes": 270310,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/png-export/reference.png",
+      "sha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "bytes": 593287,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/png-export/structure.json",
+      "sha256": "0c895e4748bea61da574f552e0cf7ee3a404f96bdd7c452cfaab2493be3922c6",
+      "bytes": 278578,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/validate/reference.png",
+      "sha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+      "bytes": 55644,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-cover/validate/structure.json",
+      "sha256": "f14c18da82b57bc6d8d34188cfa49e79465fe78d5543012413e0c9620ac8a1d4",
+      "bytes": 270262,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/editor/reference.png",
+      "sha256": "0e9626814ca74bca3379369a7d2ef2a123d98bb33ae8a298dc21b7226728d11f",
+      "bytes": 174733,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/editor/structure.json",
+      "sha256": "855b360f3d7834311d19db568176ce0acc82238fb8c4dd5917eb6b15ce1c4aa7",
+      "bytes": 82315,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/fields/reference.png",
+      "sha256": "18769755d75c410d2ca4e1b8d55870a6b14efa0e807d04dae0ae6d52f59f1d80",
+      "bytes": 26065,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/fields/structure.json",
+      "sha256": "cb2498ad771935936f3d2853a42c168a7d98c49b69c18183cd3be618a7d4f98b",
+      "bytes": 80199,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/png-export/reference.png",
+      "sha256": "ee4e1524d99abaf97d1a798ccf45e541d12abd3eac18adbdefed078ea52ad207",
+      "bytes": 566115,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/png-export/structure.json",
+      "sha256": "9b50be4044f0a3c7a991a216d54abb2c7f8f18775cb53564497a3a6a98e0451d",
+      "bytes": 82525,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/validate/reference.png",
+      "sha256": "35547ff8ca1c8d584df997990546f621c886ae48fc1a2a6ffc41da253cc2dd03",
+      "bytes": 26540,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-linear-and-mixed-paints/validate/structure.json",
+      "sha256": "da06f6eb61f83de3dee640344e68f99f0b18a8e0680df937ede501792f1a0019",
+      "bytes": 80188,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/editor/reference.png",
+      "sha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+      "bytes": 807438,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/editor/structure.json",
+      "sha256": "e8736ad804e1b6f71b7e2ecff2e08a988512dae66bd4f35f6e0f1c0524b6c413",
+      "bytes": 118030,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/fields/reference.png",
+      "sha256": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+      "bytes": 143279,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/fields/structure.json",
+      "sha256": "77823115b5d071e64660fb6b464195551a16df27174991a6d51f71f6375f0741",
+      "bytes": 116852,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/png-export/reference.png",
+      "sha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "bytes": 1412015,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/png-export/structure.json",
+      "sha256": "a25bccfb85cd9e3f980ef37f0b3c153f116e83190c50720824adab378d6d97d8",
+      "bytes": 118241,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/validate/reference.png",
+      "sha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+      "bytes": 143858,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-now-hiring/validate/structure.json",
+      "sha256": "6be5df98a939116ec125303f861aaaefe4ec2f7668992dd2974478e45e3b99fe",
+      "bytes": 116804,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/editor/reference.png",
+      "sha256": "745471aac49fccb2d82d37ecb0a600dcbad8a730a56988402817bae6e709c7ca",
+      "bytes": 6578,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/editor/structure.json",
+      "sha256": "3af62005e137a65305b4d4c5f29cc89240c56ec027af31f21f017b4af4e8fc66",
+      "bytes": 65455,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/fields/reference.png",
+      "sha256": "c42185ed3a4723fdaa54eda2994d50890c8146f6c8d11261b75f500761208a4a",
+      "bytes": 1624,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/fields/structure.json",
+      "sha256": "58ceb859facf313e6f11e904c772af1f7a22f3250169d4585328737314ff8df3",
+      "bytes": 62265,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/png-export/reference.png",
+      "sha256": "b850e41a0801da9020b39093c3fa6e90eebb66406a82acf5268470257350f19d",
+      "bytes": 35501,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/png-export/structure.json",
+      "sha256": "a130598a7297df38f3b1a7e2acbb8f46eb98a17cd6976c1d0b5b90ca748352aa",
+      "bytes": 65665,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/validate/reference.png",
+      "sha256": "6ad80851ee2e465e60f4a9f3383c27647c4654ad4d3b9b7b0229a58318abf2ef",
+      "bytes": 1627,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/references/approved/exporter-061-solid-opacity/validate/structure.json",
+      "sha256": "6cc14be670fc884ee65a42c22ac01c7d7ba20db299ee356aa4425c42ad52efe9",
+      "bytes": 62262,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/scene.json",
+      "sha256": "b93a4ecf182d5437e1be685d4e36c40f916c510fd1503b55d9087364a0898913",
+      "bytes": 1410248,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/scene-graph/snapshots/approved/exporter-061-cover/scene.json",
+      "sha256": "f3c2f28d69b3f40fc4563e8a1447654209d95c1cdf685c4ee2a42135bdaff05f",
+      "bytes": 1466273,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/scene.json",
+      "sha256": "62801d37f8b6db1c02bc28c0f0b6e0fd2f02ccb65ba167f6d3dc28dfeed0f7fe",
+      "bytes": 645736,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/comparison.json",
+      "sha256": "258e1326db67094a098dce8bbd2c12594d5507dfec6e38c24c8cc3a1f28ffc4d",
+      "bytes": 6736,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/dependency.json",
+      "sha256": "fd7a181642d2a3be6c5d0b8ef2b2f1ba12e9e627e8a4aad561b48f0f3c9612be",
+      "bytes": 89163,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/measurements.json",
+      "sha256": "18e8325c6242383b9b57aeb076f5d6173a14d83a57aaed8c281fd71db3ecc255",
+      "bytes": 27712,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/settled.json",
+      "sha256": "1c21ddbdd801458757c57b1d03335400949ff8f13ce4a6ff747b44d51b2997d2",
+      "bytes": 26228,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/trace.json",
+      "sha256": "c02c2365044f4a7793461354c687fe9a566943e3582f5b72263c0a242efceafe",
+      "bytes": 4730,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/comparison.json",
+      "sha256": "40db42f208b9482140fc3003a06a1ca43be6c04bd54108f6f6a16963b93b7c27",
+      "bytes": 6736,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/dependency.json",
+      "sha256": "cfecbac2e8aa4c300ce1cceb1c27e448db0d222675db027e5cf2939b0f570c1d",
+      "bytes": 89163,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/measurements.json",
+      "sha256": "7fa6fe7745438121dcf07c2e11bc3d14918c44236fe3deae400fc66121eaed77",
+      "bytes": 27696,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/settled.json",
+      "sha256": "3cb2928272d797a51f3d9a6d4a505e05774f6fab83353a053db0ba78d2087f8d",
+      "bytes": 26224,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/trace.json",
+      "sha256": "26fca4281871c92523efba711b2bb9c4b0147e38cab112baf54bbfeae810060d",
+      "bytes": 4730,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/comparison.json",
+      "sha256": "cfc27515c491ff28971df4f8627d881deb196d2bc1b251fae8b6a653a7ce59b4",
+      "bytes": 6744,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/dependency.json",
+      "sha256": "a290e5a93583f837830db4f88da6012c118fd6986f861e28eb3da3dc81997d87",
+      "bytes": 89167,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/measurements.json",
+      "sha256": "44083d1d288811d76f87f81d6d5731a89ffa776a87d5a194b35a767b3a04e5ed",
+      "bytes": 27720,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/settled.json",
+      "sha256": "c4365c70efbda0569e6dca8b277599a321784841f116855416737e704b3f245f",
+      "bytes": 26236,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/trace.json",
+      "sha256": "81f2a0576f489d7af745d8cf596a8de508c2e357fdb98275c615fcd91c285475",
+      "bytes": 4738,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/comparison.json",
+      "sha256": "c0ab71fd245271de99d9ee203db5da2c211af624c3c6528111b5fb9eaa401378",
+      "bytes": 6740,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/dependency.json",
+      "sha256": "e97b74597304403545d82a7b93147b234860a1734a49048d0d08e98594433452",
+      "bytes": 89165,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/measurements.json",
+      "sha256": "b4061bcddcb7dfb40ad0de85d28b43412aa32301d026f941b18253419b2e0e89",
+      "bytes": 27700,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/settled.json",
+      "sha256": "4d0dd9c55ff79deedb24028f63b5b4afb6b4dc38c740fc547605fb02bb170e16",
+      "bytes": 26228,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/trace.json",
+      "sha256": "32128fb4bc7f5462c046e7b804ce0dce1fa97ad4a4ed14605b780b5025d9f94c",
+      "bytes": 4734,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/comparison.json",
+      "sha256": "7e04e0ab293a960bc2b995e46ccbe129365e528cb9bd27bc0aa2c41dbe0ab4d8",
+      "bytes": 7158,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/dependency.json",
+      "sha256": "b87507edf391377c03e9eb1cccdbe7f39f7a00923109a1e8024a430b1d6e7aef",
+      "bytes": 78809,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/measurements.json",
+      "sha256": "0527337c50652c0d1088ac5dc1b1c876d9753d8b308f549ebfa46c60985d4e5e",
+      "bytes": 23753,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/settled.json",
+      "sha256": "99aa006ab27d00201e68f8abd41d95467bb916eeeadca48f3abf164d4305d149",
+      "bytes": 22516,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/trace.json",
+      "sha256": "751a2ed7400d7b08907b4143b019f0ec55a1153b542fb73827d1d468ff20b134",
+      "bytes": 4980,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/comparison.json",
+      "sha256": "2de47763a84f56fa2575c577bd894612351e0cd3272e638f376dc5e69ea38fff",
+      "bytes": 7158,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/dependency.json",
+      "sha256": "0c14cebff48d8d1fb3c3f23cc8a2fbaf498617caea897f8c56d2f569ae14baad",
+      "bytes": 78809,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/measurements.json",
+      "sha256": "630cf907ccb4e87b931805ec768e87a6af69d146a5a4f840ef10f3dcaad6bbda",
+      "bytes": 23791,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/settled.json",
+      "sha256": "4e30c067c95671acd7a8448e3f5c0cee252751e397214831ee67d8c3c056997d",
+      "bytes": 22583,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/trace.json",
+      "sha256": "c22f76d975612f276d219f20dcd3e1fbf6c877bf044be0ecb27725979e757807",
+      "bytes": 4980,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/comparison.json",
+      "sha256": "c31a2b38e0da1f0f2ec623eecc9f32b115551a2d570eb1f870579847ea13e2ea",
+      "bytes": 7166,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/dependency.json",
+      "sha256": "5789428ee28e4f90957a4cfc75c4dec55818191e782cfebf2cecca515a0e0bdd",
+      "bytes": 78813,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/measurements.json",
+      "sha256": "e699e4a4d62a74dd015a7f9db7218f52956674c2624bb6df735983eef814985a",
+      "bytes": 23761,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/settled.json",
+      "sha256": "acd0c5e79d24cb4cfe2aaf4afe48322a7c0b35f3a38d7d4303d31d838e6a9e8b",
+      "bytes": 22524,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/trace.json",
+      "sha256": "ce00251a4d53d5ae83e1dadcdb850cbcef1eb5930da10e8382020464842737e8",
+      "bytes": 4988,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/comparison.json",
+      "sha256": "4c838df7a106d71ede0918c87d616bb203511d5262727d9118cece95571f9443",
+      "bytes": 7162,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/dependency.json",
+      "sha256": "8f1ad35827dbeb1f020237c7d9b0ae4e8a80193c21cf778bf878c7ef2c607441",
+      "bytes": 78811,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/measurements.json",
+      "sha256": "b9c5fff7507913984e3002253625fbcfe34943b57ed93c5b2e0d38d6c95b6f6f",
+      "bytes": 23795,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/settled.json",
+      "sha256": "e70702ad066ae6d546ac6e3242a3632897dfdbebda76761e3f8101b6c6979055",
+      "bytes": 22587,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/trace.json",
+      "sha256": "2bbf73e1853a5aa3d08d2d3b2f377d5f28b1b8f6f43dbd24a595c92cad31e7c2",
+      "bytes": 4984,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/comparison.json",
+      "sha256": "4495dfbf2aff755ad3defa988d99d1287da0f11ab6d8e39d46d6c7d62498dd5d",
+      "bytes": 3620,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/dependency.json",
+      "sha256": "2b4d4469e3cbb2061b80ff2b679696852c15e638691a59a126cc1aaa0acfc396",
+      "bytes": 36988,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/measurements.json",
+      "sha256": "dc31867ace006cee18a8a2b0491ddfe016936157f61f109fa206a5df38a1a598",
+      "bytes": 16481,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/settled.json",
+      "sha256": "8a33264ae2a4422aaf8b1d6e4d53a8801e37030b8a6ac5dbaa031d184a52173b",
+      "bytes": 10416,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/trace.json",
+      "sha256": "8ee31ef25c49f4ee091016ba9c7c5ffa59762bb9715f1822652328fc8f4b328e",
+      "bytes": 2768,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/comparison.json",
+      "sha256": "6056533e6175d9c5d7d4bc6df30a973d0b706e18d8d04249605c9684d806b074",
+      "bytes": 3624,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/dependency.json",
+      "sha256": "695cbf62a96e70aec2178fb845c4c7c635cfc919b20123eceb4fa8a11c4f17ad",
+      "bytes": 36988,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/measurements.json",
+      "sha256": "42c3d76d33d7fe68128860de0d66d9c149a511b3f59f4c4e718cfe27a2b047ea",
+      "bytes": 16499,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/settled.json",
+      "sha256": "78fe9c46a2f27ca7c378fb9fab687da0514baae04939a0d7747f0f4f45f243c8",
+      "bytes": 10434,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/trace.json",
+      "sha256": "fbfe87e4ddc5549e8f3f1c2061ab5f4ebda3df93fee2f0c0767deff35ff32e08",
+      "bytes": 2768,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/comparison.json",
+      "sha256": "da6a6af8bdc100596a92aafb8b18eaed5090c8b62eed94f4fcd7c52cc5002669",
+      "bytes": 3628,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/dependency.json",
+      "sha256": "7862bc748bcb3ebc1ea793c64b092d94807e66842cf9203b96826bfe50f9c7cf",
+      "bytes": 36992,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/measurements.json",
+      "sha256": "85e7709f0807d07f5151306f0126539268461f7f3f96b707b26ca458a2772a39",
+      "bytes": 16489,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/settled.json",
+      "sha256": "0c03ec31756b907f8428f6730a86cda8e5c1f8e37f365252031dbd99aa0b69bc",
+      "bytes": 10424,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/trace.json",
+      "sha256": "ffd9dd3d103c1f46fbb5753fc09aa1673f7d145c895dec1489061a4408074fd7",
+      "bytes": 2776,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/comparison.json",
+      "sha256": "512223ac4d66226e531dc1703f0ed4540ed444c63ba521076a1f971d23003b58",
+      "bytes": 3628,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/dependency.json",
+      "sha256": "bf0877bccc6ccce534d6028a881734988195e1bda5e7d1e1eff9743c0a680e5f",
+      "bytes": 36990,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/measurements.json",
+      "sha256": "255584b1767187720cc284deaf6a425f2dfcf6a51086277048a43407e23110b2",
+      "bytes": 16503,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/settled.json",
+      "sha256": "e1f92397206c321ef8770c841d4a4d617a04e164bc47f8c752a8fcc9c772033f",
+      "bytes": 10438,
+      "operation": "add"
+    },
+    {
+      "file": "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/trace.json",
+      "sha256": "fc0e97ed672eb797e416242459fe06743edfca7b8f6c680377cc1a94531bf75a",
+      "bytes": 2772,
+      "operation": "add"
+    }
+  ]
+}

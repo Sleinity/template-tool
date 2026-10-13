@@ -1,0 +1,1058 @@
+{
+  "schemaVersion": "stored-asset-hydration-milestone-v1",
+  "recordedAt": "2026-10-09",
+  "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "dirtyStatusEntries": 337,
+  "worktreeDiffSha256": "4e38787f8b6aa45d885f02e67ce5911a54e2cde19131970738f6bbb25c825734",
+  "worktreeInventory": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/report.json",
+  "packageVersions": {
+    "core": "0.8.0",
+    "browser": "0.8.0",
+    "react": "0.8.0"
+  },
+  "implementationSha256": {
+    "packages/template-browser/src/session/templateSessionV2.ts": "b589c9e2f529cb27da7b4f1cf28446a38e63eb55be4b1caacfd771f7eb1f1852",
+    "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "927ac171ad24a3da94c44bb9b4dcf75f2136374808666d5b83bb1f532ac31cee",
+    "packages/template-browser/src/session/storedAssetHydration.ts": "5aeeb54c2b19d0c730b8f9fefeb411d2dc72ed7e36b433febe803b66eb8dddc6",
+    "packages/template-browser/test/storedAssetHydration.integration.ts": "9e9e8718097066e33b25506230ce9d8ca7e318fb7ee0f60603f354b98d0ba709",
+    "packages/template-browser/test/storedAssetHydration.test.ts": "de6761057ebf131308f128ff6b1f865e10544f2281a5990b54be4f08725a5742",
+    "packages/template-browser/test/storedAssetHydrationScope.test.ts": "d5e34695511bde1f29f623ea11ff10f5fa8c95d87e07f0bd4249834e1e5bc672",
+    "scripts/repository/verify-stored-asset-hydration.mjs": "e6e912f89b51c0e4783f5950454aa3fc4211cfd0bb80e6a6eb9d4f2eb110c4d5",
+    "scripts/repository/internal-experiment-boundaries.mjs": "e53296c003179a6c09ac4167887a5bf0fca86a42f3ac5529c02706aafa7d3365",
+    "scripts/repository/internal-experiment-boundaries.test.mjs": "74cbcfd43c95ade4057d5ed968314e617e2be0a7fbab95affe793ab75f7d2d7e",
+    "scripts/repository/verify-package-boundaries.mjs": "e2adb4a30dd87675fc7913d65ab65cbdc7188595a96d7bea944b89dfea7661af",
+    "src/test-suite.ts": "5ce86b3c8ab0008fd50c2e9ceeb2daa90cc3a324dfe9ee12202b867a97102ad2",
+    "docs/architecture/internal-session-contract.md": "0df62d323eeb77709a05624296437f5826a568624840215b5dfdcd41bd1bd82f",
+    "docs/architecture/internal-compiler-result.md": "61f20ded294f8f5687c4841c3651a0ec590f43e0602180ce8d6fd849ad381361",
+    "docs/architecture/evidence/stored-asset-hydration-original.patch": "383998975c3931ff72b23a9da32eff797a44f4a9dd9dd1cf71968069f8e57815",
+    "docs/architecture/evidence/stored-asset-hydration-repaired.patch": "8bf788cfd352012dcfe4ed68df3ba59b603cdc118e3eb3d937ad6cf5d825a559",
+    "fidelity/gates/sdk-061-dispositions.json": "adbcc41cee0f2a242d07b8a844cb6f6c0cfa0f5c5b508fee735d10ed80b26d9c",
+    "fidelity/gates/archive/sdk-061-dispositions-sdk-061-save-scheduling-20261008a.json": "c7f3ee1ecac46703d5dbf77cbd58285b933f8f324e251a741ad00900a149b645",
+    "docs/architecture/evidence/stored-asset-hydration-deferred-pruning.mjs": "4df017d1d5631aa9f4dcc7a2556770e0b84b8d302f01f74c2e253c72f5ab00ab"
+  },
+  "stages": {
+    "original": {
+      "runId": "hydration-original-20261009a",
+      "sourceHashes": {
+        "packages/template-browser/src/session/templateSessionV2.ts": "71a5f04dfe1fd4f307fbea67020ffd2c56b87b722aadb7335f2449be13b70894",
+        "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "f02a7c2fb9b5f52527c44001b6027878345fd7287ce42662d07e427893531da6"
+      },
+      "transcriptSha256": "14ce5a3042d364f2e7a5f317f0e75927e0c8df772e23af2b408414bd1d48da30",
+      "scenarioCount": 32,
+      "comparison": null,
+      "reportSha256": "28c28c25536037e94824c31c688d631240b700e13bff3220ac5b3462e75a65ff"
+    },
+    "repaired": {
+      "runId": "hydration-repaired-20261009c",
+      "sourceHashes": {
+        "packages/template-browser/src/session/templateSessionV2.ts": "670d01a27135079af9f1f8ffba1da5f881e127b3aa31c6ab1a8f19c174629958",
+        "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "f02a7c2fb9b5f52527c44001b6027878345fd7287ce42662d07e427893531da6"
+      },
+      "transcriptSha256": "747e147f6c5b2ce8d7f242593f733e187df9ee139361223462cae4b28c14b87d",
+      "scenarioCount": 32,
+      "comparison": {
+        "baselineRun": "hydration-original-20261009a",
+        "baselineStage": "original",
+        "fullTranscriptEquality": false,
+        "intentionalDifferences": [
+          {
+            "kind": "single",
+            "scenario": "collision"
+          },
+          {
+            "kind": "single",
+            "scenario": "missing-blob"
+          },
+          {
+            "kind": "single",
+            "scenario": "field-reset"
+          }
+        ],
+        "measurementCountsEqual": true
+      },
+      "reportSha256": "fac1444872b5921645d8c765004ad58bc10f3df98fec9826b3777b832c2ec120"
+    },
+    "extracted": {
+      "runId": "hydration-extracted-20261009e",
+      "sourceHashes": {
+        "packages/template-browser/src/session/templateSessionV2.ts": "b589c9e2f529cb27da7b4f1cf28446a38e63eb55be4b1caacfd771f7eb1f1852",
+        "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "927ac171ad24a3da94c44bb9b4dcf75f2136374808666d5b83bb1f532ac31cee"
+      },
+      "transcriptSha256": "747e147f6c5b2ce8d7f242593f733e187df9ee139361223462cae4b28c14b87d",
+      "scenarioCount": 32,
+      "comparison": {
+        "baselineRun": "hydration-repaired-20261009c",
+        "baselineStage": "repaired",
+        "fullTranscriptEquality": true,
+        "intentionalDifferences": [],
+        "measurementCountsEqual": true
+      },
+      "reportSha256": "af28ebc1b98a33906d98cbf0771014c6472f486239f6c3aa5ede9787b7690999"
+    }
+  },
+  "protectedArtifacts": {
+    "config/sdk-bundle-baselines.json": "a87171ae8ab3612736fec679b5bd373f6afe266592b1621dd034bb2e5abf59c2",
+    "config/sdk-entry-points.json": "d5bb6c1aeff9941e3c32c3caa9955868f900ebd45ebd4bbc907a46587c1e9cde",
+    "config/sdk-public-api.json": "db23cd1646d1c390d36a27f5e6bc4a91d30c0a157491442a0776c9d06d67146c",
+    "fidelity/fixtures.json": "e68e24a1d1e97113e21b6735f10d92e87ad242fdf72bdbc5e54490a010404e7d",
+    "fidelity/fonts.json": "8ac875d74fb88b1c3c8b8179667bca2155fc56f2d068672c08338ab8e34090d9",
+    "fidelity/gates/sdk-061.json": "35ae3294ec99779035e83ec1dbafa8a7dde7ecfdbf38fa38dce7fc63f188d100",
+    "fidelity/references/approved/deal-of-the-week-banner/editor/reference.png": "49d3dd9ace03c88a7632b938c09d4a9cc09abc3018528c92ea378f9131467f66",
+    "fidelity/references/approved/deal-of-the-week-banner/editor/structure.json": "aba136d1fbf37286e8252d716aee41c2d9092af003ce9edee8b64fe508c7403c",
+    "fidelity/references/approved/deal-of-the-week-banner/fields/reference.png": "8f985c9aa93578dee13c6f347f3d56a562f1651462d303bb6110d1411a406e2e",
+    "fidelity/references/approved/deal-of-the-week-banner/fields/structure.json": "c1688ffb2583bd77a75f7cad1d11152a82017ce1ea799983f1d139a6e72c3eb1",
+    "fidelity/references/approved/deal-of-the-week-banner/png-export/reference.png": "0de8d633d745947da11e75be50f9c889d22fb2064c2b698c2ec9bf7a5953ea28",
+    "fidelity/references/approved/deal-of-the-week-banner/png-export/structure.json": "ff776ba571d70ec915e203d7baaf396d5b62f349d543f3dfbdeae6746de3219e",
+    "fidelity/references/approved/deal-of-the-week-banner/validate/reference.png": "760fc4e0c39f1f1505599fec908977af46a9b28d049056be29a73ad43c253a0a",
+    "fidelity/references/approved/deal-of-the-week-banner/validate/structure.json": "aadab269391abedffa48fc4730feeb61533ba7c5be35a65e9c2b818c2b1d7bd0",
+    "fidelity/references/approved/deal-of-the-week-post/editor/reference.png": "d1ec28a8c769f4f1e95a62b41f1d9685ff4c1f2eff87de77d18d325751c5dcb1",
+    "fidelity/references/approved/deal-of-the-week-post/editor/structure.json": "ea2e6321b86452b90ee5d39f3dc6b687acc88e90769f7489b13bc492f551efd1",
+    "fidelity/references/approved/deal-of-the-week-post/fields/reference.png": "43828c61caeb4502e4bc8c3d61ddee9b110a855c308434ae2e8d3c7cf18552f3",
+    "fidelity/references/approved/deal-of-the-week-post/fields/structure.json": "9d558a02bca1a35d665a9d5cb5ce676cc1d1e9958782dae92cdbbbd759eb8baf",
+    "fidelity/references/approved/deal-of-the-week-post/png-export/reference.png": "5089189542e9cd102b4fb627659134f8c17303a3c116d4de74b65582485aa177",
+    "fidelity/references/approved/deal-of-the-week-post/png-export/structure.json": "5b3572d13cbb4c7bacdd4cb856ba8e6cb42e8f6b70db7784d8be24dd7ee46514",
+    "fidelity/references/approved/deal-of-the-week-post/validate/reference.png": "f59aee22338a2156ccdc69d9687a71608830a43600089f6d892efd36a9b8723c",
+    "fidelity/references/approved/deal-of-the-week-post/validate/structure.json": "a7a8670b0efb74eda490fba6f8f5dfa5df33874ffbe487a62d2fdfb46bd541b3",
+    "fidelity/references/approved/exporter-061-carrousel/editor/reference.png": "efa8b3b84c7730ae2b18f3e63c09926c6849b36baf0a539d78ab73a1d774e9db",
+    "fidelity/references/approved/exporter-061-carrousel/editor/structure.json": "2f50145e33c95da8e5a3e4da78983f811b131f8e0bd6d226d573a16bc86a7bcc",
+    "fidelity/references/approved/exporter-061-carrousel/fields/reference.png": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+    "fidelity/references/approved/exporter-061-carrousel/fields/structure.json": "49219e88c1444c2f7794fe6f9ce199556af2fd2cedc175518e7fee2e5eb8587d",
+    "fidelity/references/approved/exporter-061-carrousel/png-export/reference.png": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+    "fidelity/references/approved/exporter-061-carrousel/png-export/structure.json": "08f6cda069ea354ad51cf7ec952c8ce5a5da45877ef8b60cc58a24e2f1435e2e",
+    "fidelity/references/approved/exporter-061-carrousel/validate/reference.png": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+    "fidelity/references/approved/exporter-061-carrousel/validate/structure.json": "17becde47f726e1ee90c4e9d12158f5f844ff6e809ea670311a60d6c7aa2dd39",
+    "fidelity/references/approved/exporter-061-cover/editor/reference.png": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+    "fidelity/references/approved/exporter-061-cover/editor/structure.json": "2d343e58eaf42f3fd46188daf1979c8176451dc7fdc7cab3a9d088258059ed93",
+    "fidelity/references/approved/exporter-061-cover/fields/reference.png": "3e24815d1e50b315d3ea9e34c5fe96333b3aa607e76caf21da86f696832ecb61",
+    "fidelity/references/approved/exporter-061-cover/fields/structure.json": "87c4014f2f19b6de34a0a2f8e113e62d050d9421da7d2eb31796a5b0646ae5d9",
+    "fidelity/references/approved/exporter-061-cover/png-export/reference.png": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+    "fidelity/references/approved/exporter-061-cover/png-export/structure.json": "0c895e4748bea61da574f552e0cf7ee3a404f96bdd7c452cfaab2493be3922c6",
+    "fidelity/references/approved/exporter-061-cover/validate/reference.png": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+    "fidelity/references/approved/exporter-061-cover/validate/structure.json": "f14c18da82b57bc6d8d34188cfa49e79465fe78d5543012413e0c9620ac8a1d4",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/editor/reference.png": "0e9626814ca74bca3379369a7d2ef2a123d98bb33ae8a298dc21b7226728d11f",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/editor/structure.json": "855b360f3d7834311d19db568176ce0acc82238fb8c4dd5917eb6b15ce1c4aa7",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/fields/reference.png": "18769755d75c410d2ca4e1b8d55870a6b14efa0e807d04dae0ae6d52f59f1d80",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/fields/structure.json": "cb2498ad771935936f3d2853a42c168a7d98c49b69c18183cd3be618a7d4f98b",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/png-export/reference.png": "ee4e1524d99abaf97d1a798ccf45e541d12abd3eac18adbdefed078ea52ad207",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/png-export/structure.json": "9b50be4044f0a3c7a991a216d54abb2c7f8f18775cb53564497a3a6a98e0451d",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/validate/reference.png": "35547ff8ca1c8d584df997990546f621c886ae48fc1a2a6ffc41da253cc2dd03",
+    "fidelity/references/approved/exporter-061-linear-and-mixed-paints/validate/structure.json": "da06f6eb61f83de3dee640344e68f99f0b18a8e0680df937ede501792f1a0019",
+    "fidelity/references/approved/exporter-061-now-hiring/editor/reference.png": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+    "fidelity/references/approved/exporter-061-now-hiring/editor/structure.json": "e8736ad804e1b6f71b7e2ecff2e08a988512dae66bd4f35f6e0f1c0524b6c413",
+    "fidelity/references/approved/exporter-061-now-hiring/fields/reference.png": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+    "fidelity/references/approved/exporter-061-now-hiring/fields/structure.json": "77823115b5d071e64660fb6b464195551a16df27174991a6d51f71f6375f0741",
+    "fidelity/references/approved/exporter-061-now-hiring/png-export/reference.png": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+    "fidelity/references/approved/exporter-061-now-hiring/png-export/structure.json": "a25bccfb85cd9e3f980ef37f0b3c153f116e83190c50720824adab378d6d97d8",
+    "fidelity/references/approved/exporter-061-now-hiring/validate/reference.png": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+    "fidelity/references/approved/exporter-061-now-hiring/validate/structure.json": "6be5df98a939116ec125303f861aaaefe4ec2f7668992dd2974478e45e3b99fe",
+    "fidelity/references/approved/exporter-061-solid-opacity/editor/reference.png": "745471aac49fccb2d82d37ecb0a600dcbad8a730a56988402817bae6e709c7ca",
+    "fidelity/references/approved/exporter-061-solid-opacity/editor/structure.json": "3af62005e137a65305b4d4c5f29cc89240c56ec027af31f21f017b4af4e8fc66",
+    "fidelity/references/approved/exporter-061-solid-opacity/fields/reference.png": "c42185ed3a4723fdaa54eda2994d50890c8146f6c8d11261b75f500761208a4a",
+    "fidelity/references/approved/exporter-061-solid-opacity/fields/structure.json": "58ceb859facf313e6f11e904c772af1f7a22f3250169d4585328737314ff8df3",
+    "fidelity/references/approved/exporter-061-solid-opacity/png-export/reference.png": "b850e41a0801da9020b39093c3fa6e90eebb66406a82acf5268470257350f19d",
+    "fidelity/references/approved/exporter-061-solid-opacity/png-export/structure.json": "a130598a7297df38f3b1a7e2acbb8f46eb98a17cd6976c1d0b5b90ca748352aa",
+    "fidelity/references/approved/exporter-061-solid-opacity/validate/reference.png": "6ad80851ee2e465e60f4a9f3383c27647c4654ad4d3b9b7b0229a58318abf2ef",
+    "fidelity/references/approved/exporter-061-solid-opacity/validate/structure.json": "6cc14be670fc884ee65a42c22ac01c7d7ba20db299ee356aa4425c42ad52efe9",
+    "fidelity/references/approved/gradient-test-linear/editor/reference.png": "9fb5190e9e9f6a8302d6ed121b56ad766b11dbc2db4d125fecce6bd6777e34fc",
+    "fidelity/references/approved/gradient-test-linear/editor/structure.json": "56bdf49c61ef8f8ae9fa8119bf8ce23bf41d58fb08467be78a29c38c887751c4",
+    "fidelity/references/approved/gradient-test-linear/fields/reference.png": "2f497c78a95cdd53639e56745fa0860f7c7542a7b10e3d866e5c8cf4439f7301",
+    "fidelity/references/approved/gradient-test-linear/fields/structure.json": "1b856cce17616ba9b7b857570c4b73ad1e9bffa0cae0bd6b715851b596f33a9f",
+    "fidelity/references/approved/gradient-test-linear/png-export/reference.png": "e2420ed3191537eab97f88c84a13d3ae82b74584db0a24501dd8b7806a41a8c5",
+    "fidelity/references/approved/gradient-test-linear/png-export/structure.json": "104d8f523e6c1204266b1a5881d7e42e0191760d25c5d7215c90a7a750c07dc3",
+    "fidelity/references/approved/gradient-test-linear/validate/reference.png": "a1f7a2c1b62efc394c24f15039d201da74b12a1f25bbdf226c7953cb5e7c1c21",
+    "fidelity/references/approved/gradient-test-linear/validate/structure.json": "6bbf5414c53f9155965da62c507ceb65db6a73344bdfa0e921df214e2c9691f2",
+    "fidelity/references/approved/gradient-test-paint-opacity/editor/reference.png": "57cb6cd6e17d3f6d00c9583ad166eb23d017468cc7165c2eaf3b96de0c97be4d",
+    "fidelity/references/approved/gradient-test-paint-opacity/editor/structure.json": "78747215d7311d558579fae826110f283f523b3b2e48a8d01ba513207d9ea8b8",
+    "fidelity/references/approved/gradient-test-paint-opacity/fields/reference.png": "239aac68611dcc236573bf04d18ebd4ebfecc0797a8a7695fb99b87a3a745b12",
+    "fidelity/references/approved/gradient-test-paint-opacity/fields/structure.json": "98e49e178273c067d361845645e3088c066885af0acfcb819cc4894b0849d0ef",
+    "fidelity/references/approved/gradient-test-paint-opacity/png-export/reference.png": "d7df59f2054993b2ea6e26d08e5914ad0a76bf9b682263b7cd614deb084a9520",
+    "fidelity/references/approved/gradient-test-paint-opacity/png-export/structure.json": "84fa2878ba0145e1b89cfb7bc919c1290598fdd0ea2721f378a22c1cebc5a068",
+    "fidelity/references/approved/gradient-test-paint-opacity/validate/reference.png": "8754d5b45988af0ea04f2991c0900696811d9698593475a58e25aee461d64320",
+    "fidelity/references/approved/gradient-test-paint-opacity/validate/structure.json": "76e0419edffc501e599d2b0f92fd8afb282f5a090d08036f7297bb0ab910bcca",
+    "fidelity/references/approved/now-hiring-post/editor/reference.png": "42e5a2ea43c239f795867e4a3ec5e7c9873026eb170875efb435d3e5c8e23d87",
+    "fidelity/references/approved/now-hiring-post/editor/structure.json": "f1d2bd89bb03b3f2250759487706e02c2154859b3ec5179460a066241e314d10",
+    "fidelity/references/approved/now-hiring-post/fields/reference.png": "45e3fdfe02100f81f759db90ab07f5a912daddd2c4eb81c0b86d5252eeaceedd",
+    "fidelity/references/approved/now-hiring-post/fields/structure.json": "f49c3015b8aaf76cc3bbda9803b169bd65be291c3e405f2bd1b2d81d55614cad",
+    "fidelity/references/approved/now-hiring-post/png-export/reference.png": "ad817d2be6f264e21ba2cab2bd7fce3ce7f78c7508bbebbae84811c68404a8e1",
+    "fidelity/references/approved/now-hiring-post/png-export/structure.json": "36aeee06fb5941e04ad83113cbb27018fe0c4c822965afdd4e2cdcdd15f8f479",
+    "fidelity/references/approved/now-hiring-post/validate/reference.png": "abc1ca47efa712a1cb5508976bd0e19430c69e0d24e3c00455ffad39457f5f6d",
+    "fidelity/references/approved/now-hiring-post/validate/structure.json": "445b553b382429952b284b7ae4646e3e9e6ebd761a50191a2070440af157aff2",
+    "fidelity/references/approved/optimized-for-template-export/editor/reference.png": "7985af184cd809c2107dcf3a76987fbfc0f2c1c27aa246ab2514661df94d7add",
+    "fidelity/references/approved/optimized-for-template-export/editor/structure.json": "24087b1feb794ca5500e5f0070437545e2d8aa78b208baaff1a8d0384c079e24",
+    "fidelity/references/approved/optimized-for-template-export/fields/reference.png": "ed1dd19b83b12804fce5425dfa96bba51b1029e3309496a5b49742964a4e1f96",
+    "fidelity/references/approved/optimized-for-template-export/fields/structure.json": "37ee9f644805e4688dd9f90900ff196ac9618e2e14ffabf7705591f69d20423f",
+    "fidelity/references/approved/optimized-for-template-export/png-export/reference.png": "72d35a4edeaef4ca2ffd132eae5e6e995ade0cece5860768e7c8b33de6251d06",
+    "fidelity/references/approved/optimized-for-template-export/png-export/structure.json": "474208a080cf123ee72820e1c753132ef04d3d2aec6a67f7141f4f89dfadcb6d",
+    "fidelity/references/approved/optimized-for-template-export/validate/reference.png": "ab81854f15c95d8b7cb5c0611a27687991f70e60b280e6eab08cc1a376861f1b",
+    "fidelity/references/approved/optimized-for-template-export/validate/structure.json": "99e3e21f1d58ac03fd6ee7e5ff9ea3f7d840e602081531009787f6ca49564e10",
+    "fidelity/references/approved/ordered-solid-blue-then-red/editor/reference.png": "59cbdfa3b59c867e16b04bb3c421d8cf354f186dc20347470f8ce4847edcfc56",
+    "fidelity/references/approved/ordered-solid-blue-then-red/editor/structure.json": "74960d0671bf7fbd340047099edf3d9199f7eea586904e88d1b86cd7c1cba5ac",
+    "fidelity/references/approved/ordered-solid-blue-then-red/fields/reference.png": "046c18340f4de53726006521e51f9c1148f699a60688ac2933a50b3188d9f672",
+    "fidelity/references/approved/ordered-solid-blue-then-red/fields/structure.json": "7f608971d82f321dc267cfee35f2dd33d16b60e6ea06927f5c58942928154fd3",
+    "fidelity/references/approved/ordered-solid-blue-then-red/png-export/reference.png": "a68471bba1774f7ac0fd7cfa2c13f5c9a851e32eeddacfc7e2f816bceb760830",
+    "fidelity/references/approved/ordered-solid-blue-then-red/png-export/structure.json": "d38a01957bfec47d4cbc033ded3efbe8e0c4b6c562898d8cb12aa1bd9b7015fc",
+    "fidelity/references/approved/ordered-solid-blue-then-red/validate/reference.png": "0b78091658e91e273edc83ba9d9a5cb3cc551f1c085cad6d23b9b7f0783e40e9",
+    "fidelity/references/approved/ordered-solid-blue-then-red/validate/structure.json": "8bfd80560ff1264e6ec3c9b8888cd47d79f8cb21ea6d388993fb256cbb12cd32",
+    "fidelity/references/approved/ordered-solid-hidden-middle/editor/reference.png": "af4459f24b41a8e86f516f1d06e413d21b19eb500a40cf3176966d55c20b063c",
+    "fidelity/references/approved/ordered-solid-hidden-middle/editor/structure.json": "43abfd2a13ff5396b95afa8f6bbc434be8a7aabd9763a014807b7cb4310012a2",
+    "fidelity/references/approved/ordered-solid-hidden-middle/fields/reference.png": "50e440e32f19eed742644b072b3c71f2b640b8e9043e32d361f07659c8b46ff9",
+    "fidelity/references/approved/ordered-solid-hidden-middle/fields/structure.json": "f975c922dee472fe93aa56c3aabca38611645adafc03165f8560934f14a338a2",
+    "fidelity/references/approved/ordered-solid-hidden-middle/png-export/reference.png": "b4a736feff40c9ab268cd3eaa4579219f1c15d5dadae804247e0c327d07e1fe9",
+    "fidelity/references/approved/ordered-solid-hidden-middle/png-export/structure.json": "f5c5aaaa3e56b36d0bd4ad867c6654af52910e1faab2af6d98fa438a72e270c6",
+    "fidelity/references/approved/ordered-solid-hidden-middle/validate/reference.png": "9388ff953bb64b39a9804ba0f862aac6de8e3d13e034a91a168d2c540119a848",
+    "fidelity/references/approved/ordered-solid-hidden-middle/validate/structure.json": "17633d4228ae21834a62b0dcd74c87fbb4f789072166779646d905efe3c1d791",
+    "fidelity/references/approved/ordered-solid-independent-corners/editor/reference.png": "a71e032a044151654ab24731e15140a6ae48628d089ac5c58f2ae5dcd4164b38",
+    "fidelity/references/approved/ordered-solid-independent-corners/editor/structure.json": "a87d905d7f71324eb5430cfb76804355d99c165f3e56ce4bd6607edf32b94d93",
+    "fidelity/references/approved/ordered-solid-independent-corners/fields/reference.png": "d5443416a544052a97596c3e08b2387c2ed04264ef4e5afd9be5c325d9e29790",
+    "fidelity/references/approved/ordered-solid-independent-corners/fields/structure.json": "ec50adb7d14578e1eaa12754761665a69a4c00920b0ff5999ac813f1f60ccc56",
+    "fidelity/references/approved/ordered-solid-independent-corners/png-export/reference.png": "5552897a59a0b9538f30a35e827a02fdff04363bded14b8e666c974c3cde5a50",
+    "fidelity/references/approved/ordered-solid-independent-corners/png-export/structure.json": "50a5a208a0e495cc5a5ab90daed97016910544b32af5762341e15bb72652929f",
+    "fidelity/references/approved/ordered-solid-independent-corners/validate/reference.png": "3f81e3422ae1812aa82212d193016b1eb5cd32545d0f538cdad5079a31e973b5",
+    "fidelity/references/approved/ordered-solid-independent-corners/validate/structure.json": "dd189e3041177c720d05b0d378cb7d06be2f196dd91f4f1576e760ad3abbd529",
+    "fidelity/references/approved/ordered-solid-paint-opacity/editor/reference.png": "c9bfc6c5cb3685b371e52b4c4c5c46e98cdd4f530d9606b21e0c371e2d840271",
+    "fidelity/references/approved/ordered-solid-paint-opacity/editor/structure.json": "1d9aa2cb64388e302f237a3ad15f797b881e5795f77fbc830c2b285b168c2082",
+    "fidelity/references/approved/ordered-solid-paint-opacity/fields/reference.png": "08d7774c84f69e3a9099c532e45338d02b55d6604dfb828c8873dfdae3da0882",
+    "fidelity/references/approved/ordered-solid-paint-opacity/fields/structure.json": "78b02e5728533cb21f363e39515db13e60c4a0615a23dc8390b95e167b0beb04",
+    "fidelity/references/approved/ordered-solid-paint-opacity/png-export/reference.png": "8c92cf8e12d59ac97ccc54aeba398a054a5d475516e91a54c1911a9fc65f8b3f",
+    "fidelity/references/approved/ordered-solid-paint-opacity/png-export/structure.json": "ed2d0b1dcf3004da0a0d5fe67abd82082f9414351bc515183a1c6f5d5f7f4959",
+    "fidelity/references/approved/ordered-solid-paint-opacity/validate/reference.png": "4a4e91f29355e4d475d6c32702fa85149d34b84ddc556eec92cd303ede6bed00",
+    "fidelity/references/approved/ordered-solid-paint-opacity/validate/structure.json": "d9759b67fdf288bddbe414d3572e605f8e2a65c34bab6d5630564c93f6babeb6",
+    "fidelity/references/approved/ordered-solid-red-then-blue/editor/reference.png": "ed8192036725d26598a15e84015e51a71109176b675bc085ee38e3ccb251e39e",
+    "fidelity/references/approved/ordered-solid-red-then-blue/editor/structure.json": "dae4247f8f47861f7b05b4c756491236a34f2004ed6e5b423def99407b20bb9c",
+    "fidelity/references/approved/ordered-solid-red-then-blue/fields/reference.png": "a50f3f0737439fdc0c961786a3f6086e0b9960c050c2bb5cdc1fc38f15f30595",
+    "fidelity/references/approved/ordered-solid-red-then-blue/fields/structure.json": "e8c7d9021f7b531937b77bbc34f3e0c3fdee494fdfa99beb9d6fc145e332a1de",
+    "fidelity/references/approved/ordered-solid-red-then-blue/png-export/reference.png": "65d5817111f10949165c58654b913fed9146fcff33451af646d315ef35d518e5",
+    "fidelity/references/approved/ordered-solid-red-then-blue/png-export/structure.json": "5aad079f37c5085b927aef1f8573f665d6ee65347711d7aa4854ceced1210481",
+    "fidelity/references/approved/ordered-solid-red-then-blue/validate/reference.png": "bc59ced11bd4ceee7a924846c9027e5a3d73044f7c779c796acea9f37bb4b798",
+    "fidelity/references/approved/ordered-solid-red-then-blue/validate/structure.json": "752f3613f12a6b7ff78a5f2293848ade38ecbe3727992f773b5259d9ec5895a5",
+    "fidelity/references/approved/ordered-solid-three/editor/reference.png": "bbef1834948d9ba100dccdb45e1799b462abe5de70d4f14828935fdfe9f6cb71",
+    "fidelity/references/approved/ordered-solid-three/editor/structure.json": "0c56db76b3664752b644f171afcc07e2462f164b983168c0ade16e55a5ad96d8",
+    "fidelity/references/approved/ordered-solid-three/fields/reference.png": "134b6720b926de73d76fb2ccd31fc0ad72c7c4981549959bb911a263858a85ce",
+    "fidelity/references/approved/ordered-solid-three/fields/structure.json": "72be1b6caf0987e15646b845ab9c5f4eb566c2ab843fe1f295975dd15ee1c4e9",
+    "fidelity/references/approved/ordered-solid-three/png-export/reference.png": "ea6edb697293fed481e81b34197012cd6c9ca0177640f1217ae40a415d332ac4",
+    "fidelity/references/approved/ordered-solid-three/png-export/structure.json": "c9257cca27020818ffe050d0d14a3e4504ec23f11325d3d2b84cae35ed129c4e",
+    "fidelity/references/approved/ordered-solid-three/validate/reference.png": "d0bf11b4cb7763c2e1d13fe0daf12b8e5b0f82b8b564956477e5a1ee7d253c04",
+    "fidelity/references/approved/ordered-solid-three/validate/structure.json": "95bf3b7ea71da7d72288cbf308a276b77d4949f60068cf9291f0b6445ba7fc64",
+    "fidelity/scene-graph/snapshots/approved/deal-of-the-week-banner/scene.json": "1168f6a3bcde30cb20e1194618a8fbdbc5cb96e406fb2b8055afee5b127ea0b4",
+    "fidelity/scene-graph/snapshots/approved/deal-of-the-week-post/scene.json": "5c234a5dc5c1078303e4d411528341c1523aef86341ca63a16bd7ddce093b900",
+    "fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/scene.json": "b93a4ecf182d5437e1be685d4e36c40f916c510fd1503b55d9087364a0898913",
+    "fidelity/scene-graph/snapshots/approved/exporter-061-cover/scene.json": "f3c2f28d69b3f40fc4563e8a1447654209d95c1cdf685c4ee2a42135bdaff05f",
+    "fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/scene.json": "62801d37f8b6db1c02bc28c0f0b6e0fd2f02ccb65ba167f6d3dc28dfeed0f7fe",
+    "fidelity/scene-graph/snapshots/approved/now-hiring-post/scene.json": "87603a422b0346e1a604f0de7e35b1d09fe21cad085cc277600a729acd83ffdf",
+    "fidelity/scene-graph/snapshots/approved/optimized-for-template-export/scene.json": "cd06828ede4623854a02bddee8c98fb41408f40bc3576edb4796fe2883da1908",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/editor/comparison.json": "74d63e3d972bb73142bec752c616e9c4e6f0c6465ea49f7961673c2f96212706",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/editor/dependency.json": "52b8f1a3c2eef57f2f20b8b1adfee5050d28d01e25753f303bc3be5807b73e2b",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/editor/measurements.json": "35dca63941a4967490fc7bcf4692e2dc068c10005aa5f275f26f1e97dfccdeb8",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/editor/settled.json": "af0f048d1f4f85e90b0ddf65aa42b822871156cf7aa4f11962e78e87a3f6dcfb",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/editor/trace.json": "5ec6e641abc290ff8fc97d4067ea930e09077a87cb695b5bc7356b3f2199cebd",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/fields/comparison.json": "6625378251d98ed21ae409bfcb76c563f6499f48fdae6e91c8e83381661ffb3c",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/fields/dependency.json": "49f038ae89b3519dabb2562e4034f14c770ce0cac70c91402909524c27aa5b81",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/fields/measurements.json": "071f036f017bd60c02702bf49d62668f78e8535a0f918ebd57d537110640db55",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/fields/settled.json": "73986644657cad30062d19fc96fc71a77bc45466d436af55803e0b01920ceec2",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/fields/trace.json": "038b14ba14d61af4e51ea0263412f263ad591f5e844b29878d20e1622d3577cd",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/png-export/comparison.json": "e0a19b1eff21f205ea4b45b518b65219b6ea1307c1fceb8410e2fc38a55c65c9",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/png-export/dependency.json": "6ec99da93bf3500846224a84e330c11ee6485dcb4db454a8f7eae15cf0db4b7b",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/png-export/measurements.json": "e3e36d2f5dd316d9143307b0fa7564643f35793a91a1ccb89b0fa1c5b57a3442",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/png-export/settled.json": "4c6cfb95c76f229fbc07475157164a90e7f58186d5d3ed77ec4451509c43f7fe",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/png-export/trace.json": "3e1fc7217da38df2f86d9baa4be4380cf5a31485ed79414e737ae3ead7139ffa",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/validate/comparison.json": "e2164e022922f5be7d6483cd3c57a60775b01e4b5222e7ea3a9ce592fc2121ef",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/validate/dependency.json": "8ff032cdd1e58db860227f637df6439210fc6fd35b5e40bb4c6494e4a363fe44",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/validate/measurements.json": "c8c663ad859d964d322ca2f3672af710b7484a28de364c74f772bbf6ee08592c",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/validate/settled.json": "261d5a6058adda5ad41cd46a4cd5f6d5c22fd6f86f4b0204729119eb66a2b3fb",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-banner/validate/trace.json": "cc14f371193dc6749bbf795a10e56c005a676621bbbc9242e6dda26e72518505",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/editor/comparison.json": "04e658a2fcffba77dc2fee4107be1d339c4b418a6b2145dcedf09064ac4b5cea",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/editor/dependency.json": "3cd336b2bcc651d0722c095dbd68abecc6cf7cb2755218534eb0b26b9c0d3f00",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/editor/measurements.json": "e9667631d71fb609ed840fd672f05e3843ead23fce57da1f1383b078bcf7e349",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/editor/settled.json": "94ba99d9e5ee856926cbc2a2d817492c3deaf6b832a6ab890a938f905e237ad3",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/editor/trace.json": "fb3801786af280dbc1c38d4ed0d550c6f3deb4c6447f89eb5e6d0259ee0ebbae",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/fields/comparison.json": "31b7913938e43e623b934dff218bff6b323dd7c9454c90102aab012abb7556a8",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/fields/dependency.json": "3e03f2a6dff721bf8a59e7ff80abe5b6d867f693fbd5d2e49557914efeff788b",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/fields/measurements.json": "669f8973de3be8ecfa65c24886fc58157904b81220c5088854661ea325ebbebf",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/fields/settled.json": "a97651b350a4bd54a8af9e1791a7d3517283b3f380d723def17205e72cf7e54e",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/fields/trace.json": "466f7d2ce2bbcdf787f6fbf20421af56cb0d698f7ebd246d19567f643eb69621",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/png-export/comparison.json": "42f070c9a7083fdb0e651abc90c14538488471dfeec824aacc1259d92cb3d494",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/png-export/dependency.json": "21ade40509cf092481ef51ac2afefc4e7582cbd9e89adc5810d4c94848d6270d",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/png-export/measurements.json": "b9e8f982a9c69b2438e073e0cbea9c5faadaade24c27df0313d2fe24c68ecbe1",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/png-export/settled.json": "5e8ba9937da5ba4778e201d11db81e8b565b25d72d8ee746e1adfdf194197eaa",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/png-export/trace.json": "b1898e94aebcd39249f8da2a8d44e6966aa3b282243eba5db1c17748ed599e29",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/validate/comparison.json": "7964c694c13731d28bb3935f174427584d619bb7de6c79a8b55156f421db8011",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/validate/dependency.json": "8d1dff56b11ac8b448524e4d27544170c9baa9ca39390d6c385a7fb6a6863eb7",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/validate/measurements.json": "b1fba9b81a5c846aa7aee0610754eebce65fa4fb1aa356b0b1c033a52508afb9",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/validate/settled.json": "20812eff28b8f6df58bfdacca2c4a686ec412a94e62f41f91ed317455f86c08a",
+    "fidelity/settlement/snapshots/approved/deal-of-the-week-post/validate/trace.json": "11d72ace6863f3236c66b49a9459eba62da8cf6acfb428c6126f5617faeb6480",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/comparison.json": "258e1326db67094a098dce8bbd2c12594d5507dfec6e38c24c8cc3a1f28ffc4d",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/dependency.json": "fd7a181642d2a3be6c5d0b8ef2b2f1ba12e9e627e8a4aad561b48f0f3c9612be",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/measurements.json": "18e8325c6242383b9b57aeb076f5d6173a14d83a57aaed8c281fd71db3ecc255",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/settled.json": "1c21ddbdd801458757c57b1d03335400949ff8f13ce4a6ff747b44d51b2997d2",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/editor/trace.json": "c02c2365044f4a7793461354c687fe9a566943e3582f5b72263c0a242efceafe",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/comparison.json": "40db42f208b9482140fc3003a06a1ca43be6c04bd54108f6f6a16963b93b7c27",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/dependency.json": "cfecbac2e8aa4c300ce1cceb1c27e448db0d222675db027e5cf2939b0f570c1d",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/measurements.json": "7fa6fe7745438121dcf07c2e11bc3d14918c44236fe3deae400fc66121eaed77",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/settled.json": "3cb2928272d797a51f3d9a6d4a505e05774f6fab83353a053db0ba78d2087f8d",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/fields/trace.json": "26fca4281871c92523efba711b2bb9c4b0147e38cab112baf54bbfeae810060d",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/comparison.json": "cfc27515c491ff28971df4f8627d881deb196d2bc1b251fae8b6a653a7ce59b4",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/dependency.json": "a290e5a93583f837830db4f88da6012c118fd6986f861e28eb3da3dc81997d87",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/measurements.json": "44083d1d288811d76f87f81d6d5731a89ffa776a87d5a194b35a767b3a04e5ed",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/settled.json": "c4365c70efbda0569e6dca8b277599a321784841f116855416737e704b3f245f",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/png-export/trace.json": "81f2a0576f489d7af745d8cf596a8de508c2e357fdb98275c615fcd91c285475",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/comparison.json": "c0ab71fd245271de99d9ee203db5da2c211af624c3c6528111b5fb9eaa401378",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/dependency.json": "e97b74597304403545d82a7b93147b234860a1734a49048d0d08e98594433452",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/measurements.json": "b4061bcddcb7dfb40ad0de85d28b43412aa32301d026f941b18253419b2e0e89",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/settled.json": "4d0dd9c55ff79deedb24028f63b5b4afb6b4dc38c740fc547605fb02bb170e16",
+    "fidelity/settlement/snapshots/approved/exporter-061-carrousel/validate/trace.json": "32128fb4bc7f5462c046e7b804ce0dce1fa97ad4a4ed14605b780b5025d9f94c",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/comparison.json": "7e04e0ab293a960bc2b995e46ccbe129365e528cb9bd27bc0aa2c41dbe0ab4d8",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/dependency.json": "b87507edf391377c03e9eb1cccdbe7f39f7a00923109a1e8024a430b1d6e7aef",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/measurements.json": "0527337c50652c0d1088ac5dc1b1c876d9753d8b308f549ebfa46c60985d4e5e",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/settled.json": "99aa006ab27d00201e68f8abd41d95467bb916eeeadca48f3abf164d4305d149",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/editor/trace.json": "751a2ed7400d7b08907b4143b019f0ec55a1153b542fb73827d1d468ff20b134",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/comparison.json": "2de47763a84f56fa2575c577bd894612351e0cd3272e638f376dc5e69ea38fff",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/dependency.json": "0c14cebff48d8d1fb3c3f23cc8a2fbaf498617caea897f8c56d2f569ae14baad",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/measurements.json": "630cf907ccb4e87b931805ec768e87a6af69d146a5a4f840ef10f3dcaad6bbda",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/settled.json": "4e30c067c95671acd7a8448e3f5c0cee252751e397214831ee67d8c3c056997d",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/fields/trace.json": "c22f76d975612f276d219f20dcd3e1fbf6c877bf044be0ecb27725979e757807",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/comparison.json": "c31a2b38e0da1f0f2ec623eecc9f32b115551a2d570eb1f870579847ea13e2ea",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/dependency.json": "5789428ee28e4f90957a4cfc75c4dec55818191e782cfebf2cecca515a0e0bdd",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/measurements.json": "e699e4a4d62a74dd015a7f9db7218f52956674c2624bb6df735983eef814985a",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/settled.json": "acd0c5e79d24cb4cfe2aaf4afe48322a7c0b35f3a38d7d4303d31d838e6a9e8b",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/png-export/trace.json": "ce00251a4d53d5ae83e1dadcdb850cbcef1eb5930da10e8382020464842737e8",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/comparison.json": "4c838df7a106d71ede0918c87d616bb203511d5262727d9118cece95571f9443",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/dependency.json": "8f1ad35827dbeb1f020237c7d9b0ae4e8a80193c21cf778bf878c7ef2c607441",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/measurements.json": "b9c5fff7507913984e3002253625fbcfe34943b57ed93c5b2e0d38d6c95b6f6f",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/settled.json": "e70702ad066ae6d546ac6e3242a3632897dfdbebda76761e3f8101b6c6979055",
+    "fidelity/settlement/snapshots/approved/exporter-061-cover/validate/trace.json": "2bbf73e1853a5aa3d08d2d3b2f377d5f28b1b8f6f43dbd24a595c92cad31e7c2",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/comparison.json": "4495dfbf2aff755ad3defa988d99d1287da0f11ab6d8e39d46d6c7d62498dd5d",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/dependency.json": "2b4d4469e3cbb2061b80ff2b679696852c15e638691a59a126cc1aaa0acfc396",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/measurements.json": "dc31867ace006cee18a8a2b0491ddfe016936157f61f109fa206a5df38a1a598",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/settled.json": "8a33264ae2a4422aaf8b1d6e4d53a8801e37030b8a6ac5dbaa031d184a52173b",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/editor/trace.json": "8ee31ef25c49f4ee091016ba9c7c5ffa59762bb9715f1822652328fc8f4b328e",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/comparison.json": "6056533e6175d9c5d7d4bc6df30a973d0b706e18d8d04249605c9684d806b074",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/dependency.json": "695cbf62a96e70aec2178fb845c4c7c635cfc919b20123eceb4fa8a11c4f17ad",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/measurements.json": "42c3d76d33d7fe68128860de0d66d9c149a511b3f59f4c4e718cfe27a2b047ea",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/settled.json": "78fe9c46a2f27ca7c378fb9fab687da0514baae04939a0d7747f0f4f45f243c8",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/fields/trace.json": "fbfe87e4ddc5549e8f3f1c2061ab5f4ebda3df93fee2f0c0767deff35ff32e08",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/comparison.json": "da6a6af8bdc100596a92aafb8b18eaed5090c8b62eed94f4fcd7c52cc5002669",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/dependency.json": "7862bc748bcb3ebc1ea793c64b092d94807e66842cf9203b96826bfe50f9c7cf",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/measurements.json": "85e7709f0807d07f5151306f0126539268461f7f3f96b707b26ca458a2772a39",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/settled.json": "0c03ec31756b907f8428f6730a86cda8e5c1f8e37f365252031dbd99aa0b69bc",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/png-export/trace.json": "ffd9dd3d103c1f46fbb5753fc09aa1673f7d145c895dec1489061a4408074fd7",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/comparison.json": "512223ac4d66226e531dc1703f0ed4540ed444c63ba521076a1f971d23003b58",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/dependency.json": "bf0877bccc6ccce534d6028a881734988195e1bda5e7d1e1eff9743c0a680e5f",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/measurements.json": "255584b1767187720cc284deaf6a425f2dfcf6a51086277048a43407e23110b2",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/settled.json": "e1f92397206c321ef8770c841d4a4d617a04e164bc47f8c752a8fcc9c772033f",
+    "fidelity/settlement/snapshots/approved/exporter-061-now-hiring/validate/trace.json": "fc0e97ed672eb797e416242459fe06743edfca7b8f6c680377cc1a94531bf75a",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/editor/comparison.json": "1bcd3338f2bf2b006fbc16e31fb58273c75846c458dd3a6a78ab4a1766228e08",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/editor/dependency.json": "55b381ce4448971aaad0e44c78c6735894c173397b615f6f084bc3f8f751f077",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/editor/measurements.json": "8f48b1f619186f6904ffac633ead4ce2a8906e4b033fd953093d2e2c99d986b7",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/editor/settled.json": "75e460ae0e6cf21375054dd586d5d102d3cde621e62b63b0c690c62d48423f3a",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/editor/trace.json": "046080a467d8c3a29138a999251463d5c5b556b1378aff581cd93e250335f18e",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/fields/comparison.json": "2eff064bfeb355a727bc5953ca0060e098f9974484f5e1a9d9eaf61ff34fd942",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/fields/dependency.json": "01f85a87cf4746e5f6d639d24f074efbd89e98ee126f05a76720a8ee588e2149",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/fields/measurements.json": "387c26f5ddada90b6240b59f83464648f8463babc916d18ef75fd1d866dee67b",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/fields/settled.json": "875503cec424bc659fbf2959819d900bbe1a6e5774131f478701ff3c025dcf25",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/fields/trace.json": "0be5c3c8c335a52127728df2f4971532bd48c1af4cc8b8fe37add48007322c58",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/png-export/comparison.json": "5a905ea2a9f9406ef8dce5e94baca30f1306858bc9bb6fea8ae29c00776be6c6",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/png-export/dependency.json": "e06928e4c9114e565acfcc24afa91936b98142f8d207f24ddc653438d7c985f8",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/png-export/measurements.json": "52bfcb16b4d86a7090ee474e42aa6b344fd975f2c13514c42d437e57e26f0505",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/png-export/settled.json": "beb7f19aba88683a8d6368b17d417f90eb411cb8ae6dab961671108808c61f67",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/png-export/trace.json": "8e27d996bba36ce9162f023f02066b9d984e9c7b9671596c024d2b4764260ee5",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/validate/comparison.json": "23b0d2361fb5faf8631582487a9a72218ec7c36654cfc63fb6d023d004034b9e",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/validate/dependency.json": "c1726c54646537df92ddf11bddb02902ad61e203f1bbd6ed837e6cf9a5af1b15",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/validate/measurements.json": "c318ebb9a1d4149885513e04700072524af859b3d42bc30c7ab600d1e7f15658",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/validate/settled.json": "71427eb9d3f5aefbffb673c8485cdc83f6fe4dd4ad7f11e4bf9585f24729135c",
+    "fidelity/settlement/snapshots/approved/now-hiring-post/validate/trace.json": "d21d846523a72b976c62e72fbe14eebaac837523765f52c2c9bb817a648a073e",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/editor/comparison.json": "b10c4095229f344851fe5c2380315f93d565d0eae1ef22d5ea12a9711069f28b",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/editor/dependency.json": "baee31b211f959288c433b327b8aadc976aedf523387b67643cfc89eaaf53ee9",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/editor/measurements.json": "030c3f2bb846e5f5d2cceb820a0114872e41c1a6f6779369abdd69ac825b1b46",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/editor/settled.json": "ef220449e9a5e5472d77d292eaee474586158867f09adaf37ad4a7193388ebe5",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/editor/trace.json": "b742cd21dd7687153c98029e200fc81a4b65c88c489e92c8f255b2960bb3198b",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/fields/comparison.json": "7d0015b3740e8621149748afb72ba96b18d879dc39d30f7bbd8c93b4b18594b3",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/fields/dependency.json": "8377a42827c47d815ad97838155dae462b10c1d12585e998cc102e103c4d9464",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/fields/measurements.json": "a0841cd63c5109264690646455d82a7a1a06f53888eaed604aa858a3a354166b",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/fields/settled.json": "a5a25d8c6068bd77b237197101094500518e3df9d3b99efabb115074963c7dc1",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/fields/trace.json": "5da8973f2f888f5ca53ed3b09461bb7b66b069596cb3c511e6bf29e56b2facaa",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/png-export/comparison.json": "e627dce5a7f1b3acb8f07779b9f57dab5ecf78e0e03291550523188aa4aca0d6",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/png-export/dependency.json": "a78657432e779513b3b01c332787f23d79676c15775fd95bc36f216ae3ba1878",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/png-export/measurements.json": "47ec6b0d8cc0febf1e617044a4db9fde3a62d5c1bfb227c04fdecbc60d66518b",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/png-export/settled.json": "fb132a9f5f33d6a2d42b684c077d591d14137081299cfb7a1487e40b094d931d",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/png-export/trace.json": "0df8d1589135fa7b01c4495d4aac0387ad08dec7c153cbefeac3bb2dabadc98d",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/validate/comparison.json": "f93fa1890b1a90724b1ea810d9213ab67dfe6b6a23519c18196f53cfbdce470a",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/validate/dependency.json": "641f7cf1e5b07ba0745ca1ff804324d9f47855217d994e8c355649fec0f038ef",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/validate/measurements.json": "c2782e441bb439b68baf8b11056cb17efcd8901fd433083a4d9695d4bf624227",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/validate/settled.json": "07fb79fff7036fcac8e65bb73f58a987a2ba61c3176ae0fbbd264f5b93c71362",
+    "fidelity/settlement/snapshots/approved/optimized-for-template-export/validate/trace.json": "d521fbe6bfdfb81b728e09357f014ab79a7802d08bbb95e51e5693670f4e3099",
+    "packages/template-browser/dist/assetReliability-Dl3bgyNy.d.ts": "e05382bf33d4c526252674d4a6022e779fcf0e72a9f27d2008527a5efa2a3618",
+    "packages/template-browser/dist/assets.d.ts": "411ae6d74a1075324354d25bcb54196659ea0c3f2a472f7f8501355f1082e3ec",
+    "packages/template-browser/dist/capture.d.ts": "6c4fa4f0c42d67f075c6cb95f932bd18bf4ff3295f4d1037f6b67fa6db7ffbf7",
+    "packages/template-browser/dist/compatibility.d.ts": "f605e3780e60481b78688843c7b16ea62f43a75847512d4c9860ae66e3e39361",
+    "packages/template-browser/dist/enrichment.d.ts": "40f3605d4885df32f96fcb5044f0a7f75c5d2de44ef25f54d6e1da52c6683f20",
+    "packages/template-browser/dist/exactFontSetup-Jb8OBb7S.d.ts": "b4c2d1def5ce32ce529b9856ff40e8052f75b0ebed5cd69aaee62d0280daa1db",
+    "packages/template-browser/dist/fonts.d.ts": "24beb96ce27d50497b34116b33c280b4284df8ea5d5a20f3a2b68536490144e1",
+    "packages/template-browser/dist/importer.d.ts": "98ee1cad50251c38842ce5767c84a5b2047f3d850e060ee8f8a4e05bde0c78a5",
+    "packages/template-browser/dist/index.d.ts": "521550f228a855ab966a752f4268a0624d95f044830592489f0c440ff0a355ce",
+    "packages/template-browser/dist/persistence.d.ts": "e92c4f8e50e2a889e87d610008008c1a7dc1da2c29c818ba0543ac9acd8b00ae",
+    "packages/template-browser/dist/session-DdWKZlE_.d.ts": "657c2600bfb63d9b3b3cef5411380dd10d52ed8723a51f32663dd88807abceaf",
+    "packages/template-browser/dist/session-internal.d.ts": "e6f0621c83817812f9ecd648e506b4f0dc59defa6a16b81f9b65cd52c7284dfc",
+    "packages/template-browser/dist/session.d.ts": "9ead937886afe3362196f9e2167eca34216cfe024caf6ad566e4d1fe0513811b",
+    "packages/template-browser/dist/templateImportWizard-BqSnPfHC.d.ts": "a7a81e78adf201c5b790aec659d077a1a98a91a4e52a40af2c0d708ac6077572",
+    "packages/template-browser/dist/templateSession-Bg24iAgb.d.ts": "fc4b9749c3ce5723887c65d8b894fc4180b6863c06014b25668be27092512be7",
+    "packages/template-core/dist/TemplatePackage-XM8Jn1t1.d.ts": "0224429f930996b185aeffca1f08a6e57e9c340c4e4143f3fe52fdeb94e17ce2",
+    "packages/template-core/dist/assets.d.ts": "6660b427fe3511f5a44223151e592584475aa284754b6701e465e43818e41c77",
+    "packages/template-core/dist/editor.d.ts": "8cc30263b9edf783ccb529d1f59aaf32bb045b861a9de89f618f41ca17b1ebef",
+    "packages/template-core/dist/family.d.ts": "77ffe51278b83ae762a130abb221d320edd475dcb174f43111bfab6a45ee78f9",
+    "packages/template-core/dist/fonts.d.ts": "eeb0fdfc0df9286285b623f9fc6bbcba920800d89d21501cd2f2fa36915b3986",
+    "packages/template-core/dist/index.d.ts": "dbd67c76ff75a1c56e05413e53b73c49b44bba8f33d499dd5ce3f79e4d137e32",
+    "packages/template-core/dist/inspection.d.ts": "1e02b07071b54383355d799e3e60257f79d14fbfd4e6449f83cbf2263f82c426",
+    "packages/template-core/dist/motion.d.ts": "97d1dfe09fd7f0bea89c6e7907bbcbbdf9d804a4b30cba7b44f20db7165c4eaa",
+    "packages/template-core/dist/packageDiagnostics-C3Ou5qHU.d.ts": "58db95f108b8c142fad8ed4908960407d333fc489aff144c64b600c369e0da42",
+    "packages/template-core/dist/renderer-internal.d.ts": "4783402e61956c6819029ab4b15ee3eaa52bde7ce01d10eba1476b58073b8b5b",
+    "packages/template-react/dist/TemplateInspectionViewport-DlufJJz0.d.ts": "d37ea85c83f077f48ce86859eeedbdbaab9d2bd0c6219a06df574884089a95df",
+    "packages/template-react/dist/TemplatePackageRenderer-CS5vqi6q.d.ts": "10f71779dd15e780b3aa5cd2ff95ab803489e90ea157809191415b704a86fcec",
+    "packages/template-react/dist/editor.d.ts": "7792e1c6e120f4fa293a24bdbfff68dcd70d5bd3e6acca9a3a8269240f95c125",
+    "packages/template-react/dist/importer.d.ts": "9c15c56c65d59ac46c66d068c126a7976d9ee6f3ed112f1962961ab58fe3f392",
+    "packages/template-react/dist/index.d.ts": "50ffb169c7436ef6b91925e4272664b8c22d792a7bf74ff573fbcd78b5f31a6d",
+    "packages/template-react/dist/inspection.d.ts": "949f78f9002aca2079c281dfb6e923b23b1ff754f6d536af32d8d95cc74f21a0",
+    "packages/template-react/dist/packageRenderUtils-BuH5UFO8.d.ts": "843d093fad63a583fd0aeca3d6ffb0ea55d844a04edef7ab8d85d038db4705c7",
+    "packages/template-react/dist/productRenderIdentity-CtMf-hOf.d.ts": "1e5a03d0e035c1065a481f4cbf3003881341e05ab3aac62165f20eadcde5bdd2",
+    "packages/template-react/dist/renderer-internal.d.ts": "d25f17e0c7c4eb49175a430aa900e1359f88e8e60d0795632082ce4cdc9ff2e3",
+    "packages/template-react/dist/session-Dk6nyW1L.d.ts": "a9ceec8cdf67581dd40124ec0188e7258d211f63b73927223a35dde904e32998"
+  },
+  "fixtures": [
+    {
+      "id": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "previewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30"
+    },
+    {
+      "id": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "previewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336"
+    },
+    {
+      "id": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "previewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "geist-mono-500-normal",
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "byteSize": 149328
+    },
+    {
+      "id": "inter-tight-700-normal",
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "byteSize": 580572
+    },
+    {
+      "id": "rethink-sans-600-normal",
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+      "byteSize": 59080
+    },
+    {
+      "id": "funnel-display-400-normal",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "byteSize": 55900
+    }
+  ],
+  "differential": {
+    "comparison": {
+      "baselineRun": "hydration-repaired-20261009c",
+      "baselineStage": "repaired",
+      "fullTranscriptEquality": true,
+      "intentionalDifferences": [],
+      "measurementCountsEqual": true
+    },
+    "nativeScenarioCount": 32,
+    "supplementalAcceptedOwnershipCount": 8,
+    "supplementalTiming": "Added after repair and rerun against retained native sources; not pre-edit execution.",
+    "originalToRepairIntentionalChanges": [
+      "single/collision",
+      "single/missing-blob",
+      "single/field-reset"
+    ],
+    "binaryTranscripts": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e",
+    "regeneration": "Reconstruct a temporary mirror with the tracked stage patch, then invoke --baseline-source-directory with --baseline-stage and --baseline-record. Never apply restoration patches to the production worktree."
+  },
+  "measurements": {
+    "summary": {
+      "repaired": {
+        "sampleCount": 108,
+        "counts": {
+          "reads": 486,
+          "allocations": 432,
+          "releases": 432,
+          "transferCount": 54,
+          "temporaryCleanupCount": 54
+        },
+        "groups": [
+          {
+            "kind": "single",
+            "mode": "partial-failure",
+            "medians": {
+              "restoreMs": 0.4526669999995647,
+              "readMs": 0.022167000000081316,
+              "allocationMs": 0.00020800000038434519,
+              "releaseMs": 0.0001249999995707185,
+              "transferMs": 0,
+              "temporaryCleanupMs": 0.0011249999997744453
+            }
+          },
+          {
+            "kind": "single",
+            "mode": "success",
+            "medians": {
+              "restoreMs": 4.5645409999997355,
+              "readMs": 0.026708000000326138,
+              "allocationMs": 0.0004579999995257822,
+              "releaseMs": 0.000332999999045569,
+              "transferMs": 0.007083999999849766,
+              "temporaryCleanupMs": 0
+            }
+          },
+          {
+            "kind": "family",
+            "mode": "partial-failure",
+            "medians": {
+              "restoreMs": 0.4944999999988795,
+              "readMs": 0.024416000000201166,
+              "allocationMs": 0.00020800000038434519,
+              "releaseMs": 0.0001249999995707185,
+              "transferMs": 0,
+              "temporaryCleanupMs": 0.0007910000003903406
+            }
+          },
+          {
+            "kind": "family",
+            "mode": "success",
+            "medians": {
+              "restoreMs": 7.328499999999622,
+              "readMs": 0.025834000000031665,
+              "allocationMs": 0.00041600000076869037,
+              "releaseMs": 0.00033399999847461004,
+              "transferMs": 0.004667000000154076,
+              "temporaryCleanupMs": 0
+            }
+          }
+        ]
+      },
+      "extracted": {
+        "sampleCount": 108,
+        "counts": {
+          "reads": 486,
+          "allocations": 432,
+          "releases": 432,
+          "transferCount": 54,
+          "temporaryCleanupCount": 54
+        },
+        "groups": [
+          {
+            "kind": "single",
+            "mode": "partial-failure",
+            "medians": {
+              "restoreMs": 0.4592499999998836,
+              "readMs": 0.027584000000388187,
+              "allocationMs": 0.00016700000014679972,
+              "releaseMs": 0.00012500000002546585,
+              "transferMs": 0,
+              "temporaryCleanupMs": 0.0018329999998059066
+            }
+          },
+          {
+            "kind": "single",
+            "mode": "success",
+            "medians": {
+              "restoreMs": 4.9534169999997175,
+              "readMs": 0.03737500000033833,
+              "allocationMs": 0.0004580000004352769,
+              "releaseMs": 0.000332999999045569,
+              "transferMs": 0.009417000000212283,
+              "temporaryCleanupMs": 0
+            }
+          },
+          {
+            "kind": "family",
+            "mode": "partial-failure",
+            "medians": {
+              "restoreMs": 0.48670799999990777,
+              "readMs": 0.026625000000422006,
+              "allocationMs": 0.00020799999992959783,
+              "releaseMs": 0.00012500000002546585,
+              "transferMs": 0,
+              "temporaryCleanupMs": 0.0020839999997406267
+            }
+          },
+          {
+            "kind": "family",
+            "mode": "success",
+            "medians": {
+              "restoreMs": 7.42975000000024,
+              "readMs": 0.03387499999962529,
+              "allocationMs": 0.0004170000001977314,
+              "releaseMs": 0.00029200000017226557,
+              "transferMs": 0.00883399999975154,
+              "temporaryCleanupMs": 0
+            }
+          }
+        ]
+      }
+    },
+    "fullPairedSamples": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/report.json",
+    "fixtureRepetitions": [
+      1,
+      5,
+      20
+    ],
+    "trials": 3,
+    "limitations": "Sequential mock storage and URL callbacks; restore includes canonical native work. Scheduling/JIT effects prevent assigning full timing differences to the helper; no performance target."
+  },
+  "commands": [
+    {
+      "command": "pnpm sdk:verify",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-sdk-final.log",
+      "logSha256": "f950b36b8b83a9698ba2da064e2a1cbe5605c749a589584fdbbacd00f9d0d761"
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-build.log",
+      "logSha256": "dfbe9247b61c5297b3687d799661fb9d34751ab850191d5d71dbfb473a7522e3"
+    },
+    {
+      "command": "pnpm test:portable",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-portable-final.log",
+      "logSha256": "7d2c1958c8551ecc4d9c84fda91d4ba69d609faf81d7c0f823d91834d3d2fdce"
+    },
+    {
+      "command": "pnpm exec tsc -b --pretty false",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-types-final.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "node scripts/repository/verify-stored-asset-hydration.mjs --stage extracted --run-id hydration-extracted-20261009e --baseline-run hydration-repaired-20261009c",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-differential-measurements.log",
+      "logSha256": "5d5af2620e875f76a1c57b027c9d4a376b35c1c9210fc4d65eb14da2070ace74"
+    },
+    {
+      "command": "pnpm sdk:gate:061 -- --run-id sdk-061-stored-asset-hydration-20261009a --assess-existing",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-gate-final.log",
+      "logSha256": "a0dbcacd943e36d804ae9f261047f77962a93b951fc6d16890a140e16576f1d8"
+    },
+    {
+      "command": "pnpm sdk:import-v2:verify",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-sdk-import-v2-verify.log",
+      "logSha256": "beb7420c20e6f538b990fd50eb3c7cb80c1f95d10ccdd2e1e02e0c0b2a6c3d7d"
+    },
+    {
+      "command": "pnpm font:reactivation:verify",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-font-reactivation-verify.log",
+      "logSha256": "cd5879401c6824c84a04d9ad34879c7b7f6e05bc12da1a1b12e47a6466215a64"
+    },
+    {
+      "command": "pnpm session:browser-smoke",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-session-browser-smoke.log",
+      "logSha256": "e819242d93dc6fdcaaf570bdb6f07843bf7bf54498fb25b670385e48366970bb"
+    },
+    {
+      "command": "pnpm studio:browser-smoke",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-browser-smoke.log",
+      "logSha256": "c9cb062782fcc5d3992e1a500455425491d0eaaab1a29c34831a1c9c06c5fde5"
+    },
+    {
+      "command": "pnpm studio:setup",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-setup.log",
+      "logSha256": "0199a9bdc640489c6d776f87cf5bb90d72905898fe71af7c46a850afd17ef8ec"
+    },
+    {
+      "command": "pnpm studio:drafts",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-drafts.log",
+      "logSha256": "1b6d0faba906a7f0db1a0e7b9c43aad684f09702f2db26bf8a28cd36fa0b5013"
+    },
+    {
+      "command": "pnpm field-rules:studio",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-field-rules-studio.log",
+      "logSha256": "d3ec1f7a82f7c2fac87f805d7979b17d90e8a84c29170e238c4ab67846871388"
+    },
+    {
+      "command": "pnpm studio:family-parity",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-family-parity.log",
+      "logSha256": "c2a272cc61d1f9f2f9ba75b25c8192ed64740544776da866478f430961c991a3"
+    },
+    {
+      "command": "pnpm studio:workflow-acceptance",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-studio-workflow-acceptance.log",
+      "logSha256": "78525dee92988d49a2b56c93c0ab5b2460de78640f0ff1aa4fa1736a6c540938"
+    },
+    {
+      "command": "pnpm test:portable",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-portable-complete.log",
+      "logSha256": "7d2c1958c8551ecc4d9c84fda91d4ba69d609faf81d7c0f823d91834d3d2fdce"
+    },
+    {
+      "command": "pnpm exec tsc -b --pretty false",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-types-complete.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-docs-complete.log",
+      "logSha256": "ebc6220189600282c0de8732ebe7dced5227c1e51bcd864bbd3a7f53bc568e3f"
+    },
+    {
+      "command": "pnpm api:contract",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-api-complete.log",
+      "logSha256": "0f8a13ddf612786aafbefc722613150b1cf439c76f72b0bfed6d398cb8e01cc3"
+    },
+    {
+      "command": "pnpm boundaries:check",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-boundaries-complete.log",
+      "logSha256": "357b05d56b495eb176840c0b69c66a0ad9857d0b95e98f95d7c5ec64a5b6b8d3"
+    },
+    {
+      "command": "node --test scripts/repository/internal-experiment-boundaries.test.mjs",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-boundary-tests-complete.log",
+      "logSha256": "be6c0c403953e4f14574c82dbe80dd140bf1171c6b21908898c5ba8f63fbeddf"
+    },
+    {
+      "command": "node scripts/repository/verify-stored-asset-hydration.mjs --stage extracted --run-id hydration-regeneration-20261009a --baseline-source-directory <repaired-mirror> --baseline-stage repaired --baseline-record docs/architecture/evidence/stored-asset-hydration-20261009.json",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-regeneration.log",
+      "logSha256": "e4cdc1d5af42b2d1b2a6b5bc4eff03f8bf8f31c8ebc241da48d50aacc97555c4"
+    },
+    {
+      "command": "node scripts/repository/verify-stored-asset-hydration.mjs --stage extracted --run-id hydration-original-regeneration-20261009a --baseline-source-directory <original-mirror> --baseline-stage original --baseline-record docs/architecture/evidence/stored-asset-hydration-20261009.json",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-original-regeneration.log",
+      "logSha256": "1ae2d83d3479f948738d26183e2f95e81d9fc4fdedc22f0a925f38d320df9f18"
+    },
+    {
+      "command": "node docs/architecture/evidence/stored-asset-hydration-deferred-pruning.mjs",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-deferred-pruning-verified.log",
+      "logSha256": "41dc584a3e65c6611bcfc2c6983d58e425facc4a6b1ab5fd324cdc502a368231"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "log": "fidelity/evidence/stored-asset-hydration/hydration-extracted-20261009e/verification/hydration-docs-final-record.log",
+      "logSha256": "354fdd99ab1b973bd9829e2dd3b0c36508205fe1255aeddce3766b8e4ccce21a"
+    }
+  ],
+  "bundles": {
+    "before": {
+      "core-import-validation": {
+        "bytes": 356652,
+        "gzipBytes": 85893
+      },
+      "core-family": {
+        "bytes": 42832,
+        "gzipBytes": 10865
+      },
+      "browser-session-importer": {
+        "bytes": 689210,
+        "gzipBytes": 167679
+      },
+      "browser-field-session-v2": {
+        "bytes": 601392,
+        "gzipBytes": 137728
+      },
+      "browser-family": {
+        "bytes": 712321,
+        "gzipBytes": 171374
+      },
+      "react-renderer": {
+        "bytes": 644337,
+        "gzipBytes": 157811
+      },
+      "react-importer": {
+        "bytes": 984696,
+        "gzipBytes": 236769
+      },
+      "react-editor": {
+        "bytes": 658904,
+        "gzipBytes": 161529
+      },
+      "react-field-session-v2": {
+        "bytes": 871154,
+        "gzipBytes": 206121
+      },
+      "react-family": {
+        "bytes": 1027019,
+        "gzipBytes": 247971
+      }
+    },
+    "after": {
+      "core-import-validation": {
+        "bytes": 356652,
+        "gzipBytes": 85893
+      },
+      "core-family": {
+        "bytes": 42832,
+        "gzipBytes": 10865
+      },
+      "browser-session-importer": {
+        "bytes": 689210,
+        "gzipBytes": 167679
+      },
+      "browser-field-session-v2": {
+        "bytes": 603438,
+        "gzipBytes": 138220
+      },
+      "browser-family": {
+        "bytes": 712321,
+        "gzipBytes": 171374
+      },
+      "react-renderer": {
+        "bytes": 644337,
+        "gzipBytes": 157811
+      },
+      "react-importer": {
+        "bytes": 984696,
+        "gzipBytes": 236769
+      },
+      "react-editor": {
+        "bytes": 658904,
+        "gzipBytes": 161529
+      },
+      "react-field-session-v2": {
+        "bytes": 873203,
+        "gzipBytes": 206545
+      },
+      "react-family": {
+        "bytes": 1027019,
+        "gzipBytes": 247971
+      }
+    },
+    "failures": []
+  },
+  "gate": {
+    "runId": "sdk-061-stored-asset-hydration-20261009a",
+    "go": true,
+    "capturesComplete": true,
+    "completeStableCaptures": 24,
+    "rendererComparisons": 12,
+    "sceneComparisons": 3,
+    "settlementComparisons": 12,
+    "report": "fidelity/candidates/sdk-061-stored-asset-hydration-20261009a/sdk-gate.json",
+    "reportSha256": "950172188403356cfe3c1da6ec1b0812a9a885fe170de6e17f2655d25ce24f40",
+    "previousReviewArchive": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-save-scheduling-20261008a.json",
+    "all12PngsByteIdenticalToPreviousReview": true,
+    "environmentDifferences": [
+      "approximateProcessMemoryBytes",
+      "fontDecisions.uploadAndLinkMs",
+      "testTimestamp"
+    ]
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "browser": {
+      "approximateProcessMemoryBytes": 672514048,
+      "approximateSystemMemoryBytes": 17179869184,
+      "architecture": "arm64",
+      "browser": "Chromium",
+      "browserVersion": "149.0.7827.55",
+      "buildIdentifier": "14f8e573f013d0bd7ddfc91e667ac713b443d95c208df9116063d14059c29264",
+      "captureScale": 1,
+      "devicePixelRatio": 1,
+      "fallbackFonts": [],
+      "fontDecisions": [
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+          "byteSize": 149328,
+          "classification": "exact",
+          "fontId": "geist-mono-500-normal",
+          "requestedFamily": "Geist Mono",
+          "requestedStyle": "normal",
+          "requestedWeight": 500,
+          "requirementId": "font:geist-mono:medium",
+          "source": "Official Vercel Geist v1.7.2 release asset",
+          "uploadAndLinkMs": 106.84866599999987
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+          "byteSize": 580572,
+          "classification": "exact",
+          "fontId": "inter-tight-700-normal",
+          "requestedFamily": "Inter Tight",
+          "requestedStyle": "normal",
+          "requestedWeight": 700,
+          "requirementId": "font:inter-tight:bold",
+          "source": "Locally installed Inter Tight variable font",
+          "uploadAndLinkMs": 119.8266249999997
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+          "byteSize": 55900,
+          "classification": "exact",
+          "fontId": "funnel-display-400-normal",
+          "requestedFamily": "Funnel Display",
+          "requestedStyle": "normal",
+          "requestedWeight": 400,
+          "requirementId": "font:funnel-display:regular",
+          "source": "Locally installed variable font; parsed family and 300\u2013800 weight axis verified",
+          "uploadAndLinkMs": 97.08237499999996
+        },
+        {
+          "action": "Upload exact source-authoritative face",
+          "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+          "byteSize": 59080,
+          "classification": "exact",
+          "fontId": "rethink-sans-600-normal",
+          "requestedFamily": "Rethink Sans",
+          "requestedStyle": "normal",
+          "requestedWeight": 600,
+          "requirementId": "font:rethink-sans:semibold",
+          "source": "Repository bundled Studio font",
+          "uploadAndLinkMs": 111.75808300000062
+        }
+      ],
+      "fontProfile": "source-authoritative",
+      "fontSources": [
+        {
+          "byteSize": 149328,
+          "family": "Geist Mono",
+          "id": "geist-mono-500-normal",
+          "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+          "style": "normal",
+          "weight": 500
+        },
+        {
+          "byteSize": 580572,
+          "family": "Inter Tight",
+          "id": "inter-tight-700-normal",
+          "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+          "style": "normal",
+          "weight": 700
+        },
+        {
+          "byteSize": 59080,
+          "family": "Rethink Sans",
+          "id": "rethink-sans-600-normal",
+          "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+          "style": "normal",
+          "weight": 600
+        },
+        {
+          "byteSize": 55900,
+          "family": "Funnel Display",
+          "id": "funnel-display-400-normal",
+          "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+          "style": "normal",
+          "weight": 400
+        }
+      ],
+      "gitCommit": null,
+      "loadedFonts": [
+        {
+          "family": "Rethink Sans",
+          "status": "unloaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "100 900"
+        },
+        {
+          "family": "__template_font_90b15711dc3779b2_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "__template_font_4b8ef9ed255ebe73_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "__template_font_9062978ead3d7a3e_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "600"
+        }
+      ],
+      "locale": "en-US",
+      "nodeVersion": "v24.19.0",
+      "operatingSystem": "darwin 25.5.0",
+      "packageManager": "pnpm/11.25.0 npm/? node/v24.19.0 darwin arm64",
+      "schemaVersion": 1,
+      "testTimestamp": "2026-10-09T07:52:01.274Z",
+      "timezone": "UTC",
+      "viewport": {
+        "height": 1600,
+        "width": 1440
+      }
+    }
+  },
+  "reviewClassification": "Controlled Node probes, automated browser workflows and stored identity/structure review; no new manual live source-design review.",
+  "nonFinalAttempts": [
+    "Original collision regression expected failure before repair.",
+    "Intermediate ownership repair exposed missing-source readiness failure; corrected using existing Core source resolver, retaining deferred pending behavior.",
+    "Checks during distribution rebuild found missing prerequisites; reran after sequential sdk:verify completed.",
+    "First fresh aggregate gate rejected stale disposition run identity; verified previous source review and exact output/environment identities before rebinding. No reference update."
+  ],
+  "completion": {
+    "ownershipRepairs": true,
+    "privateScope": true,
+    "repairedToExtractedEquivalence": true,
+    "finalOwnerCleanup": true,
+    "publicDeclarationsUnchanged": true,
+    "referencesAndTolerancesUnchanged": true,
+    "freshGate": "go",
+    "nextAudit": "Evidence-lifecycle duplication; no session unification or persistence migration."
+  },
+  "regeneration": {
+    "originalPatchHashVerified": true,
+    "repairedPatchHashVerified": true,
+    "originalRun": "hydration-original-regeneration-20261009a",
+    "repairedRun": "hydration-regeneration-20261009a",
+    "repairedCompleteTranscriptEquality": true,
+    "originalIntentionalDifferencesOnly": true
+  },
+  "followUps": [
+    {
+      "id": "embedded-replacement-same-id-retention",
+      "status": "reproduced-pre-existing-deferred",
+      "scope": "Accepted-resource pruning, explicitly outside temporary hydration consolidation.",
+      "reproduction": "node docs/architecture/evidence/stored-asset-hydration-deferred-pruning.mjs [hash-verified-original-single-source]",
+      "finding": "Blob replacement followed by embedded replacement using the same asset ID retains the obsolete URL lease until disposal. Both mutations succeed; final disposal revokes once. Original and extracted results are equal.",
+      "decision": "Separate narrow ownership repair; do not consolidate accepted lease policies here."
+    }
+  ]
+}

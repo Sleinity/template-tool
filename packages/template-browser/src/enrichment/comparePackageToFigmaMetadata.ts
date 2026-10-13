@@ -135,11 +135,12 @@ export function comparePackageToFigmaMetadata(
   packageValue.editableFields.forEach((field) => {
     const liveName =
       figmaNodes[field.nodeId]?.dataName ?? figmaNodes[field.nodeId]?.name;
-    if (liveName && liveName !== `field:${field.type}:${field.id}`) {
+    const sourceName = field.id.replace(new RegExp(`^${field.type}:`, "u"), "");
+    if (liveName && liveName !== `field:${field.type}:${sourceName}`) {
       differences.push({
         code: "field-marker-changed",
         nodeId: field.nodeId,
-        packageValue: `field:${field.type}:${field.id}`,
+        packageValue: `field:${field.type}:${sourceName}`,
         figmaValue: liveName,
         message: `Editable field marker for ${field.id} differs in live Figma metadata.`,
       });

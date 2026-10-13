@@ -21,12 +21,19 @@ export function createDependencyGraph(
 ): DependencyGraphV1 {
   const vertices = new Map<string, DependencyVertexV1>();
   const edges = new Map<string, DependencyEdgeV1>();
+  const nodePrefixes = [...scene.nodeOrder].sort((left, right) => right.length - left.length);
+  const identity = (key: string): { nodeId: string | null; property: string } => {
+    const nodeId = key.startsWith("node:") ? nodePrefixes.find((id) => key.startsWith(`node:${id}:`)) ?? null : null;
+    return { nodeId, property: nodeId ? key.slice(`node:${nodeId}:`.length) : key.split(":").slice(1).join(":") };
+  };
   const addVertex = (key: string, nodeId: string | null, property: string, kind: DependencyVertexV1["kind"]): void => {
     if (!vertices.has(key)) vertices.set(key, { key, nodeId, property, kind });
   };
   const addEdge = (from: string, to: string, kind: DependencyEdgeKind, reason: string): void => {
-    addVertex(from, from.startsWith("node:") ? from.split(":")[1] : null, from.split(":").slice(2).join(":"), from.includes(":measure.") ? "measurement" : "semantic");
-    addVertex(to, to.startsWith("node:") ? to.split(":")[1] : null, to.split(":").slice(2).join(":"), to.includes(":diagnostic") ? "diagnostic" : to === "graph:export-readiness" ? "export" : "derived");
+    const source = identity(from);
+    const target = identity(to);
+    addVertex(from, source.nodeId, source.property, from.includes(":measure.") ? "measurement" : "semantic");
+    addVertex(to, target.nodeId, target.property, to.includes(":diagnostic") ? "diagnostic" : to === "graph:export-readiness" ? "export" : "derived");
     const key = `${from}|${to}|${kind}`;
     if (!edges.has(key)) edges.set(key, { from, to, kind, reason });
   };
@@ -46,7 +53,7 @@ export function createDependencyGraph(
     const measuredBounds = nodeKey(nodeId, "measure.bounds");
     const diagnostics = nodeKey(nodeId, "diagnostic");
     const clipMaskEffect = nodeKey(nodeId, "clip-mask-effect");
-    [semantic, bounds, measuredBounds, diagnostics, clipMaskEffect].forEach((key) => addVertex(key, nodeId, key.split(":").slice(2).join(":"), key.includes("measure") ? "measurement" : key.includes("diagnostic") ? "diagnostic" : "derived"));
+    [semantic, bounds, measuredBounds, diagnostics, clipMaskEffect].forEach((key) => addVertex(key, nodeId, identity(key).property, key.includes("measure") ? "measurement" : key.includes("diagnostic") ? "diagnostic" : "derived"));
     addEdge("graph:scene-revision", semantic, "semantic-input", "A scene revision may alter any semantic property.");
     addEdge(semantic, bounds, "semantic-input", "Canonical geometry, sizing, transforms and visibility feed settled bounds.");
     addEdge(measuredBounds, bounds, "measurement-input", "Observed DOM bounds supplement semantic geometry.");
@@ -96,6 +103,25 @@ export function createDependencyGraph(
         addEdge(parentBounds, bounds, "constraint", "Absolute child constraints resolve against parent bounds.");
       }
     }
+  }
+
+  for (const relationship of scene.maskRelationships ?? []) {
+    const range = nodeKey(relationship.maskSourceId, "mask-range");
+    const source = nodeKey(relationship.maskSourceId, "semantic");
+    for (const property of ["mask", "appearance.fills", "appearance.strokes", "appearance.effects", "appearance.opacity", "appearance.visible", "appearance.blendMode", "geometry.cornerRadius", "transform"]) {
+      addEdge(nodeKey(relationship.maskSourceId, property), source, "semantic-input", "Mask input changes require current canonical mask authority.");
+    }
+    for (const property of ["children", "maskRelationships"]) {
+      addEdge(nodeKey(relationship.parentId, property), nodeKey(relationship.parentId, "semantic"), "semantic-input", "Mask scope changes invalidate parent declaration evidence.");
+    }
+    addEdge(source, range, "clip-mask-effect", "Current mask declaration, paint and transform authority define the declared range.");
+    addEdge(nodeKey(relationship.parentId, "semantic"), range, "clip-mask-effect", "Parent child order and scope termination define mask membership.");
+    for (const nodeId of [relationship.maskSourceId, ...relationship.affectedSiblingIds]) {
+      addEdge(nodeKey(nodeId, "bounds"), range, "clip-mask-effect", "Mask source and affected bounds determine exact canonical clip insets.");
+      addEdge(range, nodeKey(nodeId, "clip-mask-effect"), "clip-mask-effect", "Declared mask evidence invalidates source/affected clipping.");
+      addEdge(nodeKey(nodeId, "clip-mask-effect"), nodeKey(nodeId, "diagnostic"), "diagnostic", "Mask clipping changes invalidate source/affected diagnostics.");
+    }
+    addEdge(range, "graph:export-readiness", "export-readiness", "Unresolved mask evidence blocks observational export readiness.");
   }
 
   return {

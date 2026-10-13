@@ -466,7 +466,7 @@ ${Object.entries(vendoredDependencies)
     downloadCount += 1;
   });
 
-  await page.goto(`${applicationUrl}?acceptance=1`);
+  await page.goto(`${applicationUrl}?compatibility=v1&acceptance=1`);
   const runtimeSupport = page.locator('[data-testid="runtime-support"]');
   await page.waitForTimeout(1_000);
   if (await runtimeSupport.count() === 0) {
@@ -881,12 +881,12 @@ ${Object.entries(vendoredDependencies)
     );
     return button instanceof HTMLButtonElement && !button.disabled;
   });
-  await page.getByRole("button", { name: "Save browser draft" }).click();
-  await page.getByText(/Saved browser-local draft/).waitFor();
+  await page.getByRole("button", { name: "Save session snapshot" }).click();
+  await page.getByText(/Saved browser-local session/).waitFor();
   await headline.fill("Unsaved value");
   await context.setOffline(true);
-  await page.getByRole("button", { name: "Reload browser draft" }).click();
-  await page.getByText("Reloaded the browser-local draft.").waitFor();
+  await page.getByRole("button", { name: "Reload session snapshot" }).click();
+  await page.getByText("Reloaded the browser-local session.").waitFor();
   if (await headline.inputValue() !== "Persisted acceptance value") {
     throw new Error("Offline explicit draft reload did not restore the saved value.");
   }
@@ -951,7 +951,7 @@ ${Object.entries(vendoredDependencies)
   }
   const restrictedContext = await browser.newContext();
   const restrictedPage = await restrictedContext.newPage();
-  await restrictedPage.goto(restrictedApplicationUrl);
+  await restrictedPage.goto(`${restrictedApplicationUrl}?compatibility=v1`);
   await restrictedPage
     .locator('[data-testid="runtime-support"][data-runtime-status="blocked"]')
     .waitFor();

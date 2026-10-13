@@ -177,6 +177,24 @@ assert(
   "Ordered stack resolution must preserve ascending source indices and apply canonical opacity once.",
 );
 
+const nativeMultiple = structuredClone(multiple);
+nativeMultiple.appearance.fills.forEach((paint) => {
+  if (paint.type === "SOLID") delete paint.solidPaintSource;
+});
+const nativeMultipleResult = resolvePrimitiveAppearance(nativeMultiple, {
+  packageId: packageValue.packageId,
+  rootNodeId: packageValue.rootNodeId,
+  source: { type: "figma", pluginVersion: "0.6.1" },
+});
+assert(
+    nativeMultipleResult.paints.orderedSolidStack?.capability ===
+    "source-certified-ordered-solid-stack" &&
+    nativeMultipleResult.paints.orderedSolidStack.orderedPaints.every(
+      (paint) => (paint.provenance as any).sourceAuthority === "native-canonical-source",
+    ),
+  "Clean exporter-0.6.1 canonical SOLIDs must reuse the bounded ordered-SOLID owner without legacy repair records.",
+);
+
 const reversedMultiple = structuredClone(multiple);
 reversedMultiple.appearance.fills = [
   certifiedSolid(0, { r: 0.36, g: 0.15, b: 0.22 }, 0.6),

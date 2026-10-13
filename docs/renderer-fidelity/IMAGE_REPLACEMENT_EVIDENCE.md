@@ -51,4 +51,8 @@ Ten real PNG exports across imported, Fill, Fit, and reset states took 482.5–5
 
 The exact fixture is authoritative source evidence, but all four renderer candidates, its scene candidate, and its settlement candidates remain unapproved. No reference was promoted. Full-canvas approval requires separate review of non-media differences.
 
-`editor-crop` is reserved only. A future crop tool must own a new editor-authored transform, focal point, zoom, interaction state, persistence, and reset behavior. It must never reuse imported Figma CROP as editor-authored state.
+ADR 0079 subsequently promotes `editor-crop` through a new canonical
+editor-authored normalized transform. It reuses the affine renderer authority
+but never reuses imported Figma CROP state. This historical evidence packet
+continues to certify the earlier Fill/Fit/reset matrix; Field Rules M5 owns the
+new host/Family Crop evidence.

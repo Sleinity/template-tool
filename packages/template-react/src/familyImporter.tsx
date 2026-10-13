@@ -17,7 +17,11 @@ import {
   type TemplateFamilyImportWizardSnapshotV1,
   type TemplateFamilyImportWizardV1,
 } from "@sleinity/template-browser/importer";
-import { TemplateSessionViewport } from "./editor";
+import {
+  TemplateSessionViewport,
+  type TemplateSessionViewportSnapshotV1,
+} from "./editor";
+import type { ResolvedProductRenderIdentityV1 } from "./render/productRenderIdentity";
 
 const TemplateFamilyImportWizardContext =
   createContext<TemplateFamilyImportWizardV1 | null>(null);
@@ -82,6 +86,8 @@ export interface TemplateFamilyImportPreviewProps {
   className?: string;
   style?: CSSProperties;
   fallback?: ReactNode;
+  onRenderIdentity?: (identity: ResolvedProductRenderIdentityV1) => void;
+  onViewportSnapshot?: (snapshot: TemplateSessionViewportSnapshotV1) => void;
 }
 
 export function TemplateFamilyImportPreview({
@@ -89,6 +95,8 @@ export function TemplateFamilyImportPreview({
   className,
   style,
   fallback = <p>Preparing family preview…</p>,
+  onRenderIdentity,
+  onViewportSnapshot,
 }: TemplateFamilyImportPreviewProps) {
   const wizard = useResolvedTemplateFamilyImportWizard(wizardOverride);
   const snapshot = useTemplateFamilyImportWizardSnapshot(wizard);
@@ -114,8 +122,15 @@ export function TemplateFamilyImportPreview({
         });
       }}
       onRenderIdentity={(identity) => {
-        const variantId = snapshot.previewVariantId;
-        if (!variantId) return;
+        const variantId = wizard.getSnapshot().previewVariantId;
+        const familySessionSnapshot = wizard.familySession.getSnapshot();
+        const renderSessionRevision = wizard.familySession.renderSession.getSnapshot().revision;
+        if (
+          !variantId ||
+          familySessionSnapshot.selectedVariantId !== variantId ||
+          familySessionSnapshot.materialization?.variantId !== variantId ||
+          familySessionSnapshot.renderSessionRevision !== renderSessionRevision
+        ) return;
         const blocked = identity.readiness === "unsupported" ||
           identity.exportSafety === "blocked" ||
           issues.current.some((issue) => issue.severity === "error");
@@ -126,10 +141,12 @@ export function TemplateFamilyImportPreview({
             : issues.current.length
               ? "warning"
               : "ready",
-          sessionRevision: wizard.familySession.renderSession.getSnapshot().revision,
+          sessionRevision: renderSessionRevision,
           issues: issues.current,
         });
+        onRenderIdentity?.(identity);
       }}
+      onViewportSnapshot={onViewportSnapshot}
     />
   );
 }

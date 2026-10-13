@@ -1,0 +1,318 @@
+{
+  "environmentSha256": "385a80b690788d32269792b0230d8ca730b0afdd4cb3a9b6c8881dfb1417b6c5",
+  "fixtures": [
+    {
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+      "id": "exporter-061-now-hiring",
+      "scene": {
+        "cause": "Unchanged approved structural evidence passes.",
+        "comparison": "pass",
+        "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-now-hiring --run-id <new-unique-run-id>",
+        "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+        "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: canonical scene comparison passes unchanged approved evidence; source and environment identities match sdk-061-image-replacement-ownership-20261009a. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-now-hiring/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-now-hiring/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-now-hiring/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-now-hiring/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    {
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+      "id": "exporter-061-cover",
+      "scene": {
+        "cause": "Unchanged approved structural evidence passes.",
+        "comparison": "pass",
+        "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-cover --run-id <new-unique-run-id>",
+        "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+        "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: canonical scene comparison passes unchanged approved evidence; source and environment identities match sdk-061-image-replacement-ownership-20261009a. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-cover/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "3e24815d1e50b315d3ea9e34c5fe96333b3aa607e76caf21da86f696832ecb61",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-cover/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-cover/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-cover/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    {
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+      "id": "exporter-061-carrousel",
+      "scene": {
+        "cause": "Unchanged approved structural evidence passes.",
+        "comparison": "pass",
+        "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-carrousel --run-id <new-unique-run-id>",
+        "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+        "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: canonical scene comparison passes unchanged approved evidence; source and environment identities match sdk-061-image-replacement-ownership-20261009a. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "cause": "Unchanged approved structural evidence passes.",
+          "comparison": "pass",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-local-candidate-20261009a --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained for sdk-061-field-render-evidence-20261009b: this surface's current settlement comparison passes unchanged approved evidence under the same source/font/environment profile. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "efa8b3b84c7730ae2b18f3e63c09926c6849b36baf0a539d78ab73a1d774e9db",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-carrousel/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-carrousel/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-carrousel/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+          "capture": "complete-stable",
+          "cause": "No visual or structural regression: accepted-evidence helper extraction preserves the reviewed output.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-field-render-evidence-20261009b/exporter-061-carrousel/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-061-field-render-evidence-20261009b.json",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewRetainedFrom": "sdk-061-field-render-evidence-20261009b",
+          "reviewerRationale": "Exact source/font identities, unchanged raster environment and twelve byte-identical PNGs preserve prior individually reviewed source fidelity. Renderer, scene and settlement comparisons pass. Forty canonical lifecycle transcripts match before/after; only obsolete single-session lease retention changes. Automated browser and stored-identity review; no new manual live review or reference promotion. Retained on sdk-061-field-render-evidence-20261009b after exact byte equality with sdk-061-image-replacement-ownership-20261009a, passing structural/scene/settlement comparisons, identical fixture and font identities and equivalent rendering environment. No new manual source review or reference promotion. Retained for sdk-061-local-candidate-20261009a after exact ZIP/template/preview/font identities, unchanged raster/tooling environment, twelve byte-identical reviewed PNGs and passing unchanged renderer/scene/settlement references. Automated and stored-identity review; no new manual source review or reference promotion.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    }
+  ],
+  "gate": "sdk-061",
+  "regenerate": "node scripts/fidelity/sdk-gate.mjs --run-id <new-unique-run-id>",
+  "runId": "sdk-061-local-candidate-20261009a",
+  "schemaVersion": "sdk-061-dispositions-v1"
+}

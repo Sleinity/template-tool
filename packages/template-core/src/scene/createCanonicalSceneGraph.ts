@@ -245,14 +245,18 @@ function mediaSection(
   }
   const replacementMode = activePlacementState === "replacement-fit"
     ? "contain"
-    : activePlacementState === "replacement-fill" || activePlacementState === "editor-crop"
+    : activePlacementState === "replacement-fill"
       ? "cover"
+      : activePlacementState === "editor-crop"
+        ? "user-crop"
       : null;
   const rawScaleMode = node.image?.scaleMode ?? paint?.scaleMode ?? imageHint?.figmaScaleMode ?? asset?.scaleMode ?? "FILL";
   const selectedScaleMode = activePlacementState === "replacement-fit"
     ? "FIT"
-    : activePlacementState === "replacement-fill" || activePlacementState === "editor-crop"
+    : activePlacementState === "replacement-fill"
       ? "FILL"
+      : activePlacementState === "editor-crop"
+        ? "CROP"
       : rawScaleMode.toUpperCase();
   const transform = node.image?.imageTransform ?? imageHint?.imageTransform ?? null;
   const explicitPosition = node.image?.objectPosition;

@@ -1,4 +1,5 @@
 import { measurementMap, publishMeasurementSnapshot } from "./measurement";
+import { settleMaskEvidence } from "./settleMaskEvidence";
 import type {
   MeasurementRecordV1,
   ReadinessState,
@@ -120,6 +121,7 @@ export function settleSceneGraph(input: SettlementInputV1): SettledSceneGraphV1 
   const publication = publishMeasurementSnapshot(input.measurements, input.revision);
   if (!publication.accepted || !publication.snapshot) throw new Error(`Measurement publication rejected: ${publication.reason}`);
   const measurements = measurementMap(publication.snapshot);
+  const masks = settleMaskEvidence(input);
   const maxIterations = input.options?.maxIterations ?? 12;
   const tolerance = input.options?.geometryTolerance ?? 0.001;
   const bounds = new Map<string, Rect>();
@@ -163,7 +165,8 @@ export function settleSceneGraph(input: SettlementInputV1): SettledSceneGraphV1 
     const approximations: string[] = [];
     if (node.text?.browserMeasurementRequired && !text) unresolved.push(`node:${nodeId}:measure.text`);
     if (node.media && (!node.media.intrinsicSize.width || !node.media.intrinsicSize.height) && !record(records, "intrinsic-image")) unresolved.push(`node:${nodeId}:measure.intrinsic-image`);
-    if (node.relationships.maskRelationship.isMask || node.relationships.maskRelationship.maskedSiblingRange) unresolved.push(`node:${nodeId}:mask-range`);
+    const mask = masks.get(nodeId) ?? { status: "not-applicable" as const, dependencyKeys: [] };
+    if (mask.status === "unresolved") unresolved.push(`node:${nodeId}:mask-range`);
     if (node.appearance.effects.length) approximations.push(`node:${nodeId}:effects-current-runtime-approximation`);
     unresolvedDependencies.push(...unresolved);
     const fontsPending = node.text && input.measurements.readiness.fonts !== "ready";
@@ -177,7 +180,7 @@ export function settleSceneGraph(input: SettlementInputV1): SettledSceneGraphV1 
       textMeasurement: text,
       mediaPlacement: imagePlacement(node, current, records),
       clip: node.appearance.clipping.clipsContent.value ? { strategy: "rectangular-clip-placeholder", bounds: { ...current } } : null,
-      mask: node.relationships.maskRelationship.isMask || node.relationships.maskRelationship.maskedSiblingRange ? { status: "unresolved", dependencyKeys: [`node:${nodeId}:bounds`, `node:${nodeId}:mask-range`] } : { status: "not-applicable", dependencyKeys: [] },
+      mask,
       effects: node.appearance.effects.length ? { status: "unresolved", dependencyKeys: [`node:${nodeId}:bounds`, `node:${nodeId}:effects`] } : { status: "not-applicable", dependencyKeys: [] },
       readiness,
       unresolved,

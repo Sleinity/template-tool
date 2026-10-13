@@ -90,6 +90,14 @@ export function parseTemplateFamilyV1(input: unknown): TemplateFamilyV1 {
       !group.options.every((option: unknown) => strings(option, ["id", "title"]))
     ) throw new Error("TemplateFamilyV1 contains an invalid variant group.");
   }
+  if (value.controlOrder !== undefined) {
+    if (!Array.isArray(value.controlOrder) || !value.controlOrder.every((control: unknown) => {
+      if (!record(control) || typeof control.kind !== "string") return false;
+      if (control.kind === "direct-variant-selector") return true;
+      if (control.kind === "selection-property") return typeof control.groupId === "string";
+      return control.kind === "field" && typeof control.fieldId === "string";
+    })) throw new Error("TemplateFamilyV1 contains an invalid editor control order.");
+  }
   return value as unknown as TemplateFamilyV1;
 }
 

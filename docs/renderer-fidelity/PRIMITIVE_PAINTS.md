@@ -32,6 +32,14 @@ Canvas background is a separate `PrimitiveCanvasAuthorityV1`. Template canvas, r
 
 Every source entry retains its exact array index. Index 0 is backmost and increasing indices move toward the front; a genuine reverse control confirms direction. Strict `solid-paint-source-v1` provenance supplies apply-once opacity authority. `ResolvedOrderedSolidStackV1` retains all entries, including hidden paints, and selects one SVG group/clip owner only for the complete eligible stack. Entries are never sorted or reversed by type. Accepted ADR 0065 and `ORDERED_SOLID_STACK_RUNTIME_AUTHORITY.md` govern the implemented subset.
 
+ADR 0074 additionally recognizes the explicitly supported Figma exporter
+`0.6.1` canonical SOLID representation as native source evidence when
+`color.a === 1`, paint opacity is valid, and same-index raw evidence is absent
+or non-contradictory. This renderer-internal `canonical-source` /
+`canonical-paint-opacity` evidence is distinct from historical repair
+provenance. It does not broaden the rule to exporter `0.6.0`, unidentified
+sources, or arbitrary paint stacks.
+
 The contract keeps source color alpha, paint opacity, node opacity, parent/group opacity, mask opacity, and blend mode separate. The ordered-stack route applies canonical color alpha × paint opacity exactly once, requires node opacity 1, and source-certifies hidden, transparent, and partial-opacity SOLID layers. Node opacity below 1 remains compatibility-owned.
 
 `mask-input` remains semantic input owned by the Milestone 7 mask route and cannot become ordinary RGB. Ordinary same-colored paints remain visible.

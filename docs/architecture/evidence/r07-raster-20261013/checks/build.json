@@ -1,0 +1,52 @@
+[
+  {
+    "label": "portable",
+    "command": "pnpm test:portable",
+    "started": "2026-10-13T10:22:46.328Z",
+    "durationMs": 26680,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/portable.log",
+    "logSha256": "8db36262e3086219add8d2001b40a2198e8975e11a01d47fdea939174377c425"
+  },
+  {
+    "label": "typescript",
+    "command": "pnpm exec tsc -b --pretty false",
+    "started": "2026-10-13T10:23:13.011Z",
+    "durationMs": 7062,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/typescript.log",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "studio-build",
+    "command": "pnpm --filter @sleinity/template-studio build",
+    "started": "2026-10-13T10:23:20.073Z",
+    "durationMs": 10851,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/studio-build.log",
+    "logSha256": "6445a020fe6eb16446e5a9e8a84eb9c7921d75c9f47a4c9d1a28d742cb53b560"
+  },
+  {
+    "label": "sdk",
+    "command": "pnpm sdk:verify",
+    "started": "2026-10-13T10:23:30.925Z",
+    "durationMs": 135392,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/sdk.log",
+    "logSha256": "6006c5606c9593c913fb596fb5209e4736f4c55d8b18d137ba3aecf6961715fb"
+  },
+  {
+    "label": "local-archives",
+    "command": "pnpm release-local:verify release-verification-artifacts/r07-20261013",
+    "started": "2026-10-13T10:25:46.317Z",
+    "durationMs": 49811,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/local-archives.log",
+    "logSha256": "2977b46239a7c60b4397552484298c11c8d225b477be174d5455e44929959969"
+  }
+]

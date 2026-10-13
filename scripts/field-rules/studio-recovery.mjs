@@ -1,0 +1,101 @@
+import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { normalizeTemplatePackageV1ToV2 } from '@sleinity/template-core';
+import { createStudioViteServer } from '../repository/studio-vite-server.mjs';
+import { launchBrowser } from '../fidelity/browser.mjs';
+const familyMode = (process.argv.includes('--family') || process.argv.includes('--family-parity'));
+const output = resolve(`fidelity/evidence/studio-recovery${familyMode ? '-family' : ''}`); await mkdir(output, { recursive: true });
+const pkg = normalizeTemplatePackageV1ToV2(JSON.parse(await readFile('src/template-package/fixtures/figma-plugin-v0.4.1.json', 'utf8'))).package;
+pkg.fontRequirements = [];
+for (const node of Object.values(pkg.nodes)) if (node.type === 'TEXT') { node.text.fontFamily = 'sans-serif'; if (node.extensions?.figma?.style) node.extensions.figma.style.fontFamily = 'sans-serif'; }
+pkg.editableFields = [{ id: 'text:headline', type: 'text', label: 'Headline', binding: {kind:'text-characters',nodeId:'58:57'}, defaultValue:'Original',configuration:{} }];
+pkg.editableFieldOrder = ['text:headline'];
+const server = await createStudioViteServer(); await server.listen();
+const url = server.resolvedUrls.local[0]; const browser = await launchBrowser(false);
+const context = await browser.newContext({ viewport: {width:1440,height:900}, acceptDownloads:true });
+const page = await context.newPage(); page.setDefaultTimeout(20000);
+const checks = [];
+const assert = (value, reason) => { if (!value) throw new Error(reason); checks.push(reason); };
+try {
+ await page.goto(url);
+ const template = await page.evaluate(async ({pkg, familyMode}) => {
+   const {studioRecords:r}=await import('/src/workspace/studioRecords.ts');
+   const {familyFromSources}=await import('/src/setup/setupSources.ts');
+   const s=r.openSession({id:'seed',name:'Recovery proof', ...(familyMode ? {family:{}} : {})});
+   s.load(familyMode ? familyFromSources([pkg,{...pkg,packageId:pkg.packageId+'-second'}],'Recovery proof') : pkg);
+   const record=await r.saveTemplate(s,{name:'Recovery proof'}); s.dispose(); return record;
+ },{pkg,familyMode});
+ await page.reload();
+ const open = async () => { await page.getByRole('button',{name:'Create output',exact:true}).click(); };
+ const inspect = () => page.evaluate(async ({id,kind}) => (await import('/src/workspace/studioRecords.ts')).studioRecords.recovery.inspect({kind,templateId:id}),{id:template.id,kind:familyMode?'family':'single'});
+ await open(); await page.getByLabel('Headline',{exact:true}).waitFor();
+ assert(!await inspect(),'Fresh opening does not persist a recovery payload');
+ await page.getByLabel('Headline',{exact:true}).fill('Unfinished');
+ if (familyMode) await page.getByLabel(/^(Selected variant|Design)$/,{exact:true}).selectOption({index:1});
+ await page.getByRole('button',{name:/Back to (templates|Library)/,exact:true}).click();
+ await page.getByRole('heading',{name:'Library',exact:true}).waitFor();
+ assert((await inspect()).payload.contentState.values['text:headline'].value==='Unfinished','Navigation flush persists pending text');
+ assert(!await page.getByRole('heading',{name:'Drafts',exact:true}).count(),'Library has no draft catalogue');
+ await open(); await page.getByRole('heading',{name:'Continue your draft?',exact:true}).waitFor();
+ await page.getByRole('button',{name:'Cancel',exact:true}).click(); assert(await inspect(),'Cancel retains recovery');
+ await open(); await page.getByRole('button',{name:'Continue draft',exact:true}).click();
+ assert(await page.getByLabel('Headline',{exact:true}).inputValue()==='Unfinished','Resume restores text');
+ if (familyMode) assert(await page.getByLabel(/^(Selected variant|Design)$/,{exact:true}).inputValue()===template.family.variants[1].id,'Family resumes the selected variant');
+ const second = await context.newPage(); await second.goto(page.url()); await second.getByRole('button',{name:'Continue draft',exact:true}).click();
+ await page.getByRole('heading',{name:'This editing session is no longer active',exact:true}).waitFor();
+ checks.push('A second tab supersedes the first editor');
+ await second.getByLabel('Headline',{exact:true}).fill('Latest output');
+ await second.getByRole('button',{name:/Back to (templates|Library)/,exact:true}).click(); await second.getByRole('heading',{name:'Library',exact:true}).waitFor();
+ await second.getByRole('button',{name:'Create output',exact:true}).click(); await second.getByRole('button',{name:'Start from scratch',exact:true}).click();
+ assert(await second.getByLabel('Headline',{exact:true}).inputValue()==='Original','Start from scratch restores defaults');
+ await second.getByLabel('Headline',{exact:true}).fill('Finished');
+ await second.evaluate(async () => { const r=(await import('/src/workspace/studioRecords.ts')).studioRecords.recovery; window.realRecoveryExport=r.exportAndComplete; r.exportAndComplete=async()=>{throw new Error('Injected export rejection');}; });
+ await second.getByRole('button',{name:'Export PNG',exact:true}).click();
+ await second.getByText('Injected export rejection',{exact:true}).waitFor();
+ assert(await inspect(),'Rejected export retains recovery');
+ await second.evaluate(async () => { const r=(await import('/src/workspace/studioRecords.ts')).studioRecords.recovery; r.exportAndComplete=window.realRecoveryExport; });
+ const download = second.waitForEvent('download'); await second.getByRole('button',{name:'Export PNG',exact:true}).click(); await download;
+ await second.getByRole('heading',{name:'Library',exact:true}).waitFor();
+ assert(!await inspect(),'Successful export clears recovery and returns to Library');
+ await second.getByRole('button',{name:'Create output',exact:true}).click();
+ assert(await second.getByLabel('Headline',{exact:true}).inputValue()==='Original','Next output starts from defaults after export');
+ await second.screenshot({path:resolve(output,'fresh-after-export.png')});
+ await second.getByLabel('Headline',{exact:true}).fill('Cleanup retry');
+ await second.evaluate(async modulePath => {
+   const r=(await import('/src/workspace/studioRecords.ts')).studioRecords.recovery;
+   const {TemplateRecoveryCleanupError}=await import(modulePath);
+   r.exportAndComplete=async (lease,callback)=>{await callback();throw new TemplateRecoveryCleanupError(new Error('Injected cleanup failure'));};
+ }, `/@fs${resolve('packages/template-browser/src/persistence/templateRecovery.ts')}`);
+ let cleanupDownloads=0; second.on('download',()=>cleanupDownloads++);
+ const cleanupDownload=second.waitForEvent('download'); await second.getByRole('button',{name:'Export PNG',exact:true}).click(); await cleanupDownload;
+ await second.getByRole('button',{name:'Retry cleanup',exact:true}).waitFor();
+ assert(await inspect(),'Cleanup failure retains recovery after a successful download');
+ await second.getByRole('button',{name:'Retry cleanup',exact:true}).click();
+ await second.getByRole('heading',{name:'Library',exact:true}).waitFor();
+ assert(cleanupDownloads===1 && !await inspect(),'Cleanup retry clears recovery without exporting again');
+ await second.evaluate(async template => {
+   const r=(await import('/src/workspace/studioRecords.ts')).studioRecords;
+   // A second template represents pre-upgrade saved work with no recovery tombstone.
+   const migratedTemplate={...template,id:'migration-template'};
+   await r.save(migratedTemplate);
+   for (const id of ['legacy-a','legacy-z']) await r.save({...migratedTemplate,id,studio:{role:'draft',templateId:migratedTemplate.id}});
+ },template);
+ const kind=familyMode?'family':'single';
+ await second.goto(`${url}drafts/${encodeURIComponent(kind+':legacy-z')}`);
+ await second.getByRole('button',{name:'Continue draft',exact:true}).click();
+ await second.getByLabel('Headline',{exact:true}).waitFor();
+ checks.push('Retained legacy URL opens the owning template recovery flow');
+ await second.getByRole('button',{name:/Back to (templates|Library)/,exact:true}).click();
+ await second.goto(`${url}drafts/${encodeURIComponent(kind+':legacy-a')}`);
+ await second.getByText('This draft is no longer available. Choose a template to create another output.',{exact:true}).waitFor();
+ checks.push('Superseded legacy URL returns to Library with an explanation');
+ const cleared=await second.evaluate(async kind => {
+   const r=(await import('/src/workspace/studioRecords.ts')).studioRecords;
+   const template=await r.get({kind,id:'migration-template'});
+   await r.remove(template);
+   return !await r.recovery.inspect({kind,templateId:template.id});
+ },kind);
+ assert(cleared,'Template deletion clears its recovery slot');
+ await writeFile(resolve(output,'report.json'),JSON.stringify({checks},null,2)); console.log(checks.join('\n'));
+} catch(error) { await page.screenshot({path:resolve(output,'failure.png')}); await writeFile(resolve(output,'failure.txt'),String(error)); throw error; }
+finally { await context.close(); await browser.close(); await server.close(); }

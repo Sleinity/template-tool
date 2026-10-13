@@ -48,7 +48,7 @@ The router rejects or bounds:
 - a FILL child feeding the same HUG parent axis, because current PNG capture proved DOM-form sensitivity despite equivalent visible geometry;
 - any unsafe flow descendant, which makes the affected ancestor route unsafe.
 
-Fallback is transitive. Once a compatibility boundary is selected, descendants cannot reacquire settled ownership. `CoreLayoutRouteV1.circularDependencies` records the child, parent, axis, main/cross classification, reason, and fallback chain for FILL-inside-HUG. It does not solve the cycle. Registered deal-post unsupported layout and the banner circular HUG/FILL path therefore remain coherent compatibility routes. Now-hiring's root → HUG text → HUG content → FILL visual → image slot chain is settled-authoritative on all live renderer surfaces.
+Fallback is transitive. Once a compatibility boundary is selected, descendants cannot reacquire settled ownership. `CoreLayoutRouteV1.circularDependencies` records the child, parent, axis, main/cross classification, reason, and fallback chain for FILL-inside-HUG. It does not solve the cycle. In editor-mode compatibility CSS, a main-axis FILL child inside a HUG parent retains an intrinsic flex basis so edited text contributes to shrink-to-fit sizing until the parent's declared maximum; the route and its circular diagnostic remain unchanged. Registered deal-post unsupported layout and the banner circular HUG/FILL path therefore remain coherent compatibility routes. Now-hiring's root → HUG text → HUG content → FILL visual → image slot chain is settled-authoritative on all live renderer surfaces.
 
 ## Browser measurement boundary
 
@@ -56,9 +56,19 @@ The renderer creates an isolated invisible `width:max-content` typography probe 
 
 Trim authority additionally requires a known source mode, exact loaded family/weight/style or confirmed replacement policy, available cap/baseline metrics, supported text-box mode, and no unsupported mixed runs. Missing inputs apply a complete compatibility boundary until an authoritative measurement exists. The renderer exposes separate layout, browser-line, trimmed, glyph-paint, and clip telemetry; only the trimmed height enters HUG settlement.
 
+Field Rules V2 Milestone 4 adds shared structural participation under ADR 0078.
+`appearance.visible=false` excludes a node and its descendants before participant
+discovery. Only active FLOW children contribute gaps, HUG, FILL, alignment,
+measurement, media preload, masks, active diagnostics, rendering, and export
+safety. Canonical nodes and child content remain intact. A separate monotonic
+publication generation accompanies asynchronous measurements and settlement;
+it is excluded from deterministic geometry hashes and omitted at generation
+zero, preventing true/false/true ABA publication without changing all-visible
+fixture identities.
+
 No routed final x, y, width, parent HUG height, sibling FILL size, image slot, or clip bound is read back from the renderer DOM.
 
-For routed images, each new settled slot recomputes placement from immutable source intent and intrinsic asset dimensions. `FILL` uses aspect-preserving cover and `FIT` contains; a preserved `imageTransform` is CROP-only and cannot add zoom in any fixed or dynamic FILL/FIT node. A real exported fixture proves that the raw normalized slot-to-source CROP matrix is inverted once into CSS placement. Revisioned `activePlacementState` transfers authority to replacement Fill/Fit without mutating source semantics; reset restores imported authority at a newer revision. The scene/routing identity includes active state/revision, and UI operation revisions reject stale image decode results. See [image placement](IMAGE_PLACEMENT.md) and [editable image evidence](IMAGE_REPLACEMENT_EVIDENCE.md).
+For routed images, each new settled slot recomputes placement from immutable source intent and intrinsic asset dimensions. `FILL` uses aspect-preserving cover and `FIT` contains; a preserved `imageTransform` is CROP-only and cannot add zoom in any fixed or dynamic FILL/FIT node. A real exported fixture proves that the raw normalized slot-to-source CROP matrix is inverted once into CSS placement. Revisioned `activePlacementState` transfers authority to replacement Fill/Fit or canonical editor Crop without mutating source semantics; editor Crop may shrink within its canonical source region for the current slot aspect. Reset restores imported authority at a newer revision. The scene/routing identity includes active state/revision, and UI operation revisions reject stale image decode results. See [image placement](IMAGE_PLACEMENT.md), [editable image evidence](IMAGE_REPLACEMENT_EVIDENCE.md), and ADR 0079.
 
 Managed-font routing separates source request, linked OpenType face, and runtime family. A linked face is registered under a hash/face/axis-derived private family; resolved node CSS, normalized text runs, intrinsic measurement, readiness, and export use that private family. The human family remains canonical semantics and UI evidence. Candidate selection and final linking share one semantic matcher, so a face accepted at upload cannot be rejected later by a competing family-name rule. Runtime font revisions are package-face-scoped and set-normalize equivalent browser registrations; unrelated application faces cannot perturb settlement, while delayed availability of a requested primary face still invalidates fallback geometry. See [font identity](FONT_IDENTITY.md) and ADRs 0044–0045.
 
@@ -85,6 +95,8 @@ Advanced stroke and blend boundaries are unchanged. Open-path dashes/caps/joins 
 - `pnpm runtime-routing:scenarios`: initial/short/long/clear/rapid/reset text, image replacement/clear, and preview resize through the real editor.
 - `pnpm runtime-routing:fonts`: exact Geist Mono 500 and Inter Tight 700 initial/delayed/fallback evidence across live surfaces and real PNG.
 - `pnpm runtime-routing:text-trim`: exact-font formula, edit, multiline, descender, propagation, and reset scenarios.
+- `pnpm runtime-routing:boolean`: exact exporter-fixture registration, default Validate/Fields, separate Boolean false/reset geometry, structural subtree pruning, resize-hidden-show, and real PNG/source evidence.
+- `pnpm runtime-routing:textarea-max-lines`: exact registered now-hiring Textarea binding, visible painted-span line evidence, warning/maximum/empty states, structural inactivity, four renderer instances, and valid/invalid PNG readiness.
 - `pnpm runtime-rollout:control` and `pnpm runtime-rollout:scenarios <mode>`: persisted mode, rollback, corrupt-state fallback, one-owner Compare evidence, and all-surface identity.
 - `pnpm appearance:baseline`: deterministic observational appearance projections for exact registered ZIPs.
 - `pnpm fidelity:compare`: guarded pixels and geometry for all registered surfaces.
@@ -95,5 +107,12 @@ Advanced stroke and blend boundaries are unchanged. Open-path dashes/caps/joins 
 - `pnpm ordered-solids:source-evidence`, `pnpm ordered-solids:browser-scenarios`, and `pnpm ordered-solids:performance`: source pixels, order/provenance/clip telemetry, cross-surface identity, offline persistence, and local cost for Milestone 7.4.
 
 Milestone 4 final evidence is under `fidelity/runtime-routing/stage-4a/milestone-4-delivery-final-stage4a-current/`, `fidelity/runtime-routing/stage-4a/milestone-4-stage-4a-final-visible/`, `fidelity/settlement/browser-scenarios/milestone-4-delivery-final-scenarios/`, and `fidelity/candidates/milestone-4-delivery-final-current-2/`. Approved references were not updated.
+
+Field Rules V2 Boolean source certification is produced by
+`scripts/runtime-routing/boolean-structural-visibility.mjs`. It binds the exact
+exporter-0.6.1 ZIP and records current-run artifacts under
+`fidelity/runtime-routing/boolean/`. The source-fixed `SPACE_BETWEEN` row is
+evidence for structural exclusion through compatibility, not general routed
+settlement support.
 
 The controlled now-hiring route converged in 2 iterations using 2 intrinsic text measurements for 6 routed and 4 compatibility nodes. Browser telemetry reported 0–0.3 ms core settlement compute time. These values are a local baseline only, not performance budgets.

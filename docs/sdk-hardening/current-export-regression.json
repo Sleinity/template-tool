@@ -1,0 +1,390 @@
+{
+  "before": "sdk-hardening-current-before-v2",
+  "after": "sdk-hardening-current-after",
+  "results": [
+    {
+      "fixture": "exporter-061-solid-opacity",
+      "surface": "validate",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-solid-opacity",
+      "surface": "fields",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-solid-opacity",
+      "surface": "editor",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-solid-opacity",
+      "surface": "png-export",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-linear-and-mixed-paints",
+      "surface": "validate",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-linear-and-mixed-paints",
+      "surface": "fields",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-linear-and-mixed-paints",
+      "surface": "editor",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-linear-and-mixed-paints",
+      "surface": "png-export",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-deal-of-the-week-post",
+      "surface": "validate",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-deal-of-the-week-post",
+      "surface": "fields",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-deal-of-the-week-post",
+      "surface": "editor",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "exporter-061-deal-of-the-week-post",
+      "surface": "png-export",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "field-rules-boolean-structural-visibility",
+      "surface": "validate",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "field-rules-boolean-structural-visibility",
+      "surface": "fields",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "field-rules-boolean-structural-visibility",
+      "surface": "editor",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    },
+    {
+      "fixture": "field-rules-boolean-structural-visibility",
+      "surface": "png-export",
+      "byteIdentical": true,
+      "geometry": {
+        "equal": true,
+        "tolerances": {
+          "x": 0.25,
+          "y": 0.25,
+          "width": 0.25,
+          "height": 0.25,
+          "transform": 0.001,
+          "text": 0.5,
+          "image": 0.25
+        },
+        "missingNodes": [],
+        "extraNodes": [],
+        "reorderedNodes": [],
+        "geometryChanges": [],
+        "textMeasurementChanges": [],
+        "textGeometryChanges": [],
+        "imagePlacementChanges": []
+      }
+    }
+  ]
+}

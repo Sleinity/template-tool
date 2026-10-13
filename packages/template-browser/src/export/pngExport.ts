@@ -1,4 +1,6 @@
 import { captureTemplatePackagePreview } from "../enrichment/captureTemplatePackagePreview";
+import { getManagedFontRegistry } from "../fonts/fontRegistry";
+import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
 import {
   createResolvedRenderTree,
   type FontFaceSetLike,
@@ -40,6 +42,8 @@ export interface PackagePngExportRequest {
   templateName?: string;
   now?: Date;
   fontSet?: FontFaceSetLike | null;
+  /** Borrowed for this export. Omitted uses the default; null disables registry lookup. */
+  fontRegistry?: ManagedFontRegistry | null;
   onProgress?: (message: string) => void;
 }
 
@@ -106,10 +110,11 @@ function shouldUseCrossOrigin(source: string): boolean {
   return /^https?:\/\//i.test(source);
 }
 
-async function waitForImageSource(
+export async function waitForImageSource(
   source: string,
   target: string,
   timeoutMs = 15000,
+  requireDecode = false,
 ): Promise<PackagePngExportDiagnostic | null> {
   if (typeof Image === "undefined") return null;
   return new Promise((resolve) => {
@@ -135,7 +140,7 @@ async function waitForImageSource(
       if (typeof image.decode === "function") {
         void image.decode().then(
           () => complete(null),
-          () => complete(null),
+          () => complete(requireDecode ? { code: "export.asset-load-failed", severity: "error", message: "An image or SVG asset could not be decoded.", target } : null),
         );
         return;
       }
@@ -150,7 +155,7 @@ async function waitForImageSource(
       });
     if (shouldUseCrossOrigin(source)) image.crossOrigin = "anonymous";
     image.src = source;
-    if (image.complete && image.naturalWidth > 0) complete(null);
+    if (!requireDecode && image.complete && image.naturalWidth > 0) complete(null);
   });
 }
 
@@ -192,6 +197,9 @@ export async function exportTemplatePackagePng(
   request: PackagePngExportRequest,
   dependencies: PackagePngExportDependencies = {},
 ): Promise<PackagePngExportResult> {
+  const fontRegistry = request.fontRegistry === undefined
+    ? getManagedFontRegistry()
+    : request.fontRegistry;
   const checkReadiness =
     dependencies.checkReadiness ?? checkPackageJpgExportReadiness;
   const waitForAssets =
@@ -205,6 +213,7 @@ export async function exportTemplatePackagePng(
       format: "png",
       packageValue: request.packageValue,
       renderMode: request.renderMode,
+      fontRegistry,
     },
     request.fontSet,
   );
@@ -235,7 +244,7 @@ export async function exportTemplatePackagePng(
   }
 
   request.onProgress?.("Rendering full-resolution PNG…");
-  const captureResult = await capture(request.node, request.packageValue);
+  const captureResult = await capture(request.node, request.packageValue, { fontRegistry });
   const filename = sanitizePngExportFilename(
     request.templateName ?? request.packageValue.name,
     request.now,

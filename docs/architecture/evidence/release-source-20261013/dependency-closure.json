@@ -1,0 +1,11 @@
+{
+  "copiedTextDependencies": [
+    "docs/architecture/evidence/candidate-1-20261013/baseline/identity.json",
+    "docs/architecture/evidence/candidate-1-20261013/macos-k/report.json",
+    "docs/architecture/evidence/candidate-1-20261013/linux-final/report.json",
+    "docs/architecture/evidence/candidate-1-20261013/verification.json"
+  ],
+  "forcedIgnoredTextFiles": [
+    "fidelity/evidence/compact-field-cards/measurements/measurement-after-family.json"
+  ]
+}

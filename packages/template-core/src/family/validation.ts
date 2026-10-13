@@ -80,7 +80,7 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
     ["family.field-id-duplicate", duplicateFieldId, "Family field IDs must be unique."],
     ["family.field-key-duplicate", duplicateFieldKey, "Family field keys must be unique."],
     ["family.variant-id-duplicate", duplicateVariantId, "Variant IDs must be unique."],
-    ["family.group-id-duplicate", duplicateGroupId, "Variant group IDs must be unique."],
+    ["family.group-id-duplicate", duplicateGroupId, "Selection property IDs must be unique."],
   ] as const) {
     if (value) issues.push(issue(family, { code, severity: "error", message, details: { value } }));
   }
@@ -96,8 +96,8 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
     } else if (seenTitles.has(variant.title.trim().toLowerCase())) {
       issues.push(issue(family, {
         code: "family.variant-title-duplicate",
-        severity: "warning",
-        message: `Variant title "${variant.title}" is used more than once.`,
+        severity: "error",
+        message: `Variant name "${variant.title}" is used more than once.`,
         variantId: variant.id,
       }));
     }
@@ -114,13 +114,15 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
         (candidate) => candidate.familyFieldId === familyField.id,
       );
       if (!binding || binding.targets.length === 0) {
-        issues.push(issue(family, {
-          code: "family.binding-missing",
-          severity: "error",
-          message: `Field "${familyField.title}" is not bound in variant "${variant.title}".`,
-          fieldId: familyField.id,
-          variantId: variant.id,
-        }));
+        if (variant.ruleOverrides[familyField.id]) {
+          issues.push(issue(family, {
+            code: "family.rule-override-inapplicable",
+            severity: "error",
+            message: `Field "${familyField.title}" has an override in variant "${variant.title}" but is not available in that variant.`,
+            fieldId: familyField.id,
+            variantId: variant.id,
+          }));
+        }
         continue;
       }
       const resolved = resolveTemplateFamilyFieldRule(
@@ -202,28 +204,97 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
       }
     }
   }
-  for (const group of family.variantGroups) {
-    if (!group.title.trim() || group.options.length === 0) {
+  for (const familyField of family.fields) {
+    const applicable = family.variants.some((variant) =>
+      variant.bindings.some(
+        (binding) =>
+          binding.familyFieldId === familyField.id && binding.targets.length > 0,
+      ),
+    );
+    if (!applicable) {
       issues.push(issue(family, {
-        code: "family.group-invalid",
+        code: "family.field-unbound",
         severity: "error",
-        message: `Group "${group.id}" requires a title and at least one option.`,
-        groupId: group.id,
-      }));
-    }
-    const duplicateOption = duplicate(group.options.map((option) => option.id));
-    if (duplicateOption) {
-      issues.push(issue(family, {
-        code: "family.group-option-duplicate",
-        severity: "error",
-        message: `Group "${group.title}" contains a duplicate option ID.`,
-        groupId: group.id,
-        optionId: duplicateOption,
+        message: `Field "${familyField.title}" is not available in any variant.`,
+        fieldId: familyField.id,
       }));
     }
   }
+  const groupTitles = new Set<string>();
+  for (const group of family.variantGroups) {
+    const normalizedTitle = group.title.trim().toLocaleLowerCase();
+    if (!normalizedTitle) {
+      issues.push(issue(family, {
+        code: "family.group-title-missing",
+        severity: "error",
+        message: `Selection property "${group.id}" requires a name.`,
+        groupId: group.id,
+      }));
+    } else if (groupTitles.has(normalizedTitle)) {
+      issues.push(issue(family, {
+        code: "family.group-title-duplicate",
+        severity: "error",
+        message: `Selection property name "${group.title}" is used more than once.`,
+        groupId: group.id,
+      }));
+    }
+    groupTitles.add(normalizedTitle);
+    if (group.options.length === 0) {
+      issues.push(issue(family, {
+        code: "family.group-empty",
+        severity: "error",
+        message: `Selection property "${group.title || group.id}" needs at least one option.`,
+        groupId: group.id,
+      }));
+    }
+    const duplicateOptionId = duplicate(group.options.map((option) => option.id));
+    if (duplicateOptionId) {
+      issues.push(issue(family, {
+        code: "family.group-option-duplicate",
+        severity: "error",
+        message: `Selection property "${group.title}" contains a duplicate option ID.`,
+        groupId: group.id,
+        optionId: duplicateOptionId,
+      }));
+    }
+    const optionTitles = new Set<string>();
+    for (const option of group.options) {
+      const normalizedOptionTitle = option.title.trim().toLocaleLowerCase();
+      if (!normalizedOptionTitle) {
+        issues.push(issue(family, {
+          code: "family.group-option-title-missing",
+          severity: "error",
+          message: `Selection property "${group.title}" contains an option without a name.`,
+          groupId: group.id,
+          optionId: option.id,
+        }));
+      } else if (optionTitles.has(normalizedOptionTitle)) {
+        issues.push(issue(family, {
+          code: "family.group-option-title-duplicate",
+          severity: "error",
+          message: `Option name "${option.title}" is used more than once in "${group.title}".`,
+          groupId: group.id,
+          optionId: option.id,
+        }));
+      }
+      optionTitles.add(normalizedOptionTitle);
+    }
+  }
+
   const tuples = new Map<string, string>();
+  const configuredGroupIds = new Set(family.variantGroups.map((group) => group.id));
   for (const variant of family.variants) {
+    for (const groupId of Object.keys(variant.groupAssignments)) {
+      if (!configuredGroupIds.has(groupId)) {
+        issues.push(issue(family, {
+          code: "family.group-assignment-unknown",
+          severity: "error",
+          message: `Variant "${variant.title}" has a value for an unknown selection property.`,
+          variantId: variant.id,
+          groupId,
+        }));
+      }
+    }
     const tuple: string[] = [];
     for (const group of family.variantGroups) {
       const optionId = variant.groupAssignments[group.id];
@@ -231,7 +302,7 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
         issues.push(issue(family, {
           code: "family.group-assignment-missing",
           severity: "error",
-          message: `Variant "${variant.title}" needs an option for group "${group.title}".`,
+          message: `Variant "${variant.title}" needs a value for "${group.title}".`,
           variantId: variant.id,
           groupId: group.id,
         }));
@@ -241,7 +312,7 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
         issues.push(issue(family, {
           code: "family.group-assignment-invalid",
           severity: "error",
-          message: `Variant "${variant.title}" uses an unknown option in group "${group.title}".`,
+          message: `Variant "${variant.title}" uses an unknown value for "${group.title}".`,
           variantId: variant.id,
           groupId: group.id,
           optionId,
@@ -256,10 +327,48 @@ function validateDefinition(family: TemplateFamilyV1): TemplateFamilyIssueV1[] {
         issues.push(issue(family, {
           code: "family.group-tuple-duplicate",
           severity: "error",
-          message: `Variants "${previous}" and "${variant.id}" use the same group options.`,
+          message: `Variants "${previous}" and "${variant.id}" use the same selection values.`,
           variantId: variant.id,
         }));
       } else tuples.set(key, variant.id);
+    }
+  }
+
+  if (family.controlOrder) {
+    const expected = new Set<string>([
+      ...(family.variantGroups.length > 0
+        ? family.variantGroups.map((group) => `selection-property:${group.id}`)
+        : family.variants.length > 1
+          ? ["direct-variant-selector"]
+          : []),
+      ...family.fields.map((field) => `field:${field.id}`),
+    ]);
+    const seen = new Set<string>();
+    for (const control of family.controlOrder) {
+      const key = control.kind === "direct-variant-selector"
+        ? control.kind
+        : control.kind === "selection-property"
+          ? `${control.kind}:${control.groupId}`
+          : `${control.kind}:${control.fieldId}`;
+      if (!expected.has(key) || seen.has(key)) {
+        issues.push(issue(family, {
+          code: "family.control-order-invalid",
+          severity: "error",
+          message: "Editor controls must reference each active selector and field exactly once.",
+          details: { key },
+        }));
+      }
+      seen.add(key);
+    }
+    for (const key of expected) {
+      if (!seen.has(key)) {
+        issues.push(issue(family, {
+          code: "family.control-order-incomplete",
+          severity: "error",
+          message: "Editor control order is missing an active selector or field.",
+          details: { key },
+        }));
+      }
     }
   }
   return issues;
@@ -279,7 +388,12 @@ export function validateTemplateFamily(
     family.variants.map((variant) => [
       variant.id,
       Object.fromEntries(
-        family.fields.map((field) => [
+        family.fields.filter((field) =>
+          variant.bindings.some(
+            (binding) =>
+              binding.familyFieldId === field.id && binding.targets.length > 0,
+          )
+        ).map((field) => [
           field.id,
           resolveTemplateFamilyFieldRule(
             field.rule,

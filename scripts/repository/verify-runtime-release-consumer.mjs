@@ -10,10 +10,13 @@ import {
 } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
 import { chromium } from "playwright";
 import { preview } from "vite";
 import { createCompactLifecycleFixture } from "../compact-lifecycle-fixture.mjs";
+import { verifyDeliveryBundle } from "../release-delivery/bundle.mjs";
+import { candidateManifestName, extractCandidateExamples, verifyCandidateFiles } from "./local-sdk-candidate.mjs";
 import {
   loadRuntimePackageDefinitions,
   resolveFixedRuntimeVersion,
@@ -42,6 +45,15 @@ const packageDefinitions = (await loadRuntimePackageDefinitions(root)).map(
     archive: runtimeArchiveName(item, version),
   }),
 );
+const localCandidate = await readFile(path.join(sourceArchivesDirectory, candidateManifestName), "utf8")
+  .then(JSON.parse).catch(error => { if (error.code === "ENOENT") return null; throw error; });
+const consumerLabel = path.basename(packageManager).startsWith("pnpm") ? "pnpm" : "npm";
+// A failed rerun cannot leave an earlier success report masquerading as current evidence.
+await rm(path.join(sourceArchivesDirectory, `CONSUMER-VERIFICATION-${consumerLabel}.json`), { force: true });
+if (localCandidate) await verifyCandidateFiles(sourceArchivesDirectory, localCandidate, packageDefinitions, version);
+// Publication artifacts must prove the same current contract without a local manifest.
+const delivery = await verifyDeliveryBundle(sourceArchivesDirectory, { root, version });
+if (delivery.manifest.scope !== "runtime") throw new Error("Core-only delivery cannot certify the full V2 runtime contract.");
 const workspace = await mkdtemp(
   path.join(os.tmpdir(), "template-runtime-release-consumer-"),
 );
@@ -196,7 +208,7 @@ ${Object.entries(vendoredDependencies)
           module: "ESNext",
           moduleResolution: "Bundler",
           strict: true,
-          skipLibCheck: true,
+          skipLibCheck: false,
           jsx: "react-jsx",
           noEmit: true,
         },
@@ -520,11 +532,33 @@ createRoot(document.getElementById("root")!).render(
     }
   }
 
-  run(
-    process.execPath,
-    [path.join(consumerDirectory, "node_modules/typescript/bin/tsc"), "-b"],
-    { cwd: consumerDirectory, env: environment },
-  );
+  {
+    const guide = await readFile(path.join(sourceArchivesDirectory, "SDK-V2-INTEGRATION.md"), "utf8");
+    const examples = extractCandidateExamples(guide);
+    for (const [index, example] of examples.entries()) {
+      await writeFile(path.join(consumerDirectory, "src", `sdk-guide-${index}.tsx`), example);
+    }
+    for (const item of delivery.manifest.files.filter(item => item.file.endsWith(".ts") || item.file.endsWith(".tsx"))) {
+      await copyFile(path.join(sourceArchivesDirectory, item.file), path.join(consumerDirectory, "src", item.file));
+    }
+    // Harness-only fixture lookup remains in the repository; SDK runtime imports
+    // resolve from this isolated consumer's installed archives, never workspace aliases.
+    for (const file of ["verify-sdk-061-single-host.mjs", "verify-sdk-061-family-host.mjs"]) {
+      const original = await readFile(path.join(root, "scripts/repository", file), "utf8");
+      const isolated = original.replaceAll('"../fidelity/core.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/fidelity/core.mjs")).href))
+        .replaceAll('"../fidelity/gate-profile.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/fidelity/gate-profile.mjs")).href))
+        .replaceAll('"./sdk-061-family-profile.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/repository/sdk-061-family-profile.mjs")).href));
+      const probe = path.join(consumerDirectory, file);
+      await writeFile(probe, isolated);
+      console.log(run(process.execPath, [probe], { cwd: consumerDirectory, env: environment }));
+    }
+  }
+
+  try {
+    run(process.execPath, [path.join(consumerDirectory, "node_modules/typescript/bin/tsc"), "-b"], { cwd: consumerDirectory, env: environment });
+  } catch (cause) {
+    throw new Error("Supplied archives do not satisfy the current recommended V2 integration contract. Use one compatible fixed-train delivery; V1-only verification is not a fallback.", { cause });
+  }
   run(
     process.execPath,
     [
@@ -661,6 +695,21 @@ createRoot(document.getElementById("root")!).render(
     );
   }
   await context.close();
+
+  {
+    await writeFile(path.join(sourceArchivesDirectory, `CONSUMER-VERIFICATION-${consumerLabel}.json`), JSON.stringify({
+      candidateId: localCandidate?.candidateId ?? null,
+      manifestSha256: localCandidate ? createHash("sha256").update(await readFile(path.join(sourceArchivesDirectory, candidateManifestName))).digest("hex") : null,
+      deliveryManifestSha256: delivery.manifestSha256, deliveryProvenance: delivery.manifest.provenance,
+      deliveryMode: delivery.manifest.mode, bundleLinksVerified: true, deliveredHostSourcesTypechecked: true,
+      packageManager: consumerLabel, packageManagerVersion: run(packageManager, packageManagerArguments(["--version"]), { cwd: consumerDirectory, env: environment }).trim(),
+      node: process.version, platform: process.platform, arch: process.arch,
+      archives: archiveEvidence, supportedGuideExamplesTypechecked: true,
+      exactV2SingleAndFamilyContractsPassed: true, legacyBrowserLifecyclePassed: true,
+      externalRequestCount, consoleErrors, downloadCount, passed: true,
+      manualReview: false, recordedAt: new Date().toISOString(),
+    }, null, 2) + "\n");
+  }
 
   console.log(
     `Verified secret-free runtime archives: import, diagnostics, edit, stale-export rejection, persistence, and offline reload (${archiveEvidence

@@ -5,11 +5,13 @@ import { loadManifest, parseArguments, repoRoot, selectFixtures, selectSurfaces,
 import { approvedSettlementRoot, compareSettlementDirectory, observationFromStructure, promoteSettlementDirectory, settlementRoot, settlementSnapshotDirectory, writeSettlementCandidate } from "./core.mjs";
 import { resolveSettlementModel } from "./model.mjs";
 import { selectScenarios } from "./scenarios.mjs";
+import { captureRunIssues } from "../fidelity/capture-integrity.mjs";
+import { gateFixtureSelection, readSdkGateCaptureRun } from "../fidelity/gate-profile.mjs";
 
 const [command = "compare", ...rest] = process.argv.slice(2);
 const args = parseArguments(rest);
 const manifest = loadManifest();
-const fixtures = selectFixtures(manifest, args.fixture);
+const fixtures = gateFixtureSelection(manifest, args) || selectFixtures(manifest, args.fixture);
 const selectedSurfaces = selectSurfaces(args.surface);
 const candidatesBase = resolve(String(args.output || join(settlementRoot, "candidates")));
 const runId = String(args["run-id"] || `settlement-${new Date().toISOString().replace(/[:.]/g, "-")}`);
@@ -18,13 +20,26 @@ const fidelityRoot = resolve(String(args["fidelity-output"] || join(repoRoot, "f
 const profile = String(args.profile || "chromium-headless");
 
 function hasCompleteRun(run) {
-  return fixtures.every((fixture) => selectedSurfaces.every((surface) => existsSync(join(fidelityRoot, run, fixture.id, surface, "structure-1.json"))));
+  const reportPath = join(fidelityRoot, run, "run.json");
+  if (!existsSync(reportPath)) return false;
+  const report = JSON.parse(readFileSync(reportPath, "utf8"));
+  return captureRunIssues(report, fixtures.map(fixture => fixture.id), selectedSurfaces).length === 0 &&
+    fixtures.every((fixture) => selectedSurfaces.every((surface) =>
+      Array.from({ length: report.expectedRepeat ?? 2 }, (_, index) => index + 1).every(index =>
+        existsSync(join(fidelityRoot, run, fixture.id, surface, `structure-${index}.json`)) &&
+        existsSync(join(fidelityRoot, run, fixture.id, surface, `capture-${index}.png`)))));
 }
 
 function fidelityRun() {
+  if (args.gate) {
+    const selected = String(args["fidelity-run"] || "");
+    if (!selected || selected !== runId) throw new Error("SDK gate settlement run requires --fidelity-run matching --run-id.");
+    readSdkGateCaptureRun(fidelityRoot, selected, fixtures);
+    return selected;
+  }
   if (args["fidelity-run"]) {
     const selected = String(args["fidelity-run"]);
-    if (!hasCompleteRun(selected)) throw new Error(`Fidelity run ${selected} is missing one or more selected fixture/surface structure reports.`);
+    if (!hasCompleteRun(selected)) throw new Error(`Fidelity run ${selected} has missing, failed, incomplete or unstable selected captures; inspect its run.json and structure reports.`);
     return selected;
   }
   if (!existsSync(fidelityRoot)) throw new Error(`Fidelity candidates do not exist: ${fidelityRoot}`);
@@ -55,7 +70,7 @@ async function generateObserved() {
   }
   const environmentPath = join(fidelityRoot, sourceRun, "environment.json");
   const environment = existsSync(environmentPath) ? JSON.parse(readFileSync(environmentPath, "utf8")) : null;
-  writeFileSync(join(candidateRoot, "run.json"), stableStringify({ schemaVersion: "settlement-run-v1", runId, command, sourceFidelityRun: sourceRun, environmentProfile: profile, fixtures: results.map(({ fixture, surface, model }) => ({ fixtureId: fixture.id, zipSha256: fixture.zipSha256, surface, stable: model.settled.stable, readiness: model.settled.readiness, comparison: model.comparison.summary, performance: model.performance })) }));
+  writeFileSync(join(candidateRoot, "run.json"), stableStringify({ schemaVersion: "settlement-run-v1", runId, gate: args.gate || null, command, sourceFidelityRun: sourceRun, environmentProfile: profile, fixtures: results.map(({ fixture, surface, model }) => ({ fixtureId: fixture.id, zipSha256: fixture.zipSha256, surface, stable: model.settled.stable, readiness: model.settled.readiness, comparison: model.comparison.summary, performance: model.performance })) }));
   writeFileSync(join(candidateRoot, "environment.json"), stableStringify({ schemaVersion: "settlement-environment-v1", profile, source: environment, policy: "Headed and headless raster evidence are separate; geometry tolerances are fixed and references are never shared across profiles." }));
   return results;
 }
@@ -68,15 +83,34 @@ async function baseline() {
 async function compare() {
   const results = await generateObserved();
   const comparisons = results.map(({ fixture, surface, directory }) => ({ fixtureId: fixture.id, surface, ...compareSettlementDirectory(settlementSnapshotDirectory(approvedSettlementRoot, fixture.id, surface), directory) }));
-  writeFileSync(join(candidateRoot, "reference-comparison.json"), stableStringify({ schemaVersion: "settlement-reference-comparison-v1", runId, comparisons }));
+  writeFileSync(join(candidateRoot, "reference-comparison.json"), stableStringify({ schemaVersion: "settlement-reference-comparison-v1", runId, gate: args.gate || null, sourceFidelityRun: args.gate ? runId : String(args["fidelity-run"] || ""), comparisons }));
   comparisons.forEach((item) => console.log(`[settlement] fixture=${item.fixtureId} surface=${item.surface} reference=${item.equal ? "pass" : "fail"}`));
   if (comparisons.some((item) => !item.equal)) process.exitCode = 1;
 }
 
 async function update() {
   const sourceRunId = args["source-run"] ? String(args["source-run"]) : null;
+  if (args["run-id"] && sourceRunId !== runId) {
+    throw new Error("Updating an identified settlement run requires --source-run matching --run-id; regeneration would approve different evidence.");
+  }
+  if (args.gate && !sourceRunId) {
+    throw new Error("SDK gate reference promotion requires an explicit --source-run.");
+  }
   let root = sourceRunId ? join(candidatesBase, sourceRunId) : null;
-  if (!root || !existsSync(root)) { await generateObserved(); root = candidateRoot; }
+  if (sourceRunId && !existsSync(root)) throw new Error(`Settlement candidate run does not exist: ${sourceRunId}`);
+  if (!root) { await generateObserved(); root = candidateRoot; }
+  if (sourceRunId) {
+    const source = JSON.parse(readFileSync(join(root, "run.json"), "utf8"));
+    if (source.runId !== sourceRunId || (args.gate &&
+        (source.gate !== args.gate || source.sourceFidelityRun !== sourceRunId))) {
+      throw new Error(`Settlement candidate ${sourceRunId} is not bound to the same fidelity capture.`);
+    }
+    for (const fixture of fixtures) for (const surface of selectedSurfaces) {
+      if (!source.fixtures.some((item) => item.fixtureId === fixture.id && item.surface === surface)) {
+        throw new Error(`Settlement candidate ${sourceRunId} lacks ${fixture.id}/${surface}.`);
+      }
+    }
+  }
   for (const fixture of fixtures) for (const surface of selectedSurfaces) {
     const candidateDirectory = settlementSnapshotDirectory(root, fixture.id, surface);
     const promoted = promoteSettlementDirectory({ fixtureId: fixture.id, surface, candidateDirectory, reason: args.reason });

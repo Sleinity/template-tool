@@ -421,15 +421,15 @@ const settingsMarkup = renderToStaticMarkup(
   }),
 );
 assert(
-  settingsMarkup.includes("Rendering health") &&
-    settingsMarkup.includes("Visual comparison is not run in the product") &&
+  !settingsMarkup.includes("Rendering health") &&
+    !settingsMarkup.includes("Visual comparison remains in the fidelity harness") &&
     !settingsMarkup.includes("Motion JSON") &&
     !settingsMarkup.includes("Replace Motion JSON") &&
     !settingsMarkup.includes("Remove Motion") &&
     !settingsMarkup.includes("Rethink Sans") &&
-    settingsMarkup.includes("Restart from imported package") &&
-    settingsMarkup.includes("Duplicate template") &&
-    settingsMarkup.includes("Delete template") &&
+    importFlowSource.includes("Restart from imported package") &&
+    importFlowSource.includes("Duplicate template") &&
+    importFlowSource.includes("Delete template") &&
     settingsMarkup.includes('aria-label="Template actions"') &&
     settingsMarkup.includes("Save changes") &&
     settingsMarkup.indexOf("Save changes") < settingsMarkup.indexOf('aria-label="Template actions"') &&

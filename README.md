@@ -4,6 +4,9 @@ This private monorepo contains the Template Studio reference application and a
 reusable browser renderer SDK. Fidelity improvements are made once here and are
 released as versioned private packages for other client tools.
 
+The [SDK 1.0.0 release roadmap](docs/sdk/RELEASE_ROADMAP.md) tracks the reviewed
+source baseline, guarded publication and registry acceptance.
+
 ## Workspace map
 
 - `apps/studio` — the current Template Tool product and fidelity workbench;

@@ -35,6 +35,7 @@ export {
   TemplateSessionProvider,
   type TemplateSessionProviderProps,
 } from "./internal/templateSessionContext";
+export * from "./fieldSessionV2";
 
 /**
  * Owns one browser session for the mounted React workspace. Disposal is

@@ -69,6 +69,15 @@ export interface TemplateFamilyFieldV1 {
   rule: TemplateFamilyFieldRuleV1;
 }
 
+export interface TemplateFamilyFieldScopeV1 {
+  kind:
+    | "family-wide"
+    | "variant-subset"
+    | "variant-specific"
+    | "unbound";
+  variantIds: string[];
+}
+
 export interface TemplateFamilyFieldTargetV1 {
   fieldId: string;
   nodeId: string;
@@ -109,6 +118,11 @@ export interface TemplateVariantGroupV1 {
   options: TemplateVariantGroupOptionV1[];
 }
 
+export type TemplateFamilyControlRefV1 =
+  | { kind: "direct-variant-selector" }
+  | { kind: "selection-property"; groupId: string }
+  | { kind: "field"; fieldId: string };
+
 export interface TemplateFamilyV1 {
   schemaVersion: typeof TEMPLATE_FAMILY_SCHEMA_VERSION;
   id: string;
@@ -116,6 +130,7 @@ export interface TemplateFamilyV1 {
   fields: TemplateFamilyFieldV1[];
   variants: TemplateFamilyVariantV1[];
   variantGroups: TemplateVariantGroupV1[];
+  controlOrder?: TemplateFamilyControlRefV1[];
 }
 
 export interface TemplateFamilyImageValueV1 {

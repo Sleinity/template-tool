@@ -16,12 +16,15 @@ function sha256(path) {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
 }
 
-export function loadExactFontManifest() {
+export function loadExactFontManifest(requirements = null) {
   const manifestPath = join(repoRoot, "fidelity", "fonts.json");
   const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
   return {
     ...manifest,
-    fonts: manifest.fonts.map((font) => {
+    fonts: manifest.fonts.filter(font => !requirements || requirements.some(requirement =>
+      font.family.toLowerCase() === requirement.family.trim().toLowerCase() &&
+      font.weight === Number(requirement.weight) && font.style === (requirement.style ?? "normal"),
+    )).map((font) => {
       const configured = expandEnvironment(font.sourcePath ?? "");
       const path = resolve(configured || font.defaultSourcePath || "");
       if (!path || !existsSync(path)) {
@@ -46,4 +49,10 @@ export function exactFontForRequirement(manifest, family, weight, style) {
       font.weight === Number(weight) &&
       font.style === style,
   ) ?? null;
+}
+
+export function requireExactFont(manifest, family, weight, style) {
+  const font = exactFontForRequirement(manifest, family, weight, style);
+  if (!font) throw new Error(`No verified exact font binary is registered for ${family} ${weight} ${style}.`);
+  return font;
 }

@@ -1,6 +1,7 @@
 # Template Tool V1 UX/UI Overhaul
 
-Status: Phase 1 target architecture approved for implementation planning.
+Status: Current Studio UX authority. Updated for the family-first six-step
+template setup consolidation.
 
 This document is the source of truth for the V1 interface overhaul. The
 product is ZIP-only for new imports and saved templates. Raw JSON, pasted
@@ -15,16 +16,42 @@ Templates
 -> Template workspace
 ```
 
-Template setup is:
+Template setup and Template settings now share this structure:
 
 ```text
-Package -> Fonts -> Validate -> Fields -> Add template
+Variants -> Fonts -> Fields -> Field rules -> Validate -> Review
 ```
 
-Validation remains the canonical readiness and Package Quality gate. The
-current Review step becomes Fields / Configure fields.
+New imports unlock these pages in sequence. Existing settings unlock all six
+pages immediately. Validation remains the canonical readiness and Package
+Quality gate; Review is a concise confirmation and never duplicates detailed
+diagnostics.
 
-## 1. Current UX and UI Diagnosis
+Studio uses **Template** and **variants**. **Template Family** is reserved for
+SDK documentation and technical details.
+
+## Neo-modernist wayfinding initiative
+
+Studio is developing a reusable dark visual and interaction foundation inspired
+by contemporary identity systems and civic wayfinding. It uses disciplined
+typography, explicit routes, geometric symbols, flat colour, connected records,
+and strong orientation while keeping forms, tables, previews, and diagnostics
+calm and legible. The intent is a dependable public-navigation system with
+creative energy, not an ornamental theme or a collection of page-specific
+restyles.
+
+Rollout is gated: **Foundation → Navigation Pilot → Setup Workflow → Secondary
+Surfaces → Hardening**. Foundation is currently an opt-in development surface;
+production setup remains on the current visual system. Route colour identifies
+location only. Status, focus, selection, and product accents retain independent
+semantic roles. Full details and the state matrix live in
+[`design-system-v1.md`](design-system-v1.md).
+
+## 1. Historical diagnosis and current direction
+
+The diagnosis below records the single-template baseline that led to the V1
+system. Where it conflicts with the six-step contract above, the current
+contract is authoritative.
 
 ### What is already sound
 
@@ -48,9 +75,8 @@ current Review step becomes Fields / Configure fields.
 2. The dashboard is metadata-first. Cards have no preview image and expose
    package type, motion state, description, timestamp, Use, Settings, Rename,
    Duplicate, and Delete at once.
-3. Template setup contains a duplicate Review stage. Validation already owns
-   readiness; Review currently mixes files, field inventory, field rules,
-   fonts, motion, and preview.
+3. Template setup previously contained a duplicate Review stage. Validation
+   now owns detailed readiness while Review contains only the final decision.
 4. Font preparation works but reads as a technical registry tool. Required
    action, safe continuation, and the difference between Missing, Candidate,
    Fallback, and Ready are not visually dominant.
@@ -119,7 +145,8 @@ current template or draft.
 ### Product-level destinations
 
 1. **Templates** - visual library, recent drafts, import entry point.
-2. **Template setup** - package, fonts, validation, fields, final creation.
+2. **Template setup** - variants, fonts, fields, field rules, validation, and
+   final confirmation.
 3. **Template workspace** - live preview, edit content, diagnostics, export.
 4. **Template settings** - reusable template configuration and repair tools.
 
@@ -164,19 +191,31 @@ directly.
 
 ### Template setup
 
-- **Package:** one ZIP source, detected-file summary, failure recovery, and
-  advanced technical details.
-- **Fonts:** required faces, current status, direct Add/Choose actions, safe
-  continuation, and technical matching details on demand.
-- **Validate:** the sole readiness gate, Package Quality workspace, affected
-  preview, and technical details.
-- **Fields:** detected field list plus focused configuration for supported
-  labels, order/group, editability, helper/default data, and existing rules.
-  Future input types belong in typed component/model boundaries, not inactive
+- **Variants:** one compact table owns ZIP upload, inline variant naming,
+  ordering and optional selection-property assignments. Details and replacement open in a
+  side drawer; the page has no persistent renderer.
+- **Fonts:** aggregate exact face requirements across variants. Upload once and
+  link the verified face everywhere compatible.
+- **Fields and Field rules:** keep the task list primary. Variant selection
+  lives in the preview chrome, so larger families do not add horizontal page
   controls.
-- **Add template:** preview, name, validation outcome, configured field count,
-  visible blockers, and one Add template action. Description is not shown or
-  required.
+- **Review:** collect the explicit template name, show one compact preview and
+  summarize only organization, editing and readiness with links to unfinished
+  work.
+- **Fields:** map package targets to stable fields, distinguish shared and
+  variant-specific scope in one authored-order inventory, and keep technical
+  target identity behind disclosure. Unresolved package targets are rows in
+  this same inventory rather than a separate problem panel.
+- **Field rules:** one ordered inventory using the mature rule-card controls,
+  with common rules and deliberate applicable-variant differences. Package and
+  family editing reuse the same constraint controls.
+- **Validate:** the sole detailed readiness gate, selected-variant Package
+  Quality workspace, one renderer, searchable diagnostics and focused issue
+  evidence. Entering Validate automatically checks all Not checked or Stale
+  variants once; current evidence is not rerun automatically.
+- **Review:** template name, variants, selection mode, field-scope counts, font
+  readiness and remaining warnings in one connected confirmation summary. It
+  contains no package dump or diagnostic duplicate.
 
 ### Template workspace
 
@@ -192,12 +231,13 @@ directly.
 
 ### Template settings
 
-- Edit reusable template name, supported field behavior, managed font links,
-  and Settings-only Motion JSON repair.
+- Reuse the same six pages with every page immediately available.
+- Edit the reusable template name, variants, selection behavior, field scope,
+  rules and managed font links without forcing sequential completion.
 - Keep package internals and source metadata under Technical details.
 - Keep Duplicate and Delete secondary and deliberate.
-- Do not reuse the full import journey merely because settings share some
-  domain components.
+- Use the same presentation and setup controller as import while preserving
+  settings-specific save and repair behavior.
 
 ## 5. Keep / Move / Remove Decisions
 
@@ -214,13 +254,14 @@ directly.
 | Dashboard package/motion badges | Remove | Technical details if needed |
 | Dashboard description | Remove from UI | Stored value may remain temporarily |
 | Dashboard rename/duplicate/delete buttons | Move | Card overflow menu |
-| Review step | Replace | Fields / Configure fields |
-| Review package-file panel | Move | Validate technical details |
-| Field inventory and rules | Consolidate | Fields |
+| Standalone variant-options step | Merge | Variants |
+| Detailed Review diagnostics | Remove | Validate remains authoritative |
+| Review package-file panel | Remove | Focused issue technical details |
+| Field inventory and rules | Separate by task | Fields and Field rules |
 | Motion JSON in normal setup | Remove | Settings repair / Technical details |
 | Description field in Add template | Remove | No normal UI owner |
 | Final Package files panel | Remove | Validate technical details |
-| Import/settings mode shell reuse | Split gradually | Setup and Settings pages |
+| Import/settings setup shell | Share | The same six-page flow, with different gating |
 | Developer IDs, paths, raw payloads | Keep behind disclosure | Technical details |
 
 ## 6. Canonical Terminology and Copy Changes
@@ -228,10 +269,10 @@ directly.
 | Avoid in normal UI | Canonical V1 term | Usage |
 | --- | --- | --- |
 | Template Package Platform | Templates | Page title or product area |
-| Add Package | Package | Setup navigation |
+| Add Package | Variants | Setup navigation |
 | Add ZIP Package | Import package | Primary file action |
 | Prepare Fonts / Preparing fonts | Fonts / Add missing fonts | Step and task language |
-| Review | Fields | Setup navigation |
+| Template Family | Template | Normal Studio UI |
 | Detected Editable Fields | Configure fields | Field-builder title |
 | Post Content | Edit content | Workspace panel |
 | Motion metadata | Motion preview | User-facing preview control only |
@@ -247,6 +288,30 @@ Headings, labels, and buttons use sentence case. Action labels begin with a
 verb and state the result. Persistent errors explain what happened, why it
 matters, and what to do next. Status is never communicated by color alone.
 
+### Shared setup presentation rules
+
+- The setup header owns the only page-level heading. Body sections use section,
+  subsection, control-group, label, supporting-copy and metadata roles in that
+  order.
+- A page region has one primary action. Reversible alternatives are secondary,
+  low-priority actions are quiet, and destructive actions live in a confirmed
+  overflow menu.
+- The setup status vocabulary is **Ready**, **Needs attention**, **Blocked**,
+  **Not checked**, **Checking**, and **Stale**. Shared and variant-specific
+  scope is informational, never a warning by itself.
+- Controls that form one decision share a surface. Separate surfaces represent
+  separate tasks; ordinary spacing must not create nested-card stacks.
+- Source filenames, node IDs, hashes, asset counts, package statistics and
+  provenance stay under **Technical details**.
+- Fields, Field rules, Validate and Review use the same compact preview dock.
+  It retains selection across pages and opens an upward searchable list inside
+  preview chrome, avoiding a second page-level control or renderer.
+- Desktop uses a readable task column and sticky preview where useful. Tablet
+  stacks the preview. Small-screen setup remains a single column without body
+  overflow; the full editor keeps its documented desktop/tablet minimum.
+- The sticky footer keeps Back, an explicit blocker explanation and one named
+  forward action. Failed progression focuses the first actionable blocker.
+
 ## 7. Repeat-Use Efficiency Baseline
 
 | Workflow | Current path | Baseline issue | V1 target |
@@ -261,7 +326,7 @@ matters, and what to do next. Status is never communicated by color alone.
 | Export PNG | Workspace -> Export PNG | One action after readiness | Preserve action and adjacent failure state |
 | Open template settings | Card -> Settings | One action | Preserve through sibling icon/menu action |
 | Revalidate | Setup Validate -> Validate again | Direct | Preserve in Validate |
-| Configure fields | Review -> expand rule panels | Dense and mixed with unrelated panels | Fields list -> focused field settings |
+| Configure fields | Fields -> selected mapping | Direct | Preserve focused mapping and variant context |
 
 V1 must not add confirmations to safe or reversible actions. Confirmations are
 reserved for deletion or genuine data-loss risk. Optional shortcuts may be
@@ -459,4 +524,3 @@ preview attachment at creation time.
    lookup extension described above.
 4. Approve retaining description in storage temporarily while removing it from
    all normal V1 UI.
-

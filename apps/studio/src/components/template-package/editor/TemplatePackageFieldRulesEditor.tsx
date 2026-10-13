@@ -1,13 +1,6 @@
-import { ChevronDown, GripVertical, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  CheckboxField,
-  Input,
-  Menu,
-  MenuItem,
-  Select,
-  Status,
-} from "../../ui";
+import { Menu, MenuItem } from "../../ui";
 import { resolvePackageAssetReference } from "@sleinity/template-browser/assets";
 import { resolvePackageAssetSource } from "@sleinity/template-core/assets";
 import type {
@@ -23,6 +16,8 @@ import {
   getPackageEditorFieldTargetStatuses,
   packageWithEffectiveEditableFields,
 } from "@sleinity/template-core/editor";
+import { FieldRuleCardShell } from "./FieldRuleCardShell";
+import { FieldRuleConstraintControls } from "./FieldRuleConstraintControls";
 
 interface TemplatePackageFieldRulesEditorProps {
   packageValue: TemplatePackageV1;
@@ -113,51 +108,6 @@ function fieldSummary(field: EditableFieldBinding): string {
     return lineLimit ? `${characters} · ${lineLimit}` : characters;
   }
   return editableFieldTypeLabel(field.type);
-}
-
-function ConstraintNumberInput({
-  label,
-  value,
-  integer = false,
-  onCommit,
-}: {
-  label: string;
-  value: number | undefined;
-  integer?: boolean;
-  onCommit(value: number | undefined): void;
-}) {
-  const [draft, setDraft] = useState(value === undefined ? "" : String(value));
-  useEffect(() => {
-    setDraft(value === undefined ? "" : String(value));
-  }, [value]);
-  const parsed = draft === "" ? undefined : Number(draft);
-  const invalid = draft !== "" && (
-    !Number.isFinite(parsed) ||
-    Number(parsed) <= 0 ||
-    (integer && !Number.isSafeInteger(parsed))
-  );
-  return (
-    <Input
-      label={label}
-      type="number"
-      min={integer ? 1 : 0.1}
-      step={integer ? 1 : 0.1}
-      value={draft}
-      placeholder="No limit"
-      error={invalid ? `${label} must be ${integer ? "a whole number" : "a number"} greater than zero.` : undefined}
-      onChange={(event) => {
-        const next = event.target.value;
-        setDraft(next);
-        if (next === "") onCommit(undefined);
-        else {
-          const number = Number(next);
-          if (Number.isFinite(number) && number > 0 && (!integer || Number.isSafeInteger(number))) {
-            onCommit(number);
-          }
-        }
-      }}
-    />
-  );
 }
 
 function cleanLegacyConstraints(field: EditableFieldBinding): void {
@@ -351,13 +301,35 @@ export function TemplatePackageFieldRulesEditor({
           };
 
           return (
-            <article
+            <FieldRuleCardShell
               key={fieldKey}
-              role="listitem"
-              className="field-rule-card"
-              data-selected={selected || undefined}
-              data-expanded={expanded || undefined}
-              data-drop-before={dropIndex === index || undefined}
+              fieldId={fieldKey}
+              title={formatEditableFieldLabel(field)}
+              summary={fieldSummary(field)}
+              typeLabel={editableFieldTypeLabel(field.type)}
+              selected={selected}
+              expanded={expanded}
+              configurable={configurable}
+              statuses={!targetLinked ? [{ label: "Preview unavailable", tone: "attention" }] : []}
+              onSelect={selectAndToggle}
+              reorderLabel={`Drag ${formatEditableFieldLabel(field)} to reorder`}
+              onDragStart={(event) => {
+                setDraggedFieldKey(fieldKey);
+                event.dataTransfer.effectAllowed = "move";
+                event.dataTransfer.setData("text/plain", fieldKey);
+                const row = event.currentTarget.closest<HTMLElement>(".field-rule-card");
+                if (row) {
+                  const ghost = row.cloneNode(true) as HTMLElement;
+                  ghost.classList.add("field-rule-card--drag-ghost");
+                  ghost.querySelector(".field-rule-card__content")?.remove();
+                  ghost.style.width = `${row.getBoundingClientRect().width}px`;
+                  document.body.appendChild(ghost);
+                  event.dataTransfer.setDragImage(ghost, 28, 28);
+                  window.setTimeout(() => ghost.remove(), 0);
+                }
+              }}
+              onDragEnd={finishDrag}
+              dropBefore={dropIndex === index}
               onDragOver={(event) => {
                 if (!draggedFieldKey) return;
                 event.preventDefault();
@@ -372,54 +344,8 @@ export function TemplatePackageFieldRulesEditor({
                 if (draggedFieldKey) moveField(draggedFieldKey, index);
                 finishDrag();
               }}
-            >
-              <div className="field-rule-card__summary">
-                <button
-                  type="button"
-                  className="field-rule-card__drag-handle"
-                  draggable
-                  data-field-reorder-key={fieldKey}
-                  aria-label={`Drag ${formatEditableFieldLabel(field)} to reorder`}
-                  onDragStart={(event) => {
-                    setDraggedFieldKey(fieldKey);
-                    event.dataTransfer.effectAllowed = "move";
-                    event.dataTransfer.setData("text/plain", fieldKey);
-                    const row = event.currentTarget.closest<HTMLElement>(".field-rule-card");
-                    if (row) {
-                      const ghost = row.cloneNode(true) as HTMLElement;
-                      ghost.classList.add("field-rule-card--drag-ghost");
-                      ghost.querySelector(".field-rule-card__content")?.remove();
-                      ghost.style.width = `${row.getBoundingClientRect().width}px`;
-                      document.body.appendChild(ghost);
-                      event.dataTransfer.setDragImage(ghost, 28, 28);
-                      window.setTimeout(() => ghost.remove(), 0);
-                    }
-                  }}
-                  onDragEnd={finishDrag}
-                >
-                  <GripVertical aria-hidden="true" size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="field-rule-card__select"
-                  aria-expanded={configurable ? expanded : undefined}
-                  aria-controls={configurable ? `field-rules-${fieldKey}` : undefined}
-                  aria-pressed={selected}
-                  onClick={selectAndToggle}
-                >
-                  <span className="min-w-0 text-left">
-                    <span className="block truncate font-medium">{formatEditableFieldLabel(field)}</span>
-                    <span className="mt-1 block text-xs font-normal text-content-muted">{fieldSummary(field)}</span>
-                  </span>
-                  <span className="field-rule-card__summary-meta">
-                    {!targetLinked ? <Status tone="attention">Preview unavailable</Status> : null}
-                    <Status tone="neutral" className="field-rule-card__type">
-                      {editableFieldTypeLabel(field.type)}
-                    </Status>
-                    {configurable ? <ChevronDown className="field-rule-card__chevron" aria-hidden="true" size={18} /> : null}
-                  </span>
-                </button>
-                <div className="field-rule-card__reorder-actions" aria-label={`Reorder ${formatEditableFieldLabel(field)}`}>
+              reorderActions={(
+                <div aria-label={`Reorder ${formatEditableFieldLabel(field)}`}>
                   <Menu label={<MoreHorizontal size={16} />} accessibleLabel={`More reorder actions for ${formatEditableFieldLabel(field)}`}>
                     {index > 0 ? <MenuItem onClick={() => moveField(fieldKey, index - 1)}>Move up</MenuItem> : null}
                     {index < fields.length - 1 ? <MenuItem onClick={() => moveField(fieldKey, index + 1)}>Move down</MenuItem> : null}
@@ -427,10 +353,9 @@ export function TemplatePackageFieldRulesEditor({
                     <MenuItem onClick={() => moveField(fieldKey, fields.length - 1)}>Move to bottom</MenuItem>
                   </Menu>
                 </div>
-              </div>
-
-              {expanded && configurable ? (
-                <div id={`field-rules-${fieldKey}`} className="field-rule-card__content space-y-4">
+              )}
+              content={(
+                <>
                   <DefaultValue packageValue={packageValue} field={field} />
                   {field.type === "image" ? (
                     <>
@@ -445,57 +370,28 @@ export function TemplatePackageFieldRulesEditor({
                           </p>
                         </div>
                       ) : null}
-                      <div className="field-rules-two-column">
-                        <ConstraintNumberInput label="Maximum file size (MB)" value={imageConstraints.maxFileSizeMb} onCommit={(value) => updateImageConstraint("maxFileSizeMb", value)} />
-                        <ConstraintNumberInput label="Minimum width" integer value={imageConstraints.minWidth} onCommit={(value) => updateImageConstraint("minWidth", value)} />
-                        <ConstraintNumberInput label="Minimum height" integer value={imageConstraints.minHeight} onCommit={(value) => updateImageConstraint("minHeight", value)} />
-                        <Select label="Default placement" value={imageConstraints.replacementMode === "contain" || imageConstraints.replacementMode === "user-crop" ? imageConstraints.replacementMode : "cover"} onChange={(event) => updateImageConstraint("replacementMode", event.target.value as PackageImageFieldConstraints["replacementMode"])}>
-                          <option value="cover">Fill frame</option>
-                          <option value="contain">Fit inside frame</option>
-                          <option value="user-crop">Host-provided crop</option>
-                        </Select>
-                        <Select label="Aspect ratio" value={typeof imageConstraints.aspectRatio === "number" ? "custom" : imageConstraints.aspectRatio ?? "preserve-frame"} onChange={(event) => updateImageConstraint("aspectRatio", event.target.value === "custom" ? 1 : event.target.value as "preserve-frame" | "free")}>
-                          <option value="preserve-frame">Match template frame</option>
-                          <option value="free">Any ratio</option>
-                          <option value="custom">Custom ratio</option>
-                        </Select>
-                        {typeof imageConstraints.aspectRatio === "number" ? (
-                          <ConstraintNumberInput label="Custom aspect ratio" value={imageConstraints.aspectRatio} onCommit={(value) => updateImageConstraint("aspectRatio", value ?? "preserve-frame")} />
-                        ) : null}
-                      </div>
-                      <fieldset className="field-format-options">
-                        <legend className="ui-field__label">Allowed formats</legend>
-                        <div className="mt-2 grid grid-cols-2 gap-2">
-                          {imageFormats.map((format) => (
-                            <CheckboxField
-                              key={format.mimeType}
-                              label={format.label}
-                              checked={(imageConstraints.allowedMimeTypes ?? []).includes(format.mimeType)}
-                              onChange={(checked) => {
-                                const current = imageConstraints.allowedMimeTypes ?? [];
-                                const next = checked
-                                  ? [...new Set([...current, format.mimeType])]
-                                  : current.filter((value) => value !== format.mimeType);
-                                updateImageConstraint("allowedMimeTypes", next.length ? next : undefined);
-                              }}
-                            />
-                          ))}
-                        </div>
-                      </fieldset>
+                      <FieldRuleConstraintControls
+                        fieldType={field.type}
+                        constraints={imageConstraints}
+                        onChange={(key, value) => updateImageConstraint(
+                          key as keyof PackageImageFieldConstraints,
+                          value as PackageImageFieldConstraints[keyof PackageImageFieldConstraints],
+                        )}
+                      />
                     </>
                   ) : field.type === "text" || field.type === "textarea" ? (
-                    <>
-                      <div className="field-rules-two-column field-rules-two-column--narrow">
-                        <ConstraintNumberInput label="Maximum characters" integer value={textConstraints.maxCharacters} onCommit={(value) => updateTextConstraint("maxCharacters", value)} />
-                        {field.type === "textarea" ? (
-                          <ConstraintNumberInput label="Maximum lines" integer value={textConstraints.maxLines} onCommit={(value) => updateTextConstraint("maxLines", value)} />
-                        ) : null}
-                      </div>
-                    </>
+                    <FieldRuleConstraintControls
+                      fieldType={field.type}
+                      constraints={textConstraints}
+                      onChange={(key, value) => updateTextConstraint(
+                        key as keyof PackageTextFieldConstraints,
+                        value as PackageTextFieldConstraints[keyof PackageTextFieldConstraints],
+                      )}
+                    />
                   ) : null}
-                </div>
-              ) : null}
-            </article>
+                </>
+              )}
+            />
           );
         })}
         {draggedFieldKey && dropIndex === fields.length ? <div className="field-rule-drop-indicator" /> : null}

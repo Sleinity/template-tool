@@ -1,6 +1,7 @@
 import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import {
   createTemplateFamilyFromPackage,
+  getTemplateFamilyFieldScope,
   materializeTemplateFamilyVariant,
   validateTemplateFamily,
   type TemplateFamilyV1,
@@ -8,6 +9,7 @@ import {
 import type { EditableFieldBinding, TemplatePackageV1 } from "@sleinity/template-core";
 import {
   applyTemplateFamilyVariantReimport,
+  applyTemplateFamilyVariantReimportState,
   planTemplateFamilyVariantReimport,
 } from "../src/import/templateFamilyReimport";
 import {
@@ -18,6 +20,7 @@ import {
   createSavedTemplateRecord,
   createSavedTemplateFamilyRecord,
 } from "../src/persistence/templateRepository";
+import { validateCurrentSavedTemplateFamilyRecord } from "../src/persistence/savedRecordValidation";
 import { createResolvedRenderTree, validateTemplatePackage } from "@sleinity/template-core";
 import { createTemplateFamilySession } from "../src/session/templateFamilySession";
 import { createTemplateSessionWithDependencies } from "../src/session/templateSession";
@@ -55,6 +58,71 @@ landscape.id = "variant:landscape";
 landscape.title = "Landscape";
 landscape.packageValue.canvas.width += 200;
 seeded.family.variants.push(landscape);
+seeded.family.variantGroups = [{
+  id: "group:format",
+  title: "Format",
+  options: [
+    { id: "option:square", title: "Square" },
+    { id: "option:landscape", title: "Landscape" },
+  ],
+}, {
+  id: "group:colour",
+  title: "Colour",
+  options: [
+    { id: "option:blue", title: "Blue" },
+    { id: "option:red", title: "Red" },
+  ],
+}];
+seeded.family.variants[0].groupAssignments = {
+  "group:format": "option:square",
+  "group:colour": "option:blue",
+};
+seeded.family.variants[1].groupAssignments = {
+  "group:format": "option:landscape",
+  "group:colour": "option:blue",
+};
+seeded.family.controlOrder = [
+  { kind: "selection-property", groupId: "group:format" },
+  { kind: "field", fieldId: seeded.family.fields[0].id },
+  { kind: "selection-property", groupId: "group:colour" },
+  ...seeded.family.fields.slice(1).map((field) => ({
+    kind: "field" as const,
+    fieldId: field.id,
+  })),
+];
+
+const currentSavedRecord = createSavedTemplateFamilyRecord({ family: seeded.family });
+const publishedV1Family = structuredClone(seeded.family) as TemplateFamilyV1;
+const migratedSavedRecord = validateCurrentSavedTemplateFamilyRecord({
+  ...structuredClone(currentSavedRecord),
+  family: publishedV1Family,
+});
+assert(
+  migratedSavedRecord.family.schemaVersion === "template-family-v1" &&
+    migratedSavedRecord.family.variantGroups.length === 1 &&
+    migratedSavedRecord.family.variants[0]?.id === seeded.family.variants[0]?.id &&
+    publishedV1Family.variantGroups.length === 1,
+  "Reading a saved 0.8 family must preserve its tuple selection contract without mutating the record.",
+);
+
+const mixedFamilyStorage = createInMemoryTemplateRepositoryStorage();
+mixedFamilyStorage.families!.set("family:unpublished-v2", {
+  ...structuredClone(currentSavedRecord),
+  id: "family:unpublished-v2",
+  family: {
+    schemaVersion: "template-family-v2",
+    id: "family:unpublished-v2",
+  },
+} as unknown as typeof currentSavedRecord);
+const mixedFamilyRepository = new InMemoryTemplateRepository(mixedFamilyStorage);
+await mixedFamilyRepository.saveFamily(currentSavedRecord);
+const readableFamilyRecords = await mixedFamilyRepository.listFamilies();
+assert(
+  readableFamilyRecords.length === 1 &&
+    readableFamilyRecords[0]?.id === currentSavedRecord.id &&
+    mixedFamilyStorage.families!.has("family:unpublished-v2"),
+  "An unreadable unpublished family must remain preserved without hiding valid saved templates from repository listings.",
+);
 
 const storage = createInMemoryTemplateRepositoryStorage();
 const repository = new InMemoryTemplateRepository(storage);
@@ -86,7 +154,20 @@ assert(
 );
 session.setField(headline.id, "Shared family value");
 const beforeSwitchContent = session.getSnapshot().content;
-const switched = session.selectVariant(landscape.id);
+assert(
+  session.getOptionAvailability().find(
+    (option) => option.optionId === "option:landscape",
+  )?.available === true,
+  "The family session must expose option availability for host selector controls.",
+);
+const unavailableSelection = session.selectOption("group:colour", "option:red");
+assert(
+  !unavailableSelection.applied &&
+    session.getSnapshot().selectedVariantId === seeded.family.variants[0].id &&
+    session.getSnapshot().groupSelections["group:colour"] === "option:blue",
+  "An unavailable option must not silently change another property or the selected ZIP.",
+);
+const switched = session.selectOption("group:format", "option:landscape");
 const textTarget = landscape.bindings.find(
   (binding) => binding.familyFieldId === headline.id,
 )?.targets[0];
@@ -96,6 +177,7 @@ const renderedNode = textTarget
 assert(
   switched.applied &&
     session.getSnapshot().content?.values[headline.id] === "Shared family value" &&
+    session.getSnapshot().groupSelections["group:format"] === "option:landscape" &&
     session.getSnapshot().content?.revision === beforeSwitchContent?.revision &&
     renderedNode?.type === "TEXT" &&
     "characters" in renderedNode.text &&
@@ -149,10 +231,68 @@ await reopened.loadSavedFamily(savedFamily.id, savedDraft.id);
 assert(
   reopened.getSnapshot().status === "ready" &&
     reopened.getSnapshot().selectedVariantId === landscape.id &&
+    reopened.getSnapshot().groupSelections["group:format"] === "option:landscape" &&
+    reopened.getSnapshot().groupSelections["group:colour"] === "option:blue" &&
     reopened.getSnapshot().content?.values[headline.id] === "Newer value" &&
     Object.keys(reopened.getSnapshot().sharedImageAssets).length === 1,
   "A fresh session must reopen family content, selection, and shared image assets from browser persistence.",
 );
+
+const scopedFamily = structuredClone(seeded.family);
+const scopedLandscape = scopedFamily.variants.find((variant) => variant.id === landscape.id)!;
+const scopedTargets = scopedLandscape.bindings.find(
+  (binding) => binding.familyFieldId === headline.id,
+)?.targets ?? [];
+scopedLandscape.bindings = scopedLandscape.bindings.filter(
+  (binding) => binding.familyFieldId !== headline.id,
+);
+scopedLandscape.packageValue.editableFields = scopedLandscape.packageValue.editableFields.filter(
+  (field) => !scopedTargets.some(
+    (candidate) =>
+      candidate.fieldId === field.id &&
+      candidate.nodeId === field.nodeId &&
+      candidate.property === field.property,
+  ),
+);
+const scopedStorage = createInMemoryTemplateRepositoryStorage();
+const scopedRepository = new InMemoryTemplateRepository(scopedStorage);
+const scopedSession = createTemplateFamilySession({
+  familyRepository: scopedRepository,
+  templateRepository: scopedRepository,
+  fontRegistry: null,
+});
+scopedSession.load({ family: scopedFamily, content: seeded.content });
+scopedSession.setField(headline.id, "Value hidden in Landscape");
+scopedSession.selectVariant(landscape.id);
+const scopedSavedFamily = await scopedSession.save({ name: "Scoped Browser Family" });
+const scopedSavedDraft = await scopedSession.saveDraft("Scoped Browser Draft");
+scopedSession.dispose();
+const reopenedScopedSession = createTemplateFamilySession({
+  familyRepository: scopedRepository,
+  templateRepository: scopedRepository,
+  fontRegistry: null,
+});
+await reopenedScopedSession.loadSavedFamily(scopedSavedFamily.id, scopedSavedDraft.id);
+assert(
+  reopenedScopedSession.getSnapshot().selectedVariantId === landscape.id &&
+    reopenedScopedSession.getSnapshot().content?.values[headline.id] ===
+      "Value hidden in Landscape",
+  "A hidden variant-specific value must survive selection, persistence, disposal, and offline reopening.",
+);
+reopenedScopedSession.selectVariant(scopedFamily.variants[0].id);
+const reopenedTarget = scopedFamily.variants[0].bindings.find(
+  (binding) => binding.familyFieldId === headline.id,
+)?.targets[0];
+const reopenedNode = reopenedTarget
+  ? reopenedScopedSession.renderSession.getSnapshot().workingPackage?.nodes[reopenedTarget.nodeId]
+  : null;
+assert(
+  reopenedNode?.type === "TEXT" &&
+    "characters" in reopenedNode.text &&
+    reopenedNode.text.characters === "Value hidden in Landscape",
+  "Selecting the applicable variant again must restore the retained hidden value to rendering.",
+);
+reopenedScopedSession.dispose();
 
 const exactPlan = planTemplateFamilyVariantReimport(
   seeded.family,
@@ -163,8 +303,135 @@ const reimported = applyTemplateFamilyVariantReimport(seeded.family, exactPlan, 
 assert(
   exactPlan.canApply &&
     reimported.id === seeded.family.id &&
-    reimported.variants[0].id === seeded.family.variants[0].id,
-  "An exact reimport must preserve family and variant identity.",
+    reimported.variants[0].id === seeded.family.variants[0].id &&
+    JSON.stringify(reimported.variants[0].groupAssignments) ===
+      JSON.stringify(seeded.family.variants[0].groupAssignments) &&
+    JSON.stringify(reimported.controlOrder) === JSON.stringify(seeded.family.controlOrder),
+  "An exact reimport must preserve family, variant, selection-assignment, and control-order identity.",
+);
+
+const packageWithSpecificField = sourcePackage();
+const occupiedNodes = new Set(packageWithSpecificField.editableFields.map((field) => field.nodeId));
+const specificNode = Object.values(packageWithSpecificField.nodes).find(
+  (node) => node.type === "TEXT" && !occupiedNodes.has(node.id),
+);
+assert(specificNode?.type === "TEXT", "The reimport fixture requires an unused text node.");
+packageWithSpecificField.editableFields.push({
+  id: "variant-note",
+  nodeId: specificNode.id,
+  type: "text",
+  property: "text.characters",
+  label: "Variant note",
+  defaultValue: "characters" in specificNode.text ? specificNode.text.characters : "",
+});
+const addedFieldPlan = planTemplateFamilyVariantReimport(
+  seeded.family,
+  seeded.family.variants[0].id,
+  packageWithSpecificField,
+);
+const addedTarget = addedFieldPlan.addedTargets.find((item) => item.fieldId === "variant-note");
+assert(addedTarget, "A newly imported package field must be reported for an explicit decision.");
+const addedFieldState = applyTemplateFamilyVariantReimportState(
+  seeded.family,
+  seeded.content,
+  addedFieldPlan,
+  0,
+  {
+    addedTargetResolutions: [{
+      target: addedTarget,
+      action: "create-variant-specific",
+      fieldId: "field:variant-note",
+      key: "variant_note",
+      title: "Variant note",
+    }],
+  },
+);
+assert(
+  getTemplateFamilyFieldScope(addedFieldState.family, "field:variant-note").kind ===
+      "variant-specific" &&
+    Object.prototype.hasOwnProperty.call(addedFieldState.content.values, "field:variant-note") &&
+    validateTemplateFamily(addedFieldState.family, addedFieldState.content).definitionValid,
+  "A reviewed reimport must atomically accept an added target as a stable variant-specific field and content value.",
+);
+const packageWithSuggestedRemap = sourcePackage();
+const headlineTarget = seeded.family.variants[0].bindings.find(
+  (binding) => binding.familyFieldId === headline.id,
+)?.targets[0];
+assert(headlineTarget, "The reimport fixture requires the original headline target.");
+const renamedHeadline = packageWithSuggestedRemap.editableFields.find(
+  (field) =>
+    field.id === headlineTarget.fieldId &&
+    field.nodeId === headlineTarget.nodeId &&
+    field.property === headlineTarget.property,
+);
+assert(renamedHeadline, "The reimport fixture requires the editable headline field.");
+renamedHeadline.id = "renamed-headline";
+renamedHeadline.label = headline.title;
+const suggestedRemapPlan = planTemplateFamilyVariantReimport(
+  seeded.family,
+  seeded.family.variants[0].id,
+  packageWithSuggestedRemap,
+);
+const suggestedChange = suggestedRemapPlan.fieldChanges.find(
+  (change) => change.familyFieldId === headline.id,
+);
+const suggestedTarget = suggestedChange?.suggestedTargets[0];
+assert(
+  suggestedChange?.status === "unresolved" && suggestedTarget,
+  "A normalized-name reimport match must remain a reviewed suggestion.",
+);
+const suggestedRemapState = applyTemplateFamilyVariantReimportState(
+  seeded.family,
+  seeded.content,
+  suggestedRemapPlan,
+  0,
+  {
+    resolvedBindings: [
+      ...suggestedRemapPlan.proposedBindings.filter((binding) => binding.targets.length > 0),
+      { familyFieldId: headline.id, targets: [suggestedTarget] },
+    ],
+  },
+);
+assert(
+  suggestedRemapState.family.variants[0].bindings.some(
+    (binding) =>
+      binding.familyFieldId === headline.id &&
+      binding.targets.some((candidate) => candidate.fieldId === "renamed-headline"),
+  ),
+  "A reviewed suggested remap must not also require or create a second added-field resolution.",
+);
+
+let unreviewedRemovalRejected = false;
+try {
+  applyTemplateFamilyVariantReimportState(
+    seeded.family,
+    seeded.content,
+    exactPlan,
+    0,
+    { removeOrphanFamilyFieldIds: [headline.id] },
+  );
+} catch {
+  unreviewedRemovalRejected = true;
+}
+assert(
+  unreviewedRemovalRejected,
+  "Reimport must reject deletion of a field that the reviewed plan did not identify as orphaned.",
+);
+
+const invalidRetainedContent = structuredClone(seeded.content);
+invalidRetainedContent.values[headline.id] = {
+  kind: "image",
+  assetRef: "asset:invalid-for-text",
+};
+const retainedInvalidState = applyTemplateFamilyVariantReimportState(
+  seeded.family,
+  invalidRetainedContent,
+  exactPlan,
+  0,
+);
+assert(
+  typeof retainedInvalidState.content.values[headline.id] === "object",
+  "A valid reimport must retain invalid shared content for diagnostics instead of silently rejecting or changing it.",
 );
 const incompatiblePackage = sourcePackage();
 const removedTarget = seeded.family.variants[0].bindings[0]?.targets[0];
@@ -189,6 +456,27 @@ assert(
     unresolvedPlan.unresolvedFamilyFieldIds.length > 0 &&
     unresolvedRejected,
   "Removed or incompatible reimport fields must be surfaced and rejected until explicitly resolved.",
+);
+const oneVariantFamily = structuredClone(seeded.family);
+oneVariantFamily.variants = [oneVariantFamily.variants[0]];
+const oneVariantPlan = planTemplateFamilyVariantReimport(
+  oneVariantFamily,
+  oneVariantFamily.variants[0].id,
+  incompatiblePackage,
+);
+const orphanFieldId = oneVariantPlan.unresolvedFamilyFieldIds[0];
+assert(orphanFieldId, "Removing the last target must require an orphan-field decision.");
+const removedOrphanState = applyTemplateFamilyVariantReimportState(
+  oneVariantFamily,
+  seeded.content,
+  oneVariantPlan,
+  0,
+  { removeOrphanFamilyFieldIds: [orphanFieldId] },
+);
+assert(
+  !removedOrphanState.family.fields.some((field) => field.id === orphanFieldId) &&
+    !Object.prototype.hasOwnProperty.call(removedOrphanState.content.values, orphanFieldId),
+  "Removing a field whose final target disappeared must explicitly and atomically remove its stored content.",
 );
 
 const revisionPlan = session.planVariantReimport(landscape.id, sourcePackage());
@@ -353,3 +641,51 @@ assert(
     session.renderSession.getSnapshot().status === "disposed",
   "Disposing a family session must dispose its single owned render session.",
 );
+
+for (const draft of [false, true]) {
+  const storage = new InMemoryTemplateRepository();
+  let enter!: () => void; let unblock!: () => void;
+  const entered = new Promise<void>(resolve => { enter = resolve; });
+  const release = new Promise<void>(resolve => { unblock = resolve; });
+  let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  const original = storage[method].bind(storage);
+  (storage[method] as any) = async (record: any) => { calls++; if (calls === 1) { enter(); await release; } return original(record); };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = (name: string) => draft ? owned.saveDraft(name) : owned.save({ name });
+  const first = save("First"); await entered;
+  const second = save("Second");
+  assert(calls === 1, "Family and draft writes are serialized."); unblock();
+  const [a, b] = await Promise.all([first, second]);
+  const stored = draft ? await storage.getFamilyDraft(a.id) : await storage.getFamily(a.id);
+  assert(a.id === b.id && stored?.name === "Second", "Family and draft first-save identities remain stable across overlap.");
+  owned.dispose();
+}
+for (const draft of [false, true]) for (const end of ["reset", "dispose"] as const) {
+  const storage = new InMemoryTemplateRepository();
+  let enter!: () => void; let unblock!: () => void;
+  const entered = new Promise<void>(resolve => { enter = resolve; });
+  const release = new Promise<void>(resolve => { unblock = resolve; }); let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  (storage[method] as any) = async (record: any) => { calls++; enter(); await release; return record; };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = () => draft ? owned.saveDraft() : owned.save();
+  const first = save(); await entered; const queued = save().then(() => false, () => true);
+  owned[end](); unblock(); await first;
+  assert(await queued && calls === 1, "Family reset/disposal cancels queued template and draft writes.");
+  owned.dispose();
+}
+for (const draft of [false, true]) {
+  const storage = new InMemoryTemplateRepository(); let calls = 0;
+  const method = draft ? "saveFamilyDraft" : "saveFamily";
+  const original = storage[method].bind(storage);
+  (storage[method] as any) = async (record: any) => { if (++calls === 1) throw new Error("Expected failure"); return original(record); };
+  const owned = createTemplateFamilySession({ familyRepository: storage });
+  owned.load({ family: seeded.family });
+  const save = () => draft ? owned.saveDraft() : owned.save();
+  const failed = save().then(() => false, () => true); const retry = save();
+  assert(await failed && (await retry).id, "Family failures cannot poison subsequent template or draft saves.");
+  owned.dispose();
+}

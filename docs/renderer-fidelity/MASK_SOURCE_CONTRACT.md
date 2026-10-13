@@ -25,7 +25,20 @@ The exporter declares:
 
 The current source is a RECTANGLE with one visible fully opaque SOLID fill, node opacity 1, no strokes or effects, zero radii, PASS_THROUGH/NORMAL blend behavior, and identity linear transform. Therefore its binary ALPHA region is mathematically equivalent to a rectangular clip.
 
-The renderer lowers this case to one `clip-path: inset(...)` on only the declared affected sibling. For the canonical source bounds, `429:42` has `{x:220,y:-164,width:640,height:1408}` and the clip is `{top:164,right:0,bottom:164,left:0}` in affected-node coordinates. Raw Figma translation `-164.0001220703125` remains provenance; normalized canonical geometry owns runtime placement.
+The renderer lowers this case to one CSS clip. For fixed/static geometry it uses
+`clip-path: inset(...)` on the declared affected sibling. For the canonical
+source bounds, `429:42` has `{x:220,y:-164,width:640,height:1408}` and the clip is
+`{top:164,right:0,bottom:164,left:0}` in affected-node coordinates. Raw Figma
+translation `-164.0001220703125` remains provenance; normalized canonical
+geometry owns runtime placement.
+
+For every surface, a stricter full-parent case moves that same clip owner to the
+parent as `inset(0)`: the mask source must be the first child, cover the parent
+exactly, declare `end_of_siblings`, affect every following sibling, and the
+parent must have no stroke or effect. This keeps the imported parent boundary
+stable when Boolean structural exclusion changes a HUG affected child and keeps
+Validate, Fields, editor, and PNG on one mask owner. It does
+not infer a new mask scope or broaden the certified mask subset. See ADR 0084.
 
 This remains classified as `exact-opaque-rectangular-alpha`, not generic `clipsContent`. The source node stays in scene/resolved ordering but has no ordinary visible DOM/CSS/SVG owner. Its fill is `mask-input`; affected content is rendered once.
 

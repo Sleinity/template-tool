@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {selectCaptureCamera,studioReferenceCamera,applyCaptureCamera} from './capture-camera.mjs';
+assert.equal(selectCaptureCamera(),null);
+assert.equal(selectCaptureCamera('studio-reference-20261012'),studioReferenceCamera);
+assert.throws(()=>selectCaptureCamera('unknown'),/Unknown capture camera/);
+assert.equal(await applyCaptureCamera(null,null),null);
+await assert.rejects(()=>applyCaptureCamera({viewportSize:()=>({width:768,height:1024})},studioReferenceCamera),/Capture camera viewport/);
+const actions=[];
+const nativeBefore={mode:'manual',transform:'scale(0.4)',zoomLabel:'40%',scroll:{x:0,y:0},dpr:1,reducedMotion:true};
+const evidence=await applyCaptureCamera({evaluate:async()=>nativeBefore,viewportSize:()=>studioReferenceCamera.viewport,getByRole:()=>({click:async()=>actions.push('fit')}),locator:()=>({boundingBox:async()=>studioReferenceCamera.stage}),addStyleTag:async()=>actions.push('move-stage'),waitForFunction:async()=>{}},studioReferenceCamera);
+assert.deepEqual(evidence.nativeBefore,nativeBefore,'Retain native viewport history rather than assuming final pose identifies the raster');
+assert.deepEqual(actions,['fit','move-stage'],'Fit must remain clickable before the reference stage overlaps the toolbar');
+console.log('Explicit capture-camera selection and viewport contract passed.');

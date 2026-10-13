@@ -1,0 +1,25 @@
+/** Reuse only a complete current-source run; never accept stale timing evidence. */
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {decodePacket} from './packets.mjs';
+import {assertWorkloadCoverage} from './workloadCoverage.mjs';
+import {loadManifest,verifyFixture} from '../fidelity/core.mjs';
+import {selectSdkGateFixtures} from '../fidelity/gate-profile.mjs';
+import {loadExactFontManifest} from '../fidelity/fonts.mjs';
+const path=process.argv[2],packet=decodePacket(JSON.parse(readFileSync(path)));
+const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+assertWorkloadCoverage(packet);assert.deepEqual(packet.failures,[]);
+assert.equal(packet.mode,'production');assert.equal(packet.phase,'paired');assert.equal(packet.trials,5);assert.equal(packet.rows.length,120);
+assert.equal(packet.instrumentationProfile,'latency-minimal');
+const identity=JSON.parse(readFileSync('docs/architecture/evidence/now-hiring-text-baseline/identity.json'));
+assert.deepEqual(packet.baseline,identity.files);
+for(const [file,value]of Object.entries(identity.files))assert.equal(hash(readFileSync(value.path)),value.sha256,file);
+for(const file of Object.keys(identity.files))assert.equal(packet.current[file],hash(readFileSync(file)),file);
+const manifest=loadManifest(),fixtures=selectSdkGateFixtures(manifest);
+for(const fixture of fixtures)verifyFixture(manifest,fixture);
+assert.deepEqual(packet.fixtures,fixtures.map(f=>({id:f.id,zipSha256:f.zipSha256})));
+const fonts=loadExactFontManifest(fixtures.flatMap(f=>f.requiredFonts??[]));
+assert.deepEqual(packet.fonts,fonts.fonts.map(f=>({id:f.id,sha256:f.sha256})));
+assert.equal(packet.node,process.version);assert.equal(packet.platform,process.platform);assert.equal(packet.arch,process.arch);
+console.log(JSON.stringify({path,sha256:hash(readFileSync(path)),rows:packet.rows.length,sourceIdentityVerified:true,fixtureAndFontIdentityVerified:true,reusedCompletedRun:true}));

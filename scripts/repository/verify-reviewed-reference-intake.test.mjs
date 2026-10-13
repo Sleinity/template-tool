@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { verifyIntake } from './verify-reviewed-reference-intake.mjs';
+const file = 'fidelity/references/approved/example/editor/reference.png', bytes = Buffer.from('retained pixels');
+const make = () => ({ manifest: { schemaVersion: 'reviewed-release-reference-intake-v1', baseCommit: 'reviewed-base', files: [{ file, operation: 'add', bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') }] }, baseCommit: 'reviewed-base', changes: [{ status: 'A', file }], read: () => bytes });
+test('accepts exact reviewed additions and unchanged future PRs', () => { assert.equal(verifyIntake(make()), 1); assert.equal(verifyIntake({ changes: [] }), 0); });
+test('rejects changed reference bytes', () => { const x = make(); x.read = () => Buffer.from('different pixels'); assert.throws(() => verifyIntake(x)); });
+test('rejects replacement and deletion of existing references', () => { for (const status of ['M','D','R100']) { const x = make(); x.changes[0].status = status; assert.throws(() => verifyIntake(x)); } });
+test('rejects different base and additional or missing intake changes', () => { const x = make(); x.baseCommit = 'new-base'; assert.throws(() => verifyIntake(x)); const extra = make(); extra.changes.push({ status: 'A', file: file+'extra' }); assert.throws(() => verifyIntake(extra)); const missing = make(); missing.manifest.files.push({ ...missing.manifest.files[0], file: file+'missing' }); assert.throws(() => verifyIntake(missing)); });
+test('rejects duplicate and escaping paths', () => { const x = make(); x.manifest.files.push(x.manifest.files[0]); assert.throws(() => verifyIntake(x)); const bad = make(); bad.manifest.files[0].file = '../private'; assert.throws(() => verifyIntake(bad)); });
