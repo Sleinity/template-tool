@@ -1,1 +1,109 @@
-{"status":"in-progress","candidate":"sdk-1-candidate-20261013k","publicationPerformed":false,"manualReviewPerformed":false}
+{
+  "status": "local-pass; GitHub PR check required",
+  "candidate": "sdk-1-candidate-20261013k",
+  "sourceCommit": "e7f33f126971f908f8caab8f4a871a02e82eea5c",
+  "baseCommit": "88510e5f16d16e119692a25c59f1b712acf905a3",
+  "pullRequest": "https://github.com/Sleinity/template-tool/pull/22",
+  "node": "v22.23.3",
+  "pnpm": "11.9.0",
+  "certifiedSourcesCompared": 999,
+  "certifiedSourceDifferences": [
+    {
+      "file": ".github/workflows/ci.yml",
+      "priorSha256": "17d067d9dfae7f9eff0734faa1c351c24b270a560bf1bfafe27a775c538b4849",
+      "releaseSha256": "fbe790e597a315501b7996881abc3b8830a3625f4572f7b061263b8aa9f09749"
+    }
+  ],
+  "packageContent": {
+    "status": "pass",
+    "node": "v22.23.3",
+    "packageManager": "pnpm 11.9.0",
+    "build": "isolated release checkout; all builds and checks completed before comparison",
+    "packing": "sequential completed builds; prepack already exercised by sdk:verify",
+    "frozenArchivesUnchanged": true,
+    "archives": [
+      {
+        "file": "sleinity-template-core-1.0.0.tgz",
+        "bytes": 532285,
+        "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+        "byteIdentical": true
+      },
+      {
+        "file": "sleinity-template-browser-1.0.0.tgz",
+        "bytes": 403000,
+        "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+        "byteIdentical": true
+      },
+      {
+        "file": "sleinity-template-react-1.0.0.tgz",
+        "bytes": 289360,
+        "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+        "byteIdentical": true
+      }
+    ]
+  },
+  "originalCheckout": {
+    "headPreserved": true,
+    "indexPreserved": true,
+    "trackedWorktreePreserved": true,
+    "statusPreserved": true
+  },
+  "checks": [
+    {
+      "name": "portable/typecheck/Studio",
+      "result": "All preceding CI stages passed; subsequent docs step retried after closure transfer",
+      "logSha256": "27fb4a5beb98ea4b3850e3fc13ed8b22249ea8d6d0c2cc10d5e0f03728a990ef",
+      "retainedLocalLog": "/private/tmp/sdk-m6-portable-2.log"
+    },
+    {
+      "name": "documentation",
+      "result": "pass",
+      "logSha256": "524464987b7e7d9c0cfb8d524d135ff297627b0c6e6a8f067549b250b020a7c3",
+      "retainedLocalLog": "/private/tmp/sdk-m6-docs.log"
+    },
+    {
+      "name": "SDK/API/boundaries/packed declarations/budgets",
+      "result": "pass",
+      "logSha256": "192aaacded0b6dea8cd565ae3704a739ad1def33fa22030cc7c9bfcfcd909636",
+      "retainedLocalLog": "/private/tmp/sdk-m6-sdk-network.log"
+    },
+    {
+      "name": "examples",
+      "result": "pass",
+      "logSha256": "5745dd3cf5872a333dfa57487fe523791d48d7c782a2963c97292b9e8a7a172c",
+      "retainedLocalLog": "/private/tmp/sdk-m6-examples.log"
+    },
+    {
+      "name": "tooling",
+      "result": "27 tests pass",
+      "logSha256": "763d639dcfd3f65d5c7681b5956c1e601766fc05151e448beb4f47a34d18a254",
+      "retainedLocalLog": "/private/tmp/sdk-m6-tooling-2.log"
+    }
+  ],
+  "protectedReferenceAdditions": 103,
+  "referencePromotionPerformed": false,
+  "publicationPerformed": false,
+  "manualReviewPerformed": false,
+  "attempts": [
+    {
+      "result": "missing retained-source test snapshots",
+      "resolution": "Seven public source-text inputs restored"
+    },
+    {
+      "result": "documentation closure missing final certification files",
+      "resolution": "Final compact certification records transferred"
+    },
+    {
+      "result": "roadmap link incompatible with bundled delivery inventory",
+      "resolution": "Keep roadmap in root README; current bundled guide unchanged"
+    },
+    {
+      "result": "consumer install blocked by sandbox network",
+      "resolution": "SDK verification rerun with permitted network access"
+    },
+    {
+      "result": "comparison attempted during concurrent rebuild",
+      "resolution": "Discarded intermediate pack; final sequential comparison only after all builds completed"
+    }
+  ]
+}

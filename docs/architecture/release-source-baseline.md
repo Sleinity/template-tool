@@ -18,12 +18,15 @@ excluded. Required packages, Studio, examples, tests, scripts, configuration,
 programme/ADR guidance, and compact historical/final reports are included. The
 full inventory is retained so exclusions are visible rather than silently omitted.
 Dependencies discovered through documentation links are copied separately where
-they are compact text evidence. Branch-only documentation and guard additions
+they are compact text evidence. Seven retained SDK/Studio source snapshots are
+included because portable tests require them; an 84 MB generated performance
+trace remains local with its checksum recorded. Branch-only documentation and guard additions
 are recorded with validation results.
 
 The original checkout's HEAD, index and worktree identities are retained in
 [original-checkout.json](evidence/release-source-20261013/original-checkout.json).
-Its checkout/index are not switched, staged or committed. No temporary
+All four retained HEAD/index/worktree/status checks pass. Its checkout/index
+are not switched, staged or committed. No temporary
 `.certification-input`, package archives, external ZIP/font input or encryption
 secret is transferred. Application-bundled fonts and previously approved renderer
 references remain part of the existing source contract.
@@ -32,8 +35,9 @@ references remain part of the existing source contract.
 
 The supplied frozen archives are retained unchanged. Current certified source
 verification passes. All package source/configuration files match the frozen
-candidate; only release documentation and the narrowly scoped CI reference-intake
-check are new. The certification report, its CI preparation/review binding and
+candidate; release documentation and the narrowly scoped CI reference-intake
+check are new. Of the 999 certified source files, only the CI workflow changes;
+all other certified sources are byte-identical. The certification report, its CI preparation/review binding and
 latest gate disposition were finalized after freezing; these evidence-only
 changes are identified explicitly in the inventory.
 
@@ -68,8 +72,10 @@ historical material is not replaced by fabricated screenshots or copied archives
 ## Validation and remaining release work
 
 Isolated-checkout validation and package-content equivalence are recorded in
-[evidence](evidence/release-source-20261013/verification.json). GitHub PR checks
-must also pass before this milestone is considered ready for review.
+[evidence](evidence/release-source-20261013/verification.json). All local stages pass, including strict packed consumers and unchanged bundle budgets.
+The three isolated repacks are byte-identical to the frozen archives. The 27
+release-tooling tests pass. [PR #22](https://github.com/Sleinity/template-tool/pull/22)
+remains draft until its full GitHub verification passes.
 
 Milestone 7 owns frozen-artifact publication tooling. The existing release workflow
 is retained; no SDK release tag is created and no publishing command is invoked.
