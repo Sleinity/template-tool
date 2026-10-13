@@ -1,10 +1,10 @@
 {
   "schemaVersion": "local-sdk-candidate-v1",
-  "candidateId": "unpublished-1.0.0-3bb192d2bf38a286222fb8d44927ef1006fb687eb52591bccf3ad89664f55177",
+  "candidateId": "unpublished-1.0.0-7858f192b4c06a7e9d84a5b2012bbb92f17d23b5118f470efc794c3af7035e38",
   "version": "1.0.0",
   "published": false,
   "certification": "not-yet-verified",
-  "createdAt": "2026-10-13T16:56:52.045Z",
+  "createdAt": "2026-10-13T17:07:38.367Z",
   "source": {
     "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
     "status": " D .changeset/fresh-groups-select.md\n M .github/workflows/ci.yml\n M .github/workflows/release.yml\n M apps/studio/README.md\n M apps/studio/src/App.tsx\n D apps/studio/src/TemplateFamilyApp.tsx\n M apps/studio/src/components/EditorLayout.tsx\n M apps/studio/src/components/template-family/FamilyFontPreparationPanel.tsx\n M apps/studio/src/components/template-package/editor/FieldRuleCardShell.tsx\n M apps/studio/src/components/template-package/editor/fieldLabels.ts\n M apps/studio/src/components/template-package/fonts/FontPreparationStep.tsx\n M apps/studio/src/components/template-package/quality/TemplatePackageDiagnosticContext.tsx\n M apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx\n M apps/studio/src/components/ui/SideDrawer.tsx\n M apps/studio/src/components/ui/actions.tsx\n M apps/studio/src/components/ui/fields.tsx\n M apps/studio/src/components/ui/foundation.tsx\n M apps/studio/src/components/ui/layout.tsx\n M apps/studio/src/components/ui/surfaces.tsx\n M apps/studio/src/designSystem.test.tsx\n M apps/studio/src/packageOnlyArchitecture.test.tsx\n M apps/studio/src/routing/appRoutes.test.ts\n M apps/studio/src/routing/appRoutes.ts\n M apps/studio/src/styles.css\n M apps/studio/src/views/TemplateFamilyOverviewPage.tsx\n M apps/studio/src/views/TemplateFamilySetupPage.tsx\n M apps/studio/src/views/TemplateOverviewPage.test.tsx\n M apps/studio/src/views/TemplatePackageImportFlow.test.tsx\n M config/sdk-bundle-baselines.json\n M config/sdk-entry-points.json\n M config/sdk-public-api.json\n M docs/architecture/TEMPLATE_PLATFORM_BOUNDARY_AUDIT.md\n M docs/figma-exporter/IMPORTER_BOUNDARY.md\n M docs/renderer-fidelity/APPEARANCE_CONTRACTS.md\n M docs/renderer-fidelity/CAPABILITIES.md\n M docs/renderer-fidelity/CURRENT_ARCHITECTURE.md\n M docs/renderer-fidelity/DIAGNOSTIC_PROJECTION.md\n M docs/renderer-fidelity/DUPLICATE_INTERPRETATIONS.md\n M docs/renderer-fidelity/ENVIRONMENT_POLICY.md\n M docs/renderer-fidelity/FIXTURES.md\n M docs/renderer-fidelity/FONT_IDENTITY.md\n M docs/renderer-fidelity/HANDOFF.md\n M docs/renderer-fidelity/HARNESS.md\n M docs/renderer-fidelity/IMAGE_PLACEMENT.md\n M docs/renderer-fidelity/IMAGE_REPLACEMENT_EVIDENCE.md\n M docs/renderer-fidelity/MASK_SOURCE_CONTRACT.md\n M docs/renderer-fidelity/ORDERED_SOLID_LINEAR_RUNTIME_AUTHORITY.md\n M docs/renderer-fidelity/ORDERED_SOLID_STACK_RUNTIME_AUTHORITY.md\n M docs/renderer-fidelity/PRIMITIVE_PAINTS.md\n M docs/renderer-fidelity/PROPERTY_AUTHORITY.md\n M docs/renderer-fidelity/README.md\n M docs/renderer-fidelity/REFERENCE_POLICY.md\n M docs/renderer-fidelity/RUNTIME_ROUTING.md\n M docs/renderer-fidelity/SETTLEMENT.md\n M docs/renderer-fidelity/SETTLEMENT_HARNESS.md\n M docs/renderer-fidelity/STATUS.md\n M docs/renderer-fidelity/decisions/README.md\n M docs/sdk/AGENT_INTEGRATION_PROMPTS.md\n M docs/sdk/INSTALLATION.md\n M docs/sdk/README.md\n M docs/sdk/RUNTIME_HANDOFF.md\n M docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md\n M docs/sdk/SDK_CAPABILITIES.md\n M examples/template-editor-integration/CHANGELOG.md\n M examples/template-editor-integration/README.md\n M examples/template-editor-integration/package.json\n M examples/template-editor-integration/src/main.tsx\n M examples/template-editor-integration/tsconfig.app.json\n M examples/template-family-integration/package.json\n M examples/template-family-integration/src/main.tsx\n M fidelity/evidence/milestone-7-alpha-mask/report.md\n M fidelity/fixtures.json\n M fidelity/fonts.json\n M package.json\n M packages/template-browser/CHANGELOG.md\n M packages/template-browser/README.md\n M packages/template-browser/package.json\n M packages/template-browser/src/assets/assetReliability.ts\n M packages/template-browser/src/assets/indexedDbAssetStore.ts\n M packages/template-browser/src/enrichment/captureTemplatePackagePreview.ts\n M packages/template-browser/src/enrichment/comparePackageToFigmaMetadata.ts\n M packages/template-browser/src/export/packageExportReadiness.ts\n M packages/template-browser/src/export/pngExport.ts\n M packages/template-browser/src/fonts/managedFontAssets.ts\n M packages/template-browser/src/import/index.ts\n M packages/template-browser/src/import/runTemplatePackageImportPipeline.ts\n M packages/template-browser/src/import/templateFamilyImportWizard.ts\n M packages/template-browser/src/import/templateImportIntegrity.ts\n M packages/template-browser/src/import/templateImportWizard.ts\n M packages/template-browser/src/importer.ts\n M packages/template-browser/src/persistence/assetRepository.ts\n M packages/template-browser/src/persistence/inMemoryTemplateRepository.ts\n M packages/template-browser/src/persistence/index.ts\n M packages/template-browser/src/persistence/indexedDbTemplateRepository.ts\n M packages/template-browser/src/persistence/savedRecordValidation.ts\n M packages/template-browser/src/persistence/templateRepository.ts\n M packages/template-browser/src/persistence/types.ts\n M packages/template-browser/src/session/index.ts\n M packages/template-browser/src/session/templateFamilySession.ts\n M packages/template-browser/src/session/templateSession.ts\n M packages/template-browser/src/storage/indexedDb.ts\n M packages/template-browser/test/templateFamilyImportWizard.test.ts\n M packages/template-browser/test/templateFamilySession.test.ts\n M packages/template-browser/test/templateImportWizard.test.ts\n M packages/template-browser/test/templateRepository.test.ts\n M packages/template-browser/test/templateSession.test.ts\n M packages/template-core/CHANGELOG.md\n M packages/template-core/README.md\n M packages/template-core/package.json\n M packages/template-core/src/backend-decision/resolveBackendDecision.ts\n M packages/template-core/src/bundle/normalizeTemplatePackageBundle.ts\n M packages/template-core/src/bundle/previewReference.ts\n M packages/template-core/src/bundle/zipBundleReader.ts\n M packages/template-core/src/editor/fieldConstraints.ts\n M packages/template-core/src/family/index.ts\n M packages/template-core/src/index.ts\n M packages/template-core/src/inspection/settlement/createDependencyGraph.ts\n M packages/template-core/src/inspection/settlement/invalidateDependencyGraph.ts\n M packages/template-core/src/inspection/settlement/serializeSettlement.ts\n M packages/template-core/src/inspection/settlement/settleSceneGraph.ts\n M packages/template-core/src/inspection/settlement/types.ts\n M packages/template-core/src/primitives/linearGradient.ts\n M packages/template-core/src/primitives/resolvePrimitiveAppearance.ts\n M packages/template-core/src/renderer-internal.ts\n M packages/template-core/src/resolved/createResolvedRenderTree.ts\n M packages/template-core/src/resolved/imagePlacement.ts\n M packages/template-core/src/resolved/types.ts\n M packages/template-core/src/scene/createCanonicalSceneGraph.ts\n M packages/template-core/src/types/TemplatePackage.ts\n M packages/template-core/src/types/index.ts\n M packages/template-core/test/imagePlacement.test.ts\n M packages/template-react/CHANGELOG.md\n M packages/template-react/README.md\n M packages/template-react/package.json\n M packages/template-react/src/editor.tsx\n M packages/template-react/src/inspection/analysis/featureCoverage.ts\n M packages/template-react/src/internal/runtime-routing/createCoreLayoutRoute.ts\n M packages/template-react/src/internal/runtime-routing/index.ts\n M packages/template-react/src/internal/runtime-routing/settleCoreLayout.ts\n M packages/template-react/src/internal/runtime-routing/types.ts\n M packages/template-react/src/internal/runtime-routing/useCoreLayoutRuntime.ts\n M packages/template-react/src/internal/runtime-routing/verticalTextTrim.ts\n M packages/template-react/src/render/TemplatePackageRenderer.tsx\n M packages/template-react/src/render/packageRenderUtils.ts\n M packages/template-react/src/render/productRenderIdentity.ts\n M packages/template-react/src/session.tsx\n M packages/template-react/test/render/TemplatePackageRenderer.test.tsx\n M packages/template-react/test/runtimeRouting.test.ts\n M packages/template-react/tsconfig.json\n M scripts/fidelity/browser.mjs\n M scripts/fidelity/cli.mjs\n M scripts/fidelity/core.mjs\n M scripts/fidelity/fidelity.test.mjs\n M scripts/fidelity/fonts.mjs\n M scripts/primitives/browser-scenarios.mjs\n M scripts/repository/create-core-release-handoff.mjs\n M scripts/repository/create-runtime-release-handoff.mjs\n M scripts/repository/create-sdk-local-release-verification.mjs\n M scripts/repository/studio-vite-server.mjs\n M scripts/repository/verify-core-release-consumer.mjs\n M scripts/repository/verify-curated-entry-bundles.mjs\n M scripts/repository/verify-package-boundaries.mjs\n M scripts/repository/verify-packed-consumer.mjs\n M scripts/repository/verify-packed-core-node.mjs\n M scripts/repository/verify-release-contract.mjs\n M scripts/repository/verify-runtime-release-consumer.mjs\n M scripts/repository/verify-studio-browser.mjs\n M scripts/repository/verify-template-editor-reference.mjs\n M scripts/repository/verify-template-family-reference.mjs\n M scripts/run-tests.mjs\n M scripts/runtime-routing/font-evidence.mjs\n M scripts/runtime-routing/font-manifest.test.mjs\n M scripts/runtime-routing/text-trim.mjs\n M scripts/scene-graph/cli.mjs\n M scripts/settlement/browser-scenarios.mjs\n M scripts/settlement/cli.mjs\n M scripts/settlement/core.mjs\n M scripts/settlement/model-entry.mjs\n M scripts/settlement/settlement.test.mjs\n M src/template-package/bundle/templatePackageBundle.test.ts\n M src/template-package/export/pngExport.test.ts\n M src/template-package/masks/packageMaskRelationships.test.tsx\n M src/template-package/primitives/linearGradient.test.tsx\n M src/template-package/primitives/primitiveAppearance.test.tsx\n M src/template-package/settlement/settlement.test.ts\n M src/test-suite.ts\n?? .github/workflows/candidate-certification.yml\n?? apps/studio/src/field-rules/\n?? apps/studio/src/setup/\n?? apps/studio/src/workspace/\n?? config/sdk-delivery-inventory.json\n?? docs/architecture/blocked-storage.md\n?? docs/architecture/definition-instance-projection.md\n?? docs/architecture/editor-performance.md\n?? docs/architecture/evidence/\n?? docs/architecture/fidelity-reference-review-20260930.md\n?? docs/architecture/field-choices-audit.md\n?? docs/architecture/field-choices-implementation.md\n?? docs/architecture/host-font-authority.md\n?? docs/architecture/internal-compiler-result.md\n?? docs/architecture/internal-session-contract.md\n?? docs/architecture/media-solid-underlay.md\n?? docs/architecture/now-hiring-text-stability.md\n?? docs/architecture/r07-carrousel-raster.md\n?? docs/architecture/release-delivery.md\n?? docs/architecture/sdk-061-architecture-gate.md\n?? docs/architecture/sdk-061-three-export-baseline.md\n?? docs/architecture/sdk-release-readiness.md\n?? docs/architecture/template-recovery.md\n?? docs/architecture/text-geometry-stability.md\n?? docs/architecture/v2-example-ownership-lifecycle.md\n?? docs/field-rules/\n?? docs/renderer-fidelity/OBSERVATIONAL_MASK_SETTLEMENT.md\n?? docs/renderer-fidelity/PHASE_9_COMPOSITING_SOURCE_GATE.md\n?? docs/renderer-fidelity/PHASE_9_GROUP_CONTROL_SOURCE_GATE.md\n?? docs/renderer-fidelity/TEXT_MEASUREMENT_LIFECYCLE.md\n?? docs/renderer-fidelity/decisions/0074-exporter-061-canonical-solid-opacity-is-native-source-evidence.md\n?? docs/renderer-fidelity/decisions/0075-template-package-v2-field-semantics-and-canonical-content-authority.md\n?? docs/renderer-fidelity/decisions/0076-v2-field-content-reducer-and-materializer-are-single-core-authorities.md\n?? docs/renderer-fidelity/decisions/0077-v2-browser-session-persists-only-canonical-field-authority.md\n?? docs/renderer-fidelity/decisions/0078-boolean-visibility-is-structural-participation-with-generation-safe-publication.md\n?? docs/renderer-fidelity/decisions/0079-family-image-framing-is-shared-content-with-sparse-variant-placement.md\n?? docs/renderer-fidelity/decisions/0080-textarea-visual-lines-come-from-the-current-painted-text-layout.md\n?? docs/renderer-fidelity/decisions/0081-studio-and-custom-hosts-share-v2-configuration-and-content-authority.md\n?? docs/renderer-fidelity/decisions/0082-boolean-fields-may-control-multiple-structural-targets.md\n?? docs/renderer-fidelity/decisions/0083-type-qualified-field-identity-and-shared-boolean-controls.md\n?? docs/renderer-fidelity/decisions/0084-full-parent-alpha-mask-owns-stable-parent-clip-boundary.md\n?? docs/renderer-fidelity/decisions/0085-singular-image-replacement-policy.md\n?? docs/renderer-fidelity/decisions/0086-svg-vector-assets-own-their-embedded-strokes.md\n?? docs/renderer-fidelity/decisions/0087-phase9-matrix-cover-source-does-not-certify-isolation.md\n?? docs/renderer-fidelity/decisions/0088-matched-matrix-group-control-certifies-bounded-isolation.md\n?? docs/renderer-fidelity/decisions/0089-live-figma-matrix2-confirms-paint-stack-and-bounded-overlay.md\n?? docs/renderer-fidelity/decisions/0090-bounded-opaque-source-compositing-owner.md\n?? docs/renderer-fidelity/decisions/0091-cover-mixed-image-gradient-owner.md\n?? docs/renderer-fidelity/decisions/0092-observational-mask-settlement-delegates-existing-authority.md\n?? docs/renderer-fidelity/decisions/0093-mounted-text-input-validity-and-current-publication.md\n?? docs/renderer-fidelity/decisions/0094-fresh-text-measurement-before-paint.md\n?? docs/renderer-fidelity/decisions/0095-established-media-underlay-is-not-primitive-fallback.md\n?? docs/renderer-fidelity/decisions/0096-host-font-registry-is-render-and-export-authority.md\n?? docs/sdk-hardening/\n?? docs/sdk/HOST_LIFECYCLE.md\n?? docs/sdk/OPERATION_OUTCOMES.md\n?? docs/sdk/RELEASE_PREPARATION.md\n?? docs/sdk/SDK_1_0_MIGRATION.md\n?? docs/sdk/SDK_1_0_RELEASE_NOTES.md\n?? docs/sdk/STUDIO_REFERENCE.md\n?? docs/sdk/V2_INTEGRATION.md\n?? docs/studio/\n?? examples/template-editor-integration/src/FieldRulesV2Host.tsx\n?? examples/template-editor-integration/src/fieldHostLifecycle.ts\n?? examples/template-family-integration/CHANGELOG.md\n?? fidelity/gates/\n?? fidelity/references/approved/exporter-061-carrousel/\n?? fidelity/references/approved/exporter-061-cover/\n?? fidelity/references/approved/exporter-061-linear-and-mixed-paints/\n?? fidelity/references/approved/exporter-061-now-hiring/\n?? fidelity/references/approved/exporter-061-solid-opacity/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-cover/\n?? fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/\n?? fidelity/settlement/snapshots/approved/exporter-061-carrousel/\n?? fidelity/settlement/snapshots/approved/exporter-061-cover/\n?? fidelity/settlement/snapshots/approved/exporter-061-now-hiring/\n?? packages/template-browser/src/import/familySourcePreparationV2.ts\n?? packages/template-browser/src/import/runTemplatePackageImportPipelineV2.ts\n?? packages/template-browser/src/import/templateReimportV2.ts\n?? packages/template-browser/src/import/templateSourceAssemblyV2.ts\n?? packages/template-browser/src/internal/compilerResult/\n?? packages/template-browser/src/internal/sdkVersion.ts\n?? packages/template-browser/src/internal/sessionContract/\n?? packages/template-browser/src/persistence/platformMemory.ts\n?? packages/template-browser/src/persistence/publicRepositories.ts\n?? packages/template-browser/src/persistence/savedRecordValidationV2.ts\n?? packages/template-browser/src/persistence/templateRecovery.ts\n?? packages/template-browser/src/persistence/templateSessionRepositoryV2.ts\n?? packages/template-browser/src/persistence/v2SessionRepositories.ts\n?? packages/template-browser/src/session-internal.ts\n?? packages/template-browser/src/session/activeFieldControllersV2.ts\n?? packages/template-browser/src/session/fieldRenderEvidence.ts\n?? packages/template-browser/src/session/imageSourceDimensionsV2.ts\n?? packages/template-browser/src/session/publicFamilySession.ts\n?? packages/template-browser/src/session/serializedSaveQueue.ts\n?? packages/template-browser/src/session/sessionAssetUrlLeases.ts\n?? packages/template-browser/src/session/storedAssetHydration.ts\n?? packages/template-browser/src/session/templateFieldFamilySessionV2.ts\n?? packages/template-browser/src/session/templateSessionV2.ts\n?? packages/template-browser/test/blockedStorage.test.ts\n?? packages/template-browser/test/blockedStorageHost.browser.ts\n?? packages/template-browser/test/blockedStoragePins.test.ts\n?? packages/template-browser/test/compilerResult.integration.ts\n?? packages/template-browser/test/compilerResult.test.ts\n?? packages/template-browser/test/definitionProjection.integration.test.ts\n?? packages/template-browser/test/familyAuthoringBaseline.ts\n?? packages/template-browser/test/familySourcePreparation.integration.ts\n?? packages/template-browser/test/familySourcePreparation.test.ts\n?? packages/template-browser/test/fieldRenderEvidence.integration.ts\n?? packages/template-browser/test/fieldRenderEvidence.test.ts\n?? packages/template-browser/test/hostFontEmbedding.test.ts\n?? packages/template-browser/test/imageReplacementOwnership.integration.ts\n?? packages/template-browser/test/imageReplacementOwnership.test.ts\n?? packages/template-browser/test/importPipelineV2.test.ts\n?? packages/template-browser/test/saveScheduling.integration.ts\n?? packages/template-browser/test/saveScheduling.test.ts\n?? packages/template-browser/test/sdkResourceLifetime.test.ts\n?? packages/template-browser/test/serializedSaveQueue.test.ts\n?? packages/template-browser/test/sessionContract.async.test.ts\n?? packages/template-browser/test/sessionContract.fixtures.ts\n?? packages/template-browser/test/sessionContract.integration.ts\n?? packages/template-browser/test/sessionContract.test.ts\n?? packages/template-browser/test/sessionResourceLifecycle.test.ts\n?? packages/template-browser/test/sessionSnapshotReader.test.ts\n?? packages/template-browser/test/storedAssetHydration.integration.ts\n?? packages/template-browser/test/storedAssetHydration.test.ts\n?? packages/template-browser/test/storedAssetHydrationScope.test.ts\n?? packages/template-browser/test/templateRecovery.test.ts\n?? packages/template-browser/test/templateSessionV2.test.ts\n?? packages/template-core/src/compositing/\n?? packages/template-core/src/family/configurationV2.ts\n?? packages/template-core/src/family/fieldRulesV2.ts\n?? packages/template-core/src/fieldSemanticKernelV2.ts\n?? packages/template-core/src/fieldValidationV2.ts\n?? packages/template-core/src/fieldValuesV2.ts\n?? packages/template-core/src/inspection/settlement/settleMaskEvidence.ts\n?? packages/template-core/src/internal/\n?? packages/template-core/src/materializeTemplateFieldContentV2.ts\n?? packages/template-core/src/migrateTemplatePackageV2_1.ts\n?? packages/template-core/src/normalizeTemplatePackageV2.ts\n?? packages/template-core/src/parseTemplatePackageV2.ts\n?? packages/template-core/src/schema/template-field-content-v1.schema.json\n?? packages/template-core/src/schema/template-package-v2.schema.json\n?? packages/template-core/src/sourceColorField.ts\n?? packages/template-core/src/sourceDateField.ts\n?? packages/template-core/src/sourceNumberField.ts\n?? packages/template-core/src/templateFieldContentV2.ts\n?? packages/template-core/src/types/EditableFieldDefinitionV2.ts\n?? packages/template-core/src/validateTemplateFieldContentStateV1.ts\n?? packages/template-core/src/validateTemplatePackageV2.ts\n?? packages/template-core/test/definitionProjection.fixtures.ts\n?? packages/template-core/test/definitionProjection.test.ts\n?? packages/template-core/test/mediaSolidUnderlay.test.ts\n?? packages/template-core/test/sourceCompositing.test.ts\n?? packages/template-core/test/templateFieldSemanticKernelV2.test.ts\n?? packages/template-core/test/templatePackageV2Contract.test.ts\n?? packages/template-react/src/fieldSessionV2.tsx\n?? packages/template-react/src/internal/runtime-routing/structuralParticipation.ts\n?? packages/template-react/src/internal/runtime-routing/textMeasurementInputs.ts\n?? packages/template-react/src/internal/useFieldSessionSnapshotV2.ts\n?? packages/template-react/test/fieldSessionV2.test.tsx\n?? packages/template-react/test/hostFontAuthority.browser.tsx\n?? packages/template-react/test/imageReplacementOwnership.browser.tsx\n?? packages/template-react/test/render/sourceCompositingRender.test.tsx\n?? packages/template-react/test/sessionLifecycle.browser.tsx\n?? packages/template-react/test/textMeasurementInputs.test.ts\n?? scripts/candidate-certification/\n?? scripts/compositing/\n?? scripts/editor-performance/\n?? scripts/example-lifecycle/\n?? scripts/fidelity/capture-camera.mjs\n?? scripts/fidelity/capture-camera.test.mjs\n?? scripts/fidelity/capture-integrity.mjs\n?? scripts/fidelity/capture-integrity.test.mjs\n?? scripts/fidelity/gate-disposition.mjs\n?? scripts/fidelity/gate-evidence.mjs\n?? scripts/fidelity/gate-profile.mjs\n?? scripts/fidelity/gate-profile.test.mjs\n?? scripts/fidelity/legacy/\n?? scripts/fidelity/output-lifecycle.mjs\n?? scripts/fidelity/output-lifecycle.test.mjs\n?? scripts/fidelity/reference-review.mjs\n?? scripts/fidelity/retain-choices-review.mjs\n?? scripts/fidelity/retain-compact-card-review.mjs\n?? scripts/fidelity/retain-fields-review.mjs\n?? scripts/fidelity/retain-media-underlay-review.mjs\n?? scripts/fidelity/retain-studio-product-review.mjs\n?? scripts/fidelity/review-readiness.mjs\n?? scripts/fidelity/review-readiness.test.mjs\n?? scripts/fidelity/sdk-gate.mjs\n?? scripts/fidelity/write-gate-dispositions.mjs\n?? scripts/field-rules/\n?? scripts/r07/\n?? scripts/release-delivery/\n?? scripts/repository/audit-field-choices-browser.mjs\n?? scripts/repository/audit-field-choices-native.mjs\n?? scripts/repository/blocked-storage-packed-host.mjs\n?? scripts/repository/choices-retained-source-plugin.mjs\n?? scripts/repository/compact-fields-browser.mjs\n?? scripts/repository/core-declaration-contract.mjs\n?? scripts/repository/core-declaration-contract.test.mjs\n?? scripts/repository/fields-measurement.mjs\n?? scripts/repository/internal-experiment-boundaries.mjs\n?? scripts/repository/internal-experiment-boundaries.test.mjs\n?? scripts/repository/local-sdk-candidate.mjs\n?? scripts/repository/local-sdk-candidate.test.mjs\n?? scripts/repository/measure-v2-edits-workload.mjs\n?? scripts/repository/measure-v2-edits.mjs\n?? scripts/repository/record-blocked-storage-evidence.mjs\n?? scripts/repository/record-fields-usability.mjs\n?? scripts/repository/sdk-061-family-profile.mjs\n?? scripts/repository/sdk-061-family-profile.test.mjs\n?? scripts/repository/verify-blocked-storage-unit.mjs\n?? scripts/repository/verify-blocked-storage.mjs\n?? scripts/repository/verify-compiler-result.mjs\n?? scripts/repository/verify-family-preparation.mjs\n?? scripts/repository/verify-field-choices-browser.mjs\n?? scripts/repository/verify-field-choices-release.mjs\n?? scripts/repository/verify-field-choices.mjs\n?? scripts/repository/verify-field-render-evidence-browser.mjs\n?? scripts/repository/verify-field-render-evidence.mjs\n?? scripts/repository/verify-font-reactivation.mjs\n?? scripts/repository/verify-host-font-authority.mjs\n?? scripts/repository/verify-image-replacement-ownership-browser.mjs\n?? scripts/repository/verify-image-replacement-ownership.mjs\n?? scripts/repository/verify-media-underlay-browser.mjs\n?? scripts/repository/verify-media-underlay.mjs\n?? scripts/repository/verify-save-scheduling.mjs\n?? scripts/repository/verify-sdk-061-color-browser.mjs\n?? scripts/repository/verify-sdk-061-family-host.mjs\n?? scripts/repository/verify-sdk-061-single-host.mjs\n?? scripts/repository/verify-sdk-hardening-regression.mjs\n?? scripts/repository/verify-session-contract-browser.mjs\n?? scripts/repository/verify-session-contract.mjs\n?? scripts/repository/verify-session-snapshot-bridge.mjs\n?? scripts/repository/verify-stored-asset-hydration.mjs\n?? scripts/repository/verify-studio-blocked-storage.mjs\n?? scripts/repository/verify-studio-storage-fonts.mjs\n?? scripts/repository/verify-v2-import-host.mjs\n?? scripts/runtime-routing/boolean-structural-visibility.mjs\n?? scripts/runtime-routing/textarea-max-lines-harness.tsx\n?? scripts/runtime-routing/textarea-max-lines.mjs\n?? scripts/settlement/mask-source-evidence.mjs\n?? scripts/studio-product/\n?? scripts/text-geometry/\n",
@@ -1177,13 +1177,18 @@
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/ci-preparation.json",
-        "bytes": 94156,
-        "sha256": "a2b4b16c2f3898b5ff156a12efdcd988ce04a59091337d365f7d82c178d62162"
+        "bytes": 57638,
+        "sha256": "6e3e60359287741d2aca60a23ff5bf5111de848f96e0c710186474d2f873ce59"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/fixture-roundtrip.json",
         "bytes": 1324,
         "sha256": "b4550ae4327675a9995727d3b5b2ea99d6bb43df25389105791742f679e6d296"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-first/report.json",
+        "bytes": 1397,
+        "sha256": "1540b2369c61ee5e6b81d975379bc82e095a103d481e1476cc9c47a268ee7c85"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/macos-b/npm/example/custom-carrousel.png",
@@ -1556,6 +1561,111 @@
         "sha256": "8366cfe946e12545da0186150f42ed3bb4b638d3bc50eab26d5f0fa505ba2576"
       },
       {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/custom-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/custom-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/default-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/default-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/embedded-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/embedded-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/report.json",
+        "bytes": 22494,
+        "sha256": "7b5e145d2ba0a51abc4b04953bda310aa505b68aca2bcf4845645a8594821110"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example/seven-types.png",
+        "bytes": 63382,
+        "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/fonts/verification.json",
+        "bytes": 94623,
+        "sha256": "b69e732bfccd580ffe6afbc705f253181f9d85e227ae7bbb5a2067ac326ed662"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/npm/storage/real-upgrade.json",
+        "bytes": 13429,
+        "sha256": "309db3574bdef2646fe93090e8aa25f368d44fc81e82746e9357610feb947933"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/custom-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/custom-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/default-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/default-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/embedded-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/embedded-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/report.json",
+        "bytes": 22496,
+        "sha256": "1329cfcbe032296220703cb4ea71b92294b15853c16ad39393071ec86f32575b"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example/seven-types.png",
+        "bytes": 63382,
+        "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/fonts/verification.json",
+        "bytes": 94641,
+        "sha256": "5480e77a2d4f5621dbc2750f8eb141cfd72528c2bdc7a839d757df04f28d7df0"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/storage/real-upgrade.json",
+        "bytes": 13436,
+        "sha256": "37af49b4f49902bfdfd900508a09e6d5954f43f5dd0d322d3eac4d1e72e44ca7"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-f/report.json",
+        "bytes": 7943,
+        "sha256": "c46e6b651f3bef35bce880320b9e00210954d940bd9d3f4bff5f54447fabaaab"
+      },
+      {
         "file": "docs/architecture/evidence/candidate-1-20261013/macos/npm/example/custom-carrousel.png",
         "bytes": 907586,
         "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
@@ -1673,7 +1783,7 @@
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/review-binding.json",
         "bytes": 2273,
-        "sha256": "0ef707231ae91087e49b447504a09e127167728fbecbd392f0b33d691835f5a0"
+        "sha256": "5726072ad180fc07b6af0b1fa52284fc83b7793544d305f0fcdfb23d2935e96f"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/staging-current.json",
@@ -5546,6 +5656,11 @@
         "sha256": "f83ce4719003093f56ea503950092db605e1c706f670a82a2f04635a649cb796"
       },
       {
+        "file": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013a.json",
+        "bytes": 151707,
+        "sha256": "bc893f09b3024721fec6a2cb12f055a81f81d2f2825ad6d20052e520cfdab1c3"
+      },
+      {
         "file": "fidelity/gates/archive/sdk-061-ten-fixture-dispositions-20261004.json",
         "bytes": 65229,
         "sha256": "a9695c66d42105ffd54595ab7ef727ae71eda3497ebbeb15abbe4a60d36448bb"
@@ -5573,7 +5688,7 @@
       {
         "file": "fidelity/gates/sdk-061-dispositions.json",
         "bytes": 151707,
-        "sha256": "bc893f09b3024721fec6a2cb12f055a81f81d2f2825ad6d20052e520cfdab1c3"
+        "sha256": "59e1f15134d207d4568fc6ba0783e5e31a4a6e00f4f840b3570d30e51afe563d"
       },
       {
         "file": "fidelity/gates/sdk-061.json",
@@ -8872,13 +8987,13 @@
       },
       {
         "file": "scripts/candidate-certification/frozen.mjs",
-        "bytes": 3247,
-        "sha256": "dc39af65d20e17e9a2f88cbe340595ee590d35fb8b9513edbc8fcb4fe5881133"
+        "bytes": 3279,
+        "sha256": "ffe1034d9ed69b02717f9e3367c3ac4e97eb59b1eaf2f2bfc354c72b24841a99"
       },
       {
         "file": "scripts/candidate-certification/frozen.test.mjs",
-        "bytes": 1644,
-        "sha256": "bbab100522810d1db8d624c893fa4d88b198283b99d0372bff50e037883349a4"
+        "bytes": 1957,
+        "sha256": "314e115fd4aaa1a8dc59debece0966f20fd55476acc370a341cf8bf1a14c2ecb"
       },
       {
         "file": "scripts/candidate-certification/prepare-branch.mjs",
@@ -11006,7 +11121,7 @@
         "sha256": "b3da4743e8a18b79bde95111daf12234d682bf3b6bc46cc813dba89dd45bb540"
       }
     ],
-    "filesSha256": "3bb192d2bf38a286222fb8d44927ef1006fb687eb52591bccf3ad89664f55177"
+    "filesSha256": "7858f192b4c06a7e9d84a5b2012bbb92f17d23b5118f470efc794c3af7035e38"
   },
   "environment": {
     "node": "v22.23.3",
