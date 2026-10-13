@@ -14,7 +14,7 @@ The [delivered example](V2-EXAMPLE.md) includes its [host](FieldRulesV2Host.tsx)
 | --- | --- | --- | ---: |
 | @sleinity/template-core | [sleinity-template-core-1.0.0.tgz](sleinity-template-core-1.0.0.tgz) | 363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185 | 532285 |
 | @sleinity/template-browser | [sleinity-template-browser-1.0.0.tgz](sleinity-template-browser-1.0.0.tgz) | e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8 | 403000 |
-| @sleinity/template-react | [sleinity-template-react-1.0.0.tgz](sleinity-template-react-1.0.0.tgz) | 6d7e82d80e4c8457420a6793699b778ed638237bd17c50bb46833ff12a63b584 | 289357 |
+| @sleinity/template-react | [sleinity-template-react-1.0.0.tgz](sleinity-template-react-1.0.0.tgz) | 677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b | 289360 |
 
 ## Ownership and recovery
 
