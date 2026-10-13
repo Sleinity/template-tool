@@ -104,6 +104,11 @@
     {
       "result": "comparison attempted during concurrent rebuild",
       "resolution": "Discarded intermediate pack; final sequential comparison only after all builds completed"
+    },
+    {
+      "result": "First GitHub run failed on a linked empty promotion directory",
+      "runId": 38451423868,
+      "resolution": "Retain unchanged guarded promotion JSON metadata and structures; no review images added"
     }
   ]
 }

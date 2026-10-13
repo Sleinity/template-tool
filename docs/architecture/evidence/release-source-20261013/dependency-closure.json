@@ -3,7 +3,10 @@
     "docs/architecture/evidence/candidate-1-20261013/baseline/identity.json",
     "docs/architecture/evidence/candidate-1-20261013/macos-k/report.json",
     "docs/architecture/evidence/candidate-1-20261013/linux-final/report.json",
-    "docs/architecture/evidence/candidate-1-20261013/verification.json"
+    "docs/architecture/evidence/candidate-1-20261013/verification.json",
+    "docs/architecture/evidence/r07-raster-20261013/promotion/2026-10-13T10-44-32-577Z/exporter-061-carrousel/editor/structural-after.json",
+    "docs/architecture/evidence/r07-raster-20261013/promotion/2026-10-13T10-44-32-577Z/exporter-061-carrousel/editor/structural-before.json",
+    "docs/architecture/evidence/r07-raster-20261013/promotion/2026-10-13T10-44-32-577Z/exporter-061-carrousel/editor/update.json"
   ],
   "forcedIgnoredTextFiles": [
     "fidelity/evidence/compact-field-cards/measurements/measurement-after-family.json"
