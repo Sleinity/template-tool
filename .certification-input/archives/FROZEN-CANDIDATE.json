@@ -3557,8 +3557,8 @@
     },
     {
       "file": "scripts/repository/verify-blocked-storage.mjs",
-      "bytes": 6346,
-      "sha256": "4bbb76e312fd24626caa48c107dcb994ecea7fcc794a94f59b0e5cecf5f4be41"
+      "bytes": 6557,
+      "sha256": "8e0e31ced1df4735d63c8dcab0b8657c6692ecc269e33df2fc132afd93aeb0c2"
     },
     {
       "file": "scripts/repository/verify-compiler-result.mjs",
@@ -4996,7 +4996,7 @@
       "sha256": "b3da4743e8a18b79bde95111daf12234d682bf3b6bc46cc813dba89dd45bb540"
     }
   ],
-  "certifiedSourceSha256": "1d14b2f8ab9c0cc540efbf232def4437a7085b988dfb35996a5cb7a53ad36235",
+  "certifiedSourceSha256": "b8f4ba6d58e1e560044e81b525028c0a538352f41dc87067f0ac7e54552706d0",
   "schemaVersion": "frozen-sdk-candidate-v1",
   "version": "1.0.0",
   "deliveryManifestSha256": "cba4636506cdee4cfc2753c19ef902e2ac74391deaf04ee7b3ce12602639009b",
@@ -5213,8 +5213,8 @@
     },
     {
       "file": "LOCAL-CANDIDATE-MANIFEST.json",
-      "bytes": 517329,
-      "sha256": "acff461e2775d36543501180863d9cadfad6ea7b7eb49303cbbcdbd6f7d1d9f7"
+      "bytes": 524517,
+      "sha256": "1eab1e441cfe5e92803ce38a28241dc1df3d5080317ff8e5159e60af8d0d6292"
     }
   ],
   "source": {
@@ -6389,13 +6389,63 @@
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/ci-preparation.json",
-        "bytes": 57541,
-        "sha256": "174442caea26a04e22611dfb7de2954a90bcd72fc227a21847d47b6b8514a3ae"
+        "bytes": 57695,
+        "sha256": "65bc2fb91c1b0da3c11abf453e588174ff08b3d02cc5970e1be85314c3558378"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/fixture-roundtrip.json",
         "bytes": 1324,
         "sha256": "b4550ae4327675a9995727d3b5b2ea99d6bb43df25389105791742f679e6d296"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/custom-carrousel.png",
+        "bytes": 900928,
+        "sha256": "b82d3348edf8d5a9fc02f30b7039ca003cecb15203a5e728036f26c28c8fd168"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/custom-host.png",
+        "bytes": 736609,
+        "sha256": "8da4d354c6b444be2d7e227989a68a49688eab611385016a0c0cde171d9843e4"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/default-carrousel.png",
+        "bytes": 900928,
+        "sha256": "b82d3348edf8d5a9fc02f30b7039ca003cecb15203a5e728036f26c28c8fd168"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/default-host.png",
+        "bytes": 736609,
+        "sha256": "8da4d354c6b444be2d7e227989a68a49688eab611385016a0c0cde171d9843e4"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/embedded-carrousel.png",
+        "bytes": 900928,
+        "sha256": "b82d3348edf8d5a9fc02f30b7039ca003cecb15203a5e728036f26c28c8fd168"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/embedded-host.png",
+        "bytes": 736609,
+        "sha256": "8da4d354c6b444be2d7e227989a68a49688eab611385016a0c0cde171d9843e4"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/report.json",
+        "bytes": 22495,
+        "sha256": "126f3e53bf2e106ebaee282b164c8d5ec9055f7e520f619bb9533b5b7c480a41"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/example/seven-types.png",
+        "bytes": 64128,
+        "sha256": "c93cadaf7f9c10b2ce30d0bfdd8f89c7071afe39c54a1defaf81b421539bfaa9"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/npm/fonts/verification.json",
+        "bytes": 93111,
+        "sha256": "d7627272f00f990f69036dbe05b0c5b6cc9d3706e3fcb664ade30f534d29ab7f"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/linux-fifth/report.json",
+        "bytes": 3000,
+        "sha256": "c6714d14f17a6432dfcda264c4446034017ca75676441bddf42ffc96d58934a7"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/linux-first/report.json",
@@ -7126,6 +7176,111 @@
         "file": "docs/architecture/evidence/candidate-1-20261013/macos-i/report.json",
         "bytes": 7943,
         "sha256": "df81930276c5ddde06447ac35ad7806addc97c54d79bd853652328f472852fce"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/custom-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/custom-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/default-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/default-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/embedded-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/embedded-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/report.json",
+        "bytes": 22494,
+        "sha256": "3239e9c5a650d55f0327297103fa8e7d93bc37953c32dc95ce42f9011a21bd98"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/example/seven-types.png",
+        "bytes": 63382,
+        "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/fonts/verification.json",
+        "bytes": 93183,
+        "sha256": "588915a9f49b6034d39c29e8c7c6be4bd5676d87fc17bbeeb11c9524f45b2e5b"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/npm/storage/real-upgrade.json",
+        "bytes": 13447,
+        "sha256": "b291e6fff7f409e0007f793901733c39c57f3c81af7aa9097ad0f52cd40d0fed"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/custom-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/custom-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/default-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/default-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/embedded-carrousel.png",
+        "bytes": 907586,
+        "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/embedded-host.png",
+        "bytes": 757562,
+        "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/report.json",
+        "bytes": 22498,
+        "sha256": "8e9e3b24ea8df28f3eeacf76e1c5a51bb8ecf34fbcd1d54b85ee3db69d454b49"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/example/seven-types.png",
+        "bytes": 63382,
+        "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/fonts/verification.json",
+        "bytes": 94641,
+        "sha256": "1069002ceb28ab90661d09b53378b699827b78a3aea2fb039ef9c1062c326acc"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/pnpm/storage/real-upgrade.json",
+        "bytes": 13433,
+        "sha256": "cae1e90a51fc28d2b84b5a67289730f54aa2774ed6c5034187eb6a8915479fd0"
+      },
+      {
+        "file": "docs/architecture/evidence/candidate-1-20261013/macos-j/report.json",
+        "bytes": 7944,
+        "sha256": "03e0557933bdfd3d1fc60975859a2c428781a2b230dcd4df7b656a3707cfd367"
       },
       {
         "file": "docs/architecture/evidence/candidate-1-20261013/macos/npm/example/custom-carrousel.png",
@@ -15154,8 +15309,8 @@
       },
       {
         "file": "scripts/repository/verify-blocked-storage.mjs",
-        "bytes": 6346,
-        "sha256": "4bbb76e312fd24626caa48c107dcb994ecea7fcc794a94f59b0e5cecf5f4be41"
+        "bytes": 6557,
+        "sha256": "8e0e31ced1df4735d63c8dcab0b8657c6692ecc269e33df2fc132afd93aeb0c2"
       },
       {
         "file": "scripts/repository/verify-compiler-result.mjs",
@@ -16593,8 +16748,8 @@
         "sha256": "b3da4743e8a18b79bde95111daf12234d682bf3b6bc46cc813dba89dd45bb540"
       }
     ],
-    "filesSha256": "11e758d4302841f4f33cf17a7a0db294d5698eafc80a10ababa3ed714cb0815d"
+    "filesSha256": "16f7547c6158bc19da148b3dec1b31319fc324088aa38cc735f65818b2a44672"
   },
-  "createdAt": "2026-10-13T17:40:37.289Z",
+  "createdAt": "2026-10-13T17:51:02.632Z",
   "published": false
 }

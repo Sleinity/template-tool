@@ -1,3 +1,4 @@
+import { createServer } from 'vite';
 /** Event-driven real IndexedDB upgrade evidence; no fixed waits or destructive recovery. */
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -16,7 +17,7 @@ const root = process.cwd();
 const archives=option("--archives",null), manager=option("--manager","pnpm");let packed;
 const source = baseline ? 'docs/architecture/evidence/blocked-storage-20261012/baseline/packages/template-browser/src/storage/indexedDb.ts' : 'packages/template-browser/src/storage/indexedDb.ts';
 if(baseline){const identity=JSON.parse(await readFile("docs/architecture/evidence/blocked-storage-20261012/baseline/identity.json","utf8"));assert.equal(createHash("sha256").update(await readFile(source)).digest("hex"),identity.originalSources["packages/template-browser/src/storage/indexedDb.ts"]);}
-const server = await createStudioViteServer(); let browser;
+const server = archives ? await createServer({configFile:false,root:process.cwd(),server:{host:'127.0.0.1',port:0,fs:{allow:[process.cwd()]}},optimizeDeps:{noDiscovery:true,include:[]}}) : await createStudioViteServer(); let browser;
 try {
   await server.listen(); browser = await chromium.launch({headless:true}); const context = await browser.newContext(); const page = await context.newPage();
   await page.route(server.resolvedUrls.local[0], route => route.fulfill({ contentType: "text/html", body: "<!doctype html><title>Isolated storage probe</title>" }));
