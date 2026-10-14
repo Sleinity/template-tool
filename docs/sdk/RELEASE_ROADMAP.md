@@ -12,7 +12,7 @@ stable `sdk-v1.0.0` tag once Milestones 6–9 are complete.
 
 | Milestone | Deliverable | Acceptance | Status |
 | --- | --- | --- | --- |
-| 6 — Release source baseline | Reviewed `codex/sdk-1-release` branch and PR; classified source/evidence inventory | Clean isolated checkout passes checks; runtime and package contents match the certified candidate; temporary/private inputs excluded | Prepared; validation and PR checks recorded in the baseline report |
+| 6 — Release source baseline | Reviewed `codex/sdk-1-release` branch and PR; classified source/evidence inventory | Clean isolated checkout passes checks; runtime and package contents match the certified candidate; temporary/private inputs excluded | Implemented in [PR #22](https://github.com/Sleinity/template-tool/pull/22); validation and GitHub checks pass; not merged |
 | 7 — Certified-artifact publication | Guarded workflow publishes the frozen archives; dry-run rehearsal and partial-publication recovery | Commit, archive hashes and manifest verified; no rebuild substitution; conflicting published versions stop the release | Planned |
 | 8 — Publish and verify delivery | GitHub Packages installation and prerelease assets, followed by stable release | Clean npm/pnpm registry acceptance and generated handoff pass; all three 1.0.0 packages verified before stable release | Planned; publication not performed |
 | 9 — Record the working baseline | Durable release record and updated SDK handoff | Source commit, tag, registry identities and verification runs are linked; temporary certification inputs retired safely | Planned |

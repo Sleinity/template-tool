@@ -1,5 +1,5 @@
 {
-  "status": "local-pass; GitHub PR check required",
+  "status": "pass",
   "candidate": "sdk-1-candidate-20261013k",
   "sourceCommit": "e7f33f126971f908f8caab8f4a871a02e82eea5c",
   "baseCommit": "88510e5f16d16e119692a25c59f1b712acf905a3",
@@ -110,5 +110,27 @@
       "runId": 38451423868,
       "resolution": "Retain unchanged guarded promotion JSON metadata and structures; no review images added"
     }
-  ]
+  ],
+  "completedDate": "2026-10-14",
+  "validatedSourceCommit": "00cf09c966048641fd61524243a4a46a805a1502",
+  "github": {
+    "runId": 38452271335,
+    "url": "https://github.com/Sleinity/template-tool/actions/runs/38452271335",
+    "headSha": "00cf09c966048641fd61524243a4a46a805a1502",
+    "status": "completed",
+    "conclusion": "success",
+    "checks": [
+      "verify",
+      "protected-references"
+    ],
+    "includedAcceptance": [
+      "ci:portable",
+      "release reference intake",
+      "shared delivery/publication contracts",
+      "template editor",
+      "Template Family"
+    ],
+    "currentHeadChecks": "https://github.com/Sleinity/template-tool/pull/22/checks"
+  },
+  "metadataClosure": "This report/roadmap closure changes documentation only; final PR-head checks remain authoritative."
 }

@@ -1,6 +1,6 @@
 # SDK 1.0.0 release source baseline — Milestone 6
 
-Date: 2026-10-13. Candidate: `sdk-1-candidate-20261013k`. Release branch:
+Started: 2026-10-13. Implementation completed: 2026-10-14. Candidate: `sdk-1-candidate-20261013k`. Release branch:
 `codex/sdk-1-release`. Publication remains outside this milestone.
 
 ## Source reconciliation
@@ -75,7 +75,11 @@ Isolated-checkout validation and package-content equivalence are recorded in
 [evidence](evidence/release-source-20261013/verification.json). All local stages pass, including strict packed consumers and unchanged bundle budgets.
 The three isolated repacks are byte-identical to the frozen archives. The 27
 release-tooling tests pass. [PR #22](https://github.com/Sleinity/template-tool/pull/22)
-remains draft until its full GitHub verification passes.
+passed full [GitHub verification](https://github.com/Sleinity/template-tool/actions/runs/38452271335)
+at source commit `00cf09c966048641fd61524243a4a46a805a1502`, including editor
+and Family browser acceptance. This final record adds documentation only;
+[current PR-head checks](https://github.com/Sleinity/template-tool/pull/22/checks)
+are authoritative before marking it ready for review.
 
 Milestone 7 owns frozen-artifact publication tooling. The existing release workflow
 is retained; no SDK release tag is created and no publishing command is invoked.
