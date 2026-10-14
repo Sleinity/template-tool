@@ -19,7 +19,7 @@ try {
   }else {
     await verifySource(d);report.sourceCommit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
     if(command==='assets'){
-      report.github=preflightGithub();assert.equal(process.env.SDK_RELEASE_ENVIRONMENT,'private-sdk-release');assert.equal(process.env.GITHUB_REPOSITORY,d.repository);assert(['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME),'Assets require the guarded workflow');const dir=options['--assets'];assert(dir,'Generated delivery required');const {manifest}=await verifyDeliveryBundle(dir);
+      report.github=preflightGithub();assert.equal(process.env.SDK_RELEASE_ENVIRONMENT,'private-sdk-release');assert.equal(process.env.GITHUB_REPOSITORY,d.repository);assert(['push','workflow_dispatch'].includes(process.env.GITHUB_EVENT_NAME),'Assets require the guarded workflow');if(process.env.GITHUB_EVENT_NAME==='push')assertPublicationContext(d,process.env,execFileSync('git',['rev-parse',`refs/tags/sdk-v${d.version}^{commit}`],{encoding:'utf8'}).trim());else assert.equal(process.env.GITHUB_REF,'refs/heads/main','Manual asset refresh requires main');const dir=options['--assets'];assert(dir,'Generated delivery required');const {manifest}=await verifyDeliveryBundle(dir);
       const expected=await Promise.all(manifest.uploadFiles.map(async file=>({file,sha256:sha256(await readFile(path.join(dir,file)))})));
       const tag='sdk-v'+d.version;let release;try{release=githubJson('releases/tags/'+tag);}catch{throw Error('Create the prerelease explicitly in the release workflow before uploading assets');}
       assert.equal(release.tag_name,tag);

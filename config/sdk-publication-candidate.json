@@ -5205,7 +5205,7 @@
   "publisherSourceFiles": [
     {
       "file": ".github/workflows/release-rehearsal.yml",
-      "sha256": "eb5d89ccb7159637daa4f04cd7b4d43cc24381f3bd7b80dd5dab4a9b8da2c9a8"
+      "sha256": "787f9d6e9a51e9b40b4eb9580b95b19bb7148e53b8238d45f5c83c8119811132"
     },
     {
       "file": "scripts/release-publication/candidate.mjs",
@@ -5217,7 +5217,11 @@
     },
     {
       "file": "scripts/release-publication/cli.mjs",
-      "sha256": "a2a6454995ca8205223502aedb4933ea9fa9b8ebe5b359de6e3f4ecd4ec7e3b4"
+      "sha256": "8b8a8febb8cd380b16e6c27b07b31d4a222fdddc8c413fdb3ccb6c6cf65c485f"
+    },
+    {
+      "file": "scripts/release-publication/consumer.mjs",
+      "sha256": "f7e25fd62f52b636243d2ca9dc70dfdd1cb522f0109e847cefc927f3328d1dd2"
     },
     {
       "file": "scripts/release-publication/driver.mjs",
@@ -5238,6 +5242,10 @@
     {
       "file": "scripts/release-publication/registry.mjs",
       "sha256": "81a47c3a10437e18b0eccda89531989d7f9f8ace56429f209280c71d02782c79"
+    },
+    {
+      "file": "scripts/release-publication/rehearsal.test.mjs",
+      "sha256": "9abf13fce6b25856eeef28bcaeff8f390ecb6cbcb39e99c402b6bd75d100ed20"
     },
     {
       "file": "scripts/release-publication/resume-journal.mjs",
