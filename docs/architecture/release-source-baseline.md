@@ -13,8 +13,8 @@ The later certified implementations supersede older versions on remote main;
 remote history stays in the PR parent. Existing remote files outside the reviewed
 source transfer are retained unless the certified worktree explicitly deletes them.
 
-The inventory classifies 2,307 files/explicit deletions: 1752 included and 555
-excluded. Required packages, Studio, examples, tests, scripts, configuration,
+The inventory classifies 2,307 files/explicit deletions: 1,756 included
+and 551 excluded. Required packages, Studio, examples, tests, scripts, configuration,
 programme/ADR guidance, and compact historical/final reports are included. The
 full inventory is retained so exclusions are visible rather than silently omitted.
 Dependencies discovered through documentation links are copied separately where
