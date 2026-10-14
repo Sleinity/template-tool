@@ -83,8 +83,10 @@ export class RegistryReadClient {
     return Buffer.from(await response.arrayBuffer());
   }
 }
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
 export class RegistryWriteClient extends RegistryReadClient {
   async publish(file, row) {
+    refuseRetiredOperation('registry publication');
     assert(packageNames.includes(row.name));
     assert.equal(path.basename(file), row.file);
     await this.npm(['publish', file, '--ignore-scripts']);

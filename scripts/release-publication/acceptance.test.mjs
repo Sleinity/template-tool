@@ -137,7 +137,7 @@ test('fixture artifact requires exact identity and unexpired authenticated bytes
 });
 test('full preparation never publishes or uploads plaintext reports', async () => {
   const source = await readFile(
-    '.github/workflows/release-preparation.yml',
+    'docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release-preparation.yml',
     'utf8',
   );
   assert(source.includes('acceptance.mjs --mode archive'));

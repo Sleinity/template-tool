@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "sdk-release-cleanup-inventory-v1",
+  "repository": "Sleinity/template-tool",
+  "secret": {
+    "name": "SDK_CERT_FIXTURE_KEY_20261013C",
+    "updatedAt": "2026-10-13T17:51:07Z",
+    "ownership": "dedicated-sdk-1.0.0-certification",
+    "action": "delete-after-retiring-all-active-references"
+  },
+  "artifacts": [
+    {
+      "id": 11896970117,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:d86cdd8b1aa76ad3097ea5d17543f903be6f7e991b92b32e1f2c57ba2c4601f2",
+      "runId": 38568828707,
+      "headSha": "7d229e2b2c4d77403bb219d931ec433bd8438976",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T13:05:08Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11896905997,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:3923ddeb9f17f9fdab6a2554413993b720dcbb277516771b023b02b2cb6f3ba6",
+      "runId": 38569275966,
+      "headSha": "4047ded4025b944d179d939cbb9f7f50dc65c3ca",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T13:10:08Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11894965741,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:b31a4c91084ee1f2f3fae2e7081c12fdc91ee0a4648ab2bd502668e75d144d73",
+      "runId": 38565152189,
+      "headSha": "25cae8be6198502290d85201235ee694df7b61d6",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T12:37:19Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11894140757,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:6a53c7a5b0f2e6e8121b3b8ca546a9267d1780195bc0c309309fccedd3b9e5af",
+      "runId": 38564812732,
+      "headSha": "5361fb777e75003bf6a9336064f362cfc7a38561",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T12:34:33Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11891588692,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:7970403b5ada74482097b9917d2b5cdb2934d689959d01aea2a609edb03fcec0",
+      "runId": 38554320928,
+      "headSha": "cdf069c6203405d117cba1c00513cc4e63196f0d",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T11:59:22Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11887268570,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:cb2ff349b6798ffe96947bdc621cd7c0f6a9338f46c421f95a7538cf65008a73",
+      "runId": 38553292006,
+      "headSha": "fe1d1547c0f8e252e7bd2a62f2a1940ab11c902e",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T10:59:11Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11886691893,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "digest": "sha256:0d59c13c378164282ab9f5c80b8d446a64523a31c7fb2ceb79c6215c65f709b0",
+      "runId": 38551302611,
+      "headSha": "e76e1a92a2fda944b088566b118c372ec4d21283",
+      "workflow": ".github/workflows/release-preparation.yml",
+      "expiresAt": "2026-10-17T10:41:40Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11836576350,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:1f9de9e03579d1d5c1736f614f223363a091ff47a5a1541d63f6fdb02ee57e9a",
+      "runId": 38442123584,
+      "headSha": "eac186d04a51d0757e1983e18741c04bc0e41668",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:52:13Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11835351178,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:b4af24a890ba0fd5bacdf4a8f1d9b5c6b608d874c884c5fe13f312b779d5feb0",
+      "runId": 38440732501,
+      "headSha": "52ba5aa0a69bd7ef5323ffd4937515e9d346e4fd",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:41:55Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "f2f7b6eca4b83c9a0b041d26d9d49b06200176f239b6f4ab6f3a8c798b4d834a",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11834381884,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:404a8ab8fc004f23e26ad87de8a33ce38c5d678ffabbb8ca1826acbcfd15c343",
+      "runId": 38439469014,
+      "headSha": "0ed99e1a2a639e5d2a48b13d9787fda73b26e989",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:32:30Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "d9862d1635899c171405973f7b5fe8a5176ffde9886f1c4d73dfec875c9b4082",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11833513333,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:3fe7051cb618913779690cf165f690a90bb55d63df73fd40ba2e9f3e529f838c",
+      "runId": 38438104359,
+      "headSha": "9951794f0d3e5f1452509a9d92df25dae34a1bf8",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:22:27Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "970a05b2e29b60d66559c50db45da5a2ebaf7dd35d67c11912b8dfcc7057d511",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11832890954,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:6b63b00743ffe7b28e25cde094f15cbd05fef8f36ea8353413e95d116ee172d6",
+      "runId": 38435060121,
+      "headSha": "23f7ff076a6be8d1443dabad3120e28214ea5230",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:00:01Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "f732757fe30aaa59691dff4552421810e2ad44589aaa8efd0e66e40e7daa9cd4",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    },
+    {
+      "id": 11832369116,
+      "name": "frozen-candidate-inputs",
+      "digest": "sha256:f12ab3affacc010743513e98547df9443d5c6eede22be61d4ec0e57558ec5631",
+      "runId": 38436468745,
+      "headSha": "0c76844a73124b5d59542761846b2e7bfec1883c",
+      "workflow": ".github/workflows/candidate-certification.yml",
+      "expiresAt": "2026-10-16T17:10:18Z",
+      "ownership": "verified-sdk-1.0.0-certification",
+      "ciphertextSha256": "a4c5e63bbb6efd210a190f57b64595ecf8259b0adc0939ea263d90ec5ef4f86c",
+      "purpose": "temporary authenticated exact fixture/font intake",
+      "evidence": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
+      "action": "delete-after-merged-read-only-verification"
+    }
+  ],
+  "localFiles": [
+    {
+      "file": "/private/tmp/sdk-m7-certified-inputs.zip",
+      "sha256": "1f9de9e03579d1d5c1736f614f223363a091ff47a5a1541d63f6fdb02ee57e9a",
+      "ownership": "created-sdk-release-transfer-copy",
+      "purpose": "local encrypted upload payload",
+      "action": "delete-after-remote-retirement"
+    }
+  ],
+  "preserved": [
+    {
+      "id": 11903905126,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11903775108,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11902391842,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11901522137,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11900706900,
+      "name": "sdk-registry-acceptance",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11900477094,
+      "name": "sdk-handoff-verification",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11899690877,
+      "name": "sdk-publication-journal-1",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11897750800,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11897335062,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11897119244,
+      "name": "sdk-publication-preflight",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11896830988,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11896539672,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11896334091,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11896124193,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11895565968,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11895025597,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11894791896,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11894740292,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11894640522,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11894590504,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11893506376,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11893306572,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11892096122,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11891479447,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11891406599,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11887718007,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11887500531,
+      "name": "sdk-full-preparation-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11883265583,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882897360,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882846720,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882724097,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882331644,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882294494,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882228312,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11882221817,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11880394708,
+      "name": "sdk-publication-rehearsal-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11880349657,
+      "name": "sdk-1.0.0-certified-delivery",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11836372287,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11835005450,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11834842683,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11833853085,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11833796299,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    },
+    {
+      "id": 11833070702,
+      "name": "linux-candidate-results",
+      "reason": "not a temporary exact-input artifact"
+    }
+  ],
+  "unclassified": [],
+  "localRetention": "Keep original fixtures/fonts, private captures, user credentials, original worktree, frozen archives and sanitized evidence; retain active handoff checkout until final receipt merges.",
+  "workflows": [
+    {
+      "id": 383453731,
+      "path": ".github/workflows/candidate-certification.yml",
+      "ownership": "completed-sdk-1.0.0-execution",
+      "action": "disable-after-merged-read-only-verification"
+    },
+    {
+      "id": 384213190,
+      "path": ".github/workflows/release-preparation.yml",
+      "ownership": "completed-sdk-1.0.0-execution",
+      "action": "disable-after-merged-read-only-verification"
+    },
+    {
+      "id": 384125045,
+      "path": ".github/workflows/release-rehearsal.yml",
+      "ownership": "completed-sdk-1.0.0-execution",
+      "action": "disable-after-merged-read-only-verification"
+    },
+    {
+      "id": 317625512,
+      "path": ".github/workflows/release.yml",
+      "ownership": "completed-sdk-1.0.0-execution",
+      "action": "disable-after-merged-read-only-verification"
+    }
+  ]
+}

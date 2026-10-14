@@ -41,7 +41,7 @@ const activeRoots = [
   "packages/template-browser/README.md",
   "packages/template-react/README.md",
   ".github/workflows/ci.yml",
-  ".github/workflows/release.yml",
+  "docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml",
   "scripts/repository/create-core-release-handoff.mjs",
   "scripts/repository/create-runtime-release-handoff.mjs",
   "scripts/repository/create-sdk-local-release-verification.mjs",
@@ -134,7 +134,7 @@ for (const wrapper of ["create-runtime-release-handoff.mjs","create-core-release
   if(!code.includes("generateDeliveryBundle") || code.includes("const bundledLinks") || code.includes("## Verified published archives")) throw new Error(`Independent legacy handoff in ${wrapper}`);
 }
 const workflow = await readFile(
-  path.join(root, ".github", "workflows", "release.yml"),
+  path.join(root, "docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml"),
   "utf8",
 );
 const publishStart = workflow.indexOf("\n  publish:");
@@ -155,6 +155,8 @@ if (
   );
 }
 assertDeliveryWorkflow(workflow);
+const {assertBaselineWorkflow}=await import("../release-baseline/contracts.mjs");
+assertBaselineWorkflow(await readFile(path.join(root,".github/workflows/sdk-baseline.yml"),"utf8"));
 const rootManifest=JSON.parse(await readFile('package.json','utf8'));
 if(rootManifest.scripts.release!=='node scripts/release-publication/cli.mjs publish') throw new Error('Release must use the certified archive driver.');
 const registryDriver=await readFile('scripts/release-publication/registry.mjs','utf8');
@@ -289,5 +291,5 @@ for (const item of await loadRuntimePackageDefinitions(root)) {
 }
 
 console.log(
-  `SDK ${version} release contract passed: immutable-tag publication/protected recovery, read-only handoff refresh, public Sleinity-tools-only assets.`,
+  `SDK ${version} release contract passed: archived publication/recovery safeguards, active read-only stable baseline, public Sleinity-tools-only assets.`,
 );

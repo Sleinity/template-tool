@@ -6,9 +6,9 @@ rendering and bindings. Host applications own product UI, navigation and service
 
 Start with [V2 integration](V2_INTEGRATION.md), [installation](INSTALLATION.md),
 [ownership](HOST_LIFECYCLE.md) and [operation outcomes](OPERATION_OUTCOMES.md).
-Install all three packages from one verified delivery. Current unpublished source
-archives form the unpublished 1.0.0 candidate; do not substitute historical published 0.8.0.
-The next fixed-train release is [1.0.0, versioned candidate](SDK_1_0_MIGRATION.md).
+Install all three packages from one verified delivery. [SDK 1.0.0 is stable](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0).
+Use the exact three-package train and published checksums; 0.8 guidance is historical.
+The [1.0 migration guide](SDK_1_0_MIGRATION.md) explains schema 2.2 and reimport requirements.
 
 ## Recommended V2 integration
 

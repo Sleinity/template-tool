@@ -21,6 +21,8 @@ import {
   publicationOutcomes,
 } from './driver.mjs';
 import { verifyDeliveryBundle } from '../release-delivery/bundle.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('publication/handoff CLI');
 const [command, ...args] = process.argv.slice(2),
   options = {};
 for (let i = 0; i < args.length; i += 2) {

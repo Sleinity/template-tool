@@ -1,0 +1,20 @@
+{
+  "status": "pass",
+  "evidence": "current local source/build/check evidence; first portable umbrella stopped only at sandbox DNS",
+  "runtimeFilesUnchanged": 466,
+  "protectedFilesUnchanged": 287,
+  "historicalDescriptorUnchanged": true,
+  "frozenArchivesUnchanged": true,
+  "focusedTests": 51,
+  "portableTests": "passed",
+  "packageStudioTypechecksBuilds": "passed",
+  "apiBoundariesArchiveChecks": "passed",
+  "packedConsumersBundleBudgetsExamples": "passed with authorized network rerun",
+  "localRegistryVerification": "passed strict npm/pnpm synthetic hosts; no exact-font/PNG recertification",
+  "manualLiveReview": false,
+  "logHashes": {
+    "sdk-m9-portable.log": "7edd52c8d4839da23e5d11af174f6eca5ad2c25770d31462d727e558bc29a741",
+    "sdk-m9-network-checks.log": "4126b97528361fed4332168f804d0a6a306044895e2cc6eba662cc05585c9e6e",
+    "sdk-m9-focused-final.log": "ab39ac0369c6eeea8c828f4fbca27aa2d27ca949925ab71d84e31132e618ebf7"
+  }
+}

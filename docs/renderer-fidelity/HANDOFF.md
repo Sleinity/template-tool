@@ -1,5 +1,22 @@
 # Renderer Fidelity Handoff
 
+## Stable SDK 1.0.0 development baseline
+
+Start new milestones from reviewed post-handoff main. Immutable `sdk-v1.0.0`
+(`33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`) remains the certified runtime reference.
+The [release baseline](../architecture/sdk-1-baseline.md) records source, archive,
+fixture/font, reference and report identities. The final publication gate is
+`sdk-1-publication-main-20261014a`: 24 stable captures, 12 renderer, three scene
+and 12 settlement passes. It retains R07's reviewed reference unchanged.
+
+This handoff adds no renderer authority or new source review. Existing guidance
+below remains historical/regression evidence. Future renderer work must read
+AGENTS programme guidance in order, establish a new bounded contract/candidate,
+and perform fresh source-authoritative certification. Never refresh historical
+hashes, reuse a review for changed pixels or broaden tolerances. Linux acceptance
+is functional evidence; macOS references remain in their established environment.
+
+
 ## R07 reference and viewport history
 
 Read [the R07 source review](../architecture/r07-carrousel-raster.md) before

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { assertDeliveryWorkflow } from './workflow.mjs';
-const source = await readFile('.github/workflows/release.yml', 'utf8');
+const source = await readFile('docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml', 'utf8');
 test('actual workflow gates frozen publication and verified prerelease assets', () =>
   assert(assertDeliveryWorkflow(source)));
 test('rejects manual publication, rebuilds, skipped verification and clobber', () => {

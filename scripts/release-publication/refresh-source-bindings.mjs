@@ -2,6 +2,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { descriptorFile, sha256 } from './candidate.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('historical source binding refresh');
 const allowed = [
   'package.json',
   '.github/workflows/release.yml',
