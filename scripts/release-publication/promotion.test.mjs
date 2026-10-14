@@ -90,3 +90,27 @@ test('fidelity gate cannot promote missing, reduced or changed-reference evidenc
   ])
     assert.throws(() => validateFidelity({ ...report, ...patch }, d));
 });
+
+test('remote release tag resolution rejects a moved or unsupported tag', async () => {
+  const { resolveRemoteTag } = await import('./promotion.mjs');
+  const commit = 'a'.repeat(40),
+    annotation = 'b'.repeat(40);
+  assert.equal(
+    resolveRemoteTag(() => ({ object: { sha: commit, type: 'commit' } })),
+    commit,
+  );
+  assert.equal(
+    resolveRemoteTag((p) => ({
+      object: p.startsWith('git/ref')
+        ? { sha: annotation, type: 'tag' }
+        : { sha: commit, type: 'commit' },
+    })),
+    commit,
+  );
+  assert.throws(() =>
+    resolveRemoteTag(() => ({ object: { sha: commit, type: 'tree' } })),
+  );
+  assert.throws(() =>
+    resolveRemoteTag(() => ({ object: { sha: annotation, type: 'tag' } })),
+  );
+});

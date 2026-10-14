@@ -5255,7 +5255,7 @@
     },
     {
       "file": "scripts/release-publication/acceptance.test.mjs",
-      "sha256": "91141c733a62a38b6b83bdd2a6f3f0444fae08d9b2a48b71d6c6d1de2e3cb110"
+      "sha256": "765675f6161b8b6d7e1347313526b9180e8bed979b4ae9c5b9cee501d60ab783"
     },
     {
       "file": "scripts/release-publication/asset-inventory.mjs",
@@ -5299,19 +5299,19 @@
     },
     {
       "file": "scripts/release-publication/host-installation.mjs",
-      "sha256": "2b202a9c17c2ae4b81b5151fe22c4f91963a3b5ec8465440339d4420570cbabf"
+      "sha256": "8232ee81eadb92d2532ff656d44b3109e17818433706d40f23ddff91e90c440a"
     },
     {
       "file": "scripts/release-publication/preflight.mjs",
-      "sha256": "2f66829c3544214c20664a3df6a34a1e0c6e5a6e89ed9da40eeb71dde87ffb94"
+      "sha256": "d768b6ef25c32c0b95f54858c441777f46c25d5ffef707794652cae2aca66f5e"
     },
     {
       "file": "scripts/release-publication/promotion.mjs",
-      "sha256": "983a3850286e4167c99453ff8af5f8407de3974754cfb91fda9c76862c4546b5"
+      "sha256": "442ac27bfed619293cc18e1c798157e8a46e3cdc41703233ae2df3e7f7401a91"
     },
     {
       "file": "scripts/release-publication/promotion.test.mjs",
-      "sha256": "cc85a167ec9091c48d4932f6c50989b0b37d331012aa251e9f3de9fd791cbd93"
+      "sha256": "519640a7acd95fc8aa495874937f3ca49bb8ab421b3d8b3e83ab0016d75044df"
     },
     {
       "file": "scripts/release-publication/refresh-source-bindings.mjs",

@@ -9,7 +9,11 @@ import {
   assertPublicationContext,
   toolchain,
 } from './candidate.mjs';
-import { validateFidelity, resolveReleaseTag } from './promotion.mjs';
+import {
+  validateFidelity,
+  resolveReleaseTag,
+  resolveRemoteTag,
+} from './promotion.mjs';
 import { preflightGithub } from './github.mjs';
 import { RegistryReadClient } from './registry.mjs';
 const d = await loadDescriptor();
@@ -17,6 +21,11 @@ toolchain();
 await verifySource(d);
 await verifyArchives(d, process.argv[2]);
 assertPublicationContext(d, process.env, await resolveReleaseTag());
+assert.equal(
+  resolveRemoteTag(),
+  await resolveReleaseTag(),
+  'Remote tag differs',
+);
 preflightGithub();
 const evidence = JSON.parse(
   await readFile('config/sdk-release-verification.json', 'utf8'),

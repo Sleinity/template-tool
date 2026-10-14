@@ -93,6 +93,7 @@ export async function prepareHostInstallation(
       version: d.version,
       sha256: row.sha256,
       integrity: state.integrity,
+      tarballUrlSha256: sha256(new URL(state.url).href),
     });
   }
   const file = path.join(directory, 'package.json'),
@@ -130,24 +131,38 @@ export function validateRegistryLock(lock, manager, records) {
   const npm = manager === 'npm' ? JSON.parse(lock) : null;
   for (const record of records) {
     assert(record.integrity, 'Registry integrity missing');
-    assert(lock.includes(record.integrity), 'Registry integrity differs');
+    let resolved, integrity, version;
     if (npm) {
       const item = npm.packages?.['node_modules/' + record.name];
       assert(item, 'Missing registry package');
-      assert.equal(item.version, record.version);
-      assert.equal(new URL(item.resolved).protocol, 'https:');
-      assert.equal(new URL(item.resolved).hostname, 'npm.pkg.github.com');
-      assert.equal(item.integrity, record.integrity);
+      ({ resolved, integrity, version } = item);
     } else {
-      assert(
-        lock.includes('npm.pkg.github.com'),
-        'pnpm registry authority missing',
+      const lines = lock.split('\n'),
+        key = record.name + '@' + record.version;
+      const index = lines.findIndex(
+        (line) =>
+          line === `  '${key}':` ||
+          line === `  "${key}":` ||
+          line === `  ${key}:`,
       );
-      assert(
-        lock.includes(record.name + '@' + record.version),
-        'pnpm exact package resolution missing',
-      );
+      assert(index >= 0, 'Exact pnpm package entry missing');
+      let end = index + 1;
+      while (end < lines.length && !/^\S|^  \S/.test(lines[end])) end++;
+      const block = lines.slice(index + 1, end).join('\n');
+      integrity = block.match(/integrity:\s*['"]?([^\s,'"}]+)/)?.[1];
+      resolved = block.match(/tarball:\s*['"]?([^\s,'"}]+)/)?.[1];
+      version = record.version;
     }
+    assert.equal(version, record.version);
+    assert.equal(integrity, record.integrity);
+    const url = new URL(resolved);
+    assert.equal(url.protocol, 'https:');
+    assert.equal(url.hostname, 'npm.pkg.github.com');
+    assert.equal(
+      sha256(url.href),
+      record.tarballUrlSha256,
+      'Registry lock tarball identity differs',
+    );
   }
 }
 export async function verifyHostInstallation(directory, archives, manager) {

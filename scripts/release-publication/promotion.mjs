@@ -72,6 +72,16 @@ export function validateFidelity(report, d) {
     ),
   );
 }
+export function resolveRemoteTag(fetchRecord = githubJson) {
+  let obj = fetchRecord('git/ref/tags/sdk-v1.0.0').object;
+  for (let i = 0; i < 4; i++) {
+    assert.match(obj?.sha, /^[a-f0-9]{40}$/);
+    if (obj.type === 'commit') return obj.sha;
+    assert.equal(obj.type, 'tag');
+    obj = fetchRecord('git/tags/' + obj.sha).object;
+  }
+  throw Error('Unsupported nested release tag');
+}
 export async function resolveReleaseTag() {
   const d = await loadDescriptor();
   return execFileSync(
@@ -98,6 +108,7 @@ export async function promoteStable() {
   );
   assert.equal(evidence.candidate, d.candidate);
   const tagCommit = await resolveReleaseTag();
+  assert.equal(resolveRemoteTag(), tagCommit, 'Remote release tag differs');
   assert.equal(evidence.tagCommit, tagCommit);
   const load = async (record) => {
     safeRelative(record.file);
@@ -112,6 +123,15 @@ export async function promoteStable() {
     artifact = githubJson('actions/artifacts/' + pin.id),
     run = githubJson('actions/runs/' + pin.runId);
   assert.equal(run.conclusion, 'success');
+  assert.equal(artifact.name, 'sdk-registry-acceptance');
+  assert.equal(run.path, '.github/workflows/release.yml');
+  assert.equal(run.head_repository.full_name, d.repository);
+  assert(['push', 'workflow_dispatch'].includes(run.event));
+  const jobs = githubJson('actions/runs/' + pin.runId + '/jobs').jobs;
+  assert(
+    jobs.some((job) => job.name === 'handoff' && job.conclusion === 'success'),
+    'Successful full handoff job required',
+  );
   assert.equal(run.head_sha, pin.headSha);
   assert.equal(artifact.id, pin.id);
   assert.equal(artifact.workflow_run.id, pin.runId);
@@ -167,6 +187,11 @@ export async function promoteStable() {
     release.assets.length,
     inventory.files.length,
     'Unexpected release assets require review',
+  );
+  assert.equal(
+    resolveRemoteTag(),
+    tagCommit,
+    'Remote release tag changed during verification',
   );
   if (release.prerelease)
     execFileSync(

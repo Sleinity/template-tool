@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { sha256 } from './candidate.mjs';
 import {
   installationMode,
   validateRegistryLock,
@@ -20,6 +21,7 @@ test('registry mode refuses workspace fallback, wrong versions, authorities and 
       name: '@sleinity/template-core',
       version: '1.0.0',
       integrity: 'sha512-exact',
+      tarballUrlSha256: sha256('https://npm.pkg.github.com/download/core'),
     },
   ];
   const item = {
@@ -45,13 +47,20 @@ test('registry mode refuses workspace fallback, wrong versions, authorities and 
     validateRegistryLock(lock({ ...item, link: 'workspace:' }), 'npm', records),
   );
   validateRegistryLock(
-    '@sleinity/template-core@1.0.0 https://npm.pkg.github.com sha512-exact',
+    "packages:\n  '@sleinity/template-core@1.0.0':\n    resolution: {integrity: sha512-exact, tarball: https://npm.pkg.github.com/download/core}\n",
     'pnpm',
     records,
   );
   assert.throws(() =>
     validateRegistryLock(
-      '@sleinity/template-core@0.8.0 https://npm.pkg.github.com sha512-exact',
+      "packages:\n  '@sleinity/template-core@0.8.0':\n    resolution: {integrity: sha512-exact, tarball: https://npm.pkg.github.com/download/core}\n",
+      'pnpm',
+      records,
+    ),
+  );
+  assert.throws(() =>
+    validateRegistryLock(
+      "packages:\n  '@sleinity/template-core@1.0.0':\n    resolution: {integrity: sha512-other, tarball: https://npm.pkg.github.com/download/wrong}\n  other@1:\n    resolution: {integrity: sha512-exact, tarball: https://npm.pkg.github.com/download/core}\n",
       'pnpm',
       records,
     ),
