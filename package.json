@@ -102,7 +102,7 @@
     "ci:portable": "pnpm repository:audit && pnpm packages:build && pnpm test:portable && pnpm exec tsc -b --pretty false && pnpm build && pnpm docs:verify && pnpm sdk:verify && pnpm example:build",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm sdk:verify && changeset publish",
+    "release": "node scripts/release-publication/cli.mjs publish",
     "editor:performance": "node scripts/editor-performance/run.mjs",
     "editor:verify": "node scripts/editor-performance/verify.mjs"
   },

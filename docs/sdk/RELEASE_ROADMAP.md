@@ -55,4 +55,7 @@ passes**. Linux functional evidence remains separate from macOS raster evidence.
 
 GitHub release visibility remains public. Packages remain **UNLICENSED**, with
 use authorized for **Sleinity-owned applications only**; repository visibility
-is not an open-source licence. Milestone 6 performs no merge, tag or publication.
+is not an open-source licence. Milestones 6–7 perform no merge, tag or publication.
+
+[Certified publication runbook](CERTIFIED_PUBLICATION.md) describes the frozen-input
+workflow, human approval and safe retry contract.
