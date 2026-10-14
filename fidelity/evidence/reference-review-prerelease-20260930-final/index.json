@@ -1,0 +1,840 @@
+{
+  "capturesComplete": true,
+  "environment": "fidelity/candidates/prerelease-20260930-final/environment.json",
+  "fixtureCount": 23,
+  "repeatStable": true,
+  "rows": [
+    {
+      "comparison": "fail",
+      "fixtureId": "now-hiring-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/now-hiring-post/validate.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "now-hiring-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/now-hiring-post/fields.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "now-hiring-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/now-hiring-post/editor.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "now-hiring-post",
+      "kind": "equal-size-pixel-difference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/now-hiring-post/png-export.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-post/validate.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-post/fields.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-post",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-post/editor.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-post",
+      "kind": "structural-only-difference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-post/png-export.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-banner",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner/validate.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-banner",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner/fields.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-banner",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner/editor.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "deal-of-the-week-banner",
+      "kind": "equal-size-pixel-difference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner/png-export.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-editable",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-editable/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-editable",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-editable/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-editable",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-editable/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-editable",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-editable/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-mask",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-mask/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-mask",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-mask/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-mask",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-mask/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "deal-of-the-week-banner-crop-mask",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/deal-of-the-week-banner-crop-mask/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "bb-cover-thing-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/bb-cover-thing-primitives/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "bb-cover-thing-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/bb-cover-thing-primitives/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "bb-cover-thing-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/bb-cover-thing-primitives/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "bb-cover-thing-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/bb-cover-thing-primitives/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "main-visual-section-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/main-visual-section-primitives/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "main-visual-section-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/main-visual-section-primitives/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "main-visual-section-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/main-visual-section-primitives/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "main-visual-section-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/main-visual-section-primitives/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "stroke-test-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/stroke-test-primitives/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "stroke-test-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/stroke-test-primitives/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "stroke-test-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/stroke-test-primitives/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "stroke-test-primitives",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/stroke-test-primitives/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-linear",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-linear/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-linear",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-linear/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-linear",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-linear/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "gradient-test-linear",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-linear/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-paint-opacity/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-paint-opacity/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "gradient-test-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-paint-opacity/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "gradient-test-paint-opacity",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/gradient-test-paint-opacity/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-blue-then-red",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-blue-then-red/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-blue-then-red",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-blue-then-red/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-blue-then-red",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-blue-then-red/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-blue-then-red",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-blue-then-red/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "ordered-solid-linear-normal",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-linear-normal/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "ordered-solid-linear-normal",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-linear-normal/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "ordered-solid-linear-normal",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-linear-normal/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "ordered-solid-linear-normal",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-linear-normal/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-red-then-blue",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-red-then-blue/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-red-then-blue",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-red-then-blue/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-red-then-blue",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-red-then-blue/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-red-then-blue",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-red-then-blue/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-three",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-three/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-three",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-three/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-three",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-three/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-three",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-three/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-hidden-middle",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-hidden-middle/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-hidden-middle",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-hidden-middle/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-hidden-middle",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-hidden-middle/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-hidden-middle",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-hidden-middle/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-paint-opacity/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-paint-opacity/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-paint-opacity",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-paint-opacity/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-paint-opacity",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-paint-opacity/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-independent-corners",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-independent-corners/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-independent-corners",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-independent-corners/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "ordered-solid-independent-corners",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-independent-corners/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "pass",
+      "fixtureId": "ordered-solid-independent-corners",
+      "kind": "approved-match",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/ordered-solid-independent-corners/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-solid-opacity",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-solid-opacity/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-solid-opacity",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-solid-opacity/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-solid-opacity",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-solid-opacity/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-solid-opacity",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-solid-opacity/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-linear-and-mixed-paints",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-linear-and-mixed-paints/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-linear-and-mixed-paints",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-linear-and-mixed-paints/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-linear-and-mixed-paints",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-linear-and-mixed-paints/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-linear-and-mixed-paints",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-linear-and-mixed-paints/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-deal-of-the-week-post",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-deal-of-the-week-post/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-deal-of-the-week-post",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-deal-of-the-week-post/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-deal-of-the-week-post",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-deal-of-the-week-post/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "exporter-061-deal-of-the-week-post",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/exporter-061-deal-of-the-week-post/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "field-rules-boolean-structural-visibility",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/field-rules-boolean-structural-visibility/validate.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "field-rules-boolean-structural-visibility",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/field-rules-boolean-structural-visibility/fields.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "field-rules-boolean-structural-visibility",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/field-rules-boolean-structural-visibility/editor.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "unapproved",
+      "fixtureId": "field-rules-boolean-structural-visibility",
+      "kind": "missing-approved-reference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/field-rules-boolean-structural-visibility/png-export.json",
+      "scene": "unapproved",
+      "settlement": "missing-approved-reference",
+      "surface": "png-export"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "optimized-for-template-export",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/optimized-for-template-export/validate.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "validate"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "optimized-for-template-export",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/optimized-for-template-export/fields.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "fields"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "optimized-for-template-export",
+      "kind": "preview-scale-reference-drift",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/optimized-for-template-export/editor.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "editor"
+    },
+    {
+      "comparison": "fail",
+      "fixtureId": "optimized-for-template-export",
+      "kind": "equal-size-pixel-difference",
+      "packet": "fidelity/evidence/reference-review-prerelease-20260930-final/optimized-for-template-export/png-export.json",
+      "scene": "fail",
+      "settlement": "reference-difference",
+      "surface": "png-export"
+    }
+  ],
+  "runId": "prerelease-20260930-final",
+  "sourceFidelityRun": "prerelease-20260930-final",
+  "surfaceCount": 92,
+  "packetComplete": true
+}

@@ -47,9 +47,23 @@ The independently sampled embedded preview selected approximately source x=184 t
 
 The exact editable fixture proves fixed and dynamic FILL follow the same source rule: `imageTransform` is CROP-only. The temporary `compatibility-legacy-fill-transform` path is retired. Every imported FILL performs one cover operation and every imported FIT performs one contain operation; retained matrices remain `preserved-inapplicable` provenance.
 
-`image.activePlacement` keeps editor replacement state separate from imported intent. `imported-source` selects the immutable source CROP/FIT/FILL semantics. `replacement-fill` selects cover; `replacement-fit` selects contain. Both replacement states ignore imported transform/focal/zoom/rotation and increment `placementRevision` on upload, switch, or reset. `editor-crop` is reserved and deliberately falls back because the future crop tool must own new editor-authored data.
+`image.activePlacement` keeps editor replacement state separate from imported intent. `imported-source` selects the immutable source CROP/FIT/FILL semantics. `replacement-fill` selects cover; `replacement-fit` selects contain; `editor-crop` consumes the separately authored canonical normalized Crop and uses the same affine owner as imported CROP. Replacement state increments `placementRevision` on upload, placement change, or reset. Fill/Fit never reuse imported transforms.
+
+Template Field Families retain one shared replacement asset/default placement
+and may overlay a sparse selected-variant placement before ordinary
+materialization. A shared Crop without an override derives cover within the
+canonical source region when a variant or responsive slot has another aspect:
+the crop centre and axes are retained, only the necessary source-space basis is
+shrunk, and canonical state is never mutated. Explicit variant Crop follows the
+same rule when its current slot aspect changes.
 
 Reset restores the imported asset and exact source mode/transform while issuing a new revision. Save/reload persists active state. A per-field asynchronous operation revision prevents older file reads or intrinsic-dimension decodes from publishing after a later replacement or reset.
+
+TemplatePackage 2.2 gives every Image field one required replacement policy:
+Fill, Fit, or Crop. The policy applies only to replacement content and never
+rewrites imported placement. Fill and Fit authorize only their matching active
+placement. Crop authorizes canonical Crop plus deterministic Fill when a host
+does not provide crop data; Fit remains invalid. See ADR 0085.
 
 ## Telemetry
 
@@ -69,7 +83,8 @@ PNG evidence additionally records source URL as runtime telemetry only, intrinsi
 ## Current limits
 
 - `deal-of-the-week-banner-crop-editable` source-certifies imported CROP/FIT/FILL and editor replacement Fill/Fit/reset/persistence/stale-work behavior. The CROP region differs from `preview.png` by 0.1992% at threshold 0.1. See [editable image evidence](IMAGE_REPLACEMENT_EVIDENCE.md).
-- A second reviewed source resize state is intentionally not required by the corrected Milestone 6.1 scope. Source-defined interactive crop resizing remains future crop-tool work.
+- Host-authored Crop values and Family framing use the existing normalized
+  contract. A polished crop UI remains future product work.
 - TILE, explicit object-position replacement editing, image adjustments, alpha/luminance/vector masks, nested masks, and transformed mask chains remain partial or unsupported.
 - Sampling uses browser-native image interpolation. No evidence currently justifies a custom resampler or Canvas backend.
 - Rounded rectangular slot clipping is inherited from the existing renderer. True Figma mask-chain semantics are not claimed.

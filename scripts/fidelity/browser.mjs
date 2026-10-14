@@ -1,11 +1,13 @@
+import { captureCompletedOutput } from "./output-lifecycle.mjs";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { chromium } from "playwright";
 import { comparePng, writeDifferenceImage } from "./image.mjs";
 import { artifactDirectory, stableStringify } from "./core.mjs";
 import { mergeStructuralReport } from "./model.mjs";
-import { exactFontForRequirement } from "./fonts.mjs";
-import { applyCompatibilityFontFallbacks } from "../repository/studio-font-harness.mjs";
+import { requireExactFont } from "./fonts.mjs";
+import { awaitReviewSaveReady, reviewEvidence } from "./review-readiness.mjs";
+import { applyCaptureCamera } from "./capture-camera.mjs";
 
 const remotionChromium = join(process.cwd(), "node_modules", ".remotion", "chrome-headless-shell", "mac-arm64", "chrome-headless-shell-mac-arm64", "chrome-headless-shell");
 
@@ -344,8 +346,17 @@ export async function browserStructure(page, canvasSelector) {
         settlementId: canvas.getAttribute("data-package-settlement-id"),
         revision: canvas.getAttribute("data-package-settlement-revision"),
         readiness: canvas.getAttribute("data-package-settlement-readiness"),
+        ...(canvas.getAttribute("data-package-settlement-generation")
+          ? { publicationGeneration: Number(canvas.getAttribute("data-package-settlement-generation")) }
+          : {}),
         routedNodeCount: Number(canvas.getAttribute("data-package-routed-node-count") || 0),
         compatibilityNodeCount: Number(canvas.getAttribute("data-package-compatibility-node-count") || 0),
+        ...(canvas.getAttribute("data-package-structural-excluded-count")
+          ? {
+              structurallyExcludedNodeCount: Number(canvas.getAttribute("data-package-structural-excluded-count")),
+              structuralExclusionRootIds: (canvas.getAttribute("data-package-structural-exclusion-roots") || "").split(",").filter(Boolean),
+            }
+          : {}),
         iterationCount: Number(canvas.getAttribute("data-package-settlement-iterations") || 0),
         measurementCount: Number(canvas.getAttribute("data-package-settlement-measurements") || 0),
         recomputedNodeIds: (canvas.getAttribute("data-package-settlement-recomputed") || "").split(",").filter(Boolean),
@@ -369,10 +380,21 @@ async function captureRenderer({ page, fixture, model, surface, route, mode, sel
   const captures = [];
   let previousPng = null;
   for (let index = 1; index <= repeat; index += 1) {
+    // Element screenshots scroll their target into view. Do that before reading
+    // geometry so the structural report and pixels observe the same viewport.
+    if (process.env.R07_RASTER_PROBE && surface === "editor" && index === 1) {
+      const { applyRasterProbe } = await import("../r07/probe.mjs");
+      await applyRasterProbe(page, selector, process.env.R07_RASTER_PROBE);
+    }
+    await page.locator(selector).scrollIntoViewIfNeeded();
     const readiness = await waitForCurrentReadiness(page, selector);
     const browser = await browserStructure(page, selector);
     browser.fontReadiness = readiness.fontReadiness;
     browser.assetReadiness = readiness.assetReadiness;
+    if (process.env.R07_RASTER_PROBE && surface === "editor") {
+      const { rasterTrace } = await import("../r07/probe.mjs");
+      writeFileSync(join(directory, `raster-trace-${index}.json`), stableStringify(await rasterTrace(page, selector)));
+    }
     const captureStarted = performance.now();
     const pngPath = join(directory, `capture-${index}.png`);
     await page.locator(selector).screenshot({ path: pngPath, animations: "disabled", caret: "hide", scale: "css" });
@@ -395,7 +417,7 @@ async function exportPng(page, directory, index) {
   mkdirSync(directory, { recursive: true });
   const started = performance.now();
   const downloadPromise = page.waitForEvent("download");
-  await page.getByTestId("package-export-png-button").click();
+  await page.getByRole("button", { name: "Export PNG", exact: true }).click();
   const download = await downloadPromise;
   const path = join(directory, `capture-${index}.png`);
   await download.saveAs(path);
@@ -404,7 +426,7 @@ async function exportPng(page, directory, index) {
 
 async function pngExportEvidence(page) {
   return page.evaluate(() => {
-    const target = document.querySelector('[data-testid="package-png-export-target"] > div');
+    const target = document.querySelector('[data-testid="studio-draft-editor"] [data-template-field-session-v2-revision]');
     const canvas = target?.querySelector("[data-template-package-canvas]");
     const media = [...(canvas?.querySelectorAll("[data-package-image-asset]") ?? [])].map((element) => {
       const rect = element.getBoundingClientRect();
@@ -438,7 +460,8 @@ async function pngExportEvidence(page) {
     });
     return {
       timestamp: performance.now(),
-      hiddenTarget: target ? {
+      captureTarget: target ? {
+        source: "live V2 session host",
         connected: target.isConnected,
         bounds: (() => {
           const rect = target.getBoundingClientRect();
@@ -461,35 +484,18 @@ async function pngExportEvidence(page) {
   });
 }
 
-async function selectValidatePreview(page, selector) {
-  const previewFilter = page.getByRole("button", { name: /^Preview(?:\s|$)/ });
-  if (await previewFilter.count()) await previewFilter.first().click();
-  if (await page.locator(selector).waitFor({ state: "attached", timeout: 1_500 }).then(
-    () => true,
-    () => false,
-  )) return;
-  const groups = page.getByTestId("quality-issue-group");
-  const count = await groups.count();
-  for (let index = 0; index < count; index += 1) {
-    await groups.nth(index).locator("button").first().click();
-    if (await page.locator(selector).count()) return;
-  }
-  throw new Error("Validate contains diagnostics, but none of the filtered issues exposes a live renderer preview.");
-}
-
-async function prepareSourceAuthoritativeFonts(page, manifest, fixtureResult) {
+export async function prepareSourceAuthoritativeFonts(page, manifest, fixtureResult) {
   const rows = page.locator("[data-font-requirement-id]");
-  const count = await rows.count();
-  for (let index = 0; index < count; index += 1) {
-    const row = rows.nth(index);
-    const requirementId = await row.getAttribute("data-font-requirement-id");
+  // Uploading moves resolved rows below unresolved ones. Never iterate a live
+  // collection by index: that can revisit the first upload and skip another face.
+  const requirementIds = await rows.evaluateAll(elements => elements.map(element => element.getAttribute("data-font-requirement-id")));
+  for (const requirementId of requirementIds) {
+    const row = page.locator(`[data-font-requirement-id=${JSON.stringify(requirementId)}]`);
     const family = await row.getAttribute("data-font-family");
     const weight = await row.getAttribute("data-font-weight");
     const style = await row.getAttribute("data-font-style");
-    const font = exactFontForRequirement(manifest, family ?? "", weight ?? "", style ?? "normal");
-    if (!font) {
-      throw new Error(`No verified exact font binary is registered for ${family} ${weight} ${style}.`);
-    }
+    const font = requireExactFont(manifest, family ?? "", weight ?? "", style ?? "normal");
+    if (await row.getAttribute("data-font-resolution-classification") === "exact" && await row.getAttribute("data-font-linked-binary-hash") === font.verifiedSha256) continue;
     const uploadStarted = performance.now();
     await row.getByRole("button", { name: "Upload font file" }).click();
     await page.getByTestId("package-font-upload-input").setInputFiles(font.path);
@@ -519,12 +525,14 @@ async function prepareSourceAuthoritativeFonts(page, manifest, fixtureResult) {
   }
 }
 
-export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSurfaces, runId, candidateRoot, headed = false, repeat = 2, fontProfile = "application-default", exactFontManifest = null }) {
+export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSurfaces, runId, candidateRoot, headed = false, repeat = 2, fontProfile = "application-default", exactFontManifest = null, captureCamera = null }) {
+  const motion = process.env.R07_MOTION ?? "reduce";
+  if (!["reduce", "no-preference"].includes(motion)) throw new Error("Invalid R07 motion profile");
   const browser = await launchBrowser(headed);
   const results = [];
   try {
     for (const fixture of fixtures) {
-      const context = await browser.newContext({ viewport: { width: 1440, height: 1600 }, deviceScaleFactor: 1, locale: "en-US", timezoneId: "UTC", acceptDownloads: true, reducedMotion: "reduce" });
+      const context = await browser.newContext({ viewport: { width: 1440, height: 1600 }, deviceScaleFactor: 1, locale: "en-US", timezoneId: "UTC", acceptDownloads: true, reducedMotion: motion });
       await context.addInitScript(() => {
         const describeSource = (value) => {
           const source = String(value || "");
@@ -613,54 +621,51 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
       const fullStarted = performance.now();
       const timings = {};
       const model = models.get(fixture.id);
-      const fixtureResult = { fixtureId: fixture.id, surfaces: {}, fontDecisions: [], route: null };
+      const fixtureResult = { fixtureId: fixture.id, surfaces: {}, fontDecisions: [], reviewEvidence: [], route: null };
       try {
         fixtureResult.phase = "open-import";
-        await page.goto(`${baseUrl}/templates/new?studio-mode=single-template-fidelity`, { waitUntil: "domcontentloaded" });
+        await page.goto(`${baseUrl}/templates/new`, { waitUntil: "domcontentloaded" });
         const importStarted = performance.now();
-        await page.getByTestId("zip-package-input").setInputFiles(fixture.path);
-        await page.getByRole("button", { name: "Import template" }).click();
-        await page.getByTestId("package-step-prepare-fonts").waitFor();
+        await page.getByLabel("Import source packages").setInputFiles(fixture.path);
+        await page.getByRole("button", { name: "Continue to fonts", exact: true }).click();
+        await page.getByRole("region", { name: "Font preparation", exact: true }).waitFor();
         timings.importMs = performance.now() - importStarted;
-        if (fontProfile === "source-authoritative") {
-          fixtureResult.phase = "upload-source-fonts";
-          if (!exactFontManifest) throw new Error("Source-authoritative font profile has no verified font manifest.");
-          await prepareSourceAuthoritativeFonts(page, exactFontManifest, fixtureResult);
-        } else {
-          fixtureResult.phase = "apply-development-font-fallbacks";
-          const fallbacks = await applyCompatibilityFontFallbacks(page);
-          for (const fallback of fallbacks) {
-            fixtureResult.fontDecisions.push({
-              action: "Use replacement",
-              requirement: `${fallback.family} ${fallback.weight} ${fallback.style}`,
-              requirementId: fallback.requirementId,
-              source: "development-only-font-harness",
-            });
-          }
-        }
+        fixtureResult.phase = "upload-source-fonts";
+        if (!exactFontManifest) throw new Error("Current Studio fidelity capture requires a verified font manifest.");
+        await prepareSourceAuthoritativeFonts(page, exactFontManifest, fixtureResult);
         fixtureResult.phase = "open-validate";
-        await page.getByRole("button", { name: "Check template" }).click();
-        await page.getByTestId("package-step-validate").waitFor();
-        const validateSelector = '[data-testid="package-step-validate"] [data-template-package-canvas]';
-        if (!(await page.locator(validateSelector).count())) await selectValidatePreview(page, validateSelector);
+        await page.getByRole("button", { name: "Continue to checks", exact: true }).click();
+        await page.getByRole("region", { name: "Validation workbench", exact: true }).waitFor();
+        const inspect = page.getByRole("button", { name: "Inspect design", exact: true });
+        if (await inspect.isVisible()) await inspect.click();
+        const validateSelector = '[aria-label="Validation workbench"] [aria-label="Setup preview"] [data-template-package-canvas]';
         fixtureResult.phase = "capture-validate";
         if (selectedSurfaces.includes("validate")) fixtureResult.surfaces.validate = await captureRenderer({ page, fixture, model, surface: "validate", route: "/templates/new", mode: "static", selector: validateSelector, runId, candidateRoot, repeat, consoleMessages, timings });
         const continueFields = page.getByRole("button", { name: "Continue to fields" });
         if (await continueFields.isDisabled()) throw new Error(`Fixture ${fixture.id} is blocked at Validate; Fields/editor/export surfaces cannot be reached.`);
         await continueFields.click();
-        await page.getByTestId("package-step-fields").waitFor();
-        const fieldsSelector = '[data-testid="package-step-fields"] [data-template-package-canvas]';
+        const fieldsSelector = '[data-fields-region="preview"] [data-template-package-canvas]';
+        await page.locator(fieldsSelector).waitFor();
+        fixtureResult.phase = "capture-fields";
         if (selectedSurfaces.includes("fields")) fixtureResult.surfaces.fields = await captureRenderer({ page, fixture, model, surface: "fields", route: "/templates/new", mode: "static", selector: fieldsSelector, runId, candidateRoot, repeat, consoleMessages, timings });
-        await page.getByRole("button", { name: "Continue to template details" }).click();
-        await page.getByTestId("package-step-create").waitFor();
+        fixtureResult.phase = "open-review";
+        await page.getByRole("button", { name: "Continue to review", exact: true }).click();
         const name = `Fidelity ${fixture.id}`;
         const nameInput = page.getByLabel("Template name");
         await nameInput.fill(name);
-        await page.getByRole("button", { name: "Add template", exact: true }).click();
-        await page.getByRole("button", { name: `Open template ${name}` }).waitFor();
+        fixtureResult.phase = "review-readiness";
+        await awaitReviewSaveReady(page, { evidence: fixtureResult.reviewEvidence });
+        fixtureResult.phase = "save-template";
+        await page.getByRole("button", { name: "Save template", exact: true }).click();
+        await page.getByRole("heading", { name: "Library", exact: true }).waitFor();
+        fixtureResult.phase = "restore-draft";
         const restoreStarted = performance.now();
-        await page.getByRole("button", { name: `Open template ${name}` }).click();
-        await page.getByTestId("package-editor-panel").waitFor();
+        const card = page.locator("article").filter({ has: page.getByRole("heading", { name, exact: true }) });
+        await card.getByRole("button", { name: "Create output", exact: true }).click();
+        await page.getByTestId("studio-draft-editor").waitFor();
+        await page.getByText("Saved", { exact: true }).first().waitFor();
+        await page.reload();
+        await page.getByTestId("studio-draft-editor").waitFor();
         const closeDiagnostics = page.getByRole("button", {
           name: "Close diagnostics panel",
         });
@@ -669,26 +674,38 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
         }
         timings.draftRestoreMs = performance.now() - restoreStarted;
         fixtureResult.route = new URL(page.url()).pathname;
-        const editorSelector = '[data-testid="package-working-preview"] [data-template-package-canvas]';
+        const editorSelector = '[data-testid="studio-draft-editor"] [data-template-package-canvas]';
+        const cameraEvidence = await applyCaptureCamera(page, captureCamera);
+        if (cameraEvidence) { const workflow = artifactDirectory(candidateRoot, runId, fixture.id, "workflow"); mkdirSync(workflow,{recursive:true}); writeFileSync(join(workflow, "capture-camera.json"), stableStringify(cameraEvidence)); }
         const appearanceStarted = performance.now();
         await page.locator(editorSelector).waitFor({ state: "visible" });
         timings.firstRendererAppearanceMs = performance.now() - appearanceStarted;
+        fixtureResult.phase = "capture-editor";
         if (selectedSurfaces.includes("editor")) fixtureResult.surfaces.editor = await captureRenderer({ page, fixture, model, surface: "editor", route: fixtureResult.route, mode: "editor", selector: editorSelector, runId, candidateRoot, repeat, consoleMessages, timings });
         if (selectedSurfaces.includes("png-export")) {
+          fixtureResult.phase = "capture-png-export";
           const directory = artifactDirectory(candidateRoot, runId, fixture.id, "png-export");
           const captures = [];
           let previousPng = null;
           for (let index = 1; index <= repeat; index += 1) {
             const evidenceBefore = await pngExportEvidence(page);
-            const exported = await exportPng(page, directory, index);
-            const evidenceAfter = await pngExportEvidence(page);
-            writeFileSync(join(directory, `capture-${index}-evidence.json`), stableStringify({ before: evidenceBefore, after: evidenceAfter }));
-            const editorBrowser = await browserStructure(page, editorSelector);
-            const readiness = await waitForCurrentReadiness(page, editorSelector);
-            editorBrowser.fontReadiness = readiness.fontReadiness;
-            editorBrowser.assetReadiness = readiness.assetReadiness;
+            // Export completes recovery and unmounts the editor. Capture its
+            // current structural evidence before invoking that lifecycle boundary.
+            const { editor: { editorBrowser, readiness }, output: exported, completion: evidenceAfter } = await captureCompletedOutput({
+              captureEditor: async () => {
+                const editorBrowser = await browserStructure(page, editorSelector);
+                const readiness = await waitForCurrentReadiness(page, editorSelector);
+                editorBrowser.fontReadiness = readiness.fontReadiness;
+                editorBrowser.assetReadiness = readiness.assetReadiness;
+                return { editorBrowser, readiness };
+              },
+              exportOutput: () => exportPng(page, directory, index),
+              awaitLibrary: () => page.getByRole("heading", { name: "Library", exact: true }).waitFor(),
+              captureCompletion: () => pngExportEvidence(page),
+            });
+            writeFileSync(join(directory, `capture-${index}-evidence.json`), stableStringify({ before: evidenceBefore, after: evidenceAfter, completedRecovery: true }));
             const structure = mergeStructuralReport({ fixture, fixtureHash: fixture.zipSha256, surface: "png-export", route: fixtureResult.route, mode: "editor", model, browser: editorBrowser, runId, timings: { ...timings, pngExportMs: exported.durationMs } });
-            structure.export = { suggestedFilename: exported.suggestedFilename, source: "hidden editor-mode renderer", exactFixtureHash: fixture.zipSha256 };
+            structure.export = { suggestedFilename: exported.suggestedFilename, source: "current V2 editor capture", exactFixtureHash: fixture.zipSha256 };
             const structurePath = join(directory, `structure-${index}.json`);
             writeFileSync(structurePath, stableStringify(structure));
             const current = readFileSync(exported.path);
@@ -700,28 +717,56 @@ export async function runBrowserFixtures({ baseUrl, fixtures, models, selectedSu
             }
             captures.push({ pngPath: exported.path, structurePath, structure, fontReadiness: readiness.fontReadiness, timings: structure.timings, pixelRepeat });
             previousPng = current;
+            if (index < repeat) {
+              await card.getByRole("button", { name: "Create output", exact: true }).click();
+              await page.getByTestId("studio-draft-editor").waitFor();
+              // Match the first capture's restored-document lifecycle, including
+              // its FontFaceSet; reopening alone retains earlier document faces.
+              await page.reload();
+              await page.getByTestId("studio-draft-editor").waitFor();
+              await applyCaptureCamera(page, captureCamera);
+              await waitForCurrentReadiness(page, editorSelector);
+            }
           }
           writeFileSync(join(directory, "browser-console.json"), stableStringify(consoleMessages));
           writeFileSync(join(directory, "network.json"), stableStringify(networkMessages));
           fixtureResult.surfaces["png-export"] = captures;
         }
+        fixtureResult.phase = "complete";
         fixtureResult.fullDurationMs = performance.now() - fullStarted;
         results.push(fixtureResult);
       } catch (error) {
         fixtureResult.error = error instanceof Error ? error.message : String(error);
+        fixtureResult.failureState = await reviewEvidence(page).catch(() => null);
         fixtureResult.fullDurationMs = performance.now() - fullStarted;
         const failureDir = artifactDirectory(candidateRoot, runId, fixture.id, "run-failure");
         mkdirSync(failureDir, { recursive: true });
         await page.screenshot({ path: join(failureDir, "complete-surface.png"), fullPage: true }).catch(() => undefined);
+        if (fixtureResult.phase === "review-readiness") {
+          const issues = page.getByRole("button", { name: "Review issues", exact: true });
+          if (await issues.isVisible().catch(() => false)) {
+            try {
+              await issues.click();
+              await page.getByRole("region", { name: "Validation workbench", exact: true }).waitFor();
+              fixtureResult.reviewEvidence.push({ phase: "blocked-save-checks-diagnosis", state: await reviewEvidence(page) });
+              await page.screenshot({ path: join(failureDir, "checks-diagnosis.png"), fullPage: true });
+            } catch (diagnosisError) {
+              fixtureResult.diagnosisError = String(diagnosisError);
+            }
+          }
+        }
         writeFileSync(join(failureDir, "browser-console.json"), stableStringify(consoleMessages));
         writeFileSync(join(failureDir, "failure.json"), stableStringify(fixtureResult));
         results.push(fixtureResult);
       } finally {
+        const evidenceDir = artifactDirectory(candidateRoot, runId, fixture.id, "workflow");
+        mkdirSync(evidenceDir, { recursive: true });
+        writeFileSync(join(evidenceDir, "review-readiness.json"), stableStringify(fixtureResult.reviewEvidence));
         await context.close();
       }
     }
   } finally {
     await browser.close();
   }
-  return { browser: { name: "Chromium", version: browser.version(), viewport: { width: 1440, height: 1600 }, devicePixelRatio: 1, locale: "en-US", timezone: "UTC", captureScale: 1, fontProfile }, results };
+  return { browser: { name: "Chromium", version: browser.version(), viewport: { width: 1440, height: 1600 }, devicePixelRatio: 1, locale: "en-US", timezone: "UTC", captureScale: 1, fontProfile, ...(process.env.R07_MOTION ? { reducedMotion: motion } : {}) }, results };
 }

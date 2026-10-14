@@ -1,6 +1,10 @@
 import { StrictMode, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import type { TemplateFamilyV1 } from "@sleinity/template-core/family";
+import {
+  createTemplateFamilyFieldForTarget,
+  getTemplateFamilyFieldScope,
+  type TemplateFamilyV1,
+} from "@sleinity/template-core/family";
 import {
   planTemplateFamilyVariantReimport,
   runTemplatePackageImportPipeline,
@@ -20,89 +24,109 @@ import {
   TemplateSessionViewport,
   type TemplateSessionViewportHandle,
   useTemplateFamilyEditor,
-  useTemplateFamilyEditableFields,
-  useTemplateFamilySelection,
   useTemplateFamilySessionSnapshot,
 } from "@sleinity/template-react/editor";
 import "./styles.css";
 
-function addExampleGroup(family: TemplateFamilyV1): TemplateFamilyV1 {
+function addExampleProperty(family: TemplateFamilyV1): TemplateFamilyV1 {
   const next = structuredClone(family);
   const groupId = "example-group:variant";
   next.variantGroups = [{
     id: groupId,
-    title: "Format",
+    title: "Design",
     options: next.variants.map((variant) => ({
-      id: `example-option:${variant.id}`,
+      id: `option:${variant.id}`,
       title: variant.title,
     })),
   }];
-  next.variants.forEach((variant) => {
-    variant.groupAssignments = {
-      [groupId]: `example-option:${variant.id}`,
-    };
-  });
+  for (const variant of next.variants) {
+    variant.groupAssignments[groupId] = `option:${variant.id}`;
+  }
   return next;
 }
 
 function FamilyEditor() {
-  const fields = useTemplateFamilyEditableFields();
   const snapshot = useTemplateFamilySessionSnapshot();
   const editor = useTemplateFamilyEditor();
-  const selection = useTemplateFamilySelection();
   const viewport = useRef<TemplateSessionViewportHandle>(null);
   const [captureStatus, setCaptureStatus] = useState("idle");
   return (
     <section className="workspace">
       <div className="panel">
         <h2>Variant and shared content</h2>
-        <label>
-          Variant
-          <select
-            aria-label="Current family variant"
-            value={snapshot.selectedVariantId ?? ""}
-            onChange={(event) => selection.selectVariant(event.target.value)}
-          >
-            {snapshot.family?.variants.map((variant) => (
-              <option key={variant.id} value={variant.id}>{variant.title}</option>
-            ))}
-          </select>
-        </label>
-        {fields.map((controller) => controller.field.type === "image" ? (
-          <label key={controller.field.id}>
-            {controller.field.title}
-            <input
-              aria-label={controller.field.title}
-              type="file"
-              accept="image/*"
-              onChange={(event) => {
-                const file = event.currentTarget.files?.[0];
-                if (!file || !controller.replaceImage) return;
-                const reader = new FileReader();
-                reader.onload = () => controller.replaceImage?.({
-                  dataUrl: String(reader.result),
-                  mimeType: file.type,
-                  sizeBytes: file.size,
-                });
-                reader.readAsDataURL(file);
-              }}
-            />
-            <span data-testid={`family-image-${controller.field.id}`}>
-              {controller.value && typeof controller.value === "object" && "assetRef" in controller.value
-                ? controller.value.assetRef
-                : "no shared image"}
-            </span>
-          </label>
-        ) : (
-          <label key={controller.field.id}>
-            {controller.field.title}
-            <input
-              aria-label={controller.field.title}
-              value={String(controller.value ?? "")}
-              onChange={(event) => controller.setValue(event.target.value)}
-            />
-          </label>
-        ))}
+        {editor.controls.map((control) => {
+          if (control.kind === "direct-variant-selector") {
+            return (
+              <label key={control.kind}>
+                Variant
+                <select
+                  aria-label="Current family variant"
+                  value={snapshot.selectedVariantId ?? ""}
+                  onChange={(event) => control.selection.selectVariant(event.target.value)}
+                >
+                  {control.selection.variants.map((variant) => (
+                    <option key={variant.id} value={variant.id}>{variant.title}</option>
+                  ))}
+                </select>
+              </label>
+            );
+          }
+          if (control.kind === "selection-property") {
+            const property = control.selection;
+            return (
+              <label key={property.group.id}>
+                {property.group.title}
+                <select
+                  aria-label={property.group.title}
+                  value={property.selectedOptionId ?? ""}
+                  onChange={(event) => property.selectOption(event.target.value)}
+                >
+                  {property.options.map((option) => (
+                    <option key={option.optionId} value={option.optionId} disabled={!option.available && !option.selected}>
+                      {option.title}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            );
+          }
+          const controller = control.controller;
+          return controller.field.type === "image" ? (
+            <label key={controller.field.id}>
+              {controller.field.title} ({controller.scope.kind})
+              <input
+                aria-label={controller.field.title}
+                type="file"
+                accept="image/*"
+                onChange={(event) => {
+                  const file = event.currentTarget.files?.[0];
+                  if (!file || !controller.replaceImage) return;
+                  const reader = new FileReader();
+                  reader.onload = () => controller.replaceImage?.({
+                    dataUrl: String(reader.result),
+                    mimeType: file.type,
+                    sizeBytes: file.size,
+                  });
+                  reader.readAsDataURL(file);
+                }}
+              />
+              <span data-testid={`family-image-${controller.field.id}`}>
+                {controller.value && typeof controller.value === "object" && "assetRef" in controller.value
+                  ? controller.value.assetRef
+                  : "no shared image"}
+              </span>
+            </label>
+          ) : (
+            <label key={controller.field.id}>
+              {controller.field.title} ({controller.scope.kind})
+              <input
+                aria-label={controller.field.title}
+                value={String(controller.value ?? "")}
+                onChange={(event) => controller.setValue(event.target.value)}
+              />
+            </label>
+          );
+        })}
         <button
           type="button"
           onClick={() => {
@@ -141,6 +165,47 @@ function FamilyExample() {
   const [reimportPlan, setReimportPlan] = useState<TemplateFamilyReimportPlanV1 | null>(null);
   const [persistenceStatus, setPersistenceStatus] = useState("idle");
 
+  const keepUnmatchedFieldsVariantSpecific = () => {
+    if (!snapshot.family || !snapshot.content) return;
+    let family = snapshot.family;
+    let content = snapshot.content;
+    for (const variant of family.variants) {
+      for (const target of snapshot.matchPlans[variant.id]?.unmatchedTargets ?? []) {
+        const alreadyBound = variant.bindings.some((binding) =>
+          binding.targets.some((candidate) =>
+            candidate.fieldId === target.fieldId &&
+            candidate.nodeId === target.nodeId &&
+            candidate.property === target.property,
+          ),
+        );
+        if (alreadyBound) continue;
+        const created = createTemplateFamilyFieldForTarget({
+          family,
+          content,
+          variantId: variant.id,
+          target,
+          fieldId: `field:${crypto.randomUUID()}`,
+        });
+        family = created.family;
+        content = created.content;
+      }
+    }
+    wizard.replaceFamily(family);
+    wizard.replaceContent(content);
+  };
+
+  const unboundTargetCount = snapshot.family?.variants.reduce(
+    (count, variant) => count + (snapshot.matchPlans[variant.id]?.unmatchedTargets ?? [])
+      .filter((target) => !variant.bindings.some((binding) =>
+        binding.targets.some((candidate) =>
+          candidate.fieldId === target.fieldId &&
+          candidate.nodeId === target.nodeId &&
+          candidate.property === target.property,
+        ),
+      )).length,
+    0,
+  ) ?? 0;
+
   const inspectReimport = async (file: File) => {
     if (!snapshot.family || !snapshot.previewVariantId) return;
     const imported = await runTemplatePackageImportPipeline({
@@ -161,7 +226,7 @@ function FamilyExample() {
     <TemplateFamilyImportWizardProvider wizard={wizard}>
       <TemplateFamilySessionProvider session={wizard.familySession}>
         <header>
-          <p>SDK 0.8 reference</p>
+          <p>Template Family reference</p>
           <h1>Template Family integration</h1>
           <p>Import ZIP variants, share content, preview sequentially, persist, reopen and capture.</p>
         </header>
@@ -177,10 +242,24 @@ function FamilyExample() {
             <button
               type="button"
               disabled={!snapshot.family || snapshot.family.variants.length < 2}
-              onClick={() => snapshot.family && wizard.replaceFamily(addExampleGroup(snapshot.family))}
+              onClick={() => snapshot.family && wizard.replaceFamily(addExampleProperty(snapshot.family))}
             >
-              Add generic “Format” group
+              Add “Design” property
             </button>
+            <button
+              type="button"
+              disabled={unboundTargetCount === 0}
+              onClick={keepUnmatchedFieldsVariantSpecific}
+            >
+              Keep unmatched fields variant-specific ({unboundTargetCount})
+            </button>
+            {snapshot.family ? (
+              <p data-testid="family-field-scopes">
+                {snapshot.family.fields.map((field) =>
+                  `${field.title}:${getTemplateFamilyFieldScope(snapshot.family!, field.id).kind}`
+                ).join(" | ")}
+              </p>
+            ) : null}
             <button type="button" onClick={() => wizard.back()}>Back</button>
             {snapshot.activeStep === "confirmation" ? (
               <button
@@ -220,15 +299,22 @@ function FamilyExample() {
               disabled={!snapshot.family}
               onClick={() => {
                 setPersistenceStatus("saving");
+                const accepted = wizard.familySession.getSnapshot();
                 void wizard.familySession.save().then(async (family) => {
-                  const draft = await wizard.familySession.saveDraft();
+                  // This legacy host demonstrates an explicit session checkpoint,
+                  // not an output catalogue. Current V2 hosts use SDK recovery.
+                  const key = `family-example-session:${family.id}`;
+                  localStorage.setItem(key, JSON.stringify({ content: accepted.content, selectedVariantId: accepted.selectedVariantId }));
                   wizard.familySession.reset();
-                  await wizard.familySession.loadSavedFamily(family.id, draft.id);
+                  const restored = await wizard.familySession.loadSavedFamily(family.id);
+                  const checkpoint = JSON.parse(localStorage.getItem(key)!);
+                  if (!restored.family) throw new Error("Saved family is unavailable.");
+                  wizard.familySession.load({ family: restored.family, content: checkpoint.content, selectedVariantId: checkpoint.selectedVariantId, sharedImageAssets: restored.sharedImageAssets, savedFamilyId: family.id });
                   setPersistenceStatus("reopened");
                 }).catch(() => setPersistenceStatus("blocked"));
               }}
             >
-              Save, reset and reopen offline
+              Save session checkpoint and reopen offline
             </button>
             <p data-testid="family-persistence-status">{persistenceStatus}</p>
           </section>

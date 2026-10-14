@@ -1,0 +1,211 @@
+{
+  "status": "pass",
+  "archiveIdentities": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b"
+    }
+  ],
+  "node": "v22.23.3",
+  "platform": "linux",
+  "arch": "x64",
+  "rows": [
+    {
+      "manager": "npm",
+      "name": "consumer",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-runtime-release-consumer.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 15954,
+      "exitCode": 0,
+      "logSha256": "2aa504c326c8e50a0a9f9f254fb16c922b0f26bc06802e0933fc8a6d14dd4c6b"
+    },
+    {
+      "manager": "npm",
+      "name": "example",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/example-lifecycle/verify.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--manager",
+        "npm",
+        "--delivered",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/npm/example"
+      ],
+      "durationMs": 28013,
+      "exitCode": 0,
+      "logSha256": "d3291cf2fc34ff00a698442d7edd84f7059638a92ce79cfa2b450ed47cbe51b3"
+    },
+    {
+      "manager": "npm",
+      "name": "fonts",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-host-font-authority.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/npm/fonts"
+      ],
+      "durationMs": 36933,
+      "exitCode": 0,
+      "logSha256": "6af1ed50d7dc964e9fe1b8571046d55d4c71da0e0d8f05af9b0db53b5fdc3372"
+    },
+    {
+      "manager": "npm",
+      "name": "storage",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-blocked-storage.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--manager",
+        "npm",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/npm/storage"
+      ],
+      "durationMs": 7554,
+      "exitCode": 0,
+      "logSha256": "57b85b497fc5e94c110856e4af38d278a15d0a4a4e8c0ea6f743243594e860a7"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-single",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-template-editor-reference.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 14045,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-family",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-template-family-reference.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 9092,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    },
+    {
+      "manager": "pnpm",
+      "name": "consumer",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-runtime-release-consumer.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 10859,
+      "exitCode": 0,
+      "logSha256": "369073f946c6d8a59e852f680a825891ef5e2e123a175be8359087d2788d2754"
+    },
+    {
+      "manager": "pnpm",
+      "name": "example",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/example-lifecycle/verify.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--manager",
+        "pnpm",
+        "--delivered",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/pnpm/example"
+      ],
+      "durationMs": 27370,
+      "exitCode": 0,
+      "logSha256": "d5f76a8fa37e6625709cd8ab33dbef654683a4451b00ae1a6ee41324ff5bce44"
+    },
+    {
+      "manager": "pnpm",
+      "name": "fonts",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-host-font-authority.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/pnpm/fonts"
+      ],
+      "durationMs": 36614,
+      "exitCode": 0,
+      "logSha256": "6af1ed50d7dc964e9fe1b8571046d55d4c71da0e0d8f05af9b0db53b5fdc3372"
+    },
+    {
+      "manager": "pnpm",
+      "name": "storage",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-blocked-storage.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives",
+        "--manager",
+        "pnpm",
+        "--output",
+        "/home/runner/work/_temp/candidate-results/pnpm/storage"
+      ],
+      "durationMs": 7367,
+      "exitCode": 0,
+      "logSha256": "f26ab213e1c331e97cbae1c435e58f055620a81752baec936d277bf3d81fc552"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-single",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-template-editor-reference.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 13008,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-family",
+      "command": [
+        "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+        "scripts/repository/verify-template-family-reference.mjs",
+        "--archives",
+        "/home/runner/work/_temp/candidate-inputs/archives"
+      ],
+      "durationMs": 9205,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    }
+  ],
+  "manualReview": false,
+  "ci": {
+    "commit": "eac186d04a51d0757e1983e18741c04bc0e41668",
+    "runId": "38442123584",
+    "attempt": "1"
+  },
+  "sourceSha256": "b8f4ba6d58e1e560044e81b525028c0a538352f41dc87067f0ac7e54552706d0",
+  "workspaceSourceSha256": "16f7547c6158bc19da148b3dec1b31319fc324088aa38cc735f65818b2a44672"
+}

@@ -36,13 +36,23 @@ Same-index raw Figma `SOLID` evidence, when present and valid, owns paint opacit
 
 The canonical scene and resolved/primitive source clones retain `solidPaintSource`. This milestone does not make those observational values a general live stack owner.
 
+Accepted ADR 0074 adds a second, non-normalizing admission source for exact
+Figma exporter 0.6.1 packages. A clean canonical SOLID with alpha 1, valid
+paint opacity, supported visibility/blend semantics, and no contradictory
+same-index raw type/color/opacity/visibility/blend evidence receives renderer-internal
+`native-canonical-source` / `canonical-paint-opacity` evidence. It does not
+receive `solid-paint-source-v1`, and the rule does not apply to 0.6.0,
+unidentified, or future producer versions.
+
 ## Production eligibility
 
 The runtime selects an ordered SOLID stack only when:
 
 - the node is an eligible axis-aligned FRAME or RECTANGLE;
 - every paint is `SOLID`, uses `NORMAL`, and retains a source index;
-- each contributing paint has unambiguous `solid-paint-source-v1` opacity authority;
+- each contributing paint has either unambiguous `solid-paint-source-v1`
+  compatibility authority or ADR 0074's bounded native exporter-0.6.1
+  canonical opacity authority;
 - hidden paints are preserved but skipped without reordering;
 - node opacity is 1;
 - geometry uses the already accepted uniform or independent edge-local corner model;

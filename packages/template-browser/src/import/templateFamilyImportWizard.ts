@@ -1,3 +1,4 @@
+import { sdkVersion } from "../internal/sdkVersion";
 import {
   createTemplateFamilyFromPackage,
   parseTemplateFamilyContentStateV1,
@@ -16,14 +17,15 @@ import type { AssetStorageAdapter } from "../assets/assetReliability";
 import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
 import {
   createTemplateFamilySession,
-  type TemplateFamilySessionSnapshotV1,
   type TemplateFamilySessionV1,
-} from "../session/templateFamilySession";
+} from "../session/publicFamilySession";
+import type { TemplateFamilySessionSnapshotV1 } from "../session/templateFamilySession";
 import { runTemplatePackageImportPipeline } from "./runTemplatePackageImportPipeline";
 import {
   createTemplateImportValidationReport,
   type TemplateImportValidationReportV1,
 } from "./templateImportValidation";
+import type { LoadedSourceDiagnosticReport } from "./layeredSourceDiagnostics";
 import {
   createTemplatePackageDigest,
   type TemplatePackageDigestV1,
@@ -35,6 +37,7 @@ export const TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION =
   "template-family-import-confirmation-v1" as const;
 export const TEMPLATE_FAMILY_DIGEST_SCHEMA_VERSION =
   "template-family-digest-v1" as const;
+export const TEMPLATE_FAMILY_SDK_VERSION = sdkVersion;
 
 export const TEMPLATE_FAMILY_IMPORT_STEPS = [
   "family-variants",
@@ -59,6 +62,8 @@ export interface TemplateFamilyVariantImportReportV1 {
   variantId: string;
   sourceName: string;
   importValidation: TemplateImportValidationReportV1;
+  /** Live import evidence. Saved families recompute current package diagnostics. */
+  layeredDiagnostics?: LoadedSourceDiagnosticReport;
   packageDigest: TemplatePackageDigestV1;
 }
 
@@ -75,7 +80,7 @@ export interface TemplateFamilyVariantRenderValidationV1 {
 
 export interface TemplateFamilyImportConfirmationV1 {
   schemaVersion: typeof TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION;
-  sdkVersion: "0.8.0";
+  sdkVersion: typeof TEMPLATE_FAMILY_SDK_VERSION;
   confirmedAt: string;
   family: TemplateFamilyV1;
   content: TemplateFamilyContentStateV1;
@@ -201,7 +206,7 @@ export async function verifyTemplateFamilyImportConfirmation(
   try {
     if (
       confirmation.schemaVersion !== TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION ||
-      confirmation.sdkVersion !== "0.8.0"
+      typeof confirmation.sdkVersion !== "string" || !confirmation.sdkVersion.trim()
     ) return false;
     const family = parseTemplateFamilyV1(confirmation.family);
     const content = parseTemplateFamilyContentStateV1(confirmation.content);
@@ -271,12 +276,37 @@ function errorMessage(error: unknown, fallback: string): string {
   return error instanceof Error && error.message ? error.message : fallback;
 }
 
+function renderInputChanged(
+  previousFamily: TemplateFamilyV1,
+  nextFamily: TemplateFamilyV1,
+  variantId: string,
+): boolean {
+  if (previousFamily.id !== nextFamily.id) return true;
+  if (JSON.stringify(previousFamily.fields) !== JSON.stringify(nextFamily.fields)) return true;
+  const previousVariant = previousFamily.variants.find((variant) => variant.id === variantId);
+  const nextVariant = nextFamily.variants.find((variant) => variant.id === variantId);
+  if (!previousVariant || !nextVariant) return true;
+  return JSON.stringify({
+    packageDigest: previousVariant.source.packageDigest,
+    fontRequirements: previousVariant.packageValue.fontRequirements,
+    bindings: previousVariant.bindings,
+    ruleOverrides: previousVariant.ruleOverrides,
+  }) !== JSON.stringify({
+    packageDigest: nextVariant.source.packageDigest,
+    fontRequirements: nextVariant.packageValue.fontRequirements,
+    bindings: nextVariant.bindings,
+    ruleOverrides: nextVariant.ruleOverrides,
+  });
+}
+
 export function createTemplateFamilyImportWizard(
   options: TemplateFamilyImportWizardOptionsV1 = {},
 ): TemplateFamilyImportWizardV1 {
   const familySession = options.familySession ?? createTemplateFamilySession({
     assetStorage: options.assetStorage,
-    fontRegistry: options.fontRegistry,
+    ...(Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+      ? { fontRegistry: options.fontRegistry }
+      : {}),
   });
   const listeners = new Set<() => void>();
   let disposed = false;
@@ -315,6 +345,7 @@ export function createTemplateFamilyImportWizard(
     if (value.activeStep === "field-matches") {
       return value.validation?.issues.every((item) =>
         !item.code.startsWith("family.binding") &&
+        item.code !== "family.field-unbound" &&
         item.code !== "family.variant-field-unbound"
       ) ?? false;
     }
@@ -372,7 +403,9 @@ export function createTemplateFamilyImportWizard(
       sourceName: input.sourceName,
       figmaUrl: input.figmaUrl,
       assetStorage: options.assetStorage,
-      fontRegistry: options.fontRegistry,
+      ...(Object.prototype.hasOwnProperty.call(options, "fontRegistry")
+        ? { fontRegistry: options.fontRegistry }
+        : {}),
     });
     if (!result.package || !result.validation?.valid) {
       throw new Error(
@@ -388,6 +421,7 @@ export function createTemplateFamilyImportWizard(
         loadedSource: result.loadedSource,
         layeredDiagnostics: result.layeredDiagnostics,
       }),
+      layeredDiagnostics: result.layeredDiagnostics,
       digest: await createTemplatePackageDigest(result.package),
     };
   };
@@ -474,6 +508,7 @@ export function createTemplateFamilyImportWizard(
               variantId,
               sourceName: input.sourceName,
               importValidation: imported.validation,
+              layeredDiagnostics: imported.layeredDiagnostics,
               packageDigest: imported.digest,
             },
           },
@@ -539,6 +574,7 @@ export function createTemplateFamilyImportWizard(
               variantId,
               sourceName: input.sourceName,
               importValidation: imported.validation,
+              layeredDiagnostics: imported.layeredDiagnostics,
               packageDigest: imported.digest,
             },
           },
@@ -559,17 +595,52 @@ export function createTemplateFamilyImportWizard(
     },
     replaceFamily(family) {
       assertActive();
-      if (!snapshot.content) throw new Error("Import the first family ZIP before editing it.");
+      if (!snapshot.family || !snapshot.content) {
+        throw new Error("Import the first family ZIP before editing it.");
+      }
       operationRevision += 1;
       const validation = synchronizeFamilySession(family, snapshot.content, snapshot.previewVariantId);
-      return publish({ family: structuredClone(family), validation, error: null });
+      const renderValidation = Object.fromEntries(
+        family.variants.map((variant) => {
+          const current = snapshot.renderValidation[variant.id];
+          if (!current) {
+            return [variant.id, { variantId: variant.id, status: "not-run" as const, issues: [] }];
+          }
+          return [
+            variant.id,
+            renderInputChanged(snapshot.family!, family, variant.id)
+              ? { ...current, status: "stale" as const }
+              : current,
+          ];
+        }),
+      );
+      return publish({
+        status: "active",
+        family: structuredClone(family),
+        validation,
+        renderValidation,
+        error: null,
+        completion: null,
+      });
     },
     replaceContent(content) {
       assertActive();
       if (!snapshot.family) throw new Error("Import the first family ZIP before editing content.");
       operationRevision += 1;
       const validation = synchronizeFamilySession(snapshot.family, content, snapshot.previewVariantId);
-      return publish({ content: structuredClone(content), validation, error: null });
+      return publish({
+        content: structuredClone(content),
+        validation,
+        renderValidation: Object.fromEntries(
+          snapshot.family.variants.map((variant) => {
+            const current = snapshot.renderValidation[variant.id];
+            return [variant.id, current
+              ? { ...current, status: "stale" as const }
+              : { variantId: variant.id, status: "not-run" as const, issues: [] }];
+          }),
+        ),
+        error: null,
+      });
     },
     selectPreviewVariant(variantId) {
       assertActive();
@@ -636,7 +707,7 @@ export function createTemplateFamilyImportWizard(
       }
       const confirmation: TemplateFamilyImportConfirmationV1 = {
         schemaVersion: TEMPLATE_FAMILY_IMPORT_CONFIRMATION_SCHEMA_VERSION,
-        sdkVersion: "0.8.0",
+        sdkVersion: TEMPLATE_FAMILY_SDK_VERSION,
         confirmedAt: now(),
         family,
         content,

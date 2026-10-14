@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "studio-compact-field-cards-evidence-v1",
+  "date": "2026-10-12",
+  "sourceCommit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "startingGate": "sdk-061-fields-usability-20261011b",
+  "currentGate": "sdk-061-compact-field-cards-20261012a",
+  "gateGo": true,
+  "gateCounts": {
+    "captures": 24,
+    "renderer": 12,
+    "scene": 3,
+    "settlement": 12
+  },
+  "sourceReview": {
+    "unchangedCapturePngs": 12,
+    "changedCapturePngs": 0,
+    "approvedReferencesChanged": false,
+    "runtimeHashesVerified": 272,
+    "protectedArtifactHashesVerified": 324,
+    "manualLiveReview": false
+  },
+  "implementationSha256": {
+    "apps/studio/src/field-rules/FieldConfigurationEditorV2.tsx": "4bc67ed7fbb3f216919587e830ead152d92231d99740b663631ae2b6f7e47612",
+    "apps/studio/src/setup/SetupEditGuard.tsx": "50cbfbf95a56d771e6726e2a454078edc32bcde27a1459b6047403a203e779f4",
+    "apps/studio/src/setup/studioSetup.css": "8478870ebdf16462e41daa9b9565e8410de33b07e00227d1233ca137f923802d",
+    "apps/studio/src/components/ui/SideDrawer.tsx": "a7d7e6ded874353ddd9f43e2b74c49fba0e522dc6ac1c16786c1915ceafa6026",
+    "scripts/repository/compact-fields-browser.mjs": "c6514496a21870e2044e3afadcdd0791f18d95a3b7c9322af88e76297a2eec9e",
+    "scripts/repository/verify-field-choices-browser.mjs": "683cd22b1c67f352cd8231baa4ef6b0d63f11d59b38c638db37f33c79e3426ba",
+    "scripts/repository/fields-measurement.mjs": "86630b14e460467ece0bbcf92f70f25211f1c89e15f9e30d5ddc8f64a4e7f8a9",
+    "scripts/field-rules/studio-v2.mjs": "3b5b568e08d762c5f298b83c30af3a50c119b09db4c4c8a08a0e0e0ca80fc860",
+    "scripts/field-rules/studio-setup.mjs": "50095e861b5649a7a46d8cb442ec4468d73d9802016a592fc65126c22e7e3466",
+    "scripts/fidelity/retain-compact-card-review.mjs": "9529794fa488e2ecc70a732b63ec15dc296180186b9722ecc0923275a4cf2719"
+  },
+  "measurements": {
+    "single": {
+      "cleanCardCssPx": {
+        "before": 485.5,
+        "after": 285
+      },
+      "narrowLayout": {
+        "width": 471.625,
+        "viewport": 768,
+        "overflow": false,
+        "internalScroll": "visible"
+      },
+      "before": {
+        "medianInputToTwoFramesMs": 14.300000071525574,
+        "p95InputToTwoFramesMs": 43.200000047683716,
+        "commitsPerTrial": [
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "validationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "materializationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "medianInputToTwoFramesMs": 10.5,
+        "p95InputToTwoFramesMs": 43.59999990463257,
+        "commitsPerTrial": [
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "validationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "materializationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "family": {
+      "cleanCardCssPx": {
+        "before": 537,
+        "after": 312.5
+      },
+      "narrowLayout": {
+        "width": 471.625,
+        "viewport": 768,
+        "overflow": false,
+        "internalScroll": "visible"
+      },
+      "before": {
+        "medianInputToTwoFramesMs": 11.600000023841858,
+        "p95InputToTwoFramesMs": 78.70000004768372,
+        "commitsPerTrial": [
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "validationsPerTrial": [
+          12,
+          12,
+          12,
+          12,
+          12
+        ],
+        "materializationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "medianInputToTwoFramesMs": 14.199999928474426,
+        "p95InputToTwoFramesMs": 99.5,
+        "commitsPerTrial": [
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "validationsPerTrial": [
+          12,
+          12,
+          12,
+          12,
+          12
+        ],
+        "materializationsPerTrial": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "verification": {
+    "portableTests": "pass",
+    "studioTypecheck": "pass",
+    "studioBuild": "pass",
+    "sdkVerify": "pass",
+    "packedBundles": "pass",
+    "studioSetup": "pass",
+    "studioDrafts": "pass",
+    "fieldRulesStudio": "pass",
+    "studioFamilyParity": "pass",
+    "workflowAcceptance": "pass",
+    "fontReactivation": "pass",
+    "choicesBrowserSingleFamilyFiveTypes": "pass",
+    "compactCardsBrowser": "pass",
+    "docsVerify": "pass"
+  }
+}

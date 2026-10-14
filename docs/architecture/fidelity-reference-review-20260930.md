@@ -1,0 +1,42 @@
+# Fidelity reference review — 2026-09-30
+
+This review uses the exact, two-pass, repeat-stable `prerelease-20260930-final` run. Its [92 surface packets](../../fidelity/evidence/reference-review-prerelease-20260930-final/index.json) and [92 explicit dispositions](../../fidelity/evidence/reference-review-prerelease-20260930-final/review-dispositions.json) link the source ZIP hash and embedded preview, current and approved capture/structure, scene changes, settlement files, and environment. The packet generator is `scripts/fidelity/reference-review.mjs`; it rejects incomplete, unstable, cross-run, duplicate, or hash-mismatched evidence. Its completion marker is written only after all 92 packets exist. Evidence under `fidelity/evidence` is local and ignored by Git; regenerate it from the retained capture run if needed.
+
+## Capture dimensions
+
+All 36 dimension failures are the Validate, Fields, and editor element screenshots of 12 fixtures. Every approved and current screenshot is uniformly scaled from the **same** logical source canvas (largest horizontal/vertical scale disagreement: 0.00162). The current selector captures `[data-template-package-canvas]`; there is no post-capture resize. The approved and current structures report identical `rootDimensions` for each fixture. Current Validate/Fields routes remain `/templates/new`; the editor route changed from `/drafts/…` to `/templates/…/output`. The container and Studio layout now give these canvases different visible widths, with both smaller and larger changes depending on surface. For example, `now-hiring-post` Validate is 342×461 approved versus 307×415 current on a 1000×1350 canvas, while its editor is 730×985 versus 874×1180. The PNG export sizes are unchanged.
+
+This establishes a page-container/capture-scale reference drift, not evidence of changed source dimensions or an incorrect canvas selector. The approved structures do not record their historical viewport, container width, zoom, or CSS revision, so the exact historical layout rule cannot be reconstructed from approved evidence alone. The current environment is headless Chromium 149.0.7827.55 at 1440×1600, device scale 1. The disposition for each of the 36 is **reviewable UI-layout reference difference**. No harness resizing or selector change is justified; each current preview should be accepted only after reviewing its intended Studio layout. That review has not been granted here.
+
+## Equal-size PNG and scene differences
+
+The three changed PNG exports have the same source canvas size as their approvals. Pixel comparison to each ZIP's embedded preview, at the harness threshold, is diagnostic evidence rather than automatic approval:
+
+| Fixture | Approved-to-source changed pixels | Current-to-source | Review finding |
+| --- | ---: | ---: | --- |
+| `now-hiring-post` | 35.891% | 0.763% | Current image crop visibly follows source more closely. Residual pixels and structure still need review. |
+| `deal-of-the-week-banner` | 13.836% | 0.112% | Current crop visibly follows source more closely. Residual pixels and structure still need review. |
+| `optimized-for-template-export` | 38.905% | 7.804% | Crop improved, but current text placement still differs visibly from source; no whole-image approval. |
+
+`deal-of-the-week-post` has **zero changed PNG pixels** against its approved export. Its comparison fails on image-placement structure: the approved record uses the older `figmaImageTransform`/cover representation, while current telemetry records `imported-source`, revision 0, preserved-inapplicable source transform, and the resolved destination/source polygon. The slot differs only at decimal precision. It needs structural contract review, not a PNG reference replacement.
+
+The four approved scene failures are **not merely `packageBytes` changes**. Exact JSON path diffs are in each fixture's `scene-changes.json`: `now-hiring-post` has 45, `deal-of-the-week-post` 71, `deal-of-the-week-banner` 60, and `optimized-for-template-export` 19 changed paths. They include type-qualified editable field IDs and their relationships, `solidPaintSource` provenance, and image replacement/placement authority and revisions; the post also changes scale-mode candidate authority. These are semantic/provenance contract differences as well as byte counts. Some align with documented field identity, source-opacity, and image-placement work, but this review does not certify every changed path as intended. All four scene approvals remain blocked pending contract-by-contract review through `scene:update` with a specific reason.
+
+## Missing references and source gaps
+
+The 44 renderer surfaces without approval are 11 fixtures × Validate, Fields, editor, and PNG. The 19 scenes without approval are marked separately in every packet. The 76 settlement bundles without approval, and 16 differing approved bundles, are linked to the same `sourceFidelityRun`. No missing reference is counted as a pass. Source-linked packets are ready for individual review; they have not been promoted.
+
+Manual review of the stored browser captures against embedded source previews found material blockers in the crop/crop-editable banner family (pale instead of dark left background), `bb-cover-thing-primitives` (hand/media shadow and arrow vector), and `main-visual-section-primitives` (the source's layered gradient is absent). The crop discrepancy is specifically a **source/exporter contract conflict**: both failing canonical ZIPs declare `429:41` as an opaque pale `SOLID` rectangle over a dark root, while the embedded preview shows the dark root. Their mask sibling declares `429:41` as an alpha-mask input, and both its preview and current render are dark. Rendering the unmasked canonical rectangle pale follows the accepted node data; resolving the preview-versus-package conflict requires source/exporter clarification, not an assumed renderer fix. The [fixture record](../renderer-fidelity/FIXTURES.md) identifies main-visual's SOLID + SHADER + LINEAR root stack and bb-cover's mixed/DARKEN stack as compatibility-owned outside the certified isolated gradient subset. Those appearance gaps require separately scoped fixture-led work. The crop-mask, stroke, ordered SOLID/linear, exporter-0.6.1 paint, and Boolean fixtures are packeted; source/candidate visual inspection found closer matches in several cases, but that does not substitute for surface-by-surface approval. The 11 fixture findings and all 44 next actions are in `review-dispositions.json`.
+
+## Gate
+
+- **Harness complete:** yes. No selector/setup correction was warranted; no new capture was needed after the existing fresh, stable run.
+- **Captures complete and stable:** yes, 184/184 captures and 92/92 stable pairs; exact ZIP hashes, embedded source previews, verified fonts, and one renderer/scene/settlement run identity are checked.
+- **Reference approval:** no. Forty renderer differences, four scene differences, 44 missing renderer references, 19 missing scene references, and settlement differences remain review items. No approved image, scene/settlement snapshot, or tolerance was changed.
+- **Safe to begin compiler-result consolidation:** **no-go**. The source/exporter conflict, layered-appearance gaps, and unresolved semantic scene changes need separately scoped decisions/work, and the outstanding source-linked references need explicit dispositions. Repeat stability and improved source pixel scores alone are insufficient.
+
+The review above is of stored browser-harness captures and their source previews. It is not a claim that each affected live Studio surface was manually inspected in a new interactive browser session.
+
+## Current-run verification
+
+`node scripts/fidelity/reference-review.mjs prerelease-20260930-final /tmp/reference-review-verify-20260930` completed and produced 23 exact source packets and 92 surface packets. Reusing an existing output directory was rejected. `node --check` passed. `pnpm test:portable`, `pnpm packages:typecheck`, `pnpm packages:build`, `pnpm api:contract`, and `pnpm boundaries:check` passed in this review turn. The renderer, scene, and settlement comparison statuses above are from the already complete `prerelease-20260930-final` run, not from a new browser capture in this turn. Git reports no changes in approved renderer references, scene snapshots, settlement snapshots, or API baselines. No comparison tolerance was changed.

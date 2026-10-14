@@ -1,0 +1,10 @@
+--- a/packages/template-browser/src/session/templateSessionV2.ts
++++ b/packages/template-browser/src/session/templateSessionV2.ts
+@@ -740,7 +740,6 @@
+       : null;
+     const sessionAssets = { ...snapshot.sessionAssets, [asset.id]: asset };
+     if (ownedUrl) { if (ownedUrls.get(asset.id) !== ownedUrl) revokeOwned(asset.id); retainOwned(asset.id, ownedUrl); }
+-    else revokeOwned(asset.id); // Accepted embedded data replaces this ID's Blob ownership.
+     if (previousAssetId && previousAssetId !== asset.id && sessionAssets[previousAssetId] &&
+         !referencedReplacementAssetIds(result.state).has(previousAssetId)) {
+       delete sessionAssets[previousAssetId];

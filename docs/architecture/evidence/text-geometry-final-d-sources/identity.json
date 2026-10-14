@@ -1,0 +1,16 @@
+{
+  "files": {
+    "packages/template-react/src/render/TemplatePackageRenderer.tsx": {
+      "path": "docs/architecture/evidence/text-geometry-final-d-sources/TemplatePackageRenderer.tsx.txt",
+      "sha256": "1e3989b27d3786af50fd2f080ef9fe9a97963b9fab185916d31384ebedf3f01a"
+    },
+    "packages/template-react/src/internal/runtime-routing/useCoreLayoutRuntime.ts": {
+      "path": "docs/architecture/evidence/text-geometry-final-d-sources/useCoreLayoutRuntime.ts.txt",
+      "sha256": "d8a6ad67e0494dd95b0425f70cddf70b609873fe5f53c45c3f74147fe80ab9bf"
+    },
+    "packages/template-react/src/internal/runtime-routing/textMeasurementInputs.ts": {
+      "path": "docs/architecture/evidence/text-geometry-final-d-sources/textMeasurementInputs.ts.txt",
+      "sha256": "dd142de47bad824b8b7f696eb88b858d4b58965ae1abdf8d0b2a75b9e427184b"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "source": "fields-ux-audit-20261011",
+  "implementation": [
+    {
+      "path": "apps/studio/src/setup/SetupFields.tsx",
+      "bytes": 13994,
+      "sha256": "9680ab4396be04f6de34e41863456c0e66bc0a40eac6cccd6fb95d7b74c56de4"
+    },
+    {
+      "path": "apps/studio/src/setup/SetupEditGuard.tsx",
+      "bytes": 2279,
+      "sha256": "5faa27b736a1f88b7dcf40b7eb6afa3df05d32afff525877228b4541a92b9bed"
+    },
+    {
+      "path": "apps/studio/src/setup/SetupPreview.tsx",
+      "bytes": 6889,
+      "sha256": "65764fde570c213ac50fa1842cacb19b81cd4653bc95c42b6021a099b51009e2"
+    },
+    {
+      "path": "apps/studio/src/setup/StudioSetupWizard.tsx",
+      "bytes": 43053,
+      "sha256": "3f1bcdb29a95dd224c3592616ed9988939308d00773dbb0bd2288fa6fc1e593b"
+    },
+    {
+      "path": "apps/studio/src/field-rules/FieldConfigurationEditorV2.tsx",
+      "bytes": 21450,
+      "sha256": "44a1d3f0bb60a7fafea3c17277a5b0430840101facdd955aff4d6d800b532f33"
+    },
+    {
+      "path": "apps/studio/src/field-rules/choiceAuthoring.ts",
+      "bytes": 8245,
+      "sha256": "68960c707bf9f762776da48f75f0a83c7154c6eaa355b59d991e58b2a2ea676b"
+    },
+    {
+      "path": "apps/studio/src/field-rules/FieldContentEditorV2.tsx",
+      "bytes": 19787,
+      "sha256": "68703666270a8ae561c4bc2cd7a575c03a1a25d454d679d81393a5c462a73452"
+    },
+    {
+      "path": "apps/studio/src/field-rules/StudioFieldRulesV2.tsx",
+      "bytes": 15145,
+      "sha256": "21732b66691c2978903208a3179c9f6782b7aadd84b688e216a0b28d6bbd5eac"
+    },
+    {
+      "path": "apps/studio/src/components/template-package/editor/FieldRuleCardShell.tsx",
+      "bytes": 3921,
+      "sha256": "5c1ef55ce2b31f0c9cbc1c2853fc9faca5c438403b17e5c337622a402ea80732"
+    },
+    {
+      "path": "apps/studio/src/components/ui/surfaces.tsx",
+      "bytes": 6416,
+      "sha256": "b1b6e0fdd523f3454356cc71f39581b115b578ad47e7787b020db7e16f954907"
+    },
+    {
+      "path": "apps/studio/src/components/ui/SideDrawer.tsx",
+      "bytes": 3053,
+      "sha256": "7894a6cbf1ae25ebeab1b1107f8192dd289d3faef95fed20733c2bc149da0717"
+    },
+    {
+      "path": "apps/studio/src/components/ui/fields.tsx",
+      "bytes": 9872,
+      "sha256": "0d70ce79d3e57377da1d2cc108cdc9b4f40a9e8d4ab55fc4df0f2d80b4b489e0"
+    },
+    {
+      "path": "apps/studio/src/setup/studioSetup.css",
+      "bytes": 28176,
+      "sha256": "786ffd586a21b4a0ee501a946a2443f5d8b1729c4f9c852398af412aeb673e15"
+    },
+    {
+      "path": "apps/studio/src/workspace/StudioLibrary.tsx",
+      "bytes": 23785,
+      "sha256": "1ce8c5d032a55b4303fb00c1cdb0adbb32eef9e4ec238e8b7e68816b6ea02671"
+    }
+  ],
+  "reproductions": {
+    "F01": "Common sparse field previews first variant",
+    "F02": "precision 101 Apply enabled",
+    "F03": "ArrowDown keeps first menu item focused",
+    "F04": "Invalid draft guard Apply enabled",
+    "F05": "Empty list references missing No choices option",
+    "F06": "Invalid hex produces black picker"
+  },
+  "evidence": "../fields-ux-audit-20261011/record.json"
+}

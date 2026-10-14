@@ -1,0 +1,124 @@
+{
+  "comparison": {
+    "equivalentWithinTolerance": true,
+    "fixture": {
+      "id": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    "nodeResults": [
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6755",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6756",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6763",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6764",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6765",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6766",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6767",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6768",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6769",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6836",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      },
+      {
+        "category": "within-tolerance",
+        "maximumDelta": 0,
+        "nodeId": "987:6770",
+        "note": "Difference is within the fixed geometry tolerance.",
+        "properties": []
+      }
+    ],
+    "schemaVersion": "settlement-comparison-v1",
+    "summary": {
+      "contract-gap": 0,
+      "current-runtime-compatibility": 0,
+      "dependency-gap": 0,
+      "environment-variance": 0,
+      "exact": 0,
+      "likely-future-renderer-bug": 0,
+      "measurement-gap": 0,
+      "unsupported-preserved": 0,
+      "within-tolerance": 11
+    },
+    "surface": "validate",
+    "tolerances": {
+      "geometry": 0.25,
+      "text": 0.5
+    }
+  },
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2581861,
+      "canvas": {
+        "height": 1350,
+        "width": 1000
+      },
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+      "filename": "template-package-now-hiring-v0.6.1.zip",
+      "id": "exporter-061-now-hiring",
+      "packageVersion": "1.0",
+      "rootNodeId": "987:6755",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "settlement-comparison-snapshot-v1"
+}

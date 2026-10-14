@@ -13,11 +13,14 @@ import {
   type AssetReliabilityReport,
 } from "../assets";
 import { prepareTemplatePackageFonts } from "../fonts";
+import type { ManagedFontRegistry } from "../fonts/fontRegistryTypes";
 
 export interface PackageImageExportRequest {
   format: "jpg" | "png";
   packageValue: TemplatePackageV1;
   renderMode: "static" | "editor";
+  /** Omitted uses the default registry; null uses package-provided font sources only. */
+  fontRegistry?: ManagedFontRegistry | null;
 }
 
 export type PackageJpgExportRequest = PackageImageExportRequest;
@@ -176,6 +179,7 @@ export async function checkPackageJpgExportReadiness(
     request.packageValue,
     tree,
     fontSet,
+    request.fontRegistry,
   );
   return validatePackageJpgExportReadiness(
     request,

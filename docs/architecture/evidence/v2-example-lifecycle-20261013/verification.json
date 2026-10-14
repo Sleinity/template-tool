@@ -1,0 +1,630 @@
+{
+  "status": "complete",
+  "findings": {
+    "R02": "closed",
+    "R03": "closed"
+  },
+  "baselineGate": "sdk-061-r07-raster-20261013a",
+  "runId": "sdk-061-v2-example-lifecycle-20261013a",
+  "gate": {
+    "decision": "GO",
+    "stableCaptures": 24,
+    "rendererPasses": 12,
+    "scenePasses": 3,
+    "settlementPasses": 12
+  },
+  "commit": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+  "productionSourcesUnchanged": 374,
+  "protectedUnchanged": 299,
+  "implementation": [
+    {
+      "file": "docs/architecture/sdk-release-readiness.md",
+      "bytes": 11391,
+      "sha256": "f6d4d2bd59bb7f099b9d2ac4082ae4ba54d71cc657fe44d94904781dde5d4021"
+    },
+    {
+      "file": "docs/architecture/v2-example-ownership-lifecycle.md",
+      "bytes": 9975,
+      "sha256": "e8a72ab4b0dfae7f672b44a3d1706eff14469b4cb6f0e1fe3624b801c189b8c2"
+    },
+    {
+      "file": "docs/sdk/V2_INTEGRATION.md",
+      "bytes": 17795,
+      "sha256": "68f9a45f0b333df9e45b4cb7629b5c6cf968418267d64e6486f3a9dee4e8c6ef"
+    },
+    {
+      "file": "examples/template-editor-integration/README.md",
+      "bytes": 4091,
+      "sha256": "2bb33633fa4060782e0706e05f19079b970979bbddd53062cf038181593121b8"
+    },
+    {
+      "file": "examples/template-editor-integration/src/FieldRulesV2Host.tsx",
+      "bytes": 9443,
+      "sha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51"
+    },
+    {
+      "file": "examples/template-editor-integration/src/fieldHostLifecycle.ts",
+      "bytes": 14172,
+      "sha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681"
+    },
+    {
+      "file": "examples/template-editor-integration/src/main.tsx",
+      "bytes": 28554,
+      "sha256": "5907807c4740ab14bba2bb47c095d8a01a0d95dbacd2567888713a7225d796c2"
+    },
+    {
+      "file": "examples/template-editor-integration/tsconfig.app.json",
+      "bytes": 508,
+      "sha256": "60994336f02be4eb77eb366f24bd97a7872fcc6eb345f168135db6ceb184fb84"
+    },
+    {
+      "file": "scripts/example-lifecycle/baseline-host.tsx",
+      "bytes": 1081,
+      "sha256": "bf22b024de0b57f2b89bfa37aba78d90fdb99f79e2a4af184983aba3fa6e6e42"
+    },
+    {
+      "file": "scripts/example-lifecycle/bind-review.mjs",
+      "bytes": 5332,
+      "sha256": "dea59f56f680cd4720e1f67dade07825784d47a948aa10d6ec9de7a3bbcf47f7"
+    },
+    {
+      "file": "scripts/example-lifecycle/checks.mjs",
+      "bytes": 4586,
+      "sha256": "a1f74cefdc6d497001dc76c7b7dd1e6edbdaf3837267383bdb19eb8d27953651"
+    },
+    {
+      "file": "scripts/example-lifecycle/lifecycle.test.ts",
+      "bytes": 8179,
+      "sha256": "d0404529ec84c15fc26a78f15e8d10ae7be93bd909bc0c0abe8efceb69ccaadf"
+    },
+    {
+      "file": "scripts/example-lifecycle/performance-host.tsx",
+      "bytes": 2026,
+      "sha256": "8f308dfffcd3d9dc9af3113f83f5d1c43968650a0edeb5fe1f567b709a5608de"
+    },
+    {
+      "file": "scripts/example-lifecycle/performance.mjs",
+      "bytes": 6428,
+      "sha256": "d8bfb36e5c13bde839d578f65b288f2bc980192278aeabb90baa4f1bb443df39"
+    },
+    {
+      "file": "scripts/example-lifecycle/probe.tsx",
+      "bytes": 2444,
+      "sha256": "d59b141f92ffced94a09e4dfc08678af6e696e41990f2f90d999614ac0b1bceb"
+    },
+    {
+      "file": "scripts/example-lifecycle/record.mjs",
+      "bytes": 5097,
+      "sha256": "74239c3625cce388e241e1bbcb111aeec5186c872af70269dc36b287a315e108"
+    },
+    {
+      "file": "scripts/example-lifecycle/reproduce.mjs",
+      "bytes": 5915,
+      "sha256": "f4450de96cf4b4a5faf413160dc912a99c849424d0f9987a29059a26e9e79e61"
+    },
+    {
+      "file": "scripts/example-lifecycle/unit.mjs",
+      "bytes": 1027,
+      "sha256": "25c1d5078ae4f52c9ee5e2a859c1abdd87d33dd6961bbcd8ec7628b13508904b"
+    },
+    {
+      "file": "scripts/example-lifecycle/verify.mjs",
+      "bytes": 29042,
+      "sha256": "be6c10cdd4524a1cac3e6b4256f7060dc3ac22479f976cb1e6c5239652e8bcf3"
+    },
+    {
+      "file": "scripts/field-rules/studio-v2.mjs",
+      "bytes": 23569,
+      "sha256": "fe357795007e8e8ade0cb4105180ef89ccb67366cf67d1bd20e9ca66d00f106f"
+    },
+    {
+      "file": "scripts/repository/verify-packed-consumer.mjs",
+      "bytes": 18262,
+      "sha256": "ddd1e90f81caa45ce85997b830f069729a34c0ed7dcccc6feda2501c1f492a7e"
+    },
+    {
+      "file": "scripts/repository/verify-template-editor-reference.mjs",
+      "bytes": 36086,
+      "sha256": "e5b410fbdeace9fc3b26083a03c7c947f4f92fccc233342de2ad5722cca2a51b"
+    }
+  ],
+  "archives": [
+    {
+      "file": "sleinity-template-core-0.8.0.tgz",
+      "bytes": 532284,
+      "sha256": "4f804cb26d9aa6fa97e2c2cd745e93c6699730143bdc36778528bffa231be32e",
+      "name": "@sleinity/template-core",
+      "version": "0.8.0",
+      "dependencies": {
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3"
+      },
+      "peerDependencies": {},
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./family",
+        "./assets",
+        "./fonts",
+        "./motion",
+        "./inspection"
+      ],
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "path": "release-verification-artifacts/r07-20261013/sleinity-template-core-0.8.0.tgz",
+      "published": false,
+      "unchangedFromR04": true,
+      "currentSha256": "4f804cb26d9aa6fa97e2c2cd745e93c6699730143bdc36778528bffa231be32e"
+    },
+    {
+      "file": "sleinity-template-browser-0.8.0.tgz",
+      "bytes": 403244,
+      "sha256": "7dd9899408be8dc8cada95b5a64a72abd4dd3f47e05dc4afd24a20a6ba95cb0a",
+      "name": "@sleinity/template-browser",
+      "version": "0.8.0",
+      "dependencies": {
+        "@sleinity/template-core": "workspace:*",
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3",
+        "html-to-image": "^1.11.13"
+      },
+      "peerDependencies": {},
+      "supportedEntries": [
+        ".",
+        "./session",
+        "./importer",
+        "./compatibility",
+        "./assets",
+        "./fonts",
+        "./persistence",
+        "./capture",
+        "./enrichment"
+      ],
+      "restrictedEntries": [
+        "./session-internal"
+      ],
+      "path": "release-verification-artifacts/r07-20261013/sleinity-template-browser-0.8.0.tgz",
+      "published": false,
+      "unchangedFromR04": true,
+      "currentSha256": "7dd9899408be8dc8cada95b5a64a72abd4dd3f47e05dc4afd24a20a6ba95cb0a"
+    },
+    {
+      "file": "sleinity-template-react-0.8.0.tgz",
+      "bytes": 289362,
+      "sha256": "f7c50d68d04f3de8df6d0e70a2b80adcdc6b5775927aabde48f00ded29e9100a",
+      "name": "@sleinity/template-react",
+      "version": "0.8.0",
+      "dependencies": {
+        "@sleinity/template-browser": "workspace:*",
+        "@sleinity/template-core": "workspace:*"
+      },
+      "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+      },
+      "supportedEntries": [
+        ".",
+        "./importer",
+        "./importer.css",
+        "./editor",
+        "./inspection"
+      ],
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "path": "release-verification-artifacts/r07-20261013/sleinity-template-react-0.8.0.tgz",
+      "published": false,
+      "unchangedFromR04": true,
+      "currentSha256": "f7c50d68d04f3de8df6d0e70a2b80adcdc6b5775927aabde48f00ded29e9100a"
+    }
+  ],
+  "candidateManifestSha256": "7f6365405a34fb07c1ce5fe8721415350ad03a21d5c7178b72358b5e01e89a3d",
+  "checks": [
+    {
+      "label": "portable",
+      "command": "pnpm test:portable",
+      "started": "2026-10-13T12:02:59.737Z",
+      "durationMs": 26978,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/portable.log",
+      "logSha256": "51b94cb25fadf8a7806888b6a6283e0dc51f3d58040a445b4b4eb1ec6b38b94d"
+    },
+    {
+      "label": "typescript",
+      "command": "pnpm exec tsc -b --pretty false",
+      "started": "2026-10-13T12:03:26.719Z",
+      "durationMs": 7016,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/typescript.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "studio-build",
+      "command": "pnpm --filter @sleinity/template-studio build",
+      "started": "2026-10-13T12:03:33.735Z",
+      "durationMs": 9968,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/studio-build.log",
+      "logSha256": "88c24b9a94961cc21658fcf7c9ed375ddcf6f33ee9753ef6013ab8d940d7fd84"
+    },
+    {
+      "label": "sdk",
+      "command": "pnpm sdk:verify",
+      "started": "2026-10-13T12:07:00.827Z",
+      "durationMs": 133938,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/sdk.log",
+      "logSha256": "73837d4f4a9a09d8e69b1ec74991a5cc6135514c9d5ab2d6ee745f497ed02103"
+    },
+    {
+      "label": "examples",
+      "command": "pnpm example:build",
+      "started": "2026-10-13T12:09:14.767Z",
+      "durationMs": 4158,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/examples.log",
+      "logSha256": "9b32420584cfd4e44a752bc14232a61c8e9ed098999fd2c11affa618cc37005a"
+    },
+    {
+      "label": "documentation",
+      "command": "pnpm docs:verify",
+      "started": "2026-10-13T12:13:05.683Z",
+      "durationMs": 473,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/documentation.log",
+      "logSha256": "694193b988f6e9b01beec82166e3f8c4a203f7004eabfdbcc31926a4dc2bede4"
+    },
+    {
+      "label": "font-reactivation",
+      "command": "pnpm font:reactivation:verify",
+      "started": "2026-10-13T12:04:29.497Z",
+      "durationMs": 4044,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/font-reactivation.log",
+      "logSha256": "c8d4f62d0c813ca2599df6a6461c654c8e10de72d86c26766180095dc2ece741"
+    },
+    {
+      "label": "font-routing",
+      "command": "pnpm runtime-routing:fonts",
+      "started": "2026-10-13T12:04:33.544Z",
+      "durationMs": 7709,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/font-routing.log",
+      "logSha256": "d111b447aea1302a43e4f0acffb5f765693758910c14ef3eea8ccb1aa56d7bbd"
+    },
+    {
+      "label": "text-trim",
+      "command": "pnpm runtime-routing:text-trim",
+      "started": "2026-10-13T12:04:41.254Z",
+      "durationMs": 6120,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/text-trim.log",
+      "logSha256": "d9737ad81d6212e4774c1c4409e69530de503d1f9a39908f66f65319845347e8"
+    },
+    {
+      "label": "routing",
+      "command": "pnpm runtime-routing:scenarios",
+      "started": "2026-10-13T12:04:47.374Z",
+      "durationMs": 8408,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/routing.log",
+      "logSha256": "28498cc1755e245e845ff76826024ec23c7d16a077b386db354dfa60a01c5ac0"
+    },
+    {
+      "label": "setup",
+      "command": "pnpm studio:setup",
+      "started": "2026-10-13T12:04:55.783Z",
+      "durationMs": 20705,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/setup.log",
+      "logSha256": "e7565a1673b919d4ae703b34086de27b63ba4f9f9f61f9c8872d13a3ba1f728b"
+    },
+    {
+      "label": "drafts",
+      "command": "pnpm studio:drafts",
+      "started": "2026-10-13T12:05:16.488Z",
+      "durationMs": 36146,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/drafts.log",
+      "logSha256": "9fb7596f8c5ccc4dc4ddc51748934935cb792c2612902b9aa8d845183feff77a"
+    },
+    {
+      "label": "field-rules",
+      "command": "pnpm field-rules:studio",
+      "started": "2026-10-13T12:05:52.634Z",
+      "durationMs": 16204,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/field-rules.log",
+      "logSha256": "1ef83058e54a9b6260aad89402031d7579d2bebcff1827c8b6634aff84a86522"
+    },
+    {
+      "label": "family-parity",
+      "command": "pnpm studio:family-parity",
+      "started": "2026-10-13T12:06:08.838Z",
+      "durationMs": 37116,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/family-parity.log",
+      "logSha256": "31cc9886eb9c5acb29e8c06f72a26b1140660b448572011dffdd266f0e26ba4c"
+    },
+    {
+      "label": "workflow",
+      "command": "pnpm studio:workflow-acceptance",
+      "started": "2026-10-13T12:06:45.954Z",
+      "durationMs": 18619,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/workflow.log",
+      "logSha256": "a1030a1a5957634b5b9313a41122c0bf4729a4e1d97f0dc7d0fdf58c78041999"
+    },
+    {
+      "label": "output-workspace",
+      "command": "node scripts/studio-product/verify.mjs --output fidelity/evidence/v2-example-lifecycle/output-workspace",
+      "started": "2026-10-13T12:07:04.574Z",
+      "durationMs": 56151,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/output-workspace.log",
+      "logSha256": "5dd866a2b1525a2893c771242714760335c9b24b5aa11153e9a92f84e8683e28"
+    },
+    {
+      "label": "output-lifecycle",
+      "command": "node scripts/editor-performance/verify.mjs --output fidelity/evidence/v2-example-lifecycle/output-lifecycle",
+      "started": "2026-10-13T12:08:00.727Z",
+      "durationMs": 20833,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/output-lifecycle.log",
+      "logSha256": "a267016b892be77cf9cdfadb5798d0186f11d91c5f897c59081f0c524a47d43c"
+    },
+    {
+      "label": "storage-retry",
+      "command": "node scripts/repository/verify-studio-blocked-storage.mjs --output fidelity/evidence/v2-example-lifecycle/studio-storage",
+      "started": "2026-10-13T12:08:21.560Z",
+      "durationMs": 10388,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/storage-retry.log",
+      "logSha256": "1ebb6c27ba70509cb7e79e5e82d3c64eee48c42e2fc9e456cdef48a4a89a9e0f"
+    },
+    {
+      "label": "storage-fonts",
+      "command": "node scripts/repository/verify-studio-storage-fonts.mjs --output fidelity/evidence/v2-example-lifecycle/studio-storage-fonts",
+      "started": "2026-10-13T12:08:31.948Z",
+      "durationMs": 3193,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/storage-fonts.log",
+      "logSha256": "038a29b8820a843a33d5494218d66e679a1f4d9f438183e47fbf922d4030b568"
+    },
+    {
+      "label": "npm-consumer",
+      "command": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013",
+      "started": "2026-10-13T12:13:01.899Z",
+      "durationMs": 7207,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/npm-consumer.log",
+      "logSha256": "f667b704724934d432d586e9613636081025c8d264290b9da20cf2f6a793a5fc"
+    },
+    {
+      "label": "pnpm-consumer",
+      "command": "TEMPLATE_CONSUMER_PACKAGE_MANAGER=pnpm node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013",
+      "started": "2026-10-13T12:13:09.109Z",
+      "durationMs": 6314,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/pnpm-consumer.log",
+      "logSha256": "c2c45e6929c30d1542b547def14464c2828586b449aeaa179b552b10bad0b36f"
+    },
+    {
+      "label": "r01-host",
+      "command": "node scripts/repository/verify-host-font-authority.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013 --output fidelity/evidence/v2-example-lifecycle/host-font",
+      "started": "2026-10-13T12:13:15.424Z",
+      "durationMs": 20934,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/r01-host.log",
+      "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+    },
+    {
+      "label": "r04-unit",
+      "command": "node scripts/repository/verify-blocked-storage-unit.mjs",
+      "started": "2026-10-13T12:13:36.358Z",
+      "durationMs": 1068,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/r04-unit.log",
+      "logSha256": "b0ce9d9f417c739dd19a7411e4f80f5a9291c1cf10fad22c8f76dc7532c270d8"
+    },
+    {
+      "label": "v1-compatibility",
+      "command": "node scripts/repository/verify-template-editor-reference.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013",
+      "started": "2026-10-13T12:16:11.461Z",
+      "durationMs": 9940,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/v1-compatibility.log",
+      "logSha256": "1265dd905325da47619012a75be169f566243e465c05f5b4fc5067286cec7a70"
+    },
+    {
+      "label": "r04-npm",
+      "command": "node scripts/repository/verify-blocked-storage.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013 --manager npm --output fidelity/evidence/v2-example-lifecycle/storage-npm",
+      "started": "2026-10-13T12:16:21.404Z",
+      "durationMs": 4360,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/r04-npm.log",
+      "logSha256": "0c1873d28e6b888b38e8e83f94c13a9290a893817a449390e49b33be5801acbc"
+    },
+    {
+      "label": "r04-pnpm",
+      "command": "node scripts/repository/verify-blocked-storage.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013 --manager pnpm --output fidelity/evidence/v2-example-lifecycle/storage-pnpm",
+      "started": "2026-10-13T12:16:25.764Z",
+      "durationMs": 3840,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/r04-pnpm.log",
+      "logSha256": "603bea2dcd3ff6454725380ea07aa458a0dbd372587d0d9e63111f05195e3e33"
+    },
+    {
+      "label": "example-npm",
+      "command": "node scripts/example-lifecycle/verify.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013 --manager npm",
+      "started": "2026-10-13T12:21:29.818Z",
+      "durationMs": 17602,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/example-npm.log",
+      "logSha256": "4995057ae2ee6e0723608de77d0c7c9223196cf796413d5947eeb84da56bad73"
+    },
+    {
+      "label": "example-pnpm",
+      "command": "node scripts/example-lifecycle/verify.mjs --archives release-verification-artifacts/v2-example-lifecycle-final-20261013 --manager pnpm",
+      "started": "2026-10-13T12:21:47.424Z",
+      "durationMs": 16850,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/example-pnpm.log",
+      "logSha256": "ba6053a47a4b2976205411c3e8ce1c051308a6ea4d2e4e46e1230d643e77795a"
+    },
+    {
+      "label": "lifecycle-unit",
+      "command": "node scripts/example-lifecycle/unit.mjs",
+      "started": "2026-10-13T12:22:04.275Z",
+      "durationMs": 1134,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/lifecycle-unit.log",
+      "logSha256": "5eae70118efc969454f1bbbd50d49958d94436140a3dad5541a2ab49e7df50a1"
+    },
+    {
+      "label": "example-final-build",
+      "command": "pnpm --filter @sleinity/template-editor-integration build",
+      "started": "2026-10-13T12:22:05.410Z",
+      "durationMs": 3617,
+      "exitCode": 0,
+      "error": null,
+      "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/example-final-build.log",
+      "logSha256": "20f49fcadf46fcccba9422be7443dcdac314275e5f9f45d8467ae517b49c97a0"
+    }
+  ],
+  "portableLifecycleTests": 16,
+  "packedScenarioCountPerManager": 24,
+  "performance": {
+    "before": {
+      "trialDeltas": [
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        }
+      ],
+      "inputToAcceptanceMedianMs": 4.5,
+      "inputToRafMedianMs": 15.199999928474426,
+      "typingLongTasks": []
+    },
+    "after": {
+      "trialDeltas": [
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        },
+        {
+          "commits": 11,
+          "notifications": 11,
+          "allocations": 0,
+          "activations": 0,
+          "operationRevisions": 3
+        }
+      ],
+      "inputToAcceptanceMedianMs": 4.949999988079071,
+      "inputToRafMedianMs": 14.800000071525574,
+      "typingLongTasks": []
+    }
+  },
+  "evidence": {
+    "automatedBrowser": true,
+    "storedScreenshotInspection": [
+      "packed-npm/custom-host.png"
+    ],
+    "manualLiveReview": false,
+    "manualScreenReaderReview": false,
+    "referencePromotion": false
+  },
+  "limits": [
+    "Synthetic field/Choice scenarios are not exporter source certification.",
+    "Timing workload uses three input bursts, including a sustained paste; it is not a general per-keystroke responsiveness benchmark.",
+    "Font activation caches retain their existing SDK lifetime; only temporary import/media ownership is finalized by this example.",
+    "Native Family/save/restore interoperability is covered by separate public harnesses; no Family authoring, autosave or recovery UI is added.",
+    "The candidate manifest records its creation snapshot; current copied example sources are independently bound by implementation hashes.",
+    "This milestone does not certify remaining release blockers or publication environments."
+  ]
+}

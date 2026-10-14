@@ -1,0 +1,596 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2581861,
+      "canvas": {
+        "height": 1350,
+        "width": 1000
+      },
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+      "filename": "template-package-now-hiring-v0.6.1.zip",
+      "id": "exporter-061-now-hiring",
+      "packageVersion": "1.0",
+      "rootNodeId": "987:6755",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    "scenarioId": null,
+    "surface": "validate"
+  },
+  "schemaVersion": "measurement-snapshot-envelope-v1",
+  "snapshot": {
+    "capturedAt": null,
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "id": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    "provenance": {
+      "captureRunId": null,
+      "rendererMode": "static",
+      "route": "/templates/new"
+    },
+    "readiness": {
+      "assets": "ready",
+      "fonts": "ready",
+      "framesObserved": null,
+      "geometryStable": true
+    },
+    "records": [
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6755:semantic",
+          "graph:container"
+        ],
+        "id": "987:6755:bounds",
+        "nodeId": "987:6755",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 1350,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6756:semantic",
+          "graph:container"
+        ],
+        "id": "987:6756:bounds",
+        "nodeId": "987:6756",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 989.9999,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6763:semantic",
+          "graph:container"
+        ],
+        "id": "987:6763:bounds",
+        "nodeId": "987:6763",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 950,
+          "width": 959.9998,
+          "x": 19.9999,
+          "y": 20
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "intrinsic",
+        "dependencies": [
+          "asset:asset:image:ceab5479:state"
+        ],
+        "id": "987:6763:intrinsic-image",
+        "nodeId": "987:6763",
+        "property": "intrinsic-image",
+        "readiness": "ready",
+        "source": "image-decode",
+        "unit": "pixels",
+        "valid": true,
+        "value": {
+          "height": 750,
+          "width": 1125
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6764:semantic",
+          "graph:container"
+        ],
+        "id": "987:6764:bounds",
+        "nodeId": "987:6764",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 173,
+          "width": 386,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6765:semantic",
+          "graph:container"
+        ],
+        "id": "987:6765:bounds",
+        "nodeId": "987:6765",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 93.1251,
+          "width": 305.5939,
+          "x": 40,
+          "y": 40
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6765:text.style"
+        ],
+        "id": "987:6765:font-readiness",
+        "nodeId": "987:6765",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+            "classification": "exact",
+            "cssFamily": "__template_font_4b8ef9ed255ebe73_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Inter Tight",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              303.0467,
+              303.0467
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 3,
+                "family": "__template_font_4b8ef9ed255ebe73_0_static",
+                "style": "normal",
+                "weight": "700"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Inter Tight",
+            "runtimeFamily": "__template_font_4b8ef9ed255ebe73_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 700
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6765:text.characters",
+          "node:987:6765:text.style"
+        ],
+        "id": "987:6765:text-box",
+        "nodeId": "987:6765",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 93.1251,
+          "scrollHeight": 124,
+          "scrollWidth": 306,
+          "width": 305.5939
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6766:semantic",
+          "graph:container"
+        ],
+        "id": "987:6766:bounds",
+        "nodeId": "987:6766",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 172.9998,
+          "width": 485.0002,
+          "x": 514.9998,
+          "y": 817.0001
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6767:semantic",
+          "graph:container"
+        ],
+        "id": "987:6767:bounds",
+        "nodeId": "987:6767",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 93.1251,
+          "width": 404.6718,
+          "x": 555,
+          "y": 857.0001
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6767:text.style"
+        ],
+        "id": "987:6767:font-readiness",
+        "nodeId": "987:6767",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+            "classification": "exact",
+            "cssFamily": "__template_font_4b8ef9ed255ebe73_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Inter Tight",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              402.1251,
+              402.1251
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 6,
+                "family": "__template_font_4b8ef9ed255ebe73_0_static",
+                "style": "normal",
+                "weight": "700"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Inter Tight",
+            "runtimeFamily": "__template_font_4b8ef9ed255ebe73_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 700
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6767:text.characters",
+          "node:987:6767:text.style"
+        ],
+        "id": "987:6767:text-box",
+        "nodeId": "987:6767",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 93.1251,
+          "scrollHeight": 124,
+          "scrollWidth": 405,
+          "width": 404.6718
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6768:semantic",
+          "graph:container"
+        ],
+        "id": "987:6768:bounds",
+        "nodeId": "987:6768",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 360.0001,
+          "width": 1000,
+          "x": 0,
+          "y": 989.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6769:semantic",
+          "graph:container"
+        ],
+        "id": "987:6769:bounds",
+        "nodeId": "987:6769",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 124.3905,
+          "width": 919.9998,
+          "x": 40,
+          "y": 1030.0001
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6769:text.style"
+        ],
+        "id": "987:6769:font-readiness",
+        "nodeId": "987:6769",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+            "classification": "exact",
+            "cssFamily": "__template_font_90b15711dc3779b2_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Geist Mono",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              863.9998,
+              24.0003,
+              840.0001,
+              527.9997,
+              863.9998,
+              24,
+              840.0001,
+              527.9997
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 94,
+                "family": "__template_font_90b15711dc3779b2_0_static",
+                "style": "normal",
+                "weight": "500"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Geist Mono",
+            "runtimeFamily": "__template_font_90b15711dc3779b2_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 500
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6769:text.characters",
+          "node:987:6769:text.style"
+        ],
+        "id": "987:6769:text-box",
+        "nodeId": "987:6769",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 124.3905,
+          "scrollHeight": 136,
+          "scrollWidth": 920,
+          "width": 919.9998
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6770:semantic",
+          "graph:container"
+        ],
+        "id": "987:6770:bounds",
+        "nodeId": "987:6770",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 76.3908,
+          "width": 919.9998,
+          "x": 40,
+          "y": 1233.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6770:text.style"
+        ],
+        "id": "987:6770:font-readiness",
+        "nodeId": "987:6770",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+            "classification": "exact",
+            "cssFamily": "__template_font_90b15711dc3779b2_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Geist Mono",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              288.0002,
+              0,
+              384,
+              288.0002,
+              0,
+              384
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 29,
+                "family": "__template_font_90b15711dc3779b2_0_static",
+                "style": "normal",
+                "weight": "500"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Geist Mono",
+            "runtimeFamily": "__template_font_90b15711dc3779b2_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 500
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6770:text.characters",
+          "node:987:6770:text.style"
+        ],
+        "id": "987:6770:text-box",
+        "nodeId": "987:6770",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 76.3908,
+          "scrollHeight": 88,
+          "scrollWidth": 920,
+          "width": 919.9998
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6836:semantic",
+          "graph:container"
+        ],
+        "id": "987:6836:bounds",
+        "nodeId": "987:6836",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 76.0001,
+          "width": 919.9998,
+          "x": 40,
+          "y": 1233.9999
+        }
+      }
+    ],
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "measurement-snapshot-v1",
+    "surface": "validate"
+  }
+}

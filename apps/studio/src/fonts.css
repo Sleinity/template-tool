@@ -3,5 +3,5 @@
   src: url("./assets/fonts/rethink-sans-variable.ttf") format("truetype");
   font-style: normal;
   font-weight: 100 900;
-  font-display: block;
+  font-display: swap;
 }

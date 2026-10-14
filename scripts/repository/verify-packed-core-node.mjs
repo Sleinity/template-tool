@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { assertCoreDeclaration } from "./core-declaration-contract.mjs";
 import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -313,15 +313,10 @@ try {
     "node_modules/@sleinity/template-core/dist",
   );
   const declaration = await readFile(path.join(installedDist, "index.d.ts"));
-  const declarationHash = createHash("sha256").update(declaration).digest("hex");
-  if (
-    declaration.byteLength !== 87431 ||
-    declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
-  ) {
-    throw new Error(
-      `Packed core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}`,
-    );
-  }
+  const version = JSON.parse(await readFile(path.join(installedDist, "../package.json"), "utf8")).version;
+  const workspaceVersion = JSON.parse(await readFile(path.join(root, "packages/template-core/package.json"), "utf8")).version;
+  if (version !== workspaceVersion) throw new Error(`Packed Core version ${version} differs from workspace ${workspaceVersion}.`);
+  assertCoreDeclaration(version, declaration);
   for (const fileName of ["index.js", "index.d.ts"]) {
     const source = await readFile(path.join(installedDist, fileName), "utf8");
     if (

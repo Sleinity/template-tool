@@ -1,5 +1,11 @@
 # Template Platform Boundary Audit
 
+Historical audit and milestone evidence: unfinished-work descriptions below
+belong to their recorded releases. See the [2026-10-09 architecture closure and
+local candidate disposition](sdk-release-readiness.md) for current resolved,
+intentional, deferred and release-blocking findings. Historical results and
+declaration/reference identities below remain unchanged.
+
 Status: Milestone 2F physical React-renderer ownership and SDK 0.4.2 patch
 Audit date: 2026-08-02
 Code baseline: the fixed SDK 0.4.2 train and compatibility-hardened generic template editor reference

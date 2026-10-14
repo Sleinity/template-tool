@@ -46,7 +46,7 @@ Managed faces are registered under a deterministic private family:
 
 The human family remains source and UI identity. `ResolvedRenderText`, CSS, normalized text runs, intrinsic measurement, readiness, and export use the private family. Resolution records bind request ID, managed record, full binary hash, face index, classification, effective face properties, private family, and history. This prevents a local/system face with the same display name from satisfying an exact claim.
 
-`document.fonts.check()` remains supporting readiness evidence only. Exact authority additionally requires a manifest-verified hash, a linked face record, the private loaded `FontFace`, matching request/face semantics, and current measurement/settlement revisions.
+`document.fonts.check()` remains supporting readiness evidence only. Exact authority additionally requires a manifest-verified hash, a linked face record, an activated private face, matching request/face semantics, and current measurement/settlement revisions. Normal browsers establish activation with a loaded `FontFace` registered in `document.fonts`. Embedded browsers that can apply CSS fonts but omit `FontFace` or `FontFaceSet.add()` use the same hash-owned private family and blob URL in an `@font-face` rule. That fallback is accepted only after the private family produces stable, identical geometry across three deliberately different fallback stacks while a missing-family control continues to produce different geometry. It never promotes `document.fonts.check()` to identity authority, and a blocked CSP or failed binary remains missing.
 
 The revision signature observes only effective primary faces declared by the package. For a linked face this is the private family; for compatibility fallback it remains the requested family at the head of the CSS stack so later exact activation invalidates the fallback revision. Unrelated application fonts are excluded, and equal browser face descriptors are set-normalized so draft restore can register the same binary again without creating a false revision.
 
@@ -59,3 +59,11 @@ The final now-hiring evidence is under `fidelity/candidates/milestone-5-3-source
 ## Compatibility and open evidence
 
 Older packages without the new resolution fields keep existing fallback behavior. Unknown metadata, ambiguous collection faces, uncovered text-face glyphs, unavailable axes, and corrupt binaries do not acquire exact authority. Device emoji appearance remains platform-dependent and is reported as portability evidence. Cross-browser raster equivalence, OpenType feature settings, source-preview font-version identity, variable-axis instances beyond the current declared weight, rich mixed-face runs, and Inter Tight license provenance remain open.
+
+### Activation cache and current text
+
+Binary activation caching uses face/source identity independently of the current
+text sample. Preparing a new text revision still runs the existing character
+coverage and readiness checks; caching a loaded face does not cache a glyph
+coverage verdict. Removing a face from the FontFaceSet invalidates its activation
+entry. No private-family, semantic matching, or exact-authority requirement changes.

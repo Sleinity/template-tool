@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "sdk-fidelity-gate-v1",
+  "id": "sdk-061",
+  "exporterVersion": "0.6.1",
+  "surfaces": ["validate", "fields", "editor", "png-export"],
+  "minimumRepeats": 2,
+  "fixtures": [
+    { "id": "exporter-061-solid-opacity", "zipSha256": "7e09ef2d2d8dc7eab18584305558bd02ffd3d88945b848b47908060b185a9160", "embeddedPreviewSha256": "8787f6bab82826d91ad15da801a8d1699ea455f105c7d3a8c7878754d08214e3" },
+    { "id": "exporter-061-linear-and-mixed-paints", "zipSha256": "e55ae505921d0026d9508168dba46f2c53ddf74381a120f16a0b90429d61fe8b", "embeddedPreviewSha256": "17dac36a3703662307a2ad42d435f2816427b4818748d323ebb5a094291e967d" },
+    { "id": "exporter-061-deal-of-the-week-post", "zipSha256": "dc2ba9c89fb588c30b4f175dd988f9a9f9400ea216cce40864c3c234b7d32e28", "embeddedPreviewSha256": "ef3f5bb4a3aefb37cf906a0f4b5373c0b94d690f4d051e425c12b660cc1a9e2a" },
+    { "id": "field-rules-boolean-structural-visibility", "zipSha256": "47a109f442348043a6c295b4072d38bdbffa658b80846b528dd64a552a79b6ac", "embeddedPreviewSha256": "a2afe839dc79af8297fac4c3b062e18f9db6dfd82989c3ff5645ef1952c55212" },
+    { "id": "exporter-061-now-hiring", "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc", "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30" },
+    { "id": "exporter-061-carrousel", "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904", "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d" },
+    { "id": "exporter-061-family-landscape-gray", "zipSha256": "001f1be7234760e581e7f88d59e9e3de5b3da00db23969ec01e677551895c85c", "embeddedPreviewSha256": "92ed9024073aeb425f3f374ca0e13721a4e08b4d8ac1494e3f5be740a0740e5d" },
+    { "id": "exporter-061-family-landscape-pink", "zipSha256": "4b3a25f599f276f2bd55acfe80243b968d5fce849c10797d914254bcdcf6d738", "embeddedPreviewSha256": "4847536aa16497f0acaeff71ca668d47882f8c213ee11e7a9aa9e99cb8ebf931" },
+    { "id": "exporter-061-family-portrait-gray", "zipSha256": "b44918f4b07f3218e09ecd2d0574b2cca71d018eeb8fe07e5193747bed466eff", "embeddedPreviewSha256": "6bb7fc9755e3d604f99fc0420b6d4cedf7d2380a947c48dd7a3c44bd7c3edde0" },
+    { "id": "exporter-061-family-portrait-pink", "zipSha256": "25cc3faf40cece61873afc273d42a5d61ef125725cf4b5f5f9d4e79181676f71", "embeddedPreviewSha256": "f62bcdfcc45181be57ef5e08c6ec379284652cec308642359e8430c82371f797" }
+  ]
+}

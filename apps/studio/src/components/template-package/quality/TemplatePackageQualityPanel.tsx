@@ -1,6 +1,6 @@
 import { ChevronDown, RotateCcw } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { Button, FilterChip, Input, Select, Status, type StatusTone } from "../../ui";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { Button, ConnectedList, ConnectedListItem, FilterChip, Input, Select, Status, type StatusTone } from "../../ui";
 import {
   filterPackageQualityIssues,
   getPackageQualityAreaCounts,
@@ -26,7 +26,13 @@ import {
 } from "@sleinity/template-react/inspection";
 
 interface TemplatePackageQualityPanelProps {
+  compact?: boolean;
+  scopeControl?: ReactNode;
+  renderIssueDetails?: (issue: PackageQualityIssue) => ReactNode;
+  selectionPending?: boolean;
+  selectionDisabled?: boolean;
   report: PackageQualityReport;
+  evidenceStates?: Partial<Record<keyof PackageQualityReport["health"], string>>;
   selectedIssueId?: string | null;
   onSelectIssue?: (issue: PackageQualityIssue | null) => void;
 }
@@ -39,9 +45,13 @@ const healthStatusTone: Record<PackageQualityHealth, StatusTone> = {
 
 const healthLabels: Record<PackageQualityHealth, string> = {
   ready: "Ready",
-  review: "Review",
+  review: "Needs attention",
   blocked: "Blocked",
 };
+
+function presentationLabel(state: keyof typeof diagnosticPresentationLabels): string {
+  return state === "review" ? "Needs attention" : diagnosticPresentationLabels[state];
+}
 
 const presentationDot = {
   blocked: "bg-[var(--color-status-blocked-icon)]",
@@ -66,7 +76,9 @@ function ReadinessButton({
   value,
   active,
   onClick,
+  evidenceState,
 }: {
+  evidenceState?: string;
   label: string;
   value: PackageQualityHealth;
   active: boolean;
@@ -81,7 +93,9 @@ function ReadinessButton({
       data-active={active ? "true" : "false"}
     >
       <span>{label}</span>
-      <Status tone={healthStatusTone[value]}>{healthLabels[value]}</Status>
+      {value === "ready" && !evidenceState
+        ? <span className="package-quality-readiness__state">Ready</span>
+        : <Status tone={value === "blocked" ? "blocked" : evidenceState ? "attention" : healthStatusTone[value]}>{value === "blocked" ? healthLabels[value] : evidenceState ?? healthLabels[value]}</Status>}
     </button>
   );
 }
@@ -112,12 +126,18 @@ function FilterButton({
 
 function GroupRow({
   group,
+  compact = false,
   expanded,
   selectedIssueId,
   onToggle,
   onSelect,
+  renderIssueDetails,
+  selectionDisabled,
 }: {
+  renderIssueDetails?: (issue: PackageQualityIssue) => ReactNode;
+  selectionDisabled?: boolean;
   group: PackageQualityIssueGroup;
+  compact?: boolean;
   expanded: boolean;
   selectedIssueId: string | null;
   onToggle: () => void;
@@ -130,17 +150,22 @@ function GroupRow({
   const target = getDiagnosticFriendlyTarget(issue) ?? getPackageQualityPrimaryTarget(issue);
   const state = getDiagnosticPresentationState(issue);
   return (
-    <article
+    <ConnectedListItem
       data-testid="quality-issue-group"
-      data-selected={selected ? "true" : "false"}
-      className="package-quality-issue-group border-b border-line-subtle"
+      selected={selected}
+      tone={state === "blocked" ? "blocked" : state === "review" ? "attention" : "neutral"}
+      className="package-quality-issue-group"
     >
-      <div className="flex items-stretch">
+      <div className="package-quality-issue-group__layout">
         <button
           type="button"
-          aria-pressed={selected}
+          disabled={selectionDisabled}
+          aria-pressed={renderIssueDetails ? undefined : selected}
+          aria-expanded={renderIssueDetails ? selected : undefined}
+          aria-controls={renderIssueDetails ? `issue-details-${group.id}` : undefined}
           onClick={() => onSelect(issue)}
-          className="min-w-0 flex-1 px-2 py-3 text-left hover:bg-surface-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus-ring)]"
+          className="package-quality-issue-group__select"
+          data-inline={Boolean(renderIssueDetails)}
         >
           <div className="flex items-start gap-3">
             <span
@@ -152,30 +177,30 @@ function GroupRow({
                 <span className="min-w-0 flex-1 text-sm font-semibold text-content-primary">
                   {getPackageQualityIssueTitle(issue)}
                 </span>
-                <Status tone={statusTone(issue)}>{diagnosticPresentationLabels[state]}</Status>
-                <span className="text-xs text-content-muted">
-                  {packageQualityCategoryLabels[issue.category]}
-                </span>
+                <Status tone={statusTone(issue)}>{compact && state === "review" ? "Warning" : compact && state === "blocked" ? "Action required" : presentationLabel(state)}</Status>
               </div>
-              <p className="mt-1 line-clamp-1 text-sm text-content-secondary">
+              <p className={`mt-1 ${renderIssueDetails ? "" : "line-clamp-1"} text-sm text-content-secondary`}>
                 {presentation.userImpact ?? presentation.userSummary}
               </p>
               <div className="mt-1 flex min-w-0 items-center gap-2 text-xs text-content-muted">
+                {typeof issue.details?.variantLabel === "string" ? <span>{issue.details.variantLabel}</span> : null}
                 {target ? <span className="truncate">{target}</span> : null}
+                <span>{packageQualityCategoryLabels[issue.category]}</span>
                 {group.issues.length > 1 ? (
                   <span className="shrink-0">{group.issues.length} affected</span>
                 ) : null}
               </div>
             </div>
           </div>
+          {renderIssueDetails && <ChevronDown aria-hidden="true" size={16} className={selected ? "rotate-180" : undefined} />}
         </button>
-        {group.issues.length > 1 ? (
+        {!renderIssueDetails && group.issues.length > 1 ? (
           <button
             type="button"
             aria-label={`${expanded ? "Collapse" : "Expand"} ${getPackageQualityIssueTitle(issue)} instances`}
             aria-expanded={expanded}
             onClick={onToggle}
-            className="w-11 shrink-0 text-content-muted hover:bg-surface-secondary hover:text-content-primary"
+            className="package-quality-issue-group__expand"
           >
             <ChevronDown
               aria-hidden="true"
@@ -191,6 +216,7 @@ function GroupRow({
             <button
               key={instance.id}
               type="button"
+              disabled={selectionDisabled}
               aria-pressed={instance.id === selectedIssueId}
               onClick={() => onSelect(instance)}
               className={`flex w-full items-start gap-2 rounded-[var(--radius-control)] px-2 py-2 text-left text-sm ${
@@ -201,18 +227,25 @@ function GroupRow({
             >
               <span className="shrink-0">{index + 1}.</span>
               <span className="min-w-0 truncate">
-                {getDiagnosticFriendlyTarget(instance) ?? getPackageQualityPrimaryTarget(instance) ?? getDiagnosticPresentation(instance).userSummary}
+                {typeof instance.details?.variantLabel === "string" ? `${instance.details.variantLabel} · ` : ""}{getDiagnosticFriendlyTarget(instance) ?? getPackageQualityPrimaryTarget(instance) ?? getDiagnosticPresentation(instance).userSummary}
               </span>
             </button>
           ))}
         </div>
       ) : null}
-    </article>
+      {renderIssueDetails && selected && <div id={`issue-details-${group.id}`} className="studio-check-issue-details">{renderIssueDetails(issue)}</div>}
+    </ConnectedListItem>
   );
 }
 
 export function TemplatePackageQualityPanel({
   report,
+  compact = false,
+  scopeControl,
+  renderIssueDetails,
+  selectionPending = false,
+  selectionDisabled = false,
+  evidenceStates,
   selectedIssueId,
   onSelectIssue,
 }: TemplatePackageQualityPanelProps) {
@@ -237,7 +270,7 @@ export function TemplatePackageQualityPanel({
     () => filterPackageQualityIssues(report.issues, { query, severity, area, technical }),
     [area, query, report.issues, severity, technical],
   );
-  const groups = useMemo(() => groupPackageQualityIssues(filtered), [filtered]);
+  const groups = useMemo(() => groupPackageQualityIssues(filtered).sort((a, b) => Number(getDiagnosticPresentationState(b.primaryIssue) === "blocked") - Number(getDiagnosticPresentationState(a.primaryIssue) === "blocked")), [filtered]);
   const allVisibleCount = useMemo(
     () =>
       filterPackageQualityIssues(report.issues, {
@@ -251,15 +284,17 @@ export function TemplatePackageQualityPanel({
   const filtersActive = Boolean(query.trim() || area !== "all" || technical !== "all" || severity !== "unresolved");
 
   useEffect(() => {
+    if (selectionPending || renderIssueDetails && !activeSelection) return;
     if (activeSelection && visiblePackageQualitySelection(activeSelection, filtered)) return;
-    const next = getPreferredPackageQualitySelection(filtered);
+    const next = renderIssueDetails ? null : getPreferredPackageQualitySelection(filtered);
     setInternalSelection(next?.id ?? null);
     onSelectIssue?.(next);
-  }, [activeSelection, filtered, onSelectIssue]);
+  }, [activeSelection, filtered, onSelectIssue, renderIssueDetails, selectionPending]);
 
   const selectIssue = (issue: PackageQualityIssue) => {
-    setInternalSelection(issue.id);
-    onSelectIssue?.(issue);
+    const next = renderIssueDetails && activeSelection === issue.id ? null : issue;
+    setInternalSelection(next?.id ?? null);
+    onSelectIssue?.(next);
   };
 
   const resetFilters = () => {
@@ -269,75 +304,82 @@ export function TemplatePackageQualityPanel({
     setTechnical("all");
   };
 
-  const statusTitle = report.status === "blocked" ? "Blocked" : report.status === "review" ? "Review recommended" : "Ready";
-  const unresolvedCount = workspaceCounts.blockers + workspaceCounts.warnings;
-
+  const technicalFilters = ((technicalOptions.layers.length > 0 || technicalOptions.origins.length > 0 || technicalOptions.capabilities.length > 0 || technicalOptions.regions.length > 0) ? (
+          <details className="rounded-lg border border-line-subtle px-3 py-2">
+            <summary className="cursor-pointer text-sm text-content-muted">Technical filters</summary>
+            <Select label="Validation stage" value={technical} onChange={(event) => setTechnical(event.target.value)} className="mt-3">
+              <option value="all">All validation stages</option>
+              <optgroup label="Layers">
+                {technicalOptions.layers.map((layer) => <option key={layer} value={`layer:${layer}`}>{layer}</option>)}
+              </optgroup>
+              <optgroup label="Origins">
+                {technicalOptions.origins.map((origin) => <option key={origin} value={`origin:${origin}`}>{origin}</option>)}
+              </optgroup>
+              <optgroup label="Capabilities">
+                {technicalOptions.capabilities.map((capability) => <option key={capability} value={`capability:${capability}`}>{capability}</option>)}
+              </optgroup>
+              <optgroup label="Regions">
+                {technicalOptions.regions.map((region) => <option key={region} value={`region:${region}`}>{region}</option>)}
+              </optgroup>
+            </Select>
+          </details>
+        ) : null);
+  const statusControl = (<Select label="Status" value={severity} onChange={event => setSeverity(event.target.value as PackageQualitySeverityFilter)}>
+            <option value="unresolved">Needs review ({workspaceCounts.blockers + workspaceCounts.warnings})</option>
+            <option value="blockers">Blocked ({workspaceCounts.blockers})</option>
+            <option value="review">Warnings ({workspaceCounts.warnings})</option>
+            <option value="repaired">Repaired ({workspaceCounts.repaired})</option>
+            <option value="info">Information ({workspaceCounts.info})</option>
+            <option value="all">All ({allVisibleCount})</option>
+          </Select>);
+  const statusTitle = report.status === "blocked" ? "Blocked" : report.status === "review" ? "Needs attention" : "Ready";
   return (
     <section data-testid="package-quality-report" className="package-quality-panel rounded-lg border border-line-subtle bg-surface-secondary p-5">
-      <div className="package-quality-panel__header">
-        <Status tone={healthStatusTone[report.status]}>{statusTitle}</Status>
-        <p className="mt-2 text-sm leading-6 text-content-secondary">
-          {report.status === "blocked"
-            ? `${workspaceCounts.blockers} ${workspaceCounts.blockers === 1 ? "issue blocks" : "issues block"} this template. Resolve the blocked items before continuing.`
-            : report.status === "review"
-              ? `${workspaceCounts.warnings} ${workspaceCounts.warnings === 1 ? "issue may" : "issues may"} affect preview quality or editing. Import and available export paths remain usable unless marked blocked.`
-              : "No unresolved issues require review. The template is ready to continue."}
-        </p>
-        <p className="mt-1 text-sm font-medium text-content-primary">
-          {unresolvedCount} {unresolvedCount === 1 ? "item" : "items"} to review · {workspaceCounts.repaired} repaired · {workspaceCounts.info} notes
-        </p>
-      </div>
+      {!compact && <div className="package-quality-panel__header">
+        <Status tone={report.status === "blocked" ? "blocked" : Object.keys(evidenceStates ?? {}).length ? "attention" : healthStatusTone[report.status]}>{report.status === "blocked" ? statusTitle : Object.keys(evidenceStates ?? {}).length ? "Current evidence required" : statusTitle}{" · "}
+          {workspaceCounts.blockers ? `${workspaceCounts.blockers} blocked · ` : ""}
+          {workspaceCounts.warnings} {workspaceCounts.warnings === 1 ? "item needs" : "items need"} attention
+          {workspaceCounts.repaired ? ` · ${workspaceCounts.repaired} repaired` : ""}
+          {workspaceCounts.info ? ` · ${workspaceCounts.info} notes` : ""}
+        </Status>
+      </div>}
 
-      <div className="package-quality-panel__health mt-4 grid grid-cols-2 gap-2 sm:grid-cols-5">
-        <ReadinessButton label="Import" value={report.health.import} active={area === "import"} onClick={() => setArea(area === "import" ? "all" : "import")} />
-        <ReadinessButton label="Preview" value={report.health.fidelity} active={area === "preview"} onClick={() => setArea(area === "preview" ? "all" : "preview")} />
-        <ReadinessButton label="Media & fonts" value={report.health.assets} active={area === "media" || area === "fonts"} onClick={() => setArea(area === "media" ? "fonts" : area === "fonts" ? "all" : "media")} />
-        <ReadinessButton label="Fields" value={report.health.editability} active={area === "fields"} onClick={() => setArea(area === "fields" ? "all" : "fields")} />
-        <ReadinessButton label="Export" value={report.health.export} active={area === "export"} onClick={() => setArea(area === "export" ? "all" : "export")} />
-      </div>
 
-      <div className="mt-4 rounded-lg border border-line-subtle bg-surface-primary p-3" data-testid="rendering-health-summary">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-sm font-medium text-content-primary">Rendering health</p>
-          <Status tone={report.renderingHealth.reviewFallbackRegionCount || report.renderingHealth.unsupportedCapabilities.length ? "attention" : "repaired"}>
-            {report.renderingHealth.semanticCapabilityFamilies.length} semantic families
-          </Status>
-        </div>
-        <p className="mt-1 text-xs leading-5 text-content-muted">
-          {report.renderingHealth.reviewFallbackRegionCount} fallback regions require review · {report.renderingHealth.preservedOnlyRegionCount} preserved-only regions · {report.renderingHealth.unsupportedCapabilities.length} unsupported capabilities
-        </p>
-        {report.renderingHealth.compatibilityRegionCount ? (
-          <details className="mt-1 text-xs text-content-muted">
-            <summary className="cursor-pointer">Technical compatibility ownership</summary>
-            <p className="mt-1">{report.renderingHealth.compatibilityRegionCount} regions use an established export-safe compatibility owner.</p>
-          </details>
-        ) : null}
-        <p className="mt-1 text-xs leading-5 text-content-muted">
-          Source reference {report.renderingHealth.sourceReference.availability}. Visual comparison is not run in the product; reviewed comparisons remain in the fidelity harness.
-        </p>
-        {report.renderingHealth.productRenderIdentity ? (
-          <details className="mt-2">
-            <summary className="cursor-pointer text-xs text-content-muted">Product render identity</summary>
-            <code className="mt-1 block break-all text-[11px] text-content-muted">{report.renderingHealth.productRenderIdentity.identityId}</code>
-          </details>
-        ) : null}
-      </div>
+      <section className="studio-check-filters" aria-label="Filter issues">{!compact && <h3 className="ui-subsection-title">Filter issues</h3>}
+      {!compact && <div className="package-quality-panel__health mt-4 grid grid-cols-2 gap-2 sm:grid-cols-5">
+        <ReadinessButton label="Import" value={report.health.import} evidenceState={evidenceStates?.import} active={area === "import"} onClick={() => setArea(area === "import" ? "all" : "import")} />
+        <ReadinessButton label="Preview" value={report.health.fidelity} evidenceState={evidenceStates?.fidelity} active={area === "preview"} onClick={() => setArea(area === "preview" ? "all" : "preview")} />
+        <ReadinessButton label="Media & fonts" value={report.health.assets} evidenceState={evidenceStates?.assets} active={area === "media" || area === "fonts"} onClick={() => setArea(area === "media" ? "fonts" : area === "fonts" ? "all" : "media")} />
+        <ReadinessButton label="Fields" value={report.health.editability} evidenceState={evidenceStates?.editability} active={area === "fields"} onClick={() => setArea(area === "fields" ? "all" : "fields")} />
+        <ReadinessButton label="Export" value={report.health.export} evidenceState={evidenceStates?.export} active={area === "export"} onClick={() => setArea(area === "export" ? "all" : "export")} />
+      </div>}
 
       <div className="package-quality-panel__filters mt-4 space-y-3">
-        <Input
+        <div className={compact && scopeControl ? "studio-check-filter-selects" : undefined}>
+        {scopeControl}
+        {renderIssueDetails && statusControl}
+        {!renderIssueDetails && <Input
           label="Search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search titles, layers, fields, media, fonts or codes"
-        />
+          placeholder="Search issues"
+        />}
+        </div>
 
+        {compact ? !renderIssueDetails && <div className="studio-check-filter-selects">
+          {statusControl}
+          {!renderIssueDetails && <Select label="Area" value={area} onChange={event => setArea(event.target.value as PackageQualityAreaFilter)}>
+            <option value="all">All areas</option>
+            {areaCounts.map(summary => <option key={summary.area} value={summary.area}>{packageQualityAreaLabels[summary.area]} ({summary.count})</option>)}
+          </Select>}
+        </div> : <>
         <div>
           <p className="ui-field-label mb-2">Status</p>
           <div className="flex flex-wrap gap-2" aria-label="Diagnostic status filters">
             {workspaceCounts.blockers > 0 ? (
               <FilterButton active={severity === "unresolved" || severity === "blockers"} label="Blocked" count={workspaceCounts.blockers} onClick={() => setSeverity("blockers")} />
             ) : null}
-            <FilterButton active={severity === "unresolved" || severity === "review"} label="Review" count={workspaceCounts.warnings} onClick={() => setSeverity("review")} />
+            <FilterButton active={severity === "unresolved" || severity === "review"} label="Needs attention" count={workspaceCounts.warnings} onClick={() => setSeverity("review")} />
             <FilterButton active={severity === "repaired"} label="Repaired" count={workspaceCounts.repaired} onClick={() => setSeverity("repaired")} />
             <FilterButton active={severity === "info"} label="Information" count={workspaceCounts.info} onClick={() => setSeverity("info")} />
             <FilterButton active={severity === "all"} label="All" count={allVisibleCount} onClick={() => setSeverity("all")} />
@@ -360,38 +402,26 @@ export function TemplatePackageQualityPanel({
           </div>
         </div>
 
-        {(technicalOptions.layers.length > 0 || technicalOptions.origins.length > 0 || technicalOptions.capabilities.length > 0 || technicalOptions.regions.length > 0) ? (
-          <details className="rounded-lg border border-line-subtle px-3 py-2">
-            <summary className="cursor-pointer text-sm text-content-muted">Technical filters</summary>
-            <Select label="Validation stage" value={technical} onChange={(event) => setTechnical(event.target.value)} className="mt-3">
-              <option value="all">All validation stages</option>
-              <optgroup label="Layers">
-                {technicalOptions.layers.map((layer) => <option key={layer} value={`layer:${layer}`}>{layer}</option>)}
-              </optgroup>
-              <optgroup label="Origins">
-                {technicalOptions.origins.map((origin) => <option key={origin} value={`origin:${origin}`}>{origin}</option>)}
-              </optgroup>
-              <optgroup label="Capabilities">
-                {technicalOptions.capabilities.map((capability) => <option key={capability} value={`capability:${capability}`}>{capability}</option>)}
-              </optgroup>
-              <optgroup label="Regions">
-                {technicalOptions.regions.map((region) => <option key={region} value={`region:${region}`}>{region}</option>)}
-              </optgroup>
-            </Select>
-          </details>
-        ) : null}
+        </>}
+
+
+        {!compact && technicalFilters}
       </div>
 
+      </section>
       <div className="mt-4 flex items-center justify-between gap-3 border-t border-line-subtle pt-4">
-        <p className="text-sm font-medium text-content-primary">{filtered.length} diagnostics</p>
+        <p className="text-sm font-medium text-content-primary">{groups.length} {groups.length === 1 ? "finding" : "findings"}{filtered.length !== groups.length ? ` · ${filtered.length} locations` : ""}</p>
         {filtersActive ? <Button variant="quiet" size="small" leadingIcon={<RotateCcw size={14} />} onClick={resetFilters}>Reset filters</Button> : null}
       </div>
 
-      <div className="package-quality-panel__issues mt-2 overflow-y-auto pr-1" aria-live="polite">
+      <ConnectedList label="Check issues" className="package-quality-panel__issues" aria-live="polite">
         {groups.length > 0 ? groups.map((group) => (
           <GroupRow
             key={group.id}
             group={group}
+            renderIssueDetails={renderIssueDetails}
+            selectionDisabled={selectionDisabled}
+            compact={compact}
             expanded={expandedGroups.has(group.id)}
             selectedIssueId={activeSelection}
             onToggle={() => setExpandedGroups((current) => {
@@ -403,8 +433,8 @@ export function TemplatePackageQualityPanel({
           />
         )) : severity === "unresolved" && !query.trim() ? (
           <div className="package-quality-complete-state">
-            <p className="font-medium text-content-primary">{workspaceCounts.repaired > 0 ? "All review items resolved" : "Validation complete"}</p>
-            <p className="mt-1 text-sm text-content-muted">{workspaceCounts.repaired > 0 ? "Repaired items and technical notes remain available through filters and the package technical report." : "No issues were found. The template is ready to continue."}</p>
+            <p className="font-medium text-content-primary">{Object.keys(evidenceStates ?? {}).length ? "Current checks required" : workspaceCounts.repaired > 0 ? "All review items resolved" : compact ? "No unresolved issues" : "Validation complete"}</p>
+            <p className="mt-1 text-sm text-content-muted">{Object.keys(evidenceStates ?? {}).length ? "Current evidence is still required. Run checks to refresh the results." : workspaceCounts.repaired > 0 ? "Automatically repaired items and information remain available through the filters." : "No issues were found in the available evidence."}</p>
           </div>
         ) : (
           <div className="package-quality-empty-state">
@@ -412,7 +442,8 @@ export function TemplatePackageQualityPanel({
             <Button variant="quiet" size="small" className="mt-2" onClick={resetFilters}>Reset filters</Button>
           </div>
         )}
-      </div>
+      </ConnectedList>
+      {compact && !renderIssueDetails && technicalFilters}
     </section>
   );
 }

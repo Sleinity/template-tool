@@ -1,0 +1,29 @@
+{
+  "node": "v24.19.0",
+  "results": [
+    {
+      "variants": 1,
+      "nodesPerDesign": 22,
+      "edits": 20,
+      "clonesPerEdit": 133,
+      "medianMs": 3.715,
+      "p95Ms": 4.83
+    },
+    {
+      "variants": 5,
+      "nodesPerDesign": 22,
+      "edits": 20,
+      "clonesPerEdit": 142,
+      "medianMs": 5.647,
+      "p95Ms": 6.703
+    },
+    {
+      "variants": 20,
+      "nodesPerDesign": 22,
+      "edits": 20,
+      "clonesPerEdit": 142,
+      "medianMs": 8.473,
+      "p95Ms": 9.13
+    }
+  ]
+}

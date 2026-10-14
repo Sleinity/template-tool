@@ -1,0 +1,208 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 2301611,
+      "canvas": {
+        "height": 1080,
+        "width": 1920
+      },
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+      "filename": "template-package-carrousel-v0.6.1.zip",
+      "id": "exporter-061-carrousel",
+      "packageVersion": "1.0",
+      "rootNodeId": "987:6810",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    },
+    "scenarioId": null,
+    "surface": "fields"
+  },
+  "schemaVersion": "settlement-trace-snapshot-v1",
+  "trace": {
+    "fixture": {
+      "id": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    },
+    "iterations": [
+      {
+        "changedNodeIds": [],
+        "iteration": 1,
+        "maxGeometryDelta": 0,
+        "measurementCount": 39,
+        "unresolvedCount": 0
+      }
+    ],
+    "nodes": [
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6810",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6811",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6812",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6813",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6814",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6815",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6816",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6817",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6818",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6819",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6820",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6821",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6822",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6823",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6824",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6825",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6826",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6827",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6828",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6829",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6830",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6831",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6832",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6833",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6834",
+        "unresolved": []
+      },
+      {
+        "approximations": [],
+        "changedProperties": [],
+        "id": "987:6835",
+        "unresolved": []
+      }
+    ],
+    "readiness": "ready",
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "settlement-trace-v1",
+    "stable": true,
+    "surface": "fields",
+    "unresolvedDependencies": []
+  }
+}

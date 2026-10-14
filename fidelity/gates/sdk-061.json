@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "sdk-fidelity-gate-v1",
+  "id": "sdk-061",
+  "exporterVersion": "0.6.1",
+  "surfaces": [
+    "validate",
+    "fields",
+    "editor",
+    "png-export"
+  ],
+  "minimumRepeats": 2,
+  "fixtures": [
+    {
+      "id": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30"
+    },
+    {
+      "id": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336"
+    },
+    {
+      "id": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d"
+    }
+  ]
+}

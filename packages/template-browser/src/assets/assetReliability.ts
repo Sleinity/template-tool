@@ -20,6 +20,8 @@ export interface AssetStorageReference {
 }
 
 export interface AssetStorageAdapter {
+  /** Release this adapter's temporary URLs after consumers have retained them. */
+  dispose?(): void;
   put(
     hash: string,
     bytes: Uint8Array,

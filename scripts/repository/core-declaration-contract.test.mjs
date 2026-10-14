@@ -1,0 +1,15 @@
+import assert from "node:assert/strict";
+import { assertCoreDeclaration, assertCoreDeclarationIdentity, workspaceCoreDeclarationContracts, historicalCoreDeclarationContract } from "./core-declaration-contract.mjs";
+const expected = workspaceCoreDeclarationContracts["0.8.0"];
+assert.doesNotThrow(() => assertCoreDeclarationIdentity("0.8.0", expected));
+assert.throws(() => assertCoreDeclarationIdentity("0.8.1", expected), /No protected/);
+assert.throws(() => assertCoreDeclarationIdentity("__proto__", expected), /No protected/);
+assert.throws(() => assertCoreDeclarationIdentity("0.8.0", { ...expected, bytes: expected.bytes - 1 }), /drifted/);
+assert.throws(() => assertCoreDeclarationIdentity("0.8.0", { ...expected, sha256: "0".repeat(64) }), /drifted/);
+assert.throws(() => assertCoreDeclarationIdentity("0.8.0", historicalCoreDeclarationContract), /drifted/);
+assert.throws(() => assertCoreDeclaration("0.8.0", Buffer.alloc(expected.bytes)), /drifted/);
+console.log("Protected Core declaration contracts passed (version, length, hash and historical isolation).");
+
+assert.deepEqual(workspaceCoreDeclarationContracts["1.0.0"], expected);
+assert.doesNotThrow(() => assertCoreDeclarationIdentity("1.0.0", expected));
+assert.throws(() => assertCoreDeclarationIdentity("1.0.0", historicalCoreDeclarationContract), /drifted/);

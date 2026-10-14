@@ -27,7 +27,8 @@
         { "path": "./fonts", "source": "src/fonts.ts", "classification": "supported-low-level-adapter" },
         { "path": "./importer", "source": "src/importer.ts", "classification": "recommended-high-level-integration" },
         { "path": "./persistence", "source": "src/persistence.ts", "classification": "supported-low-level-adapter" },
-        { "path": "./session", "source": "src/session.ts", "classification": "recommended-high-level-integration" }
+        { "path": "./session", "source": "src/session.ts", "classification": "recommended-high-level-integration" },
+        { "path": "./session-internal", "source": "src/session-internal.ts", "classification": "sdk-internal" }
       ]
     },
     {

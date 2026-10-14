@@ -42,6 +42,10 @@ export interface TemplatePackageCreateMetadata {
 }
 
 export interface PackageImportResult {
+  /** Release import-owned URLs after transfer to a V2 session, or on cancellation. */
+  dispose?(): void;
+  /** Reuses the preview decoded during bundle loading. */
+  previewBlob?: Blob;
   package: TemplatePackageV1 | null;
   validation: TemplatePackageValidationResult | null;
   diagnostics: PackageDiagnostic[];
@@ -143,64 +147,70 @@ export async function buildZipPackageImportResult(
   buffer: ArrayBuffer,
   sourceName: string,
   figmaUrl = "",
-  assetStorage: AssetStorageAdapter | undefined = createIndexedDbAssetStore(),
+  assetStorage: AssetStorageAdapter | undefined = undefined,
   fontRegistry?: ManagedFontRegistry | null,
 ): Promise<PackageImportResult> {
-  const reader = createZipBundleReader(buffer, { sourceName });
-  const loadedSource = loadTemplatePackageBundleSource(reader);
-  const assetIngestion =
-    loadedSource.packageValue && loadedSource.valid
-      ? await ingestLoadedSourceBundleAssets(
-          loadedSource,
-          assetStorage,
-        )
+  const storage = assetStorage ?? createIndexedDbAssetStore();
+  const dispose = () => { if (!assetStorage) storage?.dispose?.(); };
+  try {
+    const reader = createZipBundleReader(buffer, { sourceName });
+    const loadedSource = loadTemplatePackageBundleSource(reader);
+    const assetIngestion =
+      loadedSource.packageValue && loadedSource.valid
+        ? await ingestLoadedSourceBundleAssets(
+            loadedSource,
+            storage,
+          )
+        : null;
+    const packageValue = assetIngestion?.packageValue ?? loadedSource.packageValue;
+    const linkedPackage = packageValue
+      ? await autoLinkManagedFonts(packageValue, fontRegistry)
       : null;
-  const packageValue = assetIngestion?.packageValue ?? loadedSource.packageValue;
-  const linkedPackage = packageValue
-    ? await autoLinkManagedFonts(packageValue, fontRegistry)
-    : null;
-  const finalPackage = linkedPackage ?? packageValue;
-  const bundledFigmaUrl =
-    loadedSource.figmaSource?.valid && loadedSource.figmaSource.url
-      ? loadedSource.figmaSource.url
-      : "";
-  const effectiveFigmaUrl = figmaUrl.trim() || bundledFigmaUrl;
-  const validation = finalPackage
-    ? validateTemplatePackage(finalPackage)
-    : loadedSource.validation;
-  const enrichment =
-    finalPackage && validation?.valid
-      ? enrichTemplatePackage(finalPackage, { figmaUrl: effectiveFigmaUrl })
-      : null;
-  const resultPackage = enrichment?.package ?? finalPackage;
-  const resultValidation = enrichment?.package
-    ? validateTemplatePackage(enrichment.package)
-    : validation;
-  const layeredDiagnostics = createLoadedSourceDiagnosticReport(loadedSource, {
-    supplementalDiagnostics: assetIngestion?.diagnostics ?? [],
-    packageValue: resultPackage,
-    packageDiagnostics:
-      resultValidation?.diagnostics ?? loadedSource.packageDiagnostics,
-  });
+    const finalPackage = linkedPackage ?? packageValue;
+    const bundledFigmaUrl =
+      loadedSource.figmaSource?.valid && loadedSource.figmaSource.url
+        ? loadedSource.figmaSource.url
+        : "";
+    const effectiveFigmaUrl = figmaUrl.trim() || bundledFigmaUrl;
+    const validation = finalPackage
+      ? validateTemplatePackage(finalPackage)
+      : loadedSource.validation;
+    const enrichment =
+      finalPackage && validation?.valid
+        ? enrichTemplatePackage(finalPackage, { figmaUrl: effectiveFigmaUrl })
+        : null;
+    const resultPackage = enrichment?.package ?? finalPackage;
+    const resultValidation = enrichment?.package
+      ? validateTemplatePackage(enrichment.package)
+      : validation;
+    const layeredDiagnostics = createLoadedSourceDiagnosticReport(loadedSource, {
+      supplementalDiagnostics: assetIngestion?.diagnostics ?? [],
+      packageValue: resultPackage,
+      packageDiagnostics:
+        resultValidation?.diagnostics ?? loadedSource.packageDiagnostics,
+    });
 
-  return {
-    package: resultPackage,
-    validation: resultValidation,
-    diagnostics:
-      resultValidation?.diagnostics ?? loadedSource.packageDiagnostics,
-    pluginDiagnostics: resultValidation?.pluginDiagnostics ?? [],
-    enrichment,
-    loadedSource,
-    layeredDiagnostics,
-    assetIngestionDiagnostics: assetIngestion?.diagnostics ?? [],
-    assetResolutions: assetIngestion?.resolvedAssets ?? [],
-    sourceMetadata: {
-      type: "package-zip",
-      figmaUrl: effectiveFigmaUrl || undefined,
-      sourceName,
-      packageFiles: packageFilesFromLoadedSource(loadedSource),
-    },
-  };
+    return {
+      dispose,
+      ...(loadedSource.preview?.bytes ? { previewBlob: new Blob([loadedSource.preview.bytes], { type: "image/png" }) } : {}),
+      package: resultPackage,
+      validation: resultValidation,
+      diagnostics:
+        resultValidation?.diagnostics ?? loadedSource.packageDiagnostics,
+      pluginDiagnostics: resultValidation?.pluginDiagnostics ?? [],
+      enrichment,
+      loadedSource,
+      layeredDiagnostics,
+      assetIngestionDiagnostics: assetIngestion?.diagnostics ?? [],
+      assetResolutions: assetIngestion?.resolvedAssets ?? [],
+      sourceMetadata: {
+        type: "package-zip",
+        figmaUrl: effectiveFigmaUrl || undefined,
+        sourceName,
+        packageFiles: packageFilesFromLoadedSource(loadedSource),
+      },
+    };
+  } catch (error) { dispose(); throw error; }
 }
 
 export async function runTemplatePackageImportPipeline(

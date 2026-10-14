@@ -14,3 +14,4 @@ export * from "./assets/packageAssetResolution";
 export * from "./masks/packageMaskRelationships";
 export * from "./motion";
 export * from "./primitives";
+export * from "./compositing/resolveSourceCompositing";

@@ -189,7 +189,7 @@ export function applyVerticalTrimCompatibilityRoute(
     nodes: Object.fromEntries(
       scene.nodeOrder.map((nodeId) => [
         nodeId,
-        {
+        baseRoute.nodes[nodeId].participation === "active" ? {
           ...baseRoute.nodes[nodeId],
           ownership: "compatibility-authoritative" as const,
           routed: false,
@@ -198,11 +198,11 @@ export function applyVerticalTrimCompatibilityRoute(
             nodeId === scene.rootNodeId
               ? [...baseRoute.nodes[nodeId].reasonCodes, ...rootReasons]
               : baseRoute.nodes[nodeId].reasonCodes,
-        },
+        } : baseRoute.nodes[nodeId],
       ]),
     ),
     routedNodeIds: [],
-    compatibilityNodeIds: [...scene.nodeOrder],
+    compatibilityNodeIds: [...baseRoute.activeNodeIds],
     fallbackBoundaries: [
       ...baseRoute.fallbackBoundaries.filter(
         (boundary) => boundary.nodeId !== scene.rootNodeId,

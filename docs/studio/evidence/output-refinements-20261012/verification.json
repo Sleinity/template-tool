@@ -1,0 +1,204 @@
+{
+  "commands": [
+    {
+      "command": "pnpm exec tsc -p apps/studio/tsconfig.app.json --noEmit --pretty false",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "pnpm --filter @sleinity/template-studio build",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/build.log",
+      "sha256": "e7e8cd36b0bc7ae73b03b95a37a8600c8e709d76724dc60e6120d24fad1a6742"
+    },
+    {
+      "command": "pnpm api:contract",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/api.log",
+      "sha256": "0f8a13ddf612786aafbefc722613150b1cf439c76f72b0bfed6d398cb8e01cc3"
+    },
+    {
+      "command": "pnpm boundaries:check",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/boundaries.log",
+      "sha256": "357b05d56b495eb176840c0b69c66a0ad9857d0b95e98f95d7c5ec64a5b6b8d3"
+    },
+    {
+      "command": "node scripts/studio-product/verify.mjs --output fidelity/evidence/output-refinements-20261012",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/browser.log",
+      "sha256": "5dd866a2b1525a2893c771242714760335c9b24b5aa11153e9a92f84e8683e28"
+    },
+    {
+      "command": "pnpm editor:verify",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/lifecycle.log",
+      "sha256": "40df2e163e0f23f1fb6cc9042a2a4b83e5022fd67b0fa8d33ee093b86eb45f73"
+    },
+    {
+      "command": "pnpm studio:drafts",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/drafts.log",
+      "sha256": "5338651e222d63ec70438dd4a68b604db4fd23b99b80ac06094b25db84a9d0b3"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/docs.log",
+      "sha256": "e6d57b85ee191e6588e21d0cbcec2fd078d2d958d89fc25ef61bd4d858db15fd"
+    },
+    {
+      "command": "node scripts/fidelity/capture-camera.test.mjs",
+      "exitCode": 0,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/camera-test.log",
+      "sha256": "7b8ebe7e1ec356e38c9e1135f37d7f82b45b8903604e736c6dd8bdd6b8319f9c"
+    },
+    {
+      "command": "pnpm sdk:gate:061 -- --run-id sdk-061-output-refinements-20261012a",
+      "exitCode": 1,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/fidelity.log",
+      "sha256": "57ab6f7d78c4fd68f62ef8872c7f4ec1dca1535a702dcbb0ad1a3d9edb4db65f"
+    },
+    {
+      "command": "pnpm sdk:gate:061 -- --run-id sdk-061-output-refinements-20261012b",
+      "exitCode": 1,
+      "log": "docs/studio/evidence/output-refinements-20261012/commands/fidelity-final.log",
+      "sha256": "4a57d07196df97a0a0b0d8345ac816df398a06dc1ed1deb34989e5b04a0c7354"
+    }
+  ],
+  "implementationSha256": {
+    "apps/studio/src/workspace/DraftEditor.tsx": "eba671b655ecfa4a9921135dbaeea72051a78dab6af2ff07b69cdd4afd9eba7a",
+    "apps/studio/src/workspace/outputEditor.css": "b2b7b3855c41ea13abe281caf6f95f54f5cb8f592d8f648c1df4120be998756f",
+    "apps/studio/src/setup/SetupPreview.tsx": "8847c885398d982b8f065fba028779642f9dd3ebc25bc0b4390cbb01fa0472b9",
+    "apps/studio/src/components/EditorLayout.tsx": "52144e668e740cfeec2eb4905088d5ba074ee23c647aa579d03372322c46c156",
+    "scripts/fidelity/capture-camera.mjs": "2f5aa662d7b6453d1bd69522897396ad85438a7b45e6528405355d46b577f393",
+    "scripts/fidelity/capture-camera.test.mjs": "c263c98aabbe8c2d00811c360ab7e97d182fb3b09598d8b1c8eea63160b86977",
+    "scripts/studio-product/verify.mjs": "6f8e4862e59886855b679c06a98b29e9db16c8f0d42b20a27d35894de80d40e8",
+    "scripts/field-rules/studio-drafts.mjs": "042bca73c25acd0f379c87210eec02102f4506242f214349956b5b90a0bfeb9a"
+  },
+  "browser": {
+    "before": false,
+    "rows": [
+      {
+        "scenario": "exporter-061-now-hiring",
+        "resetButtons": 6,
+        "fitCount": 1,
+        "viewportChecks": [
+          1440,
+          1024,
+          768
+        ],
+        "manualReview": false,
+        "errors": []
+      },
+      {
+        "scenario": "exporter-061-cover",
+        "resetButtons": 4,
+        "fitCount": 1,
+        "viewportChecks": [
+          1440,
+          1024,
+          768
+        ],
+        "manualReview": false,
+        "errors": []
+      },
+      {
+        "scenario": "exporter-061-carrousel",
+        "resetButtons": 11,
+        "fitCount": 1,
+        "viewportChecks": [
+          1440,
+          1024,
+          768
+        ],
+        "manualReview": false,
+        "errors": []
+      },
+      {
+        "scenario": "family",
+        "resetButtons": 11,
+        "fitCount": 1,
+        "viewportChecks": [
+          1440,
+          1024,
+          768
+        ],
+        "manualReview": false,
+        "errors": []
+      }
+    ],
+    "browser": "149.0.7827.55",
+    "tests": "full-width/wider panel, transparent header, 40% initial zoom, no Issues, inline correction/export guard, focus/camera, mount, Reset, invalid date/color, managed image, keyboard pan, tablet state, PNG"
+  },
+  "sdkUnchanged": 272,
+  "protectedUnchanged": 324,
+  "exports": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "sha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "byteIdentical": true
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "sha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "byteIdentical": true
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "sha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "byteIdentical": true
+    }
+  ],
+  "fidelity": {
+    "run": "sdk-061-output-refinements-20261012b",
+    "complete": true,
+    "stable": true,
+    "rendererPassing": 11,
+    "scenePassing": 3,
+    "settlementPassing": 12,
+    "failures": [
+      {
+        "fixtureId": "exporter-061-carrousel",
+        "surface": "editor",
+        "pixel": {
+          "actualDimensions": {
+            "height": 492,
+            "width": 874
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 1,
+          "changedPixelPercentage": 0.00023255381295231718,
+          "differenceBounds": {
+            "height": 1,
+            "width": 1,
+            "x": 234,
+            "y": 475
+          },
+          "dimensionsEqual": true,
+          "equal": false,
+          "exact": false,
+          "expectedDimensions": {
+            "height": 492,
+            "width": 874
+          },
+          "largeRegions": [
+            {
+              "changedPixels": 1,
+              "height": 44,
+              "width": 64,
+              "x": 192,
+              "y": 448
+            }
+          ],
+          "threshold": 0.1
+        },
+        "geometryEqual": true
+      }
+    ],
+    "releaseCertified": false
+  },
+  "referencePromotion": false,
+  "manualLiveReview": false
+}

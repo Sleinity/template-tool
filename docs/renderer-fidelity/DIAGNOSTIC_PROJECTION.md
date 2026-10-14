@@ -1,5 +1,11 @@
 # Capability-Aware Diagnostic Projection
 
+ADR 0095 distinguishes primitive SVG-stack ineligibility from the established
+opaque SOLID → FILL/FIT IMAGE media owner. The bounded source-property recognition
+emits informational evidence; unsupported mixed patterns still emit their existing
+warnings. Primitive rejection details remain technical data. This does not add a
+renderer owner or filter a finding by fixture identity.
+
 > MVP extension: `rendering-health-projection-v1` carries these backend findings into Validate, adds root-cause/origin/impact/action metadata, and reports source comparison as `not-run-in-product`. Pixel comparison remains harness-only.
 
 ## Purpose

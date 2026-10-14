@@ -1,5 +1,5 @@
 import { Check, Clipboard, PackageOpen } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { Button, Status } from "../../ui";
 import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
 import { TemplateInspectionPreview } from "../TemplateInspectionPreview";
@@ -20,6 +20,9 @@ import type { DiagnosticUserAction, PackageQualityIssue } from "@sleinity/templa
 
 interface TemplatePackageDiagnosticContextProps {
   packageValue: TemplatePackageV1;
+  emptyTitle?: string;
+  compact?: boolean;
+  inline?: boolean;
   resolvedTree?: ResolvedRenderTreeV1 | null;
   productRenderIdentity?: ResolvedProductRenderIdentityV1 | null;
   sourceReferencePng?: string | null;
@@ -28,11 +31,25 @@ interface TemplatePackageDiagnosticContextProps {
   instances?: PackageQualityIssue[];
   onSelectInstance?: (issue: PackageQualityIssue) => void;
   onAction?: (action: DiagnosticUserAction, issue: PackageQualityIssue) => void;
+  preview?: ReactNode;
+  supplementalDetails?: Array<{
+    label: string;
+    value?: string | number | null;
+  }>;
+  customAction?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
 function statusTone(issue: PackageQualityIssue) {
   const state = getDiagnosticPresentationState(issue);
   return state === "blocked" ? "blocked" : state === "review" ? "attention" : state === "repaired" ? "repaired" : "info";
+}
+
+function diagnosticLabel(issue: PackageQualityIssue): string {
+  const state = getDiagnosticPresentationState(issue);
+  return state === "review" ? "Needs attention" : diagnosticPresentationLabels[state];
 }
 
 function Detail({ label, value }: { label: string; value?: string | number | null }) {
@@ -54,6 +71,9 @@ function formatBytes(value: unknown): string | undefined {
 
 export function TemplatePackageDiagnosticContext({
   packageValue,
+  compact = false,
+  inline = false,
+  emptyTitle = "Validation complete",
   resolvedTree,
   productRenderIdentity = null,
   sourceReferencePng,
@@ -62,6 +82,9 @@ export function TemplatePackageDiagnosticContext({
   instances = [],
   onSelectInstance,
   onAction,
+  preview,
+  supplementalDetails = [],
+  customAction,
 }: TemplatePackageDiagnosticContextProps) {
   const [copied, setCopied] = useState(false);
   const [packetDescription, setPacketDescription] = useState("");
@@ -93,17 +116,15 @@ export function TemplatePackageDiagnosticContext({
       : context.type === "field"
         ? "Field target"
         : context.type === "visual-target"
-          ? "Affected preview"
+          ? (preview === false ? "Issue details" : "Affected preview")
           : "Package details";
 
   if (!issue || !presentation) {
     return (
       <section className="validate-affected-preview" data-testid="quality-context-panel">
-        <h2 className="ui-section-title">Validation complete</h2>
-        <p className="text-sm leading-6 text-content-muted">
-          No unresolved diagnostic is selected. Repaired items and technical notes remain available through filters.
-        </p>
-        <TemplateInspectionPreview packageValue={packageValue} dimUnselected={false} onRenderIdentity={onRenderIdentity} />
+        <div key="heading"><h2 className="ui-section-title">{emptyTitle}</h2>
+        <p className="text-sm leading-6 text-content-muted">No unresolved diagnostic is selected. Repaired items and technical notes remain available through filters.</p></div>
+        <div key="inspection-preview" ref={previewRef}>{preview ?? <TemplateInspectionPreview packageValue={packageValue} dimUnselected={false} onRenderIdentity={onRenderIdentity} />}</div>
       </section>
     );
   }
@@ -116,49 +137,43 @@ export function TemplatePackageDiagnosticContext({
       aria-live="polite"
       aria-atomic="true"
     >
-      <div>
-        <p className="text-sm font-medium text-content-muted">{heading}</p>
+      {(!inline || customAction || presentation.userAction && onAction) && <div key="heading">
+        {!inline && <><p className="text-sm font-medium text-content-muted">{heading}</p>
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <h2 className="ui-section-title">{getPackageQualityIssueTitle(issue)}</h2>
           <Status tone={statusTone(issue)}>
-            {diagnosticPresentationLabels[getDiagnosticPresentationState(issue)]}
+            {compact ? getDiagnosticPresentationState(issue) === "blocked" ? "Action required" : getDiagnosticPresentationState(issue) === "review" ? "Warning" : diagnosticLabel(issue) : diagnosticLabel(issue)}
           </Status>
         </div>
         {targetName ? <p className="mt-1 text-sm font-medium text-content-secondary">{targetName}</p> : null}
-        <p className="mt-3 text-sm leading-6 text-content-secondary">{presentation.userSummary}</p>
+        {!compact && <p className="mt-3 text-sm leading-6 text-content-secondary">{presentation.userSummary}</p>}
         {presentation.userImpact ? (
           <div className="mt-3 border-l-2 border-line-strong pl-3">
             <p className="text-xs font-medium text-content-muted">Impact</p>
             <p className="mt-1 text-sm leading-6 text-content-primary">{presentation.userImpact}</p>
           </div>
         ) : null}
-        {presentation.userAction && onAction ? (
-          <Button className="mt-4" variant={getDiagnosticPresentationState(issue) === "blocked" ? "primary" : "secondary"} onClick={() => onAction(presentation.userAction!, issue)}>
+        </>}
+        {customAction ? (
+          <Button className={inline ? undefined : "mt-4"} variant={getDiagnosticPresentationState(issue) === "blocked" ? "primary" : "secondary"} onClick={customAction.onClick}>
+            {customAction.label}
+          </Button>
+        ) : presentation.userAction && onAction ? (
+          <Button className={inline ? undefined : "mt-4"} variant={getDiagnosticPresentationState(issue) === "blocked" ? "primary" : "secondary"} onClick={() => onAction(presentation.userAction!, issue)}>
             {presentation.userAction.label}
           </Button>
         ) : null}
+      </div>}
+
+      {!compact && !hasVisualTarget && <div key="no-target" className="diagnostic-no-target">
+        <p className="font-medium text-content-primary">No visual area is affected</p>
+        <p className="mt-1 text-sm leading-6 text-content-muted">This diagnostic concerns {context.type === "asset" ? "media metadata" : context.type === "font" ? "font availability" : context.type === "field" ? "field configuration" : "package metadata"} and does not point to a specific rendered layer.</p>
+      </div>}
+      <div key="inspection-preview" ref={previewRef} hidden={inline}>
+        {preview ?? (hasVisualTarget ? <TemplateInspectionPreview packageValue={packageValue} targetNodeIds={visualTargetIds} targetFitLabel="Fit affected layer" mode={issue.modes?.includes("editor") ? "editor" : "static"} onRenderIdentity={onRenderIdentity} /> : null)}
       </div>
 
-      {hasVisualTarget ? (
-        <div ref={previewRef}>
-        <TemplateInspectionPreview
-          packageValue={packageValue}
-          targetNodeIds={visualTargetIds}
-          targetFitLabel="Fit affected layer"
-          mode={issue.modes?.includes("editor") ? "editor" : "static"}
-          onRenderIdentity={onRenderIdentity}
-        />
-        </div>
-      ) : (
-        <div className="diagnostic-no-target">
-          <p className="font-medium text-content-primary">No visual area is affected</p>
-          <p className="mt-1 text-sm leading-6 text-content-muted">
-            This diagnostic concerns {context.type === "asset" ? "media metadata" : context.type === "font" ? "font availability" : context.type === "field" ? "field configuration" : "package metadata"} and does not point to a specific rendered layer.
-          </p>
-        </div>
-      )}
-
-      {context.type === "asset" ? (
+      {!inline && context.type === "asset" ? (
         <dl className="diagnostic-context-grid">
           <Detail label="Asset" value={targetName ?? assetResolution?.asset.id ?? issue.assetId} />
           <Detail label="Path" value={assetResolution?.manifestPath ?? issue.file ?? issue.path} />
@@ -169,7 +184,7 @@ export function TemplatePackageDiagnosticContext({
         </dl>
       ) : null}
 
-      {context.type === "font" ? (
+      {!inline && context.type === "font" ? (
         <dl className="diagnostic-context-grid">
           <Detail label="Font" value={(issue.details?.family as string | undefined) ?? targetName ?? issue.ref} />
           <Detail label="Weight" value={issue.details?.weight as number | undefined} />
@@ -179,12 +194,20 @@ export function TemplatePackageDiagnosticContext({
         </dl>
       ) : null}
 
-      {context.type === "field" ? (
+      {!inline && context.type === "field" ? (
         <dl className="diagnostic-context-grid">
           <Detail label="Field" value={field?.label ?? targetName ?? issue.fieldId} />
           <Detail label="Type" value={field?.type} />
           <Detail label="Target layer" value={issue.nodeName ?? field?.nodeId} />
           <Detail label="Default value" value={typeof field?.defaultValue === "string" ? field.defaultValue : undefined} />
+        </dl>
+      ) : null}
+
+      {supplementalDetails.some((detail) => detail.value !== undefined && detail.value !== null && detail.value !== "") ? (
+        <dl className="diagnostic-context-grid" data-testid="quality-supplemental-context">
+          {supplementalDetails.map((detail) => (
+            <Detail key={detail.label} label={detail.label} value={detail.value} />
+          ))}
         </dl>
       ) : null}
 
@@ -194,7 +217,7 @@ export function TemplatePackageDiagnosticContext({
           <div className="mt-2 space-y-1">
             {instances.map((instance) => (
               <button key={instance.id} type="button" className="block w-full rounded-[var(--radius-control)] px-2 py-2 text-left text-sm text-content-muted hover:bg-surface-secondary" onClick={() => onSelectInstance?.(instance)}>
-                {getDiagnosticFriendlyTarget(instance) ?? instance.nodeName ?? instance.id}
+                {typeof instance.details?.variantLabel === "string" ? `${instance.details.variantLabel} · ` : ""}{getDiagnosticFriendlyTarget(instance) ?? instance.nodeName ?? instance.id}
               </button>
             ))}
           </div>
@@ -202,8 +225,9 @@ export function TemplatePackageDiagnosticContext({
       ) : null}
 
       {resolvedTree ? (
-        <section className="border-t border-line-subtle pt-3" aria-label="Fidelity issue packet">
-          <h3 className="text-sm font-medium text-content-primary">Reproducible issue packet</h3>
+        <details className="border-t border-line-subtle pt-3" aria-label="Fidelity issue packet">
+          <summary className="cursor-pointer text-sm font-medium text-content-primary">Reproducible issue packet</summary>
+          <div className="pt-2">
           <p className="mt-1 text-xs leading-5 text-content-muted">
             Export bounded local evidence for this finding. Raw package and asset bytes are never included.
           </p>
@@ -262,12 +286,14 @@ export function TemplatePackageDiagnosticContext({
           </Button>
           {packetState === "complete" ? <p className="mt-2 text-xs text-content-muted">Issue packet downloaded.</p> : null}
           {packetState === "failed" ? <p className="mt-2 text-xs text-[var(--color-status-blocked-fg)]">The packet could not be created. Check preview readiness and try again.</p> : null}
-        </section>
+          </div>
+        </details>
       ) : null}
 
       <details className="border-t border-line-subtle pt-3">
         <summary className="cursor-pointer text-sm text-content-muted">Issue technical details</summary>
         <div className="mt-3">
+          {compact && <p>{presentation.userSummary}</p>}
           {issue.origins.includes("backend-decision") ? (
             <dl className="diagnostic-context-grid mb-3">
               <Detail label="Capability" value={issue.capabilityId} />

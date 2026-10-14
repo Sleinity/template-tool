@@ -9,11 +9,16 @@ import {
   type PropsWithChildren,
 } from "react";
 import {
-  getTemplateFamilyOptionAvailability,
+  getTemplateFamilyControlOrder,
+  getTemplateFamilyFieldScope,
   type TemplateFamilyContentValueV1,
+  type TemplateFamilyControlRefV1,
   type TemplateFamilyFieldV1,
+  type TemplateFamilyFieldScopeV1,
   type TemplateFamilyIssueV1,
   type TemplateFamilyOptionAvailabilityV1,
+  type TemplateFamilyVariantV1,
+  type TemplateVariantGroupV1,
 } from "@sleinity/template-core/family";
 import {
   createTemplateFamilySession,
@@ -84,10 +89,12 @@ export function useTemplateFamilySessionSnapshot(
 
 export interface TemplateFamilyFieldControllerV1 {
   field: TemplateFamilyFieldV1;
+  scope: TemplateFamilyFieldScopeV1;
   value: TemplateFamilyContentValueV1;
   familyRevision: number;
   selectedVariantId: string | null;
   issues: TemplateFamilyIssueV1[];
+  selectedVariantIssues: TemplateFamilyIssueV1[];
   setValue(value: TemplateFamilyContentValueV1): TemplateFamilySessionMutationResultV1;
   reset(): TemplateFamilySessionMutationResultV1;
   replaceImage?: (
@@ -104,14 +111,21 @@ function createFamilyFieldControllers(
 ): TemplateFamilyFieldControllerV1[] {
   if (!snapshot.family || !snapshot.content) return [];
   return snapshot.family.fields.map((field) => {
+    const issues = snapshot.validation?.issues.filter(
+      (issue) => issue.fieldId === field.id,
+    ) ?? [];
     const base: TemplateFamilyFieldControllerV1 = {
       field,
+      scope: getTemplateFamilyFieldScope(snapshot.family!, field.id),
       value: Object.prototype.hasOwnProperty.call(snapshot.content!.values, field.id)
         ? snapshot.content!.values[field.id]
         : field.defaultValue,
       familyRevision: snapshot.revision,
       selectedVariantId: snapshot.selectedVariantId,
-      issues: snapshot.validation?.issues.filter((issue) => issue.fieldId === field.id) ?? [],
+      issues,
+      selectedVariantIssues: issues.filter(
+        (issue) => issue.variantId === snapshot.selectedVariantId,
+      ),
       setValue: (value) => session.setField(
         field.id,
         value,
@@ -147,6 +161,22 @@ export function useTemplateFamilyEditableFields(
   );
 }
 
+export function useTemplateFamilyVisibleFields(
+  sessionOverride?: TemplateFamilySessionV1,
+): TemplateFamilyFieldControllerV1[] {
+  const session = useResolvedTemplateFamilySession(sessionOverride);
+  const snapshot = useTemplateFamilySessionSnapshot(session);
+  const fields = useTemplateFamilyEditableFields(session);
+  return useMemo(
+    () => snapshot.selectedVariantId
+      ? fields.filter((field) =>
+          field.scope.variantIds.includes(snapshot.selectedVariantId!),
+        )
+      : [],
+    [fields, snapshot.selectedVariantId],
+  );
+}
+
 export function useTemplateFamilyEditableField(
   fieldId: string,
   sessionOverride?: TemplateFamilySessionV1,
@@ -158,34 +188,140 @@ export function useTemplateFamilyEditableField(
   );
 }
 
+export interface TemplateFamilySelectionOptionV1
+  extends TemplateFamilyOptionAvailabilityV1 {
+  title: string;
+  selected: boolean;
+}
+
+export interface TemplateFamilySelectionPropertyV1 {
+  group: TemplateVariantGroupV1;
+  selectedOptionId: string | null;
+  options: TemplateFamilySelectionOptionV1[];
+  selectOption(optionId: string): TemplateFamilySessionMutationResultV1;
+}
+
 export interface TemplateFamilySelectionModelV1 {
   selectedVariantId: string | null;
-  options: TemplateFamilyOptionAvailabilityV1[];
+  groupSelections: Record<string, string>;
+  groups: TemplateFamilySelectionPropertyV1[];
+  variants: TemplateFamilyVariantV1[];
+  selectOption(groupId: string, optionId: string): TemplateFamilySessionMutationResultV1;
   selectVariant(variantId: string): TemplateFamilySessionMutationResultV1;
 }
 
 export function useTemplateFamilySelection(
-  groupSelections: Record<string, string> = {},
+  controlledSelections: Record<string, string> = {},
   sessionOverride?: TemplateFamilySessionV1,
 ): TemplateFamilySelectionModelV1 {
   const session = useResolvedTemplateFamilySession(sessionOverride);
   const snapshot = useTemplateFamilySessionSnapshot(session);
+  const groupSelections = Object.keys(controlledSelections).length > 0
+    ? controlledSelections
+    : snapshot.groupSelections;
+  const availability = useMemo(
+    () => snapshot.family ? session.getOptionAvailability(groupSelections) : [],
+    [groupSelections, session, snapshot.family],
+  );
+  const availabilityByOption = useMemo(
+    () => new Map(availability.map((item) => [`${item.groupId}:${item.optionId}`, item])),
+    [availability],
+  );
+  const groups = useMemo(() => snapshot.family?.variantGroups.map((group) => ({
+    group,
+    selectedOptionId: groupSelections[group.id] ?? null,
+    options: group.options.map((option) => ({
+      ...availabilityByOption.get(`${group.id}:${option.id}`)!,
+      groupId: group.id,
+      optionId: option.id,
+      available: availabilityByOption.get(`${group.id}:${option.id}`)?.available ?? false,
+      candidateVariantIds:
+        availabilityByOption.get(`${group.id}:${option.id}`)?.candidateVariantIds ?? [],
+      title: option.title,
+      selected: groupSelections[group.id] === option.id,
+    })),
+    selectOption: (optionId: string) => session.selectOption(
+      group.id,
+      optionId,
+      snapshot.operationRevision,
+    ),
+  })) ?? [], [
+    availabilityByOption,
+    groupSelections,
+    session,
+    snapshot.family,
+    snapshot.operationRevision,
+  ]);
   return useMemo(() => ({
     selectedVariantId: snapshot.selectedVariantId,
-    options: snapshot.family
-      ? getTemplateFamilyOptionAvailability(snapshot.family, { groupSelections })
-      : [],
+    groupSelections,
+    groups,
+    variants: snapshot.family?.variants ?? [],
+    selectOption: (groupId: string, optionId: string) => session.selectOption(
+      groupId,
+      optionId,
+      snapshot.operationRevision,
+    ),
     selectVariant: (variantId: string) => session.selectVariant(
       variantId,
       snapshot.operationRevision,
     ),
   }), [
     groupSelections,
+    groups,
     session,
     snapshot.family,
     snapshot.operationRevision,
     snapshot.selectedVariantId,
   ]);
+}
+
+export type TemplateFamilyEditorControlV1 =
+  | {
+      kind: "direct-variant-selector";
+      ref: Extract<TemplateFamilyControlRefV1, { kind: "direct-variant-selector" }>;
+      selection: TemplateFamilySelectionModelV1;
+    }
+  | {
+      kind: "selection-property";
+      ref: Extract<TemplateFamilyControlRefV1, { kind: "selection-property" }>;
+      selection: TemplateFamilySelectionPropertyV1;
+    }
+  | {
+      kind: "field";
+      ref: Extract<TemplateFamilyControlRefV1, { kind: "field" }>;
+      controller: TemplateFamilyFieldControllerV1;
+    };
+
+export function useTemplateFamilyEditorControls(
+  sessionOverride?: TemplateFamilySessionV1,
+): TemplateFamilyEditorControlV1[] {
+  const session = useResolvedTemplateFamilySession(sessionOverride);
+  const snapshot = useTemplateFamilySessionSnapshot(session);
+  const fields = useTemplateFamilyEditableFields(session);
+  const selection = useTemplateFamilySelection({}, session);
+  return useMemo(() => {
+    if (!snapshot.family) return [];
+    const fieldsById = new Map(fields.map((field) => [field.field.id, field]));
+    const groupsById = new Map(selection.groups.map((group) => [group.group.id, group]));
+    const controls: TemplateFamilyEditorControlV1[] = [];
+    for (const ref of getTemplateFamilyControlOrder(snapshot.family)) {
+      if (ref.kind === "direct-variant-selector") {
+        controls.push({ kind: ref.kind, ref, selection });
+        continue;
+      }
+      if (ref.kind === "selection-property") {
+        const property = groupsById.get(ref.groupId);
+        if (property) controls.push({ kind: ref.kind, ref, selection: property });
+        continue;
+      }
+      const controller = fieldsById.get(ref.fieldId);
+      if (controller?.scope.variantIds.includes(snapshot.selectedVariantId ?? "")) {
+        controls.push({ kind: ref.kind, ref, controller });
+      }
+    }
+    return controls;
+  }, [fields, selection, snapshot.family, snapshot.selectedVariantId]);
 }
 
 export interface TemplateFamilyDiagnosticSummaryV1 {
@@ -229,6 +365,8 @@ export interface TemplateFamilyEditorModelV1 {
   snapshot: TemplateFamilySessionSnapshotV1;
   renderSession: TemplateFamilySessionV1["renderSession"];
   fields: TemplateFamilyFieldControllerV1[];
+  visibleFields: TemplateFamilyFieldControllerV1[];
+  controls: TemplateFamilyEditorControlV1[];
   diagnostics: TemplateFamilyDiagnosticSummaryV1;
 }
 
@@ -238,11 +376,15 @@ export function useTemplateFamilyEditor(
   const session = useResolvedTemplateFamilySession(sessionOverride);
   const snapshot = useTemplateFamilySessionSnapshot(session);
   const fields = useTemplateFamilyEditableFields(session);
+  const visibleFields = useTemplateFamilyVisibleFields(session);
+  const controls = useTemplateFamilyEditorControls(session);
   const diagnostics = useTemplateFamilyDiagnosticSummary(session);
   return useMemo(() => ({
     snapshot,
     renderSession: session.renderSession,
     fields,
+    visibleFields,
+    controls,
     diagnostics,
-  }), [diagnostics, fields, session.renderSession, snapshot]);
+  }), [controls, diagnostics, fields, session.renderSession, snapshot, visibleFields]);
 }

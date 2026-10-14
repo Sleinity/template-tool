@@ -11,6 +11,7 @@ import {
 import {
   parseTemplateFamilyContentStateV1,
   parseTemplateFamilyV1,
+  validateTemplateFamily,
 } from "@sleinity/template-core/family";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -36,10 +37,29 @@ export function validateCurrentSavedTemplateFamilyRecord(
   ) {
     throw new Error("Saved template family record is incomplete.");
   }
+  if (input.family.schemaVersion === "template-family-v2") {
+    throw new Error(
+      "This record uses the unpublished collection-based family format. Preserve the original and use scripts/repository/recover-unpublished-family-v2.mjs only for explicit development-data recovery before deliberately saving a corrected family.",
+    );
+  }
   const family = parseTemplateFamilyV1(input.family);
+  const variantIds = new Set(family.variants.map((variant) => variant.id));
+  const variantPreviewAssetHashes = isRecord(input.variantPreviewAssetHashes)
+    ? Object.fromEntries(
+        Object.entries(input.variantPreviewAssetHashes).filter(
+          (entry): entry is [string, string] =>
+            variantIds.has(entry[0]) && typeof entry[1] === "string" && entry[1].length > 0,
+        ),
+      )
+    : undefined;
   return {
     ...(structuredClone(input) as unknown as SavedTemplateFamilyRecord),
     family,
+    validation: validateTemplateFamily(family),
+    variantPreviewAssetHashes:
+      variantPreviewAssetHashes && Object.keys(variantPreviewAssetHashes).length > 0
+        ? variantPreviewAssetHashes
+        : undefined,
   };
 }
 

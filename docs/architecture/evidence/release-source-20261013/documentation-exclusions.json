@@ -1,0 +1,142 @@
+[
+  {
+    "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
+    "edits": [
+      {
+        "target": "source-preview.png",
+        "label": "image"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/validate/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/fields/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/editor/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../review/r07-four-reduce-20261013/editor/approved.png",
+        "label": "approved"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/png-export/capture-1.png",
+        "label": "candidate"
+      }
+    ]
+  },
+  {
+    "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
+    "edits": [
+      {
+        "target": "source-preview.png",
+        "label": "image"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/validate/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/fields/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/editor/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/png-export/capture-1.png",
+        "label": "candidate"
+      }
+    ]
+  },
+  {
+    "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
+    "edits": [
+      {
+        "target": "source-preview.png",
+        "label": "image"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/validate/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/fields/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/editor/capture-1.png",
+        "label": "candidate"
+      },
+      {
+        "target": "../../../../../../fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/png-export/capture-1.png",
+        "label": "candidate"
+      }
+    ]
+  },
+  {
+    "file": "docs/architecture/r07-carrousel-raster.md",
+    "edits": [
+      {
+        "target": "evidence/r07-raster-20261013/source/photo.png",
+        "label": "asset bytes"
+      },
+      {
+        "target": "evidence/r07-raster-20261013/source/preview.png",
+        "label": "source preview"
+      },
+      {
+        "target": "evidence/r07-raster-20261013/review/bottom-approved-current-raw-diff-4x.png",
+        "label": "Aligned four-times crops"
+      }
+    ]
+  },
+  {
+    "file": "docs/studio/COMPACT_FIELD_CARDS_20261012.md",
+    "edits": [
+      {
+        "target": "../../fidelity/evidence/compact-field-cards/after/single-color-off.png",
+        "label": "Browser captures"
+      },
+      {
+        "target": "../../fidelity/evidence/compact-field-cards/before/single-color-off.png",
+        "label": "before counterparts"
+      }
+    ]
+  },
+  {
+    "file": "docs/studio/OUTPUT_REFINEMENTS_20261012.md",
+    "edits": [
+      {
+        "target": "../../fidelity/evidence/output-refinements-20261012/exporter-061-carrousel-2048-initial.png",
+        "label": "Current screenshot"
+      }
+    ]
+  },
+  {
+    "file": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
+    "edits": [
+      {
+        "target": "../../fidelity/evidence/product-experience/after/exporter-061-carrousel-1440.png",
+        "label": "Desktop"
+      },
+      {
+        "target": "../../fidelity/evidence/product-experience/after/family-768-preview.png",
+        "label": "tablet"
+      },
+      {
+        "target": "../../fidelity/evidence/product-experience/after/host-theme-tokens.png",
+        "label": "host-token example"
+      },
+      {
+        "target": "../../fidelity/evidence/product-experience/performance-certified/production-paired.json",
+        "label": "Individual trials and summaries",
+        "reason": "84 MB generated trace excluded; checksum retained"
+      }
+    ]
+  }
+]

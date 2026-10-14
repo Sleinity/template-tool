@@ -5,3 +5,4 @@ export * from "./templateImportCompatibility";
 export * from "./templateImportIntegrity";
 export * from "./templateImportValidation";
 export * from "./templateImportWizard";
+export * from "./templateReimportV2";

@@ -12,12 +12,14 @@ import {
 import type {
   PackageAxisSizing,
   PackageLayoutMode,
+  PackageFontCssStyle,
   PackagePaint,
   PackageRect,
   TemplateNode,
   TemplatePackageV1,
 } from "@sleinity/template-core";
-import { resolvePackageAssetReference } from "@sleinity/template-core/renderer-internal";
+import { resolveLinearGradientGeometry, resolvePackageAssetReference, resolveSourceCompositing } from "@sleinity/template-core/renderer-internal";
+import type { ResolvedSourceCompositingV1 } from "@sleinity/template-core/renderer-internal";
 import {
   backendDecisionOwns,
   createResolvedRenderTree,
@@ -65,7 +67,8 @@ import {
   type PrimitiveCornerValues,
 } from "@sleinity/template-core/renderer-internal";
 import { resolvePackageNodeLayoutRole } from "./packageLayoutModel";
-import { runtimeFontFaceSignature } from "@sleinity/template-browser";
+import { canReuseTextMeasurement, readMountedTextMeasurementInputs, textMeasurementInputKey } from "../internal/runtime-routing/textMeasurementInputs";
+import { runtimeFontFaceSignature } from "@sleinity/template-browser/fonts";
 import {
   resolveCapToBaselineTextBox,
   resolveCapTrimGlyphOrigin,
@@ -80,6 +83,22 @@ import {
   type ResolvedProductRenderIdentityV1,
 } from "./productRenderIdentity";
 
+export interface TemplateTextLineEvidenceRequestV1 {
+  fieldId: string;
+  nodeId: string;
+}
+
+export interface TemplateRenderedTextLineEvidenceV1 {
+  fieldId: string;
+  nodeId: string;
+  participation: "active" | "structurally-excluded";
+  measuredVisualLines?: number;
+  reliability: "reliable" | "pending" | "unsupported";
+  settlementRevision: string;
+  fontRevision: string;
+  publicationGeneration: number;
+}
+
 interface TemplatePackageRendererProps {
   packageValue: TemplatePackageV1;
   mode?: TemplatePackageRenderMode;
@@ -91,6 +110,8 @@ interface TemplatePackageRendererProps {
   motionRenderMode?: TemplatePackageMotionRenderMode;
   onAssetLoadError?: (assetId: string, nodeId: string) => void;
   onRenderIdentity?: (identity: ResolvedProductRenderIdentityV1) => void;
+  textLineEvidenceRequests?: readonly TemplateTextLineEvidenceRequestV1[];
+  onTextLineEvidence?: (evidence: TemplateRenderedTextLineEvidenceV1) => void;
 }
 
 export type TemplatePackageRenderMode = "static" | "editor";
@@ -103,6 +124,10 @@ interface PackageNodeRendererProps {
   node: TemplateNode;
   packageValue: TemplatePackageV1;
   parentLayoutMode: PackageLayoutMode;
+  parentSizing?: {
+    horizontal: PackageAxisSizing;
+    vertical: PackageAxisSizing;
+  };
   mode?: TemplatePackageRenderMode;
   isRoot?: boolean;
   parentConstraintBounds?: PackageRect;
@@ -113,6 +138,7 @@ interface PackageNodeRendererProps {
   highlightNodeIds?: string[];
   motionTransforms?: Record<string, PackageMotionNodeTransform>;
   runtime?: CoreLayoutRuntimeState;
+  textLineEvidenceNodeIds?: ReadonlySet<string>;
 }
 
 const justifyMap: Record<string, CSSProperties["justifyContent"]> = {
@@ -129,6 +155,50 @@ const alignMap: Record<string, CSSProperties["alignItems"]> = {
   STRETCH: "stretch",
   BASELINE: "baseline",
 };
+
+type ResolvedMaskRelationship = NonNullable<ResolvedRenderTreeV1["maskRelationships"]>[number];
+
+function approximatelyEqual(left: number, right: number): boolean {
+  return Math.abs(left - right) <= 0.000001;
+}
+
+/**
+ * A first-child, full-parent rectangular mask whose declared scope contains
+ * every following sibling can be lowered to the parent boundary. In editor
+ * mode that boundary stays correct while an affected HUG subtree changes size;
+ * source-derived affected-node insets do not.
+ */
+function ownsFullParentMaskBoundary(
+  packageValue: TemplatePackageV1,
+  relationship: ResolvedMaskRelationship,
+): boolean {
+  if (
+    relationship.status !== "valid" ||
+    relationship.renderStrategy !== "css-clip-path" ||
+    relationship.capability !== "exact-opaque-rectangular-alpha" ||
+    !relationship.maskBounds
+  ) return false;
+  const parent = packageValue.nodes[relationship.parentId];
+  const sourceIndex = parent?.children.indexOf(relationship.maskSourceId) ?? -1;
+  const declared = packageValue.maskRelationships?.find((candidate) =>
+    candidate.parentId === relationship.parentId &&
+    candidate.maskSourceId === relationship.maskSourceId
+  );
+  if (
+    !parent ||
+    sourceIndex !== 0 ||
+    declared?.scopeTerminationReason !== "end_of_siblings" ||
+    declared.affectedSiblingIds.length !== parent.children.length - 1 ||
+    !declared.affectedSiblingIds.every((nodeId, index) => nodeId === parent.children[index + 1]) ||
+    parent.appearance.strokes.length > 0 ||
+    parent.appearance.effects.length > 0
+  ) return false;
+  const mask = relationship.maskBounds;
+  return approximatelyEqual(mask.x, 0) &&
+    approximatelyEqual(mask.y, 0) &&
+    approximatelyEqual(mask.width, parent.bounds.relative.width) &&
+    approximatelyEqual(mask.height, parent.bounds.relative.height);
+}
 
 function axisSize(
   axis: PackageAxisSizing,
@@ -438,6 +508,7 @@ function buildNodeStyle(
   node: TemplateNode,
   packageValue: TemplatePackageV1,
   parentLayoutMode: PackageLayoutMode,
+  parentSizing: PackageNodeRendererProps["parentSizing"],
   isRoot: boolean,
   renderMode: TemplatePackageRenderMode,
   parentConstraintBounds?: PackageRect,
@@ -485,6 +556,11 @@ function buildNodeStyle(
     ? horizontalSizing.mode
     : parentIsVertical
       ? verticalSizing.mode
+      : null;
+  const parentMainAxisSizing = parentIsHorizontal
+    ? parentSizing?.horizontal.mode
+    : parentIsVertical
+      ? parentSizing?.vertical.mode
       : null;
   const counterAxisSizing = parentIsHorizontal
     ? verticalSizing.mode
@@ -604,7 +680,15 @@ function buildNodeStyle(
     if (mainAxisSizing === "FILL") {
       style.flexGrow = 1;
       style.flexShrink = 1;
-      style.flexBasis = 0;
+      // Figma can preserve a FILL child inside a capped HUG parent. This is a
+      // circular sizing relationship, so it remains compatibility-owned, but
+      // the child's intrinsic size still has to participate in CSS shrink-to-
+      // fit sizing. A zero basis freezes the parent at its imported size and
+      // clips edited text instead of growing it up to the parent's max.
+      style.flexBasis =
+        renderMode === "editor" && parentMainAxisSizing === "HUG"
+          ? "auto"
+          : 0;
     } else if (renderMode === "editor") {
       style.flexGrow = 0;
       style.flexShrink = 0;
@@ -658,6 +742,15 @@ function buildNodeStyle(
     Boolean(node.vector) &&
     node.vector?.renderMode !== "SEMANTIC_SHAPE" &&
     node.vector?.renderMode !== "UNSUPPORTED";
+  const svgVectorOwnsStroke = Boolean(node.vector) &&
+    node.vector?.renderMode !== "SEMANTIC_SHAPE" &&
+    (resolvedNode
+      ? Boolean(resolvedNode.vector && resolvedNode.vector.renderMode !== "SEMANTIC_SHAPE" &&
+          (backendDecisionOwns(resolvedNode.backendDecision, "vector-svg") ||
+            backendDecisionOwns(resolvedNode.backendDecision, "legacy-dom-css")))
+      : true) &&
+    Boolean(resolvedNode?.vector?.source ||
+      resolvePackageVectorRenderModel(node, packageValue)?.source);
   if (
     resolvedNode?.appearance.backgroundColor &&
     !usesSvgVisualSource &&
@@ -753,7 +846,9 @@ function buildNodeStyle(
     .filter((value): value is string => Boolean(value));
 
   const stroke = resolvePackageStrokeModel(node, renderMode);
-  if (!primitiveAuthoritative && stroke.paint && stroke.strategy !== "none") {
+  // A complete SVG asset paints its own paths and strokes. The source stroke
+  // remains canonical evidence, but a CSS border would paint a second box.
+  if (!primitiveAuthoritative && !svgVectorOwnsStroke && stroke.paint && stroke.strategy !== "none") {
     const shadowLayers: string[] = [];
     stroke.layers.forEach((layer, index) => {
       const color = normalizedColorToCss(
@@ -1094,10 +1189,12 @@ export function resolveFigmaCapHeightTextHeight({
   });
 }
 
+type TextMeasurementPublicationIdentity = Readonly<{ revision: string; generation: number }>;
+
 type TextGeometryMeasurement = Omit<
   IntrinsicTextMeasurementV1,
-  "nodeId" | "revision"
-> & { paintOffsetY: number };
+  "nodeId" | "revision" | "publicationGeneration"
+> & { paintOffsetY: number; measurementKey: string; isPublicationValidated: (key: TextMeasurementPublicationIdentity) => boolean };
 
 function normalizedFontFamily(value: string): string {
   return value.trim().replace(/^['"]|['"]$/g, "").toLowerCase();
@@ -1190,24 +1287,52 @@ function useIntrinsicTextGeometry(
   paintRef: RefObject<HTMLSpanElement | null>,
   enabled: boolean,
   measurementKey: string,
+  publicationKey: TextMeasurementPublicationIdentity,
   lineHeightPx: number,
   verticalTrimSource: string | null | undefined,
-  fontIdentity: { family: string | null; weight: number; style: string },
+  fontIdentity: { family: string | null; weight: number; style: PackageFontCssStyle },
   approvedReplacement: boolean,
 ): TextGeometryMeasurement | null {
   const [measurement, setMeasurement] = useState<TextGeometryMeasurement | null>(null);
+  const publicationValidation = useRef<TextMeasurementPublicationIdentity | null>(null);
+  const cached = useRef<{ value: TextGeometryMeasurement; inputs: string | null; fontSignature: string } | null>(null);
+  const refreshMeasurement = useRef<(() => void) | null>(null);
 
   useLayoutEffect(() => {
     if (!enabled || !boxRef.current || !paintRef.current) {
+      publicationValidation.current = null;
+      cached.current = null;
       setMeasurement(null);
       return;
     }
     const element = boxRef.current;
     const paint = paintRef.current;
+    // A known semantic mismatch cannot reuse the sample. Defer DOM reads to
+    // fresh measurement; matching candidates still validate every mounted input.
+    const inputs = cached.current?.value.measurementKey === measurementKey
+      ? readMountedTextMeasurementInputs(element, paint)
+      : null;
+    const reusable = cached.current && canReuseTextMeasurement(cached.current.value.measurementKey, measurementKey, cached.current.inputs, inputs);
+    if (reusable && cached.current) {
+      // This commit validated the mounted inputs; publication still uses the
+      // current runtime callback and its independent generation/revision guards.
+      publicationValidation.current = publicationKey;
+    } else {
+      publicationValidation.current = null;
+      cached.current = null;
+      setMeasurement(null);
+    }
     let disposed = false;
     let frame = 0;
+    let observedPaint = paint;
     const measure = () => {
-      if (disposed || !element.isConnected || !paint.isConnected) return;
+      const paint = paintRef.current;
+      if (disposed || boxRef.current !== element || !element.isConnected || !paint?.isConnected) return;
+      if (paint !== observedPaint) {
+        observer?.unobserve(observedPaint);
+        observer?.observe(paint);
+        observedPaint = paint;
+      }
       const range = document.createRange();
       range.selectNodeContents(paint);
       const rects = Array.from(range.getClientRects()).filter(
@@ -1283,7 +1408,14 @@ function useIntrinsicTextGeometry(
       document.body.appendChild(probe);
       const probeWidth = probe.getBoundingClientRect().width;
       probe.remove();
-      const intrinsicWidth = (probeWidth > 0 ? probeWidth : rangeLineWidths.size ? Math.max(...rangeLineWidths.values()) : canvasIntrinsicWidth) + horizontalChrome;
+      // CSS includes letter-spacing after the final glyph of each line when
+      // sizing the probe. Figma's HUG width uses the gaps between glyphs only.
+      // The source exports in the SDK gate expose this as exactly one spacing
+      // unit of drift in every HUG text box with non-zero letter spacing.
+      const probeIntrinsicWidth = probeWidth > 0 && textContent.length > 0
+        ? Math.max(0, probeWidth - letterSpacing)
+        : probeWidth;
+      const intrinsicWidth = (probeIntrinsicWidth > 0 ? probeIntrinsicWidth : rangeLineWidths.size ? Math.max(...rangeLineWidths.values()) : canvasIntrinsicWidth) + horizontalChrome;
       const rangeTop = rects.length ? Math.min(...rects.map((item) => item.top)) : 0;
       const rangeBottom = rects.length ? Math.max(...rects.map((item) => item.bottom)) : lineHeightPx;
       const verticalTrim = resolveVerticalTextTrimMode(verticalTrimSource);
@@ -1342,6 +1474,8 @@ function useIntrinsicTextGeometry(
         : null;
       const semanticBoxWidth = element.clientWidth || intrinsicWidth;
       const next: TextGeometryMeasurement = {
+        measurementKey,
+        isPublicationValidated: key => publicationValidation.current === key && cached.current?.value === next,
         width: intrinsicWidth,
         height: nextHeight,
         lineCount,
@@ -1384,8 +1518,9 @@ function useIntrinsicTextGeometry(
           : "range-line-box",
         paintOffsetY: glyphOrigin?.translationY ?? 0,
       };
-      setMeasurement((current) =>
-        current &&
+      const current = cached.current?.value;
+      const value = current &&
+        current.measurementKey === next.measurementKey &&
         Math.abs(current.width - next.width) < 0.01 &&
         Math.abs(current.height - next.height) < 0.01 &&
         current.lineCount === next.lineCount &&
@@ -1396,25 +1531,61 @@ function useIntrinsicTextGeometry(
         Math.abs(current.boxes.clipping.height - next.boxes.clipping.height) < 0.01 &&
         Math.abs(current.boxes.clipping.width - next.boxes.clipping.width) < 0.01
           ? current
-          : next,
-      );
+          : next;
+      publicationValidation.current = publicationKey;
+      cached.current = {
+        value,
+        inputs: readMountedTextMeasurementInputs(element, paint),
+        fontSignature: runtimeFontFaceSignature(fontIdentity.family, fontIdentity.weight, fontIdentity.style),
+      };
+      setMeasurement(value);
       range.detach();
     };
     const scheduleMeasure = () => {
+      if (disposed) return;
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(measure);
     };
-    scheduleMeasure();
     const observer =
       typeof ResizeObserver === "undefined"
         ? null
-        : new ResizeObserver(scheduleMeasure);
+        : new ResizeObserver(() => {
+            if (disposed) return;
+            const current = cached.current, paint = paintRef.current;
+            // Observer creation and the trim commit can deliver a resize after
+            // this exact sample was already validated. Reuse only complete,
+            // current mounted inputs and the same loaded face. Font events
+            // still schedule unconditionally; unknown inputs never skip work.
+            if (current?.value.fontState === "exact" && paint &&
+                document.fonts?.status === "loaded" &&
+                current.fontSignature === runtimeFontFaceSignature(fontIdentity.family, fontIdentity.weight, fontIdentity.style) &&
+                canReuseTextMeasurement(current.value.measurementKey, measurementKey, current.inputs,
+                  readMountedTextMeasurementInputs(element, paint))) return;
+            scheduleMeasure();
+          });
     observer?.observe(element);
     observer?.observe(paint);
-    void document.fonts?.ready.then(scheduleMeasure);
+    refreshMeasurement.current = measure;
+    // A fresh sample of the current DOM can complete before this commit paints.
+    // This never reuses changed text: unknown constraints or unavailable faces
+    // retain the asynchronous pending/fallback path and native freshness guards.
+    let sampledBeforePaint = false;
+    if (!reusable) {
+      if (resolveVerticalTextTrimMode(verticalTrimSource) === "cap-height-to-baseline" &&
+          (exactFontFaceLoaded(fontIdentity.family, fontIdentity.weight, fontIdentity.style) || approvedReplacement) &&
+          readMountedTextMeasurementInputs(element, paint) !== null) {
+        measure();
+        sampledBeforePaint = true;
+      }
+      else scheduleMeasure();
+    }
+    if (!reusable && (!sampledBeforePaint || cached.current?.value.fontState !== "exact" || document.fonts?.status !== "loaded"))
+      void document.fonts?.ready.then(scheduleMeasure);
     document.fonts?.addEventListener?.("loadingdone", scheduleMeasure);
     return () => {
       disposed = true;
+      if (refreshMeasurement.current === measure) refreshMeasurement.current = null;
+      publicationValidation.current = null;
       cancelAnimationFrame(frame);
       observer?.disconnect();
       document.fonts?.removeEventListener?.("loadingdone", scheduleMeasure);
@@ -1428,17 +1599,162 @@ function useIntrinsicTextGeometry(
     fontIdentity.weight,
     lineHeightPx,
     measurementKey,
+    publicationKey,
     paintRef,
     verticalTrimSource,
   ]);
 
-  return measurement;
+  // Applying the current trim wrapper or HUG width changes the measured DOM.
+  // Validate that new commit before paint too; do not wait for ResizeObserver's
+  // next frame or publish the preceding sample for the new constraints.
+  useLayoutEffect(() => {
+    if (resolveVerticalTextTrimMode(verticalTrimSource) !== "cap-height-to-baseline" ||
+        !measurement || cached.current?.value !== measurement ||
+        !boxRef.current || !paintRef.current) return;
+    const inputs = readMountedTextMeasurementInputs(boxRef.current, paintRef.current);
+    if (inputs === cached.current.inputs) return;
+    publicationValidation.current = null;
+    if (inputs !== null &&
+        (exactFontFaceLoaded(fontIdentity.family, fontIdentity.weight, fontIdentity.style) || approvedReplacement)) {
+      refreshMeasurement.current?.();
+    } else {
+      cached.current = null;
+      setMeasurement(null);
+    }
+  }, [measurement, verticalTrimSource, approvedReplacement, boxRef, paintRef, fontIdentity.family, fontIdentity.weight, fontIdentity.style]);
+
+  return measurement?.measurementKey === measurementKey ? measurement : null;
 }
 
-export function PackageNodeRenderer({
+function useRenderedTextLineObservation(
+  boxRef: RefObject<HTMLDivElement | null>,
+  paintRef: RefObject<HTMLSpanElement | null>,
+  enabled: boolean,
+  measurementKey: string,
+  publicationKey: TextMeasurementPublicationIdentity,
+  fontIdentity: { family: string | null; weight: number; style: string },
+  approvedReplacement: boolean,
+): { lineCount: number; fontState: IntrinsicTextMeasurementV1["fontState"]; measurementKey: string; isPublicationValidated: (key: TextMeasurementPublicationIdentity) => boolean } | null {
+  const [observation, setObservation] = useState<{
+    lineCount: number;
+    fontState: IntrinsicTextMeasurementV1["fontState"];
+    measurementKey: string;
+    isPublicationValidated: (key: TextMeasurementPublicationIdentity) => boolean;
+  } | null>(null);
+  const publicationValidation = useRef<TextMeasurementPublicationIdentity | null>(null);
+  const cached = useRef<{ value: NonNullable<typeof observation>; inputs: string | null } | null>(null);
+  useLayoutEffect(() => {
+    if (!enabled || !boxRef.current || !paintRef.current) {
+      publicationValidation.current = null;
+      cached.current = null;
+      setObservation(null);
+      return;
+    }
+    const box = boxRef.current;
+    const paint = paintRef.current;
+    const inputs = cached.current?.value.measurementKey === measurementKey
+      ? readMountedTextMeasurementInputs(box, paint)
+      : null;
+    const reusable = cached.current && canReuseTextMeasurement(cached.current.value.measurementKey, measurementKey, cached.current.inputs, inputs);
+    if (reusable && cached.current) {
+      publicationValidation.current = publicationKey;
+    } else {
+      publicationValidation.current = null;
+      cached.current = null;
+      setObservation(null);
+    }
+    let disposed = false;
+    let frame = 0;
+    let observedPaint = paint;
+    const measure = () => {
+      const paint = paintRef.current;
+      if (disposed || boxRef.current !== box || !box.isConnected || !paint?.isConnected) return;
+      if (paint !== observedPaint) {
+        observer?.unobserve(observedPaint);
+        observer?.observe(paint);
+        observedPaint = paint;
+      }
+      const range = document.createRange();
+      range.selectNodeContents(paint);
+      const rects = Array.from(range.getClientRects()).filter(
+        (rect) => rect.width > 0 || rect.height > 0,
+      );
+      const computed = getComputedStyle(box);
+      const lineHeight = Number.parseFloat(computed.lineHeight) || 16;
+      const canvasElement = box.closest<HTMLElement>("[data-template-package-canvas]");
+      const canvasRect = canvasElement?.getBoundingClientRect();
+      const canvasLogicalHeight = canvasElement
+        ? Number.parseFloat(getComputedStyle(canvasElement).height)
+        : 0;
+      const scaleY = canvasRect && canvasLogicalHeight > 0
+        ? canvasRect.height / canvasLogicalHeight
+        : 1;
+      const tolerance = Math.max(1, lineHeight * (scaleY || 1) * 0.2);
+      const tops: number[] = [];
+      for (const top of rects.map((rect) => rect.top).sort((left, right) => left - right)) {
+        if (!tops.some((candidate) => Math.abs(candidate - top) <= tolerance)) tops.push(top);
+      }
+      const lineCount = Math.max(1, tops.length);
+      const text = paint.textContent ?? "";
+      const exact = exactFontFaceLoaded(fontIdentity.family, fontIdentity.weight, fontIdentity.style);
+      const fontState: IntrinsicTextMeasurementV1["fontState"] = exact
+        ? "exact"
+        : approvedReplacement
+          ? "approved-replacement"
+          : document.fonts?.check(
+                `${computed.fontStyle} ${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`,
+                text.slice(0, 128),
+              )
+            ? "fallback"
+            : "unavailable";
+      const next = { lineCount, fontState, measurementKey, isPublicationValidated: (key: TextMeasurementPublicationIdentity) => publicationValidation.current === key && cached.current?.value.measurementKey === measurementKey };
+      publicationValidation.current = publicationKey;
+      cached.current = { value: next, inputs: readMountedTextMeasurementInputs(box, paint) };
+      setObservation((current) =>
+        current?.measurementKey === measurementKey && current.lineCount === lineCount && current.fontState === fontState
+          ? current
+          : next,
+      );
+      range.detach();
+    };
+    const schedule = () => {
+      if (disposed) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(schedule);
+    observer?.observe(box);
+    observer?.observe(paint);
+    if (!reusable) schedule();
+    if (!reusable) void document.fonts?.ready.then(schedule);
+    document.fonts?.addEventListener?.("loadingdone", schedule);
+    document.fonts?.addEventListener?.("loadingerror", schedule);
+    return () => {
+      disposed = true;
+      publicationValidation.current = null;
+      cancelAnimationFrame(frame);
+      observer?.disconnect();
+      document.fonts?.removeEventListener?.("loadingdone", schedule);
+      document.fonts?.removeEventListener?.("loadingerror", schedule);
+    };
+  }, [approvedReplacement, boxRef, enabled, fontIdentity.family, fontIdentity.style, fontIdentity.weight, measurementKey, publicationKey, paintRef]);
+  return observation?.measurementKey === measurementKey ? observation : null;
+}
+
+export function PackageNodeRenderer(props: PackageNodeRendererProps) {
+  const participation = props.runtime?.route.nodes[props.node.id]?.participation;
+  const visibleWithoutRuntime = props.resolvedNode
+    ? props.resolvedNode.appearance.visible
+    : props.node.appearance.visible !== false;
+  if (participation ? participation !== "active" : !visibleWithoutRuntime) return null;
+  return <ActivePackageNodeRenderer {...props} />;
+}
+
+function ActivePackageNodeRenderer({
   node,
   packageValue,
   parentLayoutMode,
+  parentSizing,
   mode = "static",
   isRoot = false,
   parentConstraintBounds,
@@ -1449,6 +1765,7 @@ export function PackageNodeRenderer({
   highlightNodeIds = [],
   motionTransforms,
   runtime,
+  textLineEvidenceNodeIds,
 }: PackageNodeRendererProps) {
   const nodeElementRef = useRef<HTMLDivElement>(null);
   const textPaintRef = useRef<HTMLSpanElement>(null);
@@ -1457,6 +1774,7 @@ export function PackageNodeRenderer({
     node,
     packageValue,
     parentLayoutMode,
+    parentSizing,
     isRoot,
     mode,
     parentConstraintBounds,
@@ -1464,8 +1782,15 @@ export function PackageNodeRenderer({
     motionTransforms?.[node.id],
   );
   const parentMaskRelationships = (resolvedTree?.maskRelationships ?? []).filter(
-    (relationship) => relationship.parentId === node.id,
+    (relationship) =>
+      relationship.parentId === node.id &&
+      runtime?.route.nodes[relationship.maskSourceId]?.participation !== "excluded-self" &&
+      runtime?.route.nodes[relationship.maskSourceId]?.participation !== "excluded-ancestor",
   );
+  const fullParentMask = parentMaskRelationships.find(
+    (relationship) => ownsFullParentMaskBoundary(packageValue, relationship),
+  ) ?? null;
+  if (fullParentMask) style.clipPath = "inset(0px)";
   const affectedMask = (resolvedTree?.maskRelationships ?? [])
     .map((relationship) => ({
       relationship,
@@ -1474,11 +1799,16 @@ export function PackageNodeRenderer({
     .find((entry) => Boolean(entry.affected));
   const exactMaskApplication = affectedMask?.relationship.status === "valid" &&
     affectedMask.relationship.renderStrategy === "css-clip-path" &&
+    runtime?.route.nodes[affectedMask.relationship.maskSourceId]?.participation !== "excluded-self" &&
+    runtime?.route.nodes[affectedMask.relationship.maskSourceId]?.participation !== "excluded-ancestor" &&
     backendDecisionOwns(resolvedNode?.backendDecision, "mask-css-clip") &&
     affectedMask.affected?.clipInsets
       ? affectedMask
       : null;
-  if (exactMaskApplication?.affected?.clipInsets) {
+  const usesFullParentMask = exactMaskApplication
+    ? ownsFullParentMaskBoundary(packageValue, exactMaskApplication.relationship)
+    : false;
+  if (exactMaskApplication?.affected?.clipInsets && !usesFullParentMask) {
     const { top, right, bottom, left } = exactMaskApplication.affected.clipInsets;
     style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px)`;
   }
@@ -1514,36 +1844,67 @@ export function PackageNodeRenderer({
       trimFontRequirement.resolution.match === "replacement" ||
       trimFontRequirement.resolution.match === "fallback"),
   );
+  const faceSignature = resolvedText ? runtimeFontFaceSignature(
+    resolvedText.runtimeFontFamily ?? resolvedText.fontFamily,
+    resolvedText.fontWeight, resolvedText.fontStyle,
+  ) : null;
+  const runRequirements = useMemo(() => node.type === "TEXT"
+    ? packageValue.fontRequirements?.filter(requirement => requirement.usedBy.includes(node.id)) ?? []
+    : [], [node.id, node.type, packageValue.fontRequirements]);
+  const runFaceSignatures = runRequirements.map(requirement => {
+    const family = requirement.resolution?.runtimeFamily ?? requirement.family;
+    return family === (resolvedText?.runtimeFontFamily ?? resolvedText?.fontFamily) &&
+      requirement.weight === resolvedText?.fontWeight && requirement.cssStyle === resolvedText?.fontStyle
+      ? faceSignature
+      : runtimeFontFaceSignature(family, requirement.weight, requirement.cssStyle);
+  }).join("|");
+  const parentInputKey = JSON.stringify([parentLayoutMode, parentSizing, parentConstraintBounds]);
+  // Canonical/resolved objects are immutable, as required by the existing
+  // scene/runtime caches. Availability signatures stay live on every render.
+  const measurementInputKey = useMemo(() => node.type === "TEXT" ? textMeasurementInputKey({
+    node,
+    text: resolvedText,
+    layout: resolvedNode?.layout,
+    font: trimFontRequirement,
+    parentInputKey,
+    runRequirements,
+    runFaceSignatures,
+    faceSignature,
+    verticalTrimSource,
+    approvedReplacement,
+  }) : node.id, [node, resolvedText, resolvedNode?.layout, trimFontRequirement,
+    parentInputKey, runRequirements, runFaceSignatures, faceSignature, verticalTrimSource, approvedReplacement]);
+  // The native revision remains opaque. A stable local token avoids assembling
+  // and comparing its potentially large string again for every publication.
+  const measurementPublicationKey = useMemo(() => ({
+    revision: runtime?.revision ?? "none",
+    generation: runtime?.publicationGeneration ?? 0,
+  }), [runtime?.revision, runtime?.publicationGeneration]);
   const intrinsicTextGeometry = useIntrinsicTextGeometry(
     nodeElementRef,
     textPaintRef,
     measuresIntrinsicText,
-    resolvedText
-      ? [
-          resolvedText.characters,
-          resolvedText.cssFontFamily,
-          resolvedText.fontWeight,
-          resolvedText.fontStyle,
-          resolvedText.fontSizePx,
-          resolvedText.lineHeightPx,
-          resolvedText.letterSpacingPx,
-          resolvedText.paragraphSpacingPx,
-          runtimeFontFaceSignature(
-            resolvedText.runtimeFontFamily ?? resolvedText.fontFamily,
-            resolvedText.fontWeight,
-            resolvedText.fontStyle,
-          ),
-          resolvedNode?.layout.horizontal.mode,
-          resolvedNode?.layout.horizontal.max,
-        ].join("|")
-      : node.type === "TEXT"
-        ? JSON.stringify(node.text)
-        : node.id,
+    measurementInputKey,
+    measurementPublicationKey,
     resolvedText?.lineHeightPx ?? 16,
     verticalTrimSource,
     {
       family:
         resolvedText?.runtimeFontFamily ?? resolvedText?.fontFamily ?? null,
+      weight: resolvedText?.fontWeight ?? 400,
+      style: resolvedText?.fontStyle ?? "normal",
+    },
+    approvedReplacement,
+  );
+  const requestsLineEvidence = Boolean(textLineEvidenceNodeIds?.has(node.id));
+  const fixedTextLineObservation = useRenderedTextLineObservation(
+    nodeElementRef,
+    textPaintRef,
+    requestsLineEvidence && !measuresIntrinsicText,
+    measurementInputKey,
+    measurementPublicationKey,
+    {
+      family: resolvedText?.runtimeFontFamily ?? resolvedText?.fontFamily ?? null,
       weight: resolvedText?.fontWeight ?? 400,
       style: resolvedText?.fontStyle ?? "normal",
     },
@@ -1559,13 +1920,25 @@ export function PackageNodeRenderer({
     runtime.route.nodes[node.id]?.routed,
   );
   useEffect(() => {
-    if (!runtime || !eligibleTextMeasurement || !intrinsicTextGeometry || !preliminaryRuntimeNode || !resolvedText) return;
-    const { paintOffsetY: _paintOffsetY, ...measurement } = intrinsicTextGeometry;
+    if (!runtime || !eligibleTextMeasurement || !intrinsicTextGeometry || !intrinsicTextGeometry.isPublicationValidated(measurementPublicationKey) || !preliminaryRuntimeNode || !resolvedText) return;
+    const { paintOffsetY: _paintOffsetY, measurementKey: _measurementKey, isPublicationValidated: _isPublicationValidated, ...measurement } = intrinsicTextGeometry;
     runtime.publishTextMeasurement({
       nodeId: node.id,
       ...measurement,
     });
-  }, [eligibleTextMeasurement, intrinsicTextGeometry, node.id, preliminaryRuntimeNode, resolvedText, runtime]);
+  }, [eligibleTextMeasurement, intrinsicTextGeometry, measurementPublicationKey, node.id, preliminaryRuntimeNode, resolvedText, runtime]);
+  useEffect(() => {
+    if (!runtime || !requestsLineEvidence) return;
+    const accepted = intrinsicTextGeometry ?? fixedTextLineObservation;
+    if (!accepted || !accepted.isPublicationValidated(measurementPublicationKey)) return;
+    const observation = intrinsicTextGeometry
+      ? { lineCount: intrinsicTextGeometry.lineCount, fontState: intrinsicTextGeometry.fontState }
+      : fixedTextLineObservation
+        ? { lineCount: fixedTextLineObservation.lineCount, fontState: fixedTextLineObservation.fontState }
+        : null;
+    if (!observation) return;
+    runtime.publishTextLineObservation({ nodeId: node.id, ...observation });
+  }, [fixedTextLineObservation, intrinsicTextGeometry, measurementPublicationKey, node.id, requestsLineEvidence, runtime]);
   if (typeof document !== "undefined" && runtime?.route.nodes[node.id]?.routed && preliminaryRuntimeNode && !runtimeAuthoritative) {
     style.width = preliminaryRuntimeNode.bounds.width;
   }
@@ -1586,6 +1959,15 @@ export function PackageNodeRenderer({
     );
     style.height = resolvedHugHeight;
     style.minHeight = resolvedHugHeight;
+  }
+  if (
+    intrinsicTextGeometry &&
+    node.sizing.horizontal.mode === "HUG" &&
+    !runtimeAuthoritative
+  ) {
+    // The browser's fit-content width counts terminal letter spacing. Use the
+    // measured glyph-gap width for the text box and its HUG ancestors alike.
+    style.width = intrinsicTextGeometry.width;
   }
   const childIds = resolvedNode?.children ?? node.children;
   const childNodes = childIds
@@ -1743,26 +2125,49 @@ export function PackageNodeRenderer({
       "characters" in node.text &&
       node.text.styleRanges?.length
     ) {
-      content = [...node.text.styleRanges]
-        .sort((left, right) => left.start - right.start)
-        .map((range, index) => (
-          <span
-            key={`${range.start}:${range.end}:${index}`}
-            style={{
-              fontFamily: resolvedTextRunFontFamily(
-                packageValue,
-                node.id,
-                range.family,
-                range.weight,
-                range.cssStyle,
-              ),
-              fontStyle: range.cssStyle,
-              fontWeight: range.weight,
-            }}
-          >
-            {resolvedContent.slice(range.start, range.end)}
-          </span>
-        ));
+      const ranges = [...node.text.styleRanges]
+        .sort((left, right) => left.start - right.start || left.end - right.end);
+      const segments: Array<{
+        start: number;
+        end: number;
+        range: typeof ranges[number] | null;
+      }> = [];
+      let cursor = 0;
+      for (const range of ranges) {
+        const start = Math.max(cursor, Math.min(resolvedContent.length, range.start));
+        const end = Math.max(start, Math.min(resolvedContent.length, range.end));
+        if (start > cursor) segments.push({ start: cursor, end: start, range: null });
+        if (end > start) segments.push({ start, end, range });
+        cursor = end;
+      }
+      if (cursor < resolvedContent.length) {
+        // Edited text beyond imported run bounds inherits the final adjacent
+        // run, matching how Figma extends formatting while retaining the
+        // immutable source ranges on the base package.
+        segments.push({
+          start: cursor,
+          end: resolvedContent.length,
+          range: ranges[ranges.length - 1] ?? null,
+        });
+      }
+      content = segments.map(({ start, end, range }, index) => (
+        <span
+          key={`${start}:${end}:${index}`}
+          style={range ? {
+            fontFamily: resolvedTextRunFontFamily(
+              packageValue,
+              node.id,
+              range.family,
+              range.weight,
+              range.cssStyle,
+            ),
+            fontStyle: range.cssStyle,
+            fontWeight: range.weight,
+          } : undefined}
+        >
+          {resolvedContent.slice(start, end)}
+        </span>
+      ));
     }
     if (
       editableTextField?.behavior?.onOverflow === "shrink-to-fit" &&
@@ -1903,9 +2308,10 @@ export function PackageNodeRenderer({
     (paint) => paint.type === "GRADIENT_LINEAR",
   );
   const currentPrimitiveAppearance = hasCurrentOrResolvedDynamicPaintContract
-    ? resolvePrimitiveAppearance(node, {
+      ? resolvePrimitiveAppearance(node, {
         packageId: packageValue.packageId,
         rootNodeId: packageValue.rootNodeId,
+        source: packageValue.source,
         bounds: primitiveBounds,
         maskInput: node.mask?.isMask === true,
         hasMaskRelationship: hasPrimitiveMaskRelationship(packageValue, node.id),
@@ -1920,12 +2326,106 @@ export function PackageNodeRenderer({
     : currentPrimitiveAppearance ?? resolvePrimitiveAppearance(node, {
         packageId: packageValue.packageId,
         rootNodeId: packageValue.rootNodeId,
+        source: packageValue.source,
         bounds: primitiveBounds,
         maskInput: node.mask?.isMask === true,
         hasMaskRelationship: hasPrimitiveMaskRelationship(packageValue, node.id),
         ancestorClipChain: collectPrimitiveAncestorClipChain(packageValue, node),
       });
   let primitiveSvgContent: ReactNode = null;
+  const sourceCompositing = (resolvedNode as (ResolvedRenderNode & {
+    compositing?: ResolvedSourceCompositingV1 | null;
+  }) | undefined)?.compositing;
+  const compositingPaintOwner = sourceCompositing?.kind === "paint-stack" &&
+    resolvedNode?.backendDecision.owners.some((candidate) =>
+      candidate.capabilityId === "CMP-OPAQUE-SOLID-PAINT-STACK") === true;
+  const compositingGroupOwner = sourceCompositing?.kind === "group" &&
+    resolvedNode?.backendDecision.owners.some((candidate) =>
+      candidate.capabilityId === "CMP-OPAQUE-GROUP-BLEND") === true;
+  const mixedGradientOwner = sourceCompositing?.kind === "mixed-image-gradient" &&
+    resolvedNode?.backendDecision.owners.some((candidate) =>
+      candidate.capabilityId === "CMP-MIXED-IMAGE-DARKEN-GRADIENT") === true &&
+    backendDecisionOwns(resolvedNode.backendDecision, "media-dom") &&
+    Boolean(resolvedNode.image?.source) &&
+    resolvedNode.image?.renderMode !== "figma-image-transform";
+  let compositingPaintContent: ReactNode = null;
+  let mixedGradientContent: ReactNode = null;
+  if (compositingPaintOwner && sourceCompositing.kind === "paint-stack") {
+    // The ordered paint elements own the complete fill. Leaving the legacy
+    // background active would paint the first SOLID twice and make its blend
+    // see pink instead of the actual canvas/media backdrop.
+    style.backgroundColor = undefined;
+    compositingPaintContent = sourceCompositing.paints.map((paint) => (
+      <span
+        key={paint.sourceIndex}
+        aria-hidden="true"
+        data-package-compositing-paint={paint.sourceIndex}
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          backgroundColor: `rgb(${paint.color.r * 255} ${paint.color.g * 255} ${paint.color.b * 255})`,
+          opacity: paint.renderedOpacity,
+          mixBlendMode: paint.blendMode.toLowerCase() as CSSProperties["mixBlendMode"],
+        }}
+      />
+    ));
+  }
+  if (compositingGroupOwner && sourceCompositing.kind === "group") {
+    // PASS_THROUGH must not establish a stacking context. Its opacity has
+    // already been distributed into the non-overlapping child paint stacks.
+    style.opacity = sourceCompositing.mode === "PASS_THROUGH" ? 1 : sourceCompositing.opacity;
+    style.isolation = sourceCompositing.mode === "PASS_THROUGH" ? undefined : "isolate";
+    style.mixBlendMode = sourceCompositing.mode === "OVERLAY" ? "overlay" : undefined;
+  }
+  if (mixedGradientOwner && sourceCompositing.kind === "mixed-image-gradient") {
+    const sourceGradient = node.appearance.fills[sourceCompositing.gradientSourceIndex];
+    if (sourceGradient?.type === "GRADIENT_LINEAR") {
+      const geometry = resolveLinearGradientGeometry(
+        sourceGradient,
+        sourceCompositing.gradientSourceIndex,
+        primitiveBounds,
+        { allowDarkenBlend: true },
+      );
+      if (geometry.capability === "source-certified-linear-gradient" && geometry.svgGradientTransform) {
+        const gradientId = `${primitiveSvgIdPrefix}-mixed-${geometry.sourceRevision.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+        const matrix = geometry.svgGradientTransform;
+        mixedGradientContent = (
+          <svg
+            aria-hidden="true"
+            data-package-mixed-image-gradient={geometry.geometryRevision}
+            width="100%"
+            height="100%"
+            viewBox={`0 0 ${primitiveBounds.width} ${primitiveBounds.height}`}
+            style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none", mixBlendMode: "darken" }}
+          >
+            <defs>
+              <linearGradient
+                id={gradientId}
+                gradientUnits="userSpaceOnUse"
+                x1={0}
+                y1={0.5}
+                x2={1}
+                y2={0.5}
+                gradientTransform={`matrix(${matrix[0][0]} ${matrix[1][0]} ${matrix[0][1]} ${matrix[1][1]} ${matrix[0][2]} ${matrix[1][2]})`}
+                colorInterpolation="sRGB"
+              >
+                {geometry.stops.map((stop) => (
+                  <stop
+                    key={`${stop.sourceIndex}:${stop.position}`}
+                    offset={stop.position}
+                    stopColor={`rgb(${Math.round(stop.color.r * 255)}, ${Math.round(stop.color.g * 255)}, ${Math.round(stop.color.b * 255)})`}
+                    stopOpacity={stop.color.a * geometry.paintOpacity}
+                  />
+                ))}
+              </linearGradient>
+            </defs>
+            <rect x={0} y={0} width="100%" height="100%" fill={`url(#${gradientId})`} />
+          </svg>
+        );
+      }
+    }
+  }
   const centralPrimitiveOwner = Boolean(
     resolvedNode && (
       backendDecisionOwns(resolvedNode.backendDecision, "primitive-dom-css") ||
@@ -1988,6 +2488,7 @@ export function PackageNodeRenderer({
   return (
     <div
       ref={nodeElementRef}
+      className={node.type === "TEXT" ? "template-package-text-node" : undefined}
       data-package-node-id={node.id}
       data-package-node-name={resolvedNode?.name ?? node.name}
       data-package-node-type={node.type}
@@ -1998,6 +2499,10 @@ export function PackageNodeRenderer({
         resolvedNode?.renderStrategy
       }
       data-package-primitive-schema={primitiveAppearance.schemaVersion}
+      data-package-compositing-revision={sourceCompositing?.revision}
+      data-package-compositing-owner={compositingPaintOwner
+        ? "ordered-paint-dom"
+        : compositingGroupOwner ? "group-dom" : mixedGradientOwner ? "mixed-image-gradient-dom" : undefined}
       data-package-primitive-ownership={primitiveAppearance.ownership}
       data-package-primitive-backend={primitiveAppearance.backend}
       data-package-primitive-source-revision={primitiveAppearance.sourceRevision}
@@ -2246,7 +2751,14 @@ export function PackageNodeRenderer({
       data-package-mask-type={affectedMask?.relationship.maskType}
       data-package-mask-capability={affectedMask?.relationship.capability}
       data-package-mask-render-strategy={affectedMask?.relationship.renderStrategy}
-      data-package-mask-clip-insets={exactMaskApplication?.affected?.clipInsets
+      data-package-mask-clip-owner={fullParentMask
+        ? "full-parent"
+        : usesFullParentMask
+          ? "full-parent-ancestor"
+          : exactMaskApplication
+            ? "affected-node"
+            : undefined}
+      data-package-mask-clip-insets={exactMaskApplication?.affected?.clipInsets && !usesFullParentMask
         ? JSON.stringify(exactMaskApplication.affected.clipInsets)
         : undefined}
       data-package-mask-parent-relationships={parentMaskRelationships.length
@@ -2342,8 +2854,10 @@ export function PackageNodeRenderer({
       }
       style={style}
     >
+      {compositingPaintContent}
       {primitiveSvgContent}
       {imageContent}
+      {mixedGradientContent}
       {content}
       {fallbackPlaceholder}
       {debugOverlay ? (
@@ -2392,6 +2906,10 @@ export function PackageNodeRenderer({
           parentLayoutMode={
             resolvedNode?.layout.mode ?? node.layout.mode
           }
+          parentSizing={{
+            horizontal: resolvedNode?.layout.horizontal ?? node.sizing.horizontal,
+            vertical: resolvedNode?.layout.vertical ?? node.sizing.vertical,
+          }}
           mode={mode}
           parentConstraintBounds={
             providesLiveConstraintContext
@@ -2405,6 +2923,7 @@ export function PackageNodeRenderer({
           highlightNodeIds={highlightNodeIds}
           motionTransforms={motionTransforms}
           runtime={runtime}
+          textLineEvidenceNodeIds={textLineEvidenceNodeIds}
         />
       ))}
     </div>
@@ -2422,6 +2941,8 @@ export function TemplatePackageRenderer({
   motionRenderMode = "playback",
   onAssetLoadError,
   onRenderIdentity,
+  textLineEvidenceRequests = [],
+  onTextLineEvidence,
 }: TemplatePackageRendererProps) {
   let resolvedTree = suppliedResolvedTree;
   let primitiveTreeStatus: "current" | "recomputed-stale" = "current";
@@ -2432,6 +2953,18 @@ export function TemplatePackageRenderer({
     suppliedResolvedTree &&
     suppliedResolvedTree.primitiveTreeRevision !== primitiveTreeRevision(packageValue),
   );
+  const compositingTreeStale = Boolean(suppliedResolvedTree && (() => {
+    const current = resolveSourceCompositing(packageValue);
+    const existing = Object.values(suppliedResolvedTree.nodes).flatMap((node) => {
+      const contract = (node as ResolvedRenderNode & {
+        compositing?: ResolvedSourceCompositingV1 | null;
+      }).compositing;
+      return contract ? [[node.id, contract.revision] as const] : [];
+    });
+    return existing.length !== Object.keys(current).length || existing.some(
+      ([nodeId, revision]) => current[nodeId]?.revision !== revision,
+    );
+  })());
   if (primitiveTreeStale) primitiveTreeStatus = "recomputed-stale";
   let maskTreeStale = false;
   if (suppliedResolvedTree && packageValue.maskRelationships) {
@@ -2444,7 +2977,7 @@ export function TemplatePackageRenderer({
       maskTreeStatus = "recomputed-stale";
     }
   }
-  if (primitiveTreeStale || maskTreeStale) {
+  if (primitiveTreeStale || maskTreeStale || compositingTreeStale) {
     resolvedTree = createResolvedRenderTree(packageValue);
   }
   if (resolvedTree === undefined) {
@@ -2470,11 +3003,47 @@ export function TemplatePackageRenderer({
       runtime.settled.settlementId,
       runtime.settled.revision,
       runtime.settled.readiness,
+      runtime.publicationGeneration,
     ],
   );
   useEffect(() => {
     if (productRenderIdentity) onRenderIdentity?.(productRenderIdentity);
   }, [onRenderIdentity, productRenderIdentity]);
+  const textLineEvidenceNodeIds = useMemo(
+    () => new Set(textLineEvidenceRequests.map((request) => request.nodeId)),
+    [textLineEvidenceRequests],
+  );
+  useEffect(() => {
+    if (!onTextLineEvidence || !productRenderIdentity) return;
+    for (const request of textLineEvidenceRequests) {
+      const participation = runtime.route.nodes[request.nodeId]?.participation;
+      if (participation && participation !== "active") {
+        onTextLineEvidence({
+          ...request,
+          participation: "structurally-excluded",
+          reliability: "reliable",
+          settlementRevision: productRenderIdentity.settlementRevision,
+          fontRevision: productRenderIdentity.fontRevision,
+          publicationGeneration: runtime.publicationGeneration,
+        });
+        continue;
+      }
+      const observation = runtime.textLineObservations[request.nodeId];
+      const current = observation?.revision === runtime.revision &&
+        observation.publicationGeneration === runtime.publicationGeneration;
+      const reliable = current && observation.fontState !== "unavailable" &&
+        productRenderIdentity.readiness === "ready";
+      onTextLineEvidence({
+        ...request,
+        participation: "active",
+        ...(current ? { measuredVisualLines: observation.lineCount } : {}),
+        reliability: reliable ? "reliable" : "pending",
+        settlementRevision: productRenderIdentity.settlementRevision,
+        fontRevision: productRenderIdentity.fontRevision,
+        publicationGeneration: runtime.publicationGeneration,
+      });
+    }
+  }, [onTextLineEvidence, productRenderIdentity, runtime.publicationGeneration, runtime.revision, runtime.route.nodes, runtime.textLineObservations, textLineEvidenceRequests]);
   const canvasRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -2489,10 +3058,19 @@ export function TemplatePackageRenderer({
         fallbackBoundaries: runtime.settled.fallbackBoundaries,
         backendDecisionRevision: resolvedTree?.backendDecisionRevision ?? null,
         backendAvailability: resolvedTree?.backendAvailability ?? null,
-        backendDecisions: resolvedTree?.nodeOrder.map(
-          (nodeId) => resolvedTree.nodes[nodeId].backendDecision,
-        ) ?? [],
+        backendDecisions: resolvedTree?.nodeOrder
+          .filter((nodeId) => runtime.route.nodes[nodeId]?.participation === "active")
+          .map((nodeId) => resolvedTree.nodes[nodeId].backendDecision) ?? [],
         productRenderIdentity,
+        ...(runtime.publicationGeneration
+          ? { publicationGeneration: runtime.publicationGeneration }
+          : {}),
+        ...(runtime.route.excludedNodeIds.length
+          ? {
+              structurallyExcludedNodeIds: runtime.route.excludedNodeIds,
+              structuralExclusionRootIds: runtime.route.exclusionRootIds,
+            }
+          : {}),
       },
     });
     return () => {
@@ -2519,7 +3097,11 @@ export function TemplatePackageRenderer({
           node,
         ): node is ResolvedRenderNode & {
           image: NonNullable<ResolvedRenderNode["image"]>;
-        } => Boolean(node.image?.assetId && node.image.source),
+        } => Boolean(
+          node.image?.assetId &&
+          node.image.source &&
+          runtime.route.nodes[node.id]?.participation === "active",
+        ),
       )
     : [];
   return (
@@ -2543,15 +3125,19 @@ export function TemplatePackageRenderer({
       data-package-product-export-safety={productRenderIdentity?.exportSafety}
       data-package-settlement-id={runtime.settled.settlementId}
       data-package-settlement-revision={runtime.revision}
+      data-package-settlement-generation={runtime.publicationGeneration || undefined}
       data-package-settlement-readiness={runtime.settled.readiness}
       data-package-routed-node-count={runtime.settled.routedNodeCount}
       data-package-compatibility-node-count={runtime.settled.compatibilityNodeCount}
+      data-package-structural-excluded-count={runtime.route.excludedNodeIds.length || undefined}
+      data-package-structural-exclusion-roots={runtime.route.exclusionRootIds.join(",") || undefined}
       data-package-settlement-iterations={runtime.settled.iterationCount}
       data-package-settlement-measurements={runtime.settled.measurementCount}
       data-package-settlement-recomputed={runtime.settled.recomputedNodeIds.join(",")}
       data-package-settlement-fallbacks={runtime.settled.fallbackBoundaries.map((boundary) => `${boundary.nodeId}:${boundary.reasonCodes.join("+")}`).join(",") || undefined}
       data-package-mask-tree-status={maskTreeStatus}
       data-package-primitive-tree-status={primitiveTreeStatus}
+      data-package-compositing-tree-status={compositingTreeStale ? "recomputed-stale" : "current"}
       data-package-primitive-tree-revision={resolvedTree?.primitiveTreeRevision}
       data-package-primitive-canvas-revision={resolvedTree?.primitiveCanvas.revision}
       data-package-primitive-canvas-source={resolvedTree?.primitiveCanvas.sourceKind}
@@ -2582,6 +3168,7 @@ export function TemplatePackageRenderer({
           highlightNodeIds={highlightNodeIds}
           motionTransforms={motionTransforms}
           runtime={runtime}
+          textLineEvidenceNodeIds={textLineEvidenceNodeIds}
         />
       ) : null}
       {onAssetLoadError

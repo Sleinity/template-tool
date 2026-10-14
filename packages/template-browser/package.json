@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-browser",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Browser sessions, import workflows, persistence, readiness, and capture for templates and Template Families.",
   "license": "UNLICENSED",
   "repository": {
@@ -54,6 +54,10 @@
     "./enrichment": {
       "types": "./dist/enrichment.d.ts",
       "import": "./dist/enrichment.js"
+    },
+    "./session-internal": {
+      "types": "./dist/session-internal.d.ts",
+      "import": "./dist/session-internal.js"
     }
   },
   "publishConfig": {
@@ -61,7 +65,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts --sourcemap --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image",
+    "build": "tsup src/index.ts src/session-internal.ts src/session.ts src/importer.ts src/compatibility.ts src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/session-internal.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/family",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
@@ -70,5 +74,8 @@
     "ajv": "^8.20.0",
     "fflate": "^0.8.3",
     "html-to-image": "^1.11.13"
-  }
+  },
+  "sdkInternalExports": [
+    "./session-internal"
+  ]
 }

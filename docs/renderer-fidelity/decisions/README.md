@@ -4,6 +4,16 @@ Architecture decision records are append-only evidence. Supersede a record with 
 
 | ADR | Status | Decision |
 | --- | --- | --- |
+| [0096](0096-host-font-registry-is-render-and-export-authority.md) | Accepted | A borrowed host font registry is continuous authority for V2 rendering and PNG; committed publication and export guards reject abandoned work. |
+| [0095](0095-established-media-underlay-is-not-primitive-fallback.md) | Accepted | An established opaque SOLID-below-FILL/FIT image is not a degraded primitive SVG-stack fallback; active owners and pixels stay unchanged. |
+| [0090](0090-bounded-opaque-source-compositing-owner.md) | Accepted | One internal source-property-gated DOM owner paints the certified opaque Matrix and Matrix 2 blend/group subset; unsupported combinations stay on a coherent compatibility path. |
+| [0089](0089-live-figma-matrix2-confirms-paint-stack-and-bounded-overlay.md) | Accepted | Direct Figma inspection matches all 14 Matrix 2 paints and certifies three bounded group-Overlay image-interior samples; no runtime transfer. |
+| [0088](0088-matched-matrix-group-control-certifies-bounded-isolation.md) | Accepted | Matrix 2 certifies matched pass-through versus isolated group behavior and post-group opacity only over sampled opaque backdrops; no runtime transfer. |
+| [0087](0087-phase9-matrix-cover-source-does-not-certify-isolation.md) | Accepted | Matrix and Cover certify sampled opaque paint blending, but not group isolation or a production compositing owner. |
+| [0086](0086-svg-vector-assets-own-their-embedded-strokes.md) | Accepted | A rendered complete SVG vector owns its embedded stroke; its wrapper must not paint a duplicate CSS border. |
+| [0085](0085-singular-image-replacement-policy.md) | Accepted | Image fields declare one required replacement policy while imported placement remains source-authoritative. |
+| [0084](0084-full-parent-alpha-mask-owns-stable-parent-clip-boundary.md) | Accepted | A certified full-parent ALPHA mask owns the stable parent clip boundary across every surface. |
+| [0081](0081-studio-and-custom-hosts-share-v2-configuration-and-content-authority.md) | Accepted | Studio and custom hosts share V2 configuration, canonical content and renderer authority. |
 | [0001](0001-zip-first-offline-authority.md) | Accepted | ZIP-first offline rendering is authoritative |
 | [0002](0002-normalize-before-strict-validation.md) | Accepted | Normalize raw exporter data before strict canonical validation |
 | [0003](0003-optional-figma-enrichment.md) | Accepted | Figma enrichment is optional and non-blocking |
@@ -77,7 +87,22 @@ Architecture decision records are append-only evidence. Supersede a record with 
 | [0071](0071-semantic-first-product-path-supersedes-rollout-governance.md) | Accepted | One semantic-first product path uses automatic capability fallback, Validate, and harness-only comparison |
 | [0072](0072-source-certified-solid-linear-stacks-use-one-svg-owner.md) | Accepted | The exact SOLID-below-linear NORMAL pair uses one ordered SVG owner and shared primitive clip |
 | [0073](0073-backend-disposition-separates-ownership-from-fallback.md) | Accepted | Ownership implementation and actual fidelity fallback are separate resolved dispositions |
+| [0074](0074-exporter-061-canonical-solid-opacity-is-native-source-evidence.md) | Accepted | Clean exporter 0.6.1 canonical SOLID opacity is native resolved capability evidence without legacy repair provenance |
+| [0075](0075-template-package-v2-field-semantics-and-canonical-content-authority.md) | Accepted | TemplatePackageV2 owns seven typed field semantics, exact import bindings, portable order, and one-way canonical content authority |
+| [0076](0076-v2-field-content-reducer-and-materializer-are-single-core-authorities.md) | Accepted | One immutable Core reducer and one-way materializer own deterministic V2 field content semantics |
+| [0077](0077-v2-browser-session-persists-only-canonical-field-authority.md) | Accepted | V2 Browser, persistence, reimport, Family, and React lifecycles retain one canonical field-content authority |
+| [0078](0078-boolean-visibility-is-structural-participation-with-generation-safe-publication.md) | Accepted | Visibility is shared structural participation and async publication also requires a monotonic generation |
+| [0079](0079-family-image-framing-is-shared-content-with-sparse-variant-placement.md) | Accepted | Family Images share one asset/default placement and use sparse variant-only placement overrides |
+| [0080](0080-textarea-visual-lines-come-from-the-current-painted-text-layout.md) | Accepted | Current visible DOM text line boxes are the sole renderer-backed Textarea line authority |
+| [0081](0081-studio-and-custom-hosts-share-v2-configuration-and-content-authority.md) | Accepted | Studio and custom hosts share V2 configuration and content authority |
+| [0082](0082-boolean-fields-may-control-multiple-structural-targets.md) | Accepted | One Boolean may control multiple structural targets while nested editor controls follow participation |
+| [0083](0083-type-qualified-field-identity-and-shared-boolean-controls.md) | Accepted | Schema 2.1 uses type-qualified field IDs and compatible repeated Booleans share one control |
+| [0091](0091-cover-mixed-image-gradient-owner.md) | Accepted | Bounded source-indexed Cover IMAGE/DARKEN-gradient visual ownership |
+| [0092](0092-observational-mask-settlement-delegates-existing-authority.md) | Accepted, observational only | Mask settlement delegates current canonical authority and retains complete dependency identity |
+| [0093](0093-mounted-text-input-validity-and-current-publication.md) | Accepted, bounded lifecycle | Mounted intrinsic-input reuse remains separate from current publication and settlement |
 
 The [Phase 7 paint/stroke completion audit](../PHASE_7_PAINT_STROKE_COMPLETION_AUDIT.md) remains a historical Result B sequencing record. The later ordered-SOLID intake closes its bounded source gate through Accepted ADR 0064, and Milestone 7.4 implements its singular owner under Accepted ADR 0065. Reference promotion remains separate.
 
 Use [TEMPLATE.md](TEMPLATE.md) for new records. Evidence must distinguish current code, automated coverage, browser verification, and intended architecture.
+
+| [0094](0094-fresh-text-measurement-before-paint.md) | Accepted, bounded lifecycle | Fresh current text measurement before paint and isolation from application transitions |

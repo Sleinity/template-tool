@@ -1,0 +1,64 @@
+--- a/packages/template-browser/src/session/templateSessionV2.ts
++++ b/packages/template-browser/src/session/templateSessionV2.ts
+@@ -1,5 +1,4 @@
+ import { retainSessionAssetUrls, sessionAssetUrlLeases } from "./sessionAssetUrlLeases";
+-import { createSerializedSaveQueue } from "./serializedSaveQueue";
+ import {
+   createResolvedRenderTree,
+   createTemplateFieldContentStateV1,
+@@ -353,7 +352,7 @@
+   let publicationLeaseBase = 0;
+   let snapshot = emptySnapshot();
+   let disposed = false;
+-  const saveQueue = createSerializedSaveQueue();
++  let saveTail: Promise<unknown> = Promise.resolve();
+   let recordGeneration = 0;
+   let reservedSaveId: string | undefined;
+   let controllerGeneration = 0;
+@@ -925,11 +924,12 @@
+       // Capture above, serialize writes below. Snapshot guards alone cannot stop
+       // an older repository write from overwriting a newer one.
+       const releaseSaveUrls = retainSessionAssetUrls(leasedUrls);
+-      const write = saveQueue.enqueue(() => {
++      const write = saveTail.then(() => {
+         assertActive();
+         if (generation !== recordGeneration) throw new Error("Save cancelled because another template was loaded or the session was reset.");
+         return repository.saveTemplateSessionV2(record);
+-      }, releaseSaveUrls);
++      }).finally(releaseSaveUrls);
++      saveTail = write.then(() => undefined, () => undefined);
+       const saved = await write;
+       if (!disposed && snapshot.operationRevision === operationRevision && snapshot.contentState?.revision === contentRevision) {
+         publish({ savedSessionId: saved.id });
+--- a/packages/template-browser/src/session/templateFieldFamilySessionV2.ts
++++ b/packages/template-browser/src/session/templateFieldFamilySessionV2.ts
+@@ -1,5 +1,4 @@
+ import { retainSessionAssetUrls, sessionAssetUrlLeases as familyAssetUrlLeases } from "./sessionAssetUrlLeases";
+-import { createSerializedSaveQueue } from "./serializedSaveQueue";
+ import {
+   createTemplateFieldContentStateV1,
+   getOrderedHostEditableFieldsV2,
+@@ -273,7 +272,7 @@
+   const fieldRenderValidation = new Map<string, FieldRenderValidationStatusV1>();
+   let snapshot = emptySnapshot();
+   let disposed = false;
+-  const saveQueue = createSerializedSaveQueue();
++  let saveTail: Promise<unknown> = Promise.resolve();
+   let recordGeneration = 0;
+   let controllerGeneration = 0;
+   let runtimeFonts: TemplateSessionReadinessV2["fonts"] = "not-required";
+@@ -1280,11 +1279,12 @@
+         description: saveOptions.description,
+       });
+       const releaseSaveUrls = retainSessionAssetUrls(leasedUrls);
+-      const write = saveQueue.enqueue(() => {
++      const write = saveTail.then(() => {
+         assertActive();
+         if (generation !== recordGeneration) throw new Error("Save cancelled because another family was loaded or the session was reset.");
+         return repository.saveTemplateFieldFamilyV3(record);
+-      }, releaseSaveUrls);
++      }).finally(releaseSaveUrls);
++      saveTail = write.then(() => undefined, () => undefined);
+       const saved = await write;
+       if (!disposed && generation === recordGeneration && snapshot.family?.id === saved.id) publish({ savedFamilyId: saved.id });
+       return saved;

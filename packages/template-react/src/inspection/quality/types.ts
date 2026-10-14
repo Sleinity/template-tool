@@ -4,6 +4,7 @@ import type {
   DiagnosticPresentation,
   DiagnosticResolution,
   PackageQualityCategory,
+  PackageQualityGate,
   PackageQualityHealth,
   PackageQualityIssue,
   PackageQualityLayer,
@@ -29,6 +30,8 @@ export interface PackageQualitySupplementalDiagnostic {
   ref?: string;
   relatedIds?: string[];
   suggestion?: string;
+  /** Optional lifecycle gates blocked by this supplemental finding. */
+  blocks?: PackageQualityGate[];
   details?: Record<string, unknown>;
 }
 

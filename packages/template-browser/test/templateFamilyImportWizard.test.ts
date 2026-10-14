@@ -45,6 +45,15 @@ function readyImport(sourceName: string): PackageImportResult {
       valid: true,
       figmaSource: null,
     },
+    layeredDiagnostics: {
+      canImport: true,
+      status: "ready",
+      diagnostics: [],
+      blockingDiagnostics: [],
+      warningDiagnostics: [],
+      infoDiagnostics: [],
+      layers: [],
+    },
   } as unknown as PackageImportResult;
 }
 
@@ -77,8 +86,9 @@ await wizard.loadFirstZip({
 });
 assert(
   wizard.getSnapshot().family?.variants.length === 1 &&
-    familySession.getSnapshot().status === "ready",
-  "The first ZIP must seed a ready family and its selected preview session.",
+    familySession.getSnapshot().status === "ready" &&
+    Object.values(wizard.getSnapshot().variantImports)[0]?.layeredDiagnostics?.canImport === true,
+  "The first ZIP must seed a ready family, retain layered diagnostics and load its selected preview session.",
 );
 
 await wizard.addVariant({
@@ -123,6 +133,55 @@ assert(
   wizard.getSnapshot().canContinue,
   "Every variant must receive a current sequential preview result before confirmation.",
 );
+const renamedFamily = structuredClone(wizard.getSnapshot().family!);
+renamedFamily.title = "Renamed family";
+renamedFamily.variants[0].title = "Renamed first variant";
+wizard.replaceFamily(renamedFamily);
+assert(
+  renamedFamily.variants.every(
+    (variant) => wizard.getSnapshot().renderValidation[variant.id]?.status === "ready",
+  ) && wizard.getSnapshot().canContinue,
+  "Changing only family presentation metadata must preserve current renderer evidence.",
+);
+const regroupedFamily = structuredClone(wizard.getSnapshot().family!);
+regroupedFamily.variantGroups = [{
+  id: "group:format",
+  title: "Format",
+  options: [
+    { id: "option:square", title: "Square" },
+    { id: "option:landscape", title: "Landscape" },
+  ],
+}];
+regroupedFamily.variants[0].groupAssignments = { "group:format": "option:square" };
+regroupedFamily.variants[1].groupAssignments = { "group:format": "option:landscape" };
+wizard.replaceFamily(regroupedFamily);
+assert(
+  regroupedFamily.variants.every(
+    (variant) => wizard.getSnapshot().renderValidation[variant.id]?.status === "ready",
+  ),
+  "Selection properties and tuple assignments must preserve unchanged per-variant renderer evidence.",
+);
+const changedRules = structuredClone(wizard.getSnapshot().family!);
+changedRules.fields[0].rule = {
+  ...changedRules.fields[0].rule,
+  constraints: { ...changedRules.fields[0].rule.constraints, maxCharacters: 12 },
+};
+wizard.replaceFamily(changedRules);
+assert(
+  changedRules.variants.every(
+    (variant) => wizard.getSnapshot().renderValidation[variant.id]?.status === "stale",
+  ) && !wizard.getSnapshot().canContinue,
+  "Changing shared field rules must invalidate renderer evidence before confirmation.",
+);
+for (const variant of changedRules.variants) {
+  wizard.selectPreviewVariant(variant.id);
+  wizard.publishRenderValidation({
+    variantId: variant.id,
+    status: "ready",
+    sessionRevision: familySession.renderSession.getSnapshot().revision,
+    issues: [],
+  });
+}
 wizard.next();
 const confirmation = await wizard.confirm();
 assert(
@@ -131,6 +190,11 @@ assert(
     await verifyTemplateFamilyImportConfirmation(confirmation),
   "Confirmation must freeze the family and verify every package plus the family-level digest.",
 );
+const historical = { ...structuredClone(confirmation), sdkVersion: "0.9.0" };
+assert(await verifyTemplateFamilyImportConfirmation(historical), "Historical 0.9.0 Family confirmations remain accepted without rewriting their digests.");
+assert(await verifyTemplateFamilyImportConfirmation({ ...historical, sdkVersion: "0.10.0" }), "Release metadata does not invalidate an otherwise supported confirmation schema and digest.");
+assert(!await verifyTemplateFamilyImportConfirmation({ ...historical, sdkVersion: "" }), "A confirmation must identify its producing release.");
+assert(confirmation.sdkVersion === "0.8.0", "New Family confirmations identify the actual SDK release.");
 const tampered = structuredClone(confirmation);
 tampered.family.title = "Tampered family";
 assert(

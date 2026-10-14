@@ -17,15 +17,31 @@ import {
   sceneSnapshotPath,
 } from "./core.mjs";
 import { resolveSceneModel } from "./model.mjs";
+import { gateFixtureSelection, readSdkGateCaptureRun } from "../fidelity/gate-profile.mjs";
 
 const [command = "compare", ...rest] = process.argv.slice(2);
 const args = parseArguments(rest);
 const manifest = loadManifest();
-const selected = selectFixtures(manifest, args.fixture);
+const selected = gateFixtureSelection(manifest, args) || selectFixtures(manifest, args.fixture);
 const runId = String(args["run-id"] || `scene-${new Date().toISOString().replace(/[:.]/g, "-")}`);
 const candidateRoot = resolve(String(args.output || join(sceneRoot, "candidates")), runId);
+const fidelityRunId = args["fidelity-run"] ? String(args["fidelity-run"]) : null;
+if (args.gate && (!fidelityRunId || fidelityRunId !== runId)) throw new Error("SDK gate scene run requires --fidelity-run matching --run-id.");
+const gateCapture = args.gate ? readSdkGateCaptureRun(join(repoRoot, "fidelity", "candidates"), fidelityRunId, selected) : null;
+if (fidelityRunId && !args.gate) {
+  const root = join(repoRoot, "fidelity", "candidates", fidelityRunId);
+  const sourceRun = JSON.parse(readFileSync(join(root, "run.json"), "utf8"));
+  const { captureRunIssues } = await import("../fidelity/capture-integrity.mjs");
+  const issues = captureRunIssues(sourceRun, selected.map(item => item.id), sourceRun.selectedSurfaces);
+  if (issues.length) throw new Error(`Scene source capture ${fidelityRunId} incomplete for selected fixtures: ${issues.join("; ")}`);
+}
 
 async function generate() {
+  if (fidelityRunId) {
+    mkdirSync(candidateRoot, { recursive: true });
+    const environment = gateCapture?.environment ?? JSON.parse(readFileSync(join(repoRoot, "fidelity", "candidates", fidelityRunId, "environment.json"), "utf8"));
+    writeFileSync(join(candidateRoot, "environment.json"), stableStringify(environment));
+  }
   const results = [];
   for (const fixture of selected) {
     const verified = verifyFixture(manifest, fixture);
@@ -47,7 +63,7 @@ async function generate() {
 
 async function baseline() {
   const results = await generate();
-  writeFileSync(join(candidateRoot, "run.json"), stableStringify({ schemaVersion: "scene-run-v1", runId, command: "baseline", fixtures: results.map(({ fixture, model }) => ({ fixtureId: fixture.id, zipSha256: fixture.zipSha256, valid: model.validation.valid, performance: model.performance, equivalenceSummary: model.equivalence.summary })) }));
+  writeFileSync(join(candidateRoot, "run.json"), stableStringify({ schemaVersion: "scene-run-v1", runId, gate: args.gate || null, sourceFidelityRun: fidelityRunId, command: "baseline", fixtures: results.map(({ fixture, model }) => ({ fixtureId: fixture.id, zipSha256: fixture.zipSha256, valid: model.validation.valid, performance: model.performance, equivalenceSummary: model.equivalence.summary })) }));
   if (results.some(({ model }) => !model.validation.valid)) process.exitCode = 1;
 }
 
@@ -60,7 +76,8 @@ async function compare() {
     const comparison = compareSceneSnapshot(approved, snapshot);
     return { fixtureId: fixture.id, status: comparison.equal ? "pass" : "fail", approvedPath, comparison };
   });
-  writeFileSync(join(candidateRoot, "comparison.json"), stableStringify({ schemaVersion: "scene-comparison-v1", runId, comparisons }));
+  writeFileSync(join(candidateRoot, "run.json"), stableStringify({ schemaVersion: "scene-run-v1", runId, gate: args.gate || null, sourceFidelityRun: fidelityRunId, command: "compare", fixtures: results.map(({ fixture, model }) => ({ fixtureId: fixture.id, zipSha256: fixture.zipSha256, valid: model.validation.valid, performance: model.performance, equivalenceSummary: model.equivalence.summary })) }));
+  writeFileSync(join(candidateRoot, "comparison.json"), stableStringify({ schemaVersion: "scene-comparison-v1", runId, gate: args.gate || null, sourceFidelityRun: fidelityRunId, comparisons }));
   comparisons.forEach((item) => console.log(`[scene] fixture=${item.fixtureId} comparison=${item.status}`));
   if (comparisons.some((item) => item.status !== "pass")) process.exitCode = 1;
 }

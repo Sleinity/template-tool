@@ -4,7 +4,7 @@ import type {
   TemplateNode,
   TemplatePackageV1,
 } from "@sleinity/template-core";
-import { resolvePackageAssetReference } from "@sleinity/template-core/renderer-internal";
+import { resolvePackageAssetReference, resolveSourceCompositing } from "@sleinity/template-core/renderer-internal";
 import {
   isEditorLiveResizableConstraintContainer,
   resolvePackageAbsoluteConstraints,
@@ -161,11 +161,13 @@ export function collectTemplatePackageRenderWarnings(
   mode: "static" | "editor" = "static",
 ): TemplatePackageRenderWarning[] {
   const warnings: TemplatePackageRenderWarning[] = [];
+  const compositing = resolveSourceCompositing(packageValue);
 
   Object.values(packageValue.nodes).forEach((node: TemplateNode) => {
     const primitiveAppearance = resolvePrimitiveAppearance(node, {
       packageId: packageValue.packageId,
       rootNodeId: packageValue.rootNodeId,
+      source: packageValue.source,
       maskInput: node.mask?.isMask === true,
       hasMaskRelationship: hasPrimitiveMaskRelationship(packageValue, node.id),
       ancestorClipChain: collectPrimitiveAncestorClipChain(packageValue, node),
@@ -175,7 +177,8 @@ export function collectTemplatePackageRenderWarnings(
       primitiveAppearance.paints.orderedSolidStack?.capability !==
         "source-certified-ordered-solid-stack" &&
       primitiveAppearance.paints.orderedNormalPaintStack?.capability !==
-        "source-certified-solid-linear-normal-stack"
+        "source-certified-solid-linear-normal-stack" &&
+      compositing[node.id]?.kind !== "paint-stack"
     ) {
       warnings.push({
         code: primitiveAppearance.fallbackReasons[0] ?? "multiple-paint-compatibility-fallback",

@@ -1,8 +1,8 @@
+import { createSavedOutputDraftRecord } from "../../../../packages/template-browser/src/persistence/templateRepository";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import {
-  createSavedOutputDraftRecord,
   createSavedTemplateRecord,
 } from "@sleinity/template-browser/persistence";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
@@ -39,13 +39,10 @@ const markup = renderToStaticMarkup(
 );
 
 assert(
-  markup.includes("Add template") &&
+    markup.includes("Add template") &&
     markup.includes(`aria-label="Open template ${record.name}"`) &&
+    markup.includes(`aria-label="Actions for ${record.name}"`) &&
     !markup.includes(">Use template<") &&
-    markup.includes("Settings") &&
-    markup.includes("Duplicate") &&
-    markup.includes("Rename") &&
-    markup.includes("Delete") &&
     markup.includes("Recent drafts") &&
     markup.includes("Continue content you previously started") &&
     markup.includes(`${packageValue.canvas.width} × ${packageValue.canvas.height}`) &&

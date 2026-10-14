@@ -40,17 +40,17 @@ export const PageContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
   },
 );
 
-export function PageFooter({
+export const PageFooter = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function PageFooter({
   className,
   children,
   ...props
-}: HTMLAttributes<HTMLElement>) {
+}, ref) {
   return (
-    <footer {...props} className={cx("page-workspace__footer", className)}>
+    <footer ref={ref} {...props} className={cx("page-workspace__footer", className)}>
       {children}
     </footer>
   );
-}
+});
 
 export function SplitWorkspace({
   className,

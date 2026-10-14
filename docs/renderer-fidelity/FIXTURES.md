@@ -1,6 +1,70 @@
 # Renderer Fixture Registry
 
-The machine-readable authority is [`fidelity/fixtures.json`](../../fidelity/fixtures.json). It was verified on 2026-07-14 against exact external bytes. The default directory is `/Users/niels/Documents/Templates`; `TEMPLATE_PACKAGE_FIXTURE_DIR` may change only that directory. Resolution uses exact manifest filenames and fails on byte/hash/dimension/root/version mismatch. It never searches by a similar name.
+## Host font authority evidence
+
+R01 uses labelled synthetic single/Family packages and the unchanged, hash-verified Rethink Sans 600 binary for adapter and lifecycle coverage. These are not new source fixtures or certification. Exact Now Hiring, Cover and Carrousel bytes, fonts, approved references and tolerances remain protected. See [R01](../architecture/host-font-authority.md).
+
+## Carrousel media diagnostic verification
+
+The exact registered `exporter-061-carrousel` ZIP supplies one ordinary opaque
+SOLID → IMAGE field, bottom image `987:6823` identified by the user's
+issue packet. Its top and main image fields contain only IMAGE paints and remain
+unchanged. ADR 0095 corrects diagnostic applicability without changing those
+source paints or media output. Synthetic reversed/hidden/partial/CROP cases are
+contract coverage only. See [the report](../architecture/media-solid-underlay.md).
+
+## Text update lifecycle verification
+
+The exact active 0.6.1 Now Hiring, Cover and Carrousel inputs remain unchanged. Carrousel Date/subtitle is the transient regression; a Family assembled through public operations adds lifecycle coverage, not a new approved source fixture. Synthetic dependency mutations remain contract tests.
+
+
+## Current three-export gate (2026-10-07)
+
+The same exact Now Hiring, Cover and Carrousel ZIPs now pass all 12 renderer,
+three scene and 12 settlement comparisons in `sdk-061-mask-settlement-final-20261007a`.
+Carrousel's mask source `987:6813`, parent `987:6812`, and affected sibling
+`987:6814` supply source-certified observational evidence under ADR 0092;
+mask revision is `mask-v1:f31e9a18`. Unrounded source bounds and affected
+insets were verified before the unchanged snapshot normalization. All four
+Carrousel bundles are ready, source-reviewed and individually guarded-approved.
+The [tracked dispositions](../../fidelity/gates/sdk-061-dispositions.json)
+bind the decision to current hashes/environment. This supersedes the prior
+four-bundle blocker below; it does not approve general masks or Matrix research.
+
+The active Now Hiring, Cover, and Carrousel exporter 0.6.1 ZIPs were reviewed
+against two-pass `sdk-061-three-review-final-20261007a` evidence. Exact ZIP,
+`template.json`, preview, and font identities are pinned in the registry and
+run environment. ADR 0091 now owns Cover's source-indexed SOLID → IMAGE →
+DARKEN-gradient fade; the SVG arrow remains the sole vector-stroke owner.
+Source-sized preview comparisons changed 340, 2,830, and 1,817 pixels at the
+recorded comparator threshold, respectively. HUG text widths on all three
+now follow their exported source boxes within subpixel rounding. Twelve
+renderer references and three observational scene snapshots received
+individual guarded source reviews. Now Hiring and Cover settlement bundles
+are ready and approved; Carrousel's four remain unapproved because node
+`987:6813` has an unresolved observational `mask-range` dependency. The
+[tracked disposition](../../fidelity/gates/sdk-061-dispositions.json) records
+every surface and retains the gate's no-go state.
+
+For `exporter-061-compositing-matrix` and
+`exporter-061-compositing-group-control`, ADR 0090 supersedes the historical
+“no runtime authority” wording in their registry rows. A bounded opaque DOM
+owner now consumes the exact source paint/group values. Two-pass candidate
+captures show the flat-color regions matching the embedded preview; remaining
+strong differences localize to browser-sampled photographic regions. Renderer,
+scene, and settlement references are still unapproved. This does not promote
+these exploratory research fixtures to the active SDK gate.
+
+## Field Rules V2 Studio/host product evidence
+
+`pnpm field-rules:studio` uses the repository-contained compact exporter fixture
+with explicit product-authored V2 fields to exercise actual Studio, Family and
+independent public-host configuration/edit/reload/reimport/PNG lifecycles. Its
+report is `fidelity/evidence/field-rules-v2-studio/report.json`. This is product
+integration evidence, not a new registered source fixture or approved reference.
+Dedicated multi-aspect Family crop source certification remains outstanding.
+
+The machine-readable authority is [`fidelity/fixtures.json`](../../fidelity/fixtures.json). It was verified on 2026-09-03 against exact external bytes. The default directory is `/Users/niels/Documents/Templates`; `TEMPLATE_PACKAGE_FIXTURE_DIR` may change only that directory. Resolution honors each manifest `sourcePath`, including declared subdirectories, and fails on byte/hash/dimension/root/version mismatch. It never searches by a similar name.
 
 External ZIPs remain outside the repository to avoid duplicating about 10 MB of source fixtures. A new machine must provision the same bytes or explicitly register new fixture identities. This workspace has no Git metadata; “last verified commit” is unavailable and must not be fabricated.
 
@@ -8,7 +72,7 @@ External ZIPs remain outside the repository to avoid duplicating about 10 MB of 
 
 | Stable ID / status | File / identity | Source reference | Package identity | Purpose / capabilities | Fonts / assets | Scenarios and limitations | Verified / tolerance |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `now-hiring-post` / authoritative | `template-package-now-hiring-post.zip`; 2,570,689 bytes; `14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b` | `preview.png`; `3c05ee9b335a996ebd35f600e32f461f6aea126cd4f0e79ef6bea805ed981970` | 1000×1350; root `387:340`; package `pkg_387_340_1783966486531`; v1.0 | Responsive `CAP_HEIGHT` text → HUG → FILL image slot/crop; clipping; five fields | Geist Mono 500, Inter Tight 700; image `asset:image:ceab5479` | All four surfaces; exact/delayed font activation; uppercase, multiline, lowercase/descenders; short/long/clear/reset; image replace/clear; viewport/root resize. True masks remain unverified. | 2026-07-14; commit unavailable; pixels threshold 0.1, 0% changed; geometry 0.25px, text 0.5px |
+| `now-hiring-post` / authoritative | `template-package-now-hiring-post.zip`; 2,570,689 bytes; `14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b` | `preview.png`; `3c05ee9b335a996ebd35f600e32f461f6aea126cd4f0e79ef6bea805ed981970` | 1000×1350; root `387:340`; package `pkg_387_340_1783966486531`; v1.0 | Responsive `CAP_HEIGHT` text → HUG → FILL image slot/crop; clipping; five fields; Textarea visual-line authority | Geist Mono 500, Inter Tight 700; image `asset:image:ceab5479` | All four surfaces; exact/delayed font activation; Textarea one/warning/over/empty and structural inactivity; short/long/clear/reset; image replace/clear; viewport/root resize. True masks remain unverified. | 2026-09-04 line evidence; commit unavailable; pixels threshold 0.1, 0% changed; geometry 0.25px, text 0.5px |
 | `deal-of-the-week-post` / authoritative | `template-package-deal-of-the-week-post.zip`; 2,500,574 bytes; `96866712f10271407a182d3a905e112b2eb1b9170257c4d8fe6d05c9a7311b05` | `preview.png`; `ab1a3ddb1b8b4b51e688f564f595b89a673c7abd4d5b715dc742923f15b99c49` | 1080×1920; root `225:117`; package `pkg_225_117_1783547502647`; v1.0 | Portrait diagnostic ZIP, editable text/media, vectors, motion/MCP, five fields | Rethink Sans 600; image/SVG assets | All four surfaces and real export. Exact font unavailable; replacement recorded. Diagnostic lifecycle plus pixel/structure baseline. | 2026-07-13; commit unavailable; same initial tolerance |
 | `deal-of-the-week-banner` / authoritative | `template-package-deal-of-the-week-banner.zip`; 2,342,981 bytes; `b8ac9d2acf962de377114013ef91626b0426ef9645566917a6655ffb538b7e1b` | `preview.png`; `af060eebfd42fbb544b675f9d5ae1a4fef06d09e9defb5abc1502dffcdd89954` | 1920×1080; root `346:34`; package `pkg_346_34_1783763662819`; v1.0 | Landscape diagnostic ZIP, editable text/media, vectors, motion/MCP, four fields | Rethink Sans 600; image/SVG assets | All four surfaces and real export. Exact font unavailable; replacement recorded. Current output is baseline evidence, not source-fidelity certification. | 2026-07-13; commit unavailable; same initial tolerance |
 | `deal-of-the-week-banner-crop` / exploratory | `template-package-deal-of-the-week-banner-crop.zip`; 2,281,149 bytes; `611251da47e4eb64cc89074590a6718eef3af96c9f2f56f7f56ed29d53cbca80` | `preview.png`; `e1c5e96aa1c8efccb720e76ccd54afb3cb982f0d2c1a8c937fd501deb7168fe7` | 1920×1080; root `429:39`; package `pkg_429_39_1784231310726`; exporter 0.6.0; v1.0 | Genuine affine CROP at node `429:46`; rotated, visibly non-centred static source certification | Rethink Sans 600 replacement recorded; image `asset:image:ceab5479` (1125×750, SHA-256 `5dcfbc0…91f0`) plus SVG | Two stable captures on all four surfaces; source crop region differs 0.1992%; no editable image field or second source resize reference, so replacement/resize certification remains incomplete. | Added 2026-07-16; unapproved; pixel threshold 0.1; template-space identity tolerance 0.001px |
@@ -22,6 +86,35 @@ External ZIPs remain outside the repository to avoid duplicating about 10 MB of 
 | `optimized-for-template-export` / exploratory | `template-package-optimized-for-template-export.zip`; 2,509,168 bytes; `fa87c4eeefbad1e8c3bbe3bc03912870aeb2a9a6d0d16ea301de25270f1e0823` | `preview.png`; `04056780b911a0696c40a27a520cd6c0c4a0d556f01cd63813e7adc20b1f4b11` | 1080×1350; root `378:19`; package `pkg_378_19_1783892960002`; v1.0 | Exporter-shape audit, image, no editable fields | Geist Mono 500, Inter Tight 700; image asset | All four surfaces and real export. Replacement fonts recorded. Optional provider absence is a typed non-blocking response. | 2026-07-14; commit unavailable; same initial tolerance |
 
 Embedded previews are source references only. Approved current renderer references are stored per fixture/surface under `fidelity/references/approved/`. The three non-now-hiring fixtures retain their original “current-behavior baseline, not source-design fidelity acceptance” approvals. On 2026-07-14, the four now-hiring surfaces were separately promoted as reviewed source-fidelity text corrections with exact-font, trim, PNG, and before/after evidence.
+
+## Exporter 0.6.1 downstream-alignment fixtures
+
+| ID / status | ZIP identity | Source scope | Evidence status |
+| --- | --- | --- | --- |
+| `exporter-061-solid-opacity` / exploratory | `Exporter update testing/template-package-fixture-1.zip`; 29,853 bytes; ZIP `7e09ef2d2d8dc7eab18584305558bd02ffd3d88945b848b47908060b185a9160`; preview `8787f6bab82826d91ad15da801a8d1699ea455f105c7d3a8c7878754d08214e3`; template `38165037e9eb2941077eb627e334ea1e904332dd9e5096d971047517e31cd776` | Package/root `pkg_811_451_1787842019313` / `811:451`; exporter 0.6.1; isolated clean semi-transparent SOLIDs with canonical alpha 1 and paint opacity | Strict lifecycle and source normalization evidence. Isolated translucent paints retain the existing compatibility renderer. Four reviewed renderer-surface references approved from `sdk-061-20261004-d`; scene/settlement references remain unapproved. |
+| `exporter-061-linear-and-mixed-paints` / exploratory | `Exporter update testing/template-package-fixture-2-3-v0.6.1.zip`; 444,990 bytes; ZIP `e55ae505921d0026d9508168dba46f2c53ddf74381a120f16a0b90429d61fe8b`; preview `17dac36a3703662307a2ad42d435f2816427b4818748d323ebb5a094291e967d`; template `a0f2f039b3670d14412d6b550d4a73db2141930d51e5bf35667608531ffb2290` | Package/root `pkg_811_458_1788280526422` / `811:458`; mixed nodes `811:459`, `811:460`; isolated gradients `811:461`, `811:462`; exporter 0.6.1 | Exact SOLID and gradient source agreement. Mixed nodes select the existing ordered SVG owner; isolated gradients retain their SVG owner. Four reviewed renderer-surface references approved from `sdk-061-20261004-d`; scene/settlement references remain unapproved. |
+| `exporter-061-deal-of-the-week-post` / exploratory | `Exporter update testing/template-package-deal-of-the-week-post-2-v0.6.1.zip`; 2,616,653 bytes; ZIP `dc2ba9c89fb588c30b4f175dd988f9a9f9400ea216cce40864c3c234b7d32e28`; preview `ef3f5bb4a3aefb37cf906a0f4b5373c0b94d690f4d051e425c12b660cc1a9e2a`; template `5aa99f57d946547857363befc84f5cd8b68199723fe23f090393c5924b6ee2ee` | Package/root `pkg_734_65_1788179775628` / `734:65`; exporter 0.6.1; 19 nodes, seven fields, two assets, one explicit font requirement, four canonical ranges, four rich segment records | Strict E1B lifecycle and browser candidate evidence under the recorded font profile. Source preview remains unapproved. |
+| `field-rules-boolean-structural-visibility` / authoritative | `Exporter update testing/template-package-deal-of-the-week-post-boolean-v0.6.1.zip`; 2,624,203 bytes; ZIP `47a109f442348043a6c295b4072d38bdbffa658b80846b528dd64a552a79b6ac`; preview `a2afe839dc79af8297fac4c3b062e18f9db6dfd82989c3ff5645ef1952c55212`; template `c3724b689c9236e3911dda4668177eefb4b6b131c1658d2cbde10db7780b2c74` | Package/root `pkg_859_29_1788376685850` / `859:29`; exporter 0.6.1; `showHeadline` → `859:35` under vertical HUG/FILL, `showEnddate` → `859:48` in fixed horizontal `SPACE_BETWEEN` row | Source-certified structural exclusion: default Validate/Fields, separate false/reset, resize-hidden-show, and real PNG. Headline parent 375.69→112 px; fixed end-date row remains 1000×32. Default/reset PNG byte-identical. Earlier Rethink Sans replacement evidence is historical; the SDK 0.6.1 gate uses the verified exact binary. Renderer references remain unapproved. |
+| `exporter-061-compositing-matrix` / exploratory research | `template-package-matrix-v0.6.1.zip`; 2,055,796 bytes; ZIP `85fa555c495202ea38b72d39853913b9325ba8aa9ef746048c38836fca03cd98`; template `8be997f3850dd1589df6522ccbb188946755322924a4fff9eb39a67ac1d53ecf`; preview `d385d51467eb2932ccb0d691ff8796531316f11b1e80403440cb1a2cb1518a64` | 1080×1350; package/root `pkg_1099_218_1791144355634` / `1099:218`; exporter 0.6.1; six opaque pink SOLID rows NORMAL, DARKEN, MULTIPLY, SCREEN, OVERLAY, LIGHTEN over a CROP image and flat-color strip | ADR 0090 routes the source-certified opaque rows. Final two-pass four-surface capture has zero strong flat-strip differences; small image-side differences remain. No general group or alpha authority and no approved references. See [Phase 9 gate](PHASE_9_COMPOSITING_SOURCE_GATE.md). |
+| `exporter-061-compositing-group-control` / exploratory research | `template-package-matrix-2-v0.6.1.zip`; 2,616,289 bytes; current ZIP `b8228a8c9d256ff0b78f89f720c57e3416f60289cae0a0344ef034a146f66c52`; template `087282c8327fdfdf8ddfae308e8ab2cf901abadc015e94c0d675ff7dd2bd0a31`; preview `5d95df01bc7bf53831f540d705a2549e86e0b53f96efb69d1780df6e61716653` | 1080×2025; root CROP image, flat-color strip, 80%-opacity PASS_THROUGH/NORMAL/OVERLAY groups with DARKEN/MULTIPLY/SCREEN rows; 40% yellow top paint in each DARKEN row | Direct live Figma read confirms all 14 paints. ADR 0090 routes the bounded opaque group behavior. Final two-pass four-surface capture is stable with remaining differences confined to photo regions; no approved references. Previous ZIP hash and capture remain historical. See [Matrix 2 gate](PHASE_9_GROUP_CONTROL_SOURCE_GATE.md). |
+
+The active [three-export SDK 0.6.1 baseline](../architecture/sdk-061-three-export-baseline.md) selects exactly `exporter-061-now-hiring`, `exporter-061-cover`, and `exporter-061-carrousel` through `fidelity/gates/sdk-061.json`. Their ZIP, `template.json`, and embedded-preview hashes are registered in `fidelity/fixtures.json`. The earlier [ten-source gate](../architecture/sdk-061-architecture-gate.md), including its four Family sources, remains historical evidence in `fidelity/gates/archive/`; its Family failures do not decide this three-export baseline. Those fixtures and source contracts are retained, not silently normalized or deleted.
+
+For `exporter-061-carrousel`, rectangle `987:6811`, SOLID fill index 0,
+contains ZIP RGB `(0.8999999761581421, 0.699999988079071, 1)` and alpha `1`.
+The bound `color:backgroundColor` control displays rounded hex, but source,
+normalized base, initial materialization, and Reset are compared by exact
+numeric equality. PNG pixels are regression evidence only, not this value's
+oracle.
+
+For `exporter-061-cover`, the ZIP's `assets/asset_arrow_icon_002.svg` is 259
+bytes, SHA-256 `d7177007d3cc20a3f7e8ebbdcfd42ed247b59ae05756979cfd1afe02b2c47924`.
+Its open path already contains the source 3.2px stroke. Node `987:6779` no
+longer adds a CSS wrapper border when that asset paints the vector. Two-pass
+all-surface evidence is `sdk-061-cover-arrow-post-20261004`; the missing
+`SOLID + IMAGE + DARKEN` fade on node `987:6774` remains a separate blocker.
+
+Their embedded previews remain source evidence and are not renderer goldens.
 
 ## Milestone 7.3–7.3A linear-gradient fixtures
 
@@ -62,6 +155,15 @@ Scene counts are 10/15/23/9 nodes for now-hiring/post/banner/optimized. All vali
 - Every fixture/surface was captured twice in Milestone 5.1 run `milestone-5-1-final-baseline`. Repeated pixels and normalized structures were stable.
 - Historical run `milestone-5-1-final-candidates` passed 12/16 because the four now-hiring references still retained pre-trim line-box geometry. Those historical references were replaced only after the Milestone 5 approval review.
 - Milestone 4 final headless comparison `milestone-4-delivery-final-current-2` passed all 16 unchanged references. Now-hiring additionally passed controlled exact-initial, fallback-initial, delayed-exact, unavailable-exact, replacement, rapid-edit, reset, image replacement/clear, real 800×1080 root resize, shared editor/export settlement identity, and 800×1080 PNG scenarios. Deal-post and banner provide real coherent-fallback evidence.
+
+- Field Rules V2 Milestone 4 is source-certified by the exact exporter-0.6.1
+  Boolean fixture. `showHeadline=false` removes nodes `859:35`–`859:37`, closes
+  the vertical HUG section to 112 logical px, and reallocates the following FILL
+  area. `showEnddate=false` removes `859:48`/`859:34` while preserving the
+  source-fixed row and start-aligned logo. Default/reset PNG bytes match exactly;
+  resize-hidden-show and both static default surfaces pass. The source-preview
+  comparison records 0.501254% changed pixels with the known font replacement.
+  No approved renderer, scene, or settlement reference changed.
 - Validate and Fields static geometry matched for every fixture after normalization.
 - Fields/editor geometry differed: 9/14/7/7 node-bound changes for now-hiring/post/banner/optimized, with text and one image-slot difference where applicable. This records the existing static/editor split.
 - Editor and PNG-export structural source reports matched for every fixture. PNG dimensions were exact canvas dimensions.
@@ -102,6 +204,12 @@ The existing JSON/TS fixtures remain useful automated inputs for HUG text, Auto 
 
 Milestone 5 adds `appearanceContractProbe.ts` and `circularFillInsideHug.ts`. Their classification and acquisition gaps are machine-readable in [`fidelity/appearance-fixtures.json`](../../fidelity/appearance-fixtures.json). They verify contract preservation/fallback only and cannot authorize renderer support or reference promotion.
 
+## Carousel text reflow regression evidence
+
+The earlier user-supplied exporter-0.6.1 package named `template-package-carrousel-g1-landscape-g2-gray-g3-right-v0.6.1.zip` was local regression evidence with 2,297,110 bytes, ZIP SHA-256 `f894b4beaba1ca9cd81c9d859dc10834481b5b64dc8c4ff1eb10f09dd9c31c33`, and embedded-preview SHA-256 `de612a114f2a1b6d6e3e439708c0afe1257a4ca8e7f9fc082aea60858eecceed`. Those bytes are historical and are no longer the file at that path. The current exact file is 2,298,557 bytes, ZIP SHA-256 `001f1be7234760e581e7f88d59e9e3de5b3da00db23969ec01e677551895c85c`, and embedded-preview SHA-256 `92ed9024073aeb425f3f374ca0e13721a4e08b4d8ac1494e3f5be740a0740e5d`; it is now registered as `exporter-061-family-landscape-gray` in the [SDK 0.6.1 gate](../architecture/sdk-061-architecture-gate.md), without an approved renderer reference.
+
+Nodes `800:146`, `800:149`, and `800:157` are FILL text inside capped HUG badges and therefore remain circular, diagnosed, and compatibility-owned. Current browser evidence verifies that edited title/subtitle strings extend their imported single style run, contribute intrinsic width, grow their badge to the 640 logical px cap, wrap, and increase HUG height. Fixed/FILL/TRUNCATE headline node `800:153` receives the complete edited string while retaining its source box and clipping policy. The repository synthetic tests cover contiguous style-range insertion and the compatibility flex-basis rule without depending on these external bytes.
+
 ## Ordered multiple-SOLID fixtures
 
 Milestone 7.4 registers six exact asset/font/field-free 1000×1500 exporter-0.6.0 packages. `fidelity/fixtures.json` is the machine-readable identity authority; similar filenames are never substituted.
@@ -121,7 +229,7 @@ All six registered target regions are pixel-exact against source `preview.png` i
 
 | Role | State / next evidence |
 | --- | --- |
-| Genuine non-centred CROP and replacement | `deal-of-the-week-banner-crop-editable` is exact-hash authoritative for imported CROP/FIT/FILL and replacement Fill/Fit/reset/persistence/stale work. Interactive editor crop and a reviewed source resize state remain future work, not Milestone 6.1 blockers. |
+| Genuine non-centred CROP and replacement | `deal-of-the-week-banner-crop-editable` is exact-hash authoritative for imported CROP/FIT/FILL and replacement Fill/Fit/reset/persistence/stale work. Field Rules V2 host-authored Crop reuses the same affine owner and has automated Square/Portrait/Landscape aspect-adaptation evidence; a dedicated exporter-authored multi-aspect Family crop fixture and Studio crop UI remain future work. |
 | ALPHA masks | crop-3 source-certifies only an opaque rectangular ALPHA source with one declared affected sibling. Partial alpha, transforms, vectors, nesting, luminance, and multiple real source scopes still need authoritative ZIPs. |
 | Primitive appearance gaps | The exact `stroke-test-primitives` ZIP closes the independent-corner and opaque uniform rectangular CENTER/OUTSIDE gate. Hidden/transparent/partial/multiple paints or strokes, node/group opacity, layout-included/self-clipped/advanced stroke geometry, corner smoothing, transforms, and complete gradient coordinate semantics remain fixture-blocked. See [the closed gate](PRIMITIVE_STROKE_FIXTURE_GATE.md) and [geometry contract](PRIMITIVE_STROKE_GEOMETRY.md). Synthetic contract tests do not close the remaining gates. |
 | Vector-heavy | No authoritative ZIP selected; obtain exact source/reference and audit vector strategies. |
@@ -133,3 +241,13 @@ All six registered target regions are pixel-exact against source `preview.png` i
 | Components/variables | Absent; obtain components, nested instances, overrides, aliases, and modes. |
 
 New fixtures require stable bytes, hashes, source reference, dimensions/root/version, purpose/status, font/asset expectations, edit/resize/export scenarios, known diagnostics/limits, and reviewed tolerance policy.
+
+## Now Hiring changed-text regression
+
+The exact active exporter-0.6.1 Now Hiring ZIP and registered Geist Mono / Inter
+Tight binaries drive the [changed-text stability probe](../architecture/now-hiring-text-stability.md).
+Short, sustained and multiline workloads record accepted revisions and all node
+bounds, permitting intended dependent reflow while rejecting extra movement for
+identical accepted text. Public Family composition also selects this source.
+Synthetic width/font changes remain contract probes, not new certified fixtures.
+No fixture, embedded preview, reference or tolerance is replaced.

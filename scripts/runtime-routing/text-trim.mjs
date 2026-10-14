@@ -23,7 +23,9 @@ function sha256(bytes) { return createHash("sha256").update(bytes).digest("hex")
 function sourcePath(font) {
   return font.sourcePath
     .replace("${RENDERER_FIDELITY_FONT_DIR}", process.env.RENDERER_FIDELITY_FONT_DIR || defaultFontDirectory)
-    .replace("${INTER_TIGHT_FIDELITY_FONT_PATH}", process.env.INTER_TIGHT_FIDELITY_FONT_PATH || font.defaultSourcePath || "");
+    .replace("${INTER_TIGHT_FIDELITY_FONT_PATH}", process.env.INTER_TIGHT_FIDELITY_FONT_PATH || font.defaultSourcePath || "")
+    .replace("${FUNNEL_DISPLAY_FIDELITY_FONT_PATH}", process.env.FUNNEL_DISPLAY_FIDELITY_FONT_PATH || font.defaultSourcePath || "")
+    .replace("${FUNNEL_SANS_FIDELITY_FONT_PATH}", process.env.FUNNEL_SANS_FIDELITY_FONT_PATH || font.defaultSourcePath || "");
 }
 
 const fonts = fontManifest.fonts.map((font) => {
@@ -134,7 +136,7 @@ try {
   await page.getByTestId("package-editor-panel").waitFor();
 
   const baseline = await capture(page, "baseline");
-  const text = page.getByLabel("Text", { exact: true });
+  const text = page.getByTestId("package-editor-panel").getByLabel("Text", { exact: true }).first();
   const original = await text.inputValue();
   await text.fill(original);
   const identical = await capture(page, "identical-edit");
