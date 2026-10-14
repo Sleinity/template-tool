@@ -9,10 +9,10 @@ export function assertDeliveryWorkflow(source) {
     publish = source.slice(start, split),
     handoff = source.slice(split, promote),
     promotion = source.slice(promote);
+  const publicationTrigger =
+    "(github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.resume_existing_tag == true && inputs.prepare_runtime_handoff == false && inputs.promote_stable == false)";
   if (
-    !publish.includes(
-      "if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0'",
-    ) ||
+    !publish.replace(/\s+/g, ' ').includes(publicationTrigger) ||
     !publish.includes('pnpm release --archives') ||
     !publish.includes('needs: preflight')
   )
@@ -31,9 +31,7 @@ export function assertDeliveryWorkflow(source) {
   )
     throw Error('Protected publication and journal required');
   if (
-    !preflight.includes(
-      "if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0'",
-    ) ||
+    !preflight.replace(/\s+/g, ' ').includes(publicationTrigger) ||
     !preflight.includes('acceptance.mjs --mode archive') ||
     !preflight.includes('preflight.mjs') ||
     !preflight.includes('fixtures.mjs restore') ||
@@ -53,6 +51,8 @@ export function assertDeliveryWorkflow(source) {
     'version: 11.9.0',
     'runs-on: ubuntu-24.04',
     'cancel-in-progress: false',
+    'group: sdk-publication-${{ github.repository }}-refs/tags/sdk-v1.0.0',
+    'SDK_RECOVERY_EXPECTED_TAG_COMMIT: ${{ inputs.expected_tag_commit }}',
   ])
     if (!source.includes(part))
       throw Error('Pinned release toolchain/concurrency required');
@@ -90,6 +90,8 @@ export function assertDeliveryWorkflow(source) {
     !promotion.includes("github.event_name == 'workflow_dispatch'") ||
     !promotion.includes("github.ref == 'refs/heads/main'") ||
     !promotion.includes('inputs.promote_stable == true') ||
+    !promotion.includes('inputs.resume_existing_tag != true') ||
+    !promotion.includes('inputs.prepare_runtime_handoff != true') ||
     !promotion.includes('environment: private-sdk-release') ||
     !promotion.includes('promotion.mjs') ||
     /packages: write|pnpm release/.test(promotion)

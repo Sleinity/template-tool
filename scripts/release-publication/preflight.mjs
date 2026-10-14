@@ -8,6 +8,7 @@ import {
   safeRelative,
   assertPublicationContext,
   toolchain,
+  verifyTaggedSdkSource,
 } from './candidate.mjs';
 import {
   validateFidelity,
@@ -26,6 +27,7 @@ assert.equal(
   await resolveReleaseTag(),
   'Remote tag differs',
 );
+verifyTaggedSdkSource(d, await resolveReleaseTag());
 preflightGithub();
 const evidence = JSON.parse(
   await readFile('config/sdk-release-verification.json', 'utf8'),

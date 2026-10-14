@@ -10,7 +10,9 @@ import {
   retainArtifact,
   assertPublicationContext,
   sha256,
+  verifyTaggedSdkSource,
 } from './candidate.mjs';
+import { resolveRemoteTag } from './promotion.mjs';
 import { github, githubJson, preflightGithub } from './github.mjs';
 import { RegistryReadClient, RegistryWriteClient } from './registry.mjs';
 import {
@@ -156,8 +158,6 @@ try {
       await verifyArchives(d, options['--archives']);
       if (command !== 'verify') {
         const writer = command === 'publish';
-        if (writer)
-          assertPublicationContext(d, process.env, process.env.GITHUB_SHA);
         report.github = preflightGithub();
         if (writer) {
           const tag = 'sdk-v' + d.version;
@@ -167,6 +167,18 @@ try {
             { encoding: 'utf8' },
           ).trim();
           assertPublicationContext(d, process.env, commit);
+          assert.equal(
+            resolveRemoteTag(),
+            commit,
+            'Remote tag changed before publication',
+          );
+          report.taggedSource = verifyTaggedSdkSource(d, commit);
+          report.tagCommit = commit;
+          assert.equal(
+            report.sourceCommit,
+            process.env.GITHUB_SHA,
+            'Tooling checkout differs from dispatched source',
+          );
           assert.equal(
             process.env.SDK_RELEASE_ENVIRONMENT,
             'private-sdk-release',
@@ -181,7 +193,7 @@ try {
           registry,
           journalFile:
             options['--journal'] ?? path.join(output, 'journal.json'),
-          sourceCommit: report.sourceCommit,
+          sourceCommit: writer ? report.tagCommit : report.sourceCommit,
           write: writer,
         });
         if (options['--download']) {

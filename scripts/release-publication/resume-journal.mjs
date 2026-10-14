@@ -4,7 +4,54 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { unzipSync } from 'fflate';
 import { github, githubJson } from './github.mjs';
-import { sha256 } from './candidate.mjs';
+import {
+  sha256,
+  loadDescriptor,
+  assertPublicationContext,
+} from './candidate.mjs';
+import { resolveReleaseTag, resolveRemoteTag } from './promotion.mjs';
+export function publicationHistory(runs, currentId, currentAttempt, tagCommit) {
+  const current = runs.find((r) => r.id === currentId);
+  assert(current, 'Current workflow run unavailable');
+  assert(
+    runs.length < 100,
+    'Publication history truncated; manual reconciliation required',
+  );
+  return [
+    ...(currentAttempt > 1
+      ? [{ run: current, attempt: currentAttempt - 1 }]
+      : []),
+    ...runs
+      .filter(
+        (r) =>
+          r.id !== currentId &&
+          r.created_at < current.created_at &&
+          ((r.event === 'push' && r.head_sha === tagCommit) ||
+            (r.event === 'workflow_dispatch' && r.head_branch === 'main')),
+      )
+      .sort((a, b) => b.created_at.localeCompare(a.created_at))
+      .map((run) => ({ run, attempt: run.run_attempt })),
+  ];
+}
+export async function findPreviousWriter(history, readJobs) {
+  for (const entry of history) {
+    const jobs = await readJobs(entry);
+    const step = jobs
+      .find((j) => j.name === 'publish')
+      ?.steps?.find(
+        (s) =>
+          s.name === 'Publish exact archives after human environment approval',
+      );
+    if (
+      step &&
+      step.status !== 'skipped' &&
+      step.conclusion !== 'skipped' &&
+      step.started_at
+    )
+      return entry;
+  }
+  return null;
+}
 export function previousInvocation(runs, currentId, currentAttempt) {
   const current = runs.find((r) => r.id === currentId);
   assert(current, 'Current workflow run unavailable');
@@ -31,15 +78,21 @@ if (
       process.env.GITHUB_RUN_ATTEMPT,
   );
   const runs =
-    githubJson(
-      'actions/workflows/release.yml/runs?head_sha=' +
-        process.env.GITHUB_SHA +
-        '&per_page=100',
-    ).workflow_runs ?? [];
-  const previous = previousInvocation(
-    runs,
-    Number(process.env.GITHUB_RUN_ID),
-    Number(process.env.GITHUB_RUN_ATTEMPT),
+    githubJson('actions/workflows/release.yml/runs?per_page=100')
+      .workflow_runs ?? [];
+  const d = await loadDescriptor(),
+    tagCommit = await resolveReleaseTag();
+  assertPublicationContext(d, process.env, tagCommit);
+  assert.equal(resolveRemoteTag(), tagCommit);
+  const previous = await findPreviousWriter(
+    publicationHistory(
+      runs,
+      Number(process.env.GITHUB_RUN_ID),
+      Number(process.env.GITHUB_RUN_ATTEMPT),
+      tagCommit,
+    ),
+    ({ run, attempt }) =>
+      githubJson(`actions/runs/${run.id}/attempts/${attempt}/jobs`).jobs ?? [],
   );
   if (previous) {
     const { run, attempt } = previous;

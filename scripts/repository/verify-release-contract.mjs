@@ -144,16 +144,7 @@ if (publishStart < 0 || handoffStart <= publishStart) {
 }
 const publishJob = workflow.slice(publishStart, handoffStart);
 const handoffJob = workflow.slice(handoffStart);
-if (
-  !publishJob.includes(
-    "if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0'",
-  ) ||
-  !publishJob.includes("pnpm release")
-) {
-  throw new Error(
-    "Only an sdk-v tag push may own the package publication command.",
-  );
-}
+// The shared workflow contract owns exact tag-push/protected existing-tag recovery gating.
 if (
   handoffJob.includes("pnpm release") ||
   !handoffJob.includes("github.event_name == 'workflow_dispatch'") ||
@@ -298,5 +289,5 @@ for (const item of await loadRuntimePackageDefinitions(root)) {
 }
 
 console.log(
-  `SDK ${version} release contract passed: tag-only publication, manual handoff-only refresh, public Sleinity-tools-only assets.`,
+  `SDK ${version} release contract passed: immutable-tag publication/protected recovery, read-only handoff refresh, public Sleinity-tools-only assets.`,
 );
