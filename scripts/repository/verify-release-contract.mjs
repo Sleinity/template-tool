@@ -167,7 +167,7 @@ assertDeliveryWorkflow(workflow);
 const rootManifest=JSON.parse(await readFile('package.json','utf8'));
 if(rootManifest.scripts.release!=='node scripts/release-publication/cli.mjs publish') throw new Error('Release must use the certified archive driver.');
 const registryDriver=await readFile('scripts/release-publication/registry.mjs','utf8');
-if(!registryDriver.includes("['publish',file,'--ignore-scripts']")) throw new Error('Publish only supplied tarballs with lifecycle scripts disabled.');
+if(!registryDriver.replace(/\s/g, '').includes("['publish',file,'--ignore-scripts']")) throw new Error('Publish only supplied tarballs with lifecycle scripts disabled.');
 
 const distribution = await loadRuntimeDistribution(root);
 if (

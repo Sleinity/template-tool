@@ -5186,7 +5186,7 @@
     },
     {
       "file": "scripts/repository/verify-release-contract.mjs",
-      "sha256": "f49434a8f5ad60a26e1746f060613c07ad3ae47db731fd5c08a8f1e58eac3a32",
+      "sha256": "fd618ee8d616299c3493c76f8578774baf019af790e3a009be8965aa281c4ed3",
       "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
     }
   ],
@@ -5217,51 +5217,51 @@
     },
     {
       "file": "scripts/release-publication/candidate.mjs",
-      "sha256": "93a47c65d4f5b516a5f71a50e38e37b5d6df0ac7f4ec476d5cef23879bc14dae"
+      "sha256": "9d997b87cf06ba619e4e15272c3cb81714bc1652a21ac94aae7013ed57171f0d"
     },
     {
       "file": "scripts/release-publication/candidate.test.mjs",
-      "sha256": "1ec7c7c54c2395975f3d2de172d651199698e2c7a515810f2329d5181fb89eb3"
+      "sha256": "f040b24de735c8815e01b9371f4b996bf408512d6ef42bda6bb8136c9cb8c5f8"
     },
     {
       "file": "scripts/release-publication/cli.mjs",
-      "sha256": "8b8a8febb8cd380b16e6c27b07b31d4a222fdddc8c413fdb3ccb6c6cf65c485f"
+      "sha256": "df85ce3e8a32af996b512747a2cc7f5bc5cdea428677485ea1904325cdedb060"
     },
     {
       "file": "scripts/release-publication/consumer.mjs",
-      "sha256": "f7e25fd62f52b636243d2ca9dc70dfdd1cb522f0109e847cefc927f3328d1dd2"
+      "sha256": "1f714853916451d4ecb46d9371cb2c70b6e0f15702f90281bde7a3b4473008b6"
     },
     {
       "file": "scripts/release-publication/driver.mjs",
-      "sha256": "eed6e236503874f6def846de28cc24b82530fc696319930aee04c4642a7eff99"
+      "sha256": "3b070bd2249f00e5da65553337c71e07e18e876b28ab5b8f26b909bdcd67b3f4"
     },
     {
       "file": "scripts/release-publication/driver.test.mjs",
-      "sha256": "d29501e0476e9360530b5f5a7c1a21c2dbcf42ee9c01345370c878ac6d390d6e"
+      "sha256": "b7c3365e5c4dd22f306506e4f613c5d00c1c63aa42f79f536ff576d3fe0dec40"
     },
     {
       "file": "scripts/release-publication/github.mjs",
-      "sha256": "046e6ed2529ad723c2e1954fcc13f58448d16f0a676f789338fe33eefab1c2e7"
+      "sha256": "14c0fa82888b95198a46dc50334c0382003aa43aa86fcab38b953ac75c76cc2e"
     },
     {
       "file": "scripts/release-publication/refresh-source-bindings.mjs",
-      "sha256": "5c388ceecf8fcd27bbfc3663642fe34df6b2b23315e1a9fa559d78463c1b6ea4"
+      "sha256": "8a9f69c0c68fdfaa177c51dacba0b9f813a0349efb820b9e40d75113ef957694"
     },
     {
       "file": "scripts/release-publication/registry.mjs",
-      "sha256": "81a47c3a10437e18b0eccda89531989d7f9f8ace56429f209280c71d02782c79"
+      "sha256": "28b00882ce2f59fa7bbb466bd322be3ab24da76218f20756ad26276fc097ffbd"
     },
     {
       "file": "scripts/release-publication/rehearsal.test.mjs",
-      "sha256": "9abf13fce6b25856eeef28bcaeff8f390ecb6cbcb39e99c402b6bd75d100ed20"
+      "sha256": "a0ef35524ab9ea1d6fe11091d52a17aade9d4b9059fd6d2c4cf6ae3dcecd3726"
     },
     {
       "file": "scripts/release-publication/resume-journal.mjs",
-      "sha256": "fdbfd6162380b45660a2be3b074468588ce950aab05e7057aec785006e09d8dc"
+      "sha256": "b14f1d4363879598422065783caa5b24a2041aa64dae0b3c43bf494f4fe122c5"
     },
     {
       "file": "scripts/release-publication/retention-record.mjs",
-      "sha256": "97feda0b0a77abf10349ae676ec713ef69e9c959939f923703328e4c27210b22"
+      "sha256": "de1514748311f85f4dbed7f4e048c19dfca0dd129054529137a17b3395b531de"
     }
   ]
 }
