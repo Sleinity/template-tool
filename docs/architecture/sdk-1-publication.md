@@ -4,8 +4,8 @@ The immutable candidate is `sdk-1-candidate-20261013k`. This milestone prepares
 and executes registry publication and stable promotion; completion requires actual
 publication, registry acceptance on Linux/macOS, a fresh macOS fidelity gate and
 human-approved stable promotion. The three packages are now published and macOS
-registry acceptance passes on both platforms; stable promotion awaits separate
-human approval.
+registry acceptance passes on both platforms. Stable promotion completed after
+the separate human approval; **Milestone 8 is complete**.
 
 ## Prepared contract
 
@@ -140,7 +140,7 @@ The [independent read-only check](evidence/sdk-1-publication-20261014/prerelease
 downloaded and matched all 41 actual prerelease asset hashes.
 
 [SDK 1.0.0](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0)
-currently remains a prerelease. Promotion configuration pins the actual Linux
+was initially created as a prerelease. Promotion configuration pins the actual Linux
 artifact and hash-bound macOS/fidelity receipts. It authorizes requesting the
 protected human checkpoint, not automatic approval. Stable promotion rechecks
 remote tag, registry archives, both receipts and every release asset before writing.
@@ -149,5 +149,35 @@ no added canonical work, font activation or production execution path. Consumer
 command durations are recorded in both reports. No new manual browser review,
 screen-reader coverage or Linux-to-macOS raster comparison is claimed.
 
-Stable promotion still requires a separate human deployment approval.
+Stable promotion received separate human deployment approval and completed as
+recorded below.
 Formal baseline handoff and temporary-input retirement remain Milestone 9.
+
+
+## Stable completion
+
+The owner approved the protected promote job in
+[run 38579849424](https://github.com/Sleinity/template-tool/actions/runs/38579849424).
+It executed evidence merge commit `a80d41178ccbadb4f3831f5d4dc58a00119c241e`,
+rechecked both platform receipts, the fidelity receipt, actual registry archives,
+all release assets and remote tag identity, and completed successfully. Its result
+records `alreadyStable: false`: this was the actual stable transition, not a
+workflow-inspection claim. The [final stable receipt](evidence/sdk-1-publication-20261014/stable-release.json)
+retains the run, human approval, release ID, all 41 asset identities and hashes of
+the supporting reports. GitHub independently reports `draft: false` and
+`prerelease: false` for [stable SDK 1.0.0](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0).
+
+The tag remains `33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`; the protected recovery
+used reviewed tooling rather than moving it. The same three frozen archive hashes
+bind candidate certification, publication, both registry matrices and final
+promotion. No SDK source, version, dependency, lockfile, schema, fixture/font binary,
+reference or tolerance changed in this milestone. The original checkout, index,
+tracked diff and untracked-file status were rechecked and preserved.
+
+Milestone 8 is complete. Milestone 9 owns the formal development-baseline handoff
+and safe retirement of temporary inputs; no fixture artifact, certification secret,
+package, release tag or unrelated resource has been deleted here. Historical
+0.8 migration material and the frozen handoff's historical administration wording
+remain distinguished from the current approved release contract. Public release
+visibility does not grant an open-source licence: packages remain UNLICENSED for
+Sleinity-owned applications only.
