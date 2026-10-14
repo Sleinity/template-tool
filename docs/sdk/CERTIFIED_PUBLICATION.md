@@ -11,7 +11,9 @@ manifest, reviewed source hashes and a pinned Actions artifact. The original
 certificate is Linux run `38442123584`; the original inputs expire on October 16,
 2026. Rehearsal retains the delivery for 90 days, excluding encrypted fixtures and
 keys. Update the retained-artifact pointer only from a successful reviewed run
-and record its ID, digest, commit and expiry. Never select by “latest” or rebuild
+and record its ID, digest, commit and expiry. The reviewed retained delivery is
+artifact `11882221817`, from successful run `38540916222`, expiring January 12,
+2027; its digest is pinned in the descriptor. Never select by “latest” or rebuild
 an expired delivery. Rerun the original unchanged certification if renewal is
 needed and bind the new artifact explicitly.
 
@@ -33,6 +35,10 @@ Registry checks use `NODE_AUTH_TOKEN`; never paste or commit its value. Preparat
 uses `GH_TOKEN` or the authenticated CLI. Rehearsal has repository/package read
 permissions only. It can create an Actions artifact/report but cannot publish a
 package, create a tag/release or upload release assets. Fixtures are not decrypted.
+The read-only npm/pnpm rehearsal compiles the delivered V2 guide and example
+with library checking enabled and exercises synthetic single/Family import, edit,
+Reset, save/reopen and disposal. It does not certify exact fonts or PNG pixels.
+The full published-archive verifier retains unconditional exact-source V2 coverage.
 Source binding includes the protected SDK/build inputs and reviewed tooling hashes.
 Refreshing those hashes is an explicit review-time operation, not a repair that
 publication performs automatically.
@@ -72,3 +78,14 @@ remain unverified until Milestone 8; rehearsal is not publication evidence.
 
 Distribution remains public GitHub release assets, **UNLICENSED**, authorized for
 **Sleinity-owned applications only**. Public visibility is not an open-source licence.
+
+## Milestone 8 fixture prerequisite
+
+The automatic published handoff intentionally retains the full exact-source
+consumer gate. It needs the private fixture/font inputs provisioned on the
+runner through a separately authenticated, hash-verified intake. The 90-day
+delivery retained here excludes those inputs and no rehearsal decrypts them.
+Before authorizing the tag, provision and test that intake and actual package-write
+permissions; otherwise the handoff remains blocked and cannot upload release assets.
+The existing macOS paths are not a portable fixture provisioning contract.
+Do not substitute the synthetic rehearsal for full registry acceptance.

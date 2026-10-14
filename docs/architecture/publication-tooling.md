@@ -42,3 +42,14 @@ of this milestone; Actions input/report artifact uploads are explicit exceptions
 
 See the [publication runbook](../sdk/CERTIFIED_PUBLICATION.md) and
 [release roadmap](../sdk/RELEASE_ROADMAP.md). All archived SDK bytes remain immutable.
+
+## Rehearsal disposition
+
+Run `38538500849` failed because the full exact-source consumer expected private
+Mac fixture paths on Ubuntu. Run `38540916222` passed after separating an
+explicit synthetic, read-only rehearsal from the unchanged full published verifier.
+Both npm and pnpm compiled all marked guide snippets and delivered host/helper
+with `skipLibCheck: false`, then exercised native single/Family session contracts.
+The 90-day delivery artifact `11882221817` is bound to that successful run and
+its exact head/digest, not a “latest” lookup. Required production fixture intake
+and actual write authorization remain Milestone 8 prerequisites.

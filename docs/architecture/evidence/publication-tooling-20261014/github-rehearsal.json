@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "sdk-publication-report-v1",
+  "command": "rehearse",
+  "environment": {
+    "node": "v22.23.3",
+    "pnpm": "11.9.0",
+    "npm": "10.9.9",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "candidate": "sdk-1-candidate-20261013k",
+  "version": "1.0.0",
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "status": "pass",
+  "mutations": [],
+  "sourceCommit": "4f5f7b9b3b846fea0fce72fd434a80ea6e74f8f1",
+  "github": {
+    "repository": "Sleinity/template-tool",
+    "visibility": "public",
+    "environment": "private-sdk-release",
+    "humanApprovalRequired": true,
+    "automaticApproval": false
+  },
+  "journal": {
+    "schemaVersion": "sdk-publication-journal-v1",
+    "identity": {
+      "version": "1.0.0",
+      "candidate": "sdk-1-candidate-20261013k",
+      "sourceCommit": "4f5f7b9b3b846fea0fce72fd434a80ea6e74f8f1",
+      "archives": [
+        {
+          "file": "sleinity-template-core-1.0.0.tgz",
+          "bytes": 532285,
+          "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+          "name": "@sleinity/template-core"
+        },
+        {
+          "file": "sleinity-template-browser-1.0.0.tgz",
+          "bytes": 403000,
+          "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+          "name": "@sleinity/template-browser"
+        },
+        {
+          "file": "sleinity-template-react-1.0.0.tgz",
+          "bytes": 289360,
+          "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+          "name": "@sleinity/template-react"
+        }
+      ]
+    },
+    "packages": [
+      {
+        "name": "@sleinity/template-core",
+        "status": "would-publish"
+      },
+      {
+        "name": "@sleinity/template-browser",
+        "status": "would-publish"
+      },
+      {
+        "name": "@sleinity/template-react",
+        "status": "would-publish"
+      }
+    ],
+    "complete": true
+  }
+}

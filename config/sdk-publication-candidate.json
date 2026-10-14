@@ -16,7 +16,15 @@
     "digest": "sha256:1f9de9e03579d1d5c1736f614f223363a091ff47a5a1541d63f6fdb02ee57e9a",
     "prefix": "archives/"
   },
-  "retainedArtifact": null,
+  "retainedArtifact": {
+    "id": 11882221817,
+    "name": "sdk-1.0.0-certified-delivery",
+    "runId": 38540916222,
+    "headSha": "4f5f7b9b3b846fea0fce72fd434a80ea6e74f8f1",
+    "digest": "sha256:0aeb4244f957ca2cf90dea242ee22d8df52adf45e9b49944e944be6acb04a2e4",
+    "prefix": "",
+    "retentionDays": 90
+  },
   "sourceFiles": [
     {
       "file": ".changeset/README.md",
