@@ -12,6 +12,12 @@ import { selectSdkGateFixtures } from '../fidelity/gate-profile.mjs';
 import { loadExactFontManifest } from '../fidelity/fonts.mjs';
 export const ciphertextSha256 =
   '7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a';
+export function sealedFixtureBytes(zip, digest) {
+  assert.equal('sha256:' + sha256(zip), digest);
+  const bytes = unzipSync(zip)['fixtures.enc'];
+  assert(bytes, 'Sealed fixtures absent');
+  return Buffer.from(bytes);
+}
 export function validateFixtureArtifact(a, pin) {
   assert.equal(a.id, pin.id);
   assert.equal(a.name, pin.name);
@@ -29,9 +35,7 @@ export async function retainSealedFixtures(output) {
   validateFixtureArtifact(a, pin);
   assert.equal(run.conclusion, 'success');
   const zip = github('actions/artifacts/' + pin.id + '/zip', { binary: true });
-  assert.equal('sha256:' + sha256(zip), pin.digest);
-  const cipher = unzipSync(zip)['fixtures.enc'];
-  assert(cipher, 'Sealed fixtures absent');
+  const cipher = sealedFixtureBytes(zip, pin.digest);
   assert.equal(sha256(cipher), ciphertextSha256);
   await mkdir(output, { recursive: true });
   await writeFile(path.join(output, 'fixtures.enc'), cipher, {
@@ -53,8 +57,7 @@ export async function restoreReleaseFixtures(directory) {
   validateFixtureArtifact(a, pin);
   assert.equal(run.conclusion, 'success');
   const zip = github('actions/artifacts/' + pin.id + '/zip', { binary: true });
-  assert.equal('sha256:' + sha256(zip), pin.digest);
-  const bytes = unzipSync(zip)['fixtures.enc'];
+  const bytes = sealedFixtureBytes(zip, pin.digest);
   assert.equal(sha256(bytes), ciphertextSha256);
   return restoreReleaseFixtureBytes(bytes, directory);
 }

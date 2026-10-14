@@ -5166,12 +5166,12 @@
     },
     {
       "file": ".github/workflows/release.yml",
-      "sha256": "40872334db1532f64fb894694c4a1fbf1f885747d816767ade963c2fa84fb57c",
+      "sha256": "b6bc2119e69fee9727ed0407d9419a6fc7483d4b0062396e631ef30d132ac035",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/workflow.mjs",
-      "sha256": "65e9b54b6a1893417fb87d6cbcbe59390a50aae23c9740d38017dbea50590099",
+      "sha256": "89d3f2f9846678a2ef1861c07c969f2470d45bdbc81d7d631f0c48d6c47bddc8",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
@@ -5186,7 +5186,7 @@
     },
     {
       "file": "scripts/repository/verify-release-contract.mjs",
-      "sha256": "fd618ee8d616299c3493c76f8578774baf019af790e3a009be8965aa281c4ed3",
+      "sha256": "827ddcba69bc3a19032ef8c32574d93f60880a1e0ed7d8028a3b2ccce8675aac",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
@@ -5243,7 +5243,7 @@
   "publisherSourceFiles": [
     {
       "file": ".github/workflows/release-preparation.yml",
-      "sha256": "a3f8bceec121f18f0effabfcb4c38b119e1ba2a3eb6d2a79a88b6d409fc839d4"
+      "sha256": "78f703b911cbc962b1f97971baf027e7722023625c5aa0ead3ecad7834b6d2ee"
     },
     {
       "file": ".github/workflows/release-rehearsal.yml",
@@ -5255,7 +5255,7 @@
     },
     {
       "file": "scripts/release-publication/acceptance.test.mjs",
-      "sha256": "765675f6161b8b6d7e1347313526b9180e8bed979b4ae9c5b9cee501d60ab783"
+      "sha256": "84697dd42d41968b3079d6227fe272a58333f24900f159ec4a7f49de8941b408"
     },
     {
       "file": "scripts/release-publication/asset-inventory.mjs",
@@ -5263,7 +5263,7 @@
     },
     {
       "file": "scripts/release-publication/candidate.mjs",
-      "sha256": "030c09843aa7e8df11bb1509ec3e97b73b444471be25ea6051e2b62aaefdd69d"
+      "sha256": "2a963d0dc53545a967c1110211a5bb78c91a0d9321228b80e05e34f37618f746"
     },
     {
       "file": "scripts/release-publication/candidate.test.mjs",
@@ -5271,7 +5271,7 @@
     },
     {
       "file": "scripts/release-publication/cli.mjs",
-      "sha256": "d4ef5acbad5e39b92752d251195a94344f376d6e57bc3dda9d7f6810ef12d817"
+      "sha256": "753b3a1472af2888492436723df543470bb8492c4c9b4150f5d0f1ff158ed0be"
     },
     {
       "file": "scripts/release-publication/consumer.mjs",
@@ -5291,7 +5291,7 @@
     },
     {
       "file": "scripts/release-publication/fixtures.mjs",
-      "sha256": "e737247279e1313cf5d5c039842e993f8d050a67e0ad82de05e842a2ae2f0a47"
+      "sha256": "17413ea8f591134635491ce5577cb2bc8d8acc2640d0aabb937a85c809106cb6"
     },
     {
       "file": "scripts/release-publication/github.mjs",
@@ -5303,7 +5303,7 @@
     },
     {
       "file": "scripts/release-publication/preflight.mjs",
-      "sha256": "d768b6ef25c32c0b95f54858c441777f46c25d5ffef707794652cae2aca66f5e"
+      "sha256": "b8f84fd063cf02b20d6581b9ed642840295537606191f4fe4a39a7b4ada222bd"
     },
     {
       "file": "scripts/release-publication/promotion.mjs",
@@ -5312,6 +5312,10 @@
     {
       "file": "scripts/release-publication/promotion.test.mjs",
       "sha256": "519640a7acd95fc8aa495874937f3ca49bb8ab421b3d8b3e83ab0016d75044df"
+    },
+    {
+      "file": "scripts/release-publication/recovery.test.mjs",
+      "sha256": "9446854c12870635d60ba3ec9acce13219205fcdc38e3d1d9a2b7308ca51f922"
     },
     {
       "file": "scripts/release-publication/refresh-source-bindings.mjs",
@@ -5327,7 +5331,7 @@
     },
     {
       "file": "scripts/release-publication/resume-journal.mjs",
-      "sha256": "b14f1d4363879598422065783caa5b24a2041aa64dae0b3c43bf494f4fe122c5"
+      "sha256": "55eb3eb2f82d50093391655967cedb0b82baee8696bb0ccc4c509cffbf02f74e"
     },
     {
       "file": "scripts/release-publication/retention-record.mjs",
@@ -5343,5 +5347,10 @@
     "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
     "retentionDays": 3,
     "prefix": ""
+  },
+  "existingTagRecovery": {
+    "tagCommit": "33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348",
+    "failedRunId": 38563617164,
+    "authorization": "Explicit user approval of protected existing-tag recovery on 2026-10-14. SDK archives and tag remain immutable; deployments require human approval."
   }
 }

@@ -51,6 +51,13 @@ export function validateDescriptor(d) {
   assert.equal(d.registry, registryUrl);
   assert.equal(d.version, '1.0.0');
   assert.equal(d.candidate, 'sdk-1-candidate-20261013k');
+  if (d.existingTagRecovery) {
+    assert.equal(
+      d.existingTagRecovery.tagCommit,
+      '33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348',
+    );
+    assert.equal(d.existingTagRecovery.failedRunId, 38563617164);
+  }
   assert.match(d.frozenManifestSha256, /^[a-f0-9]{64}$/);
   assert.deepEqual(
     d.archives.map((x) => x.name),
@@ -230,6 +237,41 @@ export async function retainArtifact(
   };
 }
 export function assertPublicationContext(d, env, tagCommit) {
+  assert.equal(env.GITHUB_REPOSITORY, repository);
+  assert.match(env.GITHUB_SHA ?? '', /^[a-f0-9]{40}$/);
+  if (env.GITHUB_EVENT_NAME === 'workflow_dispatch') {
+    assert.equal(
+      env.GITHUB_REF,
+      'refs/heads/main',
+      'Recovery requires reviewed main',
+    );
+    assert.equal(
+      env.SDK_RESUME_EXISTING_TAG,
+      'true',
+      'Explicit existing-tag resume required',
+    );
+    assert.equal(
+      env.SDK_RECOVERY_HANDOFF_INTENT,
+      'false',
+      'Mixed recovery/handoff intent',
+    );
+    assert.equal(
+      env.SDK_RECOVERY_PROMOTE_INTENT,
+      'false',
+      'Mixed recovery/promotion intent',
+    );
+    assert(d.existingTagRecovery, 'Existing-tag recovery is not authorized');
+    assert.equal(
+      env.SDK_RECOVERY_EXPECTED_TAG_COMMIT,
+      d.existingTagRecovery.tagCommit,
+    );
+    assert.equal(
+      tagCommit,
+      d.existingTagRecovery.tagCommit,
+      'Immutable tag changed',
+    );
+    return;
+  }
   assert.equal(
     env.GITHUB_EVENT_NAME,
     'push',
@@ -239,4 +281,24 @@ export function assertPublicationContext(d, env, tagCommit) {
   assert.equal(env.GITHUB_REF, `refs/tags/sdk-v${d.version}`);
   assert.match(env.GITHUB_SHA ?? '', /^[a-f0-9]{40}$/);
   assert.equal(tagCommit, env.GITHUB_SHA, 'Tag target changed');
+}
+
+export function verifyTaggedSdkSource(d, commit, root = process.cwd()) {
+  assert.match(commit, /^[a-f0-9]{40}$/);
+  const rows = d.sourceFiles.filter((r) =>
+    /^(packages|apps|src|examples|tools)\//.test(r.file),
+  );
+  assert(rows.length > 0, 'Tagged SDK source inventory missing');
+  for (const row of rows) {
+    const bytes = execFileSync('git', ['show', `${commit}:${row.file}`], {
+      cwd: root,
+      maxBuffer: 32 * 1024 * 1024,
+    });
+    assert.equal(
+      sha256(bytes),
+      row.sha256,
+      `Tagged certified source drift: ${row.file}`,
+    );
+  }
+  return { tagCommit: commit, certifiedFiles: rows.length };
 }

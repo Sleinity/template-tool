@@ -19,7 +19,8 @@ needed and bind the new artifact explicitly.
 
 Use Node **22.23.3** and pnpm **11.9.0**. npm's version is recorded in each report.
 Publication reads the archives; no build, pack, version or lifecycle script runs.
-The root release command fails without the verified files and tag-push context.
+The root release command fails without the verified files and an authorized
+tag-push or protected existing-tag recovery context.
 
 ## Read-only preparation and rehearsal
 
@@ -66,6 +67,22 @@ failures. Rerunning a failed tag job restores the previous invocation/attempt jo
 and checks package state before writing. Successful packages remain published;
 there is no rollback, deletion or overwrite. An uncertain or missing journal
 requires manual reconciliation; no automatic retry loop is introduced.
+
+### Approved existing-tag recovery exception
+
+The first 1.0.0 tag preflight failed before package writes at a private fixture
+ZIP byte-type boundary. The owner approved a protected recovery from reviewed main
+without moving `sdk-v1.0.0` from `33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`.
+See the [bounded repair contract](../architecture/sdk-1-publication-intake-repair.md).
+
+Dispatch `release.yml` on reviewed main with `resume_existing_tag=true`,
+`expected_tag_commit=33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`, and both other
+dispatch actions false. This validates the actual dispatch event, fixed tag,
+tagged certified SDK sources and corrected private tooling separately. Preflight
+and human deployment approval still precede writes. Ordinary handoff refresh
+remains read-only. The shared release concurrency group includes tag runs and
+main recovery; journals retain the immutable tag identity across tooling commits.
+No environment variable impersonates a tag-push event, and no tag is created or moved.
 
 Use read-only preflight to inspect/download the verified train. If all packages
 are present but publication cleanup failed, use the main **handoff refresh**;

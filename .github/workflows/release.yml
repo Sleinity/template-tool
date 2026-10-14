@@ -14,16 +14,32 @@ on:
         required: false
         default: false
         type: boolean
+      resume_existing_tag:
+        description: Recover only the reviewed immutable sdk-v1.0.0 tag
+        required: false
+        default: false
+        type: boolean
+      expected_tag_commit:
+        description: Exact existing tag commit required for recovery
+        required: false
+        type: string
 permissions:
   contents: read
   actions: read
   packages: read
 concurrency:
-  group: sdk-publication-${{ github.repository }}-${{ github.ref }}
+  group: sdk-publication-${{ github.repository }}-refs/tags/sdk-v1.0.0
   cancel-in-progress: false
+env:
+  SDK_RESUME_EXISTING_TAG: ${{ inputs.resume_existing_tag || false }}
+  SDK_RECOVERY_EXPECTED_TAG_COMMIT: ${{ inputs.expected_tag_commit }}
+  SDK_RECOVERY_HANDOFF_INTENT: ${{ inputs.prepare_runtime_handoff || false }}
+  SDK_RECOVERY_PROMOTE_INTENT: ${{ inputs.promote_stable || false }}
 jobs:
   preflight:
-    if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0'
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.resume_existing_tag == true && inputs.prepare_runtime_handoff == false && inputs.promote_stable == false)
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
@@ -65,7 +81,9 @@ jobs:
           if-no-files-found: warn
   publish:
     needs: preflight
-    if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0'
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/tags/sdk-v1.0.0') ||
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.resume_existing_tag == true && inputs.prepare_runtime_handoff == false && inputs.promote_stable == false)
     runs-on: ubuntu-24.04
     environment: private-sdk-release
     permissions:
@@ -110,8 +128,8 @@ jobs:
     needs: publish
     if: >-
       always() &&
-      ((github.event_name == 'push' && needs.publish.result == 'success') ||
-      (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && github.ref == 'refs/heads/main'))
+      ((needs.publish.result == 'success' && (github.event_name == 'push' || inputs.resume_existing_tag == true)) ||
+      (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.resume_existing_tag != true && inputs.promote_stable != true && github.ref == 'refs/heads/main'))
     runs-on: ubuntu-24.04
     environment: private-sdk-release
     permissions:
@@ -180,7 +198,7 @@ jobs:
           if-no-files-found: warn
 
   promote:
-    if: github.event_name == 'workflow_dispatch' && inputs.promote_stable == true && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && inputs.promote_stable == true && inputs.resume_existing_tag != true && inputs.prepare_runtime_handoff != true && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     environment: private-sdk-release
     permissions:
