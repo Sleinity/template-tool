@@ -27,6 +27,13 @@ export function validateArchive(bytes, row) {
   assert.equal(bytes.length, row.bytes, 'Registry archive size differs');
   assert.equal(sha256(bytes), row.sha256, 'Registry archive hash differs');
 }
+export function validateCleanupReceipt(receipt,inventory,inventorySha256){
+ assert.equal(receipt.schemaVersion,'sdk-release-cleanup-receipt-v1');assert.equal(receipt.status,'pass');assert.equal(receipt.inventorySha256,inventorySha256);
+ const expected=[...inventory.workflows.map(r=>({kind:'workflow',id:r.id,path:r.path})),{kind:'secret',name:inventory.secret.name},...inventory.artifacts.map(r=>({kind:'artifact',id:r.id,name:r.name,preservedCiphertextSha256:r.ciphertextSha256})),...inventory.localFiles.map(r=>({kind:'local-file',file:r.file}))];
+ assert.equal(receipt.results.length,expected.length);const keys=new Set();
+ for(const row of expected){const matches=receipt.results.filter(r=>r.kind===row.kind&& (row.id?r.id===row.id:row.name?r.name===row.name:r.file===row.file));assert.equal(matches.length,1,'Missing or duplicate cleanup outcome');const result=matches[0];for(const [key,value]of Object.entries(row))assert.equal(result[key],value);assert(['deleted','already-absent','already-deleted','disabled','already-disabled'].includes(result.outcome),'Unresolved cleanup outcome');keys.add(JSON.stringify(row));}
+ assert.equal(keys.size,expected.length);assert.equal(receipt.removedSecretValuesRecorded,false);assert.equal(receipt.gitHistoryRewritten,false);
+}
 export async function verifyLocal(root = process.cwd()) {
   const b = JSON.parse(await readFile(path.join(root, baselineFile)));
   assert.equal(b.schemaVersion, 'sdk-release-baseline-v1');
@@ -67,8 +74,11 @@ export async function verifyLocal(root = process.cwd()) {
   for(const row of [...b.protectedFiles,...b.archivedWorkflows,...b.closureReports])await load(row);
   for(const row of b.documentationChanges) await load(row);
   if(b.retirement.receipt) {
-    const cleanup=JSON.parse(await load(b.retirement.receipt));assert.equal(cleanup.status,'pass');
+    const cleanup=JSON.parse(await load(b.retirement.receipt));validateCleanupReceipt(cleanup,JSON.parse(await readFile(path.join(root,b.retirement.inventory))),b.retirement.inventorySha256);
     assert.equal(b.retirement.status,'complete');
+  }
+  if(b.postCleanupVerification){
+    const post=JSON.parse(await load(b.postCleanupVerification));assert.equal(post.status,'pass');assert.equal(post.tagCommit,b.tagCommit);assert.equal(post.assets,41);assert.deepEqual(post.registryArchives,b.archives);assert.equal(post.fixtureKeyRequired,false);assert.equal(post.actionsArtifactsRequired,false);assert.equal(post.deliveryManifestSha256,b.deliveryManifestSha256);assert.equal(post.hosts.length,2);for(const manager of ['npm','pnpm']){const rows=post.hosts.filter(r=>r.manager===manager);assert.equal(rows.length,1);assert.equal(rows[0].status,'pass');assert.equal(rows[0].strictDeclarations,true);} 
   }
   return {baseline:b,descriptor:d,reports,assets:assets.files};
 }

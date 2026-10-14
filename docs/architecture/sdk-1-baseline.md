@@ -58,7 +58,18 @@ fixtures/fonts, private captures, user credentials, managed registries, worktree
 contents and active handoff workspace are preserved. Historical Git ciphertext is
 not erased by key retirement. Unclassified/shared resources remain untouched.
 
-Status: baseline implementation awaiting merged verification and cleanup receipts.
+Cleanup passed after the repaired main verification in
+[run 38612390717](https://github.com/Sleinity/template-tool/actions/runs/38612390717).
+The [actual receipt](evidence/sdk-1-baseline-20261014/cleanup-receipt.json) records
+19 outcomes: four already-deleted workflow registrations, the deleted dedicated
+key, 13 deleted encrypted-input artifacts and one deleted local transfer copy.
+The initial attempt stopped with zero actions because GitHub uses `deleted` for
+archived workflow metadata; [PR #30](https://github.com/Sleinity/template-tool/pull/30)
+added that observed terminal state and a regression before cleanup resumed.
+This bounded repair required an additional PR beyond the originally planned pair.
+No SDK or cleanup scope changed. Historical ciphertext remains in Git history.
+
+Status: Milestone 9 complete when this verified receipt is merged.
 
 ## Starting the next milestone
 
@@ -69,3 +80,40 @@ V1 compatibility does not promise canonical 2.0/2.1 migration-on-read. Reimport
 incompatible canonical data as documented. Renderer changes follow AGENTS guidance
 and produce a new candidate and fresh fidelity gate. A future version needs its
 own release contract, not a rerun of retired 1.0.0 publication.
+
+
+## Known delivery wording limitation
+
+The immutable published bundle retains historical 0.8 installation/administration
+wording from its certified source. Use the updated repository installation and
+runtime handoff for exact 1.0.0 instructions. No release asset was overwritten to
+correct that text; current documentation hashes are separate from historical
+bundle provenance. The migration contract remains schema 2.2 with source reimport
+for incompatible canonical data, and retained V1 API compatibility.
+
+## Verified implementation and platform evidence
+
+[PR #29](https://github.com/Sleinity/template-tool/pull/29) merged as
+`0a0b3f49484ac0c672da3142f0fd2a43006deb7d`; its CI and read-only registry workflow
+passed. The narrow terminal-state repair merged as
+`7e5065feee19a188bdaa65fc28cb556eb0d15974`; CI and its main read-only run also passed.
+Portable CI was corrected to fetch tag history after a reproduced shallow-checkout
+failure, with no weakening of the certified source comparison.
+Local [verification](evidence/sdk-1-baseline-20261014/local-verification.json)
+records builds/typechecks, portable/API/boundary/packed/budget checks. The first
+local umbrella stopped at sandbox DNS; the remaining network checks passed on
+the authorized rerun. [Read-only host evidence](evidence/sdk-1-baseline-20261014/local-readonly-verification.json)
+remains explicitly synthetic; full exact-font and PNG coverage is retained from
+Milestone 8. No new manual live review or performance benchmark is claimed.
+All 466 certified package/Studio files, 287 protected records, the historical
+publication descriptor and three certified archive hashes remain unchanged.
+There is no new SDK execution or activation path in these private tools.
+
+
+The [post-cleanup GitHub receipt](evidence/sdk-1-baseline-20261014/post-cleanup-verification.json)
+comes from successful main dispatch
+[38613007749](https://github.com/Sleinity/template-tool/actions/runs/38613007749),
+after the key and all 13 input artifacts were removed. Both strict registry hosts,
+all 41 release assets and published archive hashes passed again with no temporary
+input access. Final completion is bound to the merged receipt PR; future work
+starts from that reviewed main commit, retaining the runtime tag above.
