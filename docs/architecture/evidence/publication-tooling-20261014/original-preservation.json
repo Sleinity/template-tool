@@ -1,0 +1,28 @@
+{
+  "head": {
+    "expected": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+    "actual": "944c51b33433ce2e37ec05f7de66457d5154d5b4",
+    "matches": true
+  },
+  "branch": {
+    "expected": "main",
+    "actual": "main",
+    "matches": true
+  },
+  "statusSha256": {
+    "expected": "db64bbed91378f7ea9c712b8ec632f72d91f97cb85d1c5ca370b1705bd1b4bcb",
+    "actual": "db64bbed91378f7ea9c712b8ec632f72d91f97cb85d1c5ca370b1705bd1b4bcb",
+    "matches": true,
+    "command": "git status --short --untracked-files=all"
+  },
+  "indexSha256": {
+    "expected": "1634abce67f621a1c43ded6bd6e6fba41cae7d1cb149a8fd6dbb3a01e15b8cef",
+    "actual": "1634abce67f621a1c43ded6bd6e6fba41cae7d1cb149a8fd6dbb3a01e15b8cef",
+    "matches": true
+  },
+  "trackedDiffSha256": {
+    "expected": "49dcdac2982d701dcfcd696ac88dbf01b32c0997d059952020702fc1ee66d68e",
+    "actual": "49dcdac2982d701dcfcd696ac88dbf01b32c0997d059952020702fc1ee66d68e",
+    "matches": true
+  }
+}

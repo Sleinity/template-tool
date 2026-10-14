@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "sdk-publication-milestone-report-v1",
+  "status": "passed-preparation-and-read-only-rehearsal",
+  "date": "2026-10-14",
+  "milestone": 7,
+  "candidate": "sdk-1-candidate-20261013k",
+  "sourceBaseline": "27cc1ac5c5b82d7f7b1f542c6e281abe241e0a40",
+  "verifiedSourceCommit": "3a50ebd8446a461545bc121c6c81d765c8bb9546",
+  "reviewPR": "https://github.com/Sleinity/template-tool/pull/23",
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "retainedArtifact": {
+    "id": 11882221817,
+    "name": "sdk-1.0.0-certified-delivery",
+    "runId": 38540916222,
+    "headSha": "4f5f7b9b3b846fea0fce72fd434a80ea6e74f8f1",
+    "digest": "sha256:0aeb4244f957ca2cf90dea242ee22d8df52adf45e9b49944e944be6acb04a2e4",
+    "prefix": "",
+    "retentionDays": 90
+  },
+  "retainedExpiry": "2027-01-12T09:14:42Z",
+  "githubRehearsals": [
+    {
+      "runId": 38538500849,
+      "conclusion": "failure",
+      "disposition": "Exact-source consumer required private Mac paths on Ubuntu. No mutation occurred; replaced only the rehearsal with explicitly synthetic installed-archive contracts."
+    },
+    {
+      "runId": 38540916222,
+      "conclusion": "success",
+      "proves": "origin retention, approval policy and authenticated registry probes, strict npm/pnpm synthetic contracts"
+    },
+    {
+      "runId": 38541783623,
+      "conclusion": "success",
+      "proves": "pinned retained-artifact retrieval independent of origin, unchanged source/archive identities, same npm/pnpm contracts"
+    }
+  ],
+  "localVerification": {
+    "focusedTests": 28,
+    "portable": "passed ci:portable (builds, portable tests, typechecks, Studio, API/boundary, strict consumers, unchanged budgets, examples)",
+    "documentation": "249 Markdown documents / 763 local links passed",
+    "sourceBinding": "passed; original protected source inventory preserved with explicit private tooling exceptions",
+    "archives": "same exact three certified archives; no replacement/repacking for publication",
+    "originalCheckout": "HEAD, branch, full untracked status, index and tracked diff match M6 baseline",
+    "handoffSimulation": "actual generation fragment executed with supplied registry-response substitutes; generated bundle files/anchors verified; zero mutations"
+  },
+  "environment": {
+    "name": "private-sdk-release",
+    "requiredReviewer": "Sleinity",
+    "preventSelfReview": false,
+    "deploymentPolicies": [
+      {
+        "type": "tag",
+        "name": "sdk-v1.0.0"
+      },
+      {
+        "type": "branch",
+        "name": "main"
+      }
+    ],
+    "approvalPerformed": false
+  },
+  "registryProbe": {
+    "core": "would-publish",
+    "browser": "would-publish",
+    "react": "would-publish",
+    "authenticationOrNetworkErrorsTreatAsMissing": false
+  },
+  "metrics": {
+    "retainedFiles": 44,
+    "packageWrites": 0,
+    "releaseAssetWrites": 0,
+    "tagsCreated": 0,
+    "merges": 0,
+    "encryptedFixturesTransferred": 0,
+    "protectedSourceChanges": 0
+  },
+  "evidenceClassification": {
+    "automated": "focused fake adapters, actual GitHub read-only API/registry/artifact operations, actual isolated npm/pnpm strict compilation and synthetic native V2 workflows",
+    "retained": "Milestone 5 exact fonts/PNG/24+12+3+12 fidelity certificate retained by source/archive/reference identity, not rerun here",
+    "manualBrowserReview": false,
+    "productionPublishOrAssetUpload": false
+  },
+  "limitations": [
+    "Production package-write access and full registry-installed runtime acceptance are not proven by rehearsal.",
+    "Milestone 8 must provision authenticated, hash-verified private fixtures/fonts on the handoff runner before tagging; the delivery intentionally excludes them. Full published V2 acceptance remains unconditional.",
+    "No release tag, merge, package publication, stable release or reference promotion is authorized or performed."
+  ],
+  "failureReporting": "Confirmed package writes and uncertain attempts are reported separately from the persisted journal, including failed invocations."
+}

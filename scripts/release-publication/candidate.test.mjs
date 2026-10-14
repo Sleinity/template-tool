@@ -1,0 +1,142 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  mkdtemp,
+  readFile,
+  writeFile,
+  rm,
+  mkdir,
+  readdir,
+} from 'node:fs/promises';
+import path from 'node:path';
+import { tmpdir } from 'node:os';
+import { gzipSync } from 'node:zlib';
+import { zipSync } from 'fflate';
+import { generateDeliveryBundle } from '../release-delivery/bundle.mjs';
+import { freezeCandidate } from '../candidate-certification/frozen.mjs';
+import {
+  retainArtifact,
+  verifyArchives,
+  sha256,
+  packageNames,
+} from './candidate.mjs';
+function tar(name) {
+  const b = Buffer.from(
+      JSON.stringify({
+        name,
+        version: '1.0.0',
+        license: 'UNLICENSED',
+        publishConfig: { registry: 'https://npm.pkg.github.com' },
+      }),
+    ),
+    h = Buffer.alloc(512);
+  h.write('package/package.json');
+  h.write('0000644\0', 100);
+  h.write('0000000\0', 108);
+  h.write('0000000\0', 116);
+  h.write(b.length.toString(8).padStart(11, '0') + '\0', 124);
+  h.write('00000000000\0', 136);
+  h.fill(32, 148, 156);
+  h.write('0', 156);
+  h.write('ustar\0', 257);
+  h.write(
+    h
+      .reduce((a, b) => a + b, 0)
+      .toString(8)
+      .padStart(6, '0') + '\0 ',
+    148,
+  );
+  return gzipSync(
+    Buffer.concat([
+      h,
+      b,
+      Buffer.alloc(Math.ceil(b.length / 512) * 512 - b.length),
+      Buffer.alloc(1024),
+    ]),
+  );
+}
+test('artifact retention authenticates identity, expiry and content and strips fixture input', async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), 'retention-test-'));
+  try {
+    for (let i = 0; i < packageNames.length; i++)
+      await writeFile(
+        path.join(
+          dir,
+          'sleinity-template-' + ['core', 'browser', 'react'][i] + '-1.0.0.tgz',
+        ),
+        tar(packageNames[i]),
+      );
+    const bundle = path.join(dir, 'bundle');
+    await generateDeliveryBundle({
+      archivesDirectory: dir,
+      outputDirectory: bundle,
+    });
+    await writeFile(
+      path.join(bundle, 'LOCAL-CANDIDATE-MANIFEST.json'),
+      JSON.stringify({ source: { files: [] } }),
+    );
+    const frozen = await freezeCandidate(bundle),
+      entries = { 'fixtures.enc': Buffer.from('excluded ciphertext') };
+    for (const f of [
+      ...frozen.files.map((r) => r.file),
+      'FROZEN-CANDIDATE.json',
+    ])
+      entries['archives/' + f] = await readFile(path.join(bundle, f));
+    const zip = Buffer.from(zipSync(entries)),
+      artifact = {
+        id: 1,
+        name: 'certified',
+        runId: 2,
+        headSha: 'a'.repeat(40),
+        digest: 'sha256:' + sha256(zip),
+        prefix: 'archives/',
+      },
+      d = {
+        version: '1.0.0',
+        sourceFiles: [],
+        frozenManifestSha256: sha256(entries['archives/FROZEN-CANDIDATE.json']),
+        archives: frozen.files
+          .filter((r) => r.file.endsWith('.tgz'))
+          .map((r, i) => ({ ...r, name: packageNames[i] })),
+        originArtifact: artifact,
+      },
+      meta = {
+        id: 1,
+        name: 'certified',
+        expired: false,
+        expires_at: '2099-01-01T00:00:00Z',
+        digest: artifact.digest,
+        workflow_run: { id: 2, head_sha: artifact.headSha },
+      },
+      output = path.join(dir, 'retained');
+    await retainArtifact(d, meta, zip, output);
+    assert(!(await readdir(output)).includes('fixtures.enc'));
+    await verifyArchives(d, output);
+    for (const patch of [
+      { expired: true },
+      { id: 99 },
+      { digest: 'sha256:' + '0'.repeat(64) },
+      { workflow_run: { id: 9, head_sha: artifact.headSha } },
+      { expires_at: '2000-01-01' },
+    ])
+      await assert.rejects(() =>
+        retainArtifact(d, { ...meta, ...patch }, zip, path.join(dir, 'bad')),
+      );
+    await assert.rejects(() =>
+      retainArtifact(
+        d,
+        meta,
+        Buffer.from('tampered'),
+        path.join(dir, 'tampered'),
+      ),
+    );
+    await assert.rejects(() =>
+      verifyArchives({ ...d, frozenManifestSha256: '0'.repeat(64) }, output),
+    );
+    const missing = path.join(dir, 'missing');
+    await mkdir(missing);
+    await assert.rejects(() => verifyArchives(d, missing));
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
