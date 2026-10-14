@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sha256 } from './candidate.mjs';
+import { zipSync } from 'fflate';
 import {
   installationMode,
   validateRegistryLock,
@@ -10,11 +11,29 @@ import {
 import {
   validateFixtureArtifact,
   restoreReleaseFixtureBytes,
+  sealedFixtureBytes,
 } from './fixtures.mjs';
 import {
   encryptFixturePayload,
   decryptFixturePayload,
 } from '../candidate-certification/fixtures.mjs';
+test('artifact ZIP bytes reach the authenticated decryptor as a Buffer', () => {
+  const key = Buffer.alloc(32, 7);
+  const payload = {
+    schemaVersion: 'sdk-cert-fixtures-v1',
+    files: [],
+    environment: {},
+  };
+  const encrypted = encryptFixturePayload(payload, key);
+  const zip = Buffer.from(zipSync({ 'fixtures.enc': encrypted }));
+  const digest = 'sha256:' + sha256(zip);
+  const decoded = sealedFixtureBytes(zip, digest);
+  assert(Buffer.isBuffer(decoded));
+  assert.deepEqual(decryptFixturePayload(decoded, key), payload);
+  assert.throws(() => sealedFixtureBytes(zip, 'sha256:wrong'));
+  const empty = Buffer.from(zipSync({}));
+  assert.throws(() => sealedFixtureBytes(empty, 'sha256:' + sha256(empty)));
+});
 test('registry mode refuses workspace fallback, wrong versions, authorities and integrity', () => {
   const records = [
     {

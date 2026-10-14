@@ -49,7 +49,7 @@ jobs:
           SEALED_ID: ${{ steps.sealed.outputs.artifact-id }}
           SEALED_DIGEST: ${{ steps.sealed.outputs.artifact-digest }}
       - name: Authenticate and restore exact fixtures
-        run: node scripts/release-publication/fixtures.mjs restore-file "$RUNNER_TEMP/sealed-fixtures/fixtures.enc" "$RUNNER_TEMP/exact-fixtures"
+        run: node scripts/release-publication/fixtures.mjs restore "$RUNNER_TEMP/exact-fixtures"
         env:
           SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY_20261013C }}
       - run: pnpm exec playwright install --with-deps chromium

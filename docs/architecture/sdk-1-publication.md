@@ -83,3 +83,11 @@ tolerance change, new manual live review or SDK runtime change occurred.
 These receipts are publication prerequisites, not registry acceptance. Package
 publication, Linux/macOS registry-installed verification, prerelease assets and
 human-approved stable promotion remain pending.
+
+## First publication preflight stopped safely
+
+Tag `sdk-v1.0.0` now points to `33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`.
+Run 38563617164 stopped at fixture ZIP decoding before any package write. The
+[intake repair and proposed recovery](sdk-1-publication-intake-repair.md) record
+the confirmed Buffer/Uint8Array seam, retained reproduction and required immutable-tag
+execution decision. Publication remains NO-GO; no deployment was approved by tools.
