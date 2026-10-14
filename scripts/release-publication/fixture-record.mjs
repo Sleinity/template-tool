@@ -3,6 +3,8 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import { ciphertextSha256 } from './fixtures.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('fixed release reporting/rehearsal');
 const [directory, id, digest] = process.argv.slice(2);
 assert(directory && /^\d+$/.test(id) && /^[a-f0-9]{64}$/.test(digest));
 await mkdir(directory, { recursive: true });

@@ -2,6 +2,8 @@ import { execFileSync } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('fixed release reporting/rehearsal');
 const [directory, id, digest] = process.argv.slice(2);
 assert(directory && /^\d+$/.test(id) && /^[a-f0-9]{64}$/.test(digest));
 assert(process.env.GITHUB_RUN_ID && process.env.GITHUB_SHA);

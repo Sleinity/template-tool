@@ -2,8 +2,9 @@
 
 [V2 integration](V2_INTEGRATION.md) is the recommended current source contract.
 Use one verified fixed-train delivery, identified by actual archive hashes and
-provenance. Published 0.8 migration material is historical; the staged major is
-[1.0.0](SDK_1_0_MIGRATION.md), not yet applied or published.
+provenance. Published 0.8 migration material is historical. The current stable train is
+[SDK 1.0.0](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0);
+read the [migration guide](SDK_1_0_MIGRATION.md) before reopening older canonical data.
 
 ## Recommended host journey
 
@@ -37,3 +38,18 @@ Historical migration instructions are in [the published 0.8 guide](SDK_0_8_MIGRA
 Generated handoffs use one inventory and verify links/anchors in their emitted
 directory. Archive verification always compiles the current V2 guide and exercises
 exact single/Family contracts, including when no local-candidate manifest exists.
+
+
+## Stable baseline and future work
+
+The runtime reference is immutable `sdk-v1.0.0` at
+`33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`. Source development uses reviewed
+post-handoff main; later tooling/documentation commits do not change that runtime
+identity. Registry installation requires `read:packages` and package access;
+verified public release archives need no registry credential. Keep adapter
+lifetimes caller-owned and use supported packed entries only.
+
+Configuration changes follow local draft → Apply → Save in Review. Output
+recovery autosave retains the existing 650 ms schedule, manual Retry and
+cleanup-only Retry after successful export. Persistence state and current PNG
+readiness are separate; a saved record can still require input correction.

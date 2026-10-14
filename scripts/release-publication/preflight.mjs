@@ -17,6 +17,8 @@ import {
 } from './promotion.mjs';
 import { preflightGithub } from './github.mjs';
 import { RegistryReadClient } from './registry.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('publication preflight');
 const d = await loadDescriptor();
 toolchain();
 await verifySource(d);

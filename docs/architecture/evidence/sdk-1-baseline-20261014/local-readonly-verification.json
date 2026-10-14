@@ -1,0 +1,59 @@
+{
+  "status": "pass",
+  "tagCommit": "33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348",
+  "releaseId": 412790313,
+  "assets": 41,
+  "registryArchives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "deliveryManifestSha256": "5539f59126db6f5fda7a12a94beaf5b707d09eeb840fb7a1e907e2b962bc9d8f",
+  "actionsArtifactsRequired": false,
+  "fixtureKeyRequired": false,
+  "hosts": [
+    {
+      "manager": "npm",
+      "status": "pass",
+      "durationMs": 9964,
+      "contractLogSha256": "29fe74eaf98027ad47eb6a2e72ba3d184f461a9f18986fae265c459e2bdb8c4c",
+      "installation": "registry",
+      "strictDeclarations": true,
+      "exactSourceCertification": false
+    },
+    {
+      "manager": "pnpm",
+      "status": "pass",
+      "durationMs": 7794,
+      "contractLogSha256": "29fe74eaf98027ad47eb6a2e72ba3d184f461a9f18986fae265c459e2bdb8c4c",
+      "installation": "registry",
+      "strictDeclarations": true,
+      "exactSourceCertification": false
+    }
+  ],
+  "sourceCommit": "9ef92c779d993be60790d41736a8d576730f21bb",
+  "ciRunId": null,
+  "manualLiveReview": false,
+  "evidence": "Automated local browser-independent synthetic registry workflow; implementation tested before first commit",
+  "environment": {
+    "node": "22.23.3",
+    "pnpm": "11.9.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  }
+}

@@ -104,7 +104,8 @@
     "version-packages": "changeset version",
     "release": "node scripts/release-publication/cli.mjs publish",
     "editor:performance": "node scripts/editor-performance/run.mjs",
-    "editor:verify": "node scripts/editor-performance/verify.mjs"
+    "editor:verify": "node scripts/editor-performance/verify.mjs",
+    "sdk:baseline:verify": "node scripts/release-baseline/verify.mjs"
   },
   "dependencies": {
     "@sleinity/template-browser": "workspace:*",

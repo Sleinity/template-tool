@@ -1,3 +1,8 @@
+> SDK 1.0.0 is stable. Fixed-train execution workflows below are historical
+> administration guidance, not active publication commands. Use the
+> [current baseline runbook](https://github.com/Sleinity/template-tool/blob/main/docs/sdk/CERTIFIED_PUBLICATION.md).
+> Future releases require a new reviewed candidate contract.
+
 # GitHub setup and collaboration
 
 ## Repository

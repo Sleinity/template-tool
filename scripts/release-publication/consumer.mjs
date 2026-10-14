@@ -16,6 +16,8 @@ import { verifyDeliveryBundle } from '../release-delivery/bundle.mjs';
 import { extractCandidateExamples } from '../repository/local-sdk-candidate.mjs';
 import { createCompactLifecycleFixture } from '../compact-lifecycle-fixture.mjs';
 
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('fixed release reporting/rehearsal');
 const args = process.argv.slice(2);
 assert(
   args.length === 4 && args[0] === '--archives' && args[2] === '--output',

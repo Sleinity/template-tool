@@ -1,9 +1,13 @@
-# Core importer 0.8.0 handoff
+# Core importer 1.0.0 handoff
+
+The current stable delivery is SDK 1.0.0. Older canonical schema 2.0/2.1 data
+requires source reimport; retained V1 API compatibility does not imply automatic
+canonical migration. The V2 host journey is described in the runtime handoff.
 
 ## Contract
 
 - Package: `@sleinity/template-core`
-- Version: `0.8.0`
+- Version: `1.0.0`
 - Supported importer export: `importTemplatePackage`
 - Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
   source filename.
@@ -41,9 +45,9 @@ export async function importTemplateZip(file: File) {
 ## Vendored installation
 
 Download these files from the public
-[`sdk-v0.8.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0):
+[`sdk-v1.0.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0):
 
-- `sleinity-template-core-0.8.0.tgz`
+- `sleinity-template-core-1.0.0.tgz`
 - `SHA256SUMS`
 - `SDK-CORE-HANDOFF.md`
 
@@ -52,7 +56,7 @@ Verify the archive, commit it to the private consumer repository, and declare:
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz"
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-1.0.0.tgz"
   }
 }
 ```
@@ -76,7 +80,7 @@ always-auth=true
 ```
 
 ```sh
-npm install @sleinity/template-core@0.8.0
+npm install @sleinity/template-core@1.0.0
 ```
 
 `NODE_AUTH_TOKEN` must be a classic GitHub personal access token with

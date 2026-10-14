@@ -10,6 +10,7 @@ import { restoreFixtures } from '../candidate-certification/fixtures.mjs';
 import { loadManifest, verifyFixture } from '../fidelity/core.mjs';
 import { selectSdkGateFixtures } from '../fidelity/gate-profile.mjs';
 import { loadExactFontManifest } from '../fidelity/fonts.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
 export const ciphertextSha256 =
   '7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a';
 export function sealedFixtureBytes(zip, digest) {
@@ -28,6 +29,7 @@ export function validateFixtureArtifact(a, pin) {
   assert.equal(a.workflow_run.head_sha, pin.headSha);
 }
 export async function retainSealedFixtures(output) {
+  refuseRetiredOperation('fixture access');
   const d = await loadDescriptor(),
     pin = d.fixtureArtifact ?? d.originArtifact,
     a = githubJson('actions/artifacts/' + pin.id),
@@ -49,6 +51,7 @@ export async function retainSealedFixtures(output) {
   };
 }
 export async function restoreReleaseFixtures(directory) {
+  refuseRetiredOperation('fixture access');
   const d = await loadDescriptor(),
     pin = d.fixtureArtifact;
   assert(pin, 'A pinned sealed fixture artifact is required');
@@ -62,6 +65,7 @@ export async function restoreReleaseFixtures(directory) {
   return restoreReleaseFixtureBytes(bytes, directory);
 }
 export async function restoreReleaseFixtureBytes(bytes, directory) {
+  refuseRetiredOperation('fixture access');
   assert.equal(sha256(bytes), ciphertextSha256);
   const key = Buffer.from(process.env.SDK_CERT_FIXTURE_KEY ?? '', 'hex');
   assert.equal(key.length, 32, 'Fixture decryption credential unavailable');

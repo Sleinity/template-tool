@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 test('synthetic rehearsal cannot replace unconditional published V2 acceptance', async () => {
   const rehearsal = await readFile(
-    '.github/workflows/release-rehearsal.yml',
+    'docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release-rehearsal.yml',
     'utf8',
   );
   assert(rehearsal.includes('scripts/release-publication/consumer.mjs'));
@@ -20,7 +20,7 @@ test('synthetic rehearsal cannot replace unconditional published V2 acceptance',
   assert(full.includes('verify-sdk-061-family-host.mjs'));
   assert(full.includes('skipLibCheck: false'));
   assert(!full.includes('SDK_SYNTHETIC'));
-  const release = await readFile('.github/workflows/release.yml', 'utf8');
+  const release = await readFile('docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml', 'utf8');
   assert(release.includes('acceptance.mjs --mode registry'));
   const consumer = await readFile(
     'scripts/release-publication/consumer.mjs',

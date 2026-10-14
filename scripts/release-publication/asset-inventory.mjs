@@ -4,6 +4,8 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { verifyDeliveryBundle } from '../release-delivery/bundle.mjs';
 import { sha256 } from './candidate.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('fixed release reporting/rehearsal');
 const [delivery, output] = process.argv.slice(2);
 assert(delivery && output);
 const { manifest, manifestSha256 } = await verifyDeliveryBundle(delivery);

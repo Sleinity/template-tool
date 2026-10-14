@@ -36,7 +36,7 @@ try {
       join(archives, row.file),
       join(temporary, 'release-artifacts', row.file),
     );
-  const workflow = await readFile('.github/workflows/release.yml', 'utf8');
+  const workflow = await readFile('docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml', 'utf8');
   const fragment = workflow.match(
     /      - name: Generate shared published handoff\n        run: \|\n((?: {10}.*\n)+)/,
   )?.[1];

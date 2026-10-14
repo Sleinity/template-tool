@@ -14,6 +14,7 @@ import {
 const portableTestMode = portableTestsRequested();
 globalThis.__templateToolPortableTests = portableTestMode;
 
+await import('./release-baseline/baseline.test.mjs');
 await import("./realistic-zip-fixture.test.mjs");
 await import("./fidelity/fidelity.test.mjs");
 await import("./compositing/source-evidence.test.mjs");

@@ -15,6 +15,8 @@ import {
   generateDeliveryBundle,
   verifyDeliveryBundle,
 } from '../release-delivery/bundle.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
+refuseRetiredOperation('fixed candidate acceptance');
 const args = process.argv.slice(2),
   option = (k) => {
     const i = args.indexOf(k);

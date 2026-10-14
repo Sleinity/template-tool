@@ -151,7 +151,7 @@ test('recovery preserves the latest writer journal across changed tooling heads 
   );
 });
 test('recovery preserves real event identity, human gates and frozen publication only', async () => {
-  const source = await readFile('.github/workflows/release.yml', 'utf8');
+  const source = await readFile('docs/architecture/evidence/sdk-1-baseline-20261014/workflows/release.yml', 'utf8');
   assert(source.includes('resume_existing_tag'));
   assert(source.includes('expected_tag_commit'));
   assert(

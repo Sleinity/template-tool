@@ -12,6 +12,7 @@ import {
 import { github, githubJson, preflightGithub } from './github.mjs';
 import { RegistryReadClient } from './registry.mjs';
 import { protectReleaseAssets } from './driver.mjs';
+import { refuseRetiredOperation } from '../release-baseline/retired.mjs';
 const required = [
   'consumer',
   'example',
@@ -91,6 +92,7 @@ export async function resolveReleaseTag() {
   ).trim();
 }
 export async function promoteStable() {
+  refuseRetiredOperation('stable promotion');
   const d = await loadDescriptor();
   await verifySource(d);
   preflightGithub();
