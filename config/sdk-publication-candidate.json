@@ -5271,7 +5271,7 @@
     },
     {
       "file": "scripts/release-publication/cli.mjs",
-      "sha256": "8cc1396f1c8c141c422a5c3eaecbed2540cd32ed771eeb9fcfea2d8ad1381d06"
+      "sha256": "753b3a1472af2888492436723df543470bb8492c4c9b4150f5d0f1ff158ed0be"
     },
     {
       "file": "scripts/release-publication/consumer.mjs",

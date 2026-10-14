@@ -117,6 +117,18 @@ try {
         })),
       );
       const tag = 'sdk-v' + d.version;
+      const assetTagCommit = execFileSync(
+        'git',
+        ['rev-parse', `refs/tags/${tag}^{commit}`],
+        { encoding: 'utf8' },
+      ).trim();
+      assert.equal(
+        resolveRemoteTag(),
+        assetTagCommit,
+        'Remote tag changed before asset acceptance',
+      );
+      if (d.existingTagRecovery)
+        assert.equal(assetTagCommit, d.existingTagRecovery.tagCommit);
       let release;
       try {
         release = githubJson('releases/tags/' + tag);
