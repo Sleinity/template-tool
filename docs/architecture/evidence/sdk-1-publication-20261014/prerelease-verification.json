@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "tagCommit": "33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348",
+  "releaseId": 412790313,
+  "url": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0",
+  "prerelease": true,
+  "verifiedAssets": 41,
+  "linuxArtifactDigestVerified": true,
+  "platformMatricesVerified": true,
+  "sourceCommit": "a707846e6c29674a1f8b9719702c2b2832283dac",
+  "stableApproved": false
+}

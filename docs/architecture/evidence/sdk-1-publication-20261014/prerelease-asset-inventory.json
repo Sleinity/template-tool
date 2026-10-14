@@ -1,0 +1,171 @@
+{
+  "status": "pass",
+  "tagCommit": "33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348",
+  "deliveryManifestSha256": "5539f59126db6f5fda7a12a94beaf5b707d09eeb840fb7a1e907e2b962bc9d8f",
+  "files": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "sha256": "ab6bc9cc9af095fcad8b42afaba8157fc048554caf39ac1862a8e565cb5585d7"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "sha256": "518321935e76273d67fb2dd85b3186bcbecd92eea0cd4763b3317906793343e4"
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "sha256": "2e2abe0f1d872f0c5a06a3fb0e120b19911a06cfb02651c31e1919efdc6b5e22"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "sha256": "0d0735c35ac6750d0dfaea7f0117b990b77d41c999f924b0c6c323d0113b01a2"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "sha256": "2aa363deeb58458aba43add65bf4012d81cf977dfb60d30a97657befac213875"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "sha256": "8911c753c80c98e362404a413d721b59db90511e1870905542f2a3215027c5c5"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "sha256": "f4f05f83d623bf7ced73c5c1e479f2f7f41714133d21a6dcc76f3363c85aef2d"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "sha256": "00be4de40870aeeec94f5dc3f02cbf98735d64cfb292d5e6ef420eea77fc4cb5"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "sha256": "c1f16a5d92f477282fbc2773368d5d2e382eb141500a4cbed3be812c9f20056a"
+    },
+    {
+      "file": "SDK-README.md",
+      "sha256": "94347045200d02771e5cae100dfea5c33ba8e4fca9ee9ab287b73dabb258387b"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "sha256": "81d4416f0cdee703a41cd70b242c5ecc68b2c7799b7a749005b4252451618318"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "sha256": "556f5c86af64bec82c43f031c0f94bf7f2551185390dd1683adcedb5ebab0582"
+    },
+    {
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "sha256": "f7512d07a6be93bbdcbe83d68bfeb829b4956c2c3a651cfafdde386b89f9b0e5"
+    },
+    {
+      "file": "CONSUMER-COMPATIBILITY.md",
+      "sha256": "ea7e319eeaed1a5a1a17d006d3f62324cc128f62a0f23c99abfd06cfb76bc9d5"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "sha256": "14efaf61b3a07e89278146a8542bbd051e557667de76b8f6130aa228434d2bba"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "sha256": "97419d6b9d566fdd49fdeecad5f36e23ca3dd8622abb4bfbbc352ef592df5435"
+    },
+    {
+      "file": "GITHUB-SETUP.md",
+      "sha256": "3db920ba20f18ac37c500365ad461a33c37be413311971018763ff67e4b46ad6"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "sha256": "730732c2982eb55ee33e697e39a06d44587b0b4a0bba7e89bf559b6ace8ac2c9"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "sha256": "66724388145550569d4c1fd5246efbe7bdbbf3587fd7246165cf4137d0c4f949"
+    },
+    {
+      "file": "TEMPLATE-RECOVERY.md",
+      "sha256": "841d817f81d1da1f21fb8de021d74e421c8bc43b304062777998c8bd92fdbe27"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "sha256": "5fe12de7cdf10067d3a39febb38e1027d650db4057057f56c53ebb5d47918c3d"
+    },
+    {
+      "file": "FieldRulesV2Host.tsx",
+      "sha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51"
+    },
+    {
+      "file": "fieldHostLifecycle.ts",
+      "sha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681"
+    },
+    {
+      "file": "MINIMAL-RENDERER-COMPATIBILITY.md",
+      "sha256": "ceac2fac90f8f2419f827432b924928883ca2bb5edc78ec0098e7e81c60f3c7c"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-COMPATIBILITY.md",
+      "sha256": "1881bcc3b28e55bc8c00ec78bb114e180a9bccc2e035d1b1799cc1af799114ec"
+    },
+    {
+      "file": "sdk-entry-points.json",
+      "sha256": "d5bb6c1aeff9941e3c32c3caa9955868f900ebd45ebd4bbc907a46587c1e9cde"
+    },
+    {
+      "file": "sdk-public-api.json",
+      "sha256": "cbbd47264de5606b7fef5d5b2a18e4205d1e7febff0a37bb5c1a8380d3087027"
+    },
+    {
+      "file": "SDK-0.8-MIGRATION.md",
+      "sha256": "d65f8dff77c8ac8cfa310181e0ce20cb48375676661dcc0b1cfbd78d42d0155b"
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "sha256": "6e957c948226453a1433c1af46035723d43b7151097cc069fa0949c2de91f752"
+    },
+    {
+      "file": "SDK-0.6-MIGRATION.md",
+      "sha256": "5cd5024a2fec82a17ef97a9537a2167456c1e2841096674125d764f135493e6e"
+    },
+    {
+      "file": "SDK-0.5-MIGRATION.md",
+      "sha256": "9e21d51727be139a46e148a9e573a90bd040f2e5f367aaaa6f747eb40a7a7178"
+    },
+    {
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "sha256": "91b5d6bca9d528f5bc8793ca10f48567c2f3e191d29c0feeb82f61ce44371416"
+    },
+    {
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "sha256": "9468b2cb2e943d66ade156d3d9578521b6072d2e8fe38dac510fd2e7f5ac96b4"
+    },
+    {
+      "file": "SDK-0.4-MIGRATION.md",
+      "sha256": "ccb7d59c1178811aa8d02b4a86349d3a9fa482a24a7dff85cd3f8a40158872b2"
+    },
+    {
+      "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "sha256": "1fd011248528a901504e76d40f963dd9498a220d030c1ea22da7cc77b9ffa7e3"
+    },
+    {
+      "file": "SHA256SUMS",
+      "sha256": "0edb9f2e671b57cfcadf145bd4ed99c209d301b0f5e4f9f2a79137d58c13ada3"
+    },
+    {
+      "file": "CORE-SHA256SUMS",
+      "sha256": "9060e5bb67cffa5dccbf42f2972133a6507bbdb78387fd0369a91a87d4f3472f"
+    },
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json",
+      "sha256": "5539f59126db6f5fda7a12a94beaf5b707d09eeb840fb7a1e907e2b962bc9d8f"
+    }
+  ]
+}

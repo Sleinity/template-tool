@@ -3,7 +3,9 @@
 The immutable candidate is `sdk-1-candidate-20261013k`. This milestone prepares
 and executes registry publication and stable promotion; completion requires actual
 publication, registry acceptance on Linux/macOS, a fresh macOS fidelity gate and
-human-approved stable promotion. Those final operations are still pending.
+human-approved stable promotion. The three packages are now published and macOS
+registry acceptance passes on both platforms; stable promotion awaits separate
+human approval.
 
 ## Prepared contract
 
@@ -34,7 +36,7 @@ complete Linux/macOS registry receipts, the fresh macOS fidelity receipt, matchi
 registry archives, tag identity and complete matching assets. Missing or inconsistent
 evidence blocks promotion. No tool approves deployments or source reviews.
 
-## Current evidence
+## Retained preparation evidence
 
 Actual [preparation run 38551302611](https://github.com/Sleinity/template-tool/actions/runs/38551302611)
 passed at `e76e1a92a2fda944b088566b118c372ec4d21283`:
@@ -90,4 +92,62 @@ Tag `sdk-v1.0.0` now points to `33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`.
 Run 38563617164 stopped at fixture ZIP decoding before any package write. The
 [intake repair and proposed recovery](sdk-1-publication-intake-repair.md) record
 the confirmed Buffer/Uint8Array seam, retained reproduction and required immutable-tag
-execution decision. Publication remains NO-GO; no deployment was approved by tools.
+execution decision. This failure remains retained historical evidence. The explicitly approved recovery
+below resolved it without moving the tag; no deployment was approved by tools.
+
+
+## Actual protected publication and registry acceptance
+
+[Recovery run 38571485252](https://github.com/Sleinity/template-tool/actions/runs/38571485252)
+executes reviewed tooling commit `a707846e6c29674a1f8b9719702c2b2832283dac`.
+The immutable tag remains `33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348`.
+PR #26 was reviewed and merged before the recovery dispatch; its full preparation,
+CI and rehearsal checks passed. The [read-only recovery preflight](evidence/sdk-1-publication-20261014/recovery-preflight.json)
+passed twelve archive commands and validated 709 tagged SDK/Studio/example files.
+
+The owner approved publication and handoff in GitHub's protected environment.
+[Approval records](evidence/sdk-1-publication-20261014/deployment-approvals.json)
+are distinct from automated acceptance and do not include stable approval.
+The [publication report](evidence/sdk-1-publication-20261014/publication.json)
+and [journal](evidence/sdk-1-publication-20261014/publication-journal.json)
+record three ordered, verified package writes: Core, Browser, then React 1.0.0.
+Their downloaded hashes equal the frozen candidate; lifecycle scripts were disabled.
+There were no uncertain publication outcomes, tag changes, package rebuilds or
+package deletion. CI used the protected job's package-write token. Local tests use
+only the separately authorized package-read credential; no credentials are retained.
+
+The [macOS registry matrix](evidence/sdk-1-publication-20261014/macos-registry.json)
+passed all twelve npm/pnpm commands against registry-installed packages on
+Node 22.23.3, pnpm 11.9.0 and npm 11.21.0, darwin arm64. It verifies strict guide
+and delivered example compilation, single/Family V2 workflows, exact-font authority,
+storage/recovery, and retained V1 single/Family compatibility. Fresh isolated stores,
+registry lockfile origins/integrities, installed bytes and supported entries were
+checked; no workspace SDK fallback was used. Each run rechecked frozen archives.
+These are automated browser/CLI results, not new manual live design review.
+
+The [Linux registry matrix](evidence/sdk-1-publication-20261014/linux-registry.json)
+passed all twelve registry commands on Ubuntu 24.04, Node 22.23.3, pnpm 11.9.0 and
+npm 10.9.9, x64. The same handoff job also passed all twelve archive commands before
+running registry acceptance. Its [handoff receipt](evidence/sdk-1-publication-20261014/handoff.json)
+and [asset inventory](evidence/sdk-1-publication-20261014/prerelease-asset-inventory.json)
+bind 41 verified release assets and delivery-manifest hash
+`5539f59126db6f5fda7a12a94beaf5b707d09eeb840fb7a1e907e2b962bc9d8f`.
+The actual successful release run's Linux artifact is 11900706900, digest
+`sha256:d21797f705d3f7dcac2045ca2160ba4dd0bed77879f9e55f4c2229cb910b20f8`,
+retained until January 12, 2027. Its ZIP digest was independently checked locally.
+Both platform reports bind the same tag, archive set and delivery manifest.
+The [independent read-only check](evidence/sdk-1-publication-20261014/prerelease-verification.json)
+downloaded and matched all 41 actual prerelease asset hashes.
+
+[SDK 1.0.0](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0)
+currently remains a prerelease. Promotion configuration pins the actual Linux
+artifact and hash-bound macOS/fidelity receipts. It authorizes requesting the
+protected human checkpoint, not automatic approval. Stable promotion rechecks
+remote tag, registry archives, both receipts and every release asset before writing.
+No runtime source or archive was changed after certification; there is consequently
+no added canonical work, font activation or production execution path. Consumer
+command durations are recorded in both reports. No new manual browser review,
+screen-reader coverage or Linux-to-macOS raster comparison is claimed.
+
+Stable promotion still requires a separate human deployment approval.
+Formal baseline handoff and temporary-input retirement remain Milestone 9.

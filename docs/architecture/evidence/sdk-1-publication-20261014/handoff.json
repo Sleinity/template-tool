@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "sdk-publication-report-v1",
+  "command": "assets",
+  "environment": {
+    "node": "v22.23.3",
+    "pnpm": "11.9.0",
+    "npm": "10.9.9",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "candidate": "sdk-1-candidate-20261013k",
+  "version": "1.0.0",
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "status": "pass",
+  "mutations": [],
+  "sourceCommit": "a707846e6c29674a1f8b9719702c2b2832283dac",
+  "github": {
+    "repository": "Sleinity/template-tool",
+    "visibility": "public",
+    "environment": "private-sdk-release",
+    "humanApprovalRequired": true,
+    "automaticApproval": false
+  },
+  "assetActions": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "action": "upload"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "action": "upload"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "action": "upload"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-README.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "action": "upload"
+    },
+    {
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "action": "upload"
+    },
+    {
+      "file": "CONSUMER-COMPATIBILITY.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "action": "upload"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "action": "upload"
+    },
+    {
+      "file": "GITHUB-SETUP.md",
+      "action": "upload"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "action": "upload"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "action": "upload"
+    },
+    {
+      "file": "TEMPLATE-RECOVERY.md",
+      "action": "upload"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "action": "upload"
+    },
+    {
+      "file": "FieldRulesV2Host.tsx",
+      "action": "upload"
+    },
+    {
+      "file": "fieldHostLifecycle.ts",
+      "action": "upload"
+    },
+    {
+      "file": "MINIMAL-RENDERER-COMPATIBILITY.md",
+      "action": "upload"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-COMPATIBILITY.md",
+      "action": "upload"
+    },
+    {
+      "file": "sdk-entry-points.json",
+      "action": "upload"
+    },
+    {
+      "file": "sdk-public-api.json",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.8-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.6-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.5-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.4-MIGRATION.md",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "action": "upload"
+    },
+    {
+      "file": "SHA256SUMS",
+      "action": "upload"
+    },
+    {
+      "file": "CORE-SHA256SUMS",
+      "action": "upload"
+    },
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json",
+      "action": "upload"
+    }
+  ]
+}
