@@ -301,6 +301,13 @@
       "disposition": "private tooling/test",
       "status": "modified-or-added",
       "sha256": "52270e43ce74e55203e0e69f266a51f371c2b0f73b5eb6bc0854d250b0dfef1a"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-1-baseline-20261014/change-dispositions.json",
+      "disposition": "self-describing change ledger",
+      "status": "added",
+      "sha256": null,
+      "reason": "Self-hash omitted to avoid a circular identity"
     }
   ]
 }
