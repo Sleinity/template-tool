@@ -49,3 +49,6 @@ test('cleanup records completed operations before a later failure',async()=>{
   if(method==='DELETE')throw Error('503 unavailable');return {status:200,body:{id:1,name:row.name,digest:row.digest,workflow_run:{id:2,head_sha:'c',repository_id:1307991360}}};
  },async rows=>updates.push(rows)),/503/);assert.equal(updates.length,1);assert.equal(updates[0][0].outcome,'deleted');assert.equal(updates[0][0].kind,'secret');
 });
+test('GitHub deleted workflow state is retired and never reactivated or disabled again',async()=>{
+ const inv={schemaVersion:'sdk-release-cleanup-inventory-v1',secret:{name:'SDK_CERT_FIXTURE_KEY_20261013C',ownership:'dedicated-sdk-1.0.0-certification',updatedAt:'now'},artifacts:[],localFiles:[],workflows:[{id:1,path:'.github/workflows/release.yml',ownership:'completed-sdk-1.0.0-execution'}]};const writes=[];const result=await executeCleanup(inv,(route,method)=>{if(method)writes.push(method);return route.includes('workflows/')?{status:200,body:{id:1,path:inv.workflows[0].path,state:'deleted'}}:{status:404};});assert.equal(result[0].outcome,'already-deleted');assert.equal(writes.length,0);
+});

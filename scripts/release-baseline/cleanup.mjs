@@ -16,7 +16,7 @@ export function validateCleanupRow(row, current){
 export function validateWorkflowRow(row,current){
  assert.equal(row.ownership,'completed-sdk-1.0.0-execution');
  assert(['.github/workflows/candidate-certification.yml','.github/workflows/release-preparation.yml','.github/workflows/release-rehearsal.yml','.github/workflows/release.yml'].includes(row.path));
- assert.equal(current.id,row.id);assert.equal(current.path,row.path);assert(['active','disabled_manually','disabled_inactivity'].includes(current.state));
+ assert.equal(current.id,row.id);assert.equal(current.path,row.path);assert(['active','deleted','disabled_manually','disabled_inactivity'].includes(current.state));
 }
 export function absenceOutcome(status){
  if(status===404)return 'already-absent';
@@ -53,7 +53,7 @@ export async function executeCleanup(inventory,api=request,onResult=async()=>{})
  const secret=api('actions/secrets/'+inventory.secret.name);
  if(absenceOutcome(secret.status)==='present'){assert.equal(secret.body.name,inventory.secret.name);assert.equal(secret.body.updated_at,inventory.secret.updatedAt);}
  const results=[];const append=async row=>{results.push(row);await onResult([...results]);};
- for(const {row,before} of workflows){if(before.status!==404&&before.body.state==='active'){api('actions/workflows/'+row.id+'/disable','PUT');assert.equal(api('actions/workflows/'+row.id).body.state,'disabled_manually');}await append({kind:'workflow',id:row.id,path:row.path,outcome:before.status===404?'already-absent':before.body.state==='active'?'disabled':'already-disabled'});}
+ for(const {row,before} of workflows){if(before.status!==404&&before.body.state==='active'){api('actions/workflows/'+row.id+'/disable','PUT');assert.equal(api('actions/workflows/'+row.id).body.state,'disabled_manually');}await append({kind:'workflow',id:row.id,path:row.path,outcome:before.status===404?'already-absent':before.body.state==='active'?'disabled':before.body.state==='deleted'?'already-deleted':'already-disabled'});}
  if(secret.status!==404){api('actions/secrets/'+inventory.secret.name,'DELETE');assert.equal(api('actions/secrets/'+inventory.secret.name).status,404);}
  await append({kind:'secret',name:inventory.secret.name,outcome:secret.status===404?'already-absent':'deleted'});
  for(const {row,before} of rows){if(before.status!==404){api('actions/artifacts/'+row.id,'DELETE');assert.equal(api('actions/artifacts/'+row.id).status,404);}await append({kind:'artifact',id:row.id,name:row.name,outcome:before.status===404?'already-absent':'deleted',preservedCiphertextSha256:row.ciphertextSha256});}

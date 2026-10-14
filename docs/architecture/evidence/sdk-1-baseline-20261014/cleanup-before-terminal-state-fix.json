@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "sdk-release-cleanup-receipt-v1",
+  "status": "fail",
+  "verificationRunId": 38610062222,
+  "sourceCommit": "0a0b3f49484ac0c672da3142f0fd2a43006deb7d",
+  "inventorySha256": "64a83fbf30ff3bbfe937eefe154553138af6635954d2f8532fbdf239173544a2",
+  "results": [],
+  "removedSecretValuesRecorded": false,
+  "gitHistoryRewritten": false,
+  "unclassifiedResourcesPreserved": true,
+  "error": "The expression evaluated to a falsy value:\n\n  assert(['active','disabled_manually','disabled_inactivity'].includes(current.state))\n"
+}
