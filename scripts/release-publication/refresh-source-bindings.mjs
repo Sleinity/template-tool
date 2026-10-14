@@ -17,7 +17,6 @@ const allowed = [
   'scripts/repository/verify-template-editor-reference.mjs',
   'scripts/repository/verify-template-family-reference.mjs',
   'scripts/example-lifecycle/verify.mjs',
-
 ];
 const d = JSON.parse(await readFile(descriptorFile, 'utf8'));
 d.reviewedToolingChanges = [];

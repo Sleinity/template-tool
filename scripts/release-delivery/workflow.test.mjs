@@ -1,4 +1,25 @@
-import test from 'node:test';import assert from 'node:assert/strict';import { readFile } from 'node:fs/promises';import { assertDeliveryWorkflow } from './workflow.mjs';
-const source=await readFile('.github/workflows/release.yml','utf8');
-test('actual workflow gates frozen publication and verified prerelease assets',()=>assert(assertDeliveryWorkflow(source)));
-test('rejects manual publication, rebuilds, skipped verification and clobber',()=>{for(const s of [source.replace("github.ref == 'refs/tags/sdk-v1.0.0'","true"),source.replace('pnpm release --archives','pnpm pack && pnpm release --archives'),source.replace('      - name: Generate shared published handoff','      - run: pnpm release\n      - name: Generate shared published handoff'),source.replace('cli.mjs verify','cli.mjs skipped'),source.replace('--prerelease','--latest'),source.replace('cli.mjs assets','gh release upload --clobber'),source.replace('resume-journal.mjs','missing-journal.mjs')])assert.throws(()=>assertDeliveryWorkflow(s));});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { assertDeliveryWorkflow } from './workflow.mjs';
+const source = await readFile('.github/workflows/release.yml', 'utf8');
+test('actual workflow gates frozen publication and verified prerelease assets', () =>
+  assert(assertDeliveryWorkflow(source)));
+test('rejects manual publication, rebuilds, skipped verification and clobber', () => {
+  for (const s of [
+    source.replace("github.ref == 'refs/tags/sdk-v1.0.0'", 'true'),
+    source.replace(
+      'pnpm release --archives',
+      'pnpm pack && pnpm release --archives',
+    ),
+    source.replace(
+      '      - name: Generate shared published handoff',
+      '      - run: pnpm release\n      - name: Generate shared published handoff',
+    ),
+    source.replace('cli.mjs verify', 'cli.mjs skipped'),
+    source.replace('--prerelease', '--latest'),
+    source.replace('cli.mjs assets', 'gh release upload --clobber'),
+    source.replace('resume-journal.mjs', 'missing-journal.mjs'),
+  ])
+    assert.throws(() => assertDeliveryWorkflow(s));
+});

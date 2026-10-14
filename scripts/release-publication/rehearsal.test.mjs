@@ -21,9 +21,7 @@ test('synthetic rehearsal cannot replace unconditional published V2 acceptance',
   assert(full.includes('skipLibCheck: false'));
   assert(!full.includes('SDK_SYNTHETIC'));
   const release = await readFile('.github/workflows/release.yml', 'utf8');
-  assert(
-    release.includes('scripts/repository/verify-runtime-release-consumer.mjs'),
-  );
+  assert(release.includes('acceptance.mjs --mode registry'));
   const consumer = await readFile(
     'scripts/release-publication/consumer.mjs',
     'utf8',

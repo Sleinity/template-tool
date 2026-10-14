@@ -5166,22 +5166,22 @@
     },
     {
       "file": ".github/workflows/release.yml",
-      "sha256": "6d4e4ba005a4f4d51b34d320b7806cdad5ce50d881710a71698946a7f0b81a9e",
+      "sha256": "40872334db1532f64fb894694c4a1fbf1f885747d816767ade963c2fa84fb57c",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/workflow.mjs",
-      "sha256": "7bcf70e11e10e25aa7974e833da7e50bb490929fead45fa412c8c8f0a6728163",
+      "sha256": "65e9b54b6a1893417fb87d6cbcbe59390a50aae23c9740d38017dbea50590099",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/workflow.test.mjs",
-      "sha256": "b75bd4c1611e832641662997def5d0ca082f010acd34f59fc559df426c791475",
+      "sha256": "4a90b43d29ce8d6dce216ede9d19c51eff146c06d1e309692e2c69dd78722f9a",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/simulate-publication.mjs",
-      "sha256": "90b552300e06888be6fd0d5ba4602c8988605d13d1f000667474a6f2578dd4f3",
+      "sha256": "e5cf63a284b786c31017f6397fa462596fcc57c5e4095f880a49dccfad3c9332",
       "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
@@ -5251,15 +5251,19 @@
     },
     {
       "file": "scripts/release-publication/acceptance.mjs",
-      "sha256": "17fb0852e93842cee179d9c8096278b8b15781aedf976ce2d752f3d605f40f4f"
+      "sha256": "c7cc02a768fd9a50767993bf30b9baed567855e59ac7312388749e0e59d7219e"
     },
     {
       "file": "scripts/release-publication/acceptance.test.mjs",
-      "sha256": "4ea9b6b85614cb3afd99af1304e93690a86dbe7cc64a58a5fc17a63a0f0cfdf6"
+      "sha256": "91141c733a62a38b6b83bdd2a6f3f0444fae08d9b2a48b71d6c6d1de2e3cb110"
+    },
+    {
+      "file": "scripts/release-publication/asset-inventory.mjs",
+      "sha256": "c2da3bee406c842b9b4f80a2288fc2357aa252f2a5c506042c9356617138d6e7"
     },
     {
       "file": "scripts/release-publication/candidate.mjs",
-      "sha256": "e69d873718b884ab09af0c775f9e357be1fe1316ff711e3bf7df766e2ec5e05f"
+      "sha256": "030c09843aa7e8df11bb1509ec3e97b73b444471be25ea6051e2b62aaefdd69d"
     },
     {
       "file": "scripts/release-publication/candidate.test.mjs",
@@ -5283,11 +5287,11 @@
     },
     {
       "file": "scripts/release-publication/fixture-record.mjs",
-      "sha256": "2c806bd9fd060027c075cb3a0e7f5804eed4bc9d2164c2bbc58250881f737a6a"
+      "sha256": "0d2b8aedb7fdc5be9cfdca9400f628b1c8fd15cf52ef9c524b45d08e83cc43f5"
     },
     {
       "file": "scripts/release-publication/fixtures.mjs",
-      "sha256": "4c7f0d05ba4eb87377f8060bdf3f79d9ce78b9d4eb8fea665f59a6d63506eb59"
+      "sha256": "e737247279e1313cf5d5c039842e993f8d050a67e0ad82de05e842a2ae2f0a47"
     },
     {
       "file": "scripts/release-publication/github.mjs",
@@ -5295,11 +5299,23 @@
     },
     {
       "file": "scripts/release-publication/host-installation.mjs",
-      "sha256": "af92943da71bfa37ab072a77d7633af00112fbe6a2bbbd7110c059f3f0ae584a"
+      "sha256": "2b202a9c17c2ae4b81b5151fe22c4f91963a3b5ec8465440339d4420570cbabf"
+    },
+    {
+      "file": "scripts/release-publication/preflight.mjs",
+      "sha256": "2f66829c3544214c20664a3df6a34a1e0c6e5a6e89ed9da40eeb71dde87ffb94"
+    },
+    {
+      "file": "scripts/release-publication/promotion.mjs",
+      "sha256": "983a3850286e4167c99453ff8af5f8407de3974754cfb91fda9c76862c4546b5"
+    },
+    {
+      "file": "scripts/release-publication/promotion.test.mjs",
+      "sha256": "cc85a167ec9091c48d4932f6c50989b0b37d331012aa251e9f3de9fd791cbd93"
     },
     {
       "file": "scripts/release-publication/refresh-source-bindings.mjs",
-      "sha256": "951ab5649dc250cff49696ad730b76694fe266716654d8a8bb897b025a7f605f"
+      "sha256": "2daa43e07f2a5caa30ddb50f998b0f9090c7e7768def59430add6e478dac4a1f"
     },
     {
       "file": "scripts/release-publication/registry.mjs",
@@ -5307,7 +5323,7 @@
     },
     {
       "file": "scripts/release-publication/rehearsal.test.mjs",
-      "sha256": "a0ef35524ab9ea1d6fe11091d52a17aade9d4b9059fd6d2c4cf6ae3dcecd3726"
+      "sha256": "1112cef2b306145c54ab26348d6ebebd55b3242272421074eea95351af3dfb5b"
     },
     {
       "file": "scripts/release-publication/resume-journal.mjs",
@@ -5317,5 +5333,15 @@
       "file": "scripts/release-publication/retention-record.mjs",
       "sha256": "de1514748311f85f4dbed7f4e048c19dfca0dd129054529137a17b3395b531de"
     }
-  ]
+  ],
+  "fixtureArtifact": {
+    "id": 11886691893,
+    "name": "sdk-1.0.0-sealed-fixtures",
+    "runId": 38551302611,
+    "headSha": "e76e1a92a2fda944b088566b118c372ec4d21283",
+    "digest": "sha256:0d59c13c378164282ab9f5c80b8d446a64523a31c7fb2ceb79c6215c65f709b0",
+    "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+    "retentionDays": 3,
+    "prefix": ""
+  }
 }
