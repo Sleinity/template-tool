@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "sdk-release-merged-source-v1",
+  "status": "verified",
+  "candidate": "sdk-1-candidate-20261013k",
+  "sourceCommit": "3c9bd975ee32a1402eea228f98bcd963d4efe737",
+  "sourceTree": "fd2930f710c78590a5cc04d0d00fd10388e0c37b",
+  "approvedHead": "cdf069c6203405d117cba1c00513cc4e63196f0d",
+  "approvedTreeIdentical": true,
+  "humanSourceReview": "Explicit user confirmation: Source review complete — merge the three PRs. No tool approved reviews or deployments.",
+  "merges": [
+    {
+      "pr": 22,
+      "head": "27cc1ac5c5b82d7f7b1f542c6e281abe241e0a40",
+      "commit": "3b80f6e724223efd6694eeea84bf8247f8fde7dc"
+    },
+    {
+      "pr": 23,
+      "head": "eed8fec7729f970ee7d167c3dfbcad888664d514",
+      "commit": "8607535d0a27d183aab3383baa6a43aba1851a7b",
+      "ciRun": 38542871725,
+      "attempt": 2,
+      "rehearsalRun": 38542871793
+    },
+    {
+      "pr": 24,
+      "head": "cdf069c6203405d117cba1c00513cc4e63196f0d",
+      "commit": "3c9bd975ee32a1402eea228f98bcd963d4efe737",
+      "ciRun": 38554327860,
+      "preparationRun": 38554320928,
+      "attempt": 2
+    }
+  ],
+  "sourceFilesVerified": 999,
+  "publisherFilesVerified": 23,
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "frozenManifestSha256": "59a32111a57e6a6e326fdebe450f000d032c6f19d42ab95d7ae800352ceb9fa4",
+  "fixtureAuthority": {
+    "id": 11886691893,
+    "name": "sdk-1.0.0-sealed-fixtures",
+    "runId": 38551302611,
+    "headSha": "e76e1a92a2fda944b088566b118c372ec4d21283",
+    "digest": "sha256:0d59c13c378164282ab9f5c80b8d446a64523a31c7fb2ceb79c6215c65f709b0",
+    "ciphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a",
+    "retentionDays": 3,
+    "prefix": ""
+  },
+  "deliveryAuthority": {
+    "id": 11882221817,
+    "name": "sdk-1.0.0-certified-delivery",
+    "runId": 38540916222,
+    "headSha": "4f5f7b9b3b846fea0fce72fd434a80ea6e74f8f1",
+    "digest": "sha256:0aeb4244f957ca2cf90dea242ee22d8df52adf45e9b49944e944be6acb04a2e4",
+    "prefix": "",
+    "retentionDays": 90
+  },
+  "originalPreservation": {
+    "head": true,
+    "branch": true,
+    "index": true,
+    "status": true,
+    "trackedDiff": true
+  },
+  "publication": "pending protected human approval",
+  "manualLiveReview": false
+}

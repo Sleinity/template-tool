@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "sdk-release-acceptance-v1",
+  "status": "pass",
+  "mode": "archive",
+  "candidate": "sdk-1-candidate-20261013k",
+  "environment": {
+    "node": "v22.23.3",
+    "pnpm": "11.9.0",
+    "npm": "11.21.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "sourceCommit": "cdf069c6203405d117cba1c00513cc4e63196f0d",
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "tagCommit": null,
+  "rows": [
+    {
+      "manager": "npm",
+      "name": "consumer",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-runtime-release-consumer.mjs",
+      "durationMs": 9765,
+      "exitCode": 0,
+      "logSha256": "7db21b67ba007474db506b8b70df40aa83bc8db845a3ad54e6793c3267e2864f"
+    },
+    {
+      "manager": "npm",
+      "name": "example",
+      "installationMode": "archive",
+      "command": "scripts/example-lifecycle/verify.mjs",
+      "durationMs": 17227,
+      "exitCode": 0,
+      "logSha256": "15be222551211f3c7963f98200bcc6088079390d8274a7d57db92b62c3283e64"
+    },
+    {
+      "manager": "npm",
+      "name": "fonts",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-host-font-authority.mjs",
+      "durationMs": 20794,
+      "exitCode": 0,
+      "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+    },
+    {
+      "manager": "npm",
+      "name": "storage",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-blocked-storage.mjs",
+      "durationMs": 4055,
+      "exitCode": 0,
+      "logSha256": "f2a83d077ad88b3002463fff2688bebad268d5b60a8123b47f22706964b48c20"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-single",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-template-editor-reference.mjs",
+      "durationMs": 12486,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-family",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-template-family-reference.mjs",
+      "durationMs": 6431,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    },
+    {
+      "manager": "pnpm",
+      "name": "consumer",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-runtime-release-consumer.mjs",
+      "durationMs": 7295,
+      "exitCode": 0,
+      "logSha256": "53130be4ca77d134b556aa3d02ec0bbbbbd3d5d4494cae4f819862d4bd9206b4"
+    },
+    {
+      "manager": "pnpm",
+      "name": "example",
+      "installationMode": "archive",
+      "command": "scripts/example-lifecycle/verify.mjs",
+      "durationMs": 16446,
+      "exitCode": 0,
+      "logSha256": "a196572d2ae1e24ed62a3cb83bfa3d62e5a6847c54063dcde4d6ff38e1c34fc1"
+    },
+    {
+      "manager": "pnpm",
+      "name": "fonts",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-host-font-authority.mjs",
+      "durationMs": 20634,
+      "exitCode": 0,
+      "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+    },
+    {
+      "manager": "pnpm",
+      "name": "storage",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-blocked-storage.mjs",
+      "durationMs": 3909,
+      "exitCode": 0,
+      "logSha256": "050037249d684c5e1aa991ed1e400df12fe693f697fe0e5ea29f87aa86396f6f"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-single",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-template-editor-reference.mjs",
+      "durationMs": 10591,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-family",
+      "installationMode": "archive",
+      "command": "scripts/repository/verify-template-family-reference.mjs",
+      "durationMs": 6810,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    }
+  ],
+  "manualReview": false,
+  "ci": {
+    "runId": null,
+    "attempt": null
+  },
+  "deliveryManifestSha256": "cba4636506cdee4cfc2753c19ef902e2ac74391deaf04ee7b3ce12602639009b"
+}
