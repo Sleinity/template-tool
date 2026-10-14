@@ -141,6 +141,13 @@ test('full preparation never publishes or uploads plaintext reports', async () =
     'utf8',
   );
   assert(source.includes('acceptance.mjs --mode archive'));
+  const restoreStep = source.match(
+    /- name: Authenticate and restore exact fixtures[\s\S]*?(?=\n      - )/,
+  )[0];
+  assert(
+    restoreStep.includes('fixtures.mjs restore "$RUNNER_TEMP/exact-fixtures"'),
+  );
+  assert(restoreStep.includes('GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}'));
   assert(
     !/packages: write|contents: write|cli\.mjs publish|pull_request_target/.test(
       source,

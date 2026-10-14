@@ -5243,7 +5243,7 @@
   "publisherSourceFiles": [
     {
       "file": ".github/workflows/release-preparation.yml",
-      "sha256": "45d391a088fbe690b55b0112652881313d09a56cb679e21f1f454ec370b43759"
+      "sha256": "78f703b911cbc962b1f97971baf027e7722023625c5aa0ead3ecad7834b6d2ee"
     },
     {
       "file": ".github/workflows/release-rehearsal.yml",
@@ -5255,7 +5255,7 @@
     },
     {
       "file": "scripts/release-publication/acceptance.test.mjs",
-      "sha256": "b0659f7886eba1f2fdc5f7d4f268e1def5178c106c5396aa4870fd07f02adcfb"
+      "sha256": "84697dd42d41968b3079d6227fe272a58333f24900f159ec4a7f49de8941b408"
     },
     {
       "file": "scripts/release-publication/asset-inventory.mjs",

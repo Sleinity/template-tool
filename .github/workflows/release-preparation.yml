@@ -51,6 +51,7 @@ jobs:
       - name: Authenticate and restore exact fixtures
         run: node scripts/release-publication/fixtures.mjs restore "$RUNNER_TEMP/exact-fixtures"
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY_20261013C }}
       - run: pnpm exec playwright install --with-deps chromium
       - name: Full frozen-archive acceptance before release
