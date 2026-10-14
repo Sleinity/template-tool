@@ -26,6 +26,12 @@ const reviewedPaths = new Set([
   'scripts/repository/verify-release-contract.mjs',
   'docs/sdk/RELEASE_PREPARATION.md',
   'docs/sdk/GITHUB_SETUP.md',
+  'scripts/repository/verify-runtime-release-consumer.mjs',
+  'scripts/repository/verify-host-font-authority.mjs',
+  'scripts/repository/blocked-storage-packed-host.mjs',
+  'scripts/repository/verify-template-editor-reference.mjs',
+  'scripts/repository/verify-template-family-reference.mjs',
+  'scripts/example-lifecycle/verify.mjs',
 ]);
 export function safeRelative(file) {
   assert(
@@ -66,7 +72,11 @@ export function validateDescriptor(d) {
     assert(reviewedPaths.has(r.file), 'Unreviewed source exception');
     assert.match(r.sha256, /^[a-f0-9]{64}$/);
   }
-  for (const a of [d.originArtifact, d.retainedArtifact].filter(Boolean)) {
+  for (const a of [
+    d.originArtifact,
+    d.retainedArtifact,
+    d.fixtureArtifact,
+  ].filter(Boolean)) {
     assert(Number.isSafeInteger(a.id) && a.id > 0);
     assert(Number.isSafeInteger(a.runId) && a.runId > 0);
     assert.match(a.headSha, /^[a-f0-9]{40}$/);

@@ -11,6 +11,12 @@ const allowed = [
   'scripts/repository/verify-release-contract.mjs',
   'docs/sdk/RELEASE_PREPARATION.md',
   'docs/sdk/GITHUB_SETUP.md',
+  'scripts/repository/verify-runtime-release-consumer.mjs',
+  'scripts/repository/verify-host-font-authority.mjs',
+  'scripts/repository/blocked-storage-packed-host.mjs',
+  'scripts/repository/verify-template-editor-reference.mjs',
+  'scripts/repository/verify-template-family-reference.mjs',
+  'scripts/example-lifecycle/verify.mjs',
 ];
 const d = JSON.parse(await readFile(descriptorFile, 'utf8'));
 d.reviewedToolingChanges = [];
@@ -23,7 +29,7 @@ for (const file of allowed) {
         file,
         sha256: hash,
         reason:
-          'Milestone 7 private release tooling/documentation; no SDK build or dependency change',
+          'Milestone 8 private release tooling/acceptance; no SDK build or dependency change',
       });
   }
 }
@@ -38,6 +44,7 @@ const files = execFileSync(
     '--',
     'scripts/release-publication',
     '.github/workflows/release-rehearsal.yml',
+    '.github/workflows/release-preparation.yml',
   ],
   { encoding: 'utf8' },
 )

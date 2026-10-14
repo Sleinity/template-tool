@@ -1,0 +1,75 @@
+name: Full SDK release preparation
+on:
+  push:
+    branches: [codex/sdk-1-release-acceptance]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  packages: read
+concurrency:
+  group: sdk-release-preparation-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'Sleinity/template-tool'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: node --test scripts/release-publication/*.test.mjs scripts/release-delivery/*.test.mjs
+      - name: Retrieve exact frozen delivery
+        run: node scripts/release-publication/cli.mjs prepare --archives "$RUNNER_TEMP/certified-delivery" --output "$RUNNER_TEMP/retention-report"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Retain authenticated sealed fixture payload
+        run: node scripts/release-publication/fixtures.mjs retain "$RUNNER_TEMP/sealed-fixtures"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        id: sealed
+        with:
+          name: sdk-1.0.0-sealed-fixtures
+          path: ${{ runner.temp }}/sealed-fixtures/fixtures.enc
+          retention-days: 3
+          if-no-files-found: error
+      - name: Record fixture artifact identity
+        run: node scripts/release-publication/fixture-record.mjs "$RUNNER_TEMP/retention-report" "$SEALED_ID" "$SEALED_DIGEST"
+        env:
+          SEALED_ID: ${{ steps.sealed.outputs.artifact-id }}
+          SEALED_DIGEST: ${{ steps.sealed.outputs.artifact-digest }}
+      - name: Authenticate and restore exact fixtures
+        run: node scripts/release-publication/fixtures.mjs restore-file "$RUNNER_TEMP/sealed-fixtures/fixtures.enc" "$RUNNER_TEMP/exact-fixtures"
+        env:
+          SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY_20261013C }}
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Full frozen-archive acceptance before release
+        run: node scripts/release-publication/acceptance.mjs --mode archive --archives "$RUNNER_TEMP/certified-delivery" --output "$RUNNER_TEMP/acceptance"
+      - name: Read-only registry and deployment preflight
+        run: node scripts/release-publication/cli.mjs rehearse --archives "$RUNNER_TEMP/certified-delivery" --output "$RUNNER_TEMP/registry-preflight"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Remove plaintext fixture inputs
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/exact-fixtures"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sdk-full-preparation-results
+          path: |
+            ${{ runner.temp }}/retention-report/*.json
+            ${{ runner.temp }}/acceptance/report.json
+            ${{ runner.temp }}/registry-preflight/*.json
+          retention-days: 90
+          if-no-files-found: warn

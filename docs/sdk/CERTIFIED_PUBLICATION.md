@@ -89,3 +89,24 @@ Before authorizing the tag, provision and test that intake and actual package-wr
 permissions; otherwise the handoff remains blocked and cannot upload release assets.
 The existing macOS paths are not a portable fixture provisioning contract.
 Do not substitute the synthetic rehearsal for full registry acceptance.
+
+## Milestone 8 execution contract
+
+Full preparation now authenticates the separately pinned three-day sealed fixture
+artifact and runs the complete acceptance matrix. The tag preflight repeats that
+acceptance and requires the registered fresh macOS fidelity receipt before writes.
+The handoff repeats archive and registry-mode acceptance using the same scenarios.
+Registry mode installs exact names/versions through scoped authentication and
+verifies registry integrity plus installed SDK bytes; synthetic rehearsal remains
+separate. Original certified archives are never regenerated.
+
+Stable promotion is an explicit main-branch workflow dispatch with
+`promote_stable=true`, under human deployment approval. It requires
+`config/sdk-release-verification.json` to register hash-bound macOS registry/fidelity
+receipts and a successful immutable Linux registry artifact. It rechecks the tag,
+all registry hashes and every inventory asset. Missing evidence refuses promotion.
+The promotion job cannot publish packages. No tool approves the deployment.
+
+See the [Milestone 8 report](../architecture/sdk-1-publication.md) for current
+evidence and remaining approvals. Do not interpret prepared tooling as a published
+or stable release.

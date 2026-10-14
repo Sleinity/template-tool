@@ -1,10 +1,88 @@
 /** Execute the actual generation step using supplied, verified registry-response substitutes. */
-import assert from 'node:assert/strict';import { readFile,writeFile,mkdir,mkdtemp,symlink,cp,rm } from 'node:fs/promises';import { tmpdir } from 'node:os';import { join,resolve } from 'node:path';import { spawnSync } from 'node:child_process';import { verifyDeliveryBundle,readDeliveryArchives } from './bundle.mjs';
-const archives=resolve(process.argv[2]),output=resolve(process.argv[3]);assert(process.argv[2]&&process.argv[3],'Supplied archives and output required');const temporary=await mkdtemp(join(tmpdir(),'sdk-handoff-simulation-'));
+import assert from 'node:assert/strict';
+import {
+  readFile,
+  writeFile,
+  mkdir,
+  mkdtemp,
+  symlink,
+  cp,
+  rm,
+} from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { verifyDeliveryBundle, readDeliveryArchives } from './bundle.mjs';
+const archives = resolve(process.argv[2]),
+  output = resolve(process.argv[3]);
+assert(
+  process.argv[2] && process.argv[3],
+  'Supplied archives and output required',
+);
+const temporary = await mkdtemp(join(tmpdir(), 'sdk-handoff-simulation-'));
 try {
- const records=await readDeliveryArchives(archives);for(const dir of ['config','docs','examples','packages'])await symlink(resolve(dir),join(temporary,dir),'dir');await mkdir(join(temporary,'scripts'),{recursive:true});await symlink(resolve('scripts/release-delivery'),join(temporary,'scripts/release-delivery'),'dir');await mkdir(join(temporary,'release-artifacts'));
- for(const row of records)await cp(join(archives,row.file),join(temporary,'release-artifacts',row.file));
- const workflow=await readFile('.github/workflows/release.yml','utf8');const fragment=workflow.split('      - name: Generate shared published handoff\n')[1].split('      - run: pnpm exec playwright')[0];assert(fragment);const shell=fragment.replace(/^        run: \|\n/,'').split('\n').filter(Boolean).map(l=>l.slice(10)).join('\n').replace('--provenance registry-download','--provenance test-simulation');
- const result=spawnSync('bash',['-e','-o','pipefail','-c',shell],{cwd:temporary,env:{...process.env,TEMPLATE_RUNTIME_RELEASE_VERSION:records[0].version},encoding:'utf8'});assert.equal(result.status,0,result.stdout+result.stderr);
- const {manifest}=await verifyDeliveryBundle(join(temporary,'release-artifacts'));assert.equal(manifest.provenance,'test-simulation');await cp(join(temporary,'release-artifacts'),output,{recursive:true,errorOnExist:true,force:false});await writeFile(join(output,'PUBLICATION-PATH-SIMULATION.json'),JSON.stringify({status:'pass',actualGenerationStep:true,source:'supplied verified archives',registryMutations:0,releaseMutations:0,tagMutations:0,uploadFiles:manifest.uploadFiles},null,2)+'\n');console.log('Shared publication handoff simulation passed without mutation.');
-}finally{await rm(temporary,{recursive:true,force:true});}
+  const records = await readDeliveryArchives(archives);
+  for (const dir of ['config', 'docs', 'examples', 'packages'])
+    await symlink(resolve(dir), join(temporary, dir), 'dir');
+  await mkdir(join(temporary, 'scripts'), { recursive: true });
+  await symlink(
+    resolve('scripts/release-delivery'),
+    join(temporary, 'scripts/release-delivery'),
+    'dir',
+  );
+  await mkdir(join(temporary, 'release-artifacts'));
+  for (const row of records)
+    await cp(
+      join(archives, row.file),
+      join(temporary, 'release-artifacts', row.file),
+    );
+  const workflow = await readFile('.github/workflows/release.yml', 'utf8');
+  const fragment = workflow.match(
+    /      - name: Generate shared published handoff\n        run: \|\n((?: {10}.*\n)+)/,
+  )?.[1];
+  assert(fragment);
+  const shell = fragment
+    .replace(/^        run: \|\n/, '')
+    .split('\n')
+    .filter(Boolean)
+    .map((l) => l.slice(10))
+    .join('\n')
+    .replace('--provenance registry-download', '--provenance test-simulation');
+  const result = spawnSync('bash', ['-e', '-o', 'pipefail', '-c', shell], {
+    cwd: temporary,
+    env: {
+      ...process.env,
+      TEMPLATE_RUNTIME_RELEASE_VERSION: records[0].version,
+    },
+    encoding: 'utf8',
+  });
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const { manifest } = await verifyDeliveryBundle(
+    join(temporary, 'release-artifacts'),
+  );
+  assert.equal(manifest.provenance, 'test-simulation');
+  await cp(join(temporary, 'release-artifacts'), output, {
+    recursive: true,
+    errorOnExist: true,
+    force: false,
+  });
+  await writeFile(
+    join(output, 'PUBLICATION-PATH-SIMULATION.json'),
+    JSON.stringify(
+      {
+        status: 'pass',
+        actualGenerationStep: true,
+        source: 'supplied verified archives',
+        registryMutations: 0,
+        releaseMutations: 0,
+        tagMutations: 0,
+        uploadFiles: manifest.uploadFiles,
+      },
+      null,
+      2,
+    ) + '\n',
+  );
+  console.log('Shared publication handoff simulation passed without mutation.');
+} finally {
+  await rm(temporary, { recursive: true, force: true });
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "sdk-release-verification-v1",
+  "candidate": "sdk-1-candidate-20261013k",
+  "status": "awaiting-publication-and-registry-acceptance",
+  "tagCommit": null,
+  "macos": null,
+  "linux": null,
+  "fidelity": null
+}

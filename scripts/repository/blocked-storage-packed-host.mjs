@@ -1,3 +1,4 @@
+import {prepareHostInstallation,verifyHostInstallation} from "../release-publication/host-installation.mjs";
 /** Build the storage host using only installed unpublished archives. */
 import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,writeFile,readFile,cp,rm} from 'node:fs/promises';
@@ -16,10 +17,11 @@ export async function createPackedStorageHost(archives, manager='pnpm') {
  const installed=async name=>JSON.parse(await readFile(`node_modules/${name}/package.json`,'utf8')).version;
  await writeFile(path.join(directory,'package.json'),JSON.stringify({private:true,type:'module',dependencies:{...dependencies,react:await installed('react'),'react-dom':await installed('react-dom'),typescript:await installed('typescript'),'@types/react':await installed('@types/react'),'@types/react-dom':await installed('@types/react-dom')},...(manager==='npm'?{overrides:dependencies}:{})}));
  if(manager==='pnpm')await writeFile(path.join(directory,'pnpm-workspace.yaml'),`packages:\n  - .\noverrides:\n${Object.entries(dependencies).map(([name,file])=>`  "${name}": "${file}"`).join('\n')}\n`);
- await writeFile(path.join(directory,'.npmrc'),'');const env={...process.env,CI:'true',NPM_CONFIG_USERCONFIG:path.join(directory,'.npmrc')};for(const key of ['NODE_AUTH_TOKEN','NPM_TOKEN','GH_TOKEN','GITHUB_TOKEN'])delete env[key];
+ await writeFile(path.join(directory,'.npmrc'),'');let env={...process.env,CI:'true',NPM_CONFIG_USERCONFIG:path.join(directory,'.npmrc')};for(const key of ['NODE_AUTH_TOKEN','NPM_TOKEN','GH_TOKEN','GITHUB_TOKEN'])delete env[key];
+ env=await prepareHostInstallation(directory,archives,manager,env);
  const run=(command,args)=>{const r=spawnSync(command,args,{cwd:directory,env,encoding:'utf8'});assert.equal(r.status,0,r.stderr||r.stdout);};
  run(manager,manager==='npm'?['install','--ignore-scripts','--prefer-offline','--no-audit','--no-fund']:['install','--prefer-offline']);
- const lock=await readFile(path.join(directory,manager==='npm'?'package-lock.json':'pnpm-lock.yaml'),'utf8');assert(!/workspace:|link:|npm\.pkg\.github\.com/.test(lock));
+ const lock=await readFile(path.join(directory,manager==='npm'?'package-lock.json':'pnpm-lock.yaml'),'utf8');await verifyHostInstallation(directory,archives,manager);
  await cp('packages/template-browser/test/blockedStorageHost.browser.ts',path.join(directory,'src/host.ts'));
  await writeFile(path.join(directory,'src/contracts.ts'),`import {TemplateStorageBlockedError as Root} from "@sleinity/template-browser";
 import {TemplateStorageBlockedError as Persistence} from "@sleinity/template-browser/persistence";
