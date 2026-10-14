@@ -8,7 +8,7 @@
   "releaseId": 412790313,
   "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0",
   "lifecycle": "retired",
-  "handoffStatus": "awaiting-verification-and-cleanup",
+  "handoffStatus": "complete-on-final-receipt-merge",
   "descriptor": {
     "file": "config/sdk-publication-candidate.json",
     "sha256": "7d309327a29455a63c59a09616618e4e4fe24c04cfd701cc58813b02adb9db5a"
@@ -3637,8 +3637,11 @@
     "policy": "immediate-after-merged-workflow-verification",
     "secret": "SDK_CERT_FIXTURE_KEY_20261013C",
     "inventory": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
-    "status": "pending",
-    "receipt": null,
+    "status": "complete",
+    "receipt": {
+      "file": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-receipt.json",
+      "sha256": "56cf9eb113d0777ccc487317972b8a4d4e00abe0eec05bfccf70395d8edb70e7"
+    },
     "inventorySha256": "64a83fbf30ff3bbfe937eefe154553138af6635954d2f8532fbdf239173544a2"
   },
   "documentationChanges": [
@@ -3679,8 +3682,19 @@
     },
     {
       "file": "docs/architecture/sdk-1-baseline.md",
-      "sha256": "cf451158cae29fa94c203ea486f1daa90daab4056b4789d2429cc41355bf2900",
+      "sha256": "9c21ce6bafc169616d5361a39911e4b2ef2f2803cf1440be9568f112ef65781f",
       "reason": "Post-release repository handoff correction; published bundle and historical descriptors unchanged"
     }
+  ],
+  "handoffImplementationCommit": "0a0b3f49484ac0c672da3142f0fd2a43006deb7d",
+  "retirementRepairCommit": "7e5065feee19a188bdaa65fc28cb556eb0d15974",
+  "postCleanupVerification": {
+    "file": "docs/architecture/evidence/sdk-1-baseline-20261014/post-cleanup-verification.json",
+    "sha256": "e9f035c8365b32259d11e2399bbc34b246a75dd060efa8a6e62ee38cbb15a35b"
+  },
+  "completionConditions": [
+    "required checks pass",
+    "final receipt PR merged",
+    "original checkout/index preserved"
   ]
 }

@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "sdk-release-cleanup-receipt-v1",
+  "status": "pass",
+  "verificationRunId": 38612390717,
+  "sourceCommit": "7e5065feee19a188bdaa65fc28cb556eb0d15974",
+  "inventorySha256": "64a83fbf30ff3bbfe937eefe154553138af6635954d2f8532fbdf239173544a2",
+  "results": [
+    {
+      "kind": "workflow",
+      "id": 383453731,
+      "path": ".github/workflows/candidate-certification.yml",
+      "outcome": "already-deleted"
+    },
+    {
+      "kind": "workflow",
+      "id": 384213190,
+      "path": ".github/workflows/release-preparation.yml",
+      "outcome": "already-deleted"
+    },
+    {
+      "kind": "workflow",
+      "id": 384125045,
+      "path": ".github/workflows/release-rehearsal.yml",
+      "outcome": "already-deleted"
+    },
+    {
+      "kind": "workflow",
+      "id": 317625512,
+      "path": ".github/workflows/release.yml",
+      "outcome": "already-deleted"
+    },
+    {
+      "kind": "secret",
+      "name": "SDK_CERT_FIXTURE_KEY_20261013C",
+      "outcome": "deleted"
+    },
+    {
+      "kind": "artifact",
+      "id": 11896970117,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11896905997,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11894965741,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11894140757,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11891588692,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11887268570,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11886691893,
+      "name": "sdk-1.0.0-sealed-fixtures",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11836576350,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "7e89fb8cdd2931272342d9e701f220720cf7037bb964571141850973cff7dd6a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11835351178,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "f2f7b6eca4b83c9a0b041d26d9d49b06200176f239b6f4ab6f3a8c798b4d834a"
+    },
+    {
+      "kind": "artifact",
+      "id": 11834381884,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "d9862d1635899c171405973f7b5fe8a5176ffde9886f1c4d73dfec875c9b4082"
+    },
+    {
+      "kind": "artifact",
+      "id": 11833513333,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "970a05b2e29b60d66559c50db45da5a2ebaf7dd35d67c11912b8dfcc7057d511"
+    },
+    {
+      "kind": "artifact",
+      "id": 11832890954,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "f732757fe30aaa59691dff4552421810e2ad44589aaa8efd0e66e40e7daa9cd4"
+    },
+    {
+      "kind": "artifact",
+      "id": 11832369116,
+      "name": "frozen-candidate-inputs",
+      "outcome": "deleted",
+      "preservedCiphertextSha256": "a4c5e63bbb6efd210a190f57b64595ecf8259b0adc0939ea263d90ec5ef4f86c"
+    },
+    {
+      "kind": "local-file",
+      "file": "/private/tmp/sdk-m7-certified-inputs.zip",
+      "outcome": "deleted"
+    }
+  ],
+  "removedSecretValuesRecorded": false,
+  "gitHistoryRewritten": false,
+  "unclassifiedResourcesPreserved": true
+}
