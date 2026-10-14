@@ -1,7 +1,9 @@
 # SDK 1.0.0 release intake repair
 
-Publication is **NO-GO** pending a reviewed execution recovery decision. This
-record does not authorize a tag move or a package write.
+The protected existing-tag recovery was explicitly approved, reviewed and executed.
+The three packages are now published; registry/handoff verification and stable
+promotion are tracked in the [publication report](sdk-1-publication.md). This record
+retains the original failure and never authorizes tag movement.
 
 ## Confirmed failure
 
@@ -69,7 +71,9 @@ passed. The recovery implementation adds independent checks for all 709 tagged
 SDK/Studio/example source files, refusing source drift or a missing tag. Its local
 39-test release suite passes, including wrong dispatch contexts, mixed intent,
 wrong expected/tag commits and writer-journal recovery across tooling revisions.
-Fresh CI on the complete recovery source remains required before source acceptance.
+Final head `4047ded4025b944d179d939cbb9f7f50dc65c3ca` then passed CI, rehearsal
+and complete preparation. The owner accepted it and PR #26 merged as
+`a707846e6c29674a1f8b9719702c2b2832283dac` before the protected recovery.
 
 Journal identity remains the immutable tag commit; execution reports separately
 identify the corrected tooling commit. Earlier writer attempts are found even if

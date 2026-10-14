@@ -1,0 +1,23 @@
+{
+  "runId": 38571485252,
+  "url": "https://github.com/Sleinity/template-tool/actions/runs/38571485252",
+  "records": [
+    {
+      "state": "approved",
+      "user": "Sleinity",
+      "comment": "",
+      "environments": [
+        "private-sdk-release"
+      ]
+    },
+    {
+      "state": "approved",
+      "user": "Sleinity",
+      "comment": "",
+      "environments": [
+        "private-sdk-release"
+      ]
+    }
+  ],
+  "stableApprovalIncluded": false
+}
