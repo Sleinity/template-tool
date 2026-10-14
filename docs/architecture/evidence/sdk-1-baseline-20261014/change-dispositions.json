@@ -9,6 +9,12 @@
       "sha256": null
     },
     {
+      "file": ".github/workflows/ci.yml",
+      "disposition": "private verification/retirement robustness",
+      "status": "modified-or-added",
+      "sha256": "2b5a4e5b5663b026ade9ec8a2faaf78e8f0dbbfe3b44a647c31610e1c28d72c8"
+    },
+    {
       "file": ".github/workflows/release-preparation.yml",
       "disposition": "workflow retirement/read-only verification",
       "status": "retired",
@@ -37,6 +43,13 @@
       "disposition": "private baseline record",
       "status": "modified-or-added",
       "sha256": "20487e3f04a543ff9c4a872f56b949c75ea41126f1cbae783807fd658d73dabc"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-1-baseline-20261014/change-dispositions.json",
+      "disposition": "self-describing change ledger",
+      "status": "added",
+      "sha256": null,
+      "reason": "Self-hash omitted to avoid a circular identity"
     },
     {
       "file": "docs/architecture/evidence/sdk-1-baseline-20261014/cleanup-inventory.json",
@@ -166,9 +179,9 @@
     },
     {
       "file": "scripts/release-baseline/cleanup.mjs",
-      "disposition": "private tooling/test",
+      "disposition": "private verification/retirement robustness",
       "status": "modified-or-added",
-      "sha256": "b6b3b16aeef8116b861362386166e7b6cf679a5725d2e8a936f90e5b67af3e8a"
+      "sha256": "5f0a8d3e6d6a86f7a81700cbb6f0f0af74746988c2cd8ba25b2bc81f74cd83e2"
     },
     {
       "file": "scripts/release-baseline/contracts.mjs",
@@ -301,13 +314,6 @@
       "disposition": "private tooling/test",
       "status": "modified-or-added",
       "sha256": "52270e43ce74e55203e0e69f266a51f371c2b0f73b5eb6bc0854d250b0dfef1a"
-    },
-    {
-      "file": "docs/architecture/evidence/sdk-1-baseline-20261014/change-dispositions.json",
-      "disposition": "self-describing change ledger",
-      "status": "added",
-      "sha256": null,
-      "reason": "Self-hash omitted to avoid a circular identity"
     }
   ]
 }

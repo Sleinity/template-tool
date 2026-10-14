@@ -28,7 +28,15 @@ function request(route,method='GET'){
  const status=Number(r.stdout?.match(/^HTTP\/\S+\s+(\d{3})/mi)?.[1]);
  assert(status,'Cleanup response has no observable HTTP status');
  const outcome=absenceOutcome(status);
- if(outcome==='already-absent')return {status};
+ if(outcome==='already-absent'){
+  const match=route.match(/^actions\/(secrets|artifacts|workflows)\/([^/]+)$/);assert(match,'Unexpected absent cleanup endpoint');
+  const [,kind,id]=match;for(let page=1;;page++){
+   const listing=githubJson(`actions/${kind}?per_page=100&page=${page}`);assert(Array.isArray(listing[kind]),'Cleanup listing unavailable');
+   assert(!listing[kind].some(r=>kind==='secrets'?r.name===id:String(r.id)===id),'404 conflicts with visible resource; cleanup refuses ambiguous absence');
+   if(listing[kind].length<100)break;
+  }
+  return {status};
+ }
  assert.equal(r.status,0,'Cleanup request failed');
  const text=r.stdout.split(/\r?\n\r?\n/).slice(1).join('\n\n').trim();
  return {status,body:text?JSON.parse(text):null};
