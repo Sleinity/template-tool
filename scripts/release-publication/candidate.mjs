@@ -26,6 +26,13 @@ const reviewedPaths = new Set([
   'scripts/repository/verify-release-contract.mjs',
   'docs/sdk/RELEASE_PREPARATION.md',
   'docs/sdk/GITHUB_SETUP.md',
+  'scripts/repository/verify-runtime-release-consumer.mjs',
+  'scripts/repository/verify-host-font-authority.mjs',
+  'scripts/repository/blocked-storage-packed-host.mjs',
+  'scripts/repository/verify-template-editor-reference.mjs',
+  'scripts/repository/verify-template-family-reference.mjs',
+  'scripts/example-lifecycle/verify.mjs',
+
 ]);
 export function safeRelative(file) {
   assert(

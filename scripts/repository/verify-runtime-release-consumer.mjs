@@ -1,3 +1,4 @@
+import { prepareHostInstallation, verifyHostInstallation, installationMode } from "../release-publication/host-installation.mjs";
 import { createHash } from "node:crypto";
 import {
   copyFile,
@@ -454,7 +455,7 @@ createRoot(document.getElementById("root")!).render(
 `,
   );
 
-  const environment = secretFreeEnvironment();
+  const environment = await prepareHostInstallation(consumerDirectory, sourceArchivesDirectory, consumerLabel, secretFreeEnvironment());
   run(packageManager, packageManagerArguments(installArguments()), {
     cwd: consumerDirectory,
     env: environment,
@@ -470,6 +471,7 @@ createRoot(document.getElementById("root")!).render(
     path.join(consumerDirectory, lockFileName),
     "utf8",
   );
+  if (installationMode() === "archive") {
   for (const packageValue of packageDefinitions) {
     if (!lockFile.includes(`vendor/${packageValue.archive}`)) {
       throw new Error(
@@ -486,6 +488,9 @@ createRoot(document.getElementById("root")!).render(
       "The vendored runtime lockfile contains a private registry or workspace reference.",
     );
   }
+
+  }
+  const hostInstallation = await verifyHostInstallation(consumerDirectory, sourceArchivesDirectory, consumerLabel);
 
   for (const packageValue of packageDefinitions) {
     const installedRoot = path.join(
@@ -702,7 +707,7 @@ createRoot(document.getElementById("root")!).render(
       manifestSha256: localCandidate ? createHash("sha256").update(await readFile(path.join(sourceArchivesDirectory, candidateManifestName))).digest("hex") : null,
       deliveryManifestSha256: delivery.manifestSha256, deliveryProvenance: delivery.manifest.provenance,
       deliveryMode: delivery.manifest.mode, bundleLinksVerified: true, deliveredHostSourcesTypechecked: true,
-      packageManager: consumerLabel, packageManagerVersion: run(packageManager, packageManagerArguments(["--version"]), { cwd: consumerDirectory, env: environment }).trim(),
+      hostInstallation, installationMode: installationMode(), packageManager: consumerLabel, packageManagerVersion: run(packageManager, packageManagerArguments(["--version"]), { cwd: consumerDirectory, env: environment }).trim(),
       node: process.version, platform: process.platform, arch: process.arch,
       archives: archiveEvidence, supportedGuideExamplesTypechecked: true,
       exactV2SingleAndFamilyContractsPassed: true, legacyBrowserLifecyclePassed: true,

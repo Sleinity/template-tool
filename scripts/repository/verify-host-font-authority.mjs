@@ -1,3 +1,4 @@
+import { prepareHostInstallation, verifyHostInstallation } from "../release-publication/host-installation.mjs";
 /** Isolated public host, optionally installed from the exact SDK archives. */
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
@@ -85,12 +86,13 @@ handle.exportPng({ fontRegistry: null });
 `);
     await writeFile(path.join(temporary, "tsconfig.json"), JSON.stringify({ compilerOptions: { target: "ES2022", lib: ["ES2022", "DOM", "DOM.Iterable"], module: "ESNext", moduleResolution: "Bundler", jsx: "react-jsx", strict: true, skipLibCheck: false, noEmit: true }, include: ["src"] }));
     await writeFile(path.join(temporary, "index.html"), '<!doctype html><html><body><script type="module" src="/src/main.ts"></script></body></html>');
-    const env = { ...process.env, CI: "true", NPM_CONFIG_USERCONFIG: path.join(temporary, ".npmrc") };
+    let env = { ...process.env, CI: "true", NPM_CONFIG_USERCONFIG: path.join(temporary, ".npmrc") };
     for (const key of ["NODE_AUTH_TOKEN", "NPM_TOKEN", "GH_TOKEN", "GITHUB_TOKEN"]) delete env[key];
+    env = await prepareHostInstallation(temporary, archives, manager, env);
     const install = spawnSync(manager, ["install", "--prefer-offline"], { cwd: temporary, env, encoding: "utf8" });
     assert.equal(install.status, 0, install.stderr || install.stdout);
     const lock = await readFile(path.join(temporary, manager === "pnpm" ? "pnpm-lock.yaml" : "package-lock.json"), "utf8");
-    assert(!/workspace:|link:|npm\.pkg\.github\.com/.test(lock));
+    await verifyHostInstallation(temporary, archives, manager);
     if (!baseline) {
       const check = spawnSync(process.execPath, [path.join(temporary, "node_modules/typescript/bin/tsc"), "--noEmit"], { cwd: temporary, env, encoding: "utf8" });
       assert.equal(check.status, 0, check.stdout + check.stderr);

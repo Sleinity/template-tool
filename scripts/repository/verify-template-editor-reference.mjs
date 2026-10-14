@@ -1,3 +1,4 @@
+import {prepareHostInstallation,verifyHostInstallation,installationMode} from "../release-publication/host-installation.mjs";
 import { createHash } from "node:crypto";
 import {
   copyFile,
@@ -42,7 +43,8 @@ const sourceArchivesDirectory = args[0] === "--archives"
   ? path.resolve(args[1])
   : null;
 const packageDefinitions = await loadRuntimePackageDefinitions(root);
-const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
+const hostManager = process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "pnpm";
+const pnpmExecutable = hostManager === "npm" ? "npm" : process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const workspace = await mkdtemp(
   path.join(os.tmpdir(), "template-editor-reference-"),
 );
@@ -322,26 +324,27 @@ ${Object.entries(vendoredDependencies)
 `,
   );
 
-  const environment = secretFreeEnvironment();
-  run(pnpmExecutable, ["install", "--prefer-offline=false"], {
+  const environment = await prepareHostInstallation(consumerDirectory, sourceArchivesDirectory, hostManager, secretFreeEnvironment());
+  run(pnpmExecutable, hostManager === "npm" ? ["install", "--ignore-scripts", "--no-audit", "--no-fund"] : ["install", "--prefer-offline=false"], {
     cwd: consumerDirectory,
     env: environment,
   });
+  await verifyHostInstallation(consumerDirectory, sourceArchivesDirectory, hostManager);
   const lockFile = await readFile(
-    path.join(consumerDirectory, "pnpm-lock.yaml"),
+    path.join(consumerDirectory, hostManager === "npm" ? "package-lock.json" : "pnpm-lock.yaml"),
     "utf8",
   );
-  if (
+  if (installationMode() === "archive" && (
     lockFile.includes("workspace:") ||
     lockFile.includes("link:") ||
     lockFile.includes("npm.pkg.github.com")
-  ) {
+  )) {
     throw new Error(
       "The packed reference lockfile contains a workspace, link, or GitHub Packages reference.",
     );
   }
   for (const item of archiveEvidence) {
-    if (!lockFile.includes(`vendor/${item.archive}`)) {
+    if (installationMode() === "archive" && !lockFile.includes(`vendor/${item.archive}`)) {
       throw new Error(`The packed reference lockfile omits ${item.archive}.`);
     }
     const installedRoot = path.join(
@@ -406,7 +409,7 @@ ${Object.entries(vendoredDependencies)
       }
     }
   }
-  run(pnpmExecutable, ["build"], {
+  run(pnpmExecutable, hostManager === "npm" ? ["run", "build"] : ["build"], {
     cwd: consumerDirectory,
     env: environment,
   });

@@ -1,3 +1,4 @@
+import {prepareHostInstallation,verifyHostInstallation,installationMode} from "../release-publication/host-installation.mjs";
 import { createHash } from "node:crypto";
 import {
   copyFile,
@@ -35,7 +36,8 @@ const sourceArchivesDirectory = args[0] === "--archives"
   ? path.resolve(args[1])
   : null;
 const packageDefinitions = await loadRuntimePackageDefinitions(root);
-const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
+const hostManager = process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "pnpm";
+const pnpmExecutable = hostManager === "npm" ? "npm" : process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const workspace = await mkdtemp(path.join(os.tmpdir(), "template-family-reference-"));
 const consumerDirectory = path.join(workspace, "consumer");
 const vendorDirectory = path.join(consumerDirectory, "vendor");
@@ -263,17 +265,18 @@ try {
       .join("\n")}\n`,
   );
 
-  const environment = secretFreeEnvironment();
-  run(pnpmExecutable, ["install", "--prefer-offline=false"], {
+  const environment = await prepareHostInstallation(consumerDirectory, sourceArchivesDirectory, hostManager, secretFreeEnvironment());
+  run(pnpmExecutable, hostManager === "npm" ? ["install", "--ignore-scripts", "--no-audit", "--no-fund"] : ["install", "--prefer-offline=false"], {
     cwd: consumerDirectory,
     env: environment,
   });
-  const lockfile = await readFile(path.join(consumerDirectory, "pnpm-lock.yaml"), "utf8");
-  if (/workspace:|link:|npm\.pkg\.github\.com/u.test(lockfile)) {
+  await verifyHostInstallation(consumerDirectory, sourceArchivesDirectory, hostManager);
+  const lockfile = await readFile(path.join(consumerDirectory, hostManager === "npm" ? "package-lock.json" : "pnpm-lock.yaml"), "utf8");
+  if (installationMode() === "archive" && /workspace:|link:|npm\.pkg\.github\.com/u.test(lockfile)) {
     throw new Error("The packed family reference lockfile contains a workspace, link or registry reference.");
   }
   for (const item of archiveEvidence) {
-    if (!lockfile.includes(`vendor/${item.archive}`)) {
+    if (installationMode() === "archive" && !lockfile.includes(`vendor/${item.archive}`)) {
       throw new Error(`The packed family reference lockfile omits ${item.archive}.`);
     }
     const installedRoot = path.join(consumerDirectory, "node_modules/@sleinity", item.directory);
@@ -289,7 +292,7 @@ try {
       }
     }
   }
-  run(pnpmExecutable, ["build"], { cwd: consumerDirectory, env: environment });
+  run(pnpmExecutable, hostManager === "npm" ? ["run", "build"] : ["build"], { cwd: consumerDirectory, env: environment });
 
   supportedServer = await createServer([
     "default-src 'self'",

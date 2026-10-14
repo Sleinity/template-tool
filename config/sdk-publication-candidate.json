@@ -5162,32 +5162,62 @@
     {
       "file": "package.json",
       "sha256": "4ba4206f91f75c3b11c526a6652f4ed214eb0605220b9e8a7d59434398bacc08",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": ".github/workflows/release.yml",
       "sha256": "6d4e4ba005a4f4d51b34d320b7806cdad5ce50d881710a71698946a7f0b81a9e",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/workflow.mjs",
       "sha256": "7bcf70e11e10e25aa7974e833da7e50bb490929fead45fa412c8c8f0a6728163",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/workflow.test.mjs",
       "sha256": "b75bd4c1611e832641662997def5d0ca082f010acd34f59fc559df426c791475",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/release-delivery/simulate-publication.mjs",
       "sha256": "90b552300e06888be6fd0d5ba4602c8988605d13d1f000667474a6f2578dd4f3",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     },
     {
       "file": "scripts/repository/verify-release-contract.mjs",
       "sha256": "fd618ee8d616299c3493c76f8578774baf019af790e3a009be8965aa281c4ed3",
-      "reason": "Milestone 7 private release tooling/documentation; no SDK build or dependency change"
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/repository/verify-runtime-release-consumer.mjs",
+      "sha256": "28e885727c30a371e477a2180220e1969f2b22d85038401ebf8ad44448155787",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/repository/verify-host-font-authority.mjs",
+      "sha256": "3cc68482ad0a4dc85fe4105a43d45d1d2e46b7409184d8bd21544bc4f368cb2d",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/repository/blocked-storage-packed-host.mjs",
+      "sha256": "9780266440818c9832ae617a504d659ba3ecc986d6400a34cb246371994658a7",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/repository/verify-template-editor-reference.mjs",
+      "sha256": "02847c63c56229375c3530e8dc49451b3aebb9b68006e6cba83bc40f1fcb8fe3",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/repository/verify-template-family-reference.mjs",
+      "sha256": "e87132c8067023528c575ece07c08fcf083da5a483d7d6f28606699ab9d070bf",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
+    },
+    {
+      "file": "scripts/example-lifecycle/verify.mjs",
+      "sha256": "8ebbd86e6d8c857b226123747fab4f367e8aedcef3b3b0158970cbd99b6c009b",
+      "reason": "Milestone 8 private release tooling/acceptance; no SDK build or dependency change"
     }
   ],
   "archives": [
@@ -5212,12 +5242,24 @@
   ],
   "publisherSourceFiles": [
     {
+      "file": ".github/workflows/release-preparation.yml",
+      "sha256": "a3f8bceec121f18f0effabfcb4c38b119e1ba2a3eb6d2a79a88b6d409fc839d4"
+    },
+    {
       "file": ".github/workflows/release-rehearsal.yml",
       "sha256": "787f9d6e9a51e9b40b4eb9580b95b19bb7148e53b8238d45f5c83c8119811132"
     },
     {
+      "file": "scripts/release-publication/acceptance.mjs",
+      "sha256": "17fb0852e93842cee179d9c8096278b8b15781aedf976ce2d752f3d605f40f4f"
+    },
+    {
+      "file": "scripts/release-publication/acceptance.test.mjs",
+      "sha256": "4ea9b6b85614cb3afd99af1304e93690a86dbe7cc64a58a5fc17a63a0f0cfdf6"
+    },
+    {
       "file": "scripts/release-publication/candidate.mjs",
-      "sha256": "9d997b87cf06ba619e4e15272c3cb81714bc1652a21ac94aae7013ed57171f0d"
+      "sha256": "e69d873718b884ab09af0c775f9e357be1fe1316ff711e3bf7df766e2ec5e05f"
     },
     {
       "file": "scripts/release-publication/candidate.test.mjs",
@@ -5240,12 +5282,24 @@
       "sha256": "f87b0d4e19ac294987713b66b6932ccb364f3230f72f05d199eb81ddfcf099c7"
     },
     {
+      "file": "scripts/release-publication/fixture-record.mjs",
+      "sha256": "2c806bd9fd060027c075cb3a0e7f5804eed4bc9d2164c2bbc58250881f737a6a"
+    },
+    {
+      "file": "scripts/release-publication/fixtures.mjs",
+      "sha256": "4c7f0d05ba4eb87377f8060bdf3f79d9ce78b9d4eb8fea665f59a6d63506eb59"
+    },
+    {
       "file": "scripts/release-publication/github.mjs",
       "sha256": "14c0fa82888b95198a46dc50334c0382003aa43aa86fcab38b953ac75c76cc2e"
     },
     {
+      "file": "scripts/release-publication/host-installation.mjs",
+      "sha256": "af92943da71bfa37ab072a77d7633af00112fbe6a2bbbd7110c059f3f0ae584a"
+    },
+    {
       "file": "scripts/release-publication/refresh-source-bindings.mjs",
-      "sha256": "8a9f69c0c68fdfaa177c51dacba0b9f813a0349efb820b9e40d75113ef957694"
+      "sha256": "951ab5649dc250cff49696ad730b76694fe266716654d8a8bb897b025a7f605f"
     },
     {
       "file": "scripts/release-publication/registry.mjs",
