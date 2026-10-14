@@ -5225,7 +5225,7 @@
     },
     {
       "file": "scripts/release-publication/cli.mjs",
-      "sha256": "df85ce3e8a32af996b512747a2cc7f5bc5cdea428677485ea1904325cdedb060"
+      "sha256": "d4ef5acbad5e39b92752d251195a94344f376d6e57bc3dda9d7f6810ef12d817"
     },
     {
       "file": "scripts/release-publication/consumer.mjs",
@@ -5233,11 +5233,11 @@
     },
     {
       "file": "scripts/release-publication/driver.mjs",
-      "sha256": "3b070bd2249f00e5da65553337c71e07e18e876b28ab5b8f26b909bdcd67b3f4"
+      "sha256": "afc29442ca7cf617140eae1aad14c286d1f8f5c157bef88eda21ab65f2fd449d"
     },
     {
       "file": "scripts/release-publication/driver.test.mjs",
-      "sha256": "b7c3365e5c4dd22f306506e4f613c5d00c1c63aa42f79f536ff576d3fe0dec40"
+      "sha256": "f87b0d4e19ac294987713b66b6932ccb364f3230f72f05d199eb81ddfcf099c7"
     },
     {
       "file": "scripts/release-publication/github.mjs",

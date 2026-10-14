@@ -55,7 +55,7 @@
     }
   ],
   "localVerification": {
-    "focusedTests": 27,
+    "focusedTests": 28,
     "portable": "passed ci:portable (builds, portable tests, typechecks, Studio, API/boundary, strict consumers, unchanged budgets, examples)",
     "documentation": "249 Markdown documents / 763 local links passed",
     "sourceBinding": "passed; original protected source inventory preserved with explicit private tooling exceptions",
@@ -104,5 +104,6 @@
     "Production package-write access and full registry-installed runtime acceptance are not proven by rehearsal.",
     "Milestone 8 must provision authenticated, hash-verified private fixtures/fonts on the handoff runner before tagging; the delivery intentionally excludes them. Full published V2 acceptance remains unconditional.",
     "No release tag, merge, package publication, stable release or reference promotion is authorized or performed."
-  ]
+  ],
+  "failureReporting": "Confirmed package writes and uncertain attempts are reported separately from the persisted journal, including failed invocations."
 }

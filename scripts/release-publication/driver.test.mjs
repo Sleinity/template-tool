@@ -218,3 +218,21 @@ test('GitHub reruns restore the preceding attempt rather than ignoring the same 
   });
   assert.equal(previousInvocation([runs[1]], 1, 1), null);
 });
+
+test('failed publication reporting retains confirmed and uncertain outcomes separately', async () => {
+  const { publicationOutcomes } = await import('./driver.mjs');
+  assert.deepEqual(
+    publicationOutcomes({
+      packages: [
+        { name: 'core', status: 'published' },
+        { name: 'browser', status: 'uncertain' },
+        { name: 'react', status: 'unchecked' },
+      ],
+    }),
+    {
+      confirmed: [{ package: 'core', operation: 'publish' }],
+      uncertain: [{ package: 'browser', status: 'uncertain' }],
+    },
+  );
+  assert.deepEqual(publicationOutcomes(null), { confirmed: [], uncertain: [] });
+});

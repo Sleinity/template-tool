@@ -13,7 +13,11 @@ import {
 } from './candidate.mjs';
 import { github, githubJson, preflightGithub } from './github.mjs';
 import { RegistryReadClient, RegistryWriteClient } from './registry.mjs';
-import { runTrain, protectReleaseAssets } from './driver.mjs';
+import {
+  runTrain,
+  protectReleaseAssets,
+  publicationOutcomes,
+} from './driver.mjs';
 import { verifyDeliveryBundle } from '../release-delivery/bundle.mjs';
 const [command, ...args] = process.argv.slice(2),
   options = {};
@@ -210,6 +214,21 @@ try {
   };
   throw e;
 } finally {
+  if (command === 'publish') {
+    const journalFile =
+      options['--journal'] ?? path.join(output, 'journal.json');
+    const journal = await readFile(journalFile, 'utf8')
+      .then(JSON.parse)
+      .catch(() => null);
+    const outcomes = publicationOutcomes(journal);
+    report.mutations = outcomes.confirmed;
+    report.uncertainPublicationAttempts = outcomes.uncertain;
+    report.journal = journal;
+    report.publicationOutcome =
+      report.status === 'pass'
+        ? 'verified'
+        : 'failed; journal reconciliation required';
+  }
   await writeFile(
     path.join(output, 'report.json'),
     JSON.stringify(report, null, 2) + '\n',

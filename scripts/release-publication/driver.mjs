@@ -159,3 +159,17 @@ export async function protectReleaseAssets(expected, existing, readExisting) {
   }
   return actions;
 }
+
+/** Failed publication reports must distinguish accepted writes from unresolved attempts. */
+export function publicationOutcomes(journal) {
+  return {
+    confirmed: (journal?.packages ?? [])
+      .filter((p) => p.status === 'published')
+      .map((p) => ({ package: p.name, operation: 'publish' })),
+    uncertain: (journal?.packages ?? [])
+      .filter((p) =>
+        ['publishing', 'uncertain', 'verification-pending'].includes(p.status),
+      )
+      .map((p) => ({ package: p.name, status: p.status })),
+  };
+}
