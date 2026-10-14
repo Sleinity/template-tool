@@ -7,7 +7,7 @@ human-approved stable promotion. Those final operations are still pending.
 
 ## Prepared contract
 
-[PR #24](https://github.com/Sleinity/template-tool/pull/24) is stacked on #23.
+[PR #24](https://github.com/Sleinity/template-tool/pull/24) followed #23.
 Changes are private release/acceptance tooling. SDK behavior, public APIs, versions,
 dependencies, lockfile, reference pixels and tolerances remain unchanged.
 
@@ -48,7 +48,38 @@ passed at `e76e1a92a2fda944b088566b118c372ec4d21283`:
   no package/release mutation occurred.
 
 Current evidence is automated CLI/browser coverage. It is not actual registry
-publication or manual live/source-design review. The local CLI still requires
-GitHub Packages read access for macOS registry consumers. Original checkout/index
-preservation and final source/archive/fidelity identities will be recorded before
-tagging. Formal baseline handoff/input retirement remains Milestone 9.
+publication or manual live/source-design review. GitHub Packages read access is
+now verified for macOS registry consumers. Formal baseline handoff/input retirement
+remains Milestone 9.
+
+## Reviewed merges and final pre-tag gate
+
+Following explicit human source review, PRs #22, #23 and #24 were merged in order
+with merge commits. Retargeted checks and the full preparation rerun passed.
+The [merged-source record](evidence/sdk-1-publication-20261014/merged-source.json)
+binds the approved heads, merge commits, frozen archive identities and verified
+preservation of the original checkout/index. The final merged tree at
+`3c9bd975ee32a1402eea228f98bcd963d4efe737` equals the approved #24 tree.
+
+The [current Linux archive matrix](evidence/sdk-1-publication-20261014/linux-preparation-final.json)
+passed all twelve commands in preparation run 38554320928, attempt 2.
+The [macOS archive matrix](evidence/sdk-1-publication-20261014/macos-archive.json)
+also passed all twelve commands against the same frozen train.
+
+The [fresh macOS fidelity receipt](evidence/sdk-1-publication-20261014/final-fidelity.json)
+records gate `sdk-1-publication-main-20261014a`: 24 complete stable captures,
+12 renderer passes, three scene passes and 12 settlement passes. All twelve PNG
+hashes equal the reviewed candidate in both repeats. Exact fixtures/fonts, browser,
+OS, camera placement and native pre-Fit history match. The private root release
+command changes the build-metadata hash; this is recorded separately from raster
+environment and unchanged certified runtime identity.
+
+The [current-run disposition](evidence/sdk-1-publication-20261014/final-fidelity-disposition.json)
+retains the prior source review after those identity checks. The standard SDK gate
+was reassessed successfully; the tracked disposition baseline was restored.
+All 287 protected reference/budget records remain unchanged. No reference update,
+tolerance change, new manual live review or SDK runtime change occurred.
+
+These receipts are publication prerequisites, not registry acceptance. Package
+publication, Linux/macOS registry-installed verification, prerelease assets and
+human-approved stable promotion remain pending.

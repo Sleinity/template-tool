@@ -1,0 +1,412 @@
+{
+  "schemaVersion": "sdk-release-fidelity-v1",
+  "status": "pass",
+  "candidate": "sdk-1-candidate-20261013k",
+  "runId": "sdk-1-publication-main-20261014a",
+  "sourceCommit": "3c9bd975ee32a1402eea228f98bcd963d4efe737",
+  "stableCaptures": 24,
+  "rendererPasses": 12,
+  "scenePasses": 3,
+  "settlementPasses": 12,
+  "referenceChanges": 0,
+  "toleranceChanges": 0,
+  "environment": {
+    "platform": "darwin",
+    "approximateProcessMemoryBytes": 664567808,
+    "approximateSystemMemoryBytes": 17179869184,
+    "architecture": "arm64",
+    "browser": "Chromium",
+    "browserVersion": "149.0.7827.55",
+    "buildIdentifier": "8686f5b3e8406eb44e8108c0e1af4b5236871198133ce20cb517a04a759095a7",
+    "captureScale": 1,
+    "devicePixelRatio": 1,
+    "fallbackFonts": [],
+    "fontDecisions": [
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "byteSize": 149328,
+        "classification": "exact",
+        "fontId": "geist-mono-500-normal",
+        "requestedFamily": "Geist Mono",
+        "requestedStyle": "normal",
+        "requestedWeight": 500,
+        "requirementId": "font:geist-mono:medium",
+        "source": "Official Vercel Geist v1.7.2 release asset",
+        "uploadAndLinkMs": 111.94533299999966
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "byteSize": 580572,
+        "classification": "exact",
+        "fontId": "inter-tight-700-normal",
+        "requestedFamily": "Inter Tight",
+        "requestedStyle": "normal",
+        "requestedWeight": 700,
+        "requirementId": "font:inter-tight:bold",
+        "source": "Locally installed Inter Tight variable font",
+        "uploadAndLinkMs": 123.10420900000008
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "byteSize": 55900,
+        "classification": "exact",
+        "fontId": "funnel-display-400-normal",
+        "requestedFamily": "Funnel Display",
+        "requestedStyle": "normal",
+        "requestedWeight": 400,
+        "requirementId": "font:funnel-display:regular",
+        "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+        "uploadAndLinkMs": 102.94433299999946
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "byteSize": 59080,
+        "classification": "exact",
+        "fontId": "rethink-sans-600-normal",
+        "requestedFamily": "Rethink Sans",
+        "requestedStyle": "normal",
+        "requestedWeight": 600,
+        "requirementId": "font:rethink-sans:semibold",
+        "source": "Repository bundled Studio font",
+        "uploadAndLinkMs": 116.66233400000056
+      }
+    ],
+    "fontProfile": "source-authoritative",
+    "fontSources": [
+      {
+        "byteSize": 149328,
+        "family": "Geist Mono",
+        "id": "geist-mono-500-normal",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "style": "normal",
+        "weight": 500
+      },
+      {
+        "byteSize": 580572,
+        "family": "Inter Tight",
+        "id": "inter-tight-700-normal",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "style": "normal",
+        "weight": 700
+      },
+      {
+        "byteSize": 59080,
+        "family": "Rethink Sans",
+        "id": "rethink-sans-600-normal",
+        "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "style": "normal",
+        "weight": 600
+      },
+      {
+        "byteSize": 55900,
+        "family": "Funnel Display",
+        "id": "funnel-display-400-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "style": "normal",
+        "weight": 400
+      }
+    ],
+    "gitCommit": null,
+    "loadedFonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      },
+      {
+        "family": "__template_font_90b15711dc3779b2_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "__template_font_4b8ef9ed255ebe73_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "__template_font_9062978ead3d7a3e_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "__template_font_523d8be1ea86cb25_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "600"
+      }
+    ],
+    "locale": "en-US",
+    "nodeVersion": "v24.19.0",
+    "operatingSystem": "darwin 25.5.0",
+    "packageManager": "pnpm/11.25.0 npm/? node/v24.19.0 darwin arm64",
+    "schemaVersion": 1,
+    "testTimestamp": "2026-10-14T12:10:44.335Z",
+    "timezone": "UTC",
+    "viewport": {
+      "height": 1600,
+      "width": 1440
+    }
+  },
+  "camera": "studio-reference-20261012",
+  "fontProfile": "source-authoritative",
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185",
+      "name": "@sleinity/template-core"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8",
+      "name": "@sleinity/template-browser"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b",
+      "name": "@sleinity/template-react"
+    }
+  ],
+  "fixtureManifestSha256": "e68e24a1d1e97113e21b6735f10d92e87ad242fdf72bdbc5e54490a010404e7d",
+  "fontManifestSha256": "8ac875d74fb88b1c3c8b8179667bca2155fc56f2d068672c08338ab8e34090d9",
+  "runtimeSourceSha256": "f33d6fc3ad874de11795d736a0637086f81d07c99001814730d707e5e486af9c",
+  "reviewRetainedFrom": "sdk-1-candidate-20261013k",
+  "priorDispositionSha256": "9d96bc51a4538b585d3d59f88484ff50bcb5e8439f8588376c712ebd3f96bf55",
+  "manualLiveReview": false,
+  "metadataChanges": [
+    {
+      "key": "buildIdentifier",
+      "before": "1362f2002557b1202889ecce451470d091285e4c268e847628370fde35edeb34",
+      "after": "8686f5b3e8406eb44e8108c0e1af4b5236871198133ce20cb517a04a759095a7"
+    }
+  ],
+  "rasters": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "surface": "validate",
+      "sha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+      "repeatHashes": [
+        "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+        "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "surface": "fields",
+      "sha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+      "repeatHashes": [
+        "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+        "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "surface": "editor",
+      "sha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+      "repeatHashes": [
+        "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+        "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "surface": "png-export",
+      "sha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "repeatHashes": [
+        "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+        "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "surface": "validate",
+      "sha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+      "repeatHashes": [
+        "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+        "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "surface": "fields",
+      "sha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+      "repeatHashes": [
+        "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+        "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "surface": "editor",
+      "sha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+      "repeatHashes": [
+        "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+        "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "surface": "png-export",
+      "sha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "repeatHashes": [
+        "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+        "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "surface": "validate",
+      "sha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+      "repeatHashes": [
+        "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+        "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "surface": "fields",
+      "sha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+      "repeatHashes": [
+        "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+        "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "surface": "editor",
+      "sha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+      "repeatHashes": [
+        "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+        "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "surface": "png-export",
+      "sha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "repeatHashes": [
+        "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+        "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8"
+      ],
+      "reviewRetainedFrom": "sdk-1-candidate-20261013k"
+    }
+  ],
+  "cameras": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "after": {
+        "height": 1444,
+        "width": 906,
+        "x": 485,
+        "y": 107
+      },
+      "before": {
+        "height": 1372,
+        "width": 910,
+        "x": 473,
+        "y": 171
+      },
+      "nativeBefore": {
+        "dpr": 1,
+        "mode": "manual",
+        "reducedMotion": true,
+        "scroll": {
+          "x": 0,
+          "y": 0
+        },
+        "transform": "translate(255px, 416px) scale(0.4)",
+        "zoomLabel": "40%"
+      },
+      "nativeMutation": false,
+      "profile": "studio-reference-20261012"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "after": {
+        "height": 1444,
+        "width": 906,
+        "x": 485,
+        "y": 107
+      },
+      "before": {
+        "height": 1372,
+        "width": 910,
+        "x": 473,
+        "y": 171
+      },
+      "nativeBefore": {
+        "dpr": 1,
+        "mode": "manual",
+        "reducedMotion": true,
+        "scroll": {
+          "x": 0,
+          "y": 0
+        },
+        "transform": "translate(239px, 416px) scale(0.4)",
+        "zoomLabel": "40%"
+      },
+      "nativeMutation": false,
+      "profile": "studio-reference-20261012"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "after": {
+        "height": 1444,
+        "width": 906,
+        "x": 485,
+        "y": 107
+      },
+      "before": {
+        "height": 1372,
+        "width": 910,
+        "x": 473,
+        "y": 171
+      },
+      "nativeBefore": {
+        "dpr": 1,
+        "mode": "manual",
+        "reducedMotion": true,
+        "scroll": {
+          "x": 0,
+          "y": 0
+        },
+        "transform": "translate(71px, 470px) scale(0.4)",
+        "zoomLabel": "40%"
+      },
+      "nativeMutation": false,
+      "profile": "studio-reference-20261012"
+    }
+  ],
+  "comparisonHashes": {
+    "renderer": "6c35f4dc3b4d3fee645480dc72a2322618878586a87ff6c9784ec0c869895391",
+    "scene": "cedc1e9c60bdb4ef0d6b62669f147b5da8537b76096c662d2c337bfcb9fe3821",
+    "settlement": "fda876bd816afba8dd06de7c72fa707de2118e1c5c35b480a23f0219b9b55ce5"
+  },
+  "gateSha256": "d9567011bce77628f01c065ae2c01fffd55148843f2908ff3138c8d9ea146ac8"
+}

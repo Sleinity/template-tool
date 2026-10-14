@@ -5,5 +5,8 @@
   "tagCommit": null,
   "macos": null,
   "linux": null,
-  "fidelity": null
+  "fidelity": {
+    "file": "docs/architecture/evidence/sdk-1-publication-20261014/final-fidelity.json",
+    "sha256": "68ba334c7eb2f24dfee9da66ea0c328020f60e8fd2fe5eb3c73c6577c2d733f2"
+  }
 }
