@@ -112,11 +112,11 @@
     }
   ],
   "completedDate": "2026-10-14",
-  "validatedSourceCommit": "00cf09c966048641fd61524243a4a46a805a1502",
+  "validatedSourceCommit": "b21cdf4589a65e59851d571fcab18868b413b98e",
   "github": {
-    "runId": 38452271335,
-    "url": "https://github.com/Sleinity/template-tool/actions/runs/38452271335",
-    "headSha": "00cf09c966048641fd61524243a4a46a805a1502",
+    "runId": 38526366790,
+    "url": "https://github.com/Sleinity/template-tool/actions/runs/38526366790",
+    "headSha": "b21cdf4589a65e59851d571fcab18868b413b98e",
     "status": "completed",
     "conclusion": "success",
     "checks": [
@@ -130,7 +130,14 @@
       "template editor",
       "Template Family"
     ],
-    "currentHeadChecks": "https://github.com/Sleinity/template-tool/pull/22/checks"
+    "currentHeadChecks": "https://github.com/Sleinity/template-tool/pull/22/checks",
+    "priorSourceRun": 38452271335
   },
-  "metadataClosure": "This report/roadmap closure changes documentation only; final PR-head checks remain authoritative."
+  "metadataClosure": "This report/roadmap closure changes documentation only; final PR-head checks remain authoritative.",
+  "inventoryCounts": {
+    "originalRows": 2307,
+    "included": 1756,
+    "excluded": 551,
+    "branchAdditionalFiles": 20
+  }
 }
