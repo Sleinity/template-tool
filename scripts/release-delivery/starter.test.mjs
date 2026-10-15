@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { unzipSync, strFromU8 } from 'fflate';
+import { spawnSync } from 'node:child_process';
 import { createStarter } from './starter.mjs';
 test('standalone starter is deterministic, complete and excludes repository/private inputs', async () => {
   const archives = ['core','browser','react'].map(name => ({ name:'@sleinity/template-'+name, file:`sleinity-template-${name}-2.0.0.tgz` }));
@@ -16,4 +17,14 @@ test('standalone starter is deterministic, complete and excludes repository/priv
   assert(!strFromU8(files['vite.config.ts']).includes('alias'));
   assert(strFromU8(files['src/main.tsx']).includes('<CompleteHost'));
   for(const [name,bytes]of Object.entries(files))if(/\.[tj]sx?$/.test(name))assert(!/(from\s+["'][^"']*(?:apps\/studio|renderer-internal|session-internal))/.test(strFromU8(bytes)),name);
+});
+
+test('starter bytes are identical across builder time zones', () => {
+  const code = `import {createStarter} from './scripts/release-delivery/starter.mjs';const archives=['core','browser','react'].map(name=>({name:'@sleinity/template-'+name,file:'sleinity-template-'+name+'-2.0.0.tgz'}));console.log((await createStarter(process.cwd(),archives,'2.0.0')).record.sha256);`;
+  const hashes = ['UTC', 'Europe/Amsterdam', 'America/Los_Angeles'].map(TZ => {
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', code], { env: { ...process.env, TZ }, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout.trim();
+  });
+  assert.equal(new Set(hashes).size, 1);
 });

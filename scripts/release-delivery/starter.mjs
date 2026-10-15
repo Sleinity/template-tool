@@ -8,13 +8,14 @@ const hash = b => createHash('sha256').update(b).digest('hex');
 export async function createStarter(root, archives, version) {
   const sourceRoot = path.join(root, 'examples/template-editor-integration');
   const files = {}, sources = [];
-  const add = (name, bytes) => { files[name] = [new Uint8Array(bytes), { mtime: new Date('2020-01-01T00:00:00Z') }]; };
+  // ZIP stores local clock digits without a time zone; fix those digits, not a UTC instant.
+  const add = (name, bytes) => { files[name] = [new Uint8Array(bytes), { mtime: new Date(2020, 0, 1) }]; };
   async function copy(relative) {
     const bytes = await readFile(path.join(sourceRoot, relative)); add(relative, bytes);
     sources.push({ source: 'examples/template-editor-integration/' + relative, file: relative, sha256: hash(bytes) });
   }
   for (const name of ['index.html', 'tsconfig.json', 'tsconfig.app.json', 'tsconfig.node.json', 'vite.config.ts']) await copy(name);
-  for (const entry of await readdir(path.join(sourceRoot, 'src'))) {
+  for (const entry of (await readdir(path.join(sourceRoot, 'src'))).sort()) {
     if (!/\.(tsx?|css)$/.test(entry) || /\.test\./.test(entry)) throw new Error('Unexpected starter source: ' + entry);
     await copy('src/' + entry);
   }
