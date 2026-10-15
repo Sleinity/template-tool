@@ -1,121 +1,40 @@
-# Install Template Platform SDK 0.8.0
+# Install SDK 1.0.0
 
-This page retains the **published** 0.8.0 installation contract. The current
-workspace is an unpublished candidate with unchanged version labels and newer
-V2/recovery behavior. Use its source identity and checksums rather than version
-alone; see [local release preparation](RELEASE_PREPARATION.md) and
-[current V2 integration](V2_INTEGRATION.md). Do not mix those local archives with
-published archives of the same version.
+The three packages form one fixed train. This page describes the current 1.0.0 contract; [0.8 migration guidance](SDK_0_8_MIGRATION.md) is historical. Until release approval and publication, use the exact supplied local candidate and its hashes.
 
-Install the three SDK packages at the same version. Choose one installation
-method and do not mix registry and archive dependencies.
+## Recommended: vendored release archives
 
-## Recommended: GitHub Release archives
+Download or receive one verified delivery containing Core, Browser and React archives, checksums and the delivery manifest. Verify `SHA256SUMS`, copy all archives into the host's `vendor/` directory, then use:
 
-Use this method for external hosts, agent-built applications and environments
-that should not receive a GitHub Packages credential.
-
-1. Download these files from the public
-   [`sdk-v0.8.0` GitHub Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0):
-
-   - `sleinity-template-core-0.8.0.tgz`
-   - `sleinity-template-browser-0.8.0.tgz`
-   - `sleinity-template-react-0.8.0.tgz`
-   - `SHA256SUMS`
-
-2. Put all four files in the host repository's `vendor/` directory and verify
-   the archives before installing:
-
-   ```sh
-   cd vendor
-   shasum -a 256 -c SHA256SUMS
-   ```
-
-3. Add exact local dependencies:
-
-   ```json
-   {
-     "dependencies": {
-       "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz",
-       "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz",
-       "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
-     }
-   }
-   ```
-
-4. pnpm hosts must also pin the private transitive package closure in
-   `pnpm-workspace.yaml`:
-
-   ```yaml
-   overrides:
-     "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz"
-     "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz"
-     "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
-   ```
-
-5. Run the host's normal install command and commit the updated lockfile. Check
-   that all three installed package versions resolve to `0.8.0`.
-
-Do not add a GitHub Packages `.npmrc`, `NODE_AUTH_TOKEN` or personal access
-token to a vendored consumer. The release archives are downloaded back from
-GitHub Packages by the release workflow, so the public files retain registry
-provenance.
-
-## Optional: authenticated GitHub Packages
-
-Use this method only when local development and CI can safely provide a GitHub
-Packages credential.
-
-```ini
-@sleinity:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-always-auth=true
+```json
+{
+  "dependencies": {
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-1.0.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-1.0.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-1.0.0.tgz",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
 ```
 
-```sh
-pnpm add @sleinity/template-core@0.8.0 \
-  @sleinity/template-browser@0.8.0 \
-  @sleinity/template-react@0.8.0
+pnpm also needs this private dependency closure in `pnpm-workspace.yaml`:
+
+```yaml
+overrides:
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-1.0.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-1.0.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-1.0.0.tgz"
 ```
 
-The token must be a classic GitHub personal access token with `read:packages`
-and access to the packages. Never commit the token.
+Run the chosen manager's install command, commit its lockfile and run the host typecheck/build. Do not mix registry and local SDK packages. No registry credential, token or SDK repository alias belongs in a vendored consumer. The complete [starter](QUICKSTART.md) supplies this configuration.
 
-## Choose only what the host needs
+## Optional authenticated registry installation
 
-- Core-only import and validation may install only
-  `@sleinity/template-core@0.8.0`.
-- Headless browser import, sessions, persistence or capture require core and
-  browser at `0.8.0`.
-- React UI or rendering requires the complete fixed train plus React 19 and
-  React DOM 19.
-- Template Families do not add a package: portable family contracts use the
-  core `family` entry, while family setup/session/hooks use the existing
-  browser and React packages. Install the complete train for the reference
-  family workflow.
+After publication, authorized maintainers may install all three `@sleinity/template-*` packages at exact version `1.0.0` from GitHub Packages. Configure the `@sleinity` registry and provide a read-packages credential through the host's existing secret mechanism; never commit it. Archive installation is preferred for Bas's first host.
 
-The full runtime assumes a modern browser with IndexedDB, `FontFace`, SVG,
-blob/data URLs, image decoding and the APIs reported by
-`inspectTemplateRuntimeSupport()`.
+## Runtime and ownership
 
-## Common failures
+Core-only portable import/validation needs no React. Browser sessions need DOM/browser APIs, assets and fonts; React rendering/export needs React and React DOM 19. Browser sessions are not a server-rendering API. See [compatibility](CONSUMER_COMPATIBILITY.md) for platform/CSP limits and [API guide](API_GUIDE.md) for supported entries. Native browser rendering needs no renderer-time Figma connection.
 
-- **GitHub Packages returns 401/403:** the token or package access is missing.
-  Use the Release archives when a secret cannot be provided.
-- **pnpm contacts GitHub Packages after vendoring:** add all three exact
-  overrides shown above and reinstall from a clean dependency directory.
-- **Two SDK versions are installed:** make every direct dependency and pnpm
-  override exactly `0.8.0`.
-- **React peer conflict:** upgrade the host to React 19 before adopting
-  `@sleinity/template-react`; do not force an unsupported peer resolution.
-- **An export cannot be resolved:** import only package roots and documented
-  subpaths. Never import package `src/`, repository paths, Studio code or an
-  entry named `renderer-internal`.
-- **The browser is blocked:** show the stable issues returned by
-  `inspectTemplateRuntimeSupport()` instead of bypassing the check.
-
-After installation, choose an implementation track in the
-[agent integration prompts](AGENT_INTEGRATION_PROMPTS.md) or inspect the
-[template editor reference](../../examples/template-editor-integration/README.md).
-For shared content across ZIP variants, start with the
-[Template Family reference](../../examples/template-family-integration/README.md).
+Public downloadability does not grant general reuse rights: the packages remain UNLICENSED and authorized for Sleinity-owned applications only.

@@ -1,18 +1,6 @@
-# SDK — V2 candidate
+# SDK capabilities and checked entries
 
-The unpublished 1.0.0 candidate supports V2 host workflows only. ZIP admission requires raw source schema 1.0 and exporter 0.6.1 before asset persistence or font linking. Other or missing versions return blocked with SOURCE_EXPORTER_VERSION_UNSUPPORTED and retained raw evidence. Canonical packages remain schema 2.2.
-
-Source normalization and the private V1-shaped renderer bridge remain necessary for current exports. Read-only versioned evidence does not authorize V1 editing. V1 sessions, Family editing, wizard/confirmation, persistence, React importer and importer styles are retired. Historical readers/adapters are test-only and absent from supported host entries. Existing V2 records, assets, fonts and recovery tokens are preserved. Unknown historical records remain untouched outside the catalogue; no V1 migration is provided.
-
-See [V2 integration](V2_INTEGRATION.md), [lifecycle](HOST_LIFECYCLE.md), [operation outcomes](OPERATION_OUTCOMES.md), [migration contract](SDK_1_0_MIGRATION.md) and [runtime handoff](RUNTIME_HANDOFF.md).
-
-Use createTemplateSessionV2 and createTemplateFieldFamilySessionV2 from Browser /session; runTemplatePackageImportPipelineV2, appendTemplateSourcesV2 and mutateTemplateFamilyV2 from Browser /importer. React /editor exposes existing owning hooks, TemplateFieldSessionV2Provider, TemplateFieldSessionRendererV2 and typed controllers. Core supports DOM-free createZipBundleReader/loadTemplatePackageBundleSource, parseTemplatePackageV2 and strict validation/materialization.
-
-Hosts own controls, navigation, storage policy and output delivery. Sessions own canonical content and native resource lifetimes; React subscriptions borrow sessions. Exact fonts, image Fill/Fit/Crop/Reset, stale-evidence rejection and PNG readiness guards remain intact. Use Browser /persistence for V2 records and template-scoped recovery; do not persist derived renderer trees as content authority.
-
-The delivered API and entry inventories specify supported imports. renderer-internal and session-internal are restricted repository seams; they are not supported host APIs. React /inspection retains read-only advanced evidence. There is no selectable compatibility renderer.
-
-The three examples compile V2 workflows. Archive/source hashes identify this same-version candidate. Publication and tagging require separate authorization. Runtime validators and the rasterizer are retained.
+Use [the feature catalogue](FEATURES.md) for behavior, limitations and examples, [the API task guide](API_GUIDE.md) for integration seams and [the starter](QUICKSTART.md) for a complete host. This SDK 1.0.0 candidate is V2-only, exporter-0.6.1-only, canonical schema 2.2. Internal entries below are not host APIs.
 
 <!-- sdk-capability-entry-points:start -->
 | Package | Entry | Classification | Representative exports |

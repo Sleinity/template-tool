@@ -1,31 +1,11 @@
-# Runtime integration contract
+# SDK 1.0.0 host handoff
 
-[V2 integration](V2_INTEGRATION.md) is the recommended current source contract.
-Use one verified fixed-train delivery, identified by actual archive hashes and
-provenance. Published 0.8 migration material is historical; the staged major is
-[1.0.0](SDK_1_0_MIGRATION.md), not yet applied or published.
+Start with [the first-host guide](QUICKSTART.md), [installation](INSTALLATION.md), [implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). The SDK is an unpublished candidate until the separately approved release completes; verify artifact hashes and provenance.
 
-## Recommended host journey
+The delivery contains three fixed-version archives, checksum/identity inventories, current documentation and `SDK-HOST-STARTER.zip`. Bas's React/TypeScript host needs no repository source aliases or registry credential when using vendored archives. Use only supported entries from [the API guide](API_GUIDE.md).
 
-Import once through `runTemplatePackageImportPipelineV2`; stage in a fresh native
-session; prepare exact fonts with the same borrowed authority; explicitly accept;
-edit through typed controllers; export only with current native renderer evidence.
-The [example](../../examples/template-editor-integration/README.md) keeps accepted
-work usable during replacement and cleans late/cancelled candidates.
+The starter composes native single/Family sessions, exact font preparation, typed controls, persistence/recovery and guarded PNG. Private example helpers can be adapted; they are not new SDK APIs. Studio references are pinned and explicitly classified in [the reuse catalogue](STUDIO_REFERENCE.md).
 
-Use [ownership](HOST_LIFECYCLE.md), [operation outcomes](OPERATION_OUTCOMES.md),
-[field configuration](../field-rules/STUDIO_AND_HOSTS.md) and
-[recovery](../architecture/template-recovery.md). Apply, persisted Review/save,
-output recovery autosave and PNG readiness are different responsibilities.
+Preserve resource ownership, operation-specific errors and current readiness. ZIP import requires exporter 0.6.1/source schema 1.0; canonical schema is 2.2. Retired V1 workflows have no fallback. Unknown historical bytes remain untouched. See [lifecycle](HOST_LIFECYCLE.md), [outcomes](OPERATION_OUTCOMES.md) and [history](HISTORY.md).
 
-## Focused and advanced entries
-
-The [capability catalog](SDK_CAPABILITIES.md) records public roots and curated
-entries, including optional `@sleinity/template-react/inspection`. Entries named
-`renderer-internal` or `session-internal` are repository seams;
-**they are not supported host APIs**. Studio components are private examples,
-not public UI contracts. Inspection is not a rendering backend selector.
-
-## Retired workflows
-
-V1 wizard, confirmation, editing and persistence are removed from this candidate. The three host examples use V2. ZIP admission is restricted to exporter 0.6.1; source schema 1.0 normalization remains. Unknown historical stored bytes are preserved outside the supported catalogue.
+Publication/tagging require approval after the frozen archive set passes macOS/Linux acceptance. Registry round-trip verification is separate from local certification. Distribution remains UNLICENSED for Sleinity-owned applications only.

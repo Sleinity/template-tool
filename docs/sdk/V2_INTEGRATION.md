@@ -13,6 +13,8 @@ Cover and Carrousel in the hash-gated `sdk-061` profile. Those ZIPs declare
 source schema `1.0`; the source reader and V1-to-V2 normalization remain necessary.
 Current canonical packages use schema `2.2`. ZIP admission requires source schema `1.0` and `source.pluginVersion === "0.6.1"`; missing, malformed and other versions block before asset persistence and font linking. Raw evidence remains available.
 
+For the complete runnable workflow, start with [host onboarding](QUICKSTART.md), [implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). The sections below are focused API recipes.
+
 ## Static choices
 
 Text, Textarea, Number, Date and Color can configure suggested or restricted

@@ -1,57 +1,29 @@
-# Adapting the Studio source example
+# Studio reuse catalogue for SDK 1.0.0
 
-Studio is a private application, not a supported SDK UI package. Hosts can copy
-its interaction patterns and supply their own catalogue, routing, storage and
-branding. [V2 integration](V2_INTEGRATION.md) documents supported entry points.
-Do not import Studio, `session-internal`, `renderer-internal` or architectural
-experiments into a host integration.
+Studio is an application reference, not a supported UI package. Bas can reuse public SDK components directly and adapt example/application patterns. Never import Studio modules, package source or internal entries into a host.
 
-| Responsibility | Authority / integration seam |
-| --- | --- |
-| ZIP import | Browser importer `runTemplatePackageImportPipelineV2`; ready/blocked/error evidence and explicit candidate disposal |
-| Fields / Family | Existing Core validators and Browser authoring transactions; UI owns local drafts and Apply/Discard |
-| Editing | Native single/Family controllers; preserve order, imported defaults and Choice identity |
-| Preview | React V2 session renderer; viewport transforms and highlights are presentation only |
-| Assets / fonts | Browser leases and exact face linking; thumbnails borrow supported asset sources |
-| Persistence | Host repository; Studio demonstrates IndexedDB and template-scoped recovery |
-| Export | Flush valid drafts, persist, await current readiness, export through the mounted renderer, complete recovery |
-| Diagnostics | SDK evidence; UI owns concise wording, correction links and technical disclosure |
+The source links below pin the reviewed Studio implementation included in this release line to commit `bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924`. Later Studio redesigns do not change these references. The delivered starter is generated from the candidate's own source inventory and is the current runnable example; historical pinned code is supplementary.
 
-Retain importer resources until session load acquires ownership. Dispose rejected,
-cancelled and accepted candidates after the appropriate handoff. Do not add URL
-or font registries. Saved content does not imply current font, asset, line or
-settlement readiness. UI fonts remain separate from exact template faces.
+| Classification | Component/pattern | Dependencies | How to adapt | Regression reference |
+| --- | --- | --- | --- | --- |
+| Supported SDK API | [Renderer/provider/hooks](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/packages/template-react/src/fieldSessionV2.tsx) | Native sessions and a stable font registry | Import React /editor; build host-owned controls around current snapshots. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/packages/template-react/test/sessionLifecycle.browser.tsx) |
+| Copyable example | [FieldRulesV2Host + lifecycle](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/examples/template-editor-integration/src/FieldRulesV2Host.tsx) | Public SDK entries and React 19 | Use the delivered starter; private example helpers are editable host code, not supported SDK exports. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/example-lifecycle/verify.mjs) |
+| Studio-specific implementation reference | [FieldContentEditorV2](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/FieldContentEditorV2.tsx) | UI primitives, draft coordinator, optional measurement/placement adapters | Recreate controller-to-control binding; keep incomplete drafts and currentness checks. Do not copy Studio text policy automatically. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/deferredFieldDrafts.test.ts) |
+| Studio-specific implementation reference | [FieldConfigurationEditorV2 + Choice authoring](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/FieldConfigurationEditorV2.tsx) | Field-authoring context and Choice draft helpers | Adapt local Apply/Discard forms to native configure; keep IDs/defaults and Family inheritance explicit. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/choiceAuthoring.test.ts) |
+| Studio-specific implementation reference | [FamilyVariantPropertyTable](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/FamilyVariantPropertyTable.tsx) | Family authoring and Studio row controls | Reference selector assignments/inheritance UX; keep Core/native selection as authority. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/repository/verify-sdk-061-family-host.mjs) |
+| Studio-specific implementation reference | [FamilyFontPreparationPanel](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/FamilyFontPreparationPanel.tsx) | Managed registry and per-source requirement context | Adapt requirement correction UI using Browser /fonts; never infer exactness from CSS availability. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/repository/verify-font-reactivation.mjs) |
+| Studio-specific implementation reference | [EditorLayout + ContextPreviewDock](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/EditorLayout.tsx) | Studio UI layout, responsive state and preview composition | Replace chrome/layout in the host; preserve a single current renderer mount and inspection-only overlays. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/ContextPreviewDock.test.tsx) |
+| Studio-specific implementation reference | [DraftEditor + deferred drafts/autosave](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/workspace/DraftEditor.tsx) | Studio records/recovery, UI controls, navigation and input policies | Reimplement host persistence/navigation boundaries through supported APIs; do not import Studio records or annotations. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/editor-performance/verify.mjs) |
+| Studio-specific implementation reference | [Diagnostics/quality panels](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx) | SDK quality evidence and Studio issue wording/navigation | Reuse SDK projections; adapt user wording, correction links and disclosure. Technical telemetry is not exported template content. | [Existing check](https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-package/quality/TemplatePackageQualityPanels.test.ts) |
 
-## Presentation customization
+## UI and styling ownership
 
-Override existing root CSS roles: `--font-family-sans`, `--color-surface-*`,
-`--color-text-*`, `--color-action-*`, `--color-focus-ring`, `--color-status-*`,
-`--radius-*` and spacing/control-height tokens. Preserve accessible contrast,
-focus and hit areas. Hosts may replace the field/preview composition without
-changing controller semantics. `controlRole` remains an optional host hint.
+The SDK supplies session bindings and rendering, not styled field controls or a theme API. The starter accepts custom controls. Compose your own page, navigation, saved list and error presentation. Studio's `components/ui` roles and CSS custom properties are source-example conventions; copying them does not create an SDK compatibility promise. Keep template fonts, paints, viewport transforms and PNG content separate from application chrome.
 
-For example, a host can override its application chrome while retaining the
-native sessions and renderer:
+Studio uses 100/325 ms input scheduling and 650 ms autosave as product policy. The host starter demonstrates 650 ms recovery autosave without introducing Studio's typing scheduler. Native controller validation and current renderer evidence remain authoritative. Configuration Apply, template Save and output recovery are separate actions.
 
-```css
-:root {
-  --color-surface-app: #edf2f7;
-  --color-action-primary: #234e70;
-  --color-action-primary-hover: #183b56;
-  --color-focus-ring: #2266aa;
-}
-```
+## Reuse limits and next milestone
 
-These are Studio source-example roles, not an SDK theme API. Template fonts,
-paint values and PNG content remain package-owned. The isolated product browser
-check exercises this override without advancing the native content revision.
+The source audit exposes coupling to Studio routing, record annotations, draft coordinators, measurement adapters, font-upload state and issue navigation. Before extracting styled SDK components, redesign the intended authoring/output flows and validate them in Studio. See [the redesign handoff](STUDIO_REDESIGN_HANDOFF.md). SDK 1.0.0 adds no styled component exports, universal session, new theme contract or selectable rendering backend.
 
-The output header owns Library navigation, save state, Issues and Export PNG.
-Field focus highlights without moving the camera. View state is transient. The
-tablet Content / Preview switch preserves drafts and one renderer mount. Review
-stale-session and recovery behavior before replacing route/save handlers.
-Studio's 100/325 ms draft scheduling and 650 ms autosave are product choices.
-
-Follow [current V2 guidance](V2_INTEGRATION.md) and verify adapted examples through
-packed public entries. Historical migration documents describe their published
-artifacts, not the current unpublished source candidate.
+Start with [onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). Source references help explain behavior; the released public declarations and candidate-bound starter define the host integration.

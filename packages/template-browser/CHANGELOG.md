@@ -40,8 +40,7 @@ Retire V1 host workflows; retain source-schema 1.0 normalization and the private
   overrides. Add the DOM-free seven-field semantic kernel, one immutable revisioned
   content reducer, typed mutation helpers, deterministic Number/Date formatting,
   exact Color/Image/Boolean materialization, ordered safe host descriptors, and a
-  pure one-way V2 package materializer. V1 compatibility APIs remain available alongside the recommended V2 native
-  session/renderer path. They do not imply canonical saved-record migration.
+  pure one-way V2 package materializer. The final unpublished 1.0.0 candidate retires V1 host compatibility APIs; use the V2 native session/renderer path. They do not imply canonical saved-record migration.
 
   Extend `date-display-v1` with deterministic prefix, suffix, separator,
   year-first, day/month and month/day presentation. Loose exporter input now

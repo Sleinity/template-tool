@@ -13,6 +13,12 @@ and publication are separate; no registry release is claimed by these notes.
 - Draft catalogue APIs and Family `saveDraft` are removed. Use template-scoped
   output recovery; generic template/session persistence remains available.
 
+## Runtime and host preparation
+
+- Retire V1 host workflows and require exporter 0.6.1 at first raw ZIP inspection.
+- Reuse immutable validation authority, remove duplicate primitive interpretation and collect persistence assets without scene copying. Family media completions publish readiness without rematerialization; no public API or schema changes accompany these optimizations.
+- Deliver current feature/API/Studio-reference documentation and a complete React/TypeScript starter for single/Family editing, saved work and template-scoped recovery.
+
 ## Integration fixes
 
 - Supplied font registries remain authoritative through V2 rendering and PNG

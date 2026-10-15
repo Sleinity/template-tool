@@ -1,15 +1,11 @@
-# template-react — V2 candidate
+# @sleinity/template-react 1.0.0
 
-The unpublished 1.0.0 candidate supports V2 host workflows only. ZIP admission requires raw source schema 1.0 and exporter 0.6.1 before asset persistence or font linking. Other or missing versions return blocked with SOURCE_EXPORTER_VERSION_UNSUPPORTED and retained raw evidence. Canonical packages remain schema 2.2.
+React 19 V2 bindings, mounted session rendering and guarded PNG export. This is an unpublished fixed-train candidate for Sleinity-owned applications.
 
-Source normalization and the private V1-shaped renderer bridge remain necessary for current exports. Read-only versioned evidence does not authorize V1 editing. V1 sessions, Family editing, wizard/confirmation, persistence, React importer and importer styles are retired. Historical readers/adapters are test-only and absent from supported host entries. Existing V2 records, assets, fonts and recovery tokens are preserved. Unknown historical records remain untouched outside the catalogue; no V1 migration is provided.
+Start with [host onboarding](../../docs/sdk/QUICKSTART.md), [the feature guide](../../docs/sdk/FEATURES.md) and [supported entries](../../docs/sdk/API_GUIDE.md). Typical entry: `@sleinity/template-react/editor`. Runtime hosts install all three packages at the same verified version. Core-only consumers need no React.
 
-See [V2 integration](../../docs/sdk/V2_INTEGRATION.md), [lifecycle](../../docs/sdk/HOST_LIFECYCLE.md), [operation outcomes](../../docs/sdk/OPERATION_OUTCOMES.md) and [breaking release contract](../../docs/sdk/SDK_1_0_MIGRATION.md).
+ZIP admission accepts raw source schema 1.0/exporter 0.6.1 only; canonical packages use schema 2.2. V1 host workflows are retired; required versioned source/evidence contracts remain. No hidden migration or historical-data deletion is provided.
 
-Use createTemplateSessionV2 and createTemplateFieldFamilySessionV2 from Browser /session; runTemplatePackageImportPipelineV2, appendTemplateSourcesV2 and mutateTemplateFamilyV2 from Browser /importer. React /editor exposes existing owning hooks, TemplateFieldSessionV2Provider, TemplateFieldSessionRendererV2 and typed controllers. Core supports DOM-free createZipBundleReader/loadTemplatePackageBundleSource, parseTemplatePackageV2 and strict validation/materialization.
+Use public package entries, never Studio, package source or internal entries. Hosts own UI, navigation and disposal; native sessions and the renderer preserve existing resource/readiness authorities. See [ownership](../../docs/sdk/HOST_LIFECYCLE.md), [outcomes](../../docs/sdk/OPERATION_OUTCOMES.md) and [release notes](../../docs/sdk/SDK_1_0_RELEASE_NOTES.md).
 
-Hosts own controls, navigation, storage policy and output delivery. Sessions own canonical content and native resource lifetimes; React subscriptions borrow sessions. Exact fonts, image Fill/Fit/Crop/Reset, stale-evidence rejection and PNG readiness guards remain intact. Use Browser /persistence for V2 records and template-scoped recovery; do not persist derived renderer trees as content authority.
-
-The delivered API and entry inventories specify supported imports. renderer-internal and session-internal are restricted repository seams; they are not supported host APIs. React /inspection retains read-only advanced evidence. There is no selectable compatibility renderer.
-
-The three examples compile V2 workflows. Archive/source hashes identify this same-version candidate. Publication and tagging require separate authorization. Runtime validators and the rasterizer are retained.
+Distribution is UNLICENSED and authorized for Sleinity-owned applications only.

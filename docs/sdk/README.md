@@ -1,15 +1,39 @@
-# SDK — V2 candidate
+# Template SDK 1.0.0
 
-The unpublished 1.0.0 candidate supports V2 host workflows only. ZIP admission requires raw source schema 1.0 and exporter 0.6.1 before asset persistence or font linking. Other or missing versions return blocked with SOURCE_EXPORTER_VERSION_UNSUPPORTED and retained raw evidence. Canonical packages remain schema 2.2.
+Build a React/TypeScript template editor for a Sleinity-owned application. Start with the complete host starter; the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
 
-Source normalization and the private V1-shaped renderer bridge remain necessary for current exports. Read-only versioned evidence does not authorize V1 editing. V1 sessions, Family editing, wizard/confirmation, persistence, React importer and importer styles are retired. Historical readers/adapters are test-only and absent from supported host entries. Existing V2 records, assets, fonts and recovery tokens are preserved. Unknown historical records remain untouched outside the catalogue; no V1 migration is provided.
+This is the **unpublished 1.0.0 release contract**. Packing and local certification do not mean a version is published. Use one verified delivery; do not combine archives from different candidates.
 
-See [V2 integration](V2_INTEGRATION.md), [lifecycle](HOST_LIFECYCLE.md), [operation outcomes](OPERATION_OUTCOMES.md), [migration contract](SDK_1_0_MIGRATION.md) and [runtime handoff](RUNTIME_HANDOFF.md).
+| Identity | Current contract |
+| --- | --- |
+| SDK packages | Core, Browser and React, all 1.0.0 |
+| Accepted ZIP exporter | Figma exporter 0.6.1 only |
+| Raw source schema | 1.0 |
+| Canonical package schema | 2.2 |
+| Reference host | React 19, React DOM 19, TypeScript, modern browser |
 
-Use createTemplateSessionV2 and createTemplateFieldFamilySessionV2 from Browser /session; runTemplatePackageImportPipelineV2, appendTemplateSourcesV2 and mutateTemplateFamilyV2 from Browser /importer. React /editor exposes existing owning hooks, TemplateFieldSessionV2Provider, TemplateFieldSessionRendererV2 and typed controllers. Core supports DOM-free createZipBundleReader/loadTemplatePackageBundleSource, parseTemplatePackageV2 and strict validation/materialization.
+## Start here
 
-Hosts own controls, navigation, storage policy and output delivery. Sessions own canonical content and native resource lifetimes; React subscriptions borrow sessions. Exact fonts, image Fill/Fit/Crop/Reset, stale-evidence rejection and PNG readiness guards remain intact. Use Browser /persistence for V2 records and template-scoped recovery; do not persist derived renderer trees as content authority.
+1. [Install and run the starter](QUICKSTART.md).
+2. [Follow the complete host workflow](HOST_IMPLEMENTATION.md).
+3. [Choose features and understand limits](FEATURES.md).
+4. [Find the supported API for a task](API_GUIDE.md).
+5. [Adapt Studio interaction patterns](STUDIO_REFERENCE.md).
 
-The delivered API and entry inventories specify supported imports. renderer-internal and session-internal are restricted repository seams; they are not supported host APIs. React /inspection retains read-only advanced evidence. There is no selectable compatibility renderer.
+## Implementation references
 
-The three examples compile V2 workflows. Archive/source hashes identify this same-version candidate. Publication and tagging require separate authorization. Runtime validators and the rasterizer are retained.
+- [V2 integration and checked TypeScript examples](V2_INTEGRATION.md)
+- [Session, candidate and resource ownership](HOST_LIFECYCLE.md)
+- [Operation outcomes and retry](OPERATION_OUTCOMES.md)
+- [Installation](INSTALLATION.md), [runtime compatibility](CONSUMER_COMPATIBILITY.md) and [troubleshooting](TROUBLESHOOTING.md)
+- [Field configuration and Studio policies](../field-rules/STUDIO_AND_HOSTS.md)
+- [Capability and entry inventory](SDK_CAPABILITIES.md)
+- [Agent implementation prompts](AGENT_INTEGRATION_PROMPTS.md)
+
+## Release and history
+
+[Release notes](SDK_1_0_RELEASE_NOTES.md), [breaking changes](SDK_1_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
+
+V1 editing/wizard/confirmation/persistence workflows are retired. Source normalization and versioned read-only evidence remain where required; names ending in V1 do not imply a supported V1 editing journey. Existing current V2 records and recovery are preserved. No migration or deletion of unknown historical work is provided.
+
+Studio is an application reference, not an importable UI SDK. Internal entries and repository source imports are unsupported. Distribution remains UNLICENSED and authorized for Sleinity-owned applications only.

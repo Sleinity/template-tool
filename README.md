@@ -41,8 +41,7 @@ Figma plugin. New imports accept ZIP packages only.
 5. Edit package fields in the Template Package Editor.
 6. Export the current template frame as a native-resolution PNG.
 
-Saved templates use the current ZIP package record format. Unsupported
-development-era records must be cleared and re-imported from their ZIP package.
+SDK 1.0.0 hosts use canonical schema 2.2 and exporter 0.6.1 ZIPs only. Incompatible canonical work requires explicit reimport; unknown historical stored bytes remain untouched. Start with [the complete host onboarding guide](docs/sdk/QUICKSTART.md).
 
 ## Commands
 

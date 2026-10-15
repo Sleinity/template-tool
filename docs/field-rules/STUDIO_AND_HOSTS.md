@@ -233,7 +233,7 @@ block apply. Family reimport uses the selected variant's existing contract.
 
 Incompatible canonical 2.0/2.1 packages and older saved envelopes require reimport.
 They are not migrated from working nodes. Source schema 1.0 normalization and
-retained V1 compatibility APIs are separate from canonical migration. Existing
+required source-schema 1.0 normalization is separate from retired V1 host workflows and canonical migration. Existing
 incompatible records remain visible for explicit reimport, not destructive reset.
 See [the staged 1.0 migration](../sdk/SDK_1_0_MIGRATION.md).
 

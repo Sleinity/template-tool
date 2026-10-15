@@ -26,7 +26,7 @@
     {
       "source": "docs/sdk/SDK_1_0_MIGRATION.md",
       "file": "SDK-1.0-MIGRATION.md",
-      "classification": "upcoming"
+      "classification": "current"
     },
     {
       "source": "docs/sdk/INSTALLATION.md",
@@ -183,6 +183,36 @@
       "source": "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md",
       "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
       "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/QUICKSTART.md",
+      "file": "SDK-QUICKSTART.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/HOST_IMPLEMENTATION.md",
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/FEATURES.md",
+      "file": "SDK-FEATURES.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/API_GUIDE.md",
+      "file": "SDK-API-GUIDE.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/HISTORY.md",
+      "file": "SDK-HISTORY.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/STUDIO_REDESIGN_HANDOFF.md",
+      "file": "STUDIO-REDESIGN-HANDOFF.md",
+      "classification": "current"
     }
   ],
   "generatedFiles": [

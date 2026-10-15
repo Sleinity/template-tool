@@ -38,7 +38,7 @@ test, not a reason to weaken the host's global policy without review.
 Call `inspectTemplateRuntimeSupport()` to receive stable `ready`, `warning`,
 or `blocked` evidence for the current browser and policy. The packed acceptance
 tests both a supported policy and an intentionally restricted policy.
-SDK 0.4 lazily initializes the canonical AJV validator so the preflight can
+The SDK lazily initializes the canonical AJV validator so the preflight can
 report `runtime.dynamic-code.unavailable` before a ZIP is validated.
 
 ## Storage and persistence
@@ -53,9 +53,7 @@ must be tested for every release until an explicit persisted-record migration
 contract is published. Keep the imported ZIP or uploaded media authority
 available for rollback.
 
-Browser-local managed fonts and IndexedDB records are not cross-device
-artifacts. `inspectTemplateImportConfirmation()` surfaces missing local font
-authority rather than implying that a confirmation is independently portable.
+Browser-local managed fonts and IndexedDB records are not cross-device artifacts. Reopened sessions must prepare current exact font and renderer evidence; a saved record is not a portable font licence or readiness certificate.
 
 ## Current admission and persistence
 
@@ -64,7 +62,7 @@ The unpublished 1.0.0 candidate exposes V2 host workflows. ZIP sources must decl
 ## Revision and export contract
 
 - Session mutations publish a new revision.
-- Render identity must match that exact session revision and report `ready`.
+- Export requires current content, operation, materialization, publisher, font, asset and renderer evidence; readiness-only snapshot publication is not a semantic edit.
 - Pending or stale identities cannot export.
 - `exportPng()` retains the original download behavior.
 - `exportPng({ download: false })` returns the same revision-safe PNG result
