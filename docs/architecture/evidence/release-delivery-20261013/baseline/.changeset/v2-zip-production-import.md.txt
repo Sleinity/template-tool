@@ -1,5 +1,0 @@
----
-"@sleinity/template-browser": minor
----
-
-Add `runTemplatePackageImportPipelineV2` to the curated importer entry. Hosts receive canonical V2 packages, separate import/normalization evidence, explicit blocked/error outcomes and idempotent resource disposal. Studio ZIP ingestion now uses this operation while retaining existing authoring and session authorities. Compiler experiments remain private.

@@ -1,6 +1,0 @@
-session-react: 0
-image-ownership: 0
-font-reactivation: 0
-output-lifecycle: 0
-font-routing: 0
-text-trim: 0

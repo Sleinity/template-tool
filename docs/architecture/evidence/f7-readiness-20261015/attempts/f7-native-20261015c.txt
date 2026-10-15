@@ -1,3 +1,0 @@
-Family media readiness baseline: 27 controlled outcomes pass.
-Family media readiness candidate: 27 controlled outcomes pass.
-F7 native differential: 27 exact outcomes; stable candidate references and zero completion semantic calls.
