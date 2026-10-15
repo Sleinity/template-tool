@@ -2,8 +2,8 @@
 
 <!-- delivery-context:start -->
 This guide describes the current source contract. The fixed-train workspace packages are
-2.0.0, an unpublished candidate pending cross-platform certification. Historical
-published 0.8.0 archives describe a different contract. Verify archive hashes and delivery
+2.0.0, an unpublished candidate pending cross-platform certification. Published
+1.0.0 and earlier archives describe different supported host contracts. Verify archive hashes and delivery
 provenance. [Installation](INSTALLATION.md), [release preparation](RELEASE_PREPARATION.md)
 and [2.0 migration](SDK_2_0_MIGRATION.md) distinguish those states.
 <!-- delivery-context:end -->
@@ -337,3 +337,55 @@ Recovery cleanup after a successful PNG export can throw
 Retry `complete(lease)` only, never the export. Font hosts retain the selected File
 and requirement for manual upload retry, clearing them when cancelled or replaced.
 Adapters, sessions and recovery tokens remain under their existing ownership rules.
+
+## Read-only inspection and motion
+
+Advanced inspection consumes the accepted session's renderer projection. Its
+versioned V1 shape is a private bridge exposed as snapshot evidence, not a V1
+editing workflow. Never persist or mutate that projection. This recipe uses only
+supported entries and is typechecked with the other delivered guide examples.
+
+```tsx
+// sdk-candidate-example: read-only inspection and motion
+import type { ReactTemplateFieldSessionV2 } from "@sleinity/template-react/editor";
+import { TemplateFieldSessionRendererV2 } from "@sleinity/template-react/editor";
+import { validateTemplatePackage } from "@sleinity/template-core";
+import { createCanonicalSceneGraph, createAppearanceContractProjection } from "@sleinity/template-core/inspection";
+import { createTemplatePackageQualityReport } from "@sleinity/template-react/inspection";
+import { evaluatePackageMotion, getPackageMotionSummary, getPackageMotionFinalFrameTimeMs } from "@sleinity/template-core/motion";
+
+export function inspectAccepted(session: ReactTemplateFieldSessionV2) {
+  const snapshot = session.getSnapshot();
+  const packageValue = snapshot.rendererPackage;
+  if (!packageValue) return null;
+  return {
+    appearance: createAppearanceContractProjection(createCanonicalSceneGraph(packageValue).graph),
+    quality: createTemplatePackageQualityReport({
+      packageValue,
+      validation: validateTemplatePackage(packageValue),
+      resolvedTree: snapshot.resolvedTree,
+    }),
+    motion: getPackageMotionSummary(packageValue),
+    finalFrameTimeMs: getPackageMotionFinalFrameTimeMs(packageValue),
+    firstFrame: evaluatePackageMotion(packageValue, 0),
+  };
+}
+
+export function MotionSample({ session, timeMs }: { session: ReactTemplateFieldSessionV2; timeMs: number }) {
+  return <TemplateFieldSessionRendererV2 session={session} motionTimeMs={timeMs} motionRenderMode="playback" />;
+}
+```
+
+Compute inspection on demand. Scene/appearance projections are observational;
+they do not select a backend or replace the current render tree/settlement.
+The quality recipe supplies package/tree findings only. Supply current optional
+font, asset and export evidence when presenting those sections; an omitted report
+is not proof of readiness. Use the session's readiness and renderer handle for PNG.
+Inspection highlights/debug UI must remain outside exported content.
+
+Motion evaluates supported opacity, translation, rotation and scale channels.
+The host owns playback time; unsupported fields and missing node links stay in
+summary diagnostics. No linked tracks produce an empty frame and no final-frame
+time. This does not promise full Figma animation fidelity, a timeline editor,
+MP4 export or a new PNG capture policy. The complete starter focuses on static
+editing; this is its optional advanced recipe.

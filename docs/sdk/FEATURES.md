@@ -38,7 +38,7 @@ All rows use typed controllers from Browser `/session`, exposed to React through
 | Recovery | `/persistence`, template-scoped repository and leases | Fresh/Resume/Discard; token checks reject superseded writers. Starter autosave policy is 650 ms. |
 | PNG | Renderer handle `exportPng` | Current field/font/asset/renderer/raster readiness required; not a headless Node renderer. Starter export and cleanup-only Retry. |
 | Diagnostics | Import/mutation/readiness evidence and React `/inspection` quality projections | Keep user wording, exporter evidence and technical telemetry separate. Unsupported features stay visible. |
-| Advanced inspection | Core/React `/inspection`; checked read-only exports | Evidence is not a new editing authority or production visual owner. See capability inventory. |
-| Motion | Core `/motion` and current renderer motion props | Supported channels only; no MP4/video-export promise. See API inventory and compatibility evidence. |
+| Advanced inspection | Core/React `/inspection`; checked read-only exports | Evidence is not a new editing authority or production visual owner. See the [checked inspection recipe](V2_INTEGRATION.md#read-only-inspection-and-motion). |
+| Motion | Core `/motion` and current renderer motion props | Supported channels only; no MP4/video-export promise. See the [checked motion recipe](V2_INTEGRATION.md#read-only-inspection-and-motion); hosts supply playback time. |
 
 See [operation outcomes](OPERATION_OUTCOMES.md) for each failure boundary and [Studio reuse](STUDIO_REFERENCE.md) for application-level patterns. Hosted catalogues, authentication, cloud synchronization, routing, responsive product design and publishing are host responsibilities.
