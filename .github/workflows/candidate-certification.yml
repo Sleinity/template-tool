@@ -1,7 +1,7 @@
 name: Frozen SDK candidate certification
 on:
   push:
-    branches: ['codex/sdk-1-certification-20261013c']
+    branches: ['codex/sdk-*-certification-*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -44,7 +44,7 @@ jobs:
       - name: Restore authenticated exact fixtures
         run: node scripts/candidate-certification/fixtures.mjs restore "$RUNNER_TEMP/candidate-inputs/fixtures.enc" "$RUNNER_TEMP/sdk-fixtures"
         env:
-          SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY_20261013C }}
+          SDK_CERT_FIXTURE_KEY: ${{ secrets.SDK_CERT_FIXTURE_KEY }}
       - run: pnpm exec playwright install --with-deps chromium
       - name: Functional acceptance of supplied archives only
         run: node scripts/candidate-certification/run.mjs --archives "$RUNNER_TEMP/candidate-inputs/archives" --output "$RUNNER_TEMP/candidate-results"
