@@ -1,2 +1,0 @@
-npm: supplied public contracts, literal guide examples and delivered browser lifecycles pass
-pnpm: supplied public contracts, literal guide examples and delivered browser lifecycles pass

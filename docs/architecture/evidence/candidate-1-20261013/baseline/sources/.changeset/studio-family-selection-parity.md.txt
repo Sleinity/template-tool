@@ -1,8 +1,0 @@
----
-"@sleinity/template-core": patch
-"@sleinity/template-browser": patch
----
-
-Add V2 Family selection-property metadata, portable tuple resolution and
-availability helpers, atomic configuration mutations, independent editor-control
-ordering, and session option selection without changing canonical Family content.
