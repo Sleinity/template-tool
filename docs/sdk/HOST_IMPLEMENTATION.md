@@ -16,7 +16,7 @@ Use one stable managed font registry throughout upload, linking, rendering and P
 
 ## Editing and custom controls
 
-Use the session's typed controllers and the ordinary React V2 renderer. Display rejected mutation findings and current line-validation state. A host may retain incomplete form input, but must flush or correct it before Save/export. Do not coerce empty Number/Date drafts into canonical values or drop invalid input silently. Preserve imported defaults, Choice identity and independent image-placement authority.
+Use the session's typed controllers and the ordinary React V2 renderer. Display rejected mutation findings and current line-validation state. A host may retain incomplete form input, but must flush or correct it before Save/export. Do not coerce empty Number/Date drafts into canonical values or drop invalid input silently. Preserve imported defaults, Choice identity and independent image-placement authority. The starter blocks visibility changes while a local draft is incomplete, so hiding a child cannot discard its input. This is host policy.
 
 Family switching changes selection, not shared values. Honor configured control order. Full field/selector authoring and review-first reimport are documented in [field guidance](../field-rules/STUDIO_AND_HOSTS.md); the starter intentionally provides editing rather than a replacement Studio authoring UI.
 

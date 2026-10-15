@@ -135,7 +135,7 @@ function CompleteEditor({output,fontRegistry,allowLeave,onSaved,onDiscard}:{outp
         if(invalid.current.size){setError(new Error("Correct or Reset incomplete input before switching designs."));return;}
         try{if("selectVariant"in output.session)output.session.selectVariant(e.target.value);}catch(cause){setError(cause);}
       }}>{family.variants.map(v=><option key={v.id} value={v.id}>{v.packageValue.name}</option>)}</select></label>}
-      {output.session.getFieldControllers().map(field=><StarterField key={`${"selectedVariantId"in native?native.selectedVariantId:"single"}:${field.id}`} field={field} onInvalid={bad=>{if(bad)invalid.current.add(field.id);else invalid.current.delete(field.id);setInvalidCount(invalid.current.size);}}/>)}
+      {output.session.getFieldControllers().map(field=><StarterField key={`${"selectedVariantId"in native?native.selectedVariantId:"single"}:${field.id}`} field={field} canChangeVisibility={()=>{if(invalid.current.size){setError(new Error("Correct or Reset incomplete input before changing visibility."));return false;}return true;}} onInvalid={bad=>{if(bad)invalid.current.add(field.id);else invalid.current.delete(field.id);setInvalidCount(invalid.current.size);}}/>)}
       <button disabled={invalidCount>0} onClick={()=>void perform(async()=>{await output.saveTemplate(name);await onSaved();})}>Save template</button>{" "}
       <button disabled={invalidCount>0||!output.record} onClick={()=>void perform(()=>output.flushRecovery())}>Retry save / flush recovery</button>{" "}
       <button disabled={invalidCount>0||!snapshot.readiness.exportReady} onClick={()=>void perform(()=>output.exportPng(()=>{
@@ -148,7 +148,7 @@ function CompleteEditor({output,fontRegistry,allowLeave,onSaved,onDiscard}:{outp
   </section>;
 }
 
-function StarterField({field,onInvalid}:{field:TemplateFieldControllerV2;onInvalid(bad:boolean):void}){
+function StarterField({field,onInvalid,canChangeVisibility}:{field:TemplateFieldControllerV2;onInvalid(bad:boolean):void;canChangeVisibility():boolean}){
   const [draft,setDraft]=useState(String(field.value)),[issue,setIssue]=useState<string|null>(null);
   const focused=useRef(false),live=useRef(true),operation=useRef(0);
   useLayoutEffect(()=>{live.current=true;return()=>{live.current=false;operation.current++;};},[]);
@@ -160,7 +160,7 @@ function StarterField({field,onInvalid}:{field:TemplateFieldControllerV2;onInval
   }catch(cause){setIssue(hostErrorMessage(cause));onInvalid(true);}};
   const replace=async(blob:File)=>{const ticket=++operation.current;onInvalid(true);try{if(field.type==="image"){const result=await field.replaceImage({blob});if(live.current&&ticket===operation.current)accept(result);}}catch(cause){if(live.current&&ticket===operation.current){setIssue(hostErrorMessage(cause));onInvalid(true);}}};
   return <section className="starter-field"><h3>{field.label}</h3>
-    {field.type==="boolean"?<input aria-label={field.label} type="checkbox" checked={field.value} onChange={e=>accept(field.setValue(e.target.checked))}/>:field.type==="image"?<>
+    {field.type==="boolean"?<input aria-label={field.label} type="checkbox" checked={field.value} onChange={e=>{if(canChangeVisibility())accept(field.setValue(e.target.checked));}}/>:field.type==="image"?<>
       <input aria-label={`Replace ${field.label}`} type="file" accept="image/*" onChange={e=>{const f=e.target.files?.[0];e.target.value="";if(f)void replace(f);}}/>
       {field.configuration.replacementPlacement==="crop"&&<button onClick={()=>accept(field.setPlacement({mode:"crop",crop:{schemaVersion:"normalized-image-crop-v1",coordinateSpace:"normalized-slot-to-normalized-source",transform:[[0.5,0,0.25],[0,0.5,0.25]]}}))}>Demonstrate center Crop {field.label}</button>}
     </>:field.type==="textarea"?<textarea aria-label={field.label} value={draft} onFocus={()=>{focused.current=true;}} onBlur={()=>{focused.current=false;}} onChange={e=>change(e.target.value)}/>:<input aria-label={field.label} type={field.type==="date"?"date":"text"} inputMode={field.type==="number"?"decimal":undefined} value={draft} onFocus={()=>{focused.current=true;}} onBlur={()=>{focused.current=false;}} onChange={e=>change(e.target.value)}/>}
@@ -170,6 +170,6 @@ function StarterField({field,onInvalid}:{field:TemplateFieldControllerV2;onInval
     {issue&&<p role="alert">{issue}</p>}
     {[...field.warnings,...field.blockingErrors].map((i,n)=><p key={n}>{i.message}</p>)}
     <p>Rendered validation: {field.renderValidation.state}</p>
-    <button onClick={()=>{if(accept(field.reset())){setDraft(String(field.importedDefaultValue));}}}>Reset {field.label}</button>
+    <button onClick={()=>{if(field.type==="boolean"&&!canChangeVisibility())return;if(accept(field.reset())){setDraft(String(field.importedDefaultValue));}}}>Reset {field.label}</button>
   </section>;
 }

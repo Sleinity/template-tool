@@ -27,6 +27,7 @@ try{
  await run(manager,['run','build']);
  checks.push({scenario:'unmodified-extracted-install-and-build',status:'pass'});
  const probe={name:'fresh-host-observation',enforce:'pre',transform(code,id){
+  if(id.endsWith('/src/main.tsx'))return code.replace('createRoot(document.getElementById("root")!).render(', 'const starterRoot=createRoot(document.getElementById("root")!);(window as any).__unmountStarter=()=>starterRoot.unmount();starterRoot.render(');
   if(!id.endsWith('/CompleteHost.tsx'))return null;
   const anchor='current.current = { active, pending };';assert(code.includes(anchor));
   code=code.replace('await field.replaceImage({blob})', `await (async()=>{const result=await field.replaceImage({blob});if((window as any).__holdImage)await new Promise((_,reject)=>{(window as any).__rejectImage=()=>reject(new Error('Older image feedback'));});return result;})()`);
@@ -82,6 +83,9 @@ try{
  const beforeNumber=await page.evaluate(id=>window.__starter.active.session.getFieldControllers().find(f=>f.id===id).value,number.id);
  await page.getByLabel(number.label,{exact:true}).fill('');
  assert.equal(await page.getByRole('button',{name:'Export PNG',exact:true}).isEnabled(),false);
+ const visibility=definitions.find(f=>f.type==='boolean');const wasVisible=await page.getByLabel(visibility.label,{exact:true}).isChecked();
+ await page.getByLabel(visibility.label,{exact:true}).click();assert.equal(await page.getByLabel(visibility.label,{exact:true}).isChecked(),wasVisible);
+ await page.getByRole('button',{name:`Reset ${visibility.label}`,exact:true}).click();assert.equal(await page.getByLabel(number.label,{exact:true}).inputValue(),'');
  assert.equal(await page.evaluate(id=>window.__starter.active.session.getFieldControllers().find(f=>f.id===id).value,number.id),beforeNumber);
  await page.getByRole('button',{name:`Reset ${number.label}`,exact:true}).click();
  for(const f of fields){await page.getByLabel(f.label,{exact:true}).fill(String(values[f.type]));await page.getByRole('button',{name:`Reset ${f.label}`,exact:true}).click();}
@@ -176,8 +180,8 @@ try{
  assert.equal(await other.evaluate(key=>window.__starter.storage.recovery.inspect(key),currentLease.key),null);
  await other.close();checks.push({scenario:'superseded-tab-cannot-write-current-token-and-current-owner-discards',status:'pass'});
 
+ await page.screenshot({path:path.join(out,'host.png'),fullPage:true});await page.evaluate(()=>window.__unmountStarter());await page.waitForFunction(()=>window.__starter.active.disposed);checks.push({scenario:'strictmode-root-unmount-disposes-owned-native-session',status:'pass'});
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
- await page.screenshot({path:path.join(out,'host.png'),fullPage:true});
  await writeFile(path.join(out,'report.json'),JSON.stringify({status:'pass',manager,node:process.version,platform:process.platform,arch:process.arch,browser:browser.version(),deliveryManifestSha256:verified.manifestSha256,archives:verified.manifest.archives,starterSha256:sha256(bytes),fixtures:fixtures.map(f=>({id:f.id,sha256:f.zipSha256})),fonts:fonts.map(f=>({id:f.id,sha256:f.sha256})),checks,coverage:'automated actual extracted application; build-local test observation; no workspace SDK aliases or Studio modules; offline reopening after app load, not offline app bootstrap',published:false},null,2)+'\n');
  console.log(JSON.stringify({status:'pass',manager,checks:checks.length}));await context.close();
 }catch(error){if(page&&!page.isClosed()){await page.screenshot({path:path.join(out,'failure.png'),fullPage:true});await writeFile(path.join(out,'failure-state.json'),JSON.stringify(await page.evaluate(()=>({body:document.body.innerText,active:window.__starter?.active?.session.getSnapshot(),pending:window.__starter?.pending?.sources.map(s=>s.getSnapshot())})),null,2));}await writeFile(path.join(out,'failure.json'),JSON.stringify({error:String(error),checks},null,2));throw error;}
