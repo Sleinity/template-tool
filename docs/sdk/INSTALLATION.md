@@ -1,5 +1,7 @@
 # Install SDK 2.0.0
 
+Use Node **22.23.3** and pnpm **11.9.0**, or npm, to reproduce host acceptance. React and React DOM 19 are required for the renderer. Chromium is the certified browser target; other browsers require host verification.
+
 The three packages form one fixed train. This page describes the current 2.0.0 contract; [0.8 migration guidance](SDK_0_8_MIGRATION.md) is historical. Until release approval and publication, use the exact supplied local candidate and its hashes.
 
 ## Recommended: vendored release archives

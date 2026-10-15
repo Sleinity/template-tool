@@ -1,5 +1,7 @@
 # First host: install, import, edit and export
 
+Use Node **22.23.3** and pnpm **11.9.0**, or npm, to reproduce host acceptance. React and React DOM 19 are required for the renderer. Chromium is the certified browser target; other browsers require host verification.
+
 Audience: Bas and other React/TypeScript host implementers. No SDK repository checkout or GitHub Packages credential is required for a vendored host.
 
 ## Obtain one delivery
