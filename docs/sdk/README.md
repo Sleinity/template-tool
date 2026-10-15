@@ -1,12 +1,12 @@
-# Template SDK 1.0.0
+# Template SDK 2.0.0
 
 Build a React/TypeScript template editor for a Sleinity-owned application. Start with the complete host starter; the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
 
-This is the **unpublished 1.0.0 release contract**. Packing and local certification do not mean a version is published. Use one verified delivery; do not combine archives from different candidates.
+This is the **unpublished 2.0.0 release contract**. Packing and local certification do not mean a version is published. Use one verified delivery; do not combine archives from different candidates.
 
 | Identity | Current contract |
 | --- | --- |
-| SDK packages | Core, Browser and React, all 1.0.0 |
+| SDK packages | Core, Browser and React, all 2.0.0 |
 | Accepted ZIP exporter | Figma exporter 0.6.1 only |
 | Raw source schema | 1.0 |
 | Canonical package schema | 2.2 |
@@ -32,7 +32,7 @@ This is the **unpublished 1.0.0 release contract**. Packing and local certificat
 
 ## Release and history
 
-[Release notes](SDK_1_0_RELEASE_NOTES.md), [breaking changes](SDK_1_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
+[Release notes](SDK_2_0_RELEASE_NOTES.md), [breaking changes](SDK_2_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
 
 V1 editing/wizard/confirmation/persistence workflows are retired. Source normalization and versioned read-only evidence remain where required; names ending in V1 do not imply a supported V1 editing journey. Existing current V2 records and recovery are preserved. No migration or deletion of unknown historical work is provided.
 

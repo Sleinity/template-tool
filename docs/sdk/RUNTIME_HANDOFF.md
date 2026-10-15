@@ -1,8 +1,8 @@
-# SDK 1.0.0 host handoff
+# SDK 2.0.0 host handoff
 
 Start with [the first-host guide](QUICKSTART.md), [installation](INSTALLATION.md), [implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). The SDK is an unpublished candidate until the separately approved release completes; verify artifact hashes and provenance.
 
-The delivery contains three fixed-version archives, checksum/identity inventories, current documentation and `SDK-HOST-STARTER.zip`. Bas's React/TypeScript host needs no repository source aliases or registry credential when using vendored archives. Use only supported entries from [the API guide](API_GUIDE.md).
+The delivery contains three fixed-version archives, checksum/identity inventories, current documentation and `SDK-HOST-STARTER.zip`. Bas's React/TypeScript host needs no repository source aliases or registry credential when using vendored archives. Use only supported entries from [the API guide](API_GUIDE.md). Entries named `renderer-internal` or `session-internal` are unsupported repository seams and must not be imported by hosts.
 
 The starter composes native single/Family sessions, exact font preparation, typed controls, persistence/recovery and guarded PNG. Private example helpers can be adapted; they are not new SDK APIs. Studio references are pinned and explicitly classified in [the reuse catalogue](STUDIO_REFERENCE.md).
 

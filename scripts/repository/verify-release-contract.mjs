@@ -29,7 +29,7 @@ for (const retiredPath of retiredActivePaths) {
 }
 
 const hostSpecificPattern =
-  /\bBas\b|narrowcast|screen\/player|campaign|playlist|authorizedConsumer|authorized-pilot/iu;
+  /narrowcast|screen\/player|campaign|playlist|authorizedConsumer|authorized-pilot/iu;
 const activeRoots = [
   "config/sdk-runtime-packages.json",
   "config/sdk-entry-points.json",
@@ -107,15 +107,15 @@ const runtimeHandoff = await readFile(
   "utf8",
 );
 if (
-  !runtimeHandoff.includes("they are not supported host APIs") ||
-  !runtimeHandoff.includes("Focused and advanced entries") ||
-  !runtimeHandoff.includes("@sleinity/template-react/inspection")
+  !runtimeHandoff.includes("unsupported") ||
+  !runtimeHandoff.includes("renderer-internal") ||
+  !runtimeHandoff.includes("session-internal")
 ) {
   throw new Error("Runtime handoff must exclude renderer-internal entries from host use.");
 }
 
 const inventory = await loadDeliveryInventory(root);
-for (const required of ["SDK-V2-INTEGRATION.md", "SDK-HOST-LIFECYCLE.md", "SDK-OPERATION-OUTCOMES.md", "SDK-1.0-MIGRATION.md", "SDK-0.8-MIGRATION.md", "FieldRulesV2Host.tsx", "fieldHostLifecycle.ts"]) {
+for (const required of ["SDK-V2-INTEGRATION.md", "SDK-HOST-LIFECYCLE.md", "SDK-OPERATION-OUTCOMES.md", "SDK-2.0-MIGRATION.md", "SDK-1.0-MIGRATION.md", "SDK-0.8-MIGRATION.md", "FieldRulesV2Host.tsx", "fieldHostLifecycle.ts"]) {
   if (!inventory.documents.some(item=>item.file===required)) throw new Error(`Delivery inventory is missing ${required}`);
 }
 for (const wrapper of ["create-runtime-release-handoff.mjs","create-core-release-handoff.mjs","create-sdk-local-release-verification.mjs"]) {

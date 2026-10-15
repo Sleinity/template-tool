@@ -12,7 +12,7 @@ All rows use typed controllers from Browser `/session`, exposed to React through
 | Textarea | Multiline value plus renderer-backed line validation | Line readiness needs current mounted typography/width. Starter Textarea and validation state. |
 | Number | Finite canonical number; Core formats configured display | Keep incomplete UI input separate from values; min/max/step/format and Choices. Starter numeric control. |
 | Date | Real timezone-free `YYYY-MM-DD` | Use supported date formats; do not parse locale display text back into content. Starter date control. |
-| Color | Typed opaque hex input; exact imported paints remain authoritative on default/Reset | Alpha editing is unsupported. Starter custom brand control and palette. |
+| Color | Typed opaque hex input; exact imported paints remain authoritative on default/Reset | Alpha editing is unsupported. Starter Color input and configured Choices. |
 | Image | `replaceImage`, placement operations and `reset` | One configured Fill/Fit/Crop replacement policy. Imported transform is separate. Starter replacement and center-crop demonstration; hosts build their crop UI. |
 | Boolean | Structural visibility controller | Affects dependent layout/participation, not stored child values. Starter checkbox and Reset. |
 | Static Choices | `selectChoice` for Text/Textarea/Number/Date/Color | Suggested/restricted modes; stable option identity, configured defaults and correction behavior. Starter choice controls. |

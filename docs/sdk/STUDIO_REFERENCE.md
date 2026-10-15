@@ -1,4 +1,4 @@
-# Studio reuse catalogue for SDK 1.0.0
+# Studio reuse catalogue for SDK 2.0.0
 
 Studio is an application reference, not a supported UI package. Bas can reuse public SDK components directly and adapt example/application patterns. Never import Studio modules, package source or internal entries into a host.
 
@@ -18,12 +18,12 @@ The source links below pin the reviewed Studio implementation included in this r
 
 ## UI and styling ownership
 
-The SDK supplies session bindings and rendering, not styled field controls or a theme API. The starter accepts custom controls. Compose your own page, navigation, saved list and error presentation. Studio's `components/ui` roles and CSS custom properties are source-example conventions; copying them does not create an SDK compatibility promise. Keep template fonts, paints, viewport transforms and PNG content separate from application chrome.
+The SDK supplies session bindings and rendering, not styled field controls or a theme API. Adapt `StarterField` in the complete starter for your controls; the focused `FieldRulesV2Host` also demonstrates control injection. Compose your own page, navigation, saved list and error presentation. Studio's `components/ui` roles and CSS custom properties are source-example conventions; copying them does not create an SDK compatibility promise. Keep template fonts, paints, viewport transforms and PNG content separate from application chrome.
 
 Studio uses 100/325 ms input scheduling and 650 ms autosave as product policy. The host starter demonstrates 650 ms recovery autosave without introducing Studio's typing scheduler. Native controller validation and current renderer evidence remain authoritative. Configuration Apply, template Save and output recovery are separate actions.
 
 ## Reuse limits and next milestone
 
-The source audit exposes coupling to Studio routing, record annotations, draft coordinators, measurement adapters, font-upload state and issue navigation. Before extracting styled SDK components, redesign the intended authoring/output flows and validate them in Studio. See [the redesign handoff](STUDIO_REDESIGN_HANDOFF.md). SDK 1.0.0 adds no styled component exports, universal session, new theme contract or selectable rendering backend.
+The source audit exposes coupling to Studio routing, record annotations, draft coordinators, measurement adapters, font-upload state and issue navigation. Before extracting styled SDK components, redesign the intended authoring/output flows and validate them in Studio. See [the redesign handoff](STUDIO_REDESIGN_HANDOFF.md). SDK 2.0.0 adds no styled component exports, universal session, new theme contract or selectable rendering backend.
 
 Start with [onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). Source references help explain behavior; the released public declarations and candidate-bound starter define the host integration.

@@ -1,5 +1,7 @@
 # TemplatePackageV2 Producer and Consumer Migration Map
 
+> Historical milestone migration map. Its present/future-tense rollout descriptions record the original cutover, not current host support. Use [current SDK guidance](../sdk/README.md) and [SDK 2.0 migration](../sdk/SDK_2_0_MIGRATION.md); V1 editing workflows are retired.
+
 ## Boundary
 
 Milestone 7 current state: Studio defaults to V2 authoring, Browser V2 sessions,

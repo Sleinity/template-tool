@@ -11,7 +11,7 @@ assert.throws(() => assertCoreDeclaration("0.8.0", Buffer.alloc(expected.bytes))
 console.log("Protected Core declaration contracts passed (version, length, hash and historical isolation).");
 
 const candidate = { bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" };
-assert.deepEqual(workspaceCoreDeclarationContracts["1.0.0"], candidate);
-assert.notDeepEqual(candidate, expected, 'V2-only retirement intentionally changes the unpublished candidate');
-assert.doesNotThrow(() => assertCoreDeclarationIdentity("1.0.0", candidate));
-assert.throws(() => assertCoreDeclarationIdentity("1.0.0", historicalCoreDeclarationContract), /drifted/);
+assert.deepEqual(workspaceCoreDeclarationContracts["2.0.0"], candidate);
+assert.notDeepEqual(candidate, expected, 'V2-only retirement intentionally changes the upcoming major release');
+assert.doesNotThrow(() => assertCoreDeclarationIdentity("2.0.0", candidate));
+assert.throws(() => assertCoreDeclarationIdentity("2.0.0", historicalCoreDeclarationContract), /drifted/);

@@ -24,9 +24,10 @@ provenance-preserving import/normalization remains supported. The tested source
 baseline is the exact exporter 0.6.1 Now Hiring, Cover and Carrousel ZIPs; it does
 not certify every old exporter or Figma capability.
 
-The unpublished 1.0.0 candidate supports V2 host workflows only. ZIP admission requires raw source schema 1.0 and exporter 0.6.1 before asset persistence or font linking. Other or missing versions return blocked with SOURCE_EXPORTER_VERSION_UNSUPPORTED and retained raw evidence. Canonical packages remain schema 2.2.
-
-Source normalization and the private V1-shaped renderer bridge remain necessary for current exports. Read-only versioned evidence does not authorize V1 editing. V1 sessions, Family editing, wizard/confirmation, persistence, React importer and importer styles are retired. Historical readers/adapters are test-only and absent from supported host entries. Existing V2 records, assets, fonts and recovery tokens are preserved. Unknown historical records remain untouched outside the catalogue; no V1 migration is provided.
+V1 import wizard, confirmation and session/editor compatibility APIs remain
+available. They are a separate compatibility journey, not a renderer mode or an
+automatic migration into V2. Published [0.7→0.8 migration](SDK_0_8_MIGRATION.md)
+remains historical and must not be used as the 1.0 migration policy.
 
 ## Recommended integration
 

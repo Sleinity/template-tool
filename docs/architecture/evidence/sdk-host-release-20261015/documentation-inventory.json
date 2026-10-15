@@ -1,1410 +1,1431 @@
 {
-  "method": "Complete Markdown inventory and classification with targeted current-host/API contradiction review; not a rewrite of historical semantic evidence.",
+  "method": "Complete Markdown classification; current delivery/import/version checks, pinned Studio path checks and targeted active-guidance contradiction review. Historical evidence is not rewritten.",
+  "version": "2.0.0",
   "documents": [
     {
       "file": ".changeset/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "AGENTS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "NOTICE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "apps/studio/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/architecture/TEMPLATE_PLATFORM_BOUNDARY_AUDIT.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/blocked-storage.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/definition-instance-projection.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/editor-performance.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/evidence/release-delivery-20261013/baseline/original-publication-bundle/SDK-RUNTIME-HANDOFF.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/f7-production-profiling.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/f7-readiness-publication.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/fidelity-reference-review-20260930.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/field-choices-audit.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/field-choices-implementation.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/host-font-authority.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/internal-compiler-result.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/internal-session-contract.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/media-solid-underlay.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/now-hiring-text-stability.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/r07-carrousel-raster.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/release-delivery.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/sdk-061-architecture-gate.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/sdk-061-three-export-baseline.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
+    },
+    {
+      "file": "docs/architecture/sdk-host-onboarding.md",
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/sdk-release-readiness.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/sdk-v2-candidate-certification.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/sdk-v2-optimization.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/template-recovery.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/architecture/text-geometry-stability.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/v2-example-ownership-lifecycle.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/architecture/versioned-candidate-certification.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/design-system-v1.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/BOOLEAN_STRUCTURAL_VISIBILITY.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/BROWSER_SESSION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/FIXTURE_PLAN.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/MILESTONE_7_REPORT.md",
-      "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/field-rules/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/SEMANTIC_KERNEL.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/STUDIO_AND_HOSTS.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/field-rules/TEMPLATE_PACKAGE_V2_MIGRATION.md",
-      "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/figma-exporter/IMPORTER_BOUNDARY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/figma-import-pipeline.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/figma-layer-naming-convention.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/figma-mcp-enrichment.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/legacy-import-retirement.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/APPEARANCE_CONTRACTS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/APPEARANCE_FIXTURES.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ARCHITECTURE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/BACKEND_ORCHESTRATION.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/BUNDLE_ANALYSIS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/CAPABILITIES.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/CHARTER.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/CROP_FIXTURE_INTAKE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/CROP_SOURCE_EVIDENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/CURRENT_ARCHITECTURE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/DATA_FLOW.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/DELIVERY_PLAN.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/DIAGNOSTIC_PROJECTION.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/DUPLICATE_INTERPRETATIONS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ENVIRONMENT_POLICY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FAILURE_ARTIFACTS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FALLBACKS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FEATURE_TRACE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FIXTURES.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FONT_EVIDENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/FONT_IDENTITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/HANDOFF.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/HARNESS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/IMAGE_PLACEMENT.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/IMAGE_REPLACEMENT_EVIDENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/LINEAR_GRADIENT_FIXTURE_GATE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/LINEAR_GRADIENT_IMPLEMENTATION_PLAN.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/LINEAR_GRADIENT_INTAKE_EVIDENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/LINEAR_GRADIENT_RUNTIME_AUTHORITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/LINEAR_GRADIENT_TEST_INTAKE_EVIDENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/MASK_SOURCE_CONTRACT.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/OBSERVATIONAL_MASK_SETTLEMENT.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ORDERED_NORMAL_FILL_STACK_INTAKE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ORDERED_SOLID_LINEAR_RUNTIME_AUTHORITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ORDERED_SOLID_STACK_RUNTIME_AUTHORITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/PHASE_7_PAINT_STROKE_COMPLETION_AUDIT.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/PHASE_9_COMPOSITING_SOURCE_GATE.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/PHASE_9_GROUP_CONTROL_SOURCE_GATE.md",
-      "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/PRIMITIVE_PAINTS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/PRIMITIVE_STROKE_FIXTURE_GATE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/PRIMITIVE_STROKE_GEOMETRY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/PROPERTY_AUTHORITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/REFERENCE_POLICY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/RENDER_ENTRY_POINTS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/ROLLOUT_MODES.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/RUNTIME_ROUTING.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SCENE_GRAPH.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SCENE_GRAPH_HARNESS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SCENE_MIGRATION.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SEMANTIC_RENDERER_MVP_COURSE_CORRECTION.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SEMANTIC_ROLLOUT_POLICY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SETTLEMENT.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SETTLEMENT_HARNESS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SOURCE_TO_SCENE_MAPPING.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/STATUS.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/SURFACE_CONVERGENCE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/TEXT_MEASUREMENT_LIFECYCLE.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/VERTICAL_TEXT_TRIM.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0001-zip-first-offline-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0002-normalize-before-strict-validation.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0003-optional-figma-enrichment.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0004-shared-dynamic-geometry-path.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0005-resolved-image-semantics.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0006-fill-crop-preserve-aspect.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0007-fit-contains.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0008-stretch-requires-intent.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0009-hug-uses-rendered-measurement.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0010-one-settled-graph.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0011-inspection-overlays-not-export-content.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0012-defer-offscreen-backend.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0013-fidelity-evidence-system.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0014-canonical-scene-graph-contract.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0015-property-authority-contract.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0016-deterministic-scene-transformation.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0017-preserve-unmapped-and-unsupported-scene-data.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0018-scene-compatibility-migration.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0019-versioned-measurement-snapshots.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0020-property-dependency-and-invalidation.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0021-revision-guarded-measurement-publication.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0022-observational-settlement-convergence.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0023-harness-only-settlement-integration.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0024-raster-environment-profiles.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0025-core-layout-property-ownership.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0026-capability-only-core-layout-routing.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0027-coherent-compatibility-subtrees.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0028-browser-supplies-intrinsic-text-metrics.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0029-settlement-readiness-gates-export.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0030-converge-routed-core-geometry-across-live-surfaces.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0031-exact-font-binaries-are-hash-gated-test-inputs.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0032-fill-inside-hug-cycles-select-explicit-fallback.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0033-versioned-backend-neutral-appearance-contracts.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0034-backend-selection-remains-fixture-led.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0035-source-level-probes-cannot-authorize-rendering.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0036-optional-provider-absence-is-not-an-http-failure.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0037-appearance-evidence-is-independent-of-renderer-goldens.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0038-source-owned-vertical-text-trim.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0039-exact-face-font-metrics-own-trim-inputs.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0040-semantic-text-box-is-separate-from-glyph-paint.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0041-inspection-text-bounds-use-semantic-trim.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0042-cap-trim-glyph-origin-is-exact-metric-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0043-reviewed-source-fidelity-can-supersede-historical-baselines.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0044-canonical-font-request-and-face-identity.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0045-hash-derived-private-runtime-font-family.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0046-source-authoritative-font-capture-profile.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0047-scale-mode-governs-image-transform-applicability.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0048-crop-transform-is-slot-to-source-and-inverted-once.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0049-imported-media-and-replacement-media-have-separate-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0050-exporter-mask-relations-are-canonical-source-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0051-mask-input-paint-has-one-visual-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0052-opaque-rectangular-alpha-may-lower-to-exact-clip.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0053-capability-routed-primitive-appearance-has-one-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0054-single-opaque-solid-is-the-first-routed-paint-subset.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0055-rectangular-inside-stroke-uses-non-layout-affecting-inset-geometry.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0056-advanced-primitive-appearance-remains-fixture-gated.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0057-independent-corner-radii-use-edge-local-figma-clamping.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0058-stroke-path-bounds-remain-separate-from-layout-bounds.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0059-center-and-outside-rectangular-strokes-use-singular-svg.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0060-ancestor-clipping-remains-separate-from-primitive-stroke.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0061-primitive-backend-selection-is-capability-based-and-singular.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0062-linear-gradient-authority-requires-an-isolated-source-fixture.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0063-source-certified-linear-gradient-contract-and-singular-runtime-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0064-figma-solid-paint-opacity-owns-exporter-alias-normalization.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0065-ordered-solid-stacks-require-one-svg-owner-and-one-primitive-clip.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0066-resolved-backend-decisions-centralize-existing-owner-selection.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0067-backend-diagnostics-project-existing-evidence.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0068-product-rollout-modes-remain-proposed.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0069-css-media-png-export-requires-revision-bound-raster-readiness.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0070-operator-cohort-eligibility-and-rollback-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0071-semantic-first-product-path-supersedes-rollout-governance.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0072-source-certified-solid-linear-stacks-use-one-svg-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0073-backend-disposition-separates-ownership-from-fallback.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0074-exporter-061-canonical-solid-opacity-is-native-source-evidence.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0075-template-package-v2-field-semantics-and-canonical-content-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0076-v2-field-content-reducer-and-materializer-are-single-core-authorities.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0077-v2-browser-session-persists-only-canonical-field-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0078-boolean-visibility-is-structural-participation-with-generation-safe-publication.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0079-family-image-framing-is-shared-content-with-sparse-variant-placement.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0080-textarea-visual-lines-come-from-the-current-painted-text-layout.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0081-studio-and-custom-hosts-share-v2-configuration-and-content-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0082-boolean-fields-may-control-multiple-structural-targets.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0083-type-qualified-field-identity-and-shared-boolean-controls.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0084-full-parent-alpha-mask-owns-stable-parent-clip-boundary.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0085-singular-image-replacement-policy.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0086-svg-vector-assets-own-their-embedded-strokes.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0087-phase9-matrix-cover-source-does-not-certify-isolation.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0088-matched-matrix-group-control-certifies-bounded-isolation.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0089-live-figma-matrix2-confirms-paint-stack-and-bounded-overlay.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0090-bounded-opaque-source-compositing-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0091-cover-mixed-image-gradient-owner.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0092-observational-mask-settlement-delegates-existing-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0093-mounted-text-input-validity-and-current-publication.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0094-fresh-text-measurement-before-paint.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0095-established-media-underlay-is-not-primitive-fallback.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0096-host-font-registry-is-render-and-export-authority.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0097-v2-only-sdk-and-061-source-admission.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/0098-family-media-readiness-publication.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/README.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/renderer-fidelity/decisions/TEMPLATE.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk-hardening/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk-hardening/public-api-review.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk-hardening/verification.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/AGENT_INTEGRATION_PROMPTS.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/API_GUIDE.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/CONSUMER_COMPATIBILITY.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/CORE_IMPORTER_HANDOFF.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/FEATURES.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/GITHUB_SETUP.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/HISTORY.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/HOST_IMPLEMENTATION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/HOST_LIFECYCLE.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/INSTALLATION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/OPERATION_OUTCOMES.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/QUICKSTART.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/RELEASE_PREPARATION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/RUNTIME_HANDOFF.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_4_1_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_4_2_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_4_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_5_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_6_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_7_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_0_8_MIGRATION.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_1_0_MIGRATION.md",
-      "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/SDK_1_0_RELEASE_NOTES.md",
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
+    },
+    {
+      "file": "docs/sdk/SDK_2_0_MIGRATION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
+    },
+    {
+      "file": "docs/sdk/SDK_2_0_RELEASE_NOTES.md",
+      "classification": "current-host-guidance",
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/SDK_CAPABILITIES.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/STUDIO_REDESIGN_HANDOFF.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/STUDIO_REFERENCE.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/TEMPLATE_IMPORT_WIZARD.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/sdk/TROUBLESHOOTING.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/sdk/V2_INTEGRATION.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
+    },
+    {
+      "file": "docs/sdk/history/sdk-v1.0.0/README.md",
+      "classification": "historical-evidence",
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio-wayfinding-foundation-evidence.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/COMPACT_FIELD_CARDS_20261012.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/FAMILY_AND_INSPECTION_PARITY.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/FIELDS_USABILITY_20261011.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/FIELDS_UX_AUDIT_20261011.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/IMPORTER_GUIDED_PATH.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/OUTPUT_REFINEMENTS_20261012.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/PHASE_2.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio/PHASE_3.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio/PHASE_4.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio/PHASE_5.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio/PHASE_6.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/UI_REFINEMENTS_20261011.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/UI_UX_AUDIT_20261011.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/UI_UX_CLEANUP.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/studio/WORKFLOW_RESTORATION.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/v1-copy-inventory.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "docs/v1-ux-overhaul.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "examples/minimal-renderer/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "examples/template-editor-integration/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "examples/template-editor-integration/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "examples/template-family-integration/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "examples/template-family-integration/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "fidelity/evidence/milestone-7-alpha-mask/report.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "fidelity/evidence/phase-12-import-inspector-visible/REVIEW.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "fidelity/references/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "packages/template-browser/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "packages/template-browser/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "packages/template-core/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "packages/template-core/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "packages/template-react/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "packages/template-react/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "packages/template-react/test/render/regression-fixtures/README.md",
       "classification": "current-host-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "scripts/fidelity/legacy/template-family-example/CHANGELOG.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "scripts/fidelity/legacy/template-family-example/README.md",
       "classification": "historical-evidence",
-      "policy": "Preserve historical bytes; current index identifies superseding guidance."
+      "policy": "Preserve recorded evidence; current SDK guidance supersedes installation and supported-host claims."
     },
     {
       "file": "src/template-package/fonts/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "src/template-package/render/CONSTRAINT_SIZING_MATRIX.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "src/template-package/render/VECTOR_RENDERING.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     },
     {
       "file": "tools/fidelity/README.md",
       "classification": "current-maintainer-guidance",
-      "policy": "Keep current contract; audit host claims against public inventories; retain explicitly Proposed programme boundaries."
+      "policy": "Audit current claims against supported API inventories; preserve explicitly Proposed renderer boundaries."
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "sdk-delivery-inventory-v1",
-  "targetRelease": "1.0.0",
+  "targetRelease": "2.0.0",
   "documents": [
     {
       "source": "docs/sdk/V2_INTEGRATION.md",
@@ -14,6 +14,16 @@
       "classification": "current"
     },
     {
+      "source": "docs/sdk/SDK_2_0_RELEASE_NOTES.md",
+      "file": "SDK-2.0-RELEASE-NOTES.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/SDK_2_0_MIGRATION.md",
+      "file": "SDK-2.0-MIGRATION.md",
+      "classification": "current"
+    },
+    {
       "source": "docs/sdk/OPERATION_OUTCOMES.md",
       "file": "SDK-OPERATION-OUTCOMES.md",
       "classification": "current"
@@ -21,12 +31,12 @@
     {
       "source": "docs/sdk/SDK_1_0_RELEASE_NOTES.md",
       "file": "SDK-1.0-RELEASE-NOTES.md",
-      "classification": "current"
+      "classification": "historical"
     },
     {
       "source": "docs/sdk/SDK_1_0_MIGRATION.md",
       "file": "SDK-1.0-MIGRATION.md",
-      "classification": "current"
+      "classification": "historical"
     },
     {
       "source": "docs/sdk/INSTALLATION.md",
@@ -213,12 +223,30 @@
       "source": "docs/sdk/STUDIO_REDESIGN_HANDOFF.md",
       "file": "STUDIO-REDESIGN-HANDOFF.md",
       "classification": "current"
+    },
+    {
+      "source": "examples/template-editor-integration/src/CompleteHost.tsx",
+      "file": "CompleteHost.tsx",
+      "classification": "current",
+      "transform": "example-source"
+    },
+    {
+      "source": "examples/template-editor-integration/src/starterPersistence.ts",
+      "file": "starterPersistence.ts",
+      "classification": "current",
+      "transform": "example-source"
+    },
+    {
+      "source": "docs/sdk/history/sdk-v1.0.0/README.md",
+      "file": "SDK-1.0-HISTORY.md",
+      "classification": "historical"
     }
   ],
   "generatedFiles": [
     "SHA256SUMS",
     "CORE-SHA256SUMS",
-    "SDK-DELIVERY-MANIFEST.json"
+    "SDK-DELIVERY-MANIFEST.json",
+    "SDK-HOST-STARTER.zip"
   ],
   "localGeneratedFiles": [
     "LOCAL-RELEASE-VERIFICATION.md"

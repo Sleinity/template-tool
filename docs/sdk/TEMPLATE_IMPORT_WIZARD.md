@@ -1,4 +1,4 @@
-# Historical V1 wizard contract — retired in 1.0.0
+# Historical V1 wizard contract — retired in 2.0.0
 
 This document preserves historical guidance. None of its wizard/confirmation imports are supported by the current candidate. Use [V2 integration](V2_INTEGRATION.md).
 

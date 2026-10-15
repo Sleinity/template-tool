@@ -85,5 +85,5 @@ resolution.
 Milestone 3 consumes these authorities through `createTemplateSessionV2()` and
 the lifecycle documented in [BROWSER_SESSION.md](BROWSER_SESSION.md). Browser,
 family, persistence, reimport, and React controllers do not add field semantics.
-No hidden synchronization exists between the V2 state and the isolated legacy
-V1 Studio compatibility session.
+There is one canonical V2 content authority. V1 host editing workflows are
+retired; source normalization and the private renderer bridge remain separate.

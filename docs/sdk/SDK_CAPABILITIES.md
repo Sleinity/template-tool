@@ -1,6 +1,6 @@
 # SDK capabilities and checked entries
 
-Use [the feature catalogue](FEATURES.md) for behavior, limitations and examples, [the API task guide](API_GUIDE.md) for integration seams and [the starter](QUICKSTART.md) for a complete host. This SDK 1.0.0 candidate is V2-only, exporter-0.6.1-only, canonical schema 2.2. Internal entries below are not host APIs.
+Use [the feature catalogue](FEATURES.md) for behavior, limitations and examples, [the API task guide](API_GUIDE.md) for integration seams and [the starter](QUICKSTART.md) for a complete host. This SDK 2.0.0 candidate is V2-only, exporter-0.6.1-only, canonical schema 2.2. Internal entries below are not host APIs.
 
 <!-- sdk-capability-entry-points:start -->
 | Package | Entry | Classification | Representative exports |

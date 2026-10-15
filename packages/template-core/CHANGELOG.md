@@ -1,5 +1,13 @@
 ## Unpublished 1.0.0 candidate — V2-only / exporter 0.6.1
 
+## 2.0.0
+
+### Major changes
+
+- Support V2 host workflows only; retire V1 editing/importer/persistence workflows.
+- Require exporter 0.6.1 at ZIP admission; preserve source schema 1.0 normalization and canonical schema 2.2.
+- Deliver current host documentation and the React/TypeScript single/Family starter. See the SDK 2.0 migration guide for package-specific removed entries.
+
 Retire V1 host workflows; retain source-schema 1.0 normalization and the private renderer bridge. ZIP import requires exporter 0.6.1; canonical schema remains 2.2. Existing V2 records and recovery remain supported, and historical stored bytes are untouched. Reduce duplicate validation, primitive interpretation and asset-collection scene copying without adding caches or backends.
 
 # @sleinity/template-core

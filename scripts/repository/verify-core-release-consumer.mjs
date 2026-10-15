@@ -309,8 +309,8 @@ if (invalid.valid || invalid.diagnostics.length === 0) {
     .update(declaration)
     .digest("hex");
   if (
-    declaration.byteLength !== (version === "1.0.0" ? workspaceCoreDeclarationContracts[version] : historicalCoreDeclarationContract).bytes ||
-    declarationHash !== (version === "1.0.0" ? workspaceCoreDeclarationContracts[version] : historicalCoreDeclarationContract).sha256
+    declaration.byteLength !== (workspaceCoreDeclarationContracts[version] ?? historicalCoreDeclarationContract).bytes ||
+    declarationHash !== (workspaceCoreDeclarationContracts[version] ?? historicalCoreDeclarationContract).sha256
   ) {
     throw new Error(
       `Released core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}.`,

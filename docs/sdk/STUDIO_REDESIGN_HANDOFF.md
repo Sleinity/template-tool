@@ -1,6 +1,6 @@
 # Post-release Studio redesign handoff
 
-Begin after the SDK 1.0.0 release. This is an investigation backlog, not a promise of new SDK exports.
+Begin after the SDK 2.0.0 release. This is an investigation backlog, not a promise of new SDK exports.
 
 | Area | Current coupling to inspect | Desired evidence before extraction |
 | --- | --- | --- |

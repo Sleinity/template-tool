@@ -2,7 +2,7 @@
 
 Read [host onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md), [V2 integration](V2_INTEGRATION.md), [capabilities](SDK_CAPABILITIES.md) and
 [release preparation](RELEASE_PREPARATION.md) first. Current archives retain the
-unpublished 1.0.0 candidate label. Identify source and
+unpublished 2.0.0 candidate label. Identify source and
 archive hashes before changing a host. Give one track at a time.
 
 ## 1. Audit the host

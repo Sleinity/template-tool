@@ -103,3 +103,10 @@ p { font-weight: 400; }
   .session-preview { height: 360px; }
   .session-preview--compact { height: 200px; }
 }
+
+.starter-host { max-width: 1200px; margin: auto; padding: 24px; font-family: system-ui, sans-serif; }
+.starter-host label { display: block; margin-block: 10px; }
+.starter-host button, .starter-host input, .starter-host select, .starter-host textarea { font: inherit; padding: 8px; margin: 4px; }
+.starter-host fieldset { border: 1px solid #999; padding: 16px; }
+.starter-host [role="alert"] { color: #a01212; white-space: pre-wrap; }
+.starter-field { border-block-end: 1px solid #ddd; padding-block: 12px; }

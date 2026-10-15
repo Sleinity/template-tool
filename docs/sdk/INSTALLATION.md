@@ -1,6 +1,6 @@
-# Install SDK 1.0.0
+# Install SDK 2.0.0
 
-The three packages form one fixed train. This page describes the current 1.0.0 contract; [0.8 migration guidance](SDK_0_8_MIGRATION.md) is historical. Until release approval and publication, use the exact supplied local candidate and its hashes.
+The three packages form one fixed train. This page describes the current 2.0.0 contract; [0.8 migration guidance](SDK_0_8_MIGRATION.md) is historical. Until release approval and publication, use the exact supplied local candidate and its hashes.
 
 ## Recommended: vendored release archives
 
@@ -9,9 +9,9 @@ Download or receive one verified delivery containing Core, Browser and React arc
 ```json
 {
   "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-1.0.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-1.0.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-1.0.0.tgz",
+    "@sleinity/template-core": "file:vendor/sleinity-template-core-2.0.0.tgz",
+    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-2.0.0.tgz",
+    "@sleinity/template-react": "file:vendor/sleinity-template-react-2.0.0.tgz",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
@@ -22,16 +22,16 @@ pnpm also needs this private dependency closure in `pnpm-workspace.yaml`:
 
 ```yaml
 overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-1.0.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-1.0.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-1.0.0.tgz"
+  "@sleinity/template-core": "file:vendor/sleinity-template-core-2.0.0.tgz"
+  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-2.0.0.tgz"
+  "@sleinity/template-react": "file:vendor/sleinity-template-react-2.0.0.tgz"
 ```
 
 Run the chosen manager's install command, commit its lockfile and run the host typecheck/build. Do not mix registry and local SDK packages. No registry credential, token or SDK repository alias belongs in a vendored consumer. The complete [starter](QUICKSTART.md) supplies this configuration.
 
 ## Optional authenticated registry installation
 
-After publication, authorized maintainers may install all three `@sleinity/template-*` packages at exact version `1.0.0` from GitHub Packages. Configure the `@sleinity` registry and provide a read-packages credential through the host's existing secret mechanism; never commit it. Archive installation is preferred for Bas's first host.
+After publication, authorized maintainers may install all three `@sleinity/template-*` packages at exact version `2.0.0` from GitHub Packages. Configure the `@sleinity` registry and provide a read-packages credential through the host's existing secret mechanism; never commit it. Archive installation is preferred for Bas's first host.
 
 ## Runtime and ownership
 

@@ -28,5 +28,6 @@ one-way materializer. Milestone 3 adds the canonical Browser V2 session,
 versioned persistence, review-first reimport, Template Field Families, and
 React host controllers. Milestone 4 implements shared structural participation
 and generation-safe Boolean reflow and is source-certified for the exact subset
-recorded in the Boolean capability document. The isolated legacy V1 Studio
-session remains a compatibility surface and is never synchronized with V2.
+recorded in the Boolean capability document. SDK 2.0.0 and Studio now expose V2
+host workflows only. Source schema 1.0 normalization remains; V1 editing and
+persistence workflows are retired. Start at [current host guidance](../sdk/README.md).

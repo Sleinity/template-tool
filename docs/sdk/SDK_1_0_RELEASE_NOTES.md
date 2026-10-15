@@ -13,12 +13,6 @@ and publication are separate; no registry release is claimed by these notes.
 - Draft catalogue APIs and Family `saveDraft` are removed. Use template-scoped
   output recovery; generic template/session persistence remains available.
 
-## Runtime and host preparation
-
-- Retire V1 host workflows and require exporter 0.6.1 at first raw ZIP inspection.
-- Reuse immutable validation authority, remove duplicate primitive interpretation and collect persistence assets without scene copying. Family media completions publish readiness without rematerialization; no public API or schema changes accompany these optimizations.
-- Deliver current feature/API/Studio-reference documentation and a complete React/TypeScript starter for single/Family editing, saved work and template-scoped recovery.
-
 ## Integration fixes
 
 - Supplied font registries remain authoritative through V2 rendering and PNG
@@ -35,7 +29,7 @@ and publication are separate; no registry release is claimed by these notes.
 
 ## Compatibility and responsibilities
 
-V1 wizard, confirmation, session/editor and persistence APIs are retired; the examples use V2. ZIP admission requires source schema 1.0 and exporter 0.6.1. Canonical packages remain schema 2.2; unknown historical bytes remain untouched. Hosts
+V1 compatibility APIs/examples remain supported and explicitly labeled. Hosts
 own their repository, asset-store and font-registry adapters and session disposal.
 Studio configuration Apply/Save in Review is separate from output recovery
 autosave. See [migration](SDK_1_0_MIGRATION.md), [V2 integration](V2_INTEGRATION.md),

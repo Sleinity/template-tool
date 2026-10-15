@@ -2,6 +2,8 @@
 import { createHash } from "node:crypto";
 
 export const workspaceCoreDeclarationContracts = Object.freeze({
+  "2.0.0": Object.freeze({ bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" }),
+  // Retained unpublished V2-only draft identity; not the published 1.0 compatibility contract.
   "1.0.0": Object.freeze({ bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" }),
   "0.8.0": Object.freeze({ bytes: 110540, sha256: "dbd67c76ff75a1c56e05413e53b73c49b44bba8f33d499dd5ce3f79e4d137e32" }),
 });

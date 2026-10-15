@@ -2,10 +2,10 @@
 
 <!-- delivery-context:start -->
 This guide describes the current source contract. The fixed-train workspace packages are
-1.0.0, an unpublished candidate pending cross-platform certification. Historical
+2.0.0, an unpublished candidate pending cross-platform certification. Historical
 published 0.8.0 archives describe a different contract. Verify archive hashes and delivery
 provenance. [Installation](INSTALLATION.md), [release preparation](RELEASE_PREPARATION.md)
-and [1.0 migration](SDK_1_0_MIGRATION.md) distinguish those states.
+and [2.0 migration](SDK_2_0_MIGRATION.md) distinguish those states.
 <!-- delivery-context:end -->
 
 The tested release baseline is exporter **0.6.1**, specifically Now Hiring,

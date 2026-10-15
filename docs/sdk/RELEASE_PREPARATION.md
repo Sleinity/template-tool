@@ -1,8 +1,8 @@
-# Prepare the unpublished SDK 1.0.0 release
+# Prepare the unpublished SDK 2.0.0 release
 
-Core, Browser and React are already versioned 1.0.0. Do not apply changesets again or bump versions during this preparation. Publication requires a separately approved `sdk-v1.0.0` operation; stop if that tag/version already exists.
+Core, Browser and React are already versioned 2.0.0. This major version is authorized because published 1.0.0 retains V1 APIs removed by the current contract. Preserve all published 1.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.0` operation; stop if that tag/version already exists.
 
-The current release supports V2 hosts, raw source schema 1.0/exporter 0.6.1 ZIP admission and canonical schema 2.2. Retired V1 workflows are not compatibility routes. Existing current V2 records/resources/recovery remain supported; historical bytes stay untouched. See [release notes](SDK_1_0_RELEASE_NOTES.md) and [breaking changes](SDK_1_0_MIGRATION.md).
+The current release supports V2 hosts, raw source schema 1.0/exporter 0.6.1 ZIP admission and canonical schema 2.2. Retired V1 workflows are not compatibility routes. Existing current V2 records/resources/recovery remain supported; historical bytes stay untouched. See [release notes](SDK_2_0_RELEASE_NOTES.md) and [breaking changes](SDK_2_0_MIGRATION.md).
 
 ## Review and commit
 

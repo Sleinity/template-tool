@@ -79,8 +79,9 @@ no V2 loader infers canonical values from a saved V1 working package.
 
 V2 session records use dedicated in-memory and IndexedDB repository adapters.
 They share the browser's content-addressed asset stores where applicable, while
-keeping V2 validation and methods out of legacy session bundles and never
-sharing record interpretation.
+retaining strict V2 validation and native record interpretation. V1 production
+session/persistence workflows are retired in SDK 2.0.0; historical bytes remain
+untouched and outside the supported catalogue.
 
 Schema 2.0/2.1 packages and their older saved envelopes are deliberately not
 migrated. Repository listing exposes them as lightweight `Reimport required`
@@ -128,12 +129,11 @@ snapshot hooks, and `useTemplateFieldControllersV2()`. These are composition
 APIs only: no Studio component, renderer-internal module, picker, crop UI, or
 control registry is imported.
 
-The canonical V2 path is `createTemplateSessionV2`. The older
-`createTemplateSession`/V1 record path remains present for the current Studio
-and renderer compatibility surface; it is not synchronized with V2 and cannot
-be loaded as canonical V2 state. Removing that compatibility entry requires the
-Studio consumer cutover, so this milestone does not claim repository-wide V1
-runtime deletion.
+The supported path is `createTemplateSessionV2` or the native V2 Family session.
+V1 editing/session/persistence and the React V1 importer are retired. Source
+schema 1.0 normalization and the private V1-shaped renderer projection remain;
+they are separate from host editing workflows. See [current host guidance](../sdk/README.md)
+and [the 2.0 migration](../sdk/SDK_2_0_MIGRATION.md).
 
 Boolean structural layout is delivered and source-certified in Milestone 4.
 Renderer-backed visual line measurement is delivered in Milestone 6. Studio

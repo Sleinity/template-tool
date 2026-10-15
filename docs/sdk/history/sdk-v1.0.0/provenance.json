@@ -1,0 +1,20 @@
+{
+  "release": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0",
+  "tagCommit": "33bd70dbca1f02cdd6c80a83dc1ba4666d2ed348",
+  "assets": [
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "sha256": "2aa363deeb58458aba43add65bf4012d81cf977dfb60d30a97657befac213875",
+      "sourceFile": "SDK_1_0_MIGRATION.md",
+      "sourceSha256": "70c510e3add51df5241b7b86e2cc0841bd9b793f50246411634615f4335537f9",
+      "storedAs": "SDK-1.0-MIGRATION.md.txt"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "sha256": "0d0735c35ac6750d0dfaea7f0117b990b77d41c999f924b0c6c323d0113b01a2",
+      "sourceFile": "SDK_1_0_RELEASE_NOTES.md",
+      "sourceSha256": "e857798396b6c7f90249e55558dc3eeefc8c444188ba3cf0be693e2bdf7e5da6",
+      "storedAs": "SDK-1.0-RELEASE-NOTES.md.txt"
+    }
+  ]
+}

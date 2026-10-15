@@ -1,5 +1,9 @@
 # Renderer Capability Registry
 
+## SDK 2.0 host release preparation — 2026-10-15
+
+[The host-delivery report](../architecture/sdk-host-onboarding.md) records the current 2.0.0 target, documentation and complete starter. Published 1.0.0 and earlier local certification packets remain immutable historical identities. No renderer, public API or schema behavior changes in this preparation milestone. Fresh archive-bound certification is pending; earlier GO decisions do not certify these new delivery bytes.
+
 ## Family media readiness publication — 2026-10-15
 
 [ADR 0098](decisions/0098-family-media-readiness-publication.md) and [the implementation report](../architecture/f7-readiness-publication.md) record the bounded Family-only change. Decode completion reuses the current accepted materialization/tree and projects readiness/status/error, preserving semantic references and one publication per accepted source completion. Full authoring derivation, font/line/renderer revision guards and PNG raster authority remain unchanged. Native differential, separate paired production timing and browser lifecycle evidence are retained. Fresh unpublished 1.0.0 candidate `unpublished-1.0.0-440c932335c46a7015cb074079fcd5cd2767a28d78ff8e4fe9fe0921912ece35` is GO under run `sdk-f7-readiness-20261015`; the earlier certified candidate remains immutable. Cold Cover readiness improves by approximately 90–99 ms median across two minimal paired runs; detailed warm timing differences remain a separate tracing limitation. Reproduce and review the exact evidence in the report. No API/schema, rendering capability, cache, batching, reference or tolerance change is included.

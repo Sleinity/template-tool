@@ -26,6 +26,8 @@ The starter's saved list uses the public single and Family repositories. Save pe
 
 An output uses `recovery.begin({kind, templateId}, 'fresh' | 'resume')`. Bind that lease to a private example repository adapter: native save supplies the canonical payload and resource pins, while the adapter writes through `recovery.save(lease, payload)`. Restore assets through recovery's existing resolver, with saved-template storage as fallback. Do not persist resolved trees or invent a second content store.
 
+The example enables recovery after the first explicit Save creates a saved template ID; unsaved imports require confirmation before replacement. Adapters are supplied once for the host lifetime.
+
 The example autosaves accepted content after 650 ms and flushes before changing work or exporting. This is host policy. Save errors retain dirty work and offer explicit Retry. A newer recovery lease supersedes older tabs; stale operations must never recreate completed work. Fresh/Resume/Discard are explicit decisions.
 
 ## Export and cleanup
