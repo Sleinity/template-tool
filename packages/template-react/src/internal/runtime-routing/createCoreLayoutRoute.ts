@@ -1,6 +1,7 @@
 import type { CanonicalSceneGraphV1, CanonicalSceneNodeV1 } from "@sleinity/template-core";
 import type { CoreLayoutRouteV1 } from "./types";
 import { resolveVerticalTextTrimMode } from "./verticalTextTrim";
+import { resolveStructuralParticipation } from "./structuralParticipation";
 
 const supportedAlignment = new Set(["MIN", "CENTER", "MAX", "STRETCH"]);
 
@@ -33,12 +34,18 @@ function directReasons(node: CanonicalSceneNodeV1): string[] {
 }
 
 export function createCoreLayoutRoute(scene: CanonicalSceneGraphV1): CoreLayoutRouteV1 {
-  const reasons = new Map(scene.nodeOrder.map((nodeId) => [nodeId, directReasons(scene.nodes[nodeId])]));
+  const participation = resolveStructuralParticipation(scene);
+  const isActive = (nodeId: string): boolean => participation.nodes[nodeId]?.state === "active";
+  const reasons = new Map(scene.nodeOrder.map((nodeId) => [
+    nodeId,
+    isActive(nodeId) ? directReasons(scene.nodes[nodeId]) : ["structural-visibility-excluded"],
+  ]));
   const circularDependencies: CoreLayoutRouteV1["circularDependencies"] = [];
   for (const nodeId of scene.nodeOrder) {
+    if (!isActive(nodeId)) continue;
     const node = scene.nodes[nodeId];
     const parent = node.identity.parentId ? scene.nodes[node.identity.parentId] : null;
-    if (!parent) continue;
+    if (!parent || !isActive(parent.identity.id)) continue;
     const circularHorizontal = node.layout.sizing.horizontal.mode.value === "FILL" && parent.layout.sizing.horizontal.mode.value === "HUG";
     const circularVertical = node.layout.sizing.vertical.mode.value === "FILL" && parent.layout.sizing.vertical.mode.value === "HUG";
     for (const axis of ["horizontal", "vertical"] as const) {
@@ -56,11 +63,13 @@ export function createCoreLayoutRoute(scene: CanonicalSceneGraphV1): CoreLayoutR
     }
     if (circularHorizontal || circularVertical) reasons.get(nodeId)!.push("circular-fill-inside-hug-axis");
   }
-  const unsafe = new Set([...reasons].filter(([, values]) => values.some((value) => value !== "absolute-compatibility-boundary")).map(([nodeId]) => nodeId));
+  const unsafe = new Set([...reasons].filter(([nodeId, values]) =>
+    isActive(nodeId) && values.some((value) => value !== "absolute-compatibility-boundary")
+  ).map(([nodeId]) => nodeId));
 
   for (const nodeId of [...scene.nodeOrder].reverse()) {
     const node = scene.nodes[nodeId];
-    if (!node || !node.identity.parentId || !unsafe.has(nodeId) || node.layout.positioning.value === "ABSOLUTE") continue;
+    if (!node || !isActive(nodeId) || !node.identity.parentId || !unsafe.has(nodeId) || node.layout.positioning.value === "ABSOLUTE") continue;
     unsafe.add(node.identity.parentId);
     const parentReasons = reasons.get(node.identity.parentId)!;
     if (!parentReasons.includes("unsafe-flow-descendant")) parentReasons.push("unsafe-flow-descendant");
@@ -71,6 +80,7 @@ export function createCoreLayoutRoute(scene: CanonicalSceneGraphV1): CoreLayoutR
   const visit = (nodeId: string, parentRouted: boolean, blockedByBoundary: boolean): void => {
     const node = scene.nodes[nodeId];
     if (!node) return;
+    if (!isActive(nodeId)) return;
     const absoluteBoundary = node.layout.positioning.value === "ABSOLUTE" && nodeId !== scene.rootNodeId;
     const canRoute = !blockedByBoundary && !unsafe.has(nodeId) && !absoluteBoundary && (parentRouted || nodeId === scene.rootNodeId);
     if (canRoute) routed.add(nodeId);
@@ -81,14 +91,23 @@ export function createCoreLayoutRoute(scene: CanonicalSceneGraphV1): CoreLayoutR
   visit(scene.rootNodeId, false, false);
 
   const nodes = Object.fromEntries(scene.nodeOrder.map((nodeId) => {
+    const participationNode = participation.nodes[nodeId];
     const isRouted = routed.has(nodeId);
     const reasonCodes = reasons.get(nodeId) ?? [];
     return [nodeId, {
       nodeId,
-      ownership: isRouted ? "settled-authoritative" as const : unsafe.has(nodeId) ? "unsupported" as const : "compatibility-authoritative" as const,
+      ownership: participationNode.state !== "active"
+        ? "static-canonical" as const
+        : isRouted
+          ? "settled-authoritative" as const
+          : unsafe.has(nodeId)
+            ? "unsupported" as const
+            : "compatibility-authoritative" as const,
       routed: isRouted,
       boundaryRootId: boundaries.has(nodeId) ? nodeId : null,
       reasonCodes,
+      participation: participationNode.state,
+      exclusionRootId: participationNode.exclusionRootId,
     }];
   }));
   return {
@@ -97,7 +116,10 @@ export function createCoreLayoutRoute(scene: CanonicalSceneGraphV1): CoreLayoutR
     rootNodeId: scene.rootNodeId,
     nodes,
     routedNodeIds: scene.nodeOrder.filter((id) => routed.has(id)),
-    compatibilityNodeIds: scene.nodeOrder.filter((id) => !routed.has(id)),
+    compatibilityNodeIds: scene.nodeOrder.filter((id) => isActive(id) && !routed.has(id)),
+    activeNodeIds: participation.activeNodeIds,
+    excludedNodeIds: participation.excludedNodeIds,
+    exclusionRootIds: participation.exclusionRootIds,
     fallbackBoundaries: [...boundaries].map(([nodeId, reasonCodes]) => ({ nodeId, reasonCodes: [...reasonCodes].sort() })).sort((a, b) => a.nodeId.localeCompare(b.nodeId)),
     circularDependencies: circularDependencies.sort((a, b) => `${a.parentId}:${a.nodeId}:${a.axis}`.localeCompare(`${b.parentId}:${b.nodeId}:${b.axis}`)),
   };

@@ -57,18 +57,9 @@ Browser-local managed fonts and IndexedDB records are not cross-device
 artifacts. `inspectTemplateImportConfirmation()` surfaces missing local font
 authority rather than implying that a confirmation is independently portable.
 
-## Confirmation compatibility
+## Current admission and persistence
 
-New 0.4 confirmations retain the compatible FNV fingerprint and add a SHA-256
-package digest. The digest is content-integrity evidence, not a signature or
-authorization mechanism. A valid 0.3 confirmation without the digest remains
-loadable with an informational compatibility warning. A confirmation claiming
-to come from 0.4 or newer is blocked if its required digest is absent.
-
-Use `inspectTemplateImportConfirmation()` for a read-only report, or
-`loadTemplateImportConfirmation()` for the recommended atomic path. Unsupported
-confirmation schemas, malformed packages, identity mismatches, and fingerprint
-or digest mismatches are blocked before the active session changes.
+The unpublished 1.0.0 candidate exposes V2 host workflows. ZIP sources must declare schema 1.0 and exporter 0.6.1. Canonical packages remain schema 2.2. V1 confirmation/session/persistence workflows are retired, with no migration or deletion of historical stored bytes. Current V2 records retain their own strict compatibility handling.
 
 ## Revision and export contract
 

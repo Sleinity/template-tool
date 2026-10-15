@@ -7,6 +7,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import os from "node:os";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { gzipSync } from "node:zlib";
@@ -17,69 +18,27 @@ const archivesDirectory = path.join(workspace, "archives");
 const consumerDirectory = path.join(workspace, "consumer");
 const packageDirectories = ["template-core", "template-browser", "template-react"];
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
+const reportIndex = process.argv.indexOf("--report");
+const reportPath = reportIndex < 0 ? null : path.resolve(process.argv[reportIndex + 1] ?? "");
+if (reportIndex >= 0 && !process.argv[reportIndex + 1]) throw new Error("--report requires a path.");
 const baselinePath = path.join(root, "config", "sdk-bundle-baselines.json");
 
 const profiles = {
-  "core-import-validation": `
-export { importTemplatePackage, validateTemplatePackage } from "@sleinity/template-core";
-`,
-  "core-family": `
-export {
-  createTemplateFamilyFromPackage,
-  validateTemplateFamily,
-  resolveTemplateFamilyVariant,
-  materializeTemplateFamilyVariant,
-} from "@sleinity/template-core/family";
-`,
-  "browser-session-importer": `
-export { createTemplateSession } from "@sleinity/template-browser/session";
-export { createTemplateImportWizard } from "@sleinity/template-browser/importer";
-export { inspectTemplateRuntimeSupport } from "@sleinity/template-browser/compatibility";
-`,
-  "browser-family": `
-export { createTemplateFamilySession } from "@sleinity/template-browser/session";
-export {
-  createTemplateFamilyImportWizard,
-  planTemplateFamilyVariantReimport,
-} from "@sleinity/template-browser/importer";
-export {
-  getTemplateFamilyRepository,
-  listTemplateFamiliesIncludingLegacy,
-} from "@sleinity/template-browser/persistence";
-`,
-  "react-renderer": `
-export { TemplatePackageRenderer, TemplateSessionProvider, TemplateSessionRenderer } from "@sleinity/template-react";
-`,
-  "react-importer": `
-import "@sleinity/template-react/importer.css";
-export { TemplateImportWizard, useTemplateImportWizard } from "@sleinity/template-react/importer";
-`,
-  "react-editor": `
-export {
-  TemplateSessionViewport,
-  useTemplateSessionDiagnosticSummary,
-  useTemplateSessionEditableField,
-  useTemplateSessionEditableFields,
-} from "@sleinity/template-react/editor";
-`,
-  "react-family": `
-export {
-  TemplateFamilyImportWizardProvider,
-  TemplateFamilyImportPreview,
-  useTemplateFamilyImportWizard,
-} from "@sleinity/template-react/importer";
-export {
-  TemplateFamilySessionProvider,
-  useTemplateFamilyEditor,
-  useTemplateFamilyEditableFields,
-  useTemplateFamilyDiagnosticSummary,
-} from "@sleinity/template-react/editor";
-`,
+  "core-import-validation-v2": `export {createZipBundleReader,loadTemplatePackageBundleSource,parseTemplatePackageV2,validateTemplatePackageV2} from "@sleinity/template-core";`,
+  "core-family-v2": `export {resolveTemplateFieldFamilyVariantV2,materializeTemplateFieldFamilyVariantV2,resolveTemplateFieldFamilySelectionV2} from "@sleinity/template-core/family";`,
+  "browser-session-importer-v2": `export {createTemplateSessionV2} from "@sleinity/template-browser/session"; export {runTemplatePackageImportPipelineV2} from "@sleinity/template-browser/importer"; export {inspectTemplateRuntimeSupport} from "@sleinity/template-browser/compatibility";`,
+  "browser-field-session-v2": `export {createTemplateSessionV2,createTemplateFieldFamilySessionV2} from "@sleinity/template-browser/session";export {planTemplateReimportV2} from "@sleinity/template-browser/importer";export {getTemplateSessionRepositoryV2,getTemplateFieldFamilyRepositoryV3} from "@sleinity/template-browser/persistence";`,
+  "browser-family-v2": `export {createTemplateFieldFamilySessionV2} from "@sleinity/template-browser/session";export {appendTemplateSourcesV2,mutateTemplateFamilyV2} from "@sleinity/template-browser/importer";export {getTemplateFieldFamilyRepositoryV3} from "@sleinity/template-browser/persistence";`,
+  "react-renderer-v2": `export {TemplateFieldSessionRendererV2,TemplateFieldSessionV2Provider} from "@sleinity/template-react";`,
+  "react-editor-v2": `export {TemplateFieldSessionRendererV2,TemplateFieldSessionV2Provider,useTemplateFieldControllersV2} from "@sleinity/template-react/editor";`,
+  "react-field-session-v2": `export {TemplateFieldSessionV2Provider,TemplateFieldSessionRendererV2,useTemplateFieldControllersV2,useTemplateFieldFamilySessionV2,useTemplateFieldSessionV2Snapshot,useTemplateSessionV2} from "@sleinity/template-react/editor";`,
+  "react-family-v2": `export {useTemplateFieldFamilySessionV2,TemplateFieldSessionV2Provider,TemplateFieldSessionRendererV2,useTemplateFieldControllersV2} from "@sleinity/template-react/editor";`,
 };
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
     encoding: "utf8",
+    maxBuffer: 64 * 1024 * 1024,
     stdio: "pipe",
     ...options,
   });
@@ -150,6 +109,15 @@ try {
     path.join(consumerDirectory, "vite.config.js"),
     `import { defineConfig } from "vite";
 export default defineConfig(({ mode }) => ({
+  plugins: [{ name: "bundle-attribution", generateBundle(options, bundle) {
+    const modules = Object.values(bundle).filter(item => item.type === "chunk").flatMap(chunk =>
+      Object.entries(chunk.modules).map(([id, data]) => ({
+        id: id.includes("node_modules/") ? id.slice(id.lastIndexOf("node_modules/") + 13) : id.split("/").pop(),
+        chunk: chunk.fileName, renderedLength: data.renderedLength, originalLength: data.originalLength,
+        renderedExports: data.renderedExports, removedExports: data.removedExports,
+      })));
+    this.emitFile({ type: "asset", fileName: "module-contributions.json", source: JSON.stringify(modules.sort((a,b) => b.renderedLength - a.renderedLength)) });
+  }}],
   build: {
     lib: { entry: \`src/\${mode}.tsx\`, formats: ["es"], fileName: mode },
     outDir: \`dist-\${mode}\`,
@@ -172,6 +140,7 @@ export default defineConfig(({ mode }) => ({
   });
 
   const observed = {};
+  const attribution = {};
   for (const name of Object.keys(profiles)) {
     run(
       process.execPath,
@@ -196,6 +165,7 @@ export default defineConfig(({ mode }) => ({
         "NODE_AUTH_TOKEN",
         "GITHUB_TOKEN",
         "react.production.min",
+        "createTemplateImportWizard", "loadTemplateImportConfirmation", "createTemplateSession(", "test/legacy", "InMemoryTemplateRepository",
       ]) {
         if (source.includes(forbidden)) {
           throw new Error(`${name}/${outputFile} contains forbidden ${forbidden}.`);
@@ -203,34 +173,41 @@ export default defineConfig(({ mode }) => ({
       }
     }
     observed[name] = { bytes, gzipBytes };
+    attribution[name] = JSON.parse(await readFile(path.join(outputDirectory, "module-contributions.json"), "utf8"));
   }
 
-  if (process.argv.includes("--print")) {
-    process.stdout.write(`${JSON.stringify({
-      schemaVersion: "template-sdk-bundle-baselines-v1",
-      profiles: observed,
-    }, null, 2)}\n`);
-  } else {
-    const baseline = JSON.parse(await readFile(baselinePath, "utf8"));
-    if (baseline.schemaVersion !== "template-sdk-bundle-baselines-v1") {
-      throw new Error("The SDK bundle baseline is invalid.");
-    }
-    for (const [name, measurement] of Object.entries(observed)) {
-      const limit = baseline.profiles?.[name];
-      if (!limit) throw new Error(`Missing SDK bundle baseline for ${name}.`);
-      if (measurement.bytes > limit.maxBytes || measurement.gzipBytes > limit.maxGzipBytes) {
-        throw new Error(
-          `${name} exceeds its SDK bundle budget: ${measurement.bytes}/${measurement.gzipBytes} bytes; ` +
-          `limits ${limit.maxBytes}/${limit.maxGzipBytes}.`,
-        );
-      }
-    }
-    console.log(
-      `Curated SDK entry bundles passed: ${Object.entries(observed)
-        .map(([name, value]) => `${name}=${value.bytes}/${value.gzipBytes}`)
-        .join(", ")} bytes/gzip.`,
-    );
+  const baseline = JSON.parse(await readFile(baselinePath, "utf8"));
+  if (baseline.schemaVersion !== "template-sdk-bundle-baselines-v1") throw new Error("The SDK bundle baseline is invalid.");
+  const failures = Object.entries(observed).flatMap(([name, measurement]) => {
+    const limit = baseline.profiles?.[name];
+    if (!limit) return [`Missing SDK bundle baseline for ${name}.`];
+    return measurement.bytes > limit.maxBytes || measurement.gzipBytes > limit.maxGzipBytes
+      ? [`${name} exceeds its SDK bundle budget: ${measurement.bytes}/${measurement.gzipBytes} bytes; limits ${limit.maxBytes}/${limit.maxGzipBytes}.`] : [];
+  });
+  if (reportPath) {
+    await mkdir(path.dirname(reportPath), { recursive: true });
+    await writeFile(reportPath, JSON.stringify({ schemaVersion: "sdk-bundle-measurement-v1",
+      measuredAt: new Date().toISOString(), commit: run("git", ["rev-parse", "HEAD"], { cwd: root }).trim(),
+      tooling: { node: process.version, platform: process.platform, arch: process.arch, ...dependencyVersions },
+      inputHashes: {
+        budgets: createHash("sha256").update(await readFile(baselinePath)).digest("hex"),
+        probes: createHash("sha256").update(JSON.stringify(profiles)).digest("hex"),
+        worktreeDiff: createHash("sha256").update(run("git", ["diff", "HEAD"], { cwd: root })).digest("hex"),
+      },
+      packageBuilds: Object.fromEntries(await Promise.all(packageDirectories.map(async name =>
+        [name, JSON.parse(await readFile(path.join(root, "packages", name, "package.json"), "utf8")).scripts.build]))),
+      packageVersions: Object.fromEntries(await Promise.all(packageDirectories.map(async name =>
+        [name, JSON.parse(await readFile(path.join(root, "packages", name, "package.json"), "utf8")).version]))),
+      archiveHashes: Object.fromEntries(await Promise.all(archives.map(async name => [name,
+        createHash("sha256").update(await readFile(path.join(archivesDirectory, name))).digest("hex")]))),
+      profiles: observed, limits: baseline.profiles, failures, moduleContributions: attribution,
+      attributionNote: "Rollup renderedLength is pre-minification attribution, not a sum of minified or gzip contribution; total measured JS/CSS budgets are unchanged.",
+    }, null, 2) + "\n");
   }
+  console.log(JSON.stringify({ profiles: observed, failures }, null, 2));
+  if (!process.argv.includes("--print") && failures.length) throw new Error(failures.join("\n"));
+  if (!failures.length) console.log("Curated SDK entry bundles passed.");
+
 } finally {
   await rm(workspace, { recursive: true, force: true });
 }

@@ -4,15 +4,20 @@ import type {
   TemplatePackageV1,
   TextTemplateNode,
 } from "../../../src/template-package/types";
+import {createTemplateFamilyFromPackage} from "../../template-core/test/legacyEntry";
 import {
   createInMemoryTemplateRepositoryStorage,
   InMemoryTemplateRepository,
-} from "../src/persistence/inMemoryTemplateRepository";
-import { validateCurrentSavedTemplateRecord } from "../src/persistence/savedRecordValidation";
+} from "./legacy/persistence/inMemoryTemplateRepository";
+import {
+  validateCurrentSavedTemplateFamilyRecord,
+  validateCurrentSavedTemplateRecord,
+} from "./legacy/persistence/savedRecordValidation";
 import {
   createSavedOutputDraftRecord,
+  createSavedTemplateFamilyRecord,
   createSavedTemplateRecord,
-} from "../src/persistence/templateRepository";
+} from "./legacy/persistence/templateRepository";
 import { createSavedAssetRecord } from "../src/persistence/assetRepository";
 import { semanticRendererMvpMigrationRecord } from "../src/persistence/semanticRendererMvpMigration";
 
@@ -270,6 +275,82 @@ assert(
   validateCurrentSavedTemplateRecord(recordWithoutPreview).previewAssetHash ===
     undefined,
   "Existing current-schema records without preview references should remain valid.",
+);
+
+const familyPreviewStorage = createInMemoryTemplateRepositoryStorage();
+const familyPreviewRepository = new InMemoryTemplateRepository(familyPreviewStorage);
+const seededFamily = createTemplateFamilyFromPackage({
+  familyId: "family:managed-previews",
+  familyTitle: "Managed family previews",
+  variantId: "variant:first",
+  variantTitle: "First",
+  packageValue,
+});
+seededFamily.family.variants.push({
+  ...structuredClone(seededFamily.family.variants[0]),
+  id: "variant:second",
+  title: "Second",
+});
+const firstPreview = await createSavedAssetRecord(
+  new Blob([new Uint8Array([137, 80, 78, 71, 1])], { type: "image/png" }),
+);
+const secondPreview = await createSavedAssetRecord(
+  new Blob([new Uint8Array([137, 80, 78, 71, 2])], { type: "image/png" }),
+);
+const familyPreviewRecord = createSavedTemplateFamilyRecord({
+  family: seededFamily.family,
+  variantPreviewAssetHashes: {
+    "variant:first": firstPreview.hash,
+    "variant:second": secondPreview.hash,
+  },
+});
+const savedFamilyPreviewRecord = await familyPreviewRepository.saveFamily(
+  familyPreviewRecord,
+  {
+    variantPreviewAssets: {
+      "variant:first": firstPreview,
+      "variant:second": secondPreview,
+    },
+  },
+);
+assert(
+  savedFamilyPreviewRecord.variantPreviewAssetHashes?.["variant:first"] === firstPreview.hash &&
+    savedFamilyPreviewRecord.variantPreviewAssetHashes?.["variant:second"] === secondPreview.hash &&
+    (await familyPreviewRepository.getManagedAsset(firstPreview.hash))?.mimeType === "image/png" &&
+    (await familyPreviewRepository.getManagedAsset(secondPreview.hash))?.mimeType === "image/png",
+  "Family variant preview.png assets should persist independently by content hash.",
+);
+const replacementPreview = await createSavedAssetRecord(
+  new Blob([new Uint8Array([137, 80, 78, 71, 3])], { type: "image/png" }),
+);
+const replacedFamilyPreviewRecord = await familyPreviewRepository.saveFamily(
+  {
+    ...savedFamilyPreviewRecord,
+    variantPreviewAssetHashes: {
+      ...savedFamilyPreviewRecord.variantPreviewAssetHashes,
+      "variant:first": replacementPreview.hash,
+    },
+  },
+  { variantPreviewAssets: { "variant:first": replacementPreview } },
+);
+assert(
+  replacedFamilyPreviewRecord.variantPreviewAssetHashes?.["variant:first"] === replacementPreview.hash &&
+    (await familyPreviewRepository.getManagedAsset(firstPreview.hash)) === null &&
+    (await familyPreviewRepository.getManagedAsset(secondPreview.hash)) !== null,
+  "Replacing one variant ZIP preview should release only its superseded thumbnail.",
+);
+const legacyFamilyRecord = createSavedTemplateFamilyRecord({
+  family: seededFamily.family,
+});
+assert(
+  validateCurrentSavedTemplateFamilyRecord(legacyFamilyRecord).variantPreviewAssetHashes === undefined,
+  "Existing family records without persisted preview.png hashes should remain readable.",
+);
+await familyPreviewRepository.deleteFamily(replacedFamilyPreviewRecord.id);
+assert(
+  (await familyPreviewRepository.getManagedAsset(replacementPreview.hash)) === null &&
+    (await familyPreviewRepository.getManagedAsset(secondPreview.hash)) === null,
+  "Deleting the final family preview owner should clean up every variant thumbnail.",
 );
 
 let unsupportedVersionRejected = false;

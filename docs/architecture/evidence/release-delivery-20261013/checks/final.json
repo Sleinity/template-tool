@@ -1,0 +1,42 @@
+[
+  {
+    "label": "portable-final",
+    "command": "pnpm test:portable",
+    "started": "2026-10-13T15:40:08.305Z",
+    "durationMs": 27898,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/release-delivery-20261013/checks/portable-final.log",
+    "logSha256": "ba5cc75e77b39792ffa314a2188e31bcebecae3f86293f6848abab0740f57ba6"
+  },
+  {
+    "label": "documentation",
+    "command": "pnpm docs:verify",
+    "started": "2026-10-13T15:40:36.204Z",
+    "durationMs": 428,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/release-delivery-20261013/checks/documentation.log",
+    "logSha256": "bd67b1a0e45a5e798cf3f57beb3f35e6c0b089dfe01e0ec62db5760da2732b3b"
+  },
+  {
+    "label": "review-contract",
+    "command": "node --test scripts/r07/review-contract.test.mjs",
+    "started": "2026-10-13T15:40:36.632Z",
+    "durationMs": 92,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/release-delivery-20261013/checks/review-contract.log",
+    "logSha256": "c0a0566801398e5d17d01ce1dc4afe8e783ad28ec0ad70a283d2eb25f0883f26"
+  },
+  {
+    "label": "capture-camera",
+    "command": "node scripts/fidelity/capture-camera.test.mjs",
+    "started": "2026-10-13T15:40:36.724Z",
+    "durationMs": 43,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/release-delivery-20261013/checks/capture-camera.log",
+    "logSha256": "7b8ebe7e1ec356e38c9e1135f37d7f82b45b8903604e736c6dd8bdd6b8319f9c"
+  }
+]

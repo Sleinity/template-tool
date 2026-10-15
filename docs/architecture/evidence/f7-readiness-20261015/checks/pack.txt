@@ -1,0 +1,1 @@
+Created SDK 1.0.0 local release verification at /Users/niels/Documents/Projects/template-tool/release-verification-artifacts/f7-readiness-20261015.

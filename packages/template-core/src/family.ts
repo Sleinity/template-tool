@@ -1,2 +1,4 @@
-/** Supported portable Template Family contract. */
-export * from "./family/index";
+/** V2 Family configuration, content and selection authority. */
+export * from "./family/types";
+export * from "./family/configurationV2";
+export * from "./family/fieldRulesV2";

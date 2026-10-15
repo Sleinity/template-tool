@@ -1,0 +1,31 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: npm/public-contract
+Typechecking 6 literal delivered guide examples against supplied archives.
+
+file:///Users/niels/Documents/Projects/template-tool/scripts/repository/verify-packed-consumer.mjs:34
+    throw new Error(
+          ^
+
+Error: npm install --ignore-scripts --no-audit --no-fund --prefer-offline failed:
+undefined
+    at run (file:///Users/niels/Documents/Projects/template-tool/scripts/repository/verify-packed-consumer.mjs:34:11)
+    at file:///Users/niels/Documents/Projects/template-tool/scripts/repository/verify-packed-consumer.mjs:166:3
+
+Node.js v24.19.0
+
+
+1 !== 0
+
+    at file:///Users/niels/Documents/Projects/template-tool/scripts/f7/packed.mjs:22:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,15 @@
+[primitive-scenario] fixture=bb-cover-thing-primitives identity=true figmaRequests=0
+[primitive-scenario] fixture=main-visual-section-primitives identity=true figmaRequests=0
+[primitive-scenario] fixture=stroke-test-primitives identity=true figmaRequests=0
+[primitive-scenario] fixture=gradient-test-linear identity=true figmaRequests=0
+[primitive-scenario] fixture=gradient-test-paint-opacity identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-blue-then-red identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-red-then-blue identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-three identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-hidden-middle identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-paint-opacity identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-independent-corners identity=true figmaRequests=0
+[primitive-scenario] fixture=ordered-solid-linear-normal identity=true figmaRequests=0
+[primitive-scenario] fixture=exporter-061-solid-opacity identity=true figmaRequests=0
+[primitive-scenario] fixture=exporter-061-linear-and-mixed-paints identity=true figmaRequests=0
+[primitive-scenario] output=/Users/niels/Documents/Projects/template-tool/fidelity/evidence/milestone-7-1-primitives/sdk-v2-historical-20261015

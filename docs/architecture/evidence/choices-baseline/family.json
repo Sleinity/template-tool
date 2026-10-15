@@ -1,0 +1,21 @@
+{
+  "publicFamilyOperations": true,
+  "sources": [
+    "exporter-061-now-hiring",
+    "exporter-061-cover",
+    "exporter-061-carrousel"
+  ],
+  "fieldId": "text:subtitle",
+  "commonChoices": {
+    "mode": "suggested",
+    "options": [
+      {
+        "id": "shared",
+        "value": "Shared option"
+      }
+    ]
+  },
+  "explicitNullClears": true,
+  "removingOverrideRestoresInheritance": true,
+  "familyBrowserReviewed": false
+}

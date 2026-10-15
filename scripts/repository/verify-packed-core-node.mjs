@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { assertCoreDeclaration } from "./core-declaration-contract.mjs";
 import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -60,6 +60,7 @@ function bounds(x, y, width, height) {
 
 const packageValue = {
   schemaVersion: "1.0",
+  source: { type: "figma", rootNodeId: "root", pluginVersion: "0.6.1", packageContract: "template-package-v1" },
   packageId: "packed-core-node-smoke",
   name: "Packed Core Node Smoke",
   canvas: {
@@ -138,29 +139,18 @@ try {
     checkResolvedFontReadiness,
     createBackendDiagnosticProjection,
     createResolvedRenderTree,
-    clearTemplatePackageImageOverride,
-    editableFieldRuleKey,
-    getPackageFieldValue,
-    importTemplatePackage,
-    replaceTemplatePackageImage,
-    restoreImportedPackageForEditing,
-    setTemplatePackageImageReplacementMode,
-    updatePackageEditableFieldRule,
-    updateTemplatePackageField,
-    validateTemplatePackage,
+    createZipBundleReader, loadTemplatePackageBundleSource, parseTemplatePackageV2, validateTemplatePackageV2,
+    createTemplateFieldContentStateV1, materializeTemplateFieldContentV2,
   } = await import("@sleinity/template-core");
   const bytes = await readFile(new URL("./template.zip", import.meta.url));
-  const arrayBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-  const imported = importTemplatePackage(arrayBuffer, "packed-core-node-smoke.zip");
-  if (!imported.importable || !imported.workingPackage || !imported.basePackage) {
-    throw new Error("Packed core importer rejected the inline canonical ZIP.");
-  }
-  if (!validateTemplatePackage(imported.workingPackage).valid) {
-    throw new Error("Packed core validator rejected its imported canonical package.");
-  }
-  if (imported.basePackage === imported.workingPackage) {
-    throw new Error("Packed core importer did not preserve independent base and working values.");
-  }
+  const loaded = loadTemplatePackageBundleSource(createZipBundleReader(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)));
+  if (!loaded.valid || !loaded.packageValue) throw new Error("Packed Core rejected current exporter source.");
+  const parsed = parseTemplatePackageV2(loaded.packageValue);
+  if (!parsed.package || !validateTemplatePackageV2(parsed.package).valid) throw new Error("Packed Core rejected canonical V2.");
+  const content = createTemplateFieldContentStateV1(parsed.package);
+  const materialized = materializeTemplateFieldContentV2(parsed.package, content);
+  if (!materialized.valid || !materialized.workingPackage) throw new Error("Packed Core V2 materialization failed.");
+  const imported = { workingPackage: loaded.packageValue };
   const resolved = createResolvedRenderTree(imported.workingPackage);
   const repeated = createResolvedRenderTree(structuredClone(imported.workingPackage));
   if (
@@ -189,114 +179,6 @@ try {
     throw new Error("Packed core injected font readiness is not portable.");
   }
 
-  const editable = structuredClone(imported.workingPackage);
-  editable.nodes.copy = {
-    ...structuredClone(editable.nodes.root),
-    id: "copy",
-    name: "field:text:copy",
-    type: "TEXT",
-    parentId: "root",
-    children: [],
-    text: {
-      characters: "Imported",
-      fontFamily: "sans-serif",
-      fontStyle: "Regular",
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: { value: 24, unit: "PIXELS" },
-      letterSpacing: { value: 0, unit: "PIXELS" },
-      textAlignHorizontal: "LEFT",
-      textAlignVertical: "TOP",
-      textAutoResize: "HEIGHT",
-      paragraphSpacing: 0,
-      textDecoration: "NONE",
-      textCase: "ORIGINAL",
-    },
-  };
-  editable.nodes.root.children = ["copy"];
-  const textField = {
-    id: "copy",
-    type: "text",
-    nodeId: "copy",
-    property: "text.characters",
-    defaultValue: "Imported",
-  };
-  const colorField = {
-    id: "background",
-    type: "color",
-    nodeId: "root",
-    property: "appearance.fills",
-    defaultValue: "#334d66",
-  };
-  const visibilityField = {
-    id: "visibility",
-    type: "boolean",
-    nodeId: "root",
-    property: "visible",
-    defaultValue: true,
-  };
-  const imageField = {
-    id: "image",
-    type: "image",
-    nodeId: "root",
-    property: "image.assetId",
-    defaultValue: null,
-  };
-  editable.editableFields = [textField, colorField, visibilityField, imageField];
-  const configured = updatePackageEditableFieldRule(
-    editable,
-    editableFieldRuleKey(textField),
-    {
-      label: "Configured copy",
-      constraints: { maxCharacters: 40, maxLines: 2 },
-      behavior: { onOverflow: "prevent-input" },
-    },
-  );
-  if (
-    !configured.applied ||
-    configured.fields[0]?.label !== "Configured copy"
-  ) {
-    throw new Error("Packed core field-rule contract did not apply portable configuration.");
-  }
-  const textEdited = updateTemplatePackageField(
-    configured.packageValue,
-    configured.fields[0],
-    "Edited",
-  );
-  const colorEdited = updateTemplatePackageField(textEdited.packageValue, colorField, "#ff3366");
-  const hidden = updateTemplatePackageField(colorEdited.packageValue, visibilityField, false);
-  const imageEdited = replaceTemplatePackageImage(
-    hidden.packageValue,
-    imageField,
-    "data:image/png;base64,iVBORw0KGgo=",
-    {
-      assetId: "asset:image:user:packed-smoke",
-      mimeType: "image/png",
-      sizeBytes: 16,
-      width: 10,
-      height: 10,
-    },
-  );
-  const fit = setTemplatePackageImageReplacementMode(
-    imageEdited.packageValue,
-    imageField,
-    "replacement-fit",
-  );
-  if (
-    getPackageFieldValue(textEdited.packageValue, textField) !== "Edited" ||
-    hidden.packageValue.nodes.root.appearance.visible !== false ||
-    fit.packageValue.nodes.root.image?.activePlacement?.state !== "replacement-fit"
-  ) {
-    throw new Error("Packed core field editing contract did not apply portable mutations.");
-  }
-  const cleared = clearTemplatePackageImageOverride(fit.packageValue, imageField);
-  if (cleared.warning?.code !== "missing-default-image") {
-    throw new Error("Packed core image reset did not retain missing-default diagnostics.");
-  }
-  const restored = restoreImportedPackageForEditing(imported.basePackage, fit.packageValue);
-  if (restored.assets["asset:image:user:packed-smoke"]) {
-    throw new Error("Packed core full restore retained a user replacement asset.");
-  }
 } finally {
   for (const name of forbidden) delete globalThis[name];
 }
@@ -313,15 +195,10 @@ try {
     "node_modules/@sleinity/template-core/dist",
   );
   const declaration = await readFile(path.join(installedDist, "index.d.ts"));
-  const declarationHash = createHash("sha256").update(declaration).digest("hex");
-  if (
-    declaration.byteLength !== 87431 ||
-    declarationHash !== "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
-  ) {
-    throw new Error(
-      `Packed core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}`,
-    );
-  }
+  const version = JSON.parse(await readFile(path.join(installedDist, "../package.json"), "utf8")).version;
+  const workspaceVersion = JSON.parse(await readFile(path.join(root, "packages/template-core/package.json"), "utf8")).version;
+  if (version !== workspaceVersion) throw new Error(`Packed Core version ${version} differs from workspace ${workspaceVersion}.`);
+  assertCoreDeclaration(version, declaration);
   for (const fileName of ["index.js", "index.d.ts"]) {
     const source = await readFile(path.join(installedDist, fileName), "utf8");
     if (

@@ -1,0 +1,7050 @@
+{
+  "schemaVersion": "f7-production-analysis-v1",
+  "candidateId": "unpublished-1.0.0-7c43aa0bfbb5165f5153293f3ebf8db6ba58e7b5663861da8bba7abc198bedc2",
+  "environment": {
+    "browser": "149.0.7827.55",
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "viewport": {
+      "width": 1440,
+      "height": 1600
+    },
+    "deviceScaleFactor": 1,
+    "locale": "en-US",
+    "timezoneId": "UTC",
+    "reducedMotion": "reduce"
+  },
+  "measuredRows": 120,
+  "matchedPairs": 60,
+  "warmupRowsExcluded": 24,
+  "cases": [
+    {
+      "key": "single-0/0",
+      "fixtureId": "exporter-061-now-hiring",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 155.19999992847443,
+          "p95": 158.59999990463257,
+          "min": 148.20000004768372,
+          "max": 160.29999995231628
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 203.09999990463257,
+          "p95": 207.5,
+          "min": 192.5,
+          "max": 209.5
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 534.3000000715256,
+          "p95": 541.3999999761581,
+          "min": 509.89999997615814,
+          "max": 579.1999999284744
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          11,
+          12,
+          11,
+          12,
+          11
+        ],
+        "mediaDerivationsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          2,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          2.1999999284744263,
+          -6.600000023841858,
+          -16.699999928474426,
+          42.300000071525574,
+          1.8000000715255737
+        ],
+        "pairedMedianIntervalMs": [
+          -16.699999928474426,
+          42.300000071525574
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "single-1/0",
+      "fixtureId": "exporter-061-cover",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 165.20000004768372,
+          "p95": 168.19999992847443,
+          "min": 159.30000007152557,
+          "max": 168.40000009536743
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 213.69999992847443,
+          "p95": 215.20000004768372,
+          "min": 190.39999997615814,
+          "max": 221
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 435.2000000476837,
+          "p95": 440.39999997615814,
+          "min": 425.1999999284744,
+          "max": 464.60000002384186
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          12,
+          12,
+          12,
+          12,
+          12
+        ],
+        "mediaDerivationsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -1.7000000476837158,
+          -1.2999999523162842,
+          -8.599999904632568,
+          9.799999952316284,
+          -2.200000047683716
+        ],
+        "pairedMedianIntervalMs": [
+          -8.599999904632568,
+          9.799999952316284
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "single-2/0",
+      "fixtureId": "exporter-061-carrousel",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 172.5,
+          "p95": 173,
+          "min": 169.80000007152557,
+          "max": 174
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 221,
+          "p95": 223.79999995231628,
+          "min": 213.70000004768372,
+          "max": 227
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 698.5,
+          "p95": 713.8999999761581,
+          "min": 674.1000000238419,
+          "max": 724.6000000238419
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          11,
+          11,
+          14,
+          14,
+          11
+        ],
+        "mediaDerivationsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          3.100000023841858,
+          0.3999999761581421,
+          3.399999976158142,
+          9.899999976158142,
+          -0.8000000715255737
+        ],
+        "pairedMedianIntervalMs": [
+          -0.8000000715255737,
+          9.899999976158142
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-cold-0/0",
+      "fixtureId": "exporter-061-now-hiring",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 163.59999990463257,
+          "p95": 163.89999997615814,
+          "min": 157.09999990463257,
+          "max": 167.40000009536743
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 212.5,
+          "p95": 223.39999997615814,
+          "min": 211.39999997615814,
+          "max": 224.30000007152557
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 514.8000000715256,
+          "p95": 518.5999999046326,
+          "min": 504.10000002384186,
+          "max": 525.7999999523163
+        },
+        "readinessLongTaskCounts": [
+          0,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "derivations": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "unchangedMediaPublications": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 4.5,
+          "p95": 4.5,
+          "min": 4.399999976158142,
+          "max": 4.799999952316284
+        },
+        "commits": [
+          14,
+          14,
+          14,
+          14,
+          14
+        ],
+        "mediaDerivationsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsBeforeReady": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          0,
+          1,
+          0
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -4.599999904632568,
+          0.8999998569488525,
+          2.1000001430511475,
+          8.199999928474426,
+          2.8000000715255737
+        ],
+        "pairedMedianIntervalMs": [
+          -4.599999904632568,
+          8.199999928474426
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-cold-1/0",
+      "fixtureId": "exporter-061-cover",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 268.5,
+          "p95": 272.2000000476837,
+          "min": 264.90000009536743,
+          "max": 277.5
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 317.89999997615814,
+          "p95": 325.10000002384186,
+          "min": 288.7999999523163,
+          "max": 326.5
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 443.6999999284744,
+          "p95": 451.09999990463257,
+          "min": 433.3000000715256,
+          "max": 453.7000000476837
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "derivations": [
+          16,
+          16,
+          16,
+          16,
+          16
+        ],
+        "unchangedMediaPublications": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 75.99999976158142,
+          "p95": 76.19999969005585,
+          "min": 74.39999973773956,
+          "max": 76.5
+        },
+        "commits": [
+          12,
+          14,
+          12,
+          14,
+          12
+        ],
+        "mediaDerivationsBeforeMount": [
+          15,
+          14,
+          15,
+          14,
+          14
+        ],
+        "mediaDerivationMsBeforeMount": [
+          74.39999973773956,
+          70.09999978542328,
+          74.99999988079071,
+          70.60000002384186,
+          70.69999969005585
+        ],
+        "mediaDerivationsBeforeReady": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -14.400000095367432,
+          1,
+          -6.899999976158142,
+          13.100000023841858,
+          10.5
+        ],
+        "pairedMedianIntervalMs": [
+          -14.400000095367432,
+          13.100000023841858
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-cold-2/0",
+      "fixtureId": "exporter-061-carrousel",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 217.70000004768372,
+          "p95": 223.39999997615814,
+          "min": 212.39999997615814,
+          "max": 299.89999997615814
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 269.60000002384186,
+          "p95": 270.7000000476837,
+          "min": 255.60000002384186,
+          "max": 352.09999990463257
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 734.3999999761581,
+          "p95": 736.1000000238419,
+          "min": 708.1000000238419,
+          "max": 835.7000000476837
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "derivations": [
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "unchangedMediaPublications": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 13.899999976158142,
+          "p95": 13.899999976158142,
+          "min": 13.400000095367432,
+          "max": 14.199999928474426
+        },
+        "commits": [
+          16,
+          14,
+          16,
+          16,
+          16
+        ],
+        "mediaDerivationsBeforeMount": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationMsBeforeMount": [
+          7.399999976158142,
+          7.5,
+          7.699999928474426,
+          7.600000023841858,
+          7.600000023841858
+        ],
+        "mediaDerivationsBeforeReady": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -63.89999997615814,
+          -16.600000023841858,
+          -4.899999976158142,
+          8.600000023841858,
+          2.600000023841858
+        ],
+        "pairedMedianIntervalMs": [
+          -63.89999997615814,
+          8.600000023841858
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/0",
+      "fixtureId": "exporter-061-now-hiring",
+      "stage": "cold-open",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 166.5,
+          "p95": 168.70000004768372,
+          "min": 163.89999997615814,
+          "max": 170.19999992847443
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 214.60000002384186,
+          "p95": 218.19999992847443,
+          "min": 208.29999995231628,
+          "max": 219.29999995231628
+        },
+        "pngMs": null,
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "derivations": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "unchangedMediaPublications": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 4.700000047683716,
+          "p95": 4.799999952316284,
+          "min": 4.699999928474426,
+          "max": 4.900000095367432
+        },
+        "commits": [
+          10,
+          10,
+          10,
+          10,
+          10
+        ],
+        "mediaDerivationsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMsBeforeMount": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsBeforeReady": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          32.799999952316284,
+          59.10000002384186,
+          0.9000000953674316,
+          -1.2999999523162842,
+          -7.100000023841858
+        ],
+        "pairedMedianIntervalMs": [
+          -7.100000023841858,
+          59.10000002384186
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/1",
+      "fixtureId": "exporter-061-cover",
+      "stage": "cold-switch-1",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 472,
+          "p95": 473.39999997615814,
+          "min": 466.5,
+          "max": 474.40000009536743
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 521.3000000715256,
+          "p95": 521.6000000238419,
+          "min": 512.6999999284744,
+          "max": 521.6999999284744
+        },
+        "pngMs": null,
+        "readinessLongTaskCounts": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "derivations": [
+          16,
+          16,
+          16,
+          16,
+          16
+        ],
+        "unchangedMediaPublications": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 77.39999973773956,
+          "p95": 78.99999964237213,
+          "min": 76.90000021457672,
+          "max": 79.7000002861023
+        },
+        "commits": [
+          38,
+          38,
+          38,
+          38,
+          38
+        ],
+        "mediaDerivationsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationMsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationsBeforeReady": [
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "readinessLongTaskCounts": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          8.5,
+          22.100000023841858,
+          -1,
+          0.3999999761581421,
+          -2.6000001430511475
+        ],
+        "pairedMedianIntervalMs": [
+          -2.6000001430511475,
+          22.100000023841858
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/2",
+      "fixtureId": "exporter-061-carrousel",
+      "stage": "cold-switch-2",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 150.79999995231628,
+          "p95": 152.60000002384186,
+          "min": 147.60000002384186,
+          "max": 154.79999995231628
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 185.79999995231628,
+          "p95": 186,
+          "min": 182.89999997615814,
+          "max": 210.29999995231628
+        },
+        "pngMs": null,
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "derivations": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "unchangedMediaPublications": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 5.800000071525574,
+          "p95": 6,
+          "min": 5.600000023841858,
+          "max": 6.299999952316284
+        },
+        "commits": [
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "mediaDerivationsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationMsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationsBeforeReady": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          6.799999952316284,
+          11,
+          -2.4999998807907104,
+          1.600000023841858,
+          -4.5
+        ],
+        "pairedMedianIntervalMs": [
+          -4.5,
+          11
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/3",
+      "fixtureId": "exporter-061-now-hiring",
+      "stage": "warm-revisit-0",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 73.39999997615814,
+          "p95": 79.5,
+          "min": 72.10000002384186,
+          "max": 81.5
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 122.10000002384186,
+          "p95": 128.29999995231628,
+          "min": 122.10000002384186,
+          "max": 130.39999997615814
+        },
+        "pngMs": null,
+        "readinessLongTaskCounts": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "mediaDerivationsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationMsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          7.5,
+          -0.7999999523162842,
+          7.5,
+          -1.100000023841858,
+          -1.7000000476837158
+        ],
+        "pairedMedianIntervalMs": [
+          -1.7000000476837158,
+          7.5
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/4",
+      "fixtureId": "exporter-061-cover",
+      "stage": "warm-revisit-1",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 91.79999995231628,
+          "p95": 92.10000002384186,
+          "min": 88.5,
+          "max": 93
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 181.10000002384186,
+          "p95": 181.20000004768372,
+          "min": 181,
+          "max": 181.29999995231628
+        },
+        "pngMs": null,
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "mediaDerivationsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationMsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -2.100000023841858,
+          1.3000000715255737,
+          -2.700000047683716,
+          -1.3999998569488525,
+          -0.19999992847442627
+        ],
+        "pairedMedianIntervalMs": [
+          -2.700000047683716,
+          1.3000000715255737
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    },
+    {
+      "key": "family-switch/5",
+      "fixtureId": "exporter-061-carrousel",
+      "stage": "warm-revisit-2",
+      "minimal": {
+        "finalReadyMs": {
+          "count": 5,
+          "median": 95,
+          "p95": 95.70000004768372,
+          "min": 93.69999992847443,
+          "max": 96.19999992847443
+        },
+        "stablePreviewMs": {
+          "count": 5,
+          "median": 173.10000002384186,
+          "p95": 173.10000002384186,
+          "min": 172.5,
+          "max": 173.60000002384186
+        },
+        "pngMs": {
+          "count": 5,
+          "median": 729.6999999284744,
+          "p95": 734.2999999523163,
+          "min": 707.6999999284744,
+          "max": 742.6000000238419
+        },
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "detailed": {
+        "mediaCompletions": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "derivations": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unchangedMediaPublications": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mediaDerivationMs": {
+          "count": 5,
+          "median": 0,
+          "p95": 0,
+          "min": 0,
+          "max": 0
+        },
+        "commits": [
+          8,
+          8,
+          8,
+          9,
+          8
+        ],
+        "mediaDerivationsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationMsBeforeMount": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "mediaDerivationsBeforeReady": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "readinessLongTaskCounts": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "mediaDerivationsOverlappingLongTasks": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "observationOverhead": {
+        "pairedReadyDeltasMs": [
+          -1.4000000953674316,
+          -1.399999976158142,
+          -2.200000047683716,
+          0.10000002384185791,
+          -4.5000001192092896
+        ],
+        "pairedMedianIntervalMs": [
+          -4.5000001192092896,
+          0.10000002384185791
+        ],
+        "interpretation": "Detailed-minus-minimal observation overhead and run variability; never implementation improvement."
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 180.39999997615814,
+      "synchronousLoadMs": 11.800000071525574,
+      "finalReadyMs": 148.20000004768372,
+      "readyObservedMs": 150.39999997615814,
+      "stablePreviewMs": 192.5,
+      "pngMs": 517,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 237.10000002384186,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 222.29999995231628,
+        "ready": 370.5,
+        "stable": 414.7999999523163
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 186.79999995231628,
+      "synchronousLoadMs": 12,
+      "finalReadyMs": 150.39999997615814,
+      "readyObservedMs": 152.09999990463257,
+      "stablePreviewMs": 194.19999992847443,
+      "pngMs": 507.39999997615814,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 246.20000004768372,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 231.20000004768372,
+        "ready": 381.60000002384186,
+        "stable": 425.39999997615814
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 186.30000007152557,
+      "synchronousLoadMs": 12.299999952316284,
+      "finalReadyMs": 148.5,
+      "readyObservedMs": 154,
+      "stablePreviewMs": 196.20000004768372,
+      "pngMs": 513.5,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 245.20000004768372,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 230,
+        "ready": 378.5,
+        "stable": 426.2000000476837
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 187.30000007152557,
+      "synchronousLoadMs": 12,
+      "finalReadyMs": 155.10000002384186,
+      "readyObservedMs": 160.60000002384186,
+      "stablePreviewMs": 207.5,
+      "pngMs": 534.3000000715256,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 245.40000009536743,
+          "duration": 54
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 229.80000007152557,
+        "ready": 384.90000009536743,
+        "stable": 437.3000000715256
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 180.89999997615814,
+      "synchronousLoadMs": 12.399999976158142,
+      "finalReadyMs": 160.29999995231628,
+      "readyObservedMs": 162.20000004768372,
+      "stablePreviewMs": 201,
+      "pngMs": 509.89999997615814,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 238.29999995231628,
+          "duration": 55
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 222.5,
+        "ready": 382.7999999523163,
+        "stable": 423.5
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 185.60000002384186,
+      "synchronousLoadMs": 12.300000071525574,
+      "finalReadyMs": 143.60000002384186,
+      "readyObservedMs": 145.30000007152557,
+      "stablePreviewMs": 198,
+      "pngMs": 542.6000000238419,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 244.69999992847443,
+          "duration": 50
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 229.69999992847443,
+        "ready": 373.2999999523163,
+        "stable": 427.6999999284744
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 185.89999997615814,
+      "synchronousLoadMs": 12.699999928474426,
+      "finalReadyMs": 200.89999997615814,
+      "readyObservedMs": 210,
+      "stablePreviewMs": 263.59999990463257,
+      "pngMs": 616.1999999284744,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 243.29999995231628,
+          "duration": 58
+        },
+        {
+          "start": 340.89999997615814,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 227.60000002384186,
+        "ready": 428.5,
+        "stable": 491.1999999284744
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 212.89999997615814,
+      "synchronousLoadMs": 12.5,
+      "finalReadyMs": 158.59999990463257,
+      "readyObservedMs": 160.89999997615814,
+      "stablePreviewMs": 203.09999990463257,
+      "pngMs": 579.1999999284744,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 276.5,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 261,
+        "ready": 419.59999990463257,
+        "stable": 464.09999990463257
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 185.70000004768372,
+      "synchronousLoadMs": 12.399999976158142,
+      "finalReadyMs": 155.19999992847443,
+      "readyObservedMs": 160.79999995231628,
+      "stablePreviewMs": 209.5,
+      "pngMs": 541.3999999761581,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 243.70000004768372,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 228.20000004768372,
+        "ready": 383.39999997615814,
+        "stable": 437.7000000476837
+      }
+    },
+    {
+      "scenario": "single-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 190.5,
+      "synchronousLoadMs": 12.899999976158142,
+      "finalReadyMs": 157,
+      "readyObservedMs": 159.10000002384186,
+      "stablePreviewMs": 213.10000002384186,
+      "pngMs": 710.4000000953674,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 250.90000009536743,
+          "duration": 54
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 234.60000002384186,
+        "ready": 391.60000002384186,
+        "stable": 447.7000000476837
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 163.39999997615814,
+      "synchronousLoadMs": 16.200000047683716,
+      "finalReadyMs": 165.20000004768372,
+      "readyObservedMs": 154.60000002384186,
+      "stablePreviewMs": 190.39999997615814,
+      "pngMs": 464.60000002384186,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 224.20000004768372,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 205,
+        "ready": 370.2000000476837,
+        "stable": 395.39999997615814
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 163.09999990463257,
+      "synchronousLoadMs": 16.600000023841858,
+      "finalReadyMs": 163.5,
+      "readyObservedMs": 153.10000002384186,
+      "stablePreviewMs": 212.19999992847443,
+      "pngMs": 443.2000000476837,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 223.20000004768372,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 203.60000002384186,
+        "ready": 367.10000002384186,
+        "stable": 415.7999999523163
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 164.70000004768372,
+      "synchronousLoadMs": 15.900000095367432,
+      "finalReadyMs": 163.70000004768372,
+      "readyObservedMs": 155.40000009536743,
+      "stablePreviewMs": 219.10000002384186,
+      "pngMs": 447.5,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 223.10000002384186,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 204,
+        "ready": 367.7000000476837,
+        "stable": 423.10000002384186
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 168.89999997615814,
+      "synchronousLoadMs": 16.300000071525574,
+      "finalReadyMs": 165,
+      "readyObservedMs": 157,
+      "stablePreviewMs": 221,
+      "pngMs": 435.2000000476837,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 228.89999997615814,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 208.89999997615814,
+        "ready": 373.89999997615814,
+        "stable": 429.89999997615814
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 163,
+      "synchronousLoadMs": 16.199999928474426,
+      "finalReadyMs": 168.19999992847443,
+      "readyObservedMs": 156.89999997615814,
+      "stablePreviewMs": 213.69999992847443,
+      "pngMs": 432.2000000476837,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 220.10000002384186,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 200.70000004768372,
+        "ready": 368.89999997615814,
+        "stable": 414.39999997615814
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 164.20000004768372,
+      "synchronousLoadMs": 16.399999976158142,
+      "finalReadyMs": 159.60000002384186,
+      "readyObservedMs": 164.39999997615814,
+      "stablePreviewMs": 207.39999997615814,
+      "pngMs": 427.89999997615814,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 223.89999997615814,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 204.29999995231628,
+        "ready": 363.89999997615814,
+        "stable": 411.6999999284744
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 165.10000002384186,
+      "synchronousLoadMs": 16.5,
+      "finalReadyMs": 169.10000002384186,
+      "readyObservedMs": 158.80000007152557,
+      "stablePreviewMs": 215.90000009536743,
+      "pngMs": 420.8000000715256,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 224.70000004768372,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 205,
+        "ready": 374.10000002384186,
+        "stable": 420.90000009536743
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 165.30000007152557,
+      "synchronousLoadMs": 15.900000095367432,
+      "finalReadyMs": 159.30000007152557,
+      "readyObservedMs": 151.40000009536743,
+      "stablePreviewMs": 215.20000004768372,
+      "pngMs": 440.39999997615814,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 222.69999992847443,
+          "duration": 57
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 203.59999990463257,
+        "ready": 362.89999997615814,
+        "stable": 418.7999999523163
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 165.29999995231628,
+      "synchronousLoadMs": 16.40000009536743,
+      "finalReadyMs": 168.40000009536743,
+      "readyObservedMs": 158,
+      "stablePreviewMs": 195.60000002384186,
+      "pngMs": 425.1999999284744,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 226.70000004768372,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 207,
+        "ready": 375.40000009536743,
+        "stable": 402.60000002384186
+      }
+    },
+    {
+      "scenario": "single-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 163.10000002384186,
+      "synchronousLoadMs": 16.100000023841858,
+      "finalReadyMs": 166.20000004768372,
+      "readyObservedMs": 155.60000002384186,
+      "stablePreviewMs": 191.60000002384186,
+      "pngMs": 448.5,
+      "publications": 8,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 223,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 203.89999997615814,
+        "ready": 370.10000002384186,
+        "stable": 395.5
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 157.80000007152557,
+      "synchronousLoadMs": 15.700000047683716,
+      "finalReadyMs": 170.30000007152557,
+      "readyObservedMs": 176.60000002384186,
+      "stablePreviewMs": 213.70000004768372,
+      "pngMs": 698.5,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 215.69999992847443,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 196.69999992847443,
+        "ready": 367,
+        "stable": 410.39999997615814
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 158.79999995231628,
+      "synchronousLoadMs": 15.900000095367432,
+      "finalReadyMs": 173.40000009536743,
+      "readyObservedMs": 179.80000007152557,
+      "stablePreviewMs": 225.5,
+      "pngMs": 706,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 217.89999997615814,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 198.89999997615814,
+        "ready": 372.3000000715256,
+        "stable": 424.39999997615814
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 163.60000002384186,
+      "synchronousLoadMs": 15.899999976158142,
+      "finalReadyMs": 173.39999997615814,
+      "readyObservedMs": 180.59999990463257,
+      "stablePreviewMs": 224.19999992847443,
+      "pngMs": 686.3999999761581,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 224.89999997615814,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 205.80000007152557,
+        "ready": 379.2000000476837,
+        "stable": 430
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 158.10000002384186,
+      "synchronousLoadMs": 15.800000071525574,
+      "finalReadyMs": 173,
+      "readyObservedMs": 175.20000004768372,
+      "stablePreviewMs": 221,
+      "pngMs": 674.1000000238419,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 218.40000009536743,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 199.5,
+        "ready": 372.5,
+        "stable": 420.5
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 158.39999997615814,
+      "synchronousLoadMs": 16.100000023841858,
+      "finalReadyMs": 174,
+      "readyObservedMs": 176,
+      "stablePreviewMs": 227,
+      "pngMs": 685.0999999046326,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 216.39999997615814,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 197,
+        "ready": 371,
+        "stable": 424
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 167.80000007152557,
+      "synchronousLoadMs": 15.600000023841858,
+      "finalReadyMs": 177.39999997615814,
+      "readyObservedMs": 179.80000007152557,
+      "stablePreviewMs": 232.60000002384186,
+      "pngMs": 680.0999999046326,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 225.59999990463257,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 206.69999992847443,
+        "ready": 384.09999990463257,
+        "stable": 439.2999999523163
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 163.5,
+      "synchronousLoadMs": 16.200000047683716,
+      "finalReadyMs": 179.70000004768372,
+      "readyObservedMs": 181.70000004768372,
+      "stablePreviewMs": 223.79999995231628,
+      "pngMs": 679.5,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 224.89999997615814,
+          "duration": 66
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 205.60000002384186,
+        "ready": 385.3000000715256,
+        "stable": 429.39999997615814
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 161,
+      "synchronousLoadMs": 15.400000095367432,
+      "finalReadyMs": 169.80000007152557,
+      "readyObservedMs": 176.20000004768372,
+      "stablePreviewMs": 213.70000004768372,
+      "pngMs": 724.6000000238419,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 220.10000002384186,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 201.39999997615814,
+        "ready": 371.2000000476837,
+        "stable": 415.10000002384186
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 161.5,
+      "synchronousLoadMs": 16.199999928474426,
+      "finalReadyMs": 172.5,
+      "readyObservedMs": 178.79999995231628,
+      "stablePreviewMs": 223.79999995231628,
+      "pngMs": 713.8999999761581,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 222.5,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 203,
+        "ready": 375.5,
+        "stable": 426.7999999523163
+      }
+    },
+    {
+      "scenario": "single-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 158.60000002384186,
+      "synchronousLoadMs": 15.600000023841858,
+      "finalReadyMs": 171.69999992847443,
+      "readyObservedMs": 178.29999995231628,
+      "stablePreviewMs": 218.39999997615814,
+      "pngMs": 725.9000000953674,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 5,
+      "commits": 11,
+      "readinessLongTasks": [
+        {
+          "start": 216.10000002384186,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 197.20000004768372,
+        "ready": 368.89999997615814,
+        "stable": 415.60000002384186
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 250.89999997615814,
+      "synchronousLoadMs": 13.200000047683716,
+      "finalReadyMs": 163.89999997615814,
+      "readyObservedMs": 169.20000004768372,
+      "stablePreviewMs": 212.5,
+      "pngMs": 518.5999999046326,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 291.7999999523163,
+        "ready": 455.6999999284744,
+        "stable": 504.2999999523163
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 236,
+      "synchronousLoadMs": 13.100000023841858,
+      "finalReadyMs": 159.30000007152557,
+      "readyObservedMs": 161.20000004768372,
+      "stablePreviewMs": 213.60000002384186,
+      "pngMs": 514.3999999761581,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.5,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 345.2999999523163,
+          "end": 349.7999999523163,
+          "duration": 4.5
+        }
+      ],
+      "materializations": 2,
+      "trees": 8,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 293.89999997615814,
+          "duration": 50
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 275.6999999284744,
+        "ready": 435,
+        "stable": 489.2999999523163
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 240.69999992847443,
+      "synchronousLoadMs": 13.099999904632568,
+      "finalReadyMs": 168.29999995231628,
+      "readyObservedMs": 173.59999990463257,
+      "stablePreviewMs": 218.79999995231628,
+      "pngMs": 513,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.399999976158142,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 349.7999999523163,
+          "end": 354.1999999284744,
+          "duration": 4.399999976158142
+        }
+      ],
+      "materializations": 2,
+      "trees": 8,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 297.60000002384186,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 280.10000002384186,
+        "ready": 448.39999997615814,
+        "stable": 498.89999997615814
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 248.79999995231628,
+      "synchronousLoadMs": 13.200000047683716,
+      "finalReadyMs": 167.40000009536743,
+      "readyObservedMs": 172.70000004768372,
+      "stablePreviewMs": 211.60000002384186,
+      "pngMs": 525.7999999523163,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 308.7000000476837,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 290,
+        "ready": 457.40000009536743,
+        "stable": 501.60000002384186
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 244.09999990463257,
+      "synchronousLoadMs": 13,
+      "finalReadyMs": 163.59999990463257,
+      "readyObservedMs": 169.5,
+      "stablePreviewMs": 223.39999997615814,
+      "pngMs": 514.8000000715256,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 304.3000000715256,
+          "duration": 52
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 286.90000009536743,
+        "ready": 450.5,
+        "stable": 510.3000000715256
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 244.10000002384186,
+      "synchronousLoadMs": 13.400000095367432,
+      "finalReadyMs": 165.70000004768372,
+      "readyObservedMs": 170.70000004768372,
+      "stablePreviewMs": 223.10000002384186,
+      "pngMs": 506.2999999523163,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.5,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 351.90000009536743,
+          "end": 356.40000009536743,
+          "duration": 4.5
+        }
+      ],
+      "materializations": 2,
+      "trees": 8,
+      "commits": 14,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 283,
+        "ready": 448.7000000476837,
+        "stable": 506.10000002384186
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 237.89999997615814,
+      "synchronousLoadMs": 13.099999904632568,
+      "finalReadyMs": 171,
+      "readyObservedMs": 176.19999992847443,
+      "stablePreviewMs": 218.39999997615814,
+      "pngMs": 502.10000002384186,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.799999952316284,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 348.7000000476837,
+          "end": 353.5,
+          "duration": 4.799999952316284
+        }
+      ],
+      "materializations": 2,
+      "trees": 8,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 295.2999999523163,
+          "duration": 52
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 277.7000000476837,
+        "ready": 448.7000000476837,
+        "stable": 496.10000002384186
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 243.79999995231628,
+      "synchronousLoadMs": 13.900000095367432,
+      "finalReadyMs": 162.80000007152557,
+      "readyObservedMs": 169.40000009536743,
+      "stablePreviewMs": 224.30000007152557,
+      "pngMs": 504.10000002384186,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 305.5,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 286.59999990463257,
+        "ready": 449.39999997615814,
+        "stable": 510.89999997615814
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 242.59999990463257,
+      "synchronousLoadMs": 13.199999928474426,
+      "finalReadyMs": 157.09999990463257,
+      "readyObservedMs": 165.79999995231628,
+      "stablePreviewMs": 211.39999997615814,
+      "pngMs": 504.3000000715256,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 282.40000009536743,
+        "ready": 439.5,
+        "stable": 493.8000000715256
+      }
+    },
+    {
+      "scenario": "family-cold-0",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 237.29999995231628,
+      "synchronousLoadMs": 13.200000047683716,
+      "finalReadyMs": 159.89999997615814,
+      "readyObservedMs": 166.10000002384186,
+      "stablePreviewMs": 211.60000002384186,
+      "pngMs": 516.7000000476837,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.5,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 346.10000002384186,
+          "end": 350.60000002384186,
+          "duration": 4.5
+        }
+      ],
+      "materializations": 2,
+      "trees": 8,
+      "commits": 14,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 277.2999999523163,
+        "ready": 437.1999999284744,
+        "stable": 488.89999997615814
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 240.39999997615814,
+      "synchronousLoadMs": 17.09999990463257,
+      "finalReadyMs": 277.5,
+      "readyObservedMs": 266.89999997615814,
+      "stablePreviewMs": 326.5,
+      "pngMs": 435,
+      "publications": 24,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 385.7999999523163,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281.5,
+        "ready": 559,
+        "stable": 608
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 240.19999992847443,
+      "synchronousLoadMs": 16.899999976158142,
+      "finalReadyMs": 263.09999990463257,
+      "readyObservedMs": 251.29999995231628,
+      "stablePreviewMs": 315.2999999523163,
+      "pngMs": 449.09999990463257,
+      "publications": 23,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 74.39999973773956,
+      "mediaDerivationsBeforeMount": 15,
+      "mediaDerivationMsBeforeMount": 74.39999973773956,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 306.10000002384186,
+          "end": 314.2000000476837,
+          "duration": 8.100000023841858
+        },
+        {
+          "start": 314.8000000715256,
+          "end": 320,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 320.60000002384186,
+          "end": 326.3000000715256,
+          "duration": 5.700000047683716
+        },
+        {
+          "start": 326.90000009536743,
+          "end": 332.10000002384186,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 332.7000000476837,
+          "end": 337.3000000715256,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 337.8000000715256,
+          "end": 342.5,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 343,
+          "end": 347.5,
+          "duration": 4.5
+        },
+        {
+          "start": 347.90000009536743,
+          "end": 352.60000002384186,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 353,
+          "end": 357.8000000715256,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 358.3000000715256,
+          "end": 363.60000002384186,
+          "duration": 5.299999952316284
+        },
+        {
+          "start": 364.10000002384186,
+          "end": 368.40000009536743,
+          "duration": 4.300000071525574
+        },
+        {
+          "start": 368.90000009536743,
+          "end": 373,
+          "duration": 4.099999904632568
+        },
+        {
+          "start": 373.40000009536743,
+          "end": 377.60000002384186,
+          "duration": 4.199999928474426
+        },
+        {
+          "start": 378.10000002384186,
+          "end": 382.60000002384186,
+          "duration": 4.5
+        },
+        {
+          "start": 383.40000009536743,
+          "end": 387.90000009536743,
+          "duration": 4.5
+        }
+      ],
+      "materializations": 16,
+      "trees": 22,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 390.10000002384186,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 280.40000009536743,
+        "ready": 543.5,
+        "stable": 595.7000000476837
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 241,
+      "synchronousLoadMs": 16.600000023841858,
+      "finalReadyMs": 273.2000000476837,
+      "readyObservedMs": 265.10000002384186,
+      "stablePreviewMs": 320.40000009536743,
+      "pngMs": 442.39999997615814,
+      "publications": 24,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 75.99999976158142,
+      "mediaDerivationsBeforeMount": 14,
+      "mediaDerivationMsBeforeMount": 70.09999978542328,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 306.60000002384186,
+          "end": 314.2000000476837,
+          "duration": 7.600000023841858
+        },
+        {
+          "start": 314.89999997615814,
+          "end": 320,
+          "duration": 5.100000023841858
+        },
+        {
+          "start": 320.60000002384186,
+          "end": 326.2000000476837,
+          "duration": 5.600000023841858
+        },
+        {
+          "start": 326.7000000476837,
+          "end": 331.89999997615814,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 332.5,
+          "end": 337.2000000476837,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 337.7000000476837,
+          "end": 342.60000002384186,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 343.2000000476837,
+          "end": 348,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 348.60000002384186,
+          "end": 353.2999999523163,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 353.7999999523163,
+          "end": 358.60000002384186,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 359.2000000476837,
+          "end": 364.39999997615814,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 364.89999997615814,
+          "end": 369.2999999523163,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 369.7000000476837,
+          "end": 373.7999999523163,
+          "duration": 4.099999904632568
+        },
+        {
+          "start": 374.2999999523163,
+          "end": 378.7000000476837,
+          "duration": 4.400000095367432
+        },
+        {
+          "start": 379.2000000476837,
+          "end": 383.7999999523163,
+          "duration": 4.599999904632568
+        },
+        {
+          "start": 451.10000002384186,
+          "end": 457,
+          "duration": 5.899999976158142
+        }
+      ],
+      "materializations": 16,
+      "trees": 22,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 386.2000000476837,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281.2999999523163,
+        "ready": 554.5,
+        "stable": 601.7000000476837
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 241,
+      "synchronousLoadMs": 16.5,
+      "finalReadyMs": 272.2000000476837,
+      "readyObservedMs": 255.5,
+      "stablePreviewMs": 325.10000002384186,
+      "pngMs": 451.09999990463257,
+      "publications": 22,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 387.39999997615814,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 282.09999990463257,
+        "ready": 554.2999999523163,
+        "stable": 607.1999999284744
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 242.29999995231628,
+      "synchronousLoadMs": 16.299999952316284,
+      "finalReadyMs": 268.5,
+      "readyObservedMs": 252.79999995231628,
+      "stablePreviewMs": 317.89999997615814,
+      "pngMs": 433.3000000715256,
+      "publications": 22,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 385.7000000476837,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281.3000000715256,
+        "ready": 549.8000000715256,
+        "stable": 599.2000000476837
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 241.5,
+      "synchronousLoadMs": 16.899999976158142,
+      "finalReadyMs": 261.60000002384186,
+      "readyObservedMs": 250.60000002384186,
+      "stablePreviewMs": 287.5,
+      "pngMs": 490.2000000476837,
+      "publications": 23,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 74.99999988079071,
+      "mediaDerivationsBeforeMount": 15,
+      "mediaDerivationMsBeforeMount": 74.99999988079071,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 306.89999997615814,
+          "end": 314.7999999523163,
+          "duration": 7.899999976158142
+        },
+        {
+          "start": 315.5,
+          "end": 320.6999999284744,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 321.1999999284744,
+          "end": 326.6999999284744,
+          "duration": 5.5
+        },
+        {
+          "start": 327.1999999284744,
+          "end": 332.39999997615814,
+          "duration": 5.200000047683716
+        },
+        {
+          "start": 332.89999997615814,
+          "end": 337.1999999284744,
+          "duration": 4.299999952316284
+        },
+        {
+          "start": 337.6999999284744,
+          "end": 342.5,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 343.10000002384186,
+          "end": 348.10000002384186,
+          "duration": 5
+        },
+        {
+          "start": 348.60000002384186,
+          "end": 353.5,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 353.89999997615814,
+          "end": 358.6999999284744,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 359.1999999284744,
+          "end": 364,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 364.60000002384186,
+          "end": 369,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 369.5,
+          "end": 373.7999999523163,
+          "duration": 4.199999928474426
+        },
+        {
+          "start": 374.1999999284744,
+          "end": 378.5,
+          "duration": 4.300000071525574
+        },
+        {
+          "start": 379.10000002384186,
+          "end": 383.89999997615814,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 384.5,
+          "end": 389.39999997615814,
+          "duration": 4.899999976158142
+        }
+      ],
+      "materializations": 16,
+      "trees": 22,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 391.60000002384186,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281,
+        "ready": 542.6000000238419,
+        "stable": 568.5
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 244.10000002384186,
+      "synchronousLoadMs": 16.899999976158142,
+      "finalReadyMs": 278.2000000476837,
+      "readyObservedMs": 267.8000000715256,
+      "stablePreviewMs": 324.60000002384186,
+      "pngMs": 448.60000002384186,
+      "publications": 24,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 76.5,
+      "mediaDerivationsBeforeMount": 14,
+      "mediaDerivationMsBeforeMount": 70.60000002384186,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 310.7000000476837,
+          "end": 319,
+          "duration": 8.299999952316284
+        },
+        {
+          "start": 319.5,
+          "end": 324.7000000476837,
+          "duration": 5.200000047683716
+        },
+        {
+          "start": 325.2000000476837,
+          "end": 330.60000002384186,
+          "duration": 5.399999976158142
+        },
+        {
+          "start": 331.10000002384186,
+          "end": 336.10000002384186,
+          "duration": 5
+        },
+        {
+          "start": 336.60000002384186,
+          "end": 341.7999999523163,
+          "duration": 5.199999928474426
+        },
+        {
+          "start": 342.39999997615814,
+          "end": 347.10000002384186,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 347.7999999523163,
+          "end": 352.5,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 353,
+          "end": 357.5,
+          "duration": 4.5
+        },
+        {
+          "start": 358,
+          "end": 362.60000002384186,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 363.2000000476837,
+          "end": 368.2000000476837,
+          "duration": 5
+        },
+        {
+          "start": 368.60000002384186,
+          "end": 373,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 373.39999997615814,
+          "end": 378,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 378.60000002384186,
+          "end": 383.10000002384186,
+          "duration": 4.5
+        },
+        {
+          "start": 383.60000002384186,
+          "end": 388.10000002384186,
+          "duration": 4.5
+        },
+        {
+          "start": 457,
+          "end": 462.89999997615814,
+          "duration": 5.899999976158142
+        }
+      ],
+      "materializations": 16,
+      "trees": 22,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 390.60000002384186,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 284.39999997615814,
+        "ready": 562.6000000238419,
+        "stable": 609
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 239.90000009536743,
+      "synchronousLoadMs": 16.699999928474426,
+      "finalReadyMs": 265.10000002384186,
+      "readyObservedMs": 253.39999997615814,
+      "stablePreviewMs": 288.7999999523163,
+      "pngMs": 453.7000000476837,
+      "publications": 23,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 389.5,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 279.10000002384186,
+        "ready": 544.2000000476837,
+        "stable": 567.8999999761581
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 242.5,
+      "synchronousLoadMs": 16.700000047683716,
+      "finalReadyMs": 264.90000009536743,
+      "readyObservedMs": 254,
+      "stablePreviewMs": 312.60000002384186,
+      "pngMs": 443.6999999284744,
+      "publications": 23,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 397.3000000715256,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 283.89999997615814,
+        "ready": 548.8000000715256,
+        "stable": 596.5
+      }
+    },
+    {
+      "scenario": "family-cold-1",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-cover",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 243,
+      "synchronousLoadMs": 17.100000023841858,
+      "finalReadyMs": 275.40000009536743,
+      "readyObservedMs": 257.7000000476837,
+      "stablePreviewMs": 303.10000002384186,
+      "pngMs": 456.6999999284744,
+      "publications": 22,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 76.19999969005585,
+      "mediaDerivationsBeforeMount": 14,
+      "mediaDerivationMsBeforeMount": 70.69999969005585,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 308.5,
+          "end": 316.2999999523163,
+          "duration": 7.799999952316284
+        },
+        {
+          "start": 316.89999997615814,
+          "end": 322.2000000476837,
+          "duration": 5.300000071525574
+        },
+        {
+          "start": 322.7000000476837,
+          "end": 328.2999999523163,
+          "duration": 5.599999904632568
+        },
+        {
+          "start": 328.7999999523163,
+          "end": 334.10000002384186,
+          "duration": 5.300000071525574
+        },
+        {
+          "start": 334.7000000476837,
+          "end": 339.2999999523163,
+          "duration": 4.599999904632568
+        },
+        {
+          "start": 339.89999997615814,
+          "end": 344.5,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 345.2000000476837,
+          "end": 349.89999997615814,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 350.39999997615814,
+          "end": 355.2999999523163,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 355.89999997615814,
+          "end": 361,
+          "duration": 5
+        },
+        {
+          "start": 361.60000002384186,
+          "end": 366.5,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 367.10000002384186,
+          "end": 371.39999997615814,
+          "duration": 4.299999952316284
+        },
+        {
+          "start": 371.7000000476837,
+          "end": 376.2000000476837,
+          "duration": 4.5
+        },
+        {
+          "start": 376.7000000476837,
+          "end": 381.5,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 382,
+          "end": 386.39999997615814,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 457.5,
+          "end": 463,
+          "duration": 5.5
+        }
+      ],
+      "materializations": 16,
+      "trees": 22,
+      "commits": 12,
+      "readinessLongTasks": [
+        {
+          "start": 388.89999997615814,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 282.7999999523163,
+        "ready": 558.2000000476837,
+        "stable": 585.8999999761581
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 468.5,
+      "synchronousLoadMs": 26.199999928474426,
+      "finalReadyMs": 299.89999997615814,
+      "readyObservedMs": 302.89999997615814,
+      "stablePreviewMs": 352.09999990463257,
+      "pngMs": 835.7000000476837,
+      "publications": 14,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 599.8999999761581,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 561.6000000238419,
+        "ready": 861.5,
+        "stable": 913.6999999284744
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 253.70000004768372,
+      "synchronousLoadMs": 16.399999976158142,
+      "finalReadyMs": 236,
+      "readyObservedMs": 215.10000002384186,
+      "stablePreviewMs": 265.39999997615814,
+      "pngMs": 766.7000000476837,
+      "publications": 13,
+      "mediaCompletions": 2,
+      "derivations": 3,
+      "mediaDerivations": 2,
+      "unchangedMediaPublications": 2,
+      "mediaDerivationMs": 13.899999976158142,
+      "mediaDerivationsBeforeMount": 1,
+      "mediaDerivationMsBeforeMount": 7.399999976158142,
+      "mediaDerivationsBeforeReady": 2,
+      "mediaDerivationIntervals": [
+        {
+          "start": 317.7000000476837,
+          "end": 325.10000002384186,
+          "duration": 7.399999976158142
+        },
+        {
+          "start": 396.8000000715256,
+          "end": 403.3000000715256,
+          "duration": 6.5
+        }
+      ],
+      "materializations": 3,
+      "trees": 9,
+      "commits": 16,
+      "readinessLongTasks": [
+        {
+          "start": 326.90000009536743,
+          "duration": 68
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 296.2000000476837,
+        "ready": 532.2000000476837,
+        "stable": 561.6000000238419
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 246.5,
+      "synchronousLoadMs": 16.100000023841858,
+      "finalReadyMs": 201.10000002384186,
+      "readyObservedMs": 203.89999997615814,
+      "stablePreviewMs": 256.5,
+      "pngMs": 706.5,
+      "publications": 11,
+      "mediaCompletions": 2,
+      "derivations": 3,
+      "mediaDerivations": 2,
+      "unchangedMediaPublications": 2,
+      "mediaDerivationMs": 13.400000095367432,
+      "mediaDerivationsBeforeMount": 1,
+      "mediaDerivationMsBeforeMount": 7.5,
+      "mediaDerivationsBeforeReady": 2,
+      "mediaDerivationIntervals": [
+        {
+          "start": 307.8000000715256,
+          "end": 315.3000000715256,
+          "duration": 7.5
+        },
+        {
+          "start": 384,
+          "end": 389.90000009536743,
+          "duration": 5.900000095367432
+        }
+      ],
+      "materializations": 3,
+      "trees": 9,
+      "commits": 14,
+      "readinessLongTasks": [
+        {
+          "start": 317,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 286.60000002384186,
+        "ready": 487.7000000476837,
+        "stable": 543.1000000238419
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 241.10000002384186,
+      "synchronousLoadMs": 16.600000023841858,
+      "finalReadyMs": 217.70000004768372,
+      "readyObservedMs": 220.5,
+      "stablePreviewMs": 270.7000000476837,
+      "pngMs": 708.1000000238419,
+      "publications": 13,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 312.5,
+          "duration": 66
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 280.6999999284744,
+        "ready": 498.39999997615814,
+        "stable": 551.3999999761581
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 243.80000007152557,
+      "synchronousLoadMs": 17.100000023841858,
+      "finalReadyMs": 223.39999997615814,
+      "readyObservedMs": 225.70000004768372,
+      "stablePreviewMs": 269.60000002384186,
+      "pngMs": 736.1000000238419,
+      "publications": 13,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 316.10000002384186,
+          "duration": 67
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 284.39999997615814,
+        "ready": 507.7999999523163,
+        "stable": 554
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 241.29999995231628,
+      "synchronousLoadMs": 16.5,
+      "finalReadyMs": 218.5,
+      "readyObservedMs": 220.89999997615814,
+      "stablePreviewMs": 258,
+      "pngMs": 724.8999999761581,
+      "publications": 13,
+      "mediaCompletions": 2,
+      "derivations": 3,
+      "mediaDerivations": 2,
+      "unchangedMediaPublications": 2,
+      "mediaDerivationMs": 14.199999928474426,
+      "mediaDerivationsBeforeMount": 1,
+      "mediaDerivationMsBeforeMount": 7.699999928474426,
+      "mediaDerivationsBeforeReady": 2,
+      "mediaDerivationIntervals": [
+        {
+          "start": 304.2000000476837,
+          "end": 311.89999997615814,
+          "duration": 7.699999928474426
+        },
+        {
+          "start": 380.7999999523163,
+          "end": 387.2999999523163,
+          "duration": 6.5
+        }
+      ],
+      "materializations": 3,
+      "trees": 9,
+      "commits": 16,
+      "readinessLongTasks": [
+        {
+          "start": 313.7000000476837,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281.89999997615814,
+        "ready": 500.39999997615814,
+        "stable": 539.8999999761581
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 250.10000002384186,
+      "synchronousLoadMs": 16.699999928474426,
+      "finalReadyMs": 221,
+      "readyObservedMs": 198,
+      "stablePreviewMs": 253.10000002384186,
+      "pngMs": 711.3000000715256,
+      "publications": 13,
+      "mediaCompletions": 2,
+      "derivations": 3,
+      "mediaDerivations": 2,
+      "unchangedMediaPublications": 2,
+      "mediaDerivationMs": 13.899999976158142,
+      "mediaDerivationsBeforeMount": 1,
+      "mediaDerivationMsBeforeMount": 7.600000023841858,
+      "mediaDerivationsBeforeReady": 2,
+      "mediaDerivationIntervals": [
+        {
+          "start": 315.2999999523163,
+          "end": 322.89999997615814,
+          "duration": 7.600000023841858
+        },
+        {
+          "start": 392.5,
+          "end": 398.7999999523163,
+          "duration": 6.299999952316284
+        }
+      ],
+      "materializations": 3,
+      "trees": 9,
+      "commits": 16,
+      "readinessLongTasks": [
+        {
+          "start": 324.60000002384186,
+          "duration": 66
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 293.5,
+        "ready": 514.5,
+        "stable": 546.6000000238419
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 243,
+      "synchronousLoadMs": 16.699999928474426,
+      "finalReadyMs": 212.39999997615814,
+      "readyObservedMs": 214.5,
+      "stablePreviewMs": 255.60000002384186,
+      "pngMs": 734.3999999761581,
+      "publications": 13,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 315.2999999523163,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 284.60000002384186,
+        "ready": 497,
+        "stable": 540.2000000476837
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 241,
+      "synchronousLoadMs": 16.199999928474426,
+      "finalReadyMs": 214.79999995231628,
+      "readyObservedMs": 217.10000002384186,
+      "stablePreviewMs": 262.7999999523163,
+      "pngMs": 716.2000000476837,
+      "publications": 13,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 311.2000000476837,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 280.8000000715256,
+        "ready": 495.60000002384186,
+        "stable": 543.6000000238419
+      }
+    },
+    {
+      "scenario": "family-cold-2",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 239.90000009536743,
+      "synchronousLoadMs": 16.399999976158142,
+      "finalReadyMs": 217.39999997615814,
+      "readyObservedMs": 219.5,
+      "stablePreviewMs": 263.7999999523163,
+      "pngMs": 723.7999999523163,
+      "publications": 13,
+      "mediaCompletions": 2,
+      "derivations": 3,
+      "mediaDerivations": 2,
+      "unchangedMediaPublications": 2,
+      "mediaDerivationMs": 13.800000071525574,
+      "mediaDerivationsBeforeMount": 1,
+      "mediaDerivationMsBeforeMount": 7.600000023841858,
+      "mediaDerivationsBeforeReady": 2,
+      "mediaDerivationIntervals": [
+        {
+          "start": 304.2000000476837,
+          "end": 311.8000000715256,
+          "duration": 7.600000023841858
+        },
+        {
+          "start": 379.39999997615814,
+          "end": 385.60000002384186,
+          "duration": 6.200000047683716
+        }
+      ],
+      "materializations": 3,
+      "trees": 9,
+      "commits": 16,
+      "readinessLongTasks": [
+        {
+          "start": 313.7000000476837,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281.2000000476837,
+        "ready": 498.60000002384186,
+        "stable": 545
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": 245.5,
+      "synchronousLoadMs": 12.799999952316284,
+      "finalReadyMs": 166.5,
+      "readyObservedMs": 171.70000004768372,
+      "stablePreviewMs": 208.29999995231628,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 304.40000009536743,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 286.2000000476837,
+        "ready": 452.7000000476837,
+        "stable": 494.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 466.5,
+      "readyObservedMs": 470.6999999284744,
+      "stablePreviewMs": 521.6999999284744,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 498.3000000715256,
+          "duration": 79
+        },
+        {
+          "start": 861.3000000715256,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 497.90000009536743,
+        "ready": 964.4000000953674,
+        "stable": 1019.6000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 152.60000002384186,
+      "readyObservedMs": 158.39999997615814,
+      "stablePreviewMs": 182.89999997615814,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1028,
+          "duration": 71
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1027.7000000476837,
+        "ready": 1180.3000000715256,
+        "stable": 1210.6000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 72.5,
+      "readyObservedMs": 99.39999997615814,
+      "stablePreviewMs": 122.10000002384186,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1213.8000000715256,
+        "ready": 1286.3000000715256,
+        "stable": 1335.9000000953674
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 92.10000002384186,
+      "readyObservedMs": 155.70000004768372,
+      "stablePreviewMs": 181.20000004768372,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1338.4000000953674,
+          "duration": 66
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1338.2000000476837,
+        "ready": 1430.3000000715256,
+        "stable": 1519.4000000953674
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 0,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 94.80000007152557,
+      "readyObservedMs": 142.89999997615814,
+      "stablePreviewMs": 173.10000002384186,
+      "pngMs": 734.2999999523163,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1521.8000000715256,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1521.6000000238419,
+        "ready": 1616.4000000953674,
+        "stable": 1694.7000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": 241.09999990463257,
+      "synchronousLoadMs": 13.100000023841858,
+      "finalReadyMs": 199.29999995231628,
+      "readyObservedMs": 208.69999992847443,
+      "stablePreviewMs": 250.79999995231628,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.699999928474426,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 354,
+          "end": 358.6999999284744,
+          "duration": 4.699999928474426
+        }
+      ],
+      "materializations": 2,
+      "trees": 5,
+      "commits": 10,
+      "readinessLongTasks": [
+        {
+          "start": 299.10000002384186,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 281,
+        "ready": 480.2999999523163,
+        "stable": 531.7999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 475,
+      "readyObservedMs": 478.6999999284744,
+      "stablePreviewMs": 528.8999999761581,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 76.90000021457672,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 636.1000000238419,
+          "end": 642.5,
+          "duration": 6.399999976158142
+        },
+        {
+          "start": 654.5,
+          "end": 660.6000000238419,
+          "duration": 6.100000023841858
+        },
+        {
+          "start": 672.5,
+          "end": 678.8999999761581,
+          "duration": 6.399999976158142
+        },
+        {
+          "start": 691.1999999284744,
+          "end": 696.6000000238419,
+          "duration": 5.400000095367432
+        },
+        {
+          "start": 708,
+          "end": 714,
+          "duration": 6
+        },
+        {
+          "start": 725.2999999523163,
+          "end": 730.3999999761581,
+          "duration": 5.100000023841858
+        },
+        {
+          "start": 740.8999999761581,
+          "end": 745.6000000238419,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 757.1999999284744,
+          "end": 761.8999999761581,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 771.5,
+          "end": 775.6999999284744,
+          "duration": 4.199999928474426
+        },
+        {
+          "start": 785.6000000238419,
+          "end": 790,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 800.2999999523163,
+          "end": 805.1000000238419,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 814.8999999761581,
+          "end": 819.7999999523163,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 829.1999999284744,
+          "end": 833.7999999523163,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 843.2999999523163,
+          "end": 847.6999999284744,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 859.1999999284744,
+          "end": 864,
+          "duration": 4.800000071525574
+        }
+      ],
+      "materializations": 16,
+      "trees": 16,
+      "commits": 38,
+      "readinessLongTasks": [
+        {
+          "start": 536.7999999523163,
+          "duration": 80
+        },
+        {
+          "start": 907,
+          "duration": 84
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 536.5,
+        "ready": 1011.5,
+        "stable": 1065.3999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 159.39999997615814,
+      "readyObservedMs": 255.5,
+      "stablePreviewMs": 277.89999997615814,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 6,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 1160.5,
+          "end": 1166.5,
+          "duration": 6
+        }
+      ],
+      "materializations": 2,
+      "trees": 2,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1079.6000000238419,
+          "duration": 69
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1079.2999999523163,
+        "ready": 1238.6999999284744,
+        "stable": 1357.1999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 80,
+      "readyObservedMs": 103.5,
+      "stablePreviewMs": 130,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1361.1999999284744,
+        "ready": 1441.1999999284744,
+        "stable": 1491.1999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 90,
+      "readyObservedMs": 155.39999997615814,
+      "stablePreviewMs": 179.5,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [
+        {
+          "start": 1494.1999999284744,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1494,
+        "ready": 1584,
+        "stable": 1673.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 0,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 93.39999997615814,
+      "readyObservedMs": 141.10000002384186,
+      "stablePreviewMs": 171.20000004768372,
+      "pngMs": 721.6000000238419,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 4,
+      "commits": 8,
+      "readinessLongTasks": [
+        {
+          "start": 1677.5,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1677.2999999523163,
+        "ready": 1770.6999999284744,
+        "stable": 1848.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": 252.5,
+      "synchronousLoadMs": 14,
+      "finalReadyMs": 229.29999995231628,
+      "readyObservedMs": 235,
+      "stablePreviewMs": 278.1999999284744,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.799999952316284,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 373.3000000715256,
+          "end": 378.10000002384186,
+          "duration": 4.799999952316284
+        }
+      ],
+      "materializations": 2,
+      "trees": 5,
+      "commits": 10,
+      "readinessLongTasks": [
+        {
+          "start": 312.10000002384186,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 292.7000000476837,
+        "ready": 522,
+        "stable": 570.8999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 494.10000002384186,
+      "readyObservedMs": 496.40000009536743,
+      "stablePreviewMs": 537.7000000476837,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 77.39999973773956,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 711.7000000476837,
+          "end": 718.3999999761581,
+          "duration": 6.699999928474426
+        },
+        {
+          "start": 731,
+          "end": 737.6000000238419,
+          "duration": 6.600000023841858
+        },
+        {
+          "start": 750.8000000715256,
+          "end": 757.1000000238419,
+          "duration": 6.299999952316284
+        },
+        {
+          "start": 767.5,
+          "end": 772.3999999761581,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 784.7000000476837,
+          "end": 789.3999999761581,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 798.8999999761581,
+          "end": 803.8000000715256,
+          "duration": 4.900000095367432
+        },
+        {
+          "start": 814.2000000476837,
+          "end": 820,
+          "duration": 5.799999952316284
+        },
+        {
+          "start": 830.5,
+          "end": 835.3999999761581,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 846,
+          "end": 850.3999999761581,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 860.3999999761581,
+          "end": 865.5,
+          "duration": 5.100000023841858
+        },
+        {
+          "start": 875.1000000238419,
+          "end": 880.3999999761581,
+          "duration": 5.299999952316284
+        },
+        {
+          "start": 891.3000000715256,
+          "end": 895.7000000476837,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 905.8999999761581,
+          "end": 910.2000000476837,
+          "duration": 4.300000071525574
+        },
+        {
+          "start": 920.3000000715256,
+          "end": 924.8999999761581,
+          "duration": 4.599999904632568
+        },
+        {
+          "start": 935.5,
+          "end": 940,
+          "duration": 4.5
+        }
+      ],
+      "materializations": 16,
+      "trees": 16,
+      "commits": 38,
+      "readinessLongTasks": [
+        {
+          "start": 598.1000000238419,
+          "duration": 91
+        },
+        {
+          "start": 984.5,
+          "duration": 85
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 595.3999999761581,
+        "ready": 1089.5,
+        "stable": 1133.1000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 158.60000002384186,
+      "readyObservedMs": 203.5,
+      "stablePreviewMs": 236.20000004768372,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 6.299999952316284,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 1229.3000000715256,
+          "end": 1235.6000000238419,
+          "duration": 6.299999952316284
+        }
+      ],
+      "materializations": 2,
+      "trees": 2,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1147.5,
+          "duration": 71
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1147,
+        "ready": 1305.6000000238419,
+        "stable": 1383.2000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 80.70000004768372,
+      "readyObservedMs": 104.80000007152557,
+      "stablePreviewMs": 137.5,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1387.3999999761581,
+        "ready": 1468.1000000238419,
+        "stable": 1524.8999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 93.10000002384186,
+      "readyObservedMs": 169.10000002384186,
+      "stablePreviewMs": 189.39999997615814,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [
+        {
+          "start": 1527.8000000715256,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1527.6000000238419,
+        "ready": 1620.7000000476837,
+        "stable": 1717
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 1,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 94.79999995231628,
+      "readyObservedMs": 148.60000002384186,
+      "stablePreviewMs": 171.20000004768372,
+      "pngMs": 776.2999999523163,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 4,
+      "commits": 8,
+      "readinessLongTasks": [
+        {
+          "start": 1720.8000000715256,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1720.6000000238419,
+        "ready": 1815.3999999761581,
+        "stable": 1891.8000000715256
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": 243.10000002384186,
+      "synchronousLoadMs": 14,
+      "finalReadyMs": 170.19999992847443,
+      "readyObservedMs": 175.5,
+      "stablePreviewMs": 218.19999992847443,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 303.7999999523163,
+          "duration": 50
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 285,
+        "ready": 455.1999999284744,
+        "stable": 503.1999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 472,
+      "readyObservedMs": 473.89999997615814,
+      "stablePreviewMs": 521.6000000238419,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 506.6999999284744,
+          "duration": 79
+        },
+        {
+          "start": 874.7999999523163,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 506.5,
+        "ready": 978.5,
+        "stable": 1028.1000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 147.60000002384186,
+      "readyObservedMs": 156.10000002384186,
+      "stablePreviewMs": 210.29999995231628,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1034.8999999761581,
+          "duration": 68
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1034.5,
+        "ready": 1182.1000000238419,
+        "stable": 1244.7999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 81.5,
+      "readyObservedMs": 102.89999997615814,
+      "stablePreviewMs": 130.39999997615814,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1247.5,
+        "ready": 1329,
+        "stable": 1377.8999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 91.79999995231628,
+      "readyObservedMs": 156.29999995231628,
+      "stablePreviewMs": 181.29999995231628,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1380.2999999523163,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1380,
+        "ready": 1471.7999999523163,
+        "stable": 1561.2999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 1,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 96.19999992847443,
+      "readyObservedMs": 150.60000002384186,
+      "stablePreviewMs": 172.79999995231628,
+      "pngMs": 742.6000000238419,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1563.7999999523163,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1563.5,
+        "ready": 1659.6999999284744,
+        "stable": 1736.2999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": 242.59999990463257,
+      "synchronousLoadMs": 13.599999904632568,
+      "finalReadyMs": 163.89999997615814,
+      "readyObservedMs": 169.59999990463257,
+      "stablePreviewMs": 210.89999997615814,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 300.7999999523163,
+          "duration": 50
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 282.7000000476837,
+        "ready": 446.60000002384186,
+        "stable": 493.60000002384186
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 473.39999997615814,
+      "readyObservedMs": 475.2000000476837,
+      "stablePreviewMs": 513,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 497.2000000476837,
+          "duration": 79
+        },
+        {
+          "start": 865.7999999523163,
+          "duration": 85
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 497,
+        "ready": 970.3999999761581,
+        "stable": 1010
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 150.79999995231628,
+      "readyObservedMs": 159,
+      "stablePreviewMs": 186,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1016.1000000238419,
+          "duration": 69
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1015.7000000476837,
+        "ready": 1166.5,
+        "stable": 1201.7000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 72.10000002384186,
+      "readyObservedMs": 100.30000007152557,
+      "stablePreviewMs": 122.10000002384186,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1204.7999999523163,
+        "ready": 1276.8999999761581,
+        "stable": 1326.8999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 93,
+      "readyObservedMs": 156.70000004768372,
+      "stablePreviewMs": 181.10000002384186,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1329.2000000476837,
+          "duration": 67
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1329,
+        "ready": 1422,
+        "stable": 1510.1000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 2,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 95,
+      "readyObservedMs": 143.89999997615814,
+      "stablePreviewMs": 173.60000002384186,
+      "pngMs": 726.6000000238419,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1512.5,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1512.3999999761581,
+        "ready": 1607.3999999761581,
+        "stable": 1686
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": 244.20000004768372,
+      "synchronousLoadMs": 13.100000023841858,
+      "finalReadyMs": 164.80000007152557,
+      "readyObservedMs": 171.30000007152557,
+      "stablePreviewMs": 225.30000007152557,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.900000095367432,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 357.7999999523163,
+          "end": 362.7000000476837,
+          "duration": 4.900000095367432
+        }
+      ],
+      "materializations": 2,
+      "trees": 5,
+      "commits": 10,
+      "readinessLongTasks": [
+        {
+          "start": 302.39999997615814,
+          "duration": 54
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 284.89999997615814,
+        "ready": 449.7000000476837,
+        "stable": 510.2000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 472.39999997615814,
+      "readyObservedMs": 474.39999997615814,
+      "stablePreviewMs": 520.1000000238419,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 78.99999964237213,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 613.2000000476837,
+          "end": 619.7999999523163,
+          "duration": 6.599999904632568
+        },
+        {
+          "start": 631.3999999761581,
+          "end": 637.8999999761581,
+          "duration": 6.5
+        },
+        {
+          "start": 648.7000000476837,
+          "end": 656.2999999523163,
+          "duration": 7.599999904632568
+        },
+        {
+          "start": 667.7000000476837,
+          "end": 673,
+          "duration": 5.299999952316284
+        },
+        {
+          "start": 685,
+          "end": 691.2000000476837,
+          "duration": 6.200000047683716
+        },
+        {
+          "start": 701.8999999761581,
+          "end": 706.6000000238419,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 717.1000000238419,
+          "end": 721.7999999523163,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 733.2000000476837,
+          "end": 738,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 747.8999999761581,
+          "end": 752.2999999523163,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 762.2000000476837,
+          "end": 766.8999999761581,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 777.1000000238419,
+          "end": 781.7000000476837,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 792.2000000476837,
+          "end": 796.8999999761581,
+          "duration": 4.699999928474426
+        },
+        {
+          "start": 807.2999999523163,
+          "end": 812.1000000238419,
+          "duration": 4.800000071525574
+        },
+        {
+          "start": 823.2000000476837,
+          "end": 827.7000000476837,
+          "duration": 4.5
+        },
+        {
+          "start": 838.7000000476837,
+          "end": 843.6000000238419,
+          "duration": 4.899999976158142
+        }
+      ],
+      "materializations": 16,
+      "trees": 16,
+      "commits": 38,
+      "readinessLongTasks": [
+        {
+          "start": 515.2000000476837,
+          "duration": 78
+        },
+        {
+          "start": 885,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 514.8999999761581,
+        "ready": 987.2999999523163,
+        "stable": 1035
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 148.30000007152557,
+      "readyObservedMs": 186.60000002384186,
+      "stablePreviewMs": 212.20000004768372,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 5.600000023841858,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 1124.6000000238419,
+          "end": 1130.2000000476837,
+          "duration": 5.600000023841858
+        }
+      ],
+      "materializations": 2,
+      "trees": 2,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1048,
+          "duration": 67
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1047.7999999523163,
+        "ready": 1196.1000000238419,
+        "stable": 1260
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 79.60000002384186,
+      "readyObservedMs": 97.60000002384186,
+      "stablePreviewMs": 129.5,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1263.8999999761581,
+        "ready": 1343.5,
+        "stable": 1393.3999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 90.29999995231628,
+      "readyObservedMs": 154,
+      "stablePreviewMs": 171.19999992847443,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [
+        {
+          "start": 1397.3999999761581,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1397.1000000238419,
+        "ready": 1487.3999999761581,
+        "stable": 1568.2999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 2,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 92.79999995231628,
+      "readyObservedMs": 142.5,
+      "stablePreviewMs": 171.39999997615814,
+      "pngMs": 730.5,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 4,
+      "commits": 8,
+      "readinessLongTasks": [
+        {
+          "start": 1572.5,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1572,
+        "ready": 1664.7999999523163,
+        "stable": 1743.3999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": 243.89999997615814,
+      "synchronousLoadMs": 13,
+      "finalReadyMs": 165.10000002384186,
+      "readyObservedMs": 170.39999997615814,
+      "stablePreviewMs": 218.39999997615814,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.700000047683716,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 354.39999997615814,
+          "end": 359.10000002384186,
+          "duration": 4.700000047683716
+        }
+      ],
+      "materializations": 2,
+      "trees": 5,
+      "commits": 10,
+      "readinessLongTasks": [
+        {
+          "start": 302.39999997615814,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 284.5,
+        "ready": 449.60000002384186,
+        "stable": 502.89999997615814
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 471,
+      "readyObservedMs": 473.2999999523163,
+      "stablePreviewMs": 519.5999999046326,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 77.10000014305115,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 608.3999999761581,
+          "end": 614.8999999761581,
+          "duration": 6.5
+        },
+        {
+          "start": 626.6999999284744,
+          "end": 633.6999999284744,
+          "duration": 7
+        },
+        {
+          "start": 646.5,
+          "end": 652.6000000238419,
+          "duration": 6.100000023841858
+        },
+        {
+          "start": 664.1000000238419,
+          "end": 669.6999999284744,
+          "duration": 5.599999904632568
+        },
+        {
+          "start": 681.6999999284744,
+          "end": 686.1000000238419,
+          "duration": 4.400000095367432
+        },
+        {
+          "start": 696.6999999284744,
+          "end": 701.1000000238419,
+          "duration": 4.400000095367432
+        },
+        {
+          "start": 711.6999999284744,
+          "end": 716.7999999523163,
+          "duration": 5.100000023841858
+        },
+        {
+          "start": 727.3999999761581,
+          "end": 732.2999999523163,
+          "duration": 4.899999976158142
+        },
+        {
+          "start": 742.7999999523163,
+          "end": 747.1999999284744,
+          "duration": 4.399999976158142
+        },
+        {
+          "start": 756.7999999523163,
+          "end": 762.1999999284744,
+          "duration": 5.399999976158142
+        },
+        {
+          "start": 772.1000000238419,
+          "end": 777.5,
+          "duration": 5.399999976158142
+        },
+        {
+          "start": 787.2999999523163,
+          "end": 791.6000000238419,
+          "duration": 4.300000071525574
+        },
+        {
+          "start": 801.6999999284744,
+          "end": 806.3999999761581,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 815.2999999523163,
+          "end": 819.5,
+          "duration": 4.200000047683716
+        },
+        {
+          "start": 830.1000000238419,
+          "end": 834.7999999523163,
+          "duration": 4.699999928474426
+        }
+      ],
+      "materializations": 16,
+      "trees": 16,
+      "commits": 38,
+      "readinessLongTasks": [
+        {
+          "start": 508.5,
+          "duration": 80
+        },
+        {
+          "start": 876.6999999284744,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 508.10000002384186,
+        "ready": 979.1000000238419,
+        "stable": 1027.6999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 150.89999997615814,
+      "readyObservedMs": 156.89999997615814,
+      "stablePreviewMs": 186.80000007152557,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 5.800000071525574,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 1119.1999999284744,
+          "end": 1125,
+          "duration": 5.800000071525574
+        }
+      ],
+      "materializations": 2,
+      "trees": 2,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1041.1999999284744,
+          "duration": 68
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1040.7999999523163,
+        "ready": 1191.6999999284744,
+        "stable": 1227.6000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 72.29999995231628,
+      "readyObservedMs": 99.79999995231628,
+      "stablePreviewMs": 121.09999990463257,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1231.6000000238419,
+        "ready": 1303.8999999761581,
+        "stable": 1352.6999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 89.30000007152557,
+      "readyObservedMs": 155.70000004768372,
+      "stablePreviewMs": 181,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [
+        {
+          "start": 1355.6000000238419,
+          "duration": 63
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1355.2999999523163,
+        "ready": 1444.6000000238419,
+        "stable": 1536.2999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 3,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 93.79999995231628,
+      "readyObservedMs": 174.09999990463257,
+      "stablePreviewMs": 195.89999997615814,
+      "pngMs": 710.8999999761581,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 4,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1540.5,
+          "duration": 59
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1540.1000000238419,
+        "ready": 1633.8999999761581,
+        "stable": 1736
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": 243.29999995231628,
+      "synchronousLoadMs": 13.800000071525574,
+      "finalReadyMs": 166.39999997615814,
+      "readyObservedMs": 171.70000004768372,
+      "stablePreviewMs": 214.60000002384186,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 302.40000009536743,
+          "duration": 50
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 283.60000002384186,
+        "ready": 450,
+        "stable": 498.2000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 470.60000002384186,
+      "readyObservedMs": 472.39999997615814,
+      "stablePreviewMs": 512.6999999284744,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 502,
+          "duration": 79
+        },
+        {
+          "start": 869.6000000238419,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 501.8000000715256,
+        "ready": 972.4000000953674,
+        "stable": 1014.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 149.29999995231628,
+      "readyObservedMs": 155.69999992847443,
+      "stablePreviewMs": 185.79999995231628,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1020.7000000476837,
+          "duration": 68
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1020.4000000953674,
+        "ready": 1169.7000000476837,
+        "stable": 1206.2000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 73.39999997615814,
+      "readyObservedMs": 101,
+      "stablePreviewMs": 122.10000002384186,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1209.1000000238419,
+        "ready": 1282.5,
+        "stable": 1331.2000000476837
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 90.69999992847443,
+      "readyObservedMs": 156.5,
+      "stablePreviewMs": 181.09999990463257,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1333.6000000238419,
+          "duration": 64
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1333.4000000953674,
+        "ready": 1424.1000000238419,
+        "stable": 1514.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 3,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 93.69999992847443,
+      "readyObservedMs": 141.5,
+      "stablePreviewMs": 173.10000002384186,
+      "pngMs": 707.6999999284744,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1517,
+          "duration": 60
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1516.8000000715256,
+        "ready": 1610.5,
+        "stable": 1689.9000000953674
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": 239.39999997615814,
+      "synchronousLoadMs": 12.899999976158142,
+      "finalReadyMs": 168.70000004768372,
+      "readyObservedMs": 173.39999997615814,
+      "stablePreviewMs": 219.29999995231628,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 295.5,
+          "duration": 51
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 278.2999999523163,
+        "ready": 447,
+        "stable": 497.59999990463257
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 474.40000009536743,
+      "readyObservedMs": 476.8000000715256,
+      "stablePreviewMs": 521.3000000715256,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 501.1999999284744,
+          "duration": 79
+        },
+        {
+          "start": 873,
+          "duration": 83
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 501.09999990463257,
+        "ready": 975.5,
+        "stable": 1022.3999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 154.79999995231628,
+      "readyObservedMs": 157.19999992847443,
+      "stablePreviewMs": 185,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1029.2999999523163,
+          "duration": 69
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1029,
+        "ready": 1183.7999999523163,
+        "stable": 1214
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 79.5,
+      "readyObservedMs": 100.69999992847443,
+      "stablePreviewMs": 128.29999995231628,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1219,
+        "ready": 1298.5,
+        "stable": 1347.2999999523163
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 88.5,
+      "readyObservedMs": 155.39999997615814,
+      "stablePreviewMs": 181,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1350,
+          "duration": 65
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1349.6999999284744,
+        "ready": 1438.1999999284744,
+        "stable": 1530.6999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 4,
+      "profile": "minimal",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 95.70000004768372,
+      "readyObservedMs": 145,
+      "stablePreviewMs": 172.5,
+      "pngMs": 729.6999999284744,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 0,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 0,
+      "trees": 0,
+      "commits": 0,
+      "readinessLongTasks": [
+        {
+          "start": 1533.5,
+          "duration": 61
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1533.1999999284744,
+        "ready": 1628.8999999761581,
+        "stable": 1705.6999999284744
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-open",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 0,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": 247,
+      "synchronousLoadMs": 13.399999976158142,
+      "finalReadyMs": 161.60000002384186,
+      "readyObservedMs": 167.60000002384186,
+      "stablePreviewMs": 215.60000002384186,
+      "pngMs": null,
+      "publications": 10,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 4.699999928474426,
+      "mediaDerivationsBeforeMount": 0,
+      "mediaDerivationMsBeforeMount": 0,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 359.10000002384186,
+          "end": 363.7999999523163,
+          "duration": 4.699999928474426
+        }
+      ],
+      "materializations": 2,
+      "trees": 5,
+      "commits": 10,
+      "readinessLongTasks": [
+        {
+          "start": 304.7000000476837,
+          "duration": 53
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 286.89999997615814,
+        "ready": 448.5,
+        "stable": 502.5
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 1,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 471.7999999523163,
+      "readyObservedMs": 473.6999999284744,
+      "stablePreviewMs": 511.7999999523163,
+      "pngMs": null,
+      "publications": 39,
+      "mediaCompletions": 15,
+      "derivations": 16,
+      "mediaDerivations": 15,
+      "unchangedMediaPublications": 15,
+      "mediaDerivationMs": 79.7000002861023,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 15,
+      "mediaDerivationIntervals": [
+        {
+          "start": 604.6000000238419,
+          "end": 611.2000000476837,
+          "duration": 6.600000023841858
+        },
+        {
+          "start": 622.7999999523163,
+          "end": 629.2000000476837,
+          "duration": 6.400000095367432
+        },
+        {
+          "start": 640.3999999761581,
+          "end": 647.7999999523163,
+          "duration": 7.399999976158142
+        },
+        {
+          "start": 658.7999999523163,
+          "end": 664.3999999761581,
+          "duration": 5.600000023841858
+        },
+        {
+          "start": 675.5,
+          "end": 681.5,
+          "duration": 6
+        },
+        {
+          "start": 691.2999999523163,
+          "end": 696.3999999761581,
+          "duration": 5.100000023841858
+        },
+        {
+          "start": 707.1000000238419,
+          "end": 711.8999999761581,
+          "duration": 4.799999952316284
+        },
+        {
+          "start": 723.2999999523163,
+          "end": 728,
+          "duration": 4.700000047683716
+        },
+        {
+          "start": 738.1000000238419,
+          "end": 742.7000000476837,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 752.7999999523163,
+          "end": 757,
+          "duration": 4.200000047683716
+        },
+        {
+          "start": 767.2000000476837,
+          "end": 772.6000000238419,
+          "duration": 5.399999976158142
+        },
+        {
+          "start": 782.7999999523163,
+          "end": 787.3999999761581,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 797,
+          "end": 802,
+          "duration": 5
+        },
+        {
+          "start": 813.6000000238419,
+          "end": 818.2000000476837,
+          "duration": 4.600000023841858
+        },
+        {
+          "start": 828.7999999523163,
+          "end": 833.5,
+          "duration": 4.700000047683716
+        }
+      ],
+      "materializations": 16,
+      "trees": 16,
+      "commits": 38,
+      "readinessLongTasks": [
+        {
+          "start": 507.39999997615814,
+          "duration": 78
+        },
+        {
+          "start": 875.3999999761581,
+          "duration": 84
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 507.2000000476837,
+        "ready": 979,
+        "stable": 1019
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "cold-switch-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 2,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 150.29999995231628,
+      "readyObservedMs": 188.19999992847443,
+      "stablePreviewMs": 221.29999995231628,
+      "pngMs": null,
+      "publications": 9,
+      "mediaCompletions": 1,
+      "derivations": 2,
+      "mediaDerivations": 1,
+      "unchangedMediaPublications": 1,
+      "mediaDerivationMs": 5.699999928474426,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 1,
+      "mediaDerivationIntervals": [
+        {
+          "start": 1109.7000000476837,
+          "end": 1115.3999999761581,
+          "duration": 5.699999928474426
+        }
+      ],
+      "materializations": 2,
+      "trees": 2,
+      "commits": 9,
+      "readinessLongTasks": [
+        {
+          "start": 1031.5,
+          "duration": 68
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1031.1000000238419,
+        "ready": 1181.3999999761581,
+        "stable": 1252.3999999761581
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-0",
+      "fixtureId": "exporter-061-now-hiring",
+      "step": 3,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 77.79999995231628,
+      "readyObservedMs": 100.19999992847443,
+      "stablePreviewMs": 137.89999997615814,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1256.2000000476837,
+        "ready": 1334,
+        "stable": 1394.1000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-1",
+      "fixtureId": "exporter-061-cover",
+      "step": 4,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 88.30000007152557,
+      "readyObservedMs": 150.70000004768372,
+      "stablePreviewMs": 172.20000004768372,
+      "pngMs": null,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 1,
+      "commits": 5,
+      "readinessLongTasks": [
+        {
+          "start": 1397.2000000476837,
+          "duration": 62
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1396.8999999761581,
+        "ready": 1485.2000000476837,
+        "stable": 1569.1000000238419
+      }
+    },
+    {
+      "scenario": "family-switch",
+      "stage": "warm-revisit-2",
+      "fixtureId": "exporter-061-carrousel",
+      "step": 5,
+      "trial": 4,
+      "profile": "detailed",
+      "setupMs": null,
+      "synchronousLoadMs": null,
+      "finalReadyMs": 91.19999992847443,
+      "readyObservedMs": 141.5,
+      "stablePreviewMs": 171.5,
+      "pngMs": 714.1000000238419,
+      "publications": 5,
+      "mediaCompletions": 0,
+      "derivations": 1,
+      "mediaDerivations": 0,
+      "unchangedMediaPublications": 0,
+      "mediaDerivationMs": 0,
+      "mediaDerivationsBeforeMount": null,
+      "mediaDerivationMsBeforeMount": null,
+      "mediaDerivationsBeforeReady": 0,
+      "mediaDerivationIntervals": [],
+      "materializations": 1,
+      "trees": 4,
+      "commits": 8,
+      "readinessLongTasks": [
+        {
+          "start": 1573.1000000238419,
+          "duration": 57
+        }
+      ],
+      "mediaDerivationsOverlappingLongTasks": 0,
+      "measuredWindowMs": {
+        "start": 1572.6000000238419,
+        "ready": 1663.7999999523163,
+        "stable": 1744.1000000238419
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "mode": "failure",
+      "status": "pass"
+    },
+    {
+      "mode": "rapid-switch",
+      "status": "pass"
+    },
+    {
+      "mode": "disposal",
+      "status": "pass"
+    },
+    {
+      "mode": "replacement-reset",
+      "status": "pass"
+    }
+  ],
+  "smoke": {
+    "status": "pass",
+    "seededThrough": "public import/exact fonts/Family and Studio saveTemplate",
+    "exercised": [
+      "production application route",
+      "Library Create output",
+      "three-design selector",
+      "PNG"
+    ],
+    "manualLiveReview": false
+  },
+  "decision": {
+    "repeatedCoverWork": true,
+    "coverObservations": 10,
+    "observationsWithMediaWorkInsideLongTasks": 0,
+    "recurringPreMountWork": true,
+    "recommendation": "Propose a separate bounded F7 ownership and implementation plan: 14–15 unchanged derivations repeatedly execute before the editor mount request, and all 15 precede readiness. No implementation or speedup is authorized by this packet.",
+    "caveat": "The trace establishes synchronous work in the mount/readiness sequence, not the eventual counterfactual saving. Media derivations do not overlap recorded >50 ms long tasks in this run. Cold/warm differences include decoding and renderer/font settlement; a separate ownership plan and minimally instrumented before/after pairs remain mandatory."
+  },
+  "limitations": [
+    "Five finite paired observations per case; p95 of five trials is descriptive, not a reliable tail distribution.",
+    "Fresh contexts are decode/session cold; browser process and OS caches are not cold-start certification.",
+    "Detailed and minimal runs use the identical production runtime; differences measure observation overhead and variability.",
+    "Native ready publication, observed stable DOM and PNG completion are separate overlapping intervals.",
+    "Full application smoke uses a Family seeded through public import/font/Family/save APIs; it is not a manual picker or full setup-wizard review."
+  ]
+}

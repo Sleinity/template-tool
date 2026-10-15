@@ -4,16 +4,16 @@ import type { ResolvedProductRenderIdentityV1 } from "../src/runtime/renderIdent
 import type { TemplatePackageV1 } from "../../../src/template-package/types";
 import { validateTemplatePackage } from "../../../src/template-package/validateTemplatePackage";
 import type { PackageImportResult } from "../src/import/runTemplatePackageImportPipeline";
-import { createTemplateSessionWithDependencies } from "../src/session/templateSession";
+import { createTemplateSessionWithDependencies } from "./legacy/session/templateSession";
 import {
   createTemplateImportWizard,
   type TemplateImportConfirmationV1,
-} from "../src/import/templateImportWizard";
+} from "./legacy/import/templateImportWizard";
 import {
   inspectTemplateImportConfirmation,
   inspectTemplateRuntimeSupport,
   loadTemplateImportConfirmation,
-} from "../src/import/templateImportCompatibility";
+} from "../test/legacy/import/templateImportCompatibility";
 import {
   createTemplatePackageDigest,
   createTemplatePackageFingerprint,
@@ -218,7 +218,7 @@ assert(
 const confirmation = await wizard.confirm();
 assert(
   persisted === confirmation &&
-    confirmation.sdkVersion === "0.7.0" &&
+    confirmation.sdkVersion === "0.8.0" &&
     confirmation.packageFingerprint.startsWith("fnv1a:") &&
     confirmation.packageDigest?.algorithm === "sha-256" &&
     confirmation.packageDigest.value.length === 64 &&

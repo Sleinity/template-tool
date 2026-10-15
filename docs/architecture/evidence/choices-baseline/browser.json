@@ -1,0 +1,14 @@
+{
+  "browser": "149.0.7827.55",
+  "fixtureId": "exporter-061-carrousel",
+  "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+  "genericSeedRejected": true,
+  "restrictedUsesFreeTextInput": true,
+  "validChoiceBlockedByInvalidDraft": true,
+  "enteredValue": "Not an option",
+  "selectedOption": "option-2",
+  "exportDisabled": true,
+  "errors": [],
+  "automatedBrowser": true,
+  "manualUserStateReview": false
+}

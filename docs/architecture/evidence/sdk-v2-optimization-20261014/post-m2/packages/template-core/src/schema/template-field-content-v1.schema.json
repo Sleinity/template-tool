@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.template-platform.dev/schema/template-field-content-v1.schema.json",
+  "title": "Template Field Content State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packageId", "packageSchemaVersion", "revision", "values"],
+  "properties": {
+    "schemaVersion": { "const": "template-field-content-v1" },
+    "packageId": { "type": "string", "minLength": 1 },
+    "packageSchemaVersion": { "const": "2.2" },
+    "revision": { "type": "integer", "minimum": 0 },
+    "values": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(text|textarea|image|color|number|date|boolean):[A-Za-z][A-Za-z0-9_-]*$"
+      },
+      "additionalProperties": { "$ref": "#/$defs/contentEntry" }
+    }
+  },
+  "$defs": {
+    "contentEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" },
+            { "type": "boolean" },
+            { "$ref": "#/$defs/imageValue" }
+          ]
+        },
+        "selectedChoiceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]*$"
+        }
+      }
+    },
+    "imageValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId", "placement"],
+      "properties": {
+        "assetId": { "type": "string", "minLength": 1 },
+        "placement": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode"],
+              "properties": { "mode": { "const": "fill" } }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode"],
+              "properties": { "mode": { "const": "fit" } }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["mode", "crop"],
+              "properties": {
+                "mode": { "const": "crop" },
+                "crop": { "$ref": "#/$defs/crop" }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "crop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "coordinateSpace", "transform"],
+      "properties": {
+        "schemaVersion": { "const": "normalized-image-crop-v1" },
+        "coordinateSpace": { "const": "normalized-slot-to-normalized-source" },
+        "transform": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": { "type": "number" }
+          }
+        }
+      }
+    }
+  }
+}

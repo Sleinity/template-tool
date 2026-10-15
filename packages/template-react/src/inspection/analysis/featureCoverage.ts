@@ -5,6 +5,7 @@ import type {
   TemplateNode,
   TemplatePackageV1,
 } from "@sleinity/template-core";
+import { resolveSourceCompositing } from "@sleinity/template-core/renderer-internal";
 import type {
   AnalysisNodeReference,
   FeatureSupportStatus,
@@ -144,6 +145,7 @@ export function analyzeRendererFeatureCoverage(
   packageValue: TemplatePackageV1,
 ): RendererFeatureCoverageReport {
   const nodes = Object.values(packageValue.nodes);
+  const compositing = resolveSourceCompositing(packageValue);
   const rendererWarnings = collectTemplatePackageRenderWarnings(
     packageValue,
     "editor",
@@ -263,10 +265,12 @@ export function analyzeRendererFeatureCoverage(
 
   add("solid-fills", "Appearance", "Solid fills", "supported",
     (node) => paints(node).some((paint) => paint.type === "SOLID"),
-    "The first visible solid fill is rendered for normal shapes and text.");
-  add("multiple-fills", "Appearance", "Multiple fills", "partial",
+    "Source-certified stacks render their ordered SOLID layers; other shapes retain their existing paint owner.");
+  add("multiple-fills", "Appearance", "Multiple fills",
+    nodes.some((node) => node.appearance.fills.length > 1 && compositing[node.id]?.kind !== "paint-stack")
+      ? "partial" : "supported",
     (node) => node.appearance.fills.length > 1,
-    "The package preserves multiple fills, but the semantic renderer does not composite every fill layer.");
+    "Source-certified ordered SOLID blends use one paint owner; other combinations retain compatibility fallback.");
   add("strokes", "Appearance", "Strokes", strokeSupport,
     (node) => node.appearance.strokes.length > 0,
     "Solid strokes are approximated with borders or shadows according to alignment.");
@@ -291,9 +295,21 @@ export function analyzeRendererFeatureCoverage(
   add("effects", "Appearance", "Layer effects", "unsupported",
     (node) => node.appearance.effects.length > 0,
     "Effect metadata is preserved for diagnostics, but the semantic renderer does not reproduce it.");
-  add("blend-modes", "Appearance", "Blend modes", "partial",
-    (node) => Boolean(node.appearance.blendMode && !["NORMAL", "PASS_THROUGH"].includes(node.appearance.blendMode)),
-    "Browser compositing can differ from Figma for non-standard blend modes.");
+  add("blend-modes", "Appearance", "Blend modes",
+    nodes.some((node) => (
+      (node.appearance.blendMode &&
+        !["NORMAL", "PASS_THROUGH"].includes(node.appearance.blendMode) &&
+        compositing[node.id]?.kind !== "group") ||
+      (node.appearance.fills.some((paint) => paint.blendMode &&
+        !["NORMAL", "PASS_THROUGH"].includes(paint.blendMode)) &&
+        compositing[node.id]?.kind !== "paint-stack")
+    )) ? "partial" : "supported",
+    (node) => Boolean(
+      (node.appearance.blendMode && !["NORMAL", "PASS_THROUGH"].includes(node.appearance.blendMode)) ||
+      node.appearance.fills.some((paint) => paint.blendMode &&
+        !["NORMAL", "PASS_THROUGH"].includes(paint.blendMode)),
+    ),
+    "Certified opaque-backdrop groups use their source blend and isolation; other blend families retain compatibility fallback.");
   add("gradients", "Appearance", "Gradient paints", "unsupported",
     (node) => paints(node).some((paint) => paint.type.startsWith("GRADIENT_")),
     "Semantic gradient paints are preserved but not rendered; gradients embedded inside SVG assets remain intact.");

@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Controlled fixture must materialize: {"valid":false,"familyId":"controlled-family","variantId":"a","familyContentRevision":0,"packageContentState":null,"effectivePackage":null,"materialization":null,"issues":[{"code":"field-family.variant-package-invalid","severity":"error","message":"Variant \"a\" does not contain a valid TemplatePackageV2.","variantId":"a"},{"code":"field-family.effective-package-invalid","severity":"error","message":"Embedded image data must use a supported Base64 data URL.","variantId":"a"}],"configurationAuthority":{"text:title":{"label":"imported","controlRole":"imported","configuration":{"maxCharacters":"common"}},"textarea:body":{"label":"imported","controlRole":"imported","configuration":{"maxCharacters":"common","maxLines":"common"}},"image:hero":{"label":"imported","controlRole":"imported","configuration":{"replacementPlacement":"common"}}}}
+    at file:///private/tmp/f7-native-20261015b/before/familyMediaReadiness.test.js:16732:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async file:///Users/niels/Documents/Projects/template-tool/scripts/f7/native.mjs:23:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: null,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

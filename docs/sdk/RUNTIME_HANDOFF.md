@@ -1,220 +1,31 @@
-# SDK 0.8.0 runtime handoff
+# Runtime integration contract
 
-Use the fixed-version SDK train in any Sleinity-owned React/TypeScript browser
-application:
+[V2 integration](V2_INTEGRATION.md) is the recommended current source contract.
+Use one verified fixed-train delivery, identified by actual archive hashes and
+provenance. Published 0.8 migration material is historical; the staged major is
+[1.0.0](SDK_1_0_MIGRATION.md), not yet applied or published.
 
-| Package | Responsibility | Consumer requirement |
-| --- | --- | --- |
-| `@sleinity/template-core@0.8.0` | ZIP import, strict validation, diagnostics, portable fields, Template Families, package models and optional advanced inspection | No peer dependencies |
-| `@sleinity/template-browser@0.8.0` | Single/family sessions and importers, assets, fonts, persistence, readiness, capture and enrichment | Browser runtime |
-| `@sleinity/template-react@0.8.0` | React single/family setup, shared-content editor bindings, renderer, responsive viewport and capture | React 19 and React DOM 19 |
+## Recommended host journey
 
-## Installation
+Import once through `runTemplatePackageImportPipelineV2`; stage in a fresh native
+session; prepare exact fonts with the same borrowed authority; explicitly accept;
+edit through typed controllers; export only with current native renderer evidence.
+The [example](../../examples/template-editor-integration/README.md) keeps accepted
+work usable during replacement and cleans late/cancelled candidates.
 
-Authenticated local and CI consumers may install directly from GitHub
-Packages:
-
-```ini
-@sleinity:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-always-auth=true
-```
-
-```sh
-pnpm add @sleinity/template-core@0.8.0 \
-  @sleinity/template-browser@0.8.0 \
-  @sleinity/template-react@0.8.0
-```
-
-`NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
-`read:packages` and package access.
-
-For a credential-free installation, download the three archives and combined
-`SHA256SUMS` from the public
-[`sdk-v0.8.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0).
-The archives are the exact bytes downloaded from GitHub Packages. Verify them,
-commit them under `vendor/`, and declare:
-
-```json
-{
-  "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz",
-    "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz",
-    "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
-  }
-}
-```
-
-A pnpm consumer must additionally map the private transitive closure to those
-same archives:
-
-```yaml
-overrides:
-  "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz"
-  "@sleinity/template-browser": "file:vendor/sleinity-template-browser-0.8.0.tgz"
-  "@sleinity/template-react": "file:vendor/sleinity-template-react-0.8.0.tgz"
-```
-
-Do not add a GitHub Packages `.npmrc`, token, or registry secret to a vendored
-consumer.
+Use [ownership](HOST_LIFECYCLE.md), [operation outcomes](OPERATION_OUTCOMES.md),
+[field configuration](../field-rules/STUDIO_AND_HOSTS.md) and
+[recovery](../architecture/template-recovery.md). Apply, persisted Review/save,
+output recovery autosave and PNG readiness are different responsibilities.
 
 ## Focused and advanced entries
 
-The [SDK capability catalog](SDK_CAPABILITIES.md) maps each supported entry to
-its intended outcome, runtime, ownership boundary and representative APIs.
+The [capability catalog](SDK_CAPABILITIES.md) records public roots and curated
+entries, including optional `@sleinity/template-react/inspection`. Entries named
+`renderer-internal` or `session-internal` are repository seams;
+**they are not supported host APIs**. Studio components are private examples,
+not public UI contracts. Inspection is not a rendering backend selector.
 
-Ordinary hosts can use the existing root, session, importer, compatibility,
-and React contracts. Focused integrations may additionally import core
-`family`/`editor`/`assets`/`fonts`/`motion`, browser
-`assets`/`fonts`/`persistence`/`capture`/`enrichment`, plus
-`@sleinity/template-core/inspection` and
-`@sleinity/template-react/inspection`. Inspection entries expose technical evidence and
-projections; they are optional and do not select rendering authority.
+## Retired workflows
 
-Do not import `renderer-internal`. Studio-only debug components, stress
-reports, visual-difference tooling, issue packets, and development harnesses
-are not shipped as SDK APIs.
-
-## Runtime contract
-
-For complete template setup, use `useTemplateImportWizard()` and render
-`TemplateImportWizard` from `@sleinity/template-react/importer` with its
-`@sleinity/template-react/importer.css` stylesheet. The default interface presents
-Package, Fonts, Validate, Fields and Confirm while the seven-state headless workflow
-owns ZIP selection, structured package validation, exact-font validation,
-renderer-backed validation, atomic field rules and confirmation. Shared
-validation-summary and field-editor components are available from the same
-importer entry for custom shells. Handle the immutable
-completion result through existing host services; it does not publish or
-navigate automatically.
-
-Hosts that need their own page, modal, drawer or workspace UI use
-`TemplateImportWizardProvider`, `useTemplateImportWizardSnapshot` and
-`TemplateImportWizardPreview`, or the framework-neutral
-`createTemplateImportWizard()` controller from `template-browser`. Optional
-font and post-confirmation persistence adapters remain host-owned and cannot
-bypass SDK validation.
-
-After import, use `createTemplateSession()` when the host explicitly owns the
-editor lifecycle. In React, prefer `useTemplateSession()` for StrictMode-safe
-creation and permanent-unmount disposal. Compose it with:
-
-- `TemplateSessionProvider`
-- `useTemplateSessionSnapshot()`
-- `TemplateSessionRenderer`
-- `TemplateSessionRendererHandle`
-
-For ordinary post-confirmation editors, prefer the curated
-`@sleinity/template-react/editor` entry:
-
-- `TemplateSessionViewport` contains and refits the intrinsic renderer,
-  publishes current-revision readiness and performs safe PNG capture;
-- `useTemplateSessionEditableFields()` returns every ordered field controller;
-- `useTemplateSessionEditableField(fieldId)` selects one controller or `null`;
-- `useTemplateSessionDiagnosticSummary()` consolidates existing package, font,
-  asset, session and current renderer evidence without validating again.
-
-These primitives are headless. Hosts still own their forms, image preparation,
-layout, navigation and product actions.
-
-## Template Family runtime
-
-Template Families are an additive orchestration layer for shared content
-across unmodified ZIP variants. Use `@sleinity/template-core/family` for the
-portable definition, group resolution, rule inheritance, matching, validation
-and materialization contracts. Use `createTemplateFamilyImportWizard()` from
-the browser `importer` entry and `createTemplateFamilySession()` from the
-browser `session` entry.
-
-The family session composes one existing `TemplateSessionV1`. Only the selected
-variant is materialized, and hosts pass `familySession.renderSession` to the
-ordinary `TemplateSessionViewport`. React importer/editor entries expose the
-family provider, snapshots, shared field controllers, selectors and diagnostic
-projection. There is no family renderer, hidden comparison surface or batch
-capture API.
-
-Browser persistence uses dedicated family/family-draft stores and can project
-0.7 template records and drafts as deterministic one-variant families in
-memory. Legacy records are not rewritten until an explicit family save. Use a
-reviewable reimport plan before atomically replacing a variant.
-
-Run `inspectTemplateRuntimeSupport()` before presenting template workflows.
-After confirmation, create a fresh session and reopen the host record with
-`loadTemplateImportConfirmation()`. It verifies confirmation schema, package
-identity, FNV fingerprint, SHA-256 digest and local font authority before
-delegating to the session's fresh `loadTemplateState()` rebuild. The snapshot
-publishes lifecycle status,
-validation, ordered diagnostics, editable fields, base and working packages,
-resolved state, and revisions. Mutate fields and images through the session,
-reset individual fields, or restore all imported state.
-
-Zero-routed compatibility templates may complete Render Validation through the
-existing package, exact-font, asset, DOM, revision and export-safety checks;
-routed templates still require current settlement. Invalid field-rule drafts
-remain visible with structured blockers and never replace the last valid
-working package. Device emoji fallback remains internal evidence and is not
-presented as actionable setup guidance.
-
-The host owns every content control and may perform richer validation,
-transformation, cropping, or other processing before calling the supported
-session mutation methods. The SDK validates the final supported value and
-renders the resulting revision faithfully.
-
-Default browser-local persistence uses `session.save()` and
-`session.loadSavedTemplate()`. Store only the returned saved-template ID in
-namespaced local storage. Shared/cloud persistence belongs to an injected
-adapter or an existing host service.
-
-Export only when the current session revision has a ready render identity.
-`exportPng({ download: false })` returns the revision-safe PNG and metadata
-without initiating a browser download.
-
-The SDK owns import, validation, diagnostics, editable state, local
-persistence, rendering, readiness, and capture. The host owns navigation,
-authentication, catalogues, collaboration, cloud storage, publishing, and
-other product workflows.
-
-Use only the documented root and curated entry points above. Entries named
-`renderer-internal` are fixed-train repository seams for package composition
-and compatibility forwarders; they are not supported host APIs and must not be
-imported by an application.
-
-## Implementation guides
-
-Use the [installation guide](INSTALLATION.md) as the single source for
-credential-free and authenticated installation. Coding agents should follow
-the [provider-neutral integration prompts](AGENT_INTEGRATION_PROMPTS.md).
-
-Use the [0.7→0.8 migration guide](SDK_0_8_MIGRATION.md) for additive family
-adoption. The earlier [0.2→0.7 Lovable handoff](SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md)
-remains a historical record.
-
-## Verification contract
-
-The release gate:
-
-- downloads the published archives and verifies one checksum manifest;
-- installs all three as secret-free npm and pnpm `file:vendor/...`
-  dependencies;
-- copies the committed
-  [template editor reference](../../examples/template-editor-integration/README.md)
-  into an isolated packed consumer;
-- builds and browser-checks the packed
-  [Template Family reference](../../examples/template-family-integration/README.md);
-- browser-tests invalid and valid import, rejected and exact font uploads,
-  explicit emoji fallback, automatic exact-face reuse, validation, diagnostics, field-rule and image setup,
-  downstream field/image editing, Fill/Fit/reset, offline save/reload,
-  stale-export rejection, silent PNG capture, and permanent disposal;
-- rejects external runtime requests, browser downloads, console errors,
-  workspace aliases, root-source imports, Studio code, and credentials.
-
-Package publication runs only for an exact `sdk-v*` tag. Manual workflow
-dispatch may refresh handoff assets from an already-published fixed version,
-but cannot publish packages.
-
-Local package archives are verification inputs only. Public Release assets are
-always downloaded back from GitHub Packages after successful tag publication,
-then rechecked in credential-free npm, pnpm and browser consumers.
-
-The package manifests remain `UNLICENSED`. The `sleinity-tools-only` policy
-authorizes use in Sleinity-owned applications only.
+V1 wizard, confirmation, editing and persistence are removed from this candidate. The three host examples use V2. ZIP admission is restricted to exporter 0.6.1; source schema 1.0 normalization remains. Unknown historical stored bytes are preserved outside the supported catalogue.

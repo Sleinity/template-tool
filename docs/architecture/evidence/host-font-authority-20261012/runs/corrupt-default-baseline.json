@@ -1,0 +1,452 @@
+{
+  "baseline": true,
+  "equalFamily": false,
+  "compatibility": false,
+  "synthetic": true,
+  "sourceCertification": false,
+  "manualReview": false,
+  "instrumentation": "Test-only commit counter and deferred raster barrier; no production source modification.",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "chromium": "149.0.7827.55",
+    "chromiumExecutable": "/Users/niels/Library/Caches/ms-playwright/chromium-1228/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "build": "production"
+  },
+  "node": "v24.19.0",
+  "font": {
+    "id": "rethink-sans-600-normal",
+    "family": "Rethink Sans",
+    "weight": 600,
+    "style": "normal",
+    "sourcePath": "apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+    "byteSize": 59080,
+    "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+    "source": "Repository bundled Studio font",
+    "license": "SIL Open Font License 1.1"
+  },
+  "archives": [
+    {
+      "name": "template-core",
+      "file": "sleinity-template-core-0.8.0.tgz",
+      "sha256": "4f804cb26d9aa6fa97e2c2cd745e93c6699730143bdc36778528bffa231be32e"
+    },
+    {
+      "name": "template-browser",
+      "file": "sleinity-template-browser-0.8.0.tgz",
+      "sha256": "5b7db7aac67154fdd3b346a1a092b450fab3f90706275910ed809146f64b213b"
+    },
+    {
+      "name": "template-react",
+      "file": "sleinity-template-react-0.8.0.tgz",
+      "sha256": "2e937364d65d6d027c6c9d8e3de1df243e784404f050fdd71a1d2ee6f3540f75"
+    }
+  ],
+  "rows": [
+    {
+      "kind": "single",
+      "mode": "default-corrupt",
+      "blocked": true,
+      "nativeState": {
+        "status": "ready",
+        "revision": 21,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is pending.",
+            "Renderer settlement/readiness is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:25a0b817"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:e6e5a1f3",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "de45b037",
+          "backendDecisionRevision": "a1b07e75",
+          "settlementRevision": "504d18e8",
+          "fontRevision": "bead5f4c",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 9,
+          "blobs": 1,
+          "notifications": 20,
+          "identities": 7,
+          "commits": 0,
+          "readsCompleted": 10
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "preparation": {
+        "reliable": false,
+        "exportReady": false,
+        "required": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "missing": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "fallback": [],
+        "unknown": [],
+        "groups": [
+          {
+            "family": "Rethink Sans",
+            "faces": [
+              {
+                "id": "rethink-600",
+                "family": "Rethink Sans",
+                "weight": 600,
+                "style": "normal",
+                "usedBy": [
+                  "headline"
+                ],
+                "characters": "Host font authority",
+                "postScriptName": "RethinkSans-SemiBold",
+                "editable": true,
+                "assetId": "asset:font:523d8be1ea86:0",
+                "resolution": {
+                  "managedFontId": "managed-font:523d8be1ea86:0",
+                  "match": "exact",
+                  "classification": "exact",
+                  "confirmed": true,
+                  "requestId": "rethink-600",
+                  "faceIndex": 0,
+                  "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                  "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                  "effectiveFamily": "Rethink Sans",
+                  "effectiveWeight": 600,
+                  "effectiveStyle": "normal",
+                  "effectiveStretch": "normal",
+                  "effectiveAxes": []
+                },
+                "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                "faceIndex": 0,
+                "status": "missing",
+                "source": "unresolved",
+                "verified": false,
+                "deterministicForExport": false,
+                "glyphCoverage": "unverified"
+              }
+            ]
+          }
+        ],
+        "unverified": []
+      },
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "default-corrupt",
+      "blocked": true,
+      "nativeState": {
+        "status": "ready",
+        "revision": 21,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is pending.",
+            "Renderer settlement/readiness is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:25a0b817"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:e6e5a1f3",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "de45b037",
+          "backendDecisionRevision": "a1b07e75",
+          "settlementRevision": "504d18e8",
+          "fontRevision": "bead5f4c",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 9,
+          "blobs": 1,
+          "notifications": 20,
+          "identities": 7,
+          "commits": 0,
+          "readsCompleted": 10
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "preparation": {
+        "reliable": false,
+        "exportReady": false,
+        "required": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "missing": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "fallback": [],
+        "unknown": [],
+        "groups": [
+          {
+            "family": "Rethink Sans",
+            "faces": [
+              {
+                "id": "rethink-600",
+                "family": "Rethink Sans",
+                "weight": 600,
+                "style": "normal",
+                "usedBy": [
+                  "headline"
+                ],
+                "characters": "Host font authority",
+                "postScriptName": "RethinkSans-SemiBold",
+                "editable": true,
+                "assetId": "asset:font:523d8be1ea86:0",
+                "resolution": {
+                  "managedFontId": "managed-font:523d8be1ea86:0",
+                  "match": "exact",
+                  "classification": "exact",
+                  "confirmed": true,
+                  "requestId": "rethink-600",
+                  "faceIndex": 0,
+                  "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                  "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                  "effectiveFamily": "Rethink Sans",
+                  "effectiveWeight": 600,
+                  "effectiveStyle": "normal",
+                  "effectiveStretch": "normal",
+                  "effectiveAxes": []
+                },
+                "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                "faceIndex": 0,
+                "status": "missing",
+                "source": "unresolved",
+                "verified": false,
+                "deterministicForExport": false,
+                "glyphCoverage": "unverified"
+              }
+            ]
+          }
+        ],
+        "unverified": []
+      },
+      "downloads": 0
+    }
+  ],
+  "failures": []
+}

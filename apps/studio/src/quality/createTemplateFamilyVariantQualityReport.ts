@@ -1,13 +1,6 @@
-import {
-  getTemplateFamilyFieldScope,
-  type TemplateFamilyFieldScopeV1,
-  type TemplateFamilyIssueV1,
-  type TemplateFamilyValidationReportV1,
-  type TemplateFamilyV1,
-} from "@sleinity/template-core/family";
-import type {
-  TemplateFamilyVariantRenderValidationV1,
-} from "@sleinity/template-browser/importer";
+import {type TemplateFamilyFieldScopeV1, type TemplateFamilyIssueV1, type TemplateFamilyValidationReportV1, type TemplateFamilyV1} from "@sleinity/template-core/family";
+import {getTemplateFamilyFieldScope} from "../../../../packages/template-core/test/legacyEntry";
+import type {TemplateFamilyVariantRenderValidationV1} from "../../../../packages/template-browser/test/legacyImporter";
 import {
   createTemplatePackageQualityReport,
   type CreateTemplatePackageQualityReportOptions,

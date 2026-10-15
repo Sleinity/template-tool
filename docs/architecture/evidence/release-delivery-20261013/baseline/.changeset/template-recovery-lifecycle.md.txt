@@ -1,0 +1,7 @@
+---
+"@sleinity/template-browser": minor
+---
+
+Replace the supported draft catalogue with a template-scoped recovery repository. This is a breaking pre-1.0 API change: draft list/get/save/delete helpers and Family `saveDraft` are no longer available through supported entry points. Generic template and session persistence remains available.
+
+Recovery provides inspect, fresh/resume, owned save, discard, and export completion for single and Family canonical payloads. Persistent ownership prevents superseded sessions and late autosaves from restoring completed work. Successful export callbacks complete only their matching recovery session; failed cleanup can be retried without exporting again.

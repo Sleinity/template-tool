@@ -40,50 +40,14 @@ import type {
   PackageDiagnostic,
   TemplatePackageValidationResult,
 } from "@sleinity/template-core";
-import {
-  canImportPackageResult,
-  createFieldConstraintSummaries,
-  createImportSessionRevisionGuard,
-  createSettingsPackageImportResult,
-  createTemplateCreationGate,
-  defaultPackageCreateMetadata,
-  preserveImportedPackageBaseline,
-  rebuildPackageImportResult,
-  runTemplatePackageImportPipeline,
-  type PackageImportResult,
-  type TemplateCreationBlocker,
-  type TemplatePackageCreateMetadata,
-  analyzeAssetReliability,
-  areExactFontRequirementsResolved,
-  isExactFontRequirementResolved,
-  enrichTemplatePackage,
-  requestFigmaEnrichment,
-  prepareTemplatePackageFonts,
-  validatePackageJpgExportReadiness,
-  createPersistenceSubmissionController,
-  type PersistenceSubmissionController,
-  type PersistenceSubmissionState,
-  type SavedTemplateRecord,
-  useFallbackForRequirement,
-} from "@sleinity/template-browser";
+import {analyzeAssetReliability, areExactFontRequirementsResolved, isExactFontRequirementResolved, enrichTemplatePackage, requestFigmaEnrichment, prepareTemplatePackageFonts, validatePackageJpgExportReadiness, createPersistenceSubmissionController, type PersistenceSubmissionController, type PersistenceSubmissionState, useFallbackForRequirement} from "../../../../packages/template-browser/test/legacyEntry";
+import {canImportPackageResult, createFieldConstraintSummaries, createImportSessionRevisionGuard, createSettingsPackageImportResult, createTemplateCreationGate, defaultPackageCreateMetadata, preserveImportedPackageBaseline, rebuildPackageImportResult, runTemplatePackageImportPipeline, type PackageImportResult, type TemplateCreationBlocker, type TemplatePackageCreateMetadata, type SavedTemplateRecord} from "../../../../packages/template-browser/test/legacyEntry";
 import { FontPreparationStep } from "../components/template-package/fonts/FontPreparationStep";
-import {
-  collectTemplatePackageRenderWarnings,
-  type ResolvedProductRenderIdentityV1,
-} from "@sleinity/template-react";
+import {type ResolvedProductRenderIdentityV1} from "@sleinity/template-react";
+import {collectTemplatePackageRenderWarnings} from "../../../../packages/template-react/test/legacyEntry";
 import { TemplateInspectionPreview } from "../components/template-package/TemplateInspectionPreview";
-import {
-  createZipBundleReader,
-  createResolvedRenderTree,
-  getEffectiveEditableFields,
-  getPackageEditorFieldWarnings,
-  getPackageEditorFieldTargetStatuses,
-  restoreImportedPackageForEditing,
-  type FontReadinessReport,
-  type EditableFieldBinding,
-  type LoadedTemplatePackageSource,
-  type TemplatePackageV1,
-} from "@sleinity/template-core";
+import {createZipBundleReader, createResolvedRenderTree, getEffectiveEditableFields, getPackageEditorFieldWarnings, getPackageEditorFieldTargetStatuses, type FontReadinessReport, type EditableFieldBinding, type LoadedTemplatePackageSource, type TemplatePackageV1} from "@sleinity/template-core";
+import {restoreImportedPackageForEditing} from "../../../../packages/template-core/test/legacyEntry";
 import {
   createTemplatePackageQualityReport,
   getDiagnosticCodeTitle,
@@ -126,11 +90,11 @@ export {
   canImportPackageResult,
   createSettingsPackageImportResult,
   defaultPackageCreateMetadata,
-} from "@sleinity/template-browser";
+} from "../../../../packages/template-browser/test/legacyEntry";
 export type {
   PackageImportResult,
   TemplatePackageCreateMetadata,
-} from "@sleinity/template-browser";
+} from "../../../../packages/template-browser/test/legacyEntry";
 export {
   AssetDiagnosisPanel,
   EditableFieldsDiagnosisPanel,

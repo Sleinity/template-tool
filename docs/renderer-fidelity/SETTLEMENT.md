@@ -1,5 +1,14 @@
 # Dependency, Measurement, and Settlement Contract
 
+## 2026-10-07 bounded mask evidence
+
+ADR 0092 adds optional existing canonical mask-resolution input and resolved
+observational evidence for its exact rectangular ALPHA subset. Full source IDs,
+declared scope, source bounds, affected clip insets and revision/provenance survive.
+Missing, mismatched and unsupported authority remains unresolved. This supersedes
+the historical unconditional mask placeholder below, without promoting the
+observational graph into runtime authority. See [the mask contract](OBSERVATIONAL_MASK_SETTLEMENT.md).
+
 Milestone 3 adds an evidence-only branch:
 
 Milestone 6.1 adds media active-state and placement-revision values to the production scene/routing identity. Upload, Fill/Fit switch, replacement asset change, and reset therefore invalidate the affected media placement and export readiness. Per-field asynchronous file/decode operation revisions reject stale work before it can mutate `workingPackage`; the existing package/scene/asset/settlement revision gates continue to reject stale resolved placement and PNG readiness.

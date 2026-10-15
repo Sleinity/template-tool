@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "sdk-061-single-host-v1",
+  "rows": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+      "fieldTypes": [
+        "image",
+        "text",
+        "textarea",
+        "boolean"
+      ],
+      "v2ImportMs": 197.6,
+      "sessionMaterializeMs": 23.79
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "fieldTypes": [
+        "textarea",
+        "boolean",
+        "text"
+      ],
+      "v2ImportMs": 15.37,
+      "sessionMaterializeMs": 9.1
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+      "fieldTypes": [
+        "color",
+        "boolean",
+        "image",
+        "number",
+        "text",
+        "textarea",
+        "date"
+      ],
+      "v2ImportMs": 14.21,
+      "sessionMaterializeMs": 7.93
+    }
+  ],
+  "findings": []
+}
+SDK 0.6.1 public Family host (sdk-061): 3 exact sources, one design selector, configuration/defaults, standalone materialization and save/reload passed.
+{"fixtureId":"exporter-061-carrousel","explicitControlValue":"#123456","dimensions":[1920,1080],"exportCompleted":true,"colorValueOracle":"raw-zip-template-json","result":"pass"}
+[sdk-061] run=sdk-v2-optimized-20261015 capture=complete comparisons=public-single:0,public-family:0,color-browser:0,renderer-existing:0,scene-existing:0,settlement-existing:0 decision=GO

@@ -1,5 +1,12 @@
 # Install Template Platform SDK 0.8.0
 
+This page retains the **published** 0.8.0 installation contract. The current
+workspace is an unpublished candidate with unchanged version labels and newer
+V2/recovery behavior. Use its source identity and checksums rather than version
+alone; see [local release preparation](RELEASE_PREPARATION.md) and
+[current V2 integration](V2_INTEGRATION.md). Do not mix those local archives with
+published archives of the same version.
+
 Install the three SDK packages at the same version. Choose one installation
 method and do not mix registry and archive dependencies.
 

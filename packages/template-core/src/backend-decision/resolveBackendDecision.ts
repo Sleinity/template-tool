@@ -7,6 +7,7 @@ import type {
 } from "./types";
 import type { ResolvedBackendAvailabilityV1 } from "./types";
 import type { BackendDecisionNodeInputV1 } from "./inputContracts";
+import type { ResolvedSourceCompositingV1 } from "../compositing/resolveSourceCompositing";
 
 export const resolvedBackendAvailability: ResolvedBackendAvailabilityV1 = {
   schemaVersion: "resolved-backend-availability-v1",
@@ -112,6 +113,7 @@ export interface ResolveBackendDecisionOptions {
   sourceRevision: string;
   maskOwner?: "css-clip" | "compatibility" | null;
   maskCapability?: string | null;
+  compositing?: ResolvedSourceCompositingV1 | null;
 }
 
 export function resolveBackendDecision(
@@ -137,8 +139,26 @@ export function resolveBackendDecision(
       reason: "Resolved text, exact-font evidence, measurement, trim, and editing select the established DOM/CSS text owner.",
     }));
   }
-  owners.push(...primitiveOwners(node));
-  if (node.primitiveAppearance.ownership !== "primitive-authoritative") {
+  // A selected compositing owner must not compete with a primitive owner for
+  // the same fill or establish a second isolation boundary.
+  if (!options.compositing) owners.push(...primitiveOwners(node));
+  if (options.compositing) {
+    owners.push(owner({
+      family: "compositing",
+      capabilityId: options.compositing.kind === "group"
+        ? "CMP-OPAQUE-GROUP-BLEND"
+        : options.compositing.kind === "mixed-image-gradient"
+          ? "CMP-MIXED-IMAGE-DARKEN-GRADIENT"
+          : "CMP-OPAQUE-SOLID-PAINT-STACK",
+      backend: "dom-css",
+      runtimeOwner: "legacy-dom-css",
+      supportLevel: "native",
+      reason: "The source-certified opaque-backdrop compositing contract owns this node's blend and opacity order.",
+    }));
+  }
+  if (node.primitiveAppearance.ownership !== "primitive-authoritative" &&
+      options.compositing?.kind !== "paint-stack" &&
+      options.compositing?.kind !== "mixed-image-gradient") {
     const compatibilityFills = node.text
       ? []
       : node.image
@@ -181,7 +201,7 @@ export function resolveBackendDecision(
         : "Unsupported effect source data remains preserved without authorizing a new backend.",
     }));
   }
-  if (node.appearance.opacity !== 1) {
+  if (node.appearance.opacity !== 1 && options.compositing?.kind !== "group") {
     owners.push(owner({
       family: "compositing",
       capabilityId: "CMP-NODE-OPACITY-COMPATIBILITY",
@@ -256,7 +276,7 @@ export function resolveBackendDecision(
     }));
   }
 
-  const primitiveFallbackReasons = !primitiveNodeTypes.has(node.type) || node.image || node.vector || options.maskOwner
+  const primitiveFallbackReasons = options.compositing || !primitiveNodeTypes.has(node.type) || node.image || node.vector || options.maskOwner
     ? []
     : node.primitiveAppearance.fallbackReasons;
   const fallbackReasons = Array.from(new Set([
@@ -290,6 +310,7 @@ export function resolveBackendDecision(
       paint: node.primitiveAppearance.paints.layers.map((layer) => layer.paintRevision),
       stroke: node.primitiveAppearance.strokes.layers.map((layer) => layer.strokeRevision),
     },
+    compositing: options.compositing?.revision ?? null,
   };
   const resolved = stableHash(resolvedInput);
   const backend = selectedBackend(owners);

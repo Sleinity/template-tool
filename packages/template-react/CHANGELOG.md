@@ -1,4 +1,78 @@
+## Unpublished 1.0.0 candidate — V2-only / exporter 0.6.1
+
+Retire V1 host workflows; retain source-schema 1.0 normalization and the private renderer bridge. ZIP import requires exporter 0.6.1; canonical schema remains 2.2. Existing V2 records and recovery remain supported, and historical stored bytes are untouched. Reduce duplicate validation, primitive interpretation and asset-collection scene copying without adding caches or backends.
+
 # @sleinity/template-react
+
+## 1.0.0
+
+### Major Changes
+
+- Advance the canonical TemplatePackage and content contract to schema 2.2. Image
+  fields now require one `replacementPlacement` policy—Fill, Fit, or Crop—instead
+  of an allowed-placement set plus a separate default. Exporter 1.0 input receives
+  provenance-preserving normalization and defaults to Fill, while canonical 2.0
+  and 2.1 packages require reimport.
+
+  Keep imported Figma placement separate from replacement policy, enforce the
+  policy across single and Family sessions, use Fill when a Crop-policy host does
+  not supply crop data, and restore imported placement on Reset. Add current saved
+  session and Family envelopes plus lightweight `Reimport required` Library
+  records for incompatible saved work.
+
+### Minor Changes
+
+- 944c51b: Correct and extend Template Family selection while preserving the published 0.8 tuple contract. Independent selection properties now resolve their combined option values to one concrete ZIP variant, expose availability without silently changing another property, and can be interleaved with editable fields through an optional stable control order. Studio authors properties and assignments directly on variant rows, and React exposes the same ordered selector-and-field inventory additively.
+- Add the strict TemplatePackageV2 field-contract foundation: seven discriminated
+  field definitions, exact imported bindings, stable choices, portable editor
+  order, opaque Color normalization, V1-to-V2 parsing and diagnostics, rendered
+  line-validation evidence types, and atomic Template Family configuration
+  overrides. Add the DOM-free seven-field semantic kernel, one immutable revisioned
+  content reducer, typed mutation helpers, deterministic Number/Date formatting,
+  exact Color/Image/Boolean materialization, ordered safe host descriptors, and a
+  pure one-way V2 package materializer. V1 compatibility APIs remain available alongside the recommended V2 native
+  session/renderer path. They do not imply canonical saved-record migration.
+
+  Extend `date-display-v1` with deterministic prefix, suffix, separator,
+  year-first, day/month and month/day presentation. Loose exporter input now
+  normalizes unambiguous numeric displayed dates to canonical `YYYY-MM-DD`, using
+  the recorded export year only when the displayed value intentionally omits it.
+
+  Add canonical V2 Browser/React sessions and structural Boolean rendering. Add
+  Family content V3 with one shared Image asset/default placement, sparse
+  variant-only placement overrides, current saved-record validation, typed Family Image
+  controller methods, and the ordinary affine editor-Crop path with
+  cover-within-canonical aspect adaptation.
+
+  Use typed `<type>:<name>` field identities and portable content/order/overrides.
+  The current canonical contract is schema 2.2, superseding the intermediate 2.1
+  roadmap. Canonical 2.0/2.1 packages and incompatible saved envelopes require
+  reimport; no migration-on-read promise remains. Source schema 1.0 still uses
+  provenance-preserving normalization. Different field types may share a source
+  name; compatible repeated Booleans merge into a multi-target control. Descendant
+  controls follow participation without discarding canonical child content.
+
+### Patch Changes
+
+- Keep source-certified full-parent ALPHA masks aligned with live editor layout so
+  Boolean structural reflow does not clip active sibling content with stale insets.
+- Add public atomic V2 session configuration transactions and Core canonical
+  configuration reconciliation, including stable choice identity and revision-safe
+  configuration changes. Preserve corrective mutations for semantically invalid
+  content. Correct local Blob image carriers/dimension ingestion and acquire React
+  renderer publication leases on committed mounts with operation-current async
+  callbacks. Prove Studio and external controls against the same public contracts.
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies [944c51b]
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @sleinity/template-browser@1.0.0
+  - @sleinity/template-core@1.0.0
 
 ## 0.8.0
 

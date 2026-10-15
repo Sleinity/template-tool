@@ -20,7 +20,7 @@
     {
       "name": "@sleinity/template-react",
       "directory": "template-react",
-      "role": "React import bindings and default UI, renderer, inspection viewport, export handle, and advanced renderer inspection"
+      "role": "V2 React session bindings, renderer, guarded export handle and read-only advanced inspection"
     }
   ]
 }

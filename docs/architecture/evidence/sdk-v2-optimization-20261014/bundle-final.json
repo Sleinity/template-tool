@@ -1,0 +1,41 @@
+{
+  "profiles": {
+    "core-import-validation-v2": {
+      "bytes": 448327,
+      "gzipBytes": 102391
+    },
+    "core-family-v2": {
+      "bytes": 368847,
+      "gzipBytes": 82125
+    },
+    "browser-session-importer-v2": {
+      "bytes": 731733,
+      "gzipBytes": 173579
+    },
+    "browser-field-session-v2": {
+      "bytes": 604104,
+      "gzipBytes": 138509
+    },
+    "browser-family-v2": {
+      "bytes": 612114,
+      "gzipBytes": 140657
+    },
+    "react-renderer-v2": {
+      "bytes": 651897,
+      "gzipBytes": 160445
+    },
+    "react-editor-v2": {
+      "bytes": 652015,
+      "gzipBytes": 160480
+    },
+    "react-field-session-v2": {
+      "bytes": 879239,
+      "gzipBytes": 208844
+    },
+    "react-family-v2": {
+      "bytes": 854905,
+      "gzipBytes": 204130
+    }
+  },
+  "failures": []
+}

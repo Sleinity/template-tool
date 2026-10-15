@@ -19,10 +19,15 @@ import { comparePng } from "./image.mjs";
 import { resolveModel } from "./model.mjs";
 import { approvedReferenceDirectory, approvedReferenceHash, assertReferenceImmutable, updateApprovedReference } from "./references.mjs";
 import { runBrowserFixtures } from "./browser.mjs";
+import { selectCaptureCamera } from "./capture-camera.mjs";
 import { retainFailureArtifacts } from "./artifacts.mjs";
 import { loadExactFontManifest } from "./fonts.mjs";
+import { captureCompleteness, comparisonCaptureStatus } from "./capture-integrity.mjs";
+import { gateFixtureSelection } from "./gate-profile.mjs";
 
 const command = process.argv[2] ?? "baseline";
+if ((process.env.EDITOR_RETAINED_SOURCE_IDENTITY || process.env.R07_RETAINED_VARIANT || process.env.R07_RASTER_PROBE || process.env.R07_MOTION) && command !== "compare")
+  throw new Error("Retained source overlays are permitted only for comparison evidence.");
 const options = parseArguments(process.argv.slice(3));
 const defaultCandidates = join(repoRoot, "fidelity", "candidates");
 const defaultArtifacts = join(repoRoot, "fidelity", "artifacts");
@@ -53,16 +58,24 @@ async function capture() {
   if (!["application-default", "source-authoritative"].includes(fontProfile)) {
     throw new Error(`Unknown font profile ${fontProfile}.`);
   }
-  const exactFontManifest = fontProfile === "source-authoritative"
-    ? loadExactFontManifest()
-    : null;
   const manifest = loadManifest();
-  const fixtureRecords = selectFixtures(manifest, options.fixture || options._[0]).map((fixture) => ({ ...fixture, ...verifyFixture(manifest, fixture) }));
+  const fixtureRecords = (gateFixtureSelection(manifest, options) || selectFixtures(manifest, options.fixture || options._[0])).map((fixture) => ({ ...fixture, ...verifyFixture(manifest, fixture) }));
+  const exactFontManifest = loadExactFontManifest(fixtureRecords.flatMap(fixture => fixture.requiredFonts ?? []));
   const selectedSurfaces = selectSurfaces(options.surface);
+  const captureCamera = selectCaptureCamera(options["capture-camera"]);
   const selectedRun = runId();
   const candidateRoot = resolve(options.output || defaultCandidates);
+  if (existsSync(join(candidateRoot, selectedRun))) throw new Error(`Capture run ${selectedRun} already exists; choose a new run ID to prevent stale artifacts mixing with fresh captures.`);
+  const expectedRepeat = Number(options.repeat || 2);
+  if (!Number.isInteger(expectedRepeat) || expectedRepeat < 2) throw new Error("Regression captures require at least two repeats.");
   const models = new Map();
-  for (const fixture of fixtureRecords) models.set(fixture.id, await resolveModel(fixture));
+  const modelFailures = [];
+  for (const fixture of fixtureRecords) {
+    try { models.set(fixture.id, await resolveModel(fixture)); }
+    catch (error) {
+      modelFailures.push({ fixtureId: fixture.id, phase: "resolve-model", surfaces: {}, fontDecisions: [], fullDurationMs: 0, error: error instanceof Error ? error.message : String(error) });
+    }
+  }
   const server = await createStudioViteServer({
     port: Number(options.port || 0),
     strictPort: Boolean(options.port),
@@ -71,11 +84,14 @@ async function capture() {
   const baseUrl = server.resolvedUrls?.local?.[0]?.replace(/\/$/, "");
   if (!baseUrl) throw new Error("Fidelity Vite server did not publish a local URL.");
   try {
-    const captured = await runBrowserFixtures({ baseUrl, fixtures: fixtureRecords, models, selectedSurfaces, runId: selectedRun, candidateRoot, headed: Boolean(options.headed), repeat: Number(options.repeat || 2), fontProfile, exactFontManifest });
+    const captured = await runBrowserFixtures({ baseUrl, fixtures: fixtureRecords.filter(fixture => models.has(fixture.id)), models, selectedSurfaces, runId: selectedRun, candidateRoot, headed: Boolean(options.headed), repeat: expectedRepeat, fontProfile, exactFontManifest, captureCamera });
+    captured.results.push(...modelFailures);
     const fontDecisions = captured.results.flatMap((item) => item.fontDecisions);
     const environment = environmentMetadata({ ...captured.browser, loadedFonts: [...new Map(captured.results.flatMap((item) => Object.values(item.surfaces).flatMap((captures) => captures?.[0]?.fontReadiness?.fonts ?? [])).map((font) => [`${font.family}:${font.weight}:${font.style}`, font])).values()], fallbackFonts: fontDecisions.filter((decision) => decision.action === "Use replacement"), fontDecisions, fontSources: exactFontManifest?.fonts.map(({ id, family, weight, style, verifiedByteSize, verifiedSha256 }) => ({ id, family, weight, style, byteSize: verifiedByteSize, sha256: verifiedSha256 })) ?? [], fontProfile });
     const summaries = captured.results.map((result) => ({
       fixtureId: result.fixtureId,
+      phase: result.phase,
+      completeness: captureCompleteness(selectedSurfaces, result.surfaces, expectedRepeat),
       error: result.error ?? null,
       route: result.route,
       fontDecisions: result.fontDecisions,
@@ -85,9 +101,9 @@ async function capture() {
     const runDirectory = join(candidateRoot, selectedRun);
     mkdirSync(runDirectory, { recursive: true });
     writeFileSync(join(runDirectory, "environment.json"), stableStringify(environment));
-    writeFileSync(join(runDirectory, "run.json"), stableStringify({ schemaVersion: 1, runId: selectedRun, fontProfile, productRendererPath: "semantic-first-with-capability-fallback", fixtureDirectory: manifest.defaultFixtureDirectory, selectedFixtures: fixtureRecords.map((item) => item.id), selectedSurfaces, summaries }));
-    const unstable = summaries.filter((item) => item.error || Object.values(item.repeatability).some((report) => !report.stable));
-    return { manifest, fixtureRecords, selectedSurfaces, selectedRun, candidateRoot, environment, captured, summaries, unstable };
+    writeFileSync(join(runDirectory, "run.json"), stableStringify({ schemaVersion: 1, runId: selectedRun, gate: options.gate || null, fontProfile, productRendererPath: "semantic-first-with-capability-fallback", fixtureDirectory: manifest.defaultFixtureDirectory, selectedFixtures: fixtureRecords.map((item) => item.id), selectedSurfaces, expectedRepeat, fixtures: fixtureRecords.map(({ id, zipSha256, byteSize }) => ({ id, zipSha256, byteSize })), summaries }));
+    const unstable = summaries.filter((item) => item.error || !item.completeness.complete || Object.values(item.repeatability).some((report) => !report.stable));
+    return { manifest, fixtureRecords, selectedSurfaces, selectedRun, candidateRoot, environment, captured, summaries, unstable, expectedRepeat };
   } finally {
     await server.close();
   }
@@ -101,8 +117,8 @@ async function baseline() {
   if (result.unstable.length) process.exitCode = 1;
 }
 
-async function compare() {
-  const result = await capture();
+async function compare(existingResult = null) {
+  const result = existingResult ?? await capture();
   const comparisons = [];
   const approvedRoot = resolve(options["approved-root"] || join(repoRoot, "fidelity", "references", "approved"));
   for (const fixture of result.fixtureRecords) {
@@ -111,8 +127,9 @@ async function compare() {
       const candidate = candidatePaths(result.candidateRoot, result.selectedRun, fixture.id, surface);
       const approvedDir = approvedReferenceDirectory(fixture.id, surface, approvedRoot);
       const approved = { directory: approvedDir, png: join(approvedDir, "reference.png"), structure: join(approvedDir, "structure.json") };
-      if (!existsSync(candidate.png) || !existsSync(candidate.structure)) {
-        comparisons.push({ fixtureId: fixture.id, surface, status: "capture-missing", error: fixtureResult?.error ?? "candidate missing" });
+      const captureStatus = comparisonCaptureStatus(fixtureResult?.surfaces[surface], result.expectedRepeat, existsSync(candidate.png) && existsSync(candidate.structure));
+      if (captureStatus) {
+        comparisons.push({ fixtureId: fixture.id, surface, status: captureStatus, error: fixtureResult?.error ?? "candidate missing" });
         continue;
       }
       if (!existsSync(approved.png) || !existsSync(approved.structure)) {
@@ -133,15 +150,33 @@ async function compare() {
     }
   }
   const reportPath = join(result.candidateRoot, result.selectedRun, "comparison.json");
-  writeFileSync(reportPath, stableStringify({ runId: result.selectedRun, comparisons }));
+  writeFileSync(reportPath, stableStringify({ runId: result.selectedRun, gate: options.gate || null, captureSummaries: result.summaries, capturesComplete: result.summaries.every(item => item.completeness.complete), repeatStable: result.unstable.length === 0, comparisons }));
   for (const item of comparisons) console.log(`[fidelity] fixture=${item.fixtureId} surface=${item.surface} comparison=${item.status}`);
   console.log(`[fidelity] comparison-report=${reportPath}`);
   if (result.unstable.length || comparisons.some((item) => item.status !== "pass")) process.exitCode = 1;
 }
 
+async function compareExisting() {
+  const selectedRun = String(options["run-id"] || "");
+  if (!selectedRun) throw new Error("compare-existing requires an explicit --run-id.");
+  const candidateRoot = resolve(options.output || defaultCandidates);
+  const root = join(candidateRoot, selectedRun);
+  const run = JSON.parse(readFileSync(join(root, "run.json"), "utf8"));
+  const manifest = loadManifest();
+  const fixtures = gateFixtureSelection(manifest, options) || selectFixtures(manifest, options.fixture || options._[0]);
+  if (run.runId !== selectedRun || JSON.stringify(run.selectedFixtures) !== JSON.stringify(fixtures.map(item => item.id))) throw new Error("Existing capture fixture selection differs from the requested comparison.");
+  if (options.gate && run.gate !== options.gate) throw new Error("Existing capture has a different gate identity.");
+  const fixtureRecords = fixtures.map(fixture => ({ ...fixture, ...verifyFixture(manifest, fixture) }));
+  const summaries = run.summaries;
+  const captured = { results: summaries.map(summary => ({ ...summary, surfaces: Object.fromEntries(Object.entries(summary.repeatability).map(([surface, report]) => [surface, Array.from({ length: report.repeatCount }, () => ({}))])) })) };
+  const environment = JSON.parse(readFileSync(join(root, "environment.json"), "utf8"));
+  const unstable = summaries.filter(item => item.error || !item.completeness.complete || Object.values(item.repeatability).some(report => !report.stable));
+  return compare({ fixtureRecords, selectedSurfaces: run.selectedSurfaces, selectedRun, candidateRoot, environment, captured, summaries, unstable, expectedRepeat: run.expectedRepeat });
+}
+
 async function update() {
   const manifest = loadManifest();
-  const fixtures = selectFixtures(manifest, options.fixture || options._[0]);
+  const fixtures = gateFixtureSelection(manifest, options) || selectFixtures(manifest, options.fixture || options._[0]);
   const selectedSurfaces = selectSurfaces(options.surface);
   const candidateRoot = resolve(options.output || defaultCandidates);
   const selectedRun = String(options["run-id"] || latestRun(candidateRoot) || "");
@@ -190,6 +225,7 @@ function report() {
 try {
   if (command === "baseline") await baseline();
   else if (command === "compare") await compare();
+  else if (command === "compare-existing") await compareExisting();
   else if (command === "update") await update();
   else if (command === "report") report();
   else throw new Error(`Unknown fidelity command ${command}.`);

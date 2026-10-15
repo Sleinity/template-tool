@@ -1,0 +1,71 @@
+{
+  "name": "@sleinity/template-core",
+  "version": "0.8.0",
+  "description": "Framework-neutral TemplatePackage import, validation, scene, field, and Template Family contracts.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleinity/template-tool.git",
+    "directory": "packages/template-core"
+  },
+  "private": false,
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./editor": {
+      "types": "./dist/editor.d.ts",
+      "import": "./dist/editor.js"
+    },
+    "./family": {
+      "types": "./dist/family.d.ts",
+      "import": "./dist/family.js"
+    },
+    "./assets": {
+      "types": "./dist/assets.d.ts",
+      "import": "./dist/assets.js"
+    },
+    "./fonts": {
+      "types": "./dist/fonts.d.ts",
+      "import": "./dist/fonts.js"
+    },
+    "./motion": {
+      "types": "./dist/motion.d.ts",
+      "import": "./dist/motion.js"
+    },
+    "./inspection": {
+      "types": "./dist/inspection.d.ts",
+      "import": "./dist/inspection.js"
+    },
+    "./renderer-internal": {
+      "types": "./dist/renderer-internal.d.ts",
+      "import": "./dist/renderer-internal.js"
+    }
+  },
+  "sdkInternalExports": [
+    "./renderer-internal"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts src/editor.ts src/family.ts src/assets.ts src/fonts.ts src/motion.ts src/inspection.ts src/renderer-internal.ts --format esm --sourcemap --clean --external react --external react-dom --external ajv --external fflate && tsup src/index.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate && tsup src/editor.ts src/family.ts src/assets.ts src/fonts.ts src/motion.ts src/inspection.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate && tsup src/renderer-internal.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate",
+    "prepack": "pnpm run build",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "fflate": "^0.8.3"
+  }
+}

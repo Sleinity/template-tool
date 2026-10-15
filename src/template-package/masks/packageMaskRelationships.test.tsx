@@ -91,6 +91,35 @@ assert(markup.includes('data-package-node-id="headline"'), "isMask=false must re
 assert(markup.includes("clip-path:inset(0px 0px 120px 0px)"), "Renderer must apply the source-derived clip exactly once.");
 assert(markup.includes('data-package-mask-paint-role="mask-input"'), "Developer telemetry must expose the singular mask-input paint role.");
 
+const fullParentEditorPackage = packageWithMask();
+fullParentEditorPackage.nodes.root.bounds.relative.height = 1080;
+fullParentEditorPackage.nodes.root.bounds.absolute.height = 1080;
+fullParentEditorPackage.nodes.root.sizing.vertical = { mode: "FIXED", value: 1080 };
+const fullParentEditorTree = createResolvedRenderTree(fullParentEditorPackage);
+const editorMarkup = renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+  packageValue: fullParentEditorPackage,
+  resolvedTree: fullParentEditorTree,
+  mode: "editor",
+}));
+assert(
+  editorMarkup.includes('data-package-mask-clip-owner="full-parent"') &&
+    editorMarkup.includes('data-package-mask-clip-owner="full-parent-ancestor"') &&
+    editorMarkup.includes("clip-path:inset(0px)") &&
+    !editorMarkup.includes("clip-path:inset(0px 0px 120px 0px)"),
+  "A full-parent mask in live editor mode must clip at the stable parent boundary instead of retaining stale affected-node insets.",
+);
+const fullParentStaticMarkup = renderToStaticMarkup(createElement(TemplatePackageRenderer, {
+  packageValue: fullParentEditorPackage,
+  resolvedTree: fullParentEditorTree,
+  mode: "static",
+}));
+assert(
+  fullParentStaticMarkup.includes('data-package-mask-clip-owner="full-parent"') &&
+    fullParentStaticMarkup.includes('data-package-mask-clip-owner="full-parent-ancestor"') &&
+    !fullParentStaticMarkup.includes("clip-path:inset(0px 0px 120px 0px)"),
+  "The full-parent mask owner must remain identical on static and live editor surfaces.",
+);
+
 const changedAfterResolution = packageWithMask();
 const changedPaint = changedAfterResolution.nodes.mask.appearance.fills[0];
 if (changedPaint.type === "SOLID") changedPaint.opacity = 0.5;

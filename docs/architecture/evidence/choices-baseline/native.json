@@ -1,0 +1,45 @@
+[
+  {
+    "fixture": "exporter-061-now-hiring",
+    "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+    "fieldCount": 6,
+    "configuredChoices": 0
+  },
+  {
+    "fixture": "exporter-061-cover",
+    "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+    "fieldCount": 4,
+    "configuredChoices": 0
+  },
+  {
+    "fixture": "exporter-061-carrousel",
+    "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+    "fieldCount": 11,
+    "configuredChoices": 0,
+    "field": {
+      "id": "text:subtitle",
+      "label": "Subtitle",
+      "defaultValue": "Online & in-storeee"
+    },
+    "genericRestrictedSeedError": "Subtitle only accepts configured choice values.",
+    "optionValueEditChangesSelectedContent": true,
+    "manualMatchingValueSelectedChoiceId": null,
+    "removal": {
+      "value": "Offer B",
+      "selectedChoiceId": null
+    },
+    "removedSelectedOption": {
+      "value": "Offer B",
+      "blockingErrors": [
+        {
+          "code": "field-v2.restricted-choice",
+          "fieldId": "text:subtitle",
+          "severity": "error",
+          "message": "Subtitle only accepts configured choice values.",
+          "blocksExport": true
+        }
+      ]
+    },
+    "savedChoiceIdentityRoundTrips": true
+  }
+]

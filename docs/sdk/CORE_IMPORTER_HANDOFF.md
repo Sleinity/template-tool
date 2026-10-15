@@ -1,83 +1,15 @@
-# Core importer 0.8.0 handoff
+# SDK — V2 candidate
 
-## Contract
+The unpublished 1.0.0 candidate supports V2 host workflows only. ZIP admission requires raw source schema 1.0 and exporter 0.6.1 before asset persistence or font linking. Other or missing versions return blocked with SOURCE_EXPORTER_VERSION_UNSUPPORTED and retained raw evidence. Canonical packages remain schema 2.2.
 
-- Package: `@sleinity/template-core`
-- Version: `0.8.0`
-- Supported importer export: `importTemplatePackage`
-- Input: TemplatePackage ZIP bytes as an `ArrayBuffer`, plus an optional
-  source filename.
-- Output: loaded source evidence, imported baseline, editable working package,
-  strict validation, diagnostics, and `importable`.
-- Runtime secret: none.
-- Peer dependencies: none.
-- Runtime dependencies: `ajv` and `fflate`, installed transitively.
-- Browser support: direct execution after `File.arrayBuffer()`; no API route is
-  required.
-- Node support: modern Node with the documented web-compatible primitives.
+Source normalization and the private V1-shaped renderer bridge remain necessary for current exports. Read-only versioned evidence does not authorize V1 editing. V1 sessions, Family editing, wizard/confirmation, persistence, React importer and importer styles are retired. Historical readers/adapters are test-only and absent from supported host entries. Existing V2 records, assets, fonts and recovery tokens are preserved. Unknown historical records remain untouched outside the catalogue; no V1 migration is provided.
 
-```ts
-import { importTemplatePackage } from "@sleinity/template-core";
+See [V2 integration](V2_INTEGRATION.md), [lifecycle](HOST_LIFECYCLE.md), [operation outcomes](OPERATION_OUTCOMES.md), [migration contract](SDK_1_0_MIGRATION.md) and [runtime handoff](RUNTIME_HANDOFF.md).
 
-export async function importTemplateZip(file: File) {
-  const result = importTemplatePackage(await file.arrayBuffer(), file.name);
-  if (!result.importable || !result.workingPackage) {
-    return {
-      ok: false as const,
-      diagnostics: result.source.diagnostics,
-      validation: result.validation,
-    };
-  }
-  return {
-    ok: true as const,
-    template: result.workingPackage,
-    importedBaseline: result.basePackage,
-    source: result.source,
-    validation: result.validation,
-  };
-}
-```
+Use createTemplateSessionV2 and createTemplateFieldFamilySessionV2 from Browser /session; runTemplatePackageImportPipelineV2, appendTemplateSourcesV2 and mutateTemplateFamilyV2 from Browser /importer. React /editor exposes existing owning hooks, TemplateFieldSessionV2Provider, TemplateFieldSessionRendererV2 and typed controllers. Core supports DOM-free createZipBundleReader/loadTemplatePackageBundleSource, parseTemplatePackageV2 and strict validation/materialization.
 
-## Vendored installation
+Hosts own controls, navigation, storage policy and output delivery. Sessions own canonical content and native resource lifetimes; React subscriptions borrow sessions. Exact fonts, image Fill/Fit/Crop/Reset, stale-evidence rejection and PNG readiness guards remain intact. Use Browser /persistence for V2 records and template-scoped recovery; do not persist derived renderer trees as content authority.
 
-Download these files from the public
-[`sdk-v0.8.0` Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v0.8.0):
+The delivered API and entry inventories specify supported imports. renderer-internal and session-internal are restricted repository seams; they are not supported host APIs. React /inspection retains read-only advanced evidence. There is no selectable compatibility renderer.
 
-- `sleinity-template-core-0.8.0.tgz`
-- `SHA256SUMS`
-- `SDK-CORE-HANDOFF.md`
-
-Verify the archive, commit it to the private consumer repository, and declare:
-
-```json
-{
-  "dependencies": {
-    "@sleinity/template-core": "file:vendor/sleinity-template-core-0.8.0.tgz"
-  }
-}
-```
-
-This installation needs no `.npmrc`, package-registry token, or runtime
-secret. Test one valid ZIP and require `importable === true`. Test invalid ZIP
-bytes and require structured source diagnostics. Confirm the importer makes no
-network requests.
-
-Agent-built consumers use this same vendored route. The authoritative
-[installation guide](INSTALLATION.md) covers npm, pnpm and GitHub Packages;
-the complete [runtime handoff](RUNTIME_HANDOFF.md) covers import, editing,
-rendering, persistence and PNG capture with all three packages.
-
-## Optional direct registry installation
-
-```ini
-@sleinity:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-always-auth=true
-```
-
-```sh
-npm install @sleinity/template-core@0.8.0
-```
-
-`NODE_AUTH_TOKEN` must be a classic GitHub personal access token with
-`read:packages` and package access.
+The three examples compile V2 workflows. Archive/source hashes identify this same-version candidate. Publication and tagging require separate authorization. Runtime validators and the rasterizer are retained.

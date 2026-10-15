@@ -11,11 +11,8 @@ import type {
 } from "@sleinity/template-core";
 import { formatEditableFieldLabel } from "./fieldLabels";
 import { withTextFieldConstraint } from "@sleinity/template-core/editor";
-import {
-  getEffectiveEditableFields,
-  getPackageEditorFieldTargetStatuses,
-  packageWithEffectiveEditableFields,
-} from "@sleinity/template-core/editor";
+import {getEffectiveEditableFields, getPackageEditorFieldTargetStatuses} from "@sleinity/template-core/editor";
+import {packageWithEffectiveEditableFields} from "../../../../../../packages/template-core/test/legacyEntry";
 import { FieldRuleCardShell } from "./FieldRuleCardShell";
 import { FieldRuleConstraintControls } from "./FieldRuleConstraintControls";
 

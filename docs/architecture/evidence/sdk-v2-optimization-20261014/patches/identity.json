@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "milestone": "M2",
+      "file": "packages/template-browser/src/session/templateSessionV2.ts",
+      "beforeSha256": "d8cf7d3bab568fac03b388f9226c83dd96ca0fb4e020a68b5fb9b68251fc4ea3",
+      "afterSha256": "ec03b947a4f3c66a3390253eacb679c93242466d83a6da6925ee4294c5c22fef"
+    },
+    {
+      "milestone": "M2",
+      "file": "packages/template-core/src/family/fieldRulesV2.ts",
+      "beforeSha256": "6504826242c895b98410452756f2757c540ba886e02c60b6d822479512699506",
+      "afterSha256": "d1a6d16d12983f975811df7ff32ad8f96cc16e10230756c9b146223788c9c606"
+    },
+    {
+      "milestone": "M3",
+      "file": "packages/template-core/src/primitives/resolvePrimitiveAppearance.ts",
+      "beforeSha256": "bdf1870af2d25d78a4d4637b861deeb0542d0a8dbec6fda76f057651d3e70b89",
+      "afterSha256": "ff448a78d4e3ed2632aa8916d21395b35d56912dc9009e6df2f916fbdce47d37"
+    },
+    {
+      "milestone": "M3",
+      "file": "packages/template-core/src/resolved/createResolvedRenderTree.ts",
+      "beforeSha256": "dc0a14cd488280b5256462a1128fd03a350b9fb92583493f8fd56f74ecfba365",
+      "afterSha256": "a31d0b114f8c3417fc3889a5c3344bbaf9edf43536abd9cd3b78bf7ee34d13fc"
+    },
+    {
+      "milestone": "M4",
+      "file": "packages/template-browser/src/persistence/v2SessionRepositories.ts",
+      "beforeSha256": "7d2be0925a13bd90018051c916779e862d21d85b555bcd4025b99fb03732cfe4",
+      "afterSha256": "962b57ee014b38a8cc4983ffe3773d7c8c91b7b5005a6e526f3862e7662c91dd"
+    },
+    {
+      "milestone": "M4",
+      "file": "packages/template-browser/src/persistence/templateRecovery.ts",
+      "beforeSha256": "5644695252c26fdf8bbc808c9e6ea6756ee33c13169489457d80dec9e30f1cd2",
+      "afterSha256": "d2a1cd8d2a965eeb8b8c59b63855cb92e248ef11ccaf039df43de454f35d9141"
+    }
+  ],
+  "note": "M2/M3 isolate their retained checkpoints. M4 excludes later M1 incompatible-record getter refinements. These are review/revert artifacts, never an instruction to overwrite existing user work."
+}

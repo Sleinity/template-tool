@@ -7,6 +7,8 @@ import {
 } from "./sdk-runtime-manifest.mjs";
 import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
 
+import { loadDeliveryInventory } from "../release-delivery/bundle.mjs";
+import { assertDeliveryWorkflow } from "../release-delivery/workflow.mjs";
 const root = process.cwd();
 const retiredActivePaths = [
   "docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md",
@@ -43,6 +45,8 @@ const activeRoots = [
   "scripts/repository/create-core-release-handoff.mjs",
   "scripts/repository/create-runtime-release-handoff.mjs",
   "scripts/repository/create-sdk-local-release-verification.mjs",
+  "config/sdk-delivery-inventory.json",
+  "scripts/release-delivery/bundle.mjs",
   "scripts/repository/sdk-runtime-manifest.mjs",
   "scripts/repository/verify-template-editor-reference.mjs",
 ];
@@ -81,17 +85,9 @@ const agentPrompts = await readFile(
   path.join(root, "docs", "sdk", "AGENT_INTEGRATION_PROMPTS.md"),
   "utf8",
 );
-if (
-  !agentPrompts.includes("core-only ZIP import and validation") ||
-  !agentPrompts.includes("createTemplateImportWizard") ||
-  !agentPrompts.includes("TemplateImportWizard") ||
-  !agentPrompts.includes("TemplateSessionViewport") ||
-  !agentPrompts.includes("loadTemplateImportConfirmation") ||
-  !agentPrompts.includes("renderer-internal")
-) {
-  throw new Error(
-    "Agent prompts must cover core, headless and React lifecycle contracts.",
-  );
+for (const required of ['core-only ZIP import and validation','0.6.1','V2','renderer-internal']) if (!agentPrompts.includes(required)) throw new Error('Agent integration contract missing '+required);
+for (const required of ["runTemplatePackageImportPipelineV2", "TemplateFieldSessionRendererV2", "exportAndComplete", "LOCAL-CANDIDATE-MANIFEST.json", "session-internal"]) {
+  if (!agentPrompts.includes(required)) throw new Error(`Current V2 agent guidance is missing ${required}.`);
 }
 const lovableMigration = await readFile(
   path.join(root, "docs", "sdk", "SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md"),
@@ -118,60 +114,14 @@ if (
   throw new Error("Runtime handoff must exclude renderer-internal entries from host use.");
 }
 
-const runtimeHandoffGenerator = await readFile(
-  path.join(
-    root,
-    "scripts",
-    "repository",
-    "create-runtime-release-handoff.mjs",
-  ),
-  "utf8",
-);
-if (
-  runtimeHandoffGenerator.includes(
-    "<TemplateSessionProvider session={wizard.session}>",
-  ) ||
-  !runtimeHandoffGenerator.includes("loadTemplateImportConfirmation(") ||
-  !runtimeHandoffGenerator.includes("inspectTemplateRuntimeSupport(") ||
-  !runtimeHandoffGenerator.includes(
-    'from "@sleinity/template-react/editor";',
-  ) ||
-  !runtimeHandoffGenerator.includes("TemplateSessionViewport") ||
-  !runtimeHandoffGenerator.includes("useTemplateSessionEditableFields") ||
-  !runtimeHandoffGenerator.includes("useTemplateSessionDiagnosticSummary") ||
-  !runtimeHandoffGenerator.includes(
-    'from "@sleinity/template-browser/importer";',
-  ) ||
-  !runtimeHandoffGenerator.includes("Focused and advanced entries") ||
-  !runtimeHandoffGenerator.includes("SDK-CAPABILITIES.md") ||
-  !runtimeHandoffGenerator.includes("must never import those internal entries")
-) {
-  throw new Error(
-    "Generated runtime handoff must return confirmation to the host and reopen it in a fresh session.",
-  );
+const inventory = await loadDeliveryInventory(root);
+for (const required of ["SDK-V2-INTEGRATION.md", "SDK-HOST-LIFECYCLE.md", "SDK-OPERATION-OUTCOMES.md", "SDK-1.0-MIGRATION.md", "SDK-0.8-MIGRATION.md", "FieldRulesV2Host.tsx", "fieldHostLifecycle.ts"]) {
+  if (!inventory.documents.some(item=>item.file===required)) throw new Error(`Delivery inventory is missing ${required}`);
 }
-
-const localVerificationGenerator = await readFile(
-  path.join(
-    root,
-    "scripts",
-    "repository",
-    "create-sdk-local-release-verification.mjs",
-  ),
-  "utf8",
-);
-for (const required of [
-  "SDK-INSTALLATION.md",
-  "SDK-CAPABILITIES.md",
-  "AGENT-INTEGRATION-PROMPTS.md",
-  "SDK-0.8-MIGRATION.md",
-  "LOCAL-RELEASE-VERIFICATION.md",
-]) {
-  if (!localVerificationGenerator.includes(required)) {
-    throw new Error(`Local release verification is missing ${required}.`);
-  }
+for (const wrapper of ["create-runtime-release-handoff.mjs","create-core-release-handoff.mjs","create-sdk-local-release-verification.mjs"]) {
+  const code=await readFile(path.join(root,"scripts/repository",wrapper),"utf8");
+  if(!code.includes("generateDeliveryBundle") || code.includes("const bundledLinks") || code.includes("## Verified published archives")) throw new Error(`Independent legacy handoff in ${wrapper}`);
 }
-
 const workflow = await readFile(
   path.join(root, ".github", "workflows", "release.yml"),
   "utf8",
@@ -202,27 +152,7 @@ if (
     "Manual handoff refresh must never enter package publication.",
   );
 }
-for (const required of [
-  "npm pack",
-  "create-runtime-release-handoff.mjs",
-  "create-core-release-handoff.mjs",
-  "verify-runtime-release-consumer.mjs",
-  "verify-template-editor-reference.mjs",
-  "verify-template-family-reference.mjs",
-  "SDK-CORE-HANDOFF.md",
-  "SDK-RUNTIME-HANDOFF.md",
-  "SDK-INSTALLATION.md",
-  "SDK-CAPABILITIES.md",
-  "AGENT-INTEGRATION-PROMPTS.md",
-  "SDK-0.8-MIGRATION.md",
-  "SDK_RELEASE_VISIBILITY",
-  "SDK_LICENSE_POLICY",
-  "SDK_AUTHORIZED_USE",
-]) {
-  if (!handoffJob.includes(required)) {
-    throw new Error(`Release handoff job is missing ${required}.`);
-  }
-}
+assertDeliveryWorkflow(workflow);
 
 const distribution = await loadRuntimeDistribution(root);
 if (

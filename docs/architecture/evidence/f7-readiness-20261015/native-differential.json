@@ -1,0 +1,1867 @@
+{
+  "status": "pass",
+  "outcomes": 38,
+  "baselineSha256": "5741ad00d2dd7c8531db3ac31c1cbbf336898d1e3756fac5e2fec680415cb97a",
+  "transcripts": {
+    "before": [
+      {
+        "label": "success",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "load-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "decode-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "timeout",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "shared-nodes/0",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:2baf3fcd"
+        },
+        "semanticHash": "4985f1993f1d9d3ef8201eb54f1a417be14c1d7800adc2fdaf4e99a8eaa75f2a"
+      },
+      {
+        "label": "shared-node-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"probe:extra-media\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:2baf3fcd"
+        },
+        "semanticHash": "4985f1993f1d9d3ef8201eb54f1a417be14c1d7800adc2fdaf4e99a8eaa75f2a"
+      },
+      {
+        "label": "independent-nodes/0",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:1f299483"
+        },
+        "semanticHash": "96218e49308be97e1ac74ced21ccead383f4973fc755e3f09ee9800bc262a6c3"
+      },
+      {
+        "label": "independent-nodes/1",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:1f299483"
+        },
+        "semanticHash": "96218e49308be97e1ac74ced21ccead383f4973fc755e3f09ee9800bc262a6c3"
+      },
+      {
+        "label": "aba-shared",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "aba-distinct",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "aba-distinct-rest/0",
+        "revision": 5,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "unrelated-completion",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "unrelated-completion-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reload",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reload-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reset",
+        "revision": 2,
+        "operationRevision": 2,
+        "selectedVariantId": null,
+        "status": "idle",
+        "error": null,
+        "readiness": {
+          "state": "idle",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "not-required",
+          "assets": "not-required",
+          "fonts": "not-required",
+          "renderer": "not-required",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "0018492b868c2cb3a316930b2c973a9474743e2945edc78babe3f23f29aa4475"
+      },
+      {
+        "label": "reset-reload",
+        "revision": 3,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "reset-reload-rest/0",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "dispose",
+        "revision": 2,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "disposed",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "reimport",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 1,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 1,
+          "materializationRevision": "field-materialization-v1:caf7ebf2"
+        },
+        "semanticHash": "8042cff41c9fdca60b3fddd21d44f04f5a0bf9718d7d8730d66454ead6cddd7b"
+      },
+      {
+        "label": "reimport-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 1,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 1,
+          "materializationRevision": "field-materialization-v1:caf7ebf2"
+        },
+        "semanticHash": "8042cff41c9fdca60b3fddd21d44f04f5a0bf9718d7d8730d66454ead6cddd7b"
+      },
+      {
+        "label": "line-pending/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "font-blocked-pending",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "line-invalid/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "blocked",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is invalid for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "16a35790bd733668522abf105bdda9f448defbc8309c3c06b9697eea14fb2d06"
+      },
+      {
+        "label": "font-blocked-invalid",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "blocked",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is invalid for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "16a35790bd733668522abf105bdda9f448defbc8309c3c06b9697eea14fb2d06"
+      },
+      {
+        "label": "line-inactive/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "ready",
+          "exportReady": true,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "78fa16273d54bcbf0779cded5867380e5341b13b888ed7a8100e93f9815e66dc"
+      },
+      {
+        "label": "font-blocked-inactive",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "78fa16273d54bcbf0779cded5867380e5341b13b888ed7a8100e93f9815e66dc"
+      },
+      {
+        "label": "line-valid/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "ready",
+          "exportReady": true,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "efb373ccf44dfe61382e050a8881e72857327966b9f5f7c96cbf1e4dbe9760fd"
+      },
+      {
+        "label": "font-blocked-valid",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "efb373ccf44dfe61382e050a8881e72857327966b9f5f7c96cbf1e4dbe9760fd"
+      },
+      {
+        "label": "interleaved-font-pending/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "interleaved-font-blocked/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "invalid-shared",
+        "revision": 1,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "blocked",
+        "error": {
+          "code": "family-materialization-failed",
+          "message": "title exceeds its maximum of 1 characters."
+        },
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "blocked",
+          "renderValidation": "not-required",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "blocked",
+          "reasons": [
+            "The selected variant is invalid for shared canonical content."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "ea2ec87df8f7a758c50d45a0635fa8065690309671fc6a23f254084f67c218fb"
+      },
+      {
+        "label": "missing-source",
+        "revision": 1,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "blocked",
+        "error": {
+          "code": "family-materialization-failed",
+          "message": "Variant \"a\" does not contain a valid TemplatePackageV2."
+        },
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "blocked",
+          "renderValidation": "not-required",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "blocked",
+          "reasons": [
+            "The selected variant is invalid for shared canonical content."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "122b7b61a2f379df672d750baecb99205a8652c4547a1a2b5790ccb928a7f263"
+      },
+      {
+        "label": "save-pending/0",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "restore/0",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:734c02e0"
+        },
+        "semanticHash": "e8896e2a2dcd91ec655521b432322da92bfe2fd2ee391a4609baabf379eefd45"
+      },
+      {
+        "label": "restored",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:734c02e0"
+        },
+        "semanticHash": "e8896e2a2dcd91ec655521b432322da92bfe2fd2ee391a4609baabf379eefd45"
+      },
+      {
+        "label": "replacement-crop-reset/0",
+        "revision": 8,
+        "operationRevision": 5,
+        "contentRevision": 4,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 4,
+          "materializationRevision": "field-materialization-v1:38a4dc2b"
+        },
+        "semanticHash": "b1b4dcfddb86a6965c220523d754337de057ded761f6371ca86ee63220ea332a"
+      },
+      {
+        "label": "replacement-crop-reset/1",
+        "revision": 9,
+        "operationRevision": 5,
+        "contentRevision": 4,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 4,
+          "materializationRevision": "field-materialization-v1:38a4dc2b"
+        },
+        "semanticHash": "b1b4dcfddb86a6965c220523d754337de057ded761f6371ca86ee63220ea332a"
+      }
+    ],
+    "current": [
+      {
+        "label": "success",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "load-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "decode-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "timeout",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "shared-nodes/0",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:2baf3fcd"
+        },
+        "semanticHash": "4985f1993f1d9d3ef8201eb54f1a417be14c1d7800adc2fdaf4e99a8eaa75f2a"
+      },
+      {
+        "label": "shared-node-failure",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "blocked",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Variant \"a\": asset \"asset:image:fb18a9f8\" at node \"58:87\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"58:61\" could not be decoded.",
+            "Variant \"a\": asset \"asset:image:21b94426\" at node \"probe:extra-media\" could not be decoded."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:2baf3fcd"
+        },
+        "semanticHash": "4985f1993f1d9d3ef8201eb54f1a417be14c1d7800adc2fdaf4e99a8eaa75f2a"
+      },
+      {
+        "label": "independent-nodes/0",
+        "revision": 2,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:1f299483"
+        },
+        "semanticHash": "96218e49308be97e1ac74ced21ccead383f4973fc755e3f09ee9800bc262a6c3"
+      },
+      {
+        "label": "independent-nodes/1",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:1f299483"
+        },
+        "semanticHash": "96218e49308be97e1ac74ced21ccead383f4973fc755e3f09ee9800bc262a6c3"
+      },
+      {
+        "label": "aba-shared",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "aba-distinct",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "aba-distinct-rest/0",
+        "revision": 5,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "unrelated-completion",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "unrelated-completion-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reload",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reload-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "b",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:6af15c79"
+        },
+        "semanticHash": "b0d44b7c873c3899ee45fac503eec3435c0494c3836bb6d757e04888096276b9"
+      },
+      {
+        "label": "reset",
+        "revision": 2,
+        "operationRevision": 2,
+        "selectedVariantId": null,
+        "status": "idle",
+        "error": null,
+        "readiness": {
+          "state": "idle",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "not-required",
+          "assets": "not-required",
+          "fonts": "not-required",
+          "renderer": "not-required",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "0018492b868c2cb3a316930b2c973a9474743e2945edc78babe3f23f29aa4475"
+      },
+      {
+        "label": "reset-reload",
+        "revision": 3,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "reset-reload-rest/0",
+        "revision": 4,
+        "operationRevision": 3,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "dispose",
+        "revision": 2,
+        "operationRevision": 2,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "disposed",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "4238dd76affda56f9f72464191e0bdffb9c900c7eca614186d19f17fa34bbc42"
+      },
+      {
+        "label": "reimport",
+        "revision": 3,
+        "operationRevision": 2,
+        "contentRevision": 1,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "pending",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Required image or SVG decoding is pending."
+          ],
+          "contentRevision": 1,
+          "materializationRevision": "field-materialization-v1:caf7ebf2"
+        },
+        "semanticHash": "8042cff41c9fdca60b3fddd21d44f04f5a0bf9718d7d8730d66454ead6cddd7b"
+      },
+      {
+        "label": "reimport-rest/0",
+        "revision": 4,
+        "operationRevision": 2,
+        "contentRevision": 1,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 1,
+          "materializationRevision": "field-materialization-v1:caf7ebf2"
+        },
+        "semanticHash": "8042cff41c9fdca60b3fddd21d44f04f5a0bf9718d7d8730d66454ead6cddd7b"
+      },
+      {
+        "label": "line-pending/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "font-blocked-pending",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "line-invalid/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "blocked",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is invalid for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "16a35790bd733668522abf105bdda9f448defbc8309c3c06b9697eea14fb2d06"
+      },
+      {
+        "label": "font-blocked-invalid",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "blocked",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is invalid for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "16a35790bd733668522abf105bdda9f448defbc8309c3c06b9697eea14fb2d06"
+      },
+      {
+        "label": "line-inactive/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "ready",
+          "exportReady": true,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "78fa16273d54bcbf0779cded5867380e5341b13b888ed7a8100e93f9815e66dc"
+      },
+      {
+        "label": "font-blocked-inactive",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "78fa16273d54bcbf0779cded5867380e5341b13b888ed7a8100e93f9815e66dc"
+      },
+      {
+        "label": "line-valid/0",
+        "revision": 5,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "ready",
+          "exportReady": true,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "ready",
+          "renderer": "ready",
+          "reasons": [],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "efb373ccf44dfe61382e050a8881e72857327966b9f5f7c96cbf1e4dbe9760fd"
+      },
+      {
+        "label": "font-blocked-valid",
+        "revision": 6,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "ready",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "efb373ccf44dfe61382e050a8881e72857327966b9f5f7c96cbf1e4dbe9760fd"
+      },
+      {
+        "label": "interleaved-font-pending/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "interleaved-font-blocked/0",
+        "revision": 4,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "invalid-shared",
+        "revision": 1,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "blocked",
+        "error": {
+          "code": "family-materialization-failed",
+          "message": "title exceeds its maximum of 1 characters."
+        },
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "blocked",
+          "renderValidation": "not-required",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "blocked",
+          "reasons": [
+            "The selected variant is invalid for shared canonical content."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "ea2ec87df8f7a758c50d45a0635fa8065690309671fc6a23f254084f67c218fb"
+      },
+      {
+        "label": "missing-source",
+        "revision": 1,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "blocked",
+        "error": {
+          "code": "family-materialization-failed",
+          "message": "Variant \"a\" does not contain a valid TemplatePackageV2."
+        },
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "blocked",
+          "renderValidation": "not-required",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "blocked",
+          "reasons": [
+            "The selected variant is invalid for shared canonical content."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": null
+        },
+        "semanticHash": "122b7b61a2f379df672d750baecb99205a8652c4547a1a2b5790ccb928a7f263"
+      },
+      {
+        "label": "save-pending/0",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:4f31e58f"
+        },
+        "semanticHash": "446d72526d673325375847827f031236939fc7e7e0179417021f062e76a56d51"
+      },
+      {
+        "label": "restore/0",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:734c02e0"
+        },
+        "semanticHash": "e8896e2a2dcd91ec655521b432322da92bfe2fd2ee391a4609baabf379eefd45"
+      },
+      {
+        "label": "restored",
+        "revision": 3,
+        "operationRevision": 1,
+        "contentRevision": 0,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:734c02e0"
+        },
+        "semanticHash": "e8896e2a2dcd91ec655521b432322da92bfe2fd2ee391a4609baabf379eefd45"
+      },
+      {
+        "label": "replacement-crop-reset/0",
+        "revision": 8,
+        "operationRevision": 5,
+        "contentRevision": 4,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 4,
+          "materializationRevision": "field-materialization-v1:38a4dc2b"
+        },
+        "semanticHash": "b1b4dcfddb86a6965c220523d754337de057ded761f6371ca86ee63220ea332a"
+      },
+      {
+        "label": "replacement-crop-reset/1",
+        "revision": 9,
+        "operationRevision": 5,
+        "contentRevision": 4,
+        "selectedVariantId": "a",
+        "status": "ready",
+        "error": null,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 4,
+          "materializationRevision": "field-materialization-v1:38a4dc2b"
+        },
+        "semanticHash": "b1b4dcfddb86a6965c220523d754337de057ded761f6371ca86ee63220ea332a"
+      }
+    ]
+  }
+}

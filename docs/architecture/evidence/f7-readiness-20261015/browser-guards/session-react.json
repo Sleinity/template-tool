@@ -1,0 +1,791 @@
+{
+  "environment": "headless Chromium",
+  "synthetic": true,
+  "sourceReview": false,
+  "mounted": {
+    "commits": 2,
+    "cleanups": 1,
+    "observerCommits": 7,
+    "subscriptions": {
+      "opened": 6,
+      "closed": 3,
+      "active": 3,
+      "delivered": 12
+    },
+    "publications": [
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      }
+    ],
+    "nativeNotifications": [
+      {
+        "session": "single",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 6,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 7,
+        "operationRevision": 1,
+        "status": "ready"
+      }
+    ],
+    "single": {
+      "status": "ready",
+      "revision": 7
+    },
+    "family": {
+      "status": "ready",
+      "revision": 1
+    },
+    "ownedStatuses": [
+      "ready",
+      "ready"
+    ],
+    "linePublications": [],
+    "exportReady": true,
+    "canvasMounted": true,
+    "observed": "[{\"id\":\"text:headline\",\"type\":\"text\",\"value\":\"Portable SDK session ☀️\"}]"
+  },
+  "remounted": {
+    "commits": 4,
+    "cleanups": 3,
+    "observerCommits": 11,
+    "subscriptions": {
+      "opened": 8,
+      "closed": 5,
+      "active": 3,
+      "delivered": 23
+    },
+    "publications": [
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": false,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "old",
+          "fontRevision": "old",
+          "publicationGeneration": 1,
+          "renderer": "ready"
+        }
+      }
+    ],
+    "nativeNotifications": [
+      {
+        "session": "single",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 6,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 7,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 8,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 9,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 10,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 11,
+        "operationRevision": 1,
+        "status": "ready"
+      }
+    ],
+    "single": {
+      "status": "ready",
+      "revision": 11
+    },
+    "family": {
+      "status": "ready",
+      "revision": 1
+    },
+    "ownedStatuses": [
+      "ready",
+      "ready"
+    ],
+    "linePublications": [],
+    "exportReady": true,
+    "canvasMounted": true,
+    "observed": "[{\"id\":\"text:headline\",\"type\":\"text\",\"value\":\"Portable SDK session ☀️\"}]"
+  },
+  "replacement": {
+    "commits": 6,
+    "cleanups": 5,
+    "observerCommits": 15,
+    "subscriptions": {
+      "opened": 12,
+      "closed": 9,
+      "active": 3,
+      "delivered": 31
+    },
+    "publications": [
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": false,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "old",
+          "fontRevision": "old",
+          "publicationGeneration": 1,
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": false,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "old",
+          "fontRevision": "old",
+          "publicationGeneration": 1,
+          "renderer": "ready"
+        }
+      }
+    ],
+    "nativeNotifications": [
+      {
+        "session": "single",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 6,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 7,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 8,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 9,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 10,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 11,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      }
+    ],
+    "single": {
+      "status": "ready",
+      "revision": 11
+    },
+    "family": {
+      "status": "ready",
+      "revision": 5
+    },
+    "ownedStatuses": [
+      "ready",
+      "ready"
+    ],
+    "linePublications": [],
+    "exportReady": true,
+    "canvasMounted": true,
+    "observed": "[{\"id\":\"text:headline\",\"type\":\"text\",\"value\":\"Portable SDK session ☀️\"}]"
+  },
+  "unmounted": {
+    "commits": 6,
+    "cleanups": 6,
+    "observerCommits": 15,
+    "subscriptions": {
+      "opened": 12,
+      "closed": 12,
+      "active": 0,
+      "delivered": 31
+    },
+    "publications": [
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000002,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 4000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "single",
+        "accepted": false,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "old",
+          "fontRevision": "old",
+          "publicationGeneration": 1,
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "renderer": "ready",
+          "fonts": "pending"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": true,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "913ecf26",
+          "fontRevision": "84e23576",
+          "publicationGeneration": 2000001,
+          "fonts": "ready",
+          "renderer": "ready"
+        }
+      },
+      {
+        "session": "family",
+        "accepted": false,
+        "evidence": {
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:430604de",
+          "settlementRevision": "old",
+          "fontRevision": "old",
+          "publicationGeneration": 1,
+          "renderer": "ready"
+        }
+      }
+    ],
+    "nativeNotifications": [
+      {
+        "session": "single",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 6,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 7,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 8,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 9,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 10,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "single",
+        "revision": 11,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 2,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 3,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 4,
+        "operationRevision": 1,
+        "status": "ready"
+      },
+      {
+        "session": "family",
+        "revision": 5,
+        "operationRevision": 1,
+        "status": "ready"
+      }
+    ],
+    "single": {
+      "status": "ready",
+      "revision": 11
+    },
+    "family": {
+      "status": "ready",
+      "revision": 5
+    },
+    "ownedStatuses": [
+      "disposed",
+      "disposed"
+    ],
+    "linePublications": [],
+    "exportReady": true,
+    "canvasMounted": false
+  },
+  "errors": []
+}

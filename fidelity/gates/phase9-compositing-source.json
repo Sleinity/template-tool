@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "phase9-compositing-source-v1",
+  "exporterVersion": "0.6.1",
+  "fixtures": [
+    {
+      "id": "exporter-061-compositing-matrix",
+      "zipSha256": "85fa555c495202ea38b72d39853913b9325ba8aa9ef746048c38836fca03cd98",
+      "templateJsonSha256": "8be997f3850dd1589df6522ccbb188946755322924a4fff9eb39a67ac1d53ecf",
+      "embeddedPreviewSha256": "d385d51467eb2932ccb0d691ff8796531316f11b1e80403440cb1a2cb1518a64"
+    },
+    {
+      "id": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336"
+    }
+  ],
+  "matrixImage": {
+    "entry": "assets/asset_matrix_001.png",
+    "sha256": "5dcfbc0b02a55dde8a347ca283dc1babb25958fbaa7e977d89e4d063286491f0"
+  },
+  "screenshots": [
+    {
+      "filename": "Screenshot 2026-10-04 at 22.05.27.png",
+      "sha256": "16a0b6d06e8fbf0592e253281b4faf519b1eabddc25b3f0b660fb20d46f939a2",
+      "evidence": "Selected Lighten rectangle: pink E5B2FF SOLID fill at 100% and zero corner radius."
+    },
+    {
+      "filename": "Screenshot 2026-10-04 at 22.05.20.png",
+      "sha256": "d7fee2639f513efe9ec36862a99974a070a56649c12f741b53e077700cbcdc37",
+      "evidence": "Selected Matrix frame: 1080 by 1350 canvas and IMAGE fill at 100%."
+    },
+    {
+      "filename": "Screenshot 2026-10-04 at 22.05.07.png",
+      "sha256": "57335829d477030f480218fb82b05f648fd66edf87ba698e12310eedd3464851",
+      "evidence": "Matrix child order and six named blend-mode rows, alongside the separate Cover design."
+    }
+  ]
+}

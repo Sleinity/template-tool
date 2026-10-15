@@ -1,0 +1,32 @@
+{
+  "current": "r07-trace-20261013",
+  "initialFit": "r07-initial-fit-20261013",
+  "completeTraceEqual": true,
+  "ignored": "Object URL tokens only; native decoded asset ID/bytes constrained by exact source import",
+  "nodeCount": 25,
+  "ancestors": 20,
+  "finalCanvas": {
+    "height": 491.625,
+    "width": 874,
+    "x": 501,
+    "y": 583.1875
+  },
+  "transform": "matrix(0.455208, 0, 0, 0.455208, 16, 476.188)",
+  "thresholdPoint": {
+    "x": 234,
+    "y": 475,
+    "approved": [
+      181,
+      183,
+      180,
+      255
+    ],
+    "current": [
+      155,
+      156,
+      154,
+      255
+    ]
+  },
+  "claim": "Initial viewport path causally changes native browser rasterization. Chrome internal caching mechanism is not proven."
+}

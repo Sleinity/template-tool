@@ -11,6 +11,7 @@ pnpm settlement:update -- --source-run <id> --reason "reviewed reason"
 pnpm settlement:scenario -- --fixture now-hiring-post --scenario all --run-id <id>
 pnpm settlement:browser-scenarios -- --run-id <id>
 pnpm settlement:report -- --source-run <id>
+pnpm settlement:mask-source-evidence -- --fidelity-run <id>
 ```
 
 All observed commands accept the fidelity harness `--fixture` and `--surface` filters. `--profile chromium-visible` classifies visible-browser observations separately. Normal baseline, observe, compare, scenario, and report commands never modify approved settlement references.
@@ -35,6 +36,18 @@ Approved settlement references use the same five comparison-critical files under
 ## Update guard
 
 An update requires a reason of at least 12 characters. For each file it retains the prior approved value when present, the candidate replacement, a deterministic difference report, fixture/surface identity, reason, and timestamp under `fidelity/settlement/update-evidence/`. A missing reason fails before mutation.
+
+Promotion preflights every file's identity, stable/ready settlement, absence of
+unresolved dependencies and equivalent geometry before writing approved files.
+An identified update requires matching `--run-id` and `--source-run`; SDK gate
+updates must also match the source fidelity run and gate. Pending mask evidence
+cannot be promoted. Current output routes normalize volatile template IDs while
+retaining single/Family kind and output role, alongside exact fixture hashes.
+
+`settlement:mask-source-evidence` verifies the active exact ZIP declarations,
+canonical resolver output and all four recorded browser mask identities. It
+also exercises source/affected resize and partial-alpha fallback as synthetic
+contract cases, and reports repeat serialization and settlement timings.
 
 ## Browser scenarios
 

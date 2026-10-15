@@ -1,6 +1,7 @@
+import { blockedStorageCause, studioFailureMessage } from "../../../workspace/storageFailure";
 import { FileUp } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Button, Status } from "../../ui";
+import { Button, ConnectedList, ConnectedListItem, Status } from "../../ui";
 import type {
   TemplatePackageFontRequirement,
   TemplatePackageV1,
@@ -28,6 +29,7 @@ interface FontPreparationStepProps {
   onPackageChange: (packageValue: TemplatePackageV1) => void;
   onDiagnosticsChange?: (diagnostics: ManagedFontDiagnostic[]) => void;
   onReadinessChange?: (ready: boolean) => void;
+  onBusyChange?: (busy: boolean) => void;
 }
 
 function resolutionSignature(packageValue: TemplatePackageV1): string {
@@ -59,26 +61,57 @@ export function FontPreparationStep({
   onPackageChange,
   onDiagnosticsChange,
   onReadinessChange,
+  onBusyChange,
 }: FontPreparationStepProps) {
   const registry = getManagedFontRegistry();
   const inputRef = useRef<HTMLInputElement>(null);
   const packageValueRef = useRef(packageValue);
   packageValueRef.current = packageValue;
-  const attemptedAutoLinkKey = useRef<string | null>(null);
+  const scope = useRef(0);
+  const [registryRetry, setRegistryRetry] = useState(0);
+  const [retryUpload, setRetryUpload] = useState<{ file: File; requirementId: string; packageValue: TemplatePackageV1 } | null>(null);
   const uploadRevision = useRef(0);
+  const selectedUploadSource = useRef<TemplatePackageV1 | null>(null);
   const [fonts, setFonts] = useState<ManagedFontRecord[]>([]);
   const [selectedRequirementId, setSelectedRequirementId] =
     useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const refreshFonts = async () => {
-    setFonts((await registry?.listManagedFonts()) ?? []);
-  };
+  const [errors, setErrors] = useState<Record<string, unknown>>({});
 
   useEffect(() => {
-    void refreshFonts();
-  }, [registry]);
+    const input = inputRef.current;
+    const cancel = () => { setRetryUpload(null); };
+    input?.addEventListener("cancel", cancel);
+    return () => input?.removeEventListener("cancel", cancel);
+  }, []);
+
+  useEffect(() => {
+    onBusyChange?.(busyId !== null);
+    return () => onBusyChange?.(false);
+  }, [busyId, onBusyChange]);
+
+  useEffect(() => { setRetryUpload(null); setErrors({}); setBusyId(null); setSelectedRequirementId(null); selectedUploadSource.current = null; if (inputRef.current) inputRef.current.value = ""; }, [packageValue, registry]);
+
+  useEffect(() => {
+    const revision = ++scope.current;
+    const capturedPackage = packageValue;
+    const current = () => scope.current === revision && packageValueRef.current === capturedPackage;
+    setErrors(errors => { const next = { ...errors }; delete next.__registry; return next; });
+    void (async () => {
+      const available = (await registry?.listManagedFonts()) ?? [];
+      if (!current()) return;
+      setFonts(available);
+      const ready = areExactFontRequirementsResolved(capturedPackage) && (capturedPackage.fontRequirements ?? []).every(requirement => !requirement.resolution?.managedFontId || managedFontExactlyMatchesRequirement(requirement, available.find(font => font.id === requirement.resolution?.managedFontId)));
+      if (ready || !registry || !capturedPackage.fontRequirements?.length) return;
+      const linkedPackage = await autoLinkManagedFonts(capturedPackage, registry);
+      if (!current()) return;
+      const linkedFonts = await registry.listManagedFonts();
+      if (!current()) return;
+      setFonts(linkedFonts);
+      if (resolutionSignature(linkedPackage) !== resolutionSignature(capturedPackage)) onPackageChange(linkedPackage);
+    })().catch(cause => { if (current()) setErrors(errors => ({ ...errors, __registry: cause })); });
+    return () => { scope.current++; uploadRevision.current++; };
+  }, [packageValue, registry, registryRetry]);
 
   const requirementStates = useMemo(
     () => (packageValue.fontRequirements ?? []).map((requirement) => {
@@ -112,13 +145,15 @@ export function FontPreparationStep({
     () => requirementStates.flatMap(({ requirement, ready }) => {
       if (ready) return [];
       return [{
-        code: errors[requirement.id]
+        code: blockedStorageCause(errors[requirement.id])
+          ? "managed-font-registry-failed" as const
+          : errors[requirement.id]
           ? "managed-font-upload-failed" as const
           : "managed-font-missing" as const,
         severity: errors[requirement.id] ? "error" as const : "warning" as const,
         requirementId: requirement.id,
         message:
-          errors[requirement.id] ??
+          errors[requirement.id] ? studioFailureMessage(errors[requirement.id]) :
           `${formatRequiredFontFace(requirement)} requires its exact font file.`,
       }];
     }),
@@ -129,43 +164,8 @@ export function FontPreparationStep({
     onDiagnosticsChange?.(diagnostics);
   }, [diagnostics, onDiagnosticsChange]);
 
-  useEffect(() => {
-    if (!registry || !(packageValue.fontRequirements?.length)) return;
-    if (allReady) return;
-    const key = `${packageValue.packageId}:${resolutionSignature(packageValue)}`;
-    if (attemptedAutoLinkKey.current === key) return;
-    attemptedAutoLinkKey.current = key;
-    const capturedPackage = packageValue;
-    let cancelled = false;
-    void autoLinkManagedFonts(packageValue, registry)
-      .then(async (linkedPackage) => {
-        if (cancelled || packageValueRef.current !== capturedPackage) return;
-        await refreshFonts();
-        if (
-          resolutionSignature(linkedPackage) !==
-          resolutionSignature(capturedPackage)
-        ) {
-          onPackageChange(linkedPackage);
-        }
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        const message =
-          error instanceof Error
-            ? error.message
-            : "Previously uploaded fonts could not be checked.";
-        setErrors((current) => ({
-          ...current,
-          __registry: message,
-        }));
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [allReady, packageValue, registry]);
-
-  const handleUpload = async (file: File | undefined) => {
-    const requirementId = selectedRequirementId;
+  const handleUpload = async (file: File | undefined, requirementId = selectedRequirementId, selectedSource = selectedUploadSource.current) => {
+    if (selectedSource !== packageValueRef.current) return;
     if (!file || !requirementId) return;
     const requirement = packageValue.fontRequirements?.find(
       (item) => item.id === requirementId,
@@ -173,6 +173,9 @@ export function FontPreparationStep({
     if (!requirement) return;
     const capturedPackage = packageValue;
     const revision = ++uploadRevision.current;
+    const capturedScope = scope.current;
+    const current = () => capturedScope === scope.current && uploadRevision.current === revision && packageValueRef.current === capturedPackage;
+    setRetryUpload(null);
     setBusyId(requirement.id);
     setErrors((current) => {
       const next = { ...current };
@@ -192,28 +195,21 @@ export function FontPreparationStep({
           reason: "Uploaded in the Studio exact-font setup flow.",
         },
       );
-      if (
-        uploadRevision.current !== revision ||
-        packageValueRef.current !== capturedPackage
-      ) {
+      if (!current()) {
         return;
       }
-      await refreshFonts();
+      const available = (await registry?.listManagedFonts()) ?? [];
+      if (!current()) return;
+      setFonts(available);
       onPackageChange(result.packageValue);
     } catch (error) {
-      if (
-        uploadRevision.current !== revision ||
-        packageValueRef.current !== capturedPackage
-      ) {
+      if (!current()) {
         return;
       }
-      setErrors((current) => ({
-        ...current,
-        [requirement.id]:
-          error instanceof Error ? error.message : "The font upload failed.",
-      }));
+      if (blockedStorageCause(error)) setRetryUpload({ file, requirementId: requirement.id, packageValue: capturedPackage });
+      setErrors((errors) => ({ ...errors, [requirement.id]: error }));
     } finally {
-      if (uploadRevision.current === revision) {
+      if (current()) {
         setBusyId(null);
         setSelectedRequirementId(null);
         if (inputRef.current) inputRef.current.value = "";
@@ -225,16 +221,17 @@ export function FontPreparationStep({
     return (
       <div
         data-testid="font-preparation-step"
-        className="rounded-lg border border-[var(--color-status-repaired-border)] bg-[var(--color-status-repaired-bg)] p-4 text-sm text-[var(--color-status-repaired-fg)]"
+        className="font-requirement-empty"
       >
-        <p className="font-semibold">Fonts are ready</p>
+        <p className="font-semibold">No font files required</p>
         <p className="mt-1">No font files need to be uploaded.</p>
       </div>
     );
   }
 
   return (
-    <div data-testid="font-preparation-step" className="font-requirement-list">
+    <>
+    <ConnectedList label="Required fonts" data-testid="font-preparation-step" className="font-requirement-list">
       <input
         data-testid="package-font-upload-input"
         ref={inputRef}
@@ -243,14 +240,14 @@ export function FontPreparationStep({
         accept=".woff2,.woff,.ttf,.otf,font/woff2,font/woff,font/ttf,font/otf"
         onChange={(event) => void handleUpload(event.target.files?.[0])}
       />
-      {requirementStates.map(({ requirement, linked, ready, fileName }) => {
+      {[...requirementStates].sort((a, b) => Number(a.ready) - Number(b.ready)).map(({ requirement, linked, ready, fileName }) => {
         const error = errors[requirement.id];
         const status = busyId === requirement.id
           ? { label: "Checking file…", tone: "neutral" as const }
           : ready
             ? { label: "Ready", tone: "repaired" as const }
             : error
-              ? { label: "File doesn’t match", tone: "blocked" as const }
+              ? { label: blockedStorageCause(error) ? "Storage blocked" : "File doesn’t match", tone: "blocked" as const }
               : { label: "Font required", tone: "blocked" as const };
         const exceptionalDetails = [
           requirement.stretch && requirement.stretch !== "normal"
@@ -261,9 +258,10 @@ export function FontPreparationStep({
           ),
         ].filter(Boolean);
         return (
-          <section
+          <ConnectedListItem
             key={requirement.id}
             className="font-requirement-row"
+            tone={!ready ? "attention" : "neutral"}
             data-testid={`font-requirement-${requirement.id}`}
             data-font-requirement-id={requirement.id}
             data-font-family={requirement.family}
@@ -283,7 +281,7 @@ export function FontPreparationStep({
             }
             data-font-ui-status={status.label}
           >
-            <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="font-requirement-row__heading">
               <div>
                 <h3 className="ui-subsection-title">
                   {formatRequiredFontFace(requirement)}
@@ -293,23 +291,18 @@ export function FontPreparationStep({
                     {exceptionalDetails.join(" · ")}
                   </p>
                 ) : null}
-                <p className="mt-1 text-xs text-content-muted">
-                  Used by {requirement.usedBy.length} node
-                  {requirement.usedBy.length === 1 ? "" : "s"}
-                </p>
+                {ready ? <span className="ui-metadata">Available</span> : null}
               </div>
-              <Status tone={status.tone}>{status.label}</Status>
+              {!ready || busyId === requirement.id ? <Status tone={status.tone}>{status.label}</Status> : null}
             </div>
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+            <div className="font-requirement-row__actions">
               <div>
                 {ready ? (
                   <>
-                    <p className="text-sm font-medium text-content-primary">
-                      Exact font verified
-                    </p>
+                    <span className="ui-visually-hidden">Exact font verified</span>
                     <p
-                      className="mt-1 text-xs text-content-muted"
+                      className="ui-visually-hidden"
                       data-testid="linked-font-face"
                       data-linked-font-family={
                         linked?.typographicFamily ?? linked?.family
@@ -334,9 +327,12 @@ export function FontPreparationStep({
                 )}
               </div>
               <Button
-                variant="secondary"
+                variant={ready ? "quiet" : "secondary"}
+                size="small"
                 disabled={busyId !== null}
                 onClick={() => {
+                  setRetryUpload(null);
+                  selectedUploadSource.current = packageValue;
                   setSelectedRequirementId(requirement.id);
                   inputRef.current?.click();
                 }}
@@ -352,20 +348,23 @@ export function FontPreparationStep({
                 className="mt-3 text-sm text-[var(--color-status-blocked-fg)]"
                 role="alert"
               >
-                {error}
+                {studioFailureMessage(error)}
+                {retryUpload?.requirementId === requirement.id && retryUpload.packageValue === packageValue && <><Button size="small" variant="secondary" disabled={busyId !== null} onClick={() => void handleUpload(retryUpload.file, retryUpload.requirementId, retryUpload.packageValue)}>Retry upload</Button><Button size="small" variant="quiet" onClick={() => setRetryUpload(null)}>Cancel</Button></>}
               </p>
             ) : null}
-          </section>
+          </ConnectedListItem>
         );
       })}
-      {errors.__registry ? (
+    </ConnectedList>
+      {Boolean(errors.__registry) ? (
         <p
           className="text-sm text-[var(--color-status-blocked-fg)]"
           role="alert"
         >
-          {errors.__registry}
+          {blockedStorageCause(errors.__registry) && <strong>Storage blocked. </strong>}{studioFailureMessage(errors.__registry)}
+          <Button size="small" variant="secondary" disabled={busyId !== null} onClick={() => setRegistryRetry(value => value + 1)}>Retry font check</Button>
         </p>
       ) : null}
-    </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { sessionAssetUrlLeases } from "../session/sessionAssetUrlLeases";
 import type {
   AssetStorageAdapter,
   AssetStorageReference,
@@ -33,7 +34,7 @@ function writeBlob(key: string, blob: Blob): Promise<void> {
           database.close();
           resolve();
         };
-        transaction.onerror = () => {
+        transaction.onabort = transaction.onerror = () => {
           database.close();
           reject(transaction.error);
         };
@@ -49,22 +50,41 @@ export function createIndexedDbAssetStore(): AssetStorageAdapter | undefined {
   ) {
     return undefined;
   }
+  const owned = new Set<string>();
+  let disposed = false;
   return {
+    dispose() {
+      if (disposed) return;
+      disposed = true;
+      for (const url of owned) {
+        const lease = sessionAssetUrlLeases.get(url)!;
+        if (--lease.count === 0) { sessionAssetUrlLeases.delete(url); lease.revoke(); }
+      }
+      owned.clear();
+    },
     async put(
       hash: string,
       bytes: Uint8Array,
       mimeType: string,
     ): Promise<AssetStorageReference> {
+      if (disposed) throw new Error("Asset store is disposed.");
       const storageKey = `sha256:${hash}`;
       const blob = new Blob([Uint8Array.from(bytes).buffer], {
         type: mimeType,
       });
       await writeBlob(storageKey, blob);
+      if (disposed) throw new Error("Asset store was disposed during storage.");
       let stableUrl = objectUrlCache.get(storageKey);
       if (!stableUrl) {
         stableUrl = URL.createObjectURL(blob);
         objectUrlCache.set(storageKey, stableUrl);
+        const created = stableUrl;
+        sessionAssetUrlLeases.set(created, { count: 0, revoke() {
+          if (objectUrlCache.get(storageKey) === created) objectUrlCache.delete(storageKey);
+          URL.revokeObjectURL(created);
+        } });
       }
+      if (!owned.has(stableUrl)) { owned.add(stableUrl); sessionAssetUrlLeases.get(stableUrl)!.count += 1; }
       return { storageKey, stableUrl };
     },
   };

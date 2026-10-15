@@ -113,7 +113,7 @@ try {
   await page.getByTestId("package-editor-panel").waitFor();
   results.push(await capture("baseline"));
 
-  const text = page.getByLabel("Text", { exact: true });
+  const text = page.getByTestId("package-editor-panel").getByLabel("Text", { exact: true }).first();
   await text.fill("JOIN US");
   results.push(await capture("text-short", { id: "text-short", type: "text-edit", value: "JOIN US" }));
   const longValue = "WE ARE SEEKING AN EXPERIENCED OFFICER TO LEAD A GROWING INTERNATIONAL TEAM ACROSS MULTIPLE REGIONS";
@@ -127,7 +127,7 @@ try {
   results.push(await capture("reset-imported-defaults"));
 
   const replacementPath = resolveReplacementPath();
-  await page.getByLabel("Product image", { exact: true }).setInputFiles(replacementPath);
+  await page.getByTestId("package-editor-panel").getByLabel("Product image", { exact: true }).first().setInputFiles(replacementPath);
   await page.getByRole("button", { name: "Clear replacement" }).waitFor();
   results.push(await capture("image-replacement", { id: "image-replacement", type: "asset-state", assetId: "asset:image:ceab5479" }));
   await page.getByRole("button", { name: "Clear replacement" }).click();

@@ -1,2 +1,2 @@
 /** @deprecated Internal compatibility forwarder to the template-browser owner. */
-export * from "../../../packages/template-browser/src/persistence/savedRecordValidation";
+export * from "../../../packages/template-browser/test/legacy/persistence/savedRecordValidation";

@@ -1,0 +1,271 @@
+{
+  "capture": {
+    "approved": "fidelity/references/approved/exporter-061-now-hiring/png-export/reference.png",
+    "approvedStructure": "fidelity/references/approved/exporter-061-now-hiring/png-export/structure.json",
+    "candidate": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/png-export/capture-1.png",
+    "currentStructure": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/png-export/structure-1.json",
+    "failureArtifacts": "fidelity/artifacts/sdk-061-r07-review-20261013a/exporter-061-now-hiring/png-export",
+    "geometry": {
+      "equal": true,
+      "extraNodes": [],
+      "geometryChanges": [],
+      "imagePlacementChanges": [],
+      "missingNodes": [],
+      "reorderedNodes": [],
+      "textGeometryChanges": [],
+      "textMeasurementChanges": [],
+      "tolerances": {
+        "height": 0.25,
+        "image": 0.25,
+        "text": 0.5,
+        "transform": 0.001,
+        "width": 0.25,
+        "x": 0.25,
+        "y": 0.25
+      }
+    },
+    "kind": "approved-match",
+    "nextAction": "Retain approved reference",
+    "pixel": {
+      "actualDimensions": {
+        "height": 1350,
+        "width": 1000
+      },
+      "allowedChangedPixelPercentage": 0,
+      "changedPixelCount": 0,
+      "changedPixelPercentage": 0,
+      "differenceBounds": null,
+      "dimensionsEqual": true,
+      "equal": true,
+      "exact": true,
+      "expectedDimensions": {
+        "height": 1350,
+        "width": 1000
+      },
+      "largeRegions": [],
+      "threshold": 0.1
+    },
+    "sourceComparison": {
+      "approved": {
+        "actualDimensions": {
+          "height": 1350,
+          "width": 1000
+        },
+        "allowedChangedPixelPercentage": 0,
+        "changedPixelCount": 340,
+        "changedPixelPercentage": 0.025185185185185185,
+        "differenceBounds": {
+          "height": 1164,
+          "width": 889,
+          "x": 75,
+          "y": 141
+        },
+        "dimensionsEqual": true,
+        "equal": false,
+        "exact": false,
+        "expectedDimensions": {
+          "height": 1350,
+          "width": 1000
+        },
+        "largeRegions": [
+          {
+            "changedPixels": 38,
+            "height": 64,
+            "width": 64,
+            "x": 640,
+            "y": 896
+          },
+          {
+            "changedPixels": 35,
+            "height": 64,
+            "width": 64,
+            "x": 704,
+            "y": 896
+          },
+          {
+            "changedPixels": 34,
+            "height": 64,
+            "width": 64,
+            "x": 640,
+            "y": 768
+          },
+          {
+            "changedPixels": 27,
+            "height": 64,
+            "width": 64,
+            "x": 768,
+            "y": 896
+          },
+          {
+            "changedPixels": 27,
+            "height": 64,
+            "width": 64,
+            "x": 64,
+            "y": 1024
+          },
+          {
+            "changedPixels": 26,
+            "height": 64,
+            "width": 64,
+            "x": 576,
+            "y": 896
+          },
+          {
+            "changedPixels": 17,
+            "height": 64,
+            "width": 64,
+            "x": 832,
+            "y": 896
+          },
+          {
+            "changedPixels": 16,
+            "height": 64,
+            "width": 64,
+            "x": 768,
+            "y": 768
+          },
+          {
+            "changedPixels": 14,
+            "height": 64,
+            "width": 64,
+            "x": 512,
+            "y": 768
+          },
+          {
+            "changedPixels": 14,
+            "height": 64,
+            "width": 64,
+            "x": 512,
+            "y": 896
+          }
+        ],
+        "threshold": 0.1
+      },
+      "candidate": {
+        "actualDimensions": {
+          "height": 1350,
+          "width": 1000
+        },
+        "allowedChangedPixelPercentage": 0,
+        "changedPixelCount": 340,
+        "changedPixelPercentage": 0.025185185185185185,
+        "differenceBounds": {
+          "height": 1164,
+          "width": 889,
+          "x": 75,
+          "y": 141
+        },
+        "dimensionsEqual": true,
+        "equal": false,
+        "exact": false,
+        "expectedDimensions": {
+          "height": 1350,
+          "width": 1000
+        },
+        "largeRegions": [
+          {
+            "changedPixels": 38,
+            "height": 64,
+            "width": 64,
+            "x": 640,
+            "y": 896
+          },
+          {
+            "changedPixels": 35,
+            "height": 64,
+            "width": 64,
+            "x": 704,
+            "y": 896
+          },
+          {
+            "changedPixels": 34,
+            "height": 64,
+            "width": 64,
+            "x": 640,
+            "y": 768
+          },
+          {
+            "changedPixels": 27,
+            "height": 64,
+            "width": 64,
+            "x": 768,
+            "y": 896
+          },
+          {
+            "changedPixels": 27,
+            "height": 64,
+            "width": 64,
+            "x": 64,
+            "y": 1024
+          },
+          {
+            "changedPixels": 26,
+            "height": 64,
+            "width": 64,
+            "x": 576,
+            "y": 896
+          },
+          {
+            "changedPixels": 17,
+            "height": 64,
+            "width": 64,
+            "x": 832,
+            "y": 896
+          },
+          {
+            "changedPixels": 16,
+            "height": 64,
+            "width": 64,
+            "x": 768,
+            "y": 768
+          },
+          {
+            "changedPixels": 14,
+            "height": 64,
+            "width": 64,
+            "x": 512,
+            "y": 768
+          },
+          {
+            "changedPixels": 14,
+            "height": 64,
+            "width": 64,
+            "x": 512,
+            "y": 896
+          }
+        ],
+        "threshold": 0.1
+      }
+    },
+    "status": "pass"
+  },
+  "environment": "fidelity/candidates/sdk-061-r07-review-20261013a/environment.json",
+  "fixtureId": "exporter-061-now-hiring",
+  "scene": {
+    "approved": "fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/scene.json",
+    "changeCount": 0,
+    "changes": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/scene-changes.json",
+    "current": "fidelity/scene-graph/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/scene.json",
+    "status": "pass"
+  },
+  "settlement": {
+    "differingFiles": [],
+    "sourceFidelityRun": "sdk-061-r07-review-20261013a",
+    "unapprovedFiles": []
+  },
+  "source": {
+    "byteSize": 2581861,
+    "canvas": {
+      "height": 1350,
+      "width": 1000
+    },
+    "filename": "template-package-now-hiring-v0.6.1.zip",
+    "packageNodes": 11,
+    "packageVersion": "1.0",
+    "preview": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/source-preview.png",
+    "previewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+    "rootNodeId": "987:6755",
+    "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+  },
+  "surface": "png-export"
+}

@@ -1,0 +1,2 @@
+/** Browser runtime capabilities; no V1 confirmation or restoration workflow. */
+export { inspectTemplateRuntimeSupport, TEMPLATE_RUNTIME_SUPPORT_REPORT_SCHEMA_VERSION, type TemplateRuntimeSupportReportV1, type TemplateRuntimeSupportRequirementsV1, type TemplateRuntimeCapabilityId, type TemplateRuntimeCapabilityV1, type TemplateCompatibilityStatus, type TemplateCompatibilityIssueV1 } from "./import/templateRuntimeSupport";

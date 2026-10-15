@@ -21,12 +21,14 @@ export function SideDrawer({
   open,
   title,
   description,
+  initialFocusSelector,
   onClose,
   children,
 }: {
   open: boolean;
   title: ReactNode;
   description?: ReactNode;
+  initialFocusSelector?: string;
   onClose: () => void;
   children: ReactNode;
 }) {
@@ -39,7 +41,7 @@ export function SideDrawer({
     if (!open) return;
     returnFocusRef.current = document.activeElement as HTMLElement | null;
     const frame = requestAnimationFrame(() => {
-      panelRef.current?.querySelector<HTMLElement>(focusableSelector)?.focus();
+      (panelRef.current?.querySelector<HTMLElement>(initialFocusSelector ?? focusableSelector))?.focus();
     });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";

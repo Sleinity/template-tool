@@ -1,2 +1,2 @@
-/** @deprecated Internal compatibility forwarder to the template-browser owner. */
-export * from "../../../packages/template-browser/src/persistence";
+/** Historical repository test adapter; never a supported host entry. */
+export * from "../../../packages/template-browser/test/legacyEntry";

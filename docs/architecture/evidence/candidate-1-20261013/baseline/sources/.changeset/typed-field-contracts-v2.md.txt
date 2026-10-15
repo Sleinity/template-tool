@@ -1,0 +1,34 @@
+---
+"@sleinity/template-core": minor
+"@sleinity/template-browser": minor
+"@sleinity/template-react": minor
+---
+
+Add the strict TemplatePackageV2 field-contract foundation: seven discriminated
+field definitions, exact imported bindings, stable choices, portable editor
+order, opaque Color normalization, V1-to-V2 parsing and diagnostics, rendered
+line-validation evidence types, and atomic Template Family configuration
+overrides. Add the DOM-free seven-field semantic kernel, one immutable revisioned
+content reducer, typed mutation helpers, deterministic Number/Date formatting,
+exact Color/Image/Boolean materialization, ordered safe host descriptors, and a
+pure one-way V2 package materializer. V1 compatibility APIs remain available alongside the recommended V2 native
+session/renderer path. They do not imply canonical saved-record migration.
+
+Extend `date-display-v1` with deterministic prefix, suffix, separator,
+year-first, day/month and month/day presentation. Loose exporter input now
+normalizes unambiguous numeric displayed dates to canonical `YYYY-MM-DD`, using
+the recorded export year only when the displayed value intentionally omits it.
+
+Add canonical V2 Browser/React sessions and structural Boolean rendering. Add
+Family content V3 with one shared Image asset/default placement, sparse
+variant-only placement overrides, current saved-record validation, typed Family Image
+controller methods, and the ordinary affine editor-Crop path with
+cover-within-canonical aspect adaptation.
+
+Use typed `<type>:<name>` field identities and portable content/order/overrides.
+The current canonical contract is schema 2.2, superseding the intermediate 2.1
+roadmap. Canonical 2.0/2.1 packages and incompatible saved envelopes require
+reimport; no migration-on-read promise remains. Source schema 1.0 still uses
+provenance-preserving normalization. Different field types may share a source
+name; compatible repeated Booleans merge into a multi-target control. Descendant
+controls follow participation without discarding canonical child content.

@@ -1,0 +1,5 @@
+{
+  "error": "Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: No \"exports\" main defined in /tmp/v2-example-packed-KemWen/node_modules/@sleinity/template-core/package.json",
+  "rows": [],
+  "detail": null
+}

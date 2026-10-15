@@ -13,3 +13,9 @@ for (const font of manifest.fonts) {
 const stable = createHash("sha256").update(JSON.stringify(manifest)).digest("hex");
 if (!/^[a-f0-9]{64}$/.test(stable)) throw new Error("Font manifest must have a stable content hash.");
 console.log("Exact font manifest tests passed.");
+
+// Current-export captures must not require unrelated historical font files.
+const { loadExactFontManifest } = await import("../fidelity/fonts.mjs");
+if (loadExactFontManifest([]).fonts.length !== 0) throw new Error("A font-free fixture must not load unrelated fonts.");
+const current = loadExactFontManifest([{ family: "Rethink Sans", weight: 600, style: "normal" }]);
+if (current.fonts.length !== 1 || current.fonts[0].id !== "rethink-sans-600-normal") throw new Error("Current-export font filtering must retain exact binary verification.");

@@ -1,0 +1,203 @@
+$ pnpm packages:build
+$ pnpm --filter './packages/*' build
+Scope: 3 of 8 workspace projects
+$ tsup src/index.ts src/editor.ts src/family.ts src/assets.ts src/fonts.ts src/motion.ts src/inspection.ts src/renderer-internal.ts --format esm --sourcemap --clean --external react --external react-dom --external ajv --external fflate && tsup src/index.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate && tsup src/editor.ts src/family.ts src/assets.ts src/fonts.ts src/motion.ts src/inspection.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate && tsup src/renderer-internal.ts --format esm --dts-only --external react --external react-dom --external ajv --external fflate
+CLI Building entry: src/assets.ts, src/editor.ts, src/family.ts, src/fonts.ts, src/index.ts, src/inspection.ts, src/motion.ts, src/renderer-internal.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: es2020
+CLI Cleaning output folder
+ESM Build start
+ESM dist/editor.js                2.44 KB
+ESM dist/assets.js                423.00 B
+ESM dist/chunk-XBKFFSZV.js        20.73 KB
+ESM dist/fonts.js                 544.00 B
+ESM dist/family.js                29.68 KB
+ESM dist/chunk-X7JP3XGC.js        2.72 KB
+ESM dist/inspection.js            58.02 KB
+ESM dist/motion.js                569.00 B
+ESM dist/chunk-6EL2UAO6.js        10.43 KB
+ESM dist/renderer-internal.js     2.49 KB
+ESM dist/chunk-H7VWPZY5.js        66.24 KB
+ESM dist/chunk-UI7VUKCA.js        9.98 KB
+ESM dist/chunk-W66WW525.js        3.05 KB
+ESM dist/index.js                 130.09 KB
+ESM dist/chunk-HNM56XVD.js        163.42 KB
+ESM dist/chunk-MRB7PBST.js        3.08 KB
+ESM dist/chunk-OGVLNBYQ.js        19.56 KB
+ESM dist/chunk-KK36OIWB.js        175.41 KB
+ESM dist/chunk-V6TY7KAL.js        383.00 B
+ESM dist/assets.js.map            71.00 B
+ESM dist/editor.js.map            71.00 B
+ESM dist/chunk-XBKFFSZV.js.map    54.70 KB
+ESM dist/fonts.js.map             71.00 B
+ESM dist/motion.js.map            71.00 B
+ESM dist/family.js.map            66.37 KB
+ESM dist/renderer-internal.js.map 71.00 B
+ESM dist/inspection.js.map        108.12 KB
+ESM dist/chunk-X7JP3XGC.js.map    4.80 KB
+ESM dist/chunk-UI7VUKCA.js.map    18.74 KB
+ESM dist/chunk-OGVLNBYQ.js.map    36.89 KB
+ESM dist/chunk-6EL2UAO6.js.map    20.62 KB
+ESM dist/chunk-H7VWPZY5.js.map    124.63 KB
+ESM dist/chunk-W66WW525.js.map    6.42 KB
+ESM dist/chunk-MRB7PBST.js.map    6.10 KB
+ESM dist/chunk-V6TY7KAL.js.map    71.00 B
+ESM dist/index.js.map             241.01 KB
+ESM dist/chunk-KK36OIWB.js.map    343.77 KB
+ESM dist/chunk-HNM56XVD.js.map    291.04 KB
+ESM ⚡️ Build success in 92ms
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 1497ms
+DTS dist/index.d.ts 102.63 KB
+CLI Building entry: src/assets.ts, src/editor.ts, src/family.ts, src/fonts.ts, src/inspection.ts, src/motion.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 1861ms
+DTS dist/assets.d.ts                                     1.59 KB
+DTS dist/editor.d.ts                                     12.85 KB
+DTS dist/family.d.ts                                     19.88 KB
+DTS dist/fonts.d.ts                                      27.45 KB
+DTS dist/inspection.d.ts                                 40.34 KB
+DTS dist/motion.d.ts                                     2.45 KB
+DTS dist/materializeTemplateFieldContentV2-CdV9GY2k.d.ts 3.77 KB
+DTS dist/TemplatePackage-D4QhxM3e.d.ts                   28.27 KB
+CLI Building entry: src/renderer-internal.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 774ms
+DTS dist/renderer-internal.d.ts 43.07 KB
+$ tsup src/index.ts src/session-internal.ts src/session.ts src/importer.ts src/compatibility.ts src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/index.ts src/session.ts src/importer.ts src/compatibility.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/assets.ts src/fonts.ts src/persistence.ts src/capture.ts src/enrichment.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/fonts --external @sleinity/template-core/inspection --external react --external react-dom --external ajv --external fflate --external html-to-image && tsup src/session-internal.ts --format esm --dts-only --external @sleinity/template-core --external @sleinity/template-core/family
+CLI Building entry: src/assets.ts, src/capture.ts, src/compatibility.ts, src/enrichment.ts, src/fonts.ts, src/importer.ts, src/index.ts, src/persistence.ts, src/session-internal.ts, src/session.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: es2020
+CLI Cleaning output folder
+ESM Build start
+ESM dist/assets.js               545.00 B
+ESM dist/session.js              754.00 B
+ESM dist/session-internal.js     2.85 KB
+ESM dist/capture.js              976.00 B
+ESM dist/enrichment.js           691.00 B
+ESM dist/compatibility.js        10.18 KB
+ESM dist/importer.js             26.48 KB
+ESM dist/fonts.js                3.03 KB
+ESM dist/index.js                12.21 KB
+ESM dist/chunk-54Z7ELWU.js       22.62 KB
+ESM dist/chunk-MIS45QM3.js       433.00 B
+ESM dist/chunk-EQY5YINA.js       19.90 KB
+ESM dist/chunk-2RKTKIWG.js       101.83 KB
+ESM dist/chunk-KREMPVLT.js       24.31 KB
+ESM dist/chunk-TY4GZS3F.js       14.20 KB
+ESM dist/chunk-6VGYKBQ2.js       65.02 KB
+ESM dist/chunk-ZQCDHKA5.js       11.97 KB
+ESM dist/chunk-ZGRKEZWA.js       39.41 KB
+ESM dist/persistence.js          2.89 KB
+ESM dist/chunk-QSEKT6S3.js       5.10 KB
+ESM dist/chunk-HK6ZMSPT.js       2.33 KB
+ESM dist/chunk-V6TY7KAL.js       383.00 B
+ESM dist/assets.js.map           71.00 B
+ESM dist/session.js.map          71.00 B
+ESM dist/capture.js.map          71.00 B
+ESM dist/enrichment.js.map       71.00 B
+ESM dist/session-internal.js.map 5.88 KB
+ESM dist/importer.js.map         58.22 KB
+ESM dist/fonts.js.map            71.00 B
+ESM dist/compatibility.js.map    18.21 KB
+ESM dist/chunk-54Z7ELWU.js.map   42.67 KB
+ESM dist/chunk-EQY5YINA.js.map   38.43 KB
+ESM dist/chunk-MIS45QM3.js.map   2.56 KB
+ESM dist/chunk-TY4GZS3F.js.map   27.87 KB
+ESM dist/index.js.map            7.37 KB
+ESM dist/chunk-ZQCDHKA5.js.map   23.86 KB
+ESM dist/chunk-ZGRKEZWA.js.map   87.84 KB
+ESM dist/chunk-KREMPVLT.js.map   68.31 KB
+ESM dist/persistence.js.map      71.00 B
+ESM dist/chunk-HK6ZMSPT.js.map   4.48 KB
+ESM dist/chunk-QSEKT6S3.js.map   7.86 KB
+ESM dist/chunk-2RKTKIWG.js.map   192.21 KB
+ESM dist/chunk-V6TY7KAL.js.map   71.00 B
+ESM dist/chunk-6VGYKBQ2.js.map   129.01 KB
+ESM ⚡️ Build success in 43ms
+CLI Building entry: src/compatibility.ts, src/importer.ts, src/index.ts, src/session.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 2836ms
+DTS dist/compatibility.d.ts           1.92 KB
+DTS dist/importer.d.ts                6.38 KB
+DTS dist/index.d.ts                   32.66 KB
+DTS dist/session.d.ts                 1.19 KB
+DTS dist/exactFontSetup-DInYQjIY.d.ts 41.92 KB
+DTS dist/session-DNiA8JZt.d.ts        20.06 KB
+CLI Building entry: src/assets.ts, src/capture.ts, src/enrichment.ts, src/fonts.ts, src/persistence.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 3117ms
+DTS dist/assets.d.ts                     22.45 KB
+DTS dist/capture.d.ts                    6.13 KB
+DTS dist/enrichment.d.ts                 5.08 KB
+DTS dist/fonts.d.ts                      9.77 KB
+DTS dist/persistence.d.ts                16.15 KB
+DTS dist/assetReliability-Dl3bgyNy.d.ts  2.36 KB
+DTS dist/fontRegistryTypes-BA3F13vt.d.ts 9.03 KB
+CLI Building entry: src/session-internal.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+DTS Build start
+DTS ⚡️ Build success in 1939ms
+DTS dist/session-internal.d.ts 16.98 KB
+$ tsup src/index.ts src/editor.tsx src/inspection.ts src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/inspection --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external @sleinity/template-browser/session --external @sleinity/template-browser/session-internal --external @sleinity/template-browser/assets --external @sleinity/template-browser/fonts --external @sleinity/template-browser/capture --external @sleinity/template-browser/importer --external react --external react-dom
+CLI Building entry: src/editor.tsx, src/index.ts, src/inspection.ts, src/renderer-internal.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Target: es2020
+CLI Cleaning output folder
+ESM Build start
+ESM dist/editor.js                507.00 B
+ESM dist/inspection.js            82.97 KB
+ESM dist/renderer-internal.js     16.14 KB
+ESM dist/chunk-CCCTT6NX.js        17.68 KB
+ESM dist/chunk-JVX63TIM.js        14.46 KB
+ESM dist/chunk-4TZCNOSU.js        204.43 KB
+ESM dist/index.js                 592.00 B
+ESM dist/editor.js.map            71.00 B
+ESM dist/renderer-internal.js.map 15.45 KB
+ESM dist/chunk-CCCTT6NX.js.map    31.43 KB
+ESM dist/chunk-JVX63TIM.js.map    27.75 KB
+ESM dist/inspection.js.map        143.91 KB
+ESM dist/index.js.map             71.00 B
+ESM dist/chunk-4TZCNOSU.js.map    360.78 KB
+ESM ⚡️ Build success in 37ms
+DTS Build start
+DTS ⚡️ Build success in 4668ms
+DTS dist/index.d.ts                               886.00 B
+DTS dist/renderer-internal.d.ts                   10.06 KB
+DTS dist/inspection.d.ts                          11.83 KB
+DTS dist/editor.d.ts                              3.59 KB
+DTS dist/productRenderIdentity-DPy9Sv3b.d.ts      514.00 B
+DTS dist/TemplateInspectionViewport-BPbGLDB9.d.ts 4.81 KB
+DTS dist/TemplatePackageRenderer-Bu4peITL.d.ts    9.31 KB
+$ pnpm --filter @sleinity/template-studio build
+$ tsc -b && vite build
+vite v6.4.3 building for production...
+transforming...
+✓ 2060 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     0.41 kB │ gzip:   0.28 kB
+dist/assets/rethink-sans-variable-DKNCwTQx.ttf    120.59 kB
+dist/assets/index-klIECdsL.css                    147.45 kB │ gzip:  23.29 kB
+dist/assets/index-Cng2KF96.js                   1,236.65 kB │ gzip: 355.05 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.02s

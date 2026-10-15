@@ -1,5 +1,61 @@
 # Renderer Capability Registry
 
+## Family media readiness publication — 2026-10-15
+
+[ADR 0098](decisions/0098-family-media-readiness-publication.md) and [the implementation report](../architecture/f7-readiness-publication.md) record the bounded Family-only change. Decode completion reuses the current accepted materialization/tree and projects readiness/status/error, preserving semantic references and one publication per accepted source completion. Full authoring derivation, font/line/renderer revision guards and PNG raster authority remain unchanged. Native differential, separate paired production timing and browser lifecycle evidence are retained. Fresh unpublished 1.0.0 candidate `unpublished-1.0.0-440c932335c46a7015cb074079fcd5cd2767a28d78ff8e4fe9fe0921912ece35` is GO under run `sdk-f7-readiness-20261015`; the earlier certified candidate remains immutable. Cold Cover readiness improves by approximately 90–99 ms median across two minimal paired runs; detailed warm timing differences remain a separate tracing limitation. Reproduce and review the exact evidence in the report. No API/schema, rendering capability, cache, batching, reference or tolerance change is included.
+
+
+## V2 SDK / exporter 0.6.1 boundary — 2026-10-15
+
+See [ADR 0097](decisions/0097-v2-only-sdk-and-061-source-admission.md) and [the implementation/evidence report](../architecture/sdk-v2-optimization.md). The unpublished 1.0.0 candidate supports V2 hosts and exporter 0.6.1 ZIPs only; source schema 1.0 normalization and canonical schema 2.2 remain. Historical readers are test-only. Validation, primitive revision assembly and save/recovery reuse existing authorities; no visual owner, capability, provenance, settlement or export-readiness semantics changed. The three-export candidate gate is now GO after a current run-bound stored-source/capture review and fresh public host checks; see [candidate certification](../architecture/sdk-v2-candidate-certification.md). This certifies the immutable unpublished archives in the recorded environment; subsequent profiling tooling has a separate worktree identity. No reference/snapshot/tolerance/fixture/font promotion is authorized. Reproduce with the exact commands and source checkpoints in the report/evidence, followed by a fresh `pnpm sdk:gate:061 -- --run-id <unique-run>`.
+
+## Host registry integration (ADR 0096)
+
+V2 hosts may supply one borrowed font registry to the renderer and Browser PNG pipeline. Preparation, readiness and embedding use that authority; explicit null retains only package-provided sources. This adds no renderer capability, font owner or matching policy. Missing exact embedding bytes reject capture. See [R01](../architecture/host-font-authority.md).
+
+## Established media underlay (ADR 0095)
+
+The opaque NORMAL SOLID → FILL/FIT IMAGE pair under ADR 0095 uses the existing
+media and CSS-background owners. Its primitive SVG-stack rejection is not a
+degraded fallback. Hidden, reversed, additional, translucent, non-NORMAL or
+otherwise unsupported mixed stacks retain existing diagnostics. This is a
+bounded diagnostic recognition, not general ordered IMAGE-stack support.
+
+## Mounted text lifecycle (ADR 0093)
+
+Dependency-valid local intrinsic and line measurements survive unrelated publication changes. Current-commit input validation and existing native publication guards remain mandatory; changed/unknown inputs retain pending/fallback. No new layout route or text semantics.
+
+
+## Observational mask evidence (ADR 0092)
+
+The existing `exact-opaque-rectangular-alpha` capability is now represented in
+test-only settlement when current scene declarations, existing resolver input,
+geometry and revision agree. This closes the Carrousel evidence gap, not a new
+renderer capability. Partial-alpha, luminance and unsupported
+mask inputs retain explicit unresolved/fallback outcomes. No general nested or
+overlapping-mask support is established. Missing input preserves the
+old conservative inspection behavior. See [the contract](OBSERVATIONAL_MASK_SETTLEMENT.md).
+
+ADR 0090 adds a bounded runtime owner for exporter 0.6.1 opaque Matrix paint
+rows and Matrix 2 non-overlapping groups. The historical rows below describe
+the earlier preserved-only state; for this certified subset, `PNT-008` and
+`CMP-001`–`CMP-004`/`CMP-006` now route through one internal source-compositing
+contract and DOM paint-layer owner. PASS_THROUGH, isolated NORMAL, and isolated
+OVERLAY have distinct handling. No support is claimed for transparent
+backdrops, overlapping children, masks, effects, other group modes, or Cover's
+mixed IMAGE/gradient fade. See [ADR 0090](decisions/0090-bounded-opaque-source-compositing-owner.md).
+
+Field Rules V2 Milestone 7 adds Studio/external-host authoring proof, not a new
+renderer capability. The same Boolean structural owner, canonical Image Crop
+owner and Textarea line authority are consumed through V2 controllers and the
+public renderer bridge. Compact Family/host UI fixtures remain product evidence;
+dedicated multi-aspect Family crop source certification is still outstanding.
+
+The 2026-09-14 Boolean authoring extension adds no renderer capability. One
+canonical Boolean may materialize to multiple structural target nodes, and
+Browser/React content-controller projections omit fields nested below false
+targets. ADR 0078 remains the sole renderer structural-participation authority.
+
 Phase 13 adds no renderer feature capability. It selects among already resolved owners through an internal `legacy | semantic | compare` decision; unsupported rows and their fallback/support claims are unchanged. Stage 1 aggregates these rows and backend decisions into eligibility outcomes but cannot promote a support level, hide a fallback, or turn an accepted compatibility region into Native support. Accepted compatibility remains a distinct rollout outcome tied to exact region and subject revisions.
 
 ## Phase 11–12 infrastructure note
@@ -11,6 +67,17 @@ Audited 2026-07-13. Every row contains the required registry fields in compact f
 Milestone 1 added current-behavior evidence without changing any support classification. All four registered ZIPs now have repeated Validate, Fields, editor, and PNG-export pixel/structural references. This proves harness reachability and repeatability in the recorded environment; it does not complete the charter’s required edit, resize, exact-font, fallback, and export matrix for any capability. Current runs used explicit recorded replacement fonts, so they do not increase exact-font confidence.
 
 Milestone 4 adds runtime-authority evidence without broadly changing registry support labels. The now-hiring non-wrapping vertical Auto Layout, FIXED/HUG/FILL, padding/gap/alignment, HUG text, dependent FILL image slot, rectangular clipping, edit/reset, delayed exact font, root resize, and PNG chain are settled-authoritative. Circular FILL-in-HUG axes, SPACE_BETWEEN, wrapping, true masks, transforms, and advanced text remain compatibility-owned or unsupported. This is evidence for the bounded route, not a claim that every registry row in those families is complete.
+
+Field Rules V2 Milestone 4 implements generic structural exclusion for
+`appearance.visible=false` in that existing bounded layout route, including
+subtree pruning, gap closure, HUG/FILL recomputation, and generation-safe async
+publication. The exact exporter-0.6.1 Boolean fixture source-certifies headline
+removal from a vertical HUG/FILL chain and end-date removal from a fixed
+horizontal `SPACE_BETWEEN` row. The latter certifies structural child exclusion
+through the coherent compatibility owner; it does not promote general
+`SPACE_BETWEEN` settlement authority. Default Validate/Fields, editor
+true/false/reset, resize-hidden-show, and PNG export pass without a reference or
+tolerance update.
 
 Milestone 5.1 adds evidence-backed `CAP_HEIGHT` vertical trim for eligible single-style text. The exact source property, managed font metrics, routed settlement, inspection bounds, edits/reset, dependent HUG/FILL/image slots, and hidden PNG are covered. Unknown trim modes, mixed metric runs, and unverified fallback faces remain compatibility-owned. Renderer-reference promotion remains open.
 
@@ -24,7 +91,7 @@ Milestone 6 corrects MED-001 for the routed now-hiring chain: `FILL` uses one na
 
 Milestone 6.1's superseding package has three editable image fields using one asset with FILL/CROP/FIT. It proves normalized slot-to-source CROP, one inverse, clipped placement, replacement Fill/Fit transform inapplicability, exact reset, persistence, and stale decode rejection. See [editable image evidence](IMAGE_REPLACEMENT_EVIDENCE.md).
 
-Milestone 7 registers crop-3 as the first authoritative exporter ZIP with an explicit mask source and sibling range. MSK-002 is Emulated only for a fully opaque, untransformed rectangular ALPHA source that lowers exactly to one scoped CSS clip. Its fill remains `mask-input` and never paints as RGB. Partial alpha, transformed/vector/nested/luminance/effect masks remain preserved-only or unsupported. PNT-001 gains role/revision evidence for this fixture; multiple-paint compositing is unchanged.
+Milestone 7 registers crop-3 as the first authoritative exporter ZIP with an explicit mask source and sibling range. MSK-002 is Emulated only for a fully opaque, untransformed rectangular ALPHA source that lowers exactly to one scoped CSS clip. A certified first-child mask covering its complete parent owns `inset(0)` on that parent on every surface so live HUG reflow cannot retain stale source insets; other exact scopes keep the affected-node clip. Its fill remains `mask-input` and never paints as RGB. Partial alpha, transformed/vector/nested/luminance/effect masks remain preserved-only or unsupported. PNT-001 gains role/revision evidence for this fixture; multiple-paint compositing is unchanged.
 
 Milestones 7.1–7.2 source-certify rectangular primitive geometry, ordinary single opaque SOLID, uniform/independent corners, and the bounded stroke subset. Milestone 7.3A adds one isolated source-certified `GRADIENT_LINEAR` with source-indexed canonical semantics, one-inverse geometry, two/three stops, stop alpha, paint opacity, rotation, independent corners, resize, and one SVG owner. Mixed paints, node opacity, gradient strokes, other gradient families, effects, masks, and compositing remain compatibility-owned or unsupported.
 
@@ -57,21 +124,23 @@ Milestone 3 adds observational dependency/measurement/settlement evidence withou
 | LAY-005 Space-between distribution | `primaryAxisAlignItems=SPACE_BETWEEN` | Z:Y F:P | SPACE_BETWEEN; CSS `space-between` | DOM / Emulated | N / Safe | Packed start; R | M / RF | No resize/export fixture gate / M4 |
 | LAY-006 Baseline alignment | counter align BASELINE | Z:Y F:P | BASELINE; CSS baseline | DOM / Emulated | N / Warn | Flex-start; R | M / RF | Figma text-baseline parity unverified / M4 |
 | LAY-007 FIXED | axis sizing/bounds | Z:Y F:P | `sizing.*.mode=FIXED`; px/snapshot | DOM / Emulated | P / Safe | Exported bounds; E,R | H / NH,DP,DB,RF | Root/canvas mismatch policy / M2,M4 |
-| LAY-008 HUG | AUTO/HUG, text auto-resize | Z:Y F:P | HUG; routed intrinsic measurement or compatibility DOM | DOM / Emulated | Indirect / Warn | Exported bounds; U,R | M / NH,RF | Basic non-circular route and delayed-font lifecycle proven; advanced HUG remains / M4,M5 |
-| LAY-009 FILL | FILL/STRETCH/grow/align | Z:Y F:P | FILL and raw roles; CSS flex/stretch | DOM / Emulated | Indirect / Warn | Snapshot bounds; R | H / NH,RF | Raw/canonical duplicate authority / M2,M4 |
+| LAY-008 HUG | AUTO/HUG, text auto-resize | Z:Y F:P | HUG; routed intrinsic measurement or compatibility DOM | DOM / Emulated | Indirect / Warn | Exported bounds; U,R | M / NH,RF, carousel 0.6.1 local evidence | Basic non-circular route and delayed-font lifecycle proven; capped circular text uses coherent compatibility CSS / M4,M5 |
+| LAY-009 FILL | FILL/STRETCH/grow/align | Z:Y F:P | FILL and raw roles; CSS flex/stretch; intrinsic basis inside compatibility HUG | DOM / Emulated | Indirect / Warn | Snapshot bounds; R | H / NH,RF, carousel 0.6.1 local evidence | Circular FILL/HUG remains diagnosed and compatibility-owned / M2,M4 |
 | LAY-010 Min/max dimensions | min/max width/height | Z:P F:P | axis min/max; editor CSS limits | DOM / Emulated | N / Warn | Omit limits; R | M / RF | Static mode does not apply live limits / M4 |
 | LAY-011 Aspect-ratio sizing | aspect ratio/constraints | Z:P F:P | No explicit ratio contract found | DOM / Unknown pending audit | N / Unknown | Fixed bounds; Gap | L / None | Exporter/canonical gap / M2,M4 |
 | LAY-012 Absolute children | `layoutPositioning=ABSOLUTE`, bounds | Z:Y F:P | positioning/bounds; absolute CSS | DOM / Emulated | N / Safe | Snapshot bounds; R | H / RF | Transform/constraint combinations partial / M4 |
 | LAY-013 Horizontal constraints | `constraints.horizontal` | Z:P F:P | Raw extension + sizing; editor constraint CSS | DOM / Emulated | N / Warn | Snapshot-and-clip; R | M / RF | Static ignores live constraint path / M2,M4 |
 | LAY-014 Vertical constraints | `constraints.vertical` | Z:P F:P | Raw extension + sizing; editor constraint CSS | DOM / Emulated | N / Warn | Snapshot-and-clip; R | M / RF | Static ignores live constraint path / M2,M4 |
 | LAY-015 Nested transforms | `relativeTransform`, rotation, flips | Z:P F:P | raw matrix -> transform model/CSS | DOM/SVG / Approximated | N / Warn | Snapshot unsafe axes; R | M / F041 | Skew/local geometry and nesting parity / M4 |
+| LAY-016 Structural visibility | `appearance.visible`; Boolean field `property=visible` | Z:Y F:Y | one active/excluded-self/excluded-ancestor projection before participant discovery; hidden subtree unmounted | DOM / Native structural exclusion; layout owner remains capability-routed | Y Boolean / Safe when current | Shared coherent compatibility outside routed subset; R | H subset / exporter-061 Boolean | Source-certified vertical HUG/FILL and fixed horizontal SPACE_BETWEEN child exclusion; not general SPACE_BETWEEN settlement authority; wrapping, circular and advanced mask/transform interactions deferred / Field Rules M4 |
+| TXT-017 Textarea rendered-line validation | V2 Textarea `maxLines`, `warningAtLines`; exact text binding | Z:Y F:Y | clustered `Range` line boxes from the mounted paint span; revision/font/settlement/generation evidence | DOM text owner / Native browser wrapping | Y Textarea / Safe when current valid | Pending/unsupported blocks required export; R | H / now-hiring | Fixed/HUG/FILL, explicit newlines, empty=1, pre-clip count, structural inactivity, Family-selected validity / Field Rules M6 |
 
 ## Text
 
 | ID / capability | Figma source properties | Availability | Canonical representation / current strategy | Future backend / support | Edit / export | Fallback / diagnostics | Confidence / fixture | Known limitation / milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | TXT-001 Single-style text | characters, style | Z:Y F:P | canonical text; DOM text | DOM / Emulated | Y / Safe | Browser fallback; U,E,R | H / NH,DP,DB,RF | Pixel baseline absent / M1,M4 |
-| TXT-002 Mixed-style runs | styled segments/overrides | Z:P F:P | metadata/ranges; limited spans or node style | DOM/SVG / Approximated | P / Warn | Node-level style; R | M / F041 | Full run properties not reproduced / M4 |
+| TXT-002 Mixed-style runs | styled segments/overrides | Z:P F:P | metadata/ranges; V2 edits reconcile one contiguous edit and renderer preserves uncovered text with adjacent style | DOM/SVG / Approximated | P / Warn | Node-level style; R | M / F041, carousel 0.6.1 local evidence | Full per-run properties and multi-edit rich-text intent not reproduced / M4 |
 | TXT-003 Exact font face | family/style label/PostScript/weight/stretch/axes | Z:P F:Y | versioned request + parsed face + managed binary/hash/private family | DOM / Emulated | Y / Safe only when hash/face/revision ready | Explicit replacement or block; U,E,R | H / NH,DP,DB | Real upload/restore/all surfaces proven for NH; cross-browser and source-preview release/features open / M4,M5.3 |
 | TXT-004 Fallback fonts | missing face/fallback mapping | Z:Y F:P | resolution status/fallback family | DOM / Approximated | N / Warn or Block | System/approved family; U,R | H / RF | Metric drift intentional / M4 |
 | TXT-005 Variable fonts | axes/variation settings | Z:P F:P | asset may be variable; no axis model found | DOM / Unknown pending audit | N / Unknown | Default face instance; Gap | L / None | Axis semantics/fixtures absent / M2,M4 |
@@ -93,27 +162,32 @@ Milestone 3 adds observational dependency/measurement/settlement evidence withou
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MED-001 Image FILL | `scaleMode=FILL` | Z:Y F:P | native cover; current slot; transform inapplicable | DOM / Emulated | Y replace / Safe | Centered cover; R | H + editable real ZIP | Dynamic/fixed source and replacement Fill verified / M6.1 |
 | MED-002 Image FIT | `scaleMode=FIT` | Z:Y F:P | contain; transform inapplicable | DOM / Emulated | Y replace / Safe | Contain centered; R | Editable real ZIP | Imported and replacement Fit, reset/reload verified / M6.1 |
-| MED-003 Image CROP | CROP + transform | Z:Y F:P | normalized source polygon; one affine inverse into clipped `<img>` | DOM / Approximated | Replacement uses Fill/Fit / Safe | Diagnosed cover; R | Editable real ZIP | Rotated/non-centred import, exact reset, all-surface/PNG proven; interactive crop deferred / M6.1 |
+| MED-003 Image CROP | CROP + transform | Z:Y F:P | normalized source polygon; one affine inverse into clipped `<img>`; editor Crop reuses owner | DOM / Approximated | Replacement Crop supported / Safe when valid | Invalid Crop remains invalid; deterministic preview cover; R | Editable real ZIP + V2 host tests | Rotated/non-centred import and host-authored crop path; polished crop UI deferred / M6.1,FR-M5 |
 | MED-004 Image TILE | TILE, scaling factor | Z:P F:P | tile render mode; repeat when intrinsic known | DOM/Canvas / Approximated | Y replace / Warn | Cover; R | M / F041 | Scale/phase parity incomplete / M5 |
 | MED-005 Explicit STRETCH | STRETCH or field policy | Z:Y F:P | object-fit fill only for explicit intent | DOM/Canvas / Emulated | Y / Safe | Never infer; preserve aspect ratio; R | H / RF | Source intent precedence needs M2 / M2,M5 |
 | MED-006 Focal position | explicit object position; CROP transform separately | Z:P F:P | FILL/FIT focal alignment; CROP affine source polygon | DOM / Approximated | P / Warn | 50/50 center; R | M / NH + synthetic | No browser focal editor/source fixture / M6 |
-| MED-007 Crop transforms | `imageTransform` with CROP | Z:P F:P | matrix retained, applicability classified, affine inverse applied once | DOM / Approximated | Imported-only; replacement ignores / Safe | Cover; R | Editable real ZIP | Direction/inversion/rotation/reset source-certified; editor crop unimplemented / M6.1 |
+| MED-007 Crop transforms | `imageTransform` with CROP | Z:P F:P | matrix retained, applicability classified, affine inverse applied once; editor crops adapt within canonical region | DOM / Approximated | Imported and replacement Crop / Safe when current | Cover preview remains invalid/export-blocked; R | Editable real ZIP + V2 host tests | Family per-variant source art direction has automated coverage; polished UI deferred / M6.1,FR-M5 |
 | MED-008 Image adjustments | filters/exposure/contrast/etc. | Z:P F:P | raw extension only | Canvas / Preserved only | N / Unknown | Unadjusted image; R warning | H unsupported / DP | No adjustment backend / M5 |
-| MED-009 Replacement behavior | `image.activePlacement` | Z:Y F:N | revisioned imported-source/replacement-fill/replacement-fit; editor-crop reserved | DOM / Emulated | Y / Safe when asset ready | Legacy replacement defaults Fill; R | H / editable real ZIP | All 3 source modes × Fill/Fit, switching, reset/reload, stale decode, PNG verified / M6.1 |
+| MED-009 Replacement behavior | `image.activePlacement` | Z:Y F:N | revisioned imported-source/replacement-fill/replacement-fit/editor-crop | DOM / Emulated | Y / Safe when asset/current crop ready | Legacy replacement defaults Fill; R | H / editable real ZIP + V2 host tests | Fill/Fit source lifecycle plus canonical Crop and Family sparse framing / M6.1,FR-M5 |
 | MED-010 Dynamic slot recalculation | layout dependency + image slot | Derived | current routed slot → pure placement geometry → native sampling | DOM / Emulated | Indirect / Safe | Coherent compatibility slot; R | H / NH | Initial/edit/reset/root-resize/export chain proven for FILL; CROP resize lacks real fixture / M4,M6 |
 
 ## Paint and strokes
 
 | ID / capability | Figma source properties | Availability | Canonical representation / current strategy | Future backend / support | Edit / export | Fallback / diagnostics | Confidence / fixture | Known limitation / milestone |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| PNT-001 Solid fills | SOLID/color/opacity/role/index | Z:Y F:P | ordered primitive paint contract; one opaque ordinary SOLID or an eligible ordered partial-opacity SOLID stack routes; mask input excluded | DOM/CSS/SVG / Native certified subset | Color field P / Safe subset | Coherent compatibility; preserve all entries | H subset / bb, main, crop-3 + ordered stack family | Mixed/non-NORMAL/node-opacity combinations deferred / M7.4 |
-| PNT-002 Multiple fills | fills array/order/visibility/opacity/blend | Z:Y F:P | `ResolvedOrderedSolidStackV1` covers SOLID-only; `ResolvedOrderedNormalPaintStackV1` covers the exact SOLID-below-linear pair; one SVG group/shared clip | SVG / Native certified subsets | P / Safe subset | Whole primitive compatibility with exact reason | H / six SOLID fixtures + ordered-solid-linear-normal | IMAGE layers, reversed/additional mixed patterns and non-NORMAL deferred / M7.4 + ADR 0072 |
+| PNT-001 Solid fills | SOLID/color/opacity/role/index | Z:Y F:P | ordered primitive paint contract; one opaque ordinary SOLID or an eligible ordered partial-opacity SOLID stack routes; 0.6.0 repair and bounded native 0.6.1 opacity evidence remain distinct; mask input excluded | DOM/CSS/SVG / Native certified subset | Color field P / Safe subset | Coherent compatibility; preserve all entries | H subset / bb, main, crop-3 + ordered stack + exporter-061-solid-opacity | Mixed/non-NORMAL/node-opacity combinations deferred / M7.4, ADR 0074 |
+
+Carrousel's bound Color SOLID additionally has exact value-level evidence: its
+source-equivalent imported default and Reset retain the ZIP's floating-point
+RGBA, while an explicit hex edit writes RGB only to the indexed fill. This
+does not approve its PNG or extend the routed paint subset.
+| PNT-002 Multiple fills | fills array/order/visibility/opacity/blend | Z:Y F:P | `ResolvedOrderedSolidStackV1` covers SOLID-only; `ResolvedOrderedNormalPaintStackV1` covers the exact SOLID-below-linear pair; one SVG group/shared clip; clean 0.6.1 SOLIDs need no repair record | SVG / Native certified subsets | P / Safe subset | Whole primitive compatibility with exact reason | H / six SOLID fixtures + ordered-solid-linear-normal + exporter-061-linear-and-mixed-paints | IMAGE layers, reversed/additional mixed patterns and non-NORMAL deferred / ADRs 0072, 0074 |
 | PNT-003 Linear gradients | `GRADIENT_LINEAR`; raw `gradientStops`/`gradientTransform` | Z:P F:P | same-index canonical hydration plus `ResolvedLinearGradientGeometryV1`; reusable as index-1 layer only in ADR 0072 | SVG / Native certified subset | N / Safe subset | Whole-primitive compatibility with explicit reason | H / gradient-test-linear + paint-opacity + ordered-solid-linear-normal | Isolated subset plus exact SOLID-below-linear pair; other mixed paints, node opacity, gradient strokes and families deferred |
 | PNT-004 Radial gradients | GRADIENT_RADIAL | Z:P F:P | type/order preserved; no source-index hydration or resolved geometry | SVG/Canvas / Preserved only | N / Unknown | Preserve/diagnose; R | H unsupported / zero corpus occurrences | Tier 2; separate source gate required |
 | PNT-005 Angular gradients | GRADIENT_ANGULAR | Z:P F:P | type/order preserved; no source-index hydration or resolved geometry | Canvas / Preserved only | N / Unknown | Preserve/diagnose; R | H unsupported / zero corpus occurrences | Tier 3; separate source/backend authority |
 | PNT-006 Diamond gradients | GRADIENT_DIAMOND | Z:P F:P | type/order preserved; no source-index hydration or resolved geometry | SVG/Canvas / Preserved only | N / Unknown | Preserve/diagnose; R | H unsupported / zero corpus occurrences | Tier 3; do not infer radial semantics |
-| PNT-007 Paint opacity | source alpha + paint opacity by layer | Z:Y F:P | gradient retains stop alpha/paint opacity; `solid-paint-source-v1` normalizes bounded exporter aliases to RGB alpha 1 plus paint opacity once while preserving serialized evidence | DOM/SVG / Native certified gradient, Emulated solid | Color P / Safe subset | Ambiguous/unaffected values preserved; complete compatibility | H gradient and SOLID source contract | SOLID source gate closed; IMAGE opacity remains later mixed-stack work |
-| PNT-008 Paint blend modes | per-paint blend plus node/group isolation | Z:P F:P | canonical value preserved; no resolved stack blend model | Layered DOM/SVG/offscreen / Preserved only | N / Unknown | NORMAL compatibility; non-NORMAL explicit gap | H source / DARKEN once | Non-NORMAL blocked by Phase 9; no MULTIPLY/SCREEN/OVERLAY/LIGHTEN corpus occurrence |
+| PNT-007 Paint opacity | source alpha + paint opacity by layer | Z:Y F:P | gradient retains stop alpha/paint opacity; `solid-paint-source-v1` repairs bounded 0.6.0 aliases; clean 0.6.1 alpha-1 plus paint opacity derives separate native evidence | DOM/SVG / Native certified gradient and bounded SOLID | Color P / Safe subset | Ambiguous, contradictory, unidentified, and future-version values remain compatibility-owned | H gradient, historical SOLID, and exporter 0.6.1 fixtures | IMAGE opacity remains later mixed-stack work / ADR 0074 |
+| PNT-008 Paint blend modes | per-paint blend plus node/group isolation | Z:P F:P | `ResolvedSourceCompositingV1` preserves ordered source floats for the opaque exporter 0.6.1 subset | DOM paint layers / Native bounded subset | P / Safe subset | Whole-node compatibility for unsupported stacks | H source and runtime / Matrix, Matrix 2, Cover | DARKEN/MULTIPLY/SCREEN/OVERLAY/LIGHTEN rows and bounded groups under ADR 0090; one exact Cover SOLID/IMAGE/DARKEN-gradient stack under ADR 0091; all other mixed stacks remain unsupported |
 | PNT-009 IMAGE in paint stacks | ordered IMAGE paint, opacity, blend, asset, placement | Z:Y F:P | image intent resolves separately; compatibility uses first IMAGE as CSS background | DOM layers / Approximated | Image field P / Warn | Existing media geometry plus complete stack compatibility | H source / 7 archive occurrences | V1 ordered NORMAL integration must not reopen Phase 6 placement |
 | STR-001 Solid strokes | stroke SOLID/weight/align/index | Z:Y F:P | ordered stroke contract; exact opaque rectangular INSIDE/CENTER/OUTSIDE use one capability owner | DOM/CSS/SVG / Native subset | N / Safe subset | Compatibility for unsupported alignments/stacks | H subset / bb, main, stroke-test | Partial/multiple/gradient/advanced strokes fixture-blocked / M7.2 |
 | STR-002 Gradient strokes | gradient stroke paint, path, alignment, transform | Z:P F:P | canonical paint can survive; resolved solid model ignores | SVG/Canvas / Preserved only | N / Unknown | Omit/preserve; R warning | H unsupported / zero corpus occurrences | Blocked by Phase 8 path geometry and missing source authority |
@@ -133,7 +207,7 @@ Milestone 3 adds observational dependency/measurement/settlement evidence withou
 | GEO-004 Lines | LINE/vector path | Z:P F:P | vector/shape when exported | SVG / Unknown pending audit | N / Unknown | SVG asset or preserve; R | L / None | No registered source/edit/export fixture / M5 |
 | GEO-005 Polygons | POLYGON/point count | Z:P F:P | vector/shape when exported | SVG / Unknown pending audit | N / Unknown | SVG asset; R | L / None | Semantic shape path unproven / M5 |
 | GEO-006 Stars | STAR/point count/ratio | Z:P F:P | vector/shape when exported | SVG / Unknown pending audit | N / Unknown | SVG asset; R | L / None | No fixture / M5 |
-| GEO-007 Vector paths | vector paths/SVG asset | Z:Y F:P | vector metadata/asset | SVG / Native or Emulated | N / Safe if asset safe | Snapshot/preserve; U,R | M / F041 | Complex path parity not baselined / M1,M5 |
+| GEO-007 Vector paths | vector paths/SVG asset | Z:Y F:P | complete renderable SVG asset/string owns its embedded fill and stroke; canonical stroke survives as provenance without duplicate wrapper CSS paint | SVG / Native or Emulated | N / Safe if asset safe | Missing source and semantic shape keep compatibility; U,R | M / F041; exact 0.6.1 Cover arrow all-surface regional evidence | Complex path parity not broadly baselined; DARKEN cover fade separate / ADR 0086 |
 | GEO-008 Boolean results | BOOLEAN_OPERATION/path | Z:P F:P | node/vector metadata | SVG / Approximated | N / Warn | Exported SVG/raster; R | M / F041 | Live boolean semantics not evaluated / M5 |
 | GEO-009 Independent corner radii | four radii | Z:Y F:P | explicit source order; edge-local adjacent-edge normalization from settled bounds; shared fill/clip/stroke tuple | DOM/SVG / Native certified subset | N / Safe subset | Whole-primitive compatibility | H / stroke-test `443:94`,`443:95` | Corner smoothing, transforms, unsupported paint/stroke combinations deferred / M7.2 |
 | GEO-010 Corner smoothing | smoothing value | Z:P F:P | no runtime model found | SVG/Canvas / Preserved only | N / Unknown | Ordinary radius; Gap | L / None | Squircle fidelity absent / M5 |
@@ -153,12 +227,12 @@ Milestone 3 adds observational dependency/measurement/settlement evidence withou
 | FX-003 Multiple shadows | ordered effects | Z:Y F:P | joined CSS shadows | DOM/Canvas / Emulated | N / Warn | Supported subset; R | M / F041 | Exact ordering with strokes/compositing / M6 |
 | FX-004 Layer blur | LAYER_BLUR | Z:Y F:P | CSS filter blur | DOM/Canvas / Approximated | N / Warn | No blur; R | M / F041 | Bounds expansion differs / M6 |
 | FX-005 Background blur | BACKGROUND_BLUR | Z:Y F:P | backdrop-filter blur | DOM/Canvas / Approximated | N / Warn | No blur; R | M / F041 | Browser/backdrop support and isolation / M6 |
-| CMP-001 Layer blend modes | blendMode | Z:P F:P | no explicit model | Canvas / Preserved only | N / Unknown | NORMAL; Gap | L / None | Unsupported / M6 |
-| CMP-002 Pass-through groups | group blend pass-through | Z:P F:P | no group compositing model | Canvas / Preserved only | N / Unknown | Ordinary DOM group; Gap | L / None | Unsupported / M6 |
-| CMP-003 Isolated groups | isolation/boolean | Z:P F:P | no explicit isolation model | Canvas / Preserved only | N / Unknown | Browser stacking defaults; Gap | L / None | Unsupported / M6 |
-| CMP-004 Parent opacity | node opacity | Z:Y F:P | appearance opacity; CSS opacity | DOM/Canvas / Native | N / Safe | 1; R | H / RF | Group compositing exactness unbaselined / M6 |
+| CMP-001 Layer blend modes | blendMode | Z:P F:P | canonical values plus internal source-compositing revision | DOM paint layers / Native bounded subset | P / Safe subset | Whole-node compatibility outside predicate | H source and runtime / Matrix, Matrix 2 | One paint owner over opaque SOLID/IMAGE backdrop; mixed IMAGE/gradient stacks deferred / ADR 0090 |
+| CMP-002 Pass-through groups | group blend pass-through | Z:P F:P | source group order and opacity; certified non-overlapping rows | DOM paint layers / Native bounded subset | P / Safe subset | Compatibility outside predicate | H source and runtime / Matrix 2 | External backdrop remains visible; post-group opacity distributed through ordered paints / ADR 0090 |
+| CMP-003 Isolated groups | NORMAL/OVERLAY group blend | Z:P F:P | source mode, order, and opacity with internal group revision | DOM isolation and blend / Native bounded subset | P / Safe subset | Compatibility outside predicate | H source and runtime / Matrix 2 | NORMAL isolates; OVERLAY also blends the group; transparent edges and other modes remain open / ADR 0090 |
+| CMP-004 Parent opacity | node opacity | Z:Y F:P | source opacity and certified post-child group order | DOM / Native bounded subset | P / Safe subset | Existing opacity compatibility elsewhere | H source and runtime / Matrix 2 | 80% group behavior proven for certified rows; not a general group opacity contract / ADR 0090 |
 | CMP-005 Child opacity | child node opacity | Z:Y F:P | per-node CSS opacity | DOM/Canvas / Native | N / Safe | 1; R | H / RF | Interaction with parent/blend / M6 |
-| CMP-006 Paint opacity | paint opacity | Z:Y F:P | folded into solid color alpha | DOM/SVG / Emulated | P / Warn | Layer opacity approximation; R | M / RF | Multiple/gradient paints incomplete / M5,M6 |
+| CMP-006 Paint opacity | paint opacity | Z:Y F:P | exact source paint opacity; bounded pass-through redistribution retains post-group result | DOM/SVG / Native bounded subset | P / Safe subset | Whole-row compatibility outside predicate | H source and runtime / Matrix 2 40% top paint | First/second paint order and 80% group order covered on the certified opaque subset / ADR 0090 |
 | CMP-007 Offscreen compositing | group/effect need | Derived | no offscreen backend/router | Canvas / Unsupported | N / Unknown | DOM approximation; Gap | H absent / None | Deferred until fixture proves need / M6,M8 |
 | CMP-008 Raster fallback | exported raster/subtree image | Z:P F:P | image asset only when explicitly exported | Raster / Raster fallback | N / Safe if asset exists | Preserve raster; U,E,R | M / DP,DB | No automatic subtree raster router / M5,M8 |
 
@@ -190,3 +264,12 @@ Milestone 3 adds observational dependency/measurement/settlement evidence withou
 - Milestone 3 provides explicit full-surface observational dependency settlement/readiness. Milestone 4 makes only the gated core layout/text family runtime-authoritative.
 - Milestone 5 makes the already-routed core geometry authoritative on every live surface. It does not change the support level of any appearance row.
 - `appearance:baseline` distinguishes real-ZIP source sufficiency from source-level contract probes. Advanced appearance rows remain preserved-only, unsupported, or unknown until a registered real fixture supplies source/edit/resize/export evidence.
+
+## Mounted changed-text stability — ADR 0094
+
+Fresh current text metrics may be measured before paint when face authority and
+mounted constraints are available. Changed HUG/trim-wrapper constraints receive a
+fresh commit check; unknown dependencies keep pending/fallback behavior. This is
+intrinsic-input lifecycle work, not expanded text semantics or settled-graph
+support. Now Hiring adds per-accepted-revision image/sibling and text traces to
+the existing Carrousel Date regression. See [current evidence](../architecture/now-hiring-text-stability.md).

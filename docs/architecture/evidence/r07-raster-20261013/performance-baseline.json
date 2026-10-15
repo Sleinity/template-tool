@@ -1,0 +1,20 @@
+{
+  "files": {
+    "apps/studio/src/styles.css": {
+      "path": "docs/architecture/evidence/r07-raster-20261013/baseline/apps/studio/src/styles.css",
+      "sha256": "4661c4418c87d53c28e7f37cf1979168b9be3f0d085a31a42d44184df6dedf7e"
+    },
+    "apps/studio/src/workspace/outputEditor.css": {
+      "path": "docs/architecture/evidence/r07-raster-20261013/baseline/apps/studio/src/workspace/outputEditor.css",
+      "sha256": "b2b7b3855c41ea13abe281caf6f95f54f5cb8f592d8f648c1df4120be998756f"
+    },
+    "apps/studio/src/setup/SetupPreview.tsx": {
+      "path": "docs/architecture/evidence/r07-raster-20261013/baseline/apps/studio/src/setup/SetupPreview.tsx",
+      "sha256": "8847c885398d982b8f065fba028779642f9dd3ebc25bc0b4390cbb01fa0472b9"
+    },
+    "apps/studio/src/workspace/DraftEditor.tsx": {
+      "path": "docs/architecture/evidence/r07-raster-20261013/baseline/apps/studio/src/workspace/DraftEditor.tsx",
+      "sha256": "536bcce26e68c747e0e29895280e2644875721929cff270f0acc767f7d037217"
+    }
+  }
+}

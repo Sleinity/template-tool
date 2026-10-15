@@ -1,18 +1,12 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import {
-  TemplateSessionProvider,
-  TemplateSessionRenderer,
-} from "@sleinity/template-react";
+import {TemplateSessionProvider, TemplateSessionRenderer} from "../../../packages/template-react/test/legacyEntry";
 import {
   TemplateImporterWizard,
   TemplateImportValidationSummary,
-} from "../../../packages/template-react/src/importer";
-import type {
-  TemplateImportFontValidationReportV1,
-  TemplateImportRenderValidationReportV1,
-  TemplateImportValidationReportV1,
-} from "@sleinity/template-browser/importer";
+} from "../../../packages/template-react/test/legacy/importer";
+import type {TemplateImportValidationReportV1} from "@sleinity/template-browser/importer";
+import type {TemplateImportFontValidationReportV1, TemplateImportRenderValidationReportV1} from "../../../packages/template-browser/test/legacyImporter";
 import figmaPluginV041 from "../fixtures/figma-plugin-v0.4.1.json";
 import { createResolvedRenderTree } from "../resolved";
 import type { TemplatePackageV1 } from "../types";

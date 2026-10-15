@@ -5,6 +5,7 @@ import type {
   PackageStroke,
   TemplateNode,
   TemplatePackageV1,
+  TemplatePackageSource,
 } from "../types";
 import type {
   PrimitiveAppearanceV1,
@@ -57,6 +58,86 @@ function record(value: unknown): Record<string, unknown> | null {
   return value && typeof value === "object" && !Array.isArray(value)
     ? (value as Record<string, unknown>)
     : null;
+}
+
+type PrimitiveSourceAuthority = Pick<TemplatePackageSource, "type" | "pluginVersion">;
+
+type NativeResolvedSolidProvenance = Omit<
+  ResolvedOrderedSolidPaintV1["provenance"],
+  "normalizationRevision" | "opacityDisposition"
+> & {
+  sourceAuthority: "native-canonical-source";
+  producerPluginVersion: "0.6.1";
+  evidenceRevision: string;
+  normalizationRevision: null;
+  opacityDisposition: "canonical-paint-opacity";
+};
+
+function nativeCanonicalSolidEvidence(
+  node: TemplateNode,
+  paint: Extract<PackagePaint, { type: "SOLID" }>,
+  sourceIndex: number,
+  source: PrimitiveSourceAuthority | undefined,
+): {
+  rawFigmaPath: string | null;
+  evidenceRevision: string;
+} | null {
+  if (
+    source?.type !== "figma" ||
+    source.pluginVersion !== "0.6.1" ||
+    paint.solidPaintSource ||
+    paint.color.a !== 1
+  ) return null;
+
+  const figma = record(node.extensions?.figma);
+  const rawFills = figma && Array.isArray(figma.rawFills) ? figma.rawFills : null;
+  const rawValue = rawFills?.[sourceIndex];
+  if (rawValue === undefined || rawValue === null) {
+    return {
+      rawFigmaPath: null,
+      evidenceRevision: `native-solid-opacity-v1:${stableHash({
+        producer: source,
+        nodeId: node.id,
+        sourceIndex,
+        canonical: paint,
+        raw: null,
+      })}`,
+    };
+  }
+
+  const raw = record(rawValue);
+  const rawColor = record(raw?.color);
+  const rawOpacity = raw?.opacity ?? 1;
+  const rawVisible = raw?.visible ?? true;
+  const rawBlendMode = typeof raw?.blendMode === "string"
+    ? raw.blendMode.toUpperCase()
+    : "NORMAL";
+  if (
+    raw?.type !== "SOLID" ||
+    !isUnitNumber(rawOpacity) ||
+    rawOpacity !== (paint.opacity ?? 1) ||
+    rawVisible !== (paint.visible ?? true) ||
+    rawBlendMode !== (paint.blendMode?.toUpperCase() ?? "NORMAL") ||
+    !rawColor ||
+    !isUnitNumber(rawColor.r) ||
+    !isUnitNumber(rawColor.g) ||
+    !isUnitNumber(rawColor.b) ||
+    rawColor.r !== paint.color.r ||
+    rawColor.g !== paint.color.g ||
+    rawColor.b !== paint.color.b ||
+    (rawColor.a !== undefined && rawColor.a !== 1)
+  ) return null;
+
+  return {
+    rawFigmaPath: `nodes.${node.id}.extensions.figma.rawFills.${sourceIndex}`,
+    evidenceRevision: `native-solid-opacity-v1:${stableHash({
+      producer: source,
+      nodeId: node.id,
+      sourceIndex,
+      canonical: paint,
+      raw: rawValue,
+    })}`,
+  };
 }
 
 function rawCorner(node: TemplateNode): number | PrimitiveCornerValues | null {
@@ -269,10 +350,11 @@ function paintLayer(
 }
 
 function resolveOrderedSolidPaint(
+  node: TemplateNode,
   paint: PackagePaint,
   sourceIndex: number,
   packageId: string,
-  nodeId: string,
+  source: PrimitiveSourceAuthority | undefined,
 ): { paint: ResolvedOrderedSolidPaintV1 | null; reason: string | null } {
   if (paint.type !== "SOLID") {
     return { paint: null, reason: "ordered-solid-stack-mixed-paint-types" };
@@ -288,7 +370,7 @@ function resolveOrderedSolidPaint(
   const provenance = paint.solidPaintSource;
   const provenanceCurrent = provenance &&
     provenance.sourceIndex === sourceIndex &&
-    provenance.canonicalPath === `nodes.${nodeId}.appearance.fills.${sourceIndex}` &&
+    provenance.canonicalPath === `nodes.${node.id}.appearance.fills.${sourceIndex}` &&
     (provenance.opacityDisposition === "raw-paint-opacity" ||
       provenance.opacityDisposition === "mirrored-compatibility-alias") &&
     provenance.conflicts.length === 0 &&
@@ -297,9 +379,37 @@ function resolveOrderedSolidPaint(
     provenance.canonicalPaintOpacity === paintOpacity &&
     Math.abs(provenance.effectiveOpacity - paint.color.a * paintOpacity) <=
       provenance.equalityTolerance;
-  if (!provenanceCurrent) {
+  const nativeEvidence = !provenanceCurrent
+    ? nativeCanonicalSolidEvidence(node, paint, sourceIndex, source)
+    : null;
+  if (!provenanceCurrent && !nativeEvidence) {
     return { paint: null, reason: "ordered-solid-stack-ambiguous-opacity-provenance" };
   }
+  const canonicalPath = `nodes.${node.id}.appearance.fills.${sourceIndex}`;
+  const resolvedProvenance = provenanceCurrent
+    ? {
+        canonicalPath: provenance.canonicalPath,
+        rawFigmaPath: provenance.rawFigmaPath,
+        normalizationRevision: provenance.normalizationRevision,
+        opacityDisposition: provenance.opacityDisposition as
+          | "raw-paint-opacity"
+          | "mirrored-compatibility-alias",
+        serializedColorAlpha: provenance.serializedColorAlpha,
+        serializedPaintOpacity: provenance.serializedPaintOpacity,
+        conflicts: [...provenance.conflicts],
+      }
+    : ({
+        canonicalPath,
+        rawFigmaPath: nativeEvidence!.rawFigmaPath,
+        sourceAuthority: "native-canonical-source",
+        producerPluginVersion: "0.6.1",
+        evidenceRevision: nativeEvidence!.evidenceRevision,
+        normalizationRevision: null,
+        opacityDisposition: "canonical-paint-opacity",
+        serializedColorAlpha: paint.color.a,
+        serializedPaintOpacity: paintOpacity,
+        conflicts: [],
+      } satisfies NativeResolvedSolidProvenance);
   const visible = paint.visible !== false;
   return {
     paint: {
@@ -314,18 +424,10 @@ function resolveOrderedSolidPaint(
       blendMode: "NORMAL",
       role: visible ? "ordinary-visible" : "hidden-preserved",
       capability: "source-certified-ordered-solid-layer",
-      paintRevision: `ordered-solid-paint-v1:${stableHash({ packageId, nodeId, sourceIndex, paint })}`,
-      provenance: {
-        canonicalPath: provenance.canonicalPath,
-        rawFigmaPath: provenance.rawFigmaPath,
-        normalizationRevision: provenance.normalizationRevision,
-        opacityDisposition: provenance.opacityDisposition as
-          | "raw-paint-opacity"
-          | "mirrored-compatibility-alias",
-        serializedColorAlpha: provenance.serializedColorAlpha,
-        serializedPaintOpacity: provenance.serializedPaintOpacity,
-        conflicts: [...provenance.conflicts],
-      },
+      paintRevision: `ordered-solid-paint-v1:${stableHash(provenanceCurrent
+        ? { packageId, nodeId: node.id, sourceIndex, paint }
+        : { packageId, nodeId: node.id, sourceIndex, paint, nativeEvidence })}`,
+      provenance: resolvedProvenance as ResolvedOrderedSolidPaintV1["provenance"],
       source: structuredClone(paint),
     },
     reason: null,
@@ -335,6 +437,7 @@ function resolveOrderedSolidPaint(
 function orderedSolidStackContract(
   node: TemplateNode,
   packageId: string,
+  source: PrimitiveSourceAuthority | undefined,
   sourceRevision: string,
   geometryRevision: string,
   bounds: PackageRect,
@@ -347,7 +450,7 @@ function orderedSolidStackContract(
     node.appearance.fills.some((paint) => paint.type !== "SOLID")
   ) return null;
   const resolved = node.appearance.fills.map((paint, sourceIndex) =>
-    resolveOrderedSolidPaint(paint, sourceIndex, packageId, node.id),
+    resolveOrderedSolidPaint(node, paint, sourceIndex, packageId, source),
   );
   const orderedPaints = resolved
     .map((entry) => entry.paint)
@@ -355,9 +458,9 @@ function orderedSolidStackContract(
   const rawFigmaPaths = orderedPaints
     .map((paint) => paint.provenance.rawFigmaPath)
     .filter((path): path is string => path !== null);
-  const normalizationRevisions = [...new Set(
-    orderedPaints.map((paint) => paint.provenance.normalizationRevision),
-  )];
+  const normalizationRevisions = [...new Set(orderedPaints
+    .map((paint) => paint.provenance.normalizationRevision)
+    .filter((revision): revision is string => revision !== null))];
   const stackInput = {
     nodeId: node.id,
     canonicalSourceRevision: sourceRevision,
@@ -395,6 +498,7 @@ function orderedSolidStackContract(
 function orderedNormalPaintStackContract(
   node: TemplateNode,
   packageId: string,
+  source: PrimitiveSourceAuthority | undefined,
   sourceRevision: string,
   geometryRevision: string,
   bounds: PackageRect,
@@ -409,7 +513,7 @@ function orderedNormalPaintStackContract(
     solidSource?.type !== "SOLID" ||
     gradientSource?.type !== "GRADIENT_LINEAR"
   ) return null;
-  const solid = resolveOrderedSolidPaint(solidSource, 0, packageId, node.id).paint;
+  const solid = resolveOrderedSolidPaint(node, solidSource, 0, packageId, source).paint;
   const gradient = paintLayers[1]?.linearGradient ?? null;
   if (!solid || !gradient) return null;
   const orderedLayers = [
@@ -635,6 +739,7 @@ export function resolvePrimitiveAppearance(
     maskInput?: boolean;
     hasMaskRelationship?: boolean;
     ancestorClipChain?: Array<{ nodeId: string; bounds: PackageRect }>;
+    source?: PrimitiveSourceAuthority;
   },
 ): PrimitiveAppearanceV1 {
   const bounds = { ...(options.bounds ?? node.bounds.relative) };
@@ -657,8 +762,8 @@ export function resolvePrimitiveAppearance(
     node.appearance.fills[0]?.type === "SOLID" &&
     node.appearance.fills[1]?.type === "GRADIENT_LINEAR";
   const orderedSolidPaintResults = orderedSolidStackCandidate
-    ? node.appearance.fills.map((paint, sourceIndex) =>
-        resolveOrderedSolidPaint(paint, sourceIndex, options.packageId, node.id),
+      ? node.appearance.fills.map((paint, sourceIndex) =>
+        resolveOrderedSolidPaint(node, paint, sourceIndex, options.packageId, options.source),
       )
     : [];
   const orderedPaintReasons = [...new Set(
@@ -668,7 +773,7 @@ export function resolvePrimitiveAppearance(
   )];
   if (orderedNormalPaintStackCandidate) {
     const solidResult = resolveOrderedSolidPaint(
-      node.appearance.fills[0], 0, options.packageId, node.id,
+      node, node.appearance.fills[0], 0, options.packageId, options.source,
     );
     if (solidResult.reason) orderedPaintReasons.push(solidResult.reason);
     const gradient = paintLayers[1]?.linearGradient;
@@ -774,6 +879,9 @@ export function resolvePrimitiveAppearance(
   const routedOrderedNormalPaintStack = routed && orderedNormalPaintStackCandidate;
   const sourceInput = {
     packageId: options.packageId,
+    ...(options.source?.type === "figma" && options.source.pluginVersion === "0.6.1"
+      ? { nativeSolidAuthoritySource: options.source }
+      : {}),
     nodeId: node.id,
     nodeType: node.type,
     rootNodeId: options.rootNodeId,
@@ -804,6 +912,7 @@ export function resolvePrimitiveAppearance(
   const orderedSolidStack = orderedSolidStackContract(
     node,
     options.packageId,
+    options.source,
     sourceRevision,
     geometryRevision,
     bounds,
@@ -814,6 +923,7 @@ export function resolvePrimitiveAppearance(
   const orderedNormalPaintStack = orderedNormalPaintStackContract(
     node,
     options.packageId,
+    options.source,
     sourceRevision,
     geometryRevision,
     bounds,
@@ -1082,10 +1192,19 @@ export function primitiveTreeRevision(packageValue: TemplatePackageV1): string {
     resolvePrimitiveAppearance(node, {
       packageId: packageValue.packageId,
       rootNodeId: packageValue.rootNodeId,
+      source: packageValue.source,
       hasMaskRelationship: hasPrimitiveMaskRelationship(packageValue, node.id),
       ancestorClipChain: collectPrimitiveAncestorClipChain(packageValue, node),
     }).sourceRevision,
   );
+  return primitiveTreeRevisionFromSourceRevisions(packageValue, nodeRevisions);
+}
+
+/** Construction-local reuse; callers preserve the original source-node order. */
+export function primitiveTreeRevisionFromSourceRevisions(
+  packageValue: TemplatePackageV1,
+  nodeRevisions: readonly string[],
+): string {
   return `primitive-tree-v1:${stableHash({
     packageId: packageValue.packageId,
     rootNodeId: packageValue.rootNodeId,

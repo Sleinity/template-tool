@@ -1,11 +1,7 @@
 import { useEffect, useId, useMemo, useState, type KeyboardEvent } from "react";
 import { Eye, GripVertical, MoreHorizontal, Plus } from "lucide-react";
-import {
-  assignTemplateFamilyVariantOption,
-  getTemplateFamilyControlOrder,
-  setTemplateFamilyControlOrder,
-  type TemplateFamilyV1,
-} from "@sleinity/template-core/family";
+import {type TemplateFamilyV1} from "@sleinity/template-core/family";
+import {assignTemplateFamilyVariantOption, getTemplateFamilyControlOrder, setTemplateFamilyControlOrder} from "../../../../../packages/template-core/test/legacyEntry";
 import {
   Button,
   FilePickerButton,

@@ -20,10 +20,7 @@ import {
   PageWorkspace,
   TemplateThumbnailStage,
 } from "../components/ui";
-import type {
-  SavedOutputDraftRecord,
-  SavedTemplateRecord,
-} from "@sleinity/template-browser/persistence";
+import type {SavedOutputDraftRecord, SavedTemplateRecord} from "../../../../packages/template-browser/test/legacyEntry";
 
 const templateDateFormatter = new Intl.DateTimeFormat("en", {
   day: "numeric",

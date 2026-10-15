@@ -16,9 +16,26 @@ globalThis.__templateToolPortableTests = portableTestMode;
 
 await import("./realistic-zip-fixture.test.mjs");
 await import("./fidelity/fidelity.test.mjs");
+await import("./compositing/source-evidence.test.mjs");
+await import("./compositing/group-control-evidence.test.mjs");
+await import("./fidelity/gate-profile.test.mjs");
+await import("./fidelity/capture-integrity.test.mjs");
+await import("./fidelity/capture-camera.test.mjs");
+await import("./fidelity/output-lifecycle.test.mjs");
 await import("./scene-graph/scene-graph.test.mjs");
 await import("./settlement/settlement.test.mjs");
 await import("./runtime-routing/font-manifest.test.mjs");
+await import("./repository/internal-experiment-boundaries.test.mjs");
+await import("./repository/core-declaration-contract.test.mjs");
+await import("./repository/sdk-061-family-profile.test.mjs");
+await import("./repository/local-sdk-candidate.test.mjs");
+await import("./text-geometry/pairedTimingAnalysis.test.mjs");
+await import("./text-geometry/timingDisposition.test.mjs");
+await import("./text-geometry/packets.test.mjs");
+await import("./text-geometry/workloadCoverage.test.mjs");
+await import("./text-geometry/retained-source-plugin.test.mjs");
+
+await import("./repository/verify-blocked-storage-unit.mjs");
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const outputDirectory = await mkdtemp(

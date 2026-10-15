@@ -1,0 +1,17 @@
+---
+"@sleinity/template-core": major
+"@sleinity/template-browser": major
+"@sleinity/template-react": major
+---
+
+Advance the canonical TemplatePackage and content contract to schema 2.2. Image
+fields now require one `replacementPlacement` policy—Fill, Fit, or Crop—instead
+of an allowed-placement set plus a separate default. Exporter 1.0 input receives
+provenance-preserving normalization and defaults to Fill, while canonical 2.0
+and 2.1 packages require reimport.
+
+Keep imported Figma placement separate from replacement policy, enforce the
+policy across single and Family sessions, use Fill when a Crop-policy host does
+not supply crop data, and restore imported placement on Reset. Add current saved
+session and Family envelopes plus lightweight `Reimport required` Library
+records for incompatible saved work.

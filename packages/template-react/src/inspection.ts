@@ -6,3 +6,5 @@
  */
 export * from "./inspection/analysis";
 export * from "./inspection/quality";
+
+export { TemplateInspectionViewport, type TemplateInspectionViewportProps } from "./render/TemplateInspectionViewport";

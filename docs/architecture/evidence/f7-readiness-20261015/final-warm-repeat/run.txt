@@ -1,0 +1,14 @@
+[f7] family-switch trial=-1 current
+[f7] family-switch trial=-1 before
+[f7] family-switch trial=0 before
+[f7] family-switch trial=0 current
+[f7] family-switch trial=1 current
+[f7] family-switch trial=1 before
+[f7] family-switch trial=2 before
+[f7] family-switch trial=2 current
+[f7] family-switch trial=3 current
+[f7] family-switch trial=3 before
+[f7] family-switch trial=4 before
+[f7] family-switch trial=4 current
+[f7] complete rows=60 warmups=12
+{"mode":"minimal","coverBenefit":["family-switch/1"],"flags":[["family-switch/3","previewMs",[-7.600000023841858,16.200000047683716],[-7.600000023841858,8.700000166893005]],["family-switch/5","readyMs",[-19.800000071525574,16],[-3.799999952316284,3.4000000953674316]],["family-switch/5","previewMs",[-10.100000023841858,30.700000166893005],[-6.3999998569488525,30.700000166893005]]]}

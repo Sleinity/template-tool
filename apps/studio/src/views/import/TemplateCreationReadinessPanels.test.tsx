@@ -1,9 +1,6 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import type {
-  FieldConstraintSummary,
-  TemplateCreationGate,
-} from "@sleinity/template-browser/importer";
+import type {FieldConstraintSummary, TemplateCreationGate} from "../../../../../packages/template-browser/test/legacyImporter";
 import {
   FieldExportReadinessPanel,
   TemplateCreationReadinessPanel,

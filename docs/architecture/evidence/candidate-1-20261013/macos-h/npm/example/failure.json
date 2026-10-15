@@ -1,0 +1,5 @@
+{
+  "error": "Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: No \"exports\" main defined in /private/var/folders/tp/4117k51d4t38t28l1034z3_h0000gn/T/v2-example-packed-2Cjavs/node_modules/@sleinity/template-core/package.json",
+  "rows": [],
+  "detail": null
+}

@@ -1,0 +1,2 @@
+Public V2 exact-font activation, external removal, variant switch, shared session survival and reopen passed.
+

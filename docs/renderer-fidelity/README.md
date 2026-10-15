@@ -1,5 +1,12 @@
 # Renderer Fidelity Programme
 
+Current Carrousel raster disposition: [R07 source review and certification](../architecture/r07-carrousel-raster.md). The intentional 40% initial viewport is recorded as native capture history; only Carrousel/editor's reference changes.
+
+Current host font integration: [ADR 0096](decisions/0096-host-font-registry-is-render-and-export-authority.md) and the [R01 evidence report](../architecture/host-font-authority.md).
+
+Current text lifecycle: [mounted input validity](TEXT_MEASUREMENT_LIFECYCLE.md), [ADR 0093](decisions/0093-mounted-text-input-validity-and-current-publication.md), and [verification report](../architecture/text-geometry-stability.md).
+
+
 Repository and reusable SDK packaging are documented in
 [`../sdk/README.md`](../sdk/README.md). The SDK extraction does not change
 renderer authority or authorize reference updates.
@@ -28,6 +35,7 @@ This directory is the durable operating context for the contract-renderer progra
 | [Scene evidence tooling](SCENE_GRAPH_HARNESS.md) | Fixture snapshots, equivalence, inspection, updates, and performance |
 | [Settlement contract](SETTLEMENT.md) | Measurement, dependency, invalidation, stale work, convergence, and readiness |
 | [Settlement evidence tooling](SETTLEMENT_HARNESS.md) | Observation, scenarios, snapshots, update guards, and commands |
+| [Observational mask settlement](OBSERVATIONAL_MASK_SETTLEMENT.md) | Existing mask authority, range evidence, complete source IDs, and three-export gate closure |
 | [Core layout and text runtime routing](RUNTIME_ROUTING.md) | Milestone 4 property ownership, capability routing, intrinsic measurement, fallback, and export readiness |
 | [Core surface convergence](SURFACE_CONVERGENCE.md) | Milestone 5 live-surface geometry ownership and circular fallback |
 | [Exact font evidence](FONT_EVIDENCE.md) | Hash-gated required identities and browser activation evidence |
@@ -35,6 +43,8 @@ This directory is the durable operating context for the contract-renderer progra
 | [Vertical text trim](VERTICAL_TEXT_TRIM.md) | CAP_HEIGHT source authority, font metrics, semantic boxes, fallback, and evidence |
 | [Appearance contracts](APPEARANCE_CONTRACTS.md) | Versioned appearance projections and backend matrix |
 | [Appearance fixture audit](APPEARANCE_FIXTURES.md) | Real-ZIP evidence, source-level probes, and acquisition backlog |
+| [Phase 9 Matrix/Cover compositing source gate](PHASE_9_COMPOSITING_SOURCE_GATE.md) | Exact 0.6.1 ZIPs, opaque blend samples, stable captures, unresolved group isolation, and Result B |
+| [Phase 9 matched group control](PHASE_9_GROUP_CONTROL_SOURCE_GATE.md) | Exact Matrix 2 and direct Figma paint inspection; bounded pass-through/isolation, opacity-order, and sampled Overlay evidence without runtime transfer |
 | [Image placement authority](IMAGE_PLACEMENT.md) | Source fit/crop authority, coordinate spaces, geometry, sampling, compatibility, and telemetry |
 | [Authoritative CROP fixture intake](CROP_FIXTURE_INTAKE.md) | Current ZIP audit, exact source-fixture specification, resize/replacement evidence, and intake gate |
 | [CROP source evidence](CROP_SOURCE_EVIDENCE.md) | Exact real-ZIP identity, affine coordinate derivation, source comparison, all-surface evidence, and remaining certification boundary |

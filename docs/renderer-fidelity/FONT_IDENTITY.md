@@ -59,3 +59,11 @@ The final now-hiring evidence is under `fidelity/candidates/milestone-5-3-source
 ## Compatibility and open evidence
 
 Older packages without the new resolution fields keep existing fallback behavior. Unknown metadata, ambiguous collection faces, uncovered text-face glyphs, unavailable axes, and corrupt binaries do not acquire exact authority. Device emoji appearance remains platform-dependent and is reported as portability evidence. Cross-browser raster equivalence, OpenType feature settings, source-preview font-version identity, variable-axis instances beyond the current declared weight, rich mixed-face runs, and Inter Tight license provenance remain open.
+
+### Activation cache and current text
+
+Binary activation caching uses face/source identity independently of the current
+text sample. Preparing a new text revision still runs the existing character
+coverage and readiness checks; caching a loaded face does not cache a glyph
+coverage verdict. Removing a face from the FontFaceSet invalidates its activation
+entry. No private-family, semantic matching, or exact-authority requirement changes.

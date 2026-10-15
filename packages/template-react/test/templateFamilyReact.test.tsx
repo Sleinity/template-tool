@@ -2,19 +2,19 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
-import { createTemplateFamilyFromPackage } from "@sleinity/template-core/family";
-import { createTemplateFamilySession } from "@sleinity/template-browser/session";
-import { createTemplateFamilyImportWizard } from "@sleinity/template-browser/importer";
+import {createTemplateFamilyFromPackage} from "../../template-core/test/legacyEntry";
+import {createTemplateFamilySession} from "../../template-browser/test/legacyEntry";
+import {createTemplateFamilyImportWizard} from "../../template-browser/test/legacyImporter";
 import {
   TemplateFamilySessionProvider,
   useTemplateFamilyEditor,
   useTemplateFamilySelection,
   type TemplateFamilyFieldControllerV1,
-} from "../src/familyEditor";
+} from "./legacy/familyEditor";
 import {
   TemplateFamilyImportWizardProvider,
   TemplateFamilyZipInput,
-} from "../src/familyImporter";
+} from "./legacy/familyImporter";
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(message);

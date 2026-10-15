@@ -29,10 +29,17 @@ function png(width, height, color = [0, 0, 0, 255]) {
 }
 
 const manifest = loadManifest();
-assert.equal(manifest.fixtures.length, 19, "Registered fixture manifest should contain nineteen exact fixtures.");
+assert.equal(manifest.fixtures.length, 32, "Registered fixture manifest should retain historical sources and both separate Phase 9 research fixtures.");
 const portableTestMode = globalThis.__templateToolPortableTests === true;
 if (!portableTestMode) {
 for (const fixture of manifest.fixtures) assert.equal(verifyFixture(manifest, fixture).fixture.id, fixture.id, `Fixture hash and metadata should verify for ${fixture.id}.`);
+const threeExportCover = manifest.fixtures.find((fixture) => fixture.id === "exporter-061-cover");
+assert(threeExportCover?.templateJsonSha256, "The active Cover fixture must bind exact template.json bytes.");
+assert.throws(
+  () => verifyFixture(manifest, { ...threeExportCover, templateJsonSha256: "0".repeat(64) }),
+  /template\.json hash mismatch/,
+  "A matching ZIP record must not conceal a mismatched registered template.json hash.",
+);
 const cropFixture = manifest.fixtures.find((fixture) => fixture.id === "deal-of-the-week-banner-crop");
 assert.ok(cropFixture?.cropEvidence, "The real CROP fixture must retain exact source evidence.");
 const cropGeometry = deriveCropGeometry(cropFixture.cropEvidence);
@@ -106,6 +113,43 @@ assert.equal(Object.keys(linearGradientFixture?.linearGradientEvidence?.nodes ??
 const linearGradientVerified = verifyFixture(manifest, linearGradientFixture);
 assert.equal(linearGradientVerified.template.nodes["454:32"].appearance.cornerRadii?.topRight, 170, "Independent-corner gradient evidence must bind the exact source node.");
 assert.equal(linearGradientVerified.template.nodes["451:181"].extensions.figma.rotation < -90, true, "Rotated three-stop evidence must bind the source rotation.");
+
+const exporter061SolidFixture = manifest.fixtures.find((fixture) => fixture.id === "exporter-061-solid-opacity");
+assert.equal(exporter061SolidFixture?.zipSha256, "7e09ef2d2d8dc7eab18584305558bd02ffd3d88945b848b47908060b185a9160", "Exporter-0.6.1 SOLID evidence must bind exact source bytes.");
+const exporter061SolidVerified = verifyFixture(manifest, exporter061SolidFixture);
+assert.equal(exporter061SolidVerified.template.source?.pluginVersion, "0.6.1", "Native canonical SOLID evidence must bind the producer version from template.json.");
+assert.equal(Object.values(exporter061SolidVerified.template.nodes).flatMap((node) => node.appearance?.fills ?? []).filter((paint) => paint.type === "SOLID").every((paint) => paint.color.a === 1), true, "Exporter-0.6.1 SOLID evidence must retain canonical color alpha 1.");
+
+const booleanFixture = manifest.fixtures.find((fixture) => fixture.id === "field-rules-boolean-structural-visibility");
+assert.equal(booleanFixture?.zipSha256, "47a109f442348043a6c295b4072d38bdbffa658b80846b528dd64a552a79b6ac", "Boolean structural fixture must bind the exact supplied ZIP bytes.");
+assert.equal(booleanFixture?.status, "authoritative", "Boolean structural fixture must retain source-certified status.");
+const booleanVerified = verifyFixture(manifest, booleanFixture);
+assert.equal(booleanVerified.template.source?.pluginVersion, "0.6.1", "Boolean structural evidence must bind exporter 0.6.1.");
+assert.deepEqual(
+  booleanVerified.template.editableFields.filter((field) => field.type === "boolean").map((field) => [field.id, field.nodeId, field.property, field.defaultValue]),
+  [["showEnddate", "859:48", "visible", true], ["showHeadline", "859:35", "visible", true]],
+  "The exact source ZIP must retain both Boolean structural bindings.",
+);
+assert.equal(booleanVerified.template.nodes["859:30"].layout.mode, "VERTICAL", "Headline evidence must retain the vertical parent.");
+assert.equal(booleanVerified.template.nodes["859:30"].sizing.vertical.mode, "HUG", "Headline evidence must retain the source HUG parent.");
+assert.deepEqual(booleanVerified.template.nodes["859:30"].children, ["859:31", "859:35"], "Headline evidence must retain source participant order.");
+assert.equal(booleanVerified.template.nodes["859:32"].layout.primaryAlignment, "SPACE_BETWEEN", "End-date evidence must retain source SPACE_BETWEEN alignment.");
+assert.equal(booleanVerified.template.nodes["859:32"].sizing.vertical.mode, "FIXED", "End-date evidence must retain its fixed row.");
+assert.deepEqual(booleanVerified.template.nodes["859:32"].children, ["859:33", "859:48"], "End-date evidence must retain source participant order.");
+
+const exporter061MixedFixture = manifest.fixtures.find((fixture) => fixture.id === "exporter-061-linear-and-mixed-paints");
+assert.equal(exporter061MixedFixture?.zipSha256, "e55ae505921d0026d9508168dba46f2c53ddf74381a120f16a0b90429d61fe8b", "Exporter-0.6.1 mixed-paint evidence must bind exact corrected source bytes.");
+const exporter061MixedVerified = verifyFixture(manifest, exporter061MixedFixture);
+assert.deepEqual(exporter061MixedFixture?.orderedNormalPaintEvidence?.nodeIds, ["811:459", "811:460"], "The corrected fixture must identify both bounded mixed nodes.");
+assert.equal(exporter061MixedVerified.template.source?.pluginVersion, "0.6.1", "Mixed-paint capability admission must use template.json producer identity.");
+
+const exporter061DealFixture = manifest.fixtures.find((fixture) => fixture.id === "exporter-061-deal-of-the-week-post");
+assert.equal(exporter061DealFixture?.zipSha256, "dc2ba9c89fb588c30b4f175dd988f9a9f9400ea216cce40864c3c234b7d32e28", "The current exporter-0.6.1 Deal package must bind exact supplied bytes.");
+const exporter061DealVerified = verifyFixture(manifest, exporter061DealFixture);
+assert.equal(exporter061DealVerified.template.source?.pluginVersion, "0.6.1", "The Deal package must derive producer identity from template.json.");
+assert.equal(exporter061DealVerified.template.fontRequirements?.length, 1, "The Deal package must retain its explicit source font requirement.");
+assert.equal(Object.values(exporter061DealVerified.template.nodes).reduce((count, node) => count + (node.text?.styleRanges?.length ?? 0), 0), 4, "The Deal package must retain four canonical style ranges.");
+assert.equal(Object.values(exporter061DealVerified.template.nodes).filter((node) => Array.isArray(node.extensions?.figma?.textStyleSegments)).length, 4, "The Deal package must retain four rich Figma segment records as provenance.");
 
 const paintOpacityFixture = manifest.fixtures.find((fixture) => fixture.id === "gradient-test-paint-opacity");
 assert.equal(paintOpacityFixture?.zipSha256, "9da63d95f3a6b661a0c4818908abc39735e63a9b8cdf00e8aa42c243813a0ad3", "Paint-opacity fixture must bind the exact final source-gate ZIP bytes.");
@@ -211,6 +255,16 @@ const repeatability = createRepeatabilityReport([
 ]);
 assert.equal(repeatability.stable, true, "Repeatability report should classify stable geometry, pixels, and fonts.");
 assert.equal(repeatability.comparisons[0].timingVariationMs.captureMs, 1, "Repeatability report should retain timing variation.");
+const reorderedFonts = createRepeatabilityReport([
+  { structure: baseStructure, fontReadiness: { status: "loaded", fonts: [{ family: "A", status: "loaded" }, { family: "B", status: "loaded" }] } },
+  { structure: structuredClone(baseStructure), fontReadiness: { status: "loaded", fonts: [{ family: "B", status: "loaded" }, { family: "A", status: "loaded" }] }, pixelRepeat: { equal: true } },
+]);
+assert.equal(reorderedFonts.stable, true, "FontFaceSet iteration order does not change font readiness identity.");
+const missingFont = createRepeatabilityReport([
+  { structure: baseStructure, fontReadiness: { status: "loaded", fonts: [{ family: "A", status: "loaded" }, { family: "B", status: "loaded" }] } },
+  { structure: structuredClone(baseStructure), fontReadiness: { status: "loaded", fonts: [{ family: "A", status: "loaded" }] }, pixelRepeat: { equal: true } },
+]);
+assert.equal(missingFont.stable, false, "Missing exact faces still fail font repeatability.");
 
 const environment = environmentMetadata({ name: "test-browser", version: "1", loadedFonts: [] });
 assert.equal(environment.gitCommit, null, "Environment metadata must not fabricate Git metadata.");

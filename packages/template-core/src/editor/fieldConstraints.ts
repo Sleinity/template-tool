@@ -90,7 +90,7 @@ function currentFieldValue(
 }
 
 function label(field: EditableFieldBinding): string {
-  return field.label?.trim() || field.id;
+  return field.label?.trim() || field.id.replace(/^[^:]+:/u, "");
 }
 
 function lines(value: string): string[] {

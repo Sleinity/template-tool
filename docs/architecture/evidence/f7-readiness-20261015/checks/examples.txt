@@ -1,0 +1,47 @@
+$ pnpm --filter './examples/*' build
+Scope: 3 of 8 workspace projects
+examples/minimal-renderer build$ tsc -b && vite build
+examples/template-editor-integration build$ tsc -b && vite build
+examples/template-family-integration build$ tsc -b && vite build
+examples/minimal-renderer build: vite v6.4.3 building for production...
+examples/minimal-renderer build: transforming...
+examples/template-family-integration build: vite v6.4.3 building for production...
+examples/template-family-integration build: transforming...
+examples/minimal-renderer build: ✓ 252 modules transformed.
+examples/template-editor-integration build: vite v6.4.3 building for production...
+examples/template-editor-integration build: transforming...
+examples/template-family-integration build: ✓ 252 modules transformed.
+examples/minimal-renderer build: rendering chunks...
+examples/minimal-renderer build: computing gzip size...
+examples/minimal-renderer build: dist/index.html                   0.41 kB │ gzip:   0.28 kB
+examples/minimal-renderer build: dist/assets/index-BjkufI0e.css    6.17 kB │ gzip:   1.84 kB
+examples/minimal-renderer build: dist/assets/index-DRWQRY_-.js   932.97 kB │ gzip: 270.91 kB
+examples/minimal-renderer build: (!) Some chunks are larger than 500 kB after minification. Consider:
+examples/minimal-renderer build: - Using dynamic import() to code-split the application
+examples/minimal-renderer build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+examples/minimal-renderer build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+examples/minimal-renderer build: ✓ built in 1.55s
+examples/minimal-renderer build: Done
+examples/template-family-integration build: rendering chunks...
+examples/template-family-integration build: computing gzip size...
+examples/template-family-integration build: dist/index.html                   0.41 kB │ gzip:   0.28 kB
+examples/template-family-integration build: dist/assets/index-BjkufI0e.css    6.17 kB │ gzip:   1.84 kB
+examples/template-family-integration build: dist/assets/index-DRWQRY_-.js   932.97 kB │ gzip: 270.91 kB
+examples/template-family-integration build: ✓ built in 1.53s
+examples/template-family-integration build: (!) Some chunks are larger than 500 kB after minification. Consider:
+examples/template-family-integration build: - Using dynamic import() to code-split the application
+examples/template-family-integration build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+examples/template-family-integration build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+examples/template-family-integration build: Done
+examples/template-editor-integration build: ✓ 252 modules transformed.
+examples/template-editor-integration build: rendering chunks...
+examples/template-editor-integration build: computing gzip size...
+examples/template-editor-integration build: dist/index.html                   0.42 kB │ gzip:   0.28 kB
+examples/template-editor-integration build: dist/assets/index-BjkufI0e.css    6.17 kB │ gzip:   1.84 kB
+examples/template-editor-integration build: dist/assets/index-DRWQRY_-.js   932.97 kB │ gzip: 270.91 kB
+examples/template-editor-integration build: ✓ built in 1.36s
+examples/template-editor-integration build: (!) Some chunks are larger than 500 kB after minification. Consider:
+examples/template-editor-integration build: - Using dynamic import() to code-split the application
+examples/template-editor-integration build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+examples/template-editor-integration build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+examples/template-editor-integration build: Done

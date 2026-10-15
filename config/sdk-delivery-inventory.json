@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "sdk-delivery-inventory-v1",
+  "targetRelease": "1.0.0",
+  "documents": [
+    {
+      "source": "docs/sdk/V2_INTEGRATION.md",
+      "file": "SDK-V2-INTEGRATION.md",
+      "classification": "current",
+      "transform": "context"
+    },
+    {
+      "source": "docs/sdk/HOST_LIFECYCLE.md",
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/OPERATION_OUTCOMES.md",
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/SDK_1_0_RELEASE_NOTES.md",
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/SDK_1_0_MIGRATION.md",
+      "file": "SDK-1.0-MIGRATION.md",
+      "classification": "upcoming"
+    },
+    {
+      "source": "docs/sdk/INSTALLATION.md",
+      "file": "SDK-INSTALLATION.md",
+      "classification": "current",
+      "transform": "installation"
+    },
+    {
+      "source": "docs/sdk/SDK_CAPABILITIES.md",
+      "file": "SDK-CAPABILITIES.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/AGENT_INTEGRATION_PROMPTS.md",
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/RELEASE_PREPARATION.md",
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/README.md",
+      "file": "SDK-README.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/CORE_IMPORTER_HANDOFF.md",
+      "file": "SDK-CORE-HANDOFF.md",
+      "classification": "current",
+      "transform": "core"
+    },
+    {
+      "source": "docs/sdk/RUNTIME_HANDOFF.md",
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "classification": "current",
+      "transform": "runtime"
+    },
+    {
+      "source": "docs/sdk/TEMPLATE_IMPORT_WIZARD.md",
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/CONSUMER_COMPATIBILITY.md",
+      "file": "CONSUMER-COMPATIBILITY.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/TROUBLESHOOTING.md",
+      "file": "SDK-TROUBLESHOOTING.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/STUDIO_REFERENCE.md",
+      "file": "STUDIO-REFERENCE.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/GITHUB_SETUP.md",
+      "file": "GITHUB-SETUP.md",
+      "classification": "publication-preparation"
+    },
+    {
+      "source": "docs/field-rules/BROWSER_SESSION.md",
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/field-rules/STUDIO_AND_HOSTS.md",
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "classification": "current"
+    },
+    {
+      "source": "docs/architecture/template-recovery.md",
+      "file": "TEMPLATE-RECOVERY.md",
+      "classification": "current"
+    },
+    {
+      "source": "examples/template-editor-integration/README.md",
+      "file": "V2-EXAMPLE.md",
+      "classification": "current",
+      "transform": "example-readme"
+    },
+    {
+      "source": "examples/template-editor-integration/src/FieldRulesV2Host.tsx",
+      "file": "FieldRulesV2Host.tsx",
+      "classification": "current",
+      "transform": "example-source"
+    },
+    {
+      "source": "examples/template-editor-integration/src/fieldHostLifecycle.ts",
+      "file": "fieldHostLifecycle.ts",
+      "classification": "current",
+      "transform": "example-source"
+    },
+    {
+      "source": "examples/minimal-renderer/README.md",
+      "file": "MINIMAL-RENDERER-V2.md",
+      "classification": "current"
+    },
+    {
+      "source": "examples/template-family-integration/README.md",
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "classification": "current"
+    },
+    {
+      "source": "config/sdk-entry-points.json",
+      "file": "sdk-entry-points.json",
+      "classification": "current"
+    },
+    {
+      "source": "config/sdk-public-api.json",
+      "file": "sdk-public-api.json",
+      "classification": "current"
+    },
+    {
+      "source": "docs/sdk/SDK_0_8_MIGRATION.md",
+      "file": "SDK-0.8-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_7_MIGRATION.md",
+      "file": "SDK-0.7-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_6_MIGRATION.md",
+      "file": "SDK-0.6-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_5_MIGRATION.md",
+      "file": "SDK-0.5-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_4_2_MIGRATION.md",
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_4_1_MIGRATION.md",
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_4_MIGRATION.md",
+      "file": "SDK-0.4-MIGRATION.md",
+      "classification": "historical"
+    },
+    {
+      "source": "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md",
+      "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "classification": "historical"
+    }
+  ],
+  "generatedFiles": [
+    "SHA256SUMS",
+    "CORE-SHA256SUMS",
+    "SDK-DELIVERY-MANIFEST.json"
+  ],
+  "localGeneratedFiles": [
+    "LOCAL-RELEASE-VERIFICATION.md"
+  ]
+}

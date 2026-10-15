@@ -12,6 +12,7 @@ export interface FieldRuleCardStatus {
 
 export function FieldRuleCardShell({
   fieldId,
+  identity,
   title,
   summary,
   typeLabel,
@@ -31,6 +32,7 @@ export function FieldRuleCardShell({
   dropBefore = false,
 }: {
   fieldId: string;
+  identity?: string;
   title: string;
   summary: string;
   typeLabel: string;
@@ -42,8 +44,8 @@ export function FieldRuleCardShell({
   onSelect: () => void;
   content?: ReactNode;
   reorderLabel?: string;
-  onDragStart?: DragEventHandler<HTMLButtonElement>;
-  onDragEnd?: DragEventHandler<HTMLButtonElement>;
+  onDragStart?: DragEventHandler<HTMLElement>;
+  onDragEnd?: DragEventHandler<HTMLElement>;
   reorderActions?: ReactNode;
   onDragOver?: DragEventHandler<HTMLElement>;
   onDrop?: DragEventHandler<HTMLElement>;
@@ -52,16 +54,14 @@ export function FieldRuleCardShell({
   const summaryContent = (
     <>
       <span className="min-w-0 text-left">
-        <span className="block truncate font-medium">{title}</span>
+        <span className="block truncate font-medium" title={typeof title === "string" ? title : undefined}>{title}</span>
         <span className="mt-1 block text-xs font-normal text-content-muted">{summary}</span>
       </span>
       <span className="field-rule-card__summary-meta">
         {statuses.map((status) => (
-          <Status key={`${status.tone}:${status.label}`} tone={status.tone}>
-            {status.label}
-          </Status>
+          status.tone === "neutral" ? <span key={`${status.tone}:${status.label}`} className="field-rule-card__metadata">{status.label}</span> : <Status key={`${status.tone}:${status.label}`} tone={status.tone}>{status.label}</Status>
         ))}
-        <Status tone="neutral" className="field-rule-card__type">{typeLabel}</Status>
+        <span className="field-rule-card__type">{typeLabel}</span>
         {configurable ? <ChevronDown className="field-rule-card__chevron" aria-hidden="true" size={18} /> : null}
       </span>
     </>
@@ -70,30 +70,35 @@ export function FieldRuleCardShell({
     <article
       role="listitem"
       className="field-rule-card"
+      data-field-id={fieldId}
       data-selected={selected || undefined}
       data-expanded={expanded || undefined}
       data-drop-before={dropBefore || undefined}
+      data-field-reorder-key={reorderLabel ? fieldId : undefined}
+      tabIndex={reorderLabel ? -1 : undefined}
+      draggable={Boolean(reorderLabel)}
+      aria-label={reorderLabel}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
       onDragOver={onDragOver}
       onDrop={onDrop}
     >
       <div className="field-rule-card__summary">
         {reorderLabel ? (
-          <button
-            type="button"
+          <span
             className="field-rule-card__drag-handle"
-            draggable
-            data-field-reorder-key={fieldId}
-            aria-label={reorderLabel}
-            onDragStart={onDragStart}
-            onDragEnd={onDragEnd}
+            aria-hidden="true"
           >
             <GripVertical aria-hidden="true" size={18} />
-          </button>
+          </span>
         ) : <span className="field-rule-card__summary-spacer" />}
         {selectable ? (
           <button
             type="button"
             className="field-rule-card__select"
+            aria-label={title}
+            aria-description={`${identity ?? fieldId}. ${typeLabel}. ${summary}`}
+            title={typeof title === "string" ? `${title} · ${identity ?? fieldId}` : identity ?? fieldId}
             aria-expanded={configurable ? expanded : undefined}
             aria-controls={configurable ? `field-rules-${fieldId}` : undefined}
             aria-pressed={selected}
@@ -107,7 +112,7 @@ export function FieldRuleCardShell({
         <div className="field-rule-card__reorder-actions">{reorderActions}</div>
       </div>
       {expanded && configurable ? (
-        <div id={`field-rules-${fieldId}`} className="field-rule-card__content space-y-4">
+        <div id={`field-rules-${fieldId}`} className="field-rule-card__content space-y-4" role="region" aria-label={`Configure ${typeof title === "string" ? title : fieldId}`}>
           {content}
         </div>
       ) : null}

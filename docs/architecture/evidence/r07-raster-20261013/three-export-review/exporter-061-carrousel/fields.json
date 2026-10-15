@@ -1,0 +1,80 @@
+{
+  "capture": {
+    "approved": "fidelity/references/approved/exporter-061-carrousel/fields/reference.png",
+    "approvedStructure": "fidelity/references/approved/exporter-061-carrousel/fields/structure.json",
+    "candidate": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/fields/capture-1.png",
+    "currentStructure": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/fields/structure-1.json",
+    "failureArtifacts": "fidelity/artifacts/sdk-061-r07-review-20261013a/exporter-061-carrousel/fields",
+    "geometry": {
+      "equal": true,
+      "extraNodes": [],
+      "geometryChanges": [],
+      "imagePlacementChanges": [],
+      "missingNodes": [],
+      "reorderedNodes": [],
+      "textGeometryChanges": [],
+      "textMeasurementChanges": [],
+      "tolerances": {
+        "height": 0.25,
+        "image": 0.25,
+        "text": 0.5,
+        "transform": 0.001,
+        "width": 0.25,
+        "x": 0.25,
+        "y": 0.25
+      }
+    },
+    "kind": "approved-match",
+    "nextAction": "Retain approved reference",
+    "pixel": {
+      "actualDimensions": {
+        "height": 221,
+        "width": 392
+      },
+      "allowedChangedPixelPercentage": 0,
+      "changedPixelCount": 0,
+      "changedPixelPercentage": 0,
+      "differenceBounds": null,
+      "dimensionsEqual": true,
+      "equal": true,
+      "exact": true,
+      "expectedDimensions": {
+        "height": 221,
+        "width": 392
+      },
+      "largeRegions": [],
+      "threshold": 0.1
+    },
+    "sourceComparison": null,
+    "status": "pass"
+  },
+  "environment": "fidelity/candidates/sdk-061-r07-review-20261013a/environment.json",
+  "fixtureId": "exporter-061-carrousel",
+  "scene": {
+    "approved": "fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/scene.json",
+    "changeCount": 0,
+    "changes": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/scene-changes.json",
+    "current": "fidelity/scene-graph/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/scene.json",
+    "status": "pass"
+  },
+  "settlement": {
+    "differingFiles": [],
+    "sourceFidelityRun": "sdk-061-r07-review-20261013a",
+    "unapprovedFiles": []
+  },
+  "source": {
+    "byteSize": 2301611,
+    "canvas": {
+      "height": 1080,
+      "width": 1920
+    },
+    "filename": "template-package-carrousel-v0.6.1.zip",
+    "packageNodes": 26,
+    "packageVersion": "1.0",
+    "preview": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/source-preview.png",
+    "previewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+    "rootNodeId": "987:6810",
+    "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+  },
+  "surface": "fields"
+}

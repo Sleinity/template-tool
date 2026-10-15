@@ -1,0 +1,62 @@
+[
+  {
+    "label": "portable",
+    "command": "pnpm test:portable",
+    "started": "2026-10-13T12:02:59.737Z",
+    "durationMs": 26978,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/portable.log",
+    "logSha256": "51b94cb25fadf8a7806888b6a6283e0dc51f3d58040a445b4b4eb1ec6b38b94d"
+  },
+  {
+    "label": "typescript",
+    "command": "pnpm exec tsc -b --pretty false",
+    "started": "2026-10-13T12:03:26.719Z",
+    "durationMs": 7016,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/typescript.log",
+    "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "studio-build",
+    "command": "pnpm --filter @sleinity/template-studio build",
+    "started": "2026-10-13T12:03:33.735Z",
+    "durationMs": 9968,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/studio-build.log",
+    "logSha256": "88c24b9a94961cc21658fcf7c9ed375ddcf6f33ee9753ef6013ab8d940d7fd84"
+  },
+  {
+    "label": "sdk",
+    "command": "pnpm sdk:verify",
+    "started": "2026-10-13T12:07:00.827Z",
+    "durationMs": 133938,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/sdk.log",
+    "logSha256": "73837d4f4a9a09d8e69b1ec74991a5cc6135514c9d5ab2d6ee745f497ed02103"
+  },
+  {
+    "label": "examples",
+    "command": "pnpm example:build",
+    "started": "2026-10-13T12:09:14.767Z",
+    "durationMs": 4158,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/examples.log",
+    "logSha256": "9b32420584cfd4e44a752bc14232a61c8e9ed098999fd2c11affa618cc37005a"
+  },
+  {
+    "label": "documentation",
+    "command": "pnpm docs:verify",
+    "started": "2026-10-13T12:13:05.683Z",
+    "durationMs": 473,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/documentation.log",
+    "logSha256": "694193b988f6e9b01beec82166e3f8c4a203f7004eabfdbcc31926a4dc2bede4"
+  }
+]

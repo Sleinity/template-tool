@@ -32,3 +32,5 @@ export type {
   BundleAssetManifestEntry,
   TemplateAssetBridge,
 } from "../../../template-core/src/bundle/assetRegistry";
+
+export { packageWithEffectiveEditableFields } from "../../../template-core/src/editor/packageFieldBindings";

@@ -1,3 +1,4 @@
+import { historicalCoreDeclarationContract, workspaceCoreDeclarationContracts } from "./core-declaration-contract.mjs";
 import {
   copyFile,
   mkdir,
@@ -212,17 +213,17 @@ try {
     path.join(consumerDirectory, "src/main.tsx"),
     `import { useState, type ChangeEvent } from "react";
 import { createRoot } from "react-dom/client";
-import { importTemplatePackage } from "@sleinity/template-core";
+import { createZipBundleReader, loadTemplatePackageBundleSource } from "@sleinity/template-core";
 
 function App() {
   const [summary, setSummary] = useState("Choose a TemplatePackage ZIP");
   async function onFile(event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
     if (!file) return;
-    const result = importTemplatePackage(await file.arrayBuffer(), file.name);
-    setSummary(result.importable && result.workingPackage
-      ? \`Imported \${result.workingPackage.name}\`
-      : \`Rejected with \${result.source.diagnostics.length} source diagnostics\`);
+    const result = loadTemplatePackageBundleSource(createZipBundleReader(await file.arrayBuffer(), { sourceName: file.name }));
+    setSummary(result.valid && result.packageValue
+      ? \`Imported \${result.packageValue.name}\`
+      : \`Rejected with \${result.diagnostics.length} source diagnostics\`);
   }
   return <main><input type="file" accept=".zip,application/zip" onChange={onFile} /><p>{summary}</p></main>;
 }
@@ -233,16 +234,16 @@ createRoot(document.getElementById("root")!).render(<App />);
   await writeFile(
     path.join(consumerDirectory, "verify.mjs"),
     `import { readFile } from "node:fs/promises";
-import { importTemplatePackage } from "@sleinity/template-core";
+import { createZipBundleReader, loadTemplatePackageBundleSource } from "@sleinity/template-core";
 
 const bytes = await readFile(new URL("./template.zip", import.meta.url));
 const arrayBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-const imported = importTemplatePackage(arrayBuffer, "release-consumer.zip");
-if (!imported.importable || !imported.workingPackage || !imported.basePackage) {
+const imported = loadTemplatePackageBundleSource(createZipBundleReader(arrayBuffer, { sourceName: "release-consumer.zip" }));
+if (!imported.valid || !imported.packageValue) {
   throw new Error("The released importer rejected the canonical ZIP.");
 }
-const invalid = importTemplatePackage(new Uint8Array([0, 1, 2, 3]).buffer, "invalid.zip");
-if (invalid.importable || invalid.source.valid || invalid.source.diagnostics.length === 0) {
+const invalid = loadTemplatePackageBundleSource(createZipBundleReader(new Uint8Array([0, 1, 2, 3]).buffer, { sourceName: "invalid.zip" }));
+if (invalid.valid || invalid.diagnostics.length === 0) {
   throw new Error("The released importer did not return structured invalid-ZIP diagnostics.");
 }
 `,
@@ -308,9 +309,8 @@ if (invalid.importable || invalid.source.valid || invalid.source.diagnostics.len
     .update(declaration)
     .digest("hex");
   if (
-    declaration.byteLength !== 87_431 ||
-    declarationHash !==
-      "7aeba90568921568baa477bec68dcab378d6c0413903c058fc332f9e48624033"
+    declaration.byteLength !== (version === "1.0.0" ? workspaceCoreDeclarationContracts[version] : historicalCoreDeclarationContract).bytes ||
+    declarationHash !== (version === "1.0.0" ? workspaceCoreDeclarationContracts[version] : historicalCoreDeclarationContract).sha256
   ) {
     throw new Error(
       `Released core declaration drifted: ${declaration.byteLength} bytes / ${declarationHash}.`,

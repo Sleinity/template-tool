@@ -1,0 +1,266 @@
+{
+  "environmentSha256": "044203c7717de0892115f3b779010ce53c67ecd307b3111a421a32868a19c12a",
+  "fixtures": [
+    {
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+      "id": "exporter-061-now-hiring",
+      "scene": {
+        "cause": "Source-indexed observational scene matches the exact ZIP and approved snapshot; mask.range remains an explicit non-authoritative migration blocker.",
+        "comparison": "pass",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-now-hiring --run-id <new-unique-run-id>",
+        "reviewerRationale": "Source IDs, node order, paints, bindings and provenance were reviewed. Scene equivalence reports no missing source properties and preserves mask.range as a migration blocker rather than claiming runtime authority.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The editor bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The fields bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The png-export bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The validate bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-now-hiring/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The HUG text width now follows the ZIP geometry within 0.5 px; exact font and asset bytes are loaded. Residual changed pixels are font/image raster edges. Stored PNG and all four captured surfaces were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 340 changed pixels (0.0252%) under the recorded source-preview comparator; editor is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-now-hiring/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The HUG text width now follows the ZIP geometry within 0.5 px; exact font and asset bytes are loaded. Residual changed pixels are font/image raster edges. Stored PNG and all four captured surfaces were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 340 changed pixels (0.0252%) under the recorded source-preview comparator; fields is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-now-hiring/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The HUG text width now follows the ZIP geometry within 0.5 px; exact font and asset bytes are loaded. Residual changed pixels are font/image raster edges. Stored PNG and all four captured surfaces were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 340 changed pixels (0.0252%) under the recorded source-preview comparator; png-export is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-now-hiring/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The HUG text width now follows the ZIP geometry within 0.5 px; exact font and asset bytes are loaded. Residual changed pixels are font/image raster edges. Stored PNG and all four captured surfaces were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 340 changed pixels (0.0252%) under the recorded source-preview comparator; validate is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    {
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+      "id": "exporter-061-cover",
+      "scene": {
+        "cause": "Source-indexed observational scene matches the exact ZIP and approved snapshot; mask.range remains an explicit non-authoritative migration blocker.",
+        "comparison": "pass",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-cover --run-id <new-unique-run-id>",
+        "reviewerRationale": "Source IDs, node order, paints, bindings and provenance were reviewed. Scene equivalence reports no missing source properties and preserves mask.range as a migration blocker rather than claiming runtime authority.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The editor bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The fields bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The png-export bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "cause": "Exact-run observational settlement is stable, ready and approved through guarded update.",
+          "comparison": "pass",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "The validate bundle was bound to the same sdk-061-three-review-final-20261007a fidelity capture and reviewed as an observational regression snapshot, without claiming full scene runtime authority.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-cover/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The source-ordered SOLID, FILL image, DARKEN gradient fade and complete SVG arrow have one visual owner each. Source-sized PNG and live Studio editor both show the hand fading into the footer; remaining differences follow text/photo raster edges. The source-sized PNG has 2830 changed pixels (0.1941%) under the recorded source-preview comparator; editor is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "3e24815d1e50b315d3ea9e34c5fe96333b3aa607e76caf21da86f696832ecb61",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-cover/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The source-ordered SOLID, FILL image, DARKEN gradient fade and complete SVG arrow have one visual owner each. Source-sized PNG and live Studio editor both show the hand fading into the footer; remaining differences follow text/photo raster edges. The source-sized PNG has 2830 changed pixels (0.1941%) under the recorded source-preview comparator; fields is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-cover/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The source-ordered SOLID, FILL image, DARKEN gradient fade and complete SVG arrow have one visual owner each. Source-sized PNG and live Studio editor both show the hand fading into the footer; remaining differences follow text/photo raster edges. The source-sized PNG has 2830 changed pixels (0.1941%) under the recorded source-preview comparator; png-export is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-cover/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The source-ordered SOLID, FILL image, DARKEN gradient fade and complete SVG arrow have one visual owner each. Source-sized PNG and live Studio editor both show the hand fading into the footer; remaining differences follow text/photo raster edges. The source-sized PNG has 2830 changed pixels (0.1941%) under the recorded source-preview comparator; validate is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    {
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+      "id": "exporter-061-carrousel",
+      "scene": {
+        "cause": "Source-indexed observational scene matches the exact ZIP and approved snapshot; mask.range remains an explicit non-authoritative migration blocker.",
+        "comparison": "pass",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-carrousel --run-id <new-unique-run-id>",
+        "reviewerRationale": "Source IDs, node order, paints, bindings and provenance were reviewed. Scene equivalence reports no missing source properties and preserves mask.range as a migration blocker rather than claiming runtime authority.",
+        "sourceReview": "reviewed-source-faithful"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Node 987:6813 has an unresolved mask-range dependency; observational settlement remains pending-measurements on every surface. No reference promoted.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "Two-pass capture is stable, but source mask-range semantics are not represented by the observational settlement contract. Promoting pending readiness would misstate support; this requires a separate mask-range architecture decision.",
+          "sourceReview": "blocked-unresolved-mask-range"
+        },
+        "fields": {
+          "cause": "Node 987:6813 has an unresolved mask-range dependency; observational settlement remains pending-measurements on every surface. No reference promoted.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "Two-pass capture is stable, but source mask-range semantics are not represented by the observational settlement contract. Promoting pending readiness would misstate support; this requires a separate mask-range architecture decision.",
+          "sourceReview": "blocked-unresolved-mask-range"
+        },
+        "png-export": {
+          "cause": "Node 987:6813 has an unresolved mask-range dependency; observational settlement remains pending-measurements on every surface. No reference promoted.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "Two-pass capture is stable, but source mask-range semantics are not represented by the observational settlement contract. Promoting pending readiness would misstate support; this requires a separate mask-range architecture decision.",
+          "sourceReview": "blocked-unresolved-mask-range"
+        },
+        "validate": {
+          "cause": "Node 987:6813 has an unresolved mask-range dependency; observational settlement remains pending-measurements on every surface. No reference promoted.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-three-review-final-20261007a --run-id <new-unique-run-id>",
+          "reviewerRationale": "Two-pass capture is stable, but source mask-range semantics are not represented by the observational settlement contract. Promoting pending readiness would misstate support; this requires a separate mask-range architecture decision.",
+          "sourceReview": "blocked-unresolved-mask-range"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "efa8b3b84c7730ae2b18f3e63c09926c6849b36baf0a539d78ab73a1d774e9db",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-carrousel/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "Source geometry, CROP placement and exact fonts match the ZIP. The background Color field was verified against exact numeric template.json paint values through edit, Reset and export, not against PNG pixels. Stored captures were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 1817 changed pixels (0.0876%) under the recorded source-preview comparator; editor is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "fields": {
+          "candidatePngSha256": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-carrousel/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "Source geometry, CROP placement and exact fonts match the ZIP. The background Color field was verified against exact numeric template.json paint values through edit, Reset and export, not against PNG pixels. Stored captures were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 1817 changed pixels (0.0876%) under the recorded source-preview comparator; fields is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "png-export": {
+          "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-carrousel/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "Source geometry, CROP placement and exact fonts match the ZIP. The background Color field was verified against exact numeric template.json paint values through edit, Reset and export, not against PNG pixels. Stored captures were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 1817 changed pixels (0.0876%) under the recorded source-preview comparator; png-export is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "validate": {
+          "candidatePngSha256": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+          "capture": "complete-stable",
+          "cause": "Source-reviewed candidate approved through guarded renderer update; residual source-preview differences are rasterization, not a changed source property.",
+          "comparison": "pass",
+          "evidence": "fidelity/candidates/sdk-061-three-review-final-20261007a/exporter-061-carrousel/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "Source geometry, CROP placement and exact fonts match the ZIP. The background Color field was verified against exact numeric template.json paint values through edit, Reset and export, not against PNG pixels. Stored captures were inspected; a separate live Studio check was not performed for this fixture. The source-sized PNG has 1817 changed pixels (0.0876%) under the recorded source-preview comparator; validate is individually captured and repeat-stable. Approval evidence is under fidelity/update-evidence/2026-10-07T15-4*.",
+          "sourceReview": "reviewed-source-faithful"
+        }
+      },
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    }
+  ],
+  "gate": "sdk-061",
+  "regenerate": "node scripts/fidelity/sdk-gate.mjs --run-id <new-unique-run-id>",
+  "runId": "sdk-061-three-review-final-20261007a",
+  "schemaVersion": "sdk-061-dispositions-v1",
+  "supersededBy": "sdk-061-mask-settlement-final-20261007a",
+  "supersessionReason": "ADR 0092 closes the bounded observational mask settlement gap with source/resolver/browser evidence; current exact fixtures and renderer references remain unchanged."
+}

@@ -337,6 +337,17 @@ function accessors(
 export function loadTemplatePackageBundleSource(
   reader: ZipBundleReader,
 ): LoadedTemplatePackageSource {
+  return loadBundleSource(reader, true);
+}
+
+/** Historical fixture adapter only; never exported by a supported SDK entry. */
+export function loadHistoricalTemplatePackageBundleSource(
+  reader: ZipBundleReader,
+): LoadedTemplatePackageSource {
+  return loadBundleSource(reader, false);
+}
+
+function loadBundleSource(reader: ZipBundleReader, requireCurrentExporter: boolean): LoadedTemplatePackageSource {
   const diagnostics: TemplatePackageBundleDiagnostic[] = [...reader.bundle.diagnostics];
   const sourceName = reader.bundle.sourceName ?? "template-package.zip";
 
@@ -348,6 +359,21 @@ export function loadTemplatePackageBundleSource(
     "package",
   );
   diagnostics.push(...template.diagnostics);
+
+  const rawSource = isRecord(template.value) && isRecord(template.value.source) ? template.value.source : null;
+  const sourceAdmitted = !requireCurrentExporter || (isRecord(template.value) &&
+    template.value.schemaVersion === "1.0" && rawSource?.pluginVersion === "0.6.1");
+  if (!sourceAdmitted) {
+    diagnostics.push(diagnostic(
+      "SOURCE_EXPORTER_VERSION_UNSUPPORTED", "error", "source",
+      "This SDK requires a source-schema 1.0 ZIP from exporter 0.6.1.",
+      { path: "template.json/source/pluginVersion", details: {
+        validationStage: "raw-source", requiredExporterVersion: "0.6.1",
+        sourceSchemaVersion: isRecord(template.value) ? template.value.schemaVersion : null,
+        receivedExporterVersion: rawSource?.pluginVersion ?? null,
+      } },
+    ));
+  }
 
   const missingAssetManifestIsEmpty = (() => {
     if (!isRecord(template.value) || !isRecord(template.value.assets)) return false;
@@ -461,7 +487,7 @@ export function loadTemplatePackageBundleSource(
   let compatibility: BundleTemplateCompatibilityData = {};
   let assetResolutions: BundleAssetResolution[] = [];
 
-  if (template.value !== null) {
+  if (template.value !== null && sourceAdmitted) {
     const sourceContract = validateTemplatePackageBundleSource(template.value);
     diagnostics.push(...sourceContract.diagnostics);
     const normalization = normalizeTemplatePackageBundleTemplate(template.value, {

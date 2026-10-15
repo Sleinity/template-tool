@@ -1,22 +1,6 @@
 import figmaPluginV041 from "../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import {
-  createTemplateFamilyFromPackage,
-  getTemplateFamilyControlOrder,
-  getTemplateFamilyFieldsForVariant,
-  getTemplateFamilyFieldScope,
-  getTemplateFamilyOptionAvailability,
-  materializeTemplateFamilyVariant,
-  parseTemplateFamilyContentStateV1,
-  parseTemplateFamilyV1,
-  planTemplateFamilyFieldMatches,
-  resolveTemplateFamilyFieldRule,
-  resolveTemplateFamilyVariant,
-  setTemplateFamilyControlOrder,
-  updateTemplateFamilyContentField,
-  validateTemplateFamily,
-  wrapLegacyTemplatePackageAsFamily,
-  type TemplateFamilyV1,
-} from "../src/family";
+import {type TemplateFamilyV1} from "../src/family";
+import {createTemplateFamilyFromPackage, getTemplateFamilyControlOrder, getTemplateFamilyFieldsForVariant, getTemplateFamilyFieldScope, getTemplateFamilyOptionAvailability, materializeTemplateFamilyVariant, parseTemplateFamilyContentStateV1, parseTemplateFamilyV1, planTemplateFamilyFieldMatches, resolveTemplateFamilyFieldRule, resolveTemplateFamilyVariant, setTemplateFamilyControlOrder, updateTemplateFamilyContentField, validateTemplateFamily, wrapLegacyTemplatePackageAsFamily} from "./legacyEntry";
 import type { TemplatePackageV1 } from "../src/types";
 
 function assert(condition: unknown, message: string): asserts condition {

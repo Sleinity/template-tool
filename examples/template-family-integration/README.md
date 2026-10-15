@@ -1,7 +1,5 @@
-# Template Family integration reference
+# V2 SDK host example
 
-This packed-consumer example demonstrates the Template Family path. It imports multiple real TemplatePackage ZIPs, preserves per-variant packages, classifies unmatched targets as variant-specific fields, assigns independent selection-property options to each concrete variant, uses one shared content state, previews one variant at a time, reports per-variant validation, persists and reopens offline, inspects reimport compatibility, and captures the current revision. Ordered editor controls keep selectors and fields composable, while variant-only fields hide and reappear without losing their values.
+This example mounts the shared [Field Rules V2 host](../template-editor-integration/src/FieldRulesV2Host.tsx). It accepts exporter 0.6.1 ZIPs and uses native V2 single/Family sessions, typed controllers, fonts, images, recovery and guarded PNG export. There is no V1 compatibility route.
 
-It intentionally owns its forms, selector presentation, downloads and navigation. It imports no Studio or `renderer-internal` code.
-
-Run `pnpm --filter @sleinity/template-family-integration dev`, then choose two compatible TemplatePackage ZIPs.
+See [integration](../../docs/sdk/V2_INTEGRATION.md) and [lifecycle](../../docs/sdk/HOST_LIFECYCLE.md). Build with `pnpm example:build`.

@@ -1,5 +1,91 @@
 import type { TemplatePackageBundleDiagnostic } from "./types";
 import { parseFigmaUrl, type ParsedFigmaUrl } from "../enrichment/parseFigmaUrl";
+import { resolveSourceColorFill } from "../sourceColorField";
+import { parseSourceDateDisplay } from "../sourceDateField";
+import { parseSourceNumberDisplay } from "../sourceNumberField";
+
+const FIELD_TYPES = new Set(["text", "textarea", "image", "color", "number", "date", "boolean"]);
+const PORTABLE_FIELD_NAME = /^[A-Za-z][A-Za-z0-9_-]*$/u;
+
+function normalizeTypeQualifiedFieldIds(
+  input: JsonRecord,
+): TemplatePackageBundleDiagnostic[] {
+  if (!Array.isArray(input.editableFields)) return [];
+  const diagnostics: TemplatePackageBundleDiagnostic[] = [];
+  input.editableFields.forEach((value, index) => {
+    if (!isRecord(value) || typeof value.id !== "string" ||
+        typeof value.type !== "string" || !FIELD_TYPES.has(value.type)) return;
+    if (/^(text|textarea|image|color|number|date|boolean):/u.test(value.id)) return;
+    if (!PORTABLE_FIELD_NAME.test(value.id)) return;
+    const originalId = value.id;
+    value.id = `${value.type}:${originalId}`;
+    diagnostics.push(diagnostic(
+      "FIELD_ID_TYPE_QUALIFIED",
+      "info",
+      `Field "${originalId}" was normalized to canonical ID "${value.id}".`,
+      {
+        path: `/editableFields/${index}/id`,
+        sourceFieldId: originalId,
+        canonicalFieldId: value.id,
+        fieldType: value.type,
+      },
+    ));
+  });
+  return diagnostics;
+}
+
+/**
+ * V1 has no multi-target Boolean binding. Exporter bundles still retain the
+ * marker on every target, so compatible duplicate descriptors can be reduced
+ * to one primary descriptor before strict V1 parsing. The V2 source normalizer
+ * then discovers the remaining marker targets and records the canonical merge.
+ */
+function prepareRepeatedBooleanDescriptors(
+  input: JsonRecord,
+): TemplatePackageBundleDiagnostic[] {
+  if (!Array.isArray(input.editableFields) || !isRecord(input.nodes)) return [];
+  const nodes = input.nodes;
+  const groups = new Map<string, Array<{ candidate: JsonRecord; index: number }>>();
+  input.editableFields.forEach((candidate, index) => {
+    if (!isRecord(candidate) || candidate.type !== "boolean" || typeof candidate.id !== "string") return;
+    const entries = groups.get(candidate.id) ?? [];
+    entries.push({ candidate, index });
+    groups.set(candidate.id, entries);
+  });
+  const removed = new Set<number>();
+  const diagnostics: TemplatePackageBundleDiagnostic[] = [];
+  for (const [fieldId, entries] of groups) {
+    if (entries.length < 2) continue;
+    const name = fieldId.startsWith("boolean:") ? fieldId.slice("boolean:".length) : null;
+    const defaults = new Set(entries.map(({ candidate }) => candidate.defaultValue));
+    const nodeIds = entries.map(({ candidate }) => candidate.nodeId);
+    const compatible = name && PORTABLE_FIELD_NAME.test(name) && defaults.size === 1 &&
+      typeof entries[0].candidate.defaultValue === "boolean" &&
+      new Set(nodeIds).size === nodeIds.length &&
+      entries.every(({ candidate }) => {
+        if (candidate.property !== "visible" || typeof candidate.nodeId !== "string") return false;
+        const node = nodes[candidate.nodeId];
+        return isRecord(node) && node.name === `field:boolean:${name}`;
+      });
+    if (!compatible) continue;
+    entries.slice(1).forEach(({ index }) => removed.add(index));
+    diagnostics.push(diagnostic(
+      "BOOLEAN_VISIBILITY_DESCRIPTORS_PREPARED",
+      "info",
+      `Repeated Boolean field "${fieldId}" was prepared for canonical multi-target normalization.`,
+      {
+        path: "/editableFields",
+        fieldId,
+        primaryNodeId: nodeIds[0],
+        additionalNodeIds: nodeIds.slice(1),
+      },
+    ));
+  }
+  if (removed.size > 0) {
+    input.editableFields = input.editableFields.filter((_candidate, index) => !removed.has(index));
+  }
+  return diagnostics;
+}
 
 type JsonRecord = Record<string, unknown>;
 
@@ -99,6 +185,147 @@ function isRecord(value: unknown): value is JsonRecord {
 
 function readString(value: unknown): string | undefined {
   return typeof value === "string" && value.length > 0 ? value : undefined;
+}
+
+function normalizeNumberFieldDefaults(
+  input: JsonRecord,
+): TemplatePackageBundleDiagnostic[] {
+  if (!Array.isArray(input.editableFields) || !isRecord(input.nodes)) return [];
+  const nodes = input.nodes;
+  const diagnostics: TemplatePackageBundleDiagnostic[] = [];
+  input.editableFields.forEach((candidate, index) => {
+    if (!isRecord(candidate) || candidate.type !== "number" ||
+        typeof candidate.defaultValue !== "string") return;
+    const sourceValue = candidate.defaultValue;
+    const node = typeof candidate.nodeId === "string" ? nodes[candidate.nodeId] : undefined;
+    if (!isRecord(node) || node.type !== "TEXT" ||
+        !["text.characters", "text.content"].includes(String(candidate.property))) return;
+    const text = isRecord(node.text)
+      ? typeof node.text.characters === "string"
+        ? node.text.characters
+        : typeof node.text.content === "string"
+          ? node.text.content
+          : undefined
+      : undefined;
+    if (text !== sourceValue) return;
+
+    const parsed = parseSourceNumberDisplay(sourceValue);
+    if (!parsed) return;
+    const inferredFormat: JsonRecord = {
+      ...(parsed.prefix ? { prefix: parsed.prefix } : {}),
+      ...(parsed.suffix ? { suffix: parsed.suffix } : {}),
+      ...(parsed.decimalPlaces !== undefined ? { decimalPlaces: parsed.decimalPlaces } : {}),
+    };
+    const explicitFormat = isRecord(candidate.format) ? candidate.format : {};
+    candidate.defaultValue = parsed.value;
+    if (Object.keys(inferredFormat).length > 0 || Object.keys(explicitFormat).length > 0) {
+      candidate.format = { ...inferredFormat, ...explicitFormat };
+    }
+    diagnostics.push(diagnostic(
+      "NUMBER_FIELD_DEFAULT_NORMALIZED",
+      "info",
+      `Number field "${String(candidate.id ?? index)}" was normalized from displayed text to a numeric default.`,
+      {
+        path: `/editableFields/${index}/defaultValue`,
+        ...(typeof candidate.nodeId === "string" ? { nodeId: candidate.nodeId } : {}),
+        fieldId: candidate.id,
+        originalValue: sourceValue,
+        canonicalValue: candidate.defaultValue,
+        inferredFormat,
+      },
+    ));
+  });
+  return diagnostics;
+}
+
+function normalizeGenericColorFieldBindings(
+  input: JsonRecord,
+): TemplatePackageBundleDiagnostic[] {
+  if (!Array.isArray(input.editableFields) || !isRecord(input.nodes)) return [];
+  const nodes = input.nodes;
+  const diagnostics: TemplatePackageBundleDiagnostic[] = [];
+  input.editableFields.forEach((candidate, index) => {
+    if (!isRecord(candidate) || candidate.type !== "color" ||
+        candidate.property !== "appearance.fills" ||
+        typeof candidate.nodeId !== "string") return;
+    const node = nodes[candidate.nodeId];
+    const resolution = resolveSourceColorFill(input, node);
+    if (!resolution.resolved) return;
+
+    const originalProperty = candidate.property;
+    const resolvedProperty = `appearance.fills.${resolution.sourceIndex}.color`;
+    candidate.property = resolvedProperty;
+    diagnostics.push(diagnostic(
+      "COLOR_FIELD_BINDING_NORMALIZED",
+      "info",
+      `Color field "${String(candidate.id ?? index)}" was resolved to an exact SOLID fill binding.`,
+      {
+        path: `/editableFields/${index}/property`,
+        nodeId: candidate.nodeId,
+        fieldId: candidate.id,
+        originalProperty,
+        resolvedProperty,
+        sourceIndex: resolution.sourceIndex,
+      },
+    ));
+  });
+  return diagnostics;
+}
+
+function normalizeDateFieldDefaults(
+  input: JsonRecord,
+): TemplatePackageBundleDiagnostic[] {
+  if (!Array.isArray(input.editableFields) || !isRecord(input.nodes)) return [];
+  const nodes = input.nodes;
+  const diagnostics: TemplatePackageBundleDiagnostic[] = [];
+  const exportedAt = isRecord(input.source) ? input.source.exportedAt : undefined;
+  input.editableFields.forEach((candidate, index) => {
+    if (!isRecord(candidate) || candidate.type !== "date" ||
+        typeof candidate.defaultValue !== "string") return;
+    const sourceValue = candidate.defaultValue;
+    const node = typeof candidate.nodeId === "string" ? nodes[candidate.nodeId] : undefined;
+    if (!isRecord(node) || node.type !== "TEXT" ||
+        !["text.characters", "text.content"].includes(String(candidate.property))) return;
+    const text = isRecord(node.text)
+      ? typeof node.text.characters === "string"
+        ? node.text.characters
+        : typeof node.text.content === "string"
+          ? node.text.content
+          : undefined
+      : undefined;
+    if (text !== sourceValue) return;
+
+    const explicitFormat = isRecord(candidate.format) ? candidate.format : {};
+    const parsed = parseSourceDateDisplay(sourceValue, { exportedAt, explicitFormat });
+    if (!parsed) return;
+    const inferredFormat: JsonRecord = {
+      schemaVersion: "date-display-v1",
+      preset: parsed.preset,
+      ...(parsed.prefix ? { prefix: parsed.prefix } : {}),
+      ...(parsed.suffix ? { suffix: parsed.suffix } : {}),
+      ...(parsed.separator ? { separator: parsed.separator } : {}),
+    };
+    candidate.defaultValue = parsed.value;
+    candidate.format = { ...inferredFormat, ...explicitFormat };
+    diagnostics.push(diagnostic(
+      "DATE_FIELD_DEFAULT_NORMALIZED",
+      "info",
+      `Date field "${String(candidate.id ?? index)}" was normalized from displayed text to a canonical calendar date.`,
+      {
+        path: `/editableFields/${index}/defaultValue`,
+        ...(typeof candidate.nodeId === "string" ? { nodeId: candidate.nodeId } : {}),
+        fieldId: candidate.id,
+        originalValue: sourceValue,
+        canonicalValue: candidate.defaultValue,
+        inferredFormat,
+        ...(parsed.inferredYear ? {
+          inferredYear: parsed.inferredYear,
+          inferredYearSource: "package.source.exportedAt",
+        } : {}),
+      },
+    ));
+  });
+  return diagnostics;
 }
 
 function inferredFontWeight(value: unknown, style: unknown): number {
@@ -956,6 +1183,11 @@ export function normalizeTemplatePackageBundleTemplate(
   diagnostics.push(...normalizeUnsupportedPaints(normalizedTemplateJson));
   diagnostics.push(...normalizeSolidPaintOpacity(normalizedTemplateJson));
   diagnostics.push(...normalizeLinearGradientPaints(normalizedTemplateJson));
+  diagnostics.push(...normalizeTypeQualifiedFieldIds(normalizedTemplateJson));
+  diagnostics.push(...prepareRepeatedBooleanDescriptors(normalizedTemplateJson));
+  diagnostics.push(...normalizeGenericColorFieldBindings(normalizedTemplateJson));
+  diagnostics.push(...normalizeNumberFieldDefaults(normalizedTemplateJson));
+  diagnostics.push(...normalizeDateFieldDefaults(normalizedTemplateJson));
   diagnostics.push(...inferMissingFontRequirements(normalizedTemplateJson));
 
   const bundledFigma = attachBundledFigmaSource(

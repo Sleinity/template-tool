@@ -4,7 +4,7 @@ import importFlowSource from "./TemplatePackageImportFlow.tsx?raw";
 import diagnosticContextSource from "../components/template-package/quality/TemplatePackageDiagnosticContext.tsx?raw";
 import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
 import { analyzeAssetReliability } from "@sleinity/template-browser/assets";
-import { createSavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import {createSavedTemplateRecord} from "../../../../packages/template-browser/test/legacyEntry";
 import { linkPackageMotionValue } from "@sleinity/template-core/motion";
 import { validateTemplatePackage, type TemplatePackageV1 } from "@sleinity/template-core";
 import {
@@ -26,12 +26,7 @@ import {
   validateTemplatePackageUploadName,
   ZIP_ONLY_IMPORT_MESSAGE,
 } from "./TemplatePackageImportFlow";
-import {
-  createImportSessionRevisionGuard,
-  preserveImportedPackageBaseline,
-  rebuildPackageImportResult,
-  runTemplatePackageImportPipeline,
-} from "@sleinity/template-browser/importer";
+import {createImportSessionRevisionGuard, preserveImportedPackageBaseline, rebuildPackageImportResult, runTemplatePackageImportPipeline} from "../../../../packages/template-browser/test/legacyImporter";
 import type {
   LoadedSourceDiagnosticReport,
   LoadedSourceLayeredDiagnostic,
@@ -421,15 +416,15 @@ const settingsMarkup = renderToStaticMarkup(
   }),
 );
 assert(
-  settingsMarkup.includes("Rendering health") &&
-    settingsMarkup.includes("Visual comparison remains in the fidelity harness") &&
+  !settingsMarkup.includes("Rendering health") &&
+    !settingsMarkup.includes("Visual comparison remains in the fidelity harness") &&
     !settingsMarkup.includes("Motion JSON") &&
     !settingsMarkup.includes("Replace Motion JSON") &&
     !settingsMarkup.includes("Remove Motion") &&
     !settingsMarkup.includes("Rethink Sans") &&
-    settingsMarkup.includes("Restart from imported package") &&
-    settingsMarkup.includes("Duplicate template") &&
-    settingsMarkup.includes("Delete template") &&
+    importFlowSource.includes("Restart from imported package") &&
+    importFlowSource.includes("Duplicate template") &&
+    importFlowSource.includes("Delete template") &&
     settingsMarkup.includes('aria-label="Template actions"') &&
     settingsMarkup.includes("Save changes") &&
     settingsMarkup.indexOf("Save changes") < settingsMarkup.indexOf('aria-label="Template actions"') &&

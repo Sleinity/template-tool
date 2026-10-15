@@ -101,11 +101,13 @@ export function WayfindingMark({
 
 export function ConnectedList({
   label,
+  header,
   children,
   className,
   ...props
 }: {
   label: string;
+  header?: ReactNode;
   children: ReactNode;
   className?: string;
 } & Omit<HTMLAttributes<HTMLDivElement>, "children" | "aria-label">) {
@@ -115,6 +117,36 @@ export function ConnectedList({
       className={cx("ui-connected-list", className)}
       role="list"
       aria-label={label}
+    >
+      {header ? <div className="ui-connected-list__header" role="presentation">{header}</div> : null}
+      {children}
+    </div>
+  );
+}
+
+export function ConnectedListItem({
+  children,
+  selected = false,
+  disabled = false,
+  tone = "neutral",
+  className,
+  ...props
+}: {
+  children: ReactNode;
+  selected?: boolean;
+  disabled?: boolean;
+  tone?: "neutral" | "attention" | "blocked";
+  className?: string;
+} & Omit<HTMLAttributes<HTMLDivElement>, "children">) {
+  return (
+    <div
+      {...props}
+      className={cx("ui-connected-list__item", className)}
+      role="listitem"
+      data-selected={selected || undefined}
+      data-disabled={disabled || undefined}
+      data-tone={tone === "neutral" ? undefined : tone}
+      aria-disabled={disabled || undefined}
     >
       {children}
     </div>
@@ -146,13 +178,11 @@ export function ConnectedListRow({
   className?: string;
 } & Omit<HTMLAttributes<HTMLDivElement>, "children" | "title">) {
   return (
-    <div
+    <ConnectedListItem
       {...props}
       className={cx("ui-connected-list__row", className)}
-      role="listitem"
-      data-selected={selected || undefined}
-      data-disabled={disabled || undefined}
-      aria-disabled={disabled || undefined}
+      selected={selected}
+      disabled={disabled}
     >
       {icon ? <span className="ui-connected-list__icon">{icon}</span> : null}
       <div className="ui-connected-list__content">
@@ -169,6 +199,6 @@ export function ConnectedListRow({
       </div>
       {status ? <div className="ui-connected-list__status">{status}</div> : null}
       {actions ? <div className="ui-connected-list__actions">{actions}</div> : null}
-    </div>
+    </ConnectedListItem>
   );
 }

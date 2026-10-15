@@ -1,0 +1,12 @@
+---
+"@sleinity/template-core": minor
+"@sleinity/template-browser": minor
+"@sleinity/template-react": patch
+---
+
+Add public atomic V2 session configuration transactions and Core canonical
+configuration reconciliation, including stable choice identity and revision-safe
+configuration changes. Preserve corrective mutations for semantically invalid
+content. Correct local Blob image carriers/dimension ingestion and acquire React
+renderer publication leases on committed mounts with operation-current async
+callbacks. Prove Studio and external controls against the same public contracts.

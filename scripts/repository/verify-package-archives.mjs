@@ -58,11 +58,6 @@ try {
     }
     if (archive.includes("template-react")) {
       for (const requiredEntry of [
-        "package/dist/importer.js",
-        "package/dist/importer.js.map",
-        "package/dist/importer.d.ts",
-        "package/dist/importer.css",
-        "package/dist/importer.css.map",
         "package/dist/renderer-internal.js",
         "package/dist/renderer-internal.js.map",
         "package/dist/renderer-internal.d.ts",
@@ -211,9 +206,6 @@ try {
     }
     if (archive.includes("template-react")) {
       for (const entry of [
-        "package/dist/importer.js",
-        "package/dist/importer.d.ts",
-        "package/dist/importer.css",
         "package/dist/inspection.js",
         "package/dist/inspection.d.ts",
       ]) {

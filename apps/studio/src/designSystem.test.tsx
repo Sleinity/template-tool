@@ -1,6 +1,10 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import visualSystemCss from "./styles.css?raw";
+import importerSystemCss from "./setup/studioSetup.css?raw";
+import fieldRulesCss from "./field-rules/fieldRulesV2.css?raw";
+import setupFieldsSource from "./setup/SetupFields.tsx?raw";
+import setupWizardSource from "./setup/StudioSetupWizard.tsx?raw";
 import familySetupSource from "./views/TemplateFamilySetupPage.tsx?raw";
 import {
   Alert,
@@ -11,6 +15,7 @@ import {
   CheckboxField,
   CountBadge,
   ConnectedList,
+  ConnectedListItem,
   ConnectedListRow,
   DesignSystemShowcase,
   FilePickerButton,
@@ -30,11 +35,77 @@ import {
   WayfindingMark,
   WorkspaceSidePanel,
 } from "./components/ui";
+import { SetupPreviewPanel } from "./setup/SetupPreview";
+import { TemplatePackageQualityPanel } from "./components/template-package/quality/TemplatePackageQualityPanel";
+import { SetupOutcome } from "./setup/SetupPagePrimitives";
 import { FieldRuleCardShell } from "./components/template-package/editor/FieldRuleCardShell";
 import { FieldRuleConstraintControls } from "./components/template-package/editor/FieldRuleConstraintControls";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);
+}
+
+const studioCss = `${visualSystemCss}\n${importerSystemCss}`;
+const definedCustomProperties = new Set(
+  Array.from(studioCss.matchAll(/(--[a-z0-9-]+)\s*:/gi), (match) => match[1]),
+);
+const referencedCustomProperties = new Set(
+  Array.from(studioCss.matchAll(/var\((--[a-z0-9-]+)/gi), (match) => match[1]),
+);
+const undefinedCustomProperties = [...referencedCustomProperties]
+  .filter((property) => !definedCustomProperties.has(property));
+
+assert(
+  undefinedCustomProperties.length === 0,
+  `Studio CSS should not reference undefined custom properties: ${undefinedCustomProperties.join(", ")}`,
+);
+
+const importerHexColours = Array.from(importerSystemCss.matchAll(/#[0-9a-f]{3,8}\b/gi));
+const importerRawRadii = Array.from(
+  importerSystemCss.matchAll(/border-radius:\s*([^;]+);/gi),
+  (match) => match[1].trim(),
+).filter((value) => value !== "0" && !value.startsWith("var("));
+const importerRawMaximumWidths = Array.from(
+  importerSystemCss.matchAll(/max-width:\s*[0-9.]+(?:px|rem)\s*;/gi),
+);
+const importerImportantDeclarations = Array.from(
+  importerSystemCss.matchAll(/^[^\n]*!important[^\n]*$/gim),
+  (match) => match[0].trim(),
+).filter((line) => line !== "display: none !important;");
+
+assert(
+  importerHexColours.length === 0 &&
+    importerRawRadii.length === 0 &&
+    importerRawMaximumWidths.length === 0 &&
+    importerImportantDeclarations.length === 0,
+  "Importer composition CSS should use shared colour, radius, and width tokens without avoidable !important overrides.",
+);
+
+assert(
+  !importerSystemCss.includes("data-step") &&
+    !setupFieldsSource.includes("v2-order") &&
+    !setupWizardSource.includes("data-step") &&
+    !setupWizardSource.includes('className="v2-'),
+  "Importer layout should use semantic modes and must not inherit unscoped V2 presentation classes.",
+);
+
+for (const selector of fieldRulesCss.matchAll(/^([^@\n][^{]+)\{/gm)) {
+  const selectorText = selector[1].trim();
+  assert(
+    selectorText === ".v2-studio" || selectorText.split(",").every((part) => part.trim().startsWith(".v2-studio ")),
+    `Standalone V2 selector should be scoped beneath .v2-studio: ${selectorText}`,
+  );
+}
+
+for (const selector of [".ui-button", ".ui-status", ".ui-connected-list"]) {
+  const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const definitions = Array.from(
+    visualSystemCss.matchAll(new RegExp(`^${escapedSelector}\\s*\\{`, "gm")),
+  );
+  assert(
+    definitions.length === 1,
+    `${selector} should have one canonical base definition.`,
+  );
 }
 
 const shellMarkup = renderToStaticMarkup(
@@ -66,12 +137,20 @@ const foundationMarkup = renderToStaticMarkup(
   createElement("div", null,
     createElement(ConnectedList, {
       label: "Dense fields",
-      children: createElement(ConnectedListRow, {
-        title: "Headline",
-        description: "All variants",
-        meta: "Text",
-        selected: true,
-      }),
+      children: [
+        createElement(ConnectedListRow, {
+          key: "field",
+          title: "Headline",
+          description: "All variants",
+          meta: "Text",
+          selected: true,
+        }),
+        createElement(ConnectedListItem, {
+          key: "dependency",
+          tone: "attention",
+          children: "Missing font",
+        }),
+      ],
     }),
     createElement(WayfindingMark, {
       number: 1,
@@ -90,6 +169,7 @@ assert(
   foundationMarkup.includes('role="list"') &&
     foundationMarkup.includes('role="listitem"') &&
     foundationMarkup.includes('data-selected="true"') &&
+    foundationMarkup.includes('data-tone="attention"') &&
     foundationMarkup.includes('data-accent="variants"') &&
     foundationMarkup.includes("ui-wayfinding-mark__station") &&
     foundationMarkup.includes(">1</span>") &&
@@ -238,6 +318,10 @@ assert(
     visualSystemCss.includes(".ui-field__control") &&
     visualSystemCss.includes("font-variant-numeric: tabular-nums") &&
     visualSystemCss.includes('.field-editor-input__counter[data-multiline="true"]') &&
+    visualSystemCss.includes(".field-editor-input__counter--warning") &&
+    visualSystemCss.includes(".field-editor-input__counter--maximum") &&
+    visualSystemCss.includes(".field-editor-input__limit--maximum") &&
+    visualSystemCss.includes("color: var(--color-status-blocked-fg)") &&
     visualSystemCss.includes("border: 1px solid var(--color-border-subtle)"),
   "The visual system should consolidate neutral outlines, radius roles, typography roles, button sizes, shell boundaries, and light preview presentation.",
 );
@@ -382,3 +466,21 @@ assert(
     showcaseMarkup.includes("No templates yet"),
   "The non-routed showcase should cover the scoped route palette, action and field states, semantic feedback, realistic density, and empty states.",
 );
+
+// Preview modes share their chrome and slot order; only their content differs.
+for (const mode of ["inspection", "workspace", "summary"] as const) {
+  const markup = renderToStaticMarkup(createElement(SetupPreviewPanel, { mode, selector: "Design selector", children: "Canvas" }));
+  assert(markup.includes('class="studio-setup-preview"') && markup.indexOf("Canvas") < markup.indexOf("Design selector"), "Every importer preview mode places selection below the same canvas frame.");
+}
+const readyOutcome = renderToStaticMarkup(createElement(SetupOutcome, { title: "Fonts available", tone: "ready" }));
+assert(readyOutcome.includes('data-tone="ready"') && readyOutcome.includes("Fonts available") && readyOutcome.includes("<svg"), "Ready outcomes communicate success with text and an icon, independently of colour.");
+assert(!setupFieldsSource.includes('label="Search fields"') && setupFieldsSource.includes('studio-field-rule-list--cards'), "Fields uses compact cards and field-type filtering without a search control.");
+
+const inlineQuality = renderToStaticMarkup(createElement(TemplatePackageQualityPanel, {
+  compact: true,
+  report: { status: "ready", health: { import: "ready", fidelity: "ready", assets: "ready", editability: "ready", export: "ready" }, issues: [], summary: { errors: 0, warnings: 0, info: 0, importBlockers: 0, exportBlockers: 0 }, renderingHealth: { schemaVersion: "rendering-health-projection-v1", readiness: { import: "ready", dependencies: "ready", editing: "ready", preview: "ready", export: "ready" }, semanticCapabilityFamilies: [], compatibilityRegionCount: 0, reviewFallbackRegionCount: 0, preservedOnlyRegionCount: 0, unsupportedCapabilities: [], sourceReference: { availability: "missing", comparison: "not-run-in-product" }, productRenderIdentity: null } },
+  renderIssueDetails: () => null,
+}));
+assert(inlineQuality.includes('Status') && !inlineQuality.includes('Search issues') && !inlineQuality.includes('All areas') && !inlineQuality.includes('Technical filters'), 'Importer issue review keeps Status without search, area or technical filters.');
+assert(!setupWizardSource.includes('Return to checks') && !setupWizardSource.includes('Settings changed. Check again before saving.'), 'Setup must not retain cross-step correction links or settings notices.');
+assert(importerSystemCss.includes('[data-has-selectors="false"]') && importerSystemCss.includes('.studio-design-scroll'), 'Designs has an explicit zero-selector grid and bounded scroll owner.');

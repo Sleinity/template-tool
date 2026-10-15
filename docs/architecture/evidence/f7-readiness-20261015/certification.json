@@ -1,0 +1,489 @@
+{
+  "schemaVersion": "sdk-candidate-certification-v1",
+  "recordedAt": "2026-10-15T13:02:14.098Z",
+  "decision": "GO",
+  "candidateId": "unpublished-1.0.0-440c932335c46a7015cb074079fcd5cd2767a28d78ff8e4fe9fe0921912ece35",
+  "sourceIdentity": "440c932335c46a7015cb074079fcd5cd2767a28d78ff8e4fe9fe0921912ece35",
+  "sourceFilesAtPack": 4661,
+  "archives": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 487348,
+      "sha256": "626f1673ff94594e21a718d698865e307e22c2a6aa4075d465bb316496189e8a",
+      "name": "@sleinity/template-core",
+      "version": "1.0.0",
+      "dependencies": {
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3"
+      },
+      "peerDependencies": {},
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./family",
+        "./assets",
+        "./fonts",
+        "./motion",
+        "./inspection"
+      ],
+      "restrictedEntries": [
+        "./renderer-internal"
+      ]
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 277811,
+      "sha256": "273fb27d06105d702aeb759c24d485a9cc46cc636b7c562f055e0836f0c57eaa",
+      "name": "@sleinity/template-browser",
+      "version": "1.0.0",
+      "dependencies": {
+        "@sleinity/template-core": "workspace:*",
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3",
+        "html-to-image": "^1.11.13"
+      },
+      "peerDependencies": {},
+      "supportedEntries": [
+        ".",
+        "./session",
+        "./importer",
+        "./compatibility",
+        "./assets",
+        "./fonts",
+        "./persistence",
+        "./capture",
+        "./enrichment"
+      ],
+      "restrictedEntries": [
+        "./session-internal"
+      ]
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 213279,
+      "sha256": "17219b572236ccf71cb663fd170b78921ad22e77b99f23eafc6d4e1382ecf165",
+      "name": "@sleinity/template-react",
+      "version": "1.0.0",
+      "dependencies": {
+        "@sleinity/template-browser": "workspace:*",
+        "@sleinity/template-core": "workspace:*"
+      },
+      "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+      },
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./inspection"
+      ],
+      "restrictedEntries": [
+        "./renderer-internal"
+      ]
+    }
+  ],
+  "gateRun": "sdk-f7-readiness-20261015",
+  "environment": {
+    "approximateProcessMemoryBytes": 551026688,
+    "approximateSystemMemoryBytes": 17179869184,
+    "architecture": "arm64",
+    "browser": "Chromium",
+    "browserVersion": "149.0.7827.55",
+    "buildIdentifier": "1362f2002557b1202889ecce451470d091285e4c268e847628370fde35edeb34",
+    "captureScale": 1,
+    "devicePixelRatio": 1,
+    "fallbackFonts": [],
+    "fontDecisions": [
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "byteSize": 149328,
+        "classification": "exact",
+        "fontId": "geist-mono-500-normal",
+        "requestedFamily": "Geist Mono",
+        "requestedStyle": "normal",
+        "requestedWeight": 500,
+        "requirementId": "font:geist-mono:medium",
+        "source": "Official Vercel Geist v1.7.2 release asset",
+        "uploadAndLinkMs": 131.58854100000008
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "byteSize": 580572,
+        "classification": "exact",
+        "fontId": "inter-tight-700-normal",
+        "requestedFamily": "Inter Tight",
+        "requestedStyle": "normal",
+        "requestedWeight": 700,
+        "requirementId": "font:inter-tight:bold",
+        "source": "Locally installed Inter Tight variable font",
+        "uploadAndLinkMs": 149.49433299999964
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "byteSize": 55900,
+        "classification": "exact",
+        "fontId": "funnel-display-400-normal",
+        "requestedFamily": "Funnel Display",
+        "requestedStyle": "normal",
+        "requestedWeight": 400,
+        "requirementId": "font:funnel-display:regular",
+        "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+        "uploadAndLinkMs": 115.38600000000042
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "byteSize": 59080,
+        "classification": "exact",
+        "fontId": "rethink-sans-600-normal",
+        "requestedFamily": "Rethink Sans",
+        "requestedStyle": "normal",
+        "requestedWeight": 600,
+        "requirementId": "font:rethink-sans:semibold",
+        "source": "Repository bundled Studio font",
+        "uploadAndLinkMs": 116.04041700000016
+      }
+    ],
+    "fontProfile": "source-authoritative",
+    "fontSources": [
+      {
+        "byteSize": 149328,
+        "family": "Geist Mono",
+        "id": "geist-mono-500-normal",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "style": "normal",
+        "weight": 500
+      },
+      {
+        "byteSize": 580572,
+        "family": "Inter Tight",
+        "id": "inter-tight-700-normal",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "style": "normal",
+        "weight": 700
+      },
+      {
+        "byteSize": 59080,
+        "family": "Rethink Sans",
+        "id": "rethink-sans-600-normal",
+        "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "style": "normal",
+        "weight": 600
+      },
+      {
+        "byteSize": 55900,
+        "family": "Funnel Display",
+        "id": "funnel-display-400-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "style": "normal",
+        "weight": 400
+      }
+    ],
+    "gitCommit": null,
+    "loadedFonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      },
+      {
+        "family": "__template_font_90b15711dc3779b2_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "__template_font_4b8ef9ed255ebe73_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "__template_font_9062978ead3d7a3e_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "__template_font_523d8be1ea86cb25_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "600"
+      }
+    ],
+    "locale": "en-US",
+    "nodeVersion": "v24.19.0",
+    "operatingSystem": "darwin 25.5.0",
+    "packageManager": "pnpm@11.9.0",
+    "schemaVersion": 1,
+    "testTimestamp": "2026-10-15T12:43:24.003Z",
+    "timezone": "UTC",
+    "viewport": {
+      "height": 1600,
+      "width": 1440
+    }
+  },
+  "sourceReview": {
+    "file": "docs/architecture/evidence/f7-readiness-20261015/source-review.json",
+    "sha256": "efffee78ff064d6af4a5bb4677272d7c5f3a90c7b177ff70bb6e4b5ed9f9000c"
+  },
+  "verification": {
+    "file": "docs/architecture/evidence/f7-readiness-20261015/verification.json",
+    "sha256": "335ddf303f3eb573437e27893e0da2d2ba6e7d0cbb8c33b849412f0b476341d3"
+  },
+  "sourceChangesAfterPack": [
+    {
+      "file": "docs/architecture/f7-readiness-publication.md",
+      "packedSha256": "b71706606d423008d93bef0de1490ae786a61981a2e1e7d1910dee7b55f817d2",
+      "currentSha256": "704049f172a489449d739402e7b0b3126c6d3a35997f916b0d11f7b53734f705"
+    },
+    {
+      "file": "docs/renderer-fidelity/ARCHITECTURE.md",
+      "packedSha256": "82dd2d364150c66d505d90e3bdbaed9c5004bd6907788d7b8c5a201208d8471f",
+      "currentSha256": "06aa796ea36404dd0a6b47751388c2847e0192505cd1750d3181b560f1369863"
+    },
+    {
+      "file": "docs/renderer-fidelity/CAPABILITIES.md",
+      "packedSha256": "3117cec54f1061d5e4066c931fe9ea49210a77ad2a7b846b4c350e869d8b0bd7",
+      "currentSha256": "f7bb22c276a454e46ce16fb5be05257690c510bb7760ba6f89d990c30105a763"
+    },
+    {
+      "file": "docs/renderer-fidelity/HANDOFF.md",
+      "packedSha256": "9170d4e3e4f716b9f3501e6dbef944d3b1302cd2cffeaa175a7705eb9fa04f73",
+      "currentSha256": "be415b1df704e3f489a7edf63e124ec432fe5ef301c46ce4b0003066e5523aef"
+    },
+    {
+      "file": "docs/renderer-fidelity/PROPERTY_AUTHORITY.md",
+      "packedSha256": "6ac4fa87c2fc9102407d68a6a19561204d3a5d4311c67048b6cb7748938793c6",
+      "currentSha256": "bbbb8ca8f9a21f0ca84856058837a71d2c0b2bf2d549b34d24d36430a8ffc051"
+    },
+    {
+      "file": "docs/renderer-fidelity/STATUS.md",
+      "packedSha256": "57a15af229a7ba54d3b7b47c541a0f91509697ba77d4925857464f2c2af2aae0",
+      "currentSha256": "7dae556639ccc609f36aafa4c37e10f52ee9c72a1e39976ebe33179f0574a8dc"
+    },
+    {
+      "file": "docs/renderer-fidelity/decisions/0098-family-media-readiness-publication.md",
+      "packedSha256": "d2c6e68ffca13345aee9f4e9ee0aeb911ba7915c8fdeea9ae2014d7bb8dceff6",
+      "currentSha256": "9fd73ec639a1523e6bd2cd2c92e40388a829fb844c9099c554739a62e4d78b7d"
+    },
+    {
+      "file": "docs/renderer-fidelity/decisions/README.md",
+      "packedSha256": "02f0ed674d85a15c9b96d162827768545314332b0e435da21d018603104667bb",
+      "currentSha256": "ca8daed1284bc0580abbec725188165143190c275fa7119923fa6c0b5c32d873"
+    },
+    {
+      "file": "fidelity/gates/sdk-061-dispositions.json",
+      "packedSha256": "78b4e8c14b080478af135d0a9ffb796f7f4a858e31efc2c16589c71cbd52d769",
+      "currentSha256": "5439316c47fd69f8c1b5a37b2931b257d7cbe5fdbcc6e9d0b44ee64e3ce4aa89"
+    }
+  ],
+  "sourceAdditionsAfterPack": [
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/direct-png.txt",
+      "bytes": 98,
+      "sha256": "bdf929ad37ab1379660b213641d962bbe8a9bd7b1f499203e4069a7dddba52c8"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/docs-final.txt",
+      "bytes": 101,
+      "sha256": "6ee7f56d702693b1e224d2160b7fe17eaa2a02cdc105d2b4b39cb9762103a29a"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/docs-prepack-retry.txt",
+      "bytes": 101,
+      "sha256": "9296b2c14eeff99a864c96a6cb72e3c00894335343857275d267ec670cc03c97"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/docs-prepack.txt",
+      "bytes": 32,
+      "sha256": "3ef74e6f88f0b1a09d6cb801c5341e965beee9c20e9a834fa4889fd0c9773caf"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/gate-assessed.txt",
+      "bytes": 1562,
+      "sha256": "a40c69a56509d86aabf8c6e0678306e9dd08181c6bfecea06e98f75358b31a13"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/pack.txt",
+      "bytes": 148,
+      "sha256": "9a8e66e03785406f182944fc7b153e3c55f4f11981a4b841875a4fd09757fcff"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/packed-retry.txt",
+      "bytes": 187,
+      "sha256": "34f6ec4f8d356e9b4177c98e4b9bf325a77ace0659cdd4b5875eab6d594a1f93"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/packed.txt",
+      "bytes": 921,
+      "sha256": "85e27c63eaccd9541ff4ad9ce65a6face0afefc09bb33fcfeeb09e698217fafe"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/checks/review-record.txt",
+      "bytes": 132,
+      "sha256": "1c1172aa35c09969515e95af239c24225dcb60419d90f8f056bfa216337a7795"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/direct-png.json",
+      "bytes": 597,
+      "sha256": "8578009a0fa5ec8fed38e947dacd12d77ebbff56517fd593c470c8e6735e9dbc"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/direct-png.mjs",
+      "bytes": 5423,
+      "sha256": "5862abc5405c6bf46abc901aa25ee9dff86f3a48cdc94c80931e1d9afe2a6eea"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/gate-before-review.json",
+      "bytes": 30623,
+      "sha256": "0f5a11322b8b0fc8c6520a30e7c654bd605a16d917419a461fae8da2ddcbe465"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm-checks.json",
+      "bytes": 673,
+      "sha256": "590bc56bb8312fedba2c55eec61c22b36878cd12d2fcb390e0eafafcc5aeddeb"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm-delivered-example.txt",
+      "bytes": 1251,
+      "sha256": "84e862283cc4e7653f63bab5033c73498351845d2015858f5011c725160c26be"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm-public-contract.txt",
+      "bytes": 1437,
+      "sha256": "60b3434d43a395a35125b46e49b2318506b1c02ebd10cd91c0ede13b1f401edb"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/custom-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/custom-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/default-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/default-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/embedded-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/embedded-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/report.json",
+      "bytes": 22505,
+      "sha256": "31cb6a83b8f937015d282cd116087a4249505e78fc5bc5a964454869e6059dbe"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/npm/seven-types.png",
+      "bytes": 63382,
+      "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm-checks.json",
+      "bytes": 675,
+      "sha256": "0bdbe5c618b300576bd312c0fd2d64ea53d2eefd7688a054c59f240e46d5328d"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm-delivered-example.txt",
+      "bytes": 1253,
+      "sha256": "36550d76fb1c9c1c8998180053cf4ca535b9e9cb15a5f94b6dc90ecedd955736"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm-public-contract.txt",
+      "bytes": 1438,
+      "sha256": "29412b3bec468f9b8893ba3d50f7b06b68876cc3e8a2829e1339b440ab96cfbc"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/custom-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/custom-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/default-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/default-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/embedded-carrousel.png",
+      "bytes": 907586,
+      "sha256": "fe3969bd2937e14bdd68d78a7f6d0de02fdfd0d497250b398a07c08e39789883"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/embedded-host.png",
+      "bytes": 757562,
+      "sha256": "872065db1c2314fd073d8bade49d430e33ee66243de6b459610c127cc8deda31"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/report.json",
+      "bytes": 22506,
+      "sha256": "ce4087592ace15f18bdbf7dadaa8ffa84d49bd602240a9b09f8f16d20d2fc766"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/packed-consumers/pnpm/seven-types.png",
+      "bytes": 63382,
+      "sha256": "9b250c7e43866d5063c5d52301c7c75f11700cf9a7168d16056313014bc75b6d"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/protected.json",
+      "bytes": 43816,
+      "sha256": "246dea38996f8e2fe93d723c35067d78a993b24b70841e19884074bea6d92243"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/source-review.json",
+      "bytes": 41829,
+      "sha256": "efffee78ff064d6af4a5bb4677272d7c5f3a90c7b177ff70bb6e4b5ed9f9000c"
+    },
+    {
+      "file": "docs/architecture/evidence/f7-readiness-20261015/verification.json",
+      "bytes": 7916,
+      "sha256": "335ddf303f3eb573437e27893e0da2d2ba6e7d0cbb8c33b849412f0b476341d3"
+    },
+    {
+      "file": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+      "bytes": 29610,
+      "sha256": "78b4e8c14b080478af135d0a9ffb796f7f4a858e31efc2c16589c71cbd52d769"
+    }
+  ],
+  "productionCheckpointFilesUnchanged": 359,
+  "protectedFilesUnchanged": 285,
+  "previousCertifiedCandidateUnchanged": "unpublished-1.0.0-7c43aa0bfbb5165f5153293f3ebf8db6ba58e7b5663861da8bba7abc198bedc2",
+  "packingManifestPreserved": "not-yet-verified",
+  "publication": false,
+  "referencePromotion": false,
+  "limitation": "Local automated headless browser workflows and personally reviewed stored comparison sheets; no manual live user-browser or other-platform certification."
+}

@@ -9,15 +9,8 @@ import {
 } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { type TemplateFamilyFieldScopeV1 } from "@sleinity/template-core/family";
-import type { TemplateFamilySessionV1 } from "@sleinity/template-browser/session";
-import {
-  TemplateFamilySessionProvider,
-  TemplateSessionViewport,
-  type TemplateFamilyFieldControllerV1,
-  type TemplateSessionViewportHandle,
-  useTemplateFamilyEditor,
-  useTemplateFamilySelection,
-} from "@sleinity/template-react/editor";
+import type {TemplateFamilySessionV1} from "../../../../packages/template-browser/test/legacyEntry";
+import {TemplateFamilySessionProvider, TemplateSessionViewport, type TemplateFamilyFieldControllerV1, type TemplateSessionViewportHandle, useTemplateFamilyEditor, useTemplateFamilySelection} from "../../../../packages/template-react/test/legacyEntry";
 import { EditorLayout } from "../components/EditorLayout";
 import {
   Alert,

@@ -1,0 +1,53 @@
+Exact fixture mode: custom
+Exact fixture mode: default
+Exact fixture mode: embedded
+Preparation: linked binary unavailable
+Preparation: cancel-fonts
+Preparation: registry-fonts
+Preparation: unmount-fonts
+Ownership: receiving-owner
+Ownership: save-success
+Ownership: save-rejection
+Scenario: cancel-read
+Scenario: cancel-pipeline
+Scenario: unmount-pipeline
+Scenario: cancel-staged
+Scenario: staged-load-error
+Scenario: overlap-error
+Scenario: malformed
+Scenario: seven-types
+Scenario: restricted-choices
+Scenario: late-image-error
+Scenario: late-export-error
+{
+  "status": "pass",
+  "manager": "pnpm",
+  "rows": [
+    "default/alias ",
+    "default/alias ?fields-v2",
+    "retired query does not select V1",
+    "exact Carrousel custom",
+    "exact Carrousel default",
+    "exact Carrousel embedded",
+    "linked-unavailable-correction",
+    "cancel-fonts",
+    "registry-fonts",
+    "unmount-fonts",
+    "receiving-owner",
+    "save-success",
+    "save-rejection",
+    "cancel-read",
+    "cancel-pipeline",
+    "unmount-pipeline",
+    "cancel-staged",
+    "staged-load-error",
+    "overlap-error",
+    "malformed",
+    "seven-types",
+    "restricted-choices",
+    "late-image-error",
+    "late-export-error"
+  ],
+  "out": "/tmp/f7-packed-retry/pnpm"
+}
+

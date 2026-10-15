@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: {"valid":false,"familyId":"controlled-family","variantId":"a","familyContentRevision":0,"packageContentState":null,"effectivePackage":null,"materialization":null,"issues":[{"code":"field-family.variant-package-invalid","severity":"error","message":"Variant \"a\" does not contain a valid TemplatePackageV2.","variantId":"a"},{"code":"field-family.effective-package-invalid","severity":"error","message":"Child \"58:63\" does not point back to parent \"probe:extra-media\".","variantId":"a"}],"configurationAuthority":{"text:title":{"label":"imported","controlRole":"imported","configuration":{"maxCharacters":"common"}},"textarea:body":{"label":"imported","controlRole":"imported","configuration":{"maxCharacters":"common","maxLines":"common"}},"image:hero":{"label":"imported","controlRole":"imported","configuration":{"replacementPlacement":"common"}}}}
+
+0 !== 1
+
+    at file:///private/tmp/f7-native-d-20261015/before/familyMediaReadiness.test.js:19464:12 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

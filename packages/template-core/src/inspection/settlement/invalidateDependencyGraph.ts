@@ -1,7 +1,12 @@
 import type { DependencyGraphV1, InvalidationEventV1, InvalidationResultV1, InvalidationTraceStepV1 } from "./types";
 
 function eventKeys(event: InvalidationEventV1, graph: DependencyGraphV1): { keys: string[]; full: boolean } {
-  if (event.type === "property-change") return { keys: [`node:${event.nodeId}:${event.property}`], full: false };
+  if (event.type === "property-change") {
+    const key = `node:${event.nodeId}:${event.property}`;
+    return graph.vertices.some((vertex) => vertex.key === key)
+      ? { keys: [key], full: false }
+      : { keys: ["graph:scene-revision"], full: true };
+  }
   if (event.type === "font-state-change") return { keys: [`font:${event.fontId}:state`], full: false };
   if (event.type === "asset-state-change") return { keys: [`asset:${event.assetId}:state`], full: false };
   if (event.type === "container-resize") return { keys: event.nodeId ? [`node:${event.nodeId}:measure.bounds`] : ["graph:container"], full: false };
@@ -35,7 +40,8 @@ export function invalidateDependencyGraph(graph: DependencyGraphV1, events: Inva
     }
   }
   const affected = [...visited].sort();
-  const nodeIds = [...new Set(affected.filter((key) => key.startsWith("node:")).map((key) => key.split(":")[1]))].sort();
+  const vertexNodes = new Map(graph.vertices.map((vertex) => [vertex.key, vertex.nodeId]));
+  const nodeIds = [...new Set(affected.flatMap((key) => vertexNodes.get(key) ? [vertexNodes.get(key)!] : []))].sort();
   return {
     schemaVersion: "invalidation-result-v1",
     events: structuredClone(events),

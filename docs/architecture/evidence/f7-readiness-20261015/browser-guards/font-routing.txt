@@ -1,0 +1,2 @@
+[runtime-routing] exact-font-evidence=pass output=/Users/niels/Documents/Projects/template-tool/fidelity/runtime-routing/font-evidence/f7-readiness-fonts-20261015
+

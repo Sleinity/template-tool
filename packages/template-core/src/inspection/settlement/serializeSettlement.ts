@@ -11,6 +11,8 @@ export function normalizeMeasurementSnapshot(snapshot: MeasurementSnapshotV1): M
   normalized.capturedAt = null;
   normalized.provenance.captureRunId = null;
   if (normalized.provenance.route?.startsWith("/drafts/")) normalized.provenance.route = "/drafts/:draftId";
+  const outputRoute = normalized.provenance.route?.match(/^\/templates\/(single|family)(?:%3A|:)[^/]+\/output$/i);
+  if (outputRoute) normalized.provenance.route = `/templates/${outputRoute[1].toLowerCase()}:templateId/output`;
   normalized.records.sort((left, right) => left.id.localeCompare(right.id));
   return stable(normalized) as MeasurementSnapshotV1;
 }

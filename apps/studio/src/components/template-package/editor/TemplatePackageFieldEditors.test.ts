@@ -20,11 +20,8 @@ import {
   validateTextFieldValue,
   withTextFieldConstraint,
 } from "@sleinity/template-core/editor";
-import {
-  getEffectiveEditableFields,
-  getPackageFieldOverrideValue,
-  updateTemplatePackageField,
-} from "@sleinity/template-core/editor";
+import {getEffectiveEditableFields} from "@sleinity/template-core/editor";
+import {getPackageFieldOverrideValue, updateTemplatePackageField} from "../../../../../../packages/template-core/test/legacyEntry";
 
 function assert(condition: unknown, message: string): void {
   if (!condition) throw new Error(message);

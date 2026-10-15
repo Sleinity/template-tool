@@ -7,6 +7,8 @@ import {
 import {
   createTemplatePackageFontEmbedCss,
   prepareTemplatePackageFonts,
+  getManagedFontRegistry,
+  type ManagedFontRegistry,
 } from "../fonts";
 
 export interface TemplatePackagePreviewCapture {
@@ -179,6 +181,7 @@ function createRasterReadinessRevision(
     canvas: packageValue.canvas,
     settlementRevision: renderer?.dataset.packageSettlementRevision ?? null,
     settlementId: renderer?.dataset.packageSettlementId ?? null,
+    settlementGeneration: renderer?.dataset.packageSettlementGeneration ?? null,
     primitiveTreeRevision: renderer?.dataset.packagePrimitiveTreeRevision ?? null,
     backendDecisionRevision: runtimeTelemetry?.backendDecisionRevision ?? null,
     productRenderIdentity: runtimeTelemetry?.productRenderIdentity?.identityId ?? null,
@@ -219,7 +222,9 @@ export async function waitForCurrentRuntimeSettlement(node: HTMLElement): Promis
   for (let frame = 0; frame < 120; frame += 1) {
     await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
     const readiness = renderer.dataset.packageSettlementReadiness;
-    const identity = `${renderer.dataset.packageSettlementRevision ?? ""}|${renderer.dataset.packageSettlementId ?? ""}`;
+    const baseIdentity = `${renderer.dataset.packageSettlementRevision ?? ""}|${renderer.dataset.packageSettlementId ?? ""}`;
+    const generation = renderer.dataset.packageSettlementGeneration;
+    const identity = generation ? `${baseIdentity}|${generation}` : baseIdentity;
     stableFrames = readiness === "ready" && identity && identity === previousIdentity ? stableFrames + 1 : 0;
     previousIdentity = identity;
     if (stableFrames >= 2) return;
@@ -230,21 +235,25 @@ export async function waitForCurrentRuntimeSettlement(node: HTMLElement): Promis
 export async function captureTemplatePackagePreview(
   node: HTMLElement,
   packageValue: TemplatePackageV1,
-  dependencies: { rasterize?: Rasterize } = {},
+  dependencies: { rasterize?: Rasterize; fontRegistry?: ManagedFontRegistry | null } = {},
 ): Promise<TemplatePackagePreviewCapture> {
   const rasterize = dependencies.rasterize ?? toPng;
+  const fontRegistry = dependencies.fontRegistry === undefined
+    ? getManagedFontRegistry()
+    : dependencies.fontRegistry;
   const resolvedTree = createResolvedRenderTree(packageValue);
   const fontReadiness = await prepareTemplatePackageFonts(
     packageValue,
     resolvedTree,
     document.fonts,
+    fontRegistry,
   );
   await document.fonts?.ready;
   await waitForCurrentRuntimeSettlement(node);
   const mediaReadinessStarted = performance.now();
   const mediaReadiness = await waitForCurrentMediaReadiness(node);
   const mediaReadinessMs = performance.now() - mediaReadinessStarted;
-  const fontEmbedCSS = await createTemplatePackageFontEmbedCss(packageValue);
+  const fontEmbedCSS = await createTemplatePackageFontEmbedCss(packageValue, fontRegistry);
   const captureOptions = createTemplatePackageCaptureOptions(packageValue, fontEmbedCSS);
   const revision = createRasterReadinessRevision(node, packageValue, mediaReadiness);
   const requiresRasterWarmup = mediaReadiness.some(

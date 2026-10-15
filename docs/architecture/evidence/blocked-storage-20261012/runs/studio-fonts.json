@@ -1,0 +1,72 @@
+{
+  "chromium": "149.0.7827.55",
+  "evidence": "controlled registry faults; exact Rethink bytes; StrictMode",
+  "rows": [
+    {
+      "kind": "single",
+      "scenario": "retry",
+      "counts": {
+        "lists": 12,
+        "mappings": 3,
+        "uploads": 2,
+        "accepted": 1
+      },
+      "unhandledErrors": []
+    },
+    {
+      "kind": "single",
+      "scenario": "source-replacement",
+      "counts": {
+        "lists": 9,
+        "mappings": 2,
+        "uploads": 1,
+        "accepted": 0
+      },
+      "unhandledErrors": []
+    },
+    {
+      "kind": "single",
+      "scenario": "unmount",
+      "counts": {
+        "lists": 6,
+        "mappings": 1,
+        "uploads": 1,
+        "accepted": 0
+      },
+      "unhandledErrors": []
+    },
+    {
+      "kind": "family",
+      "scenario": "retry",
+      "counts": {
+        "lists": 14,
+        "mappings": 7,
+        "uploads": 2,
+        "accepted": 1
+      },
+      "unhandledErrors": []
+    },
+    {
+      "kind": "family",
+      "scenario": "source-replacement",
+      "counts": {
+        "lists": 9,
+        "mappings": 4,
+        "uploads": 1,
+        "accepted": 0
+      },
+      "unhandledErrors": []
+    },
+    {
+      "kind": "family",
+      "scenario": "unmount",
+      "counts": {
+        "lists": 7,
+        "mappings": 2,
+        "uploads": 1,
+        "accepted": 0
+      },
+      "unhandledErrors": []
+    }
+  ]
+}

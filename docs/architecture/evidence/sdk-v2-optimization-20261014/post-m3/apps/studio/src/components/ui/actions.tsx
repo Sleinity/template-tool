@@ -1,0 +1,184 @@
+import type {
+  ButtonHTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+} from "react";
+import { cx } from "./utils";
+
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "quiet"
+  | "destructive";
+
+export type ButtonSize = "small" | "medium" | "large";
+
+export function Spinner({ label = "Loading" }: { label?: string }) {
+  return (
+    <>
+      <span aria-hidden="true" className="ui-spinner" />
+      <span className="ui-visually-hidden">{label}</span>
+    </>
+  );
+}
+
+export interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  loading?: boolean;
+  loadingLabel?: string;
+  leadingIcon?: ReactNode;
+}
+
+export function Button({
+  variant = "primary",
+  size = "medium",
+  loading = false,
+  loadingLabel = "Working",
+  leadingIcon,
+  className,
+  children,
+  disabled,
+  type = "button",
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      {...props}
+      type={type}
+      className={cx("ui-button", className)}
+      data-size={size}
+      data-variant={variant}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+    >
+      {loading ? <Spinner label={loadingLabel} /> : leadingIcon}
+      <span>{loading ? loadingLabel : children}</span>
+    </button>
+  );
+}
+
+export interface IconButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label"> {
+  label: string;
+  icon: ReactNode;
+  loading?: boolean;
+  size?: ButtonSize;
+}
+
+export function IconButton({
+  label,
+  icon,
+  loading = false,
+  size = "medium",
+  className,
+  disabled,
+  type = "button",
+  ...props
+}: IconButtonProps) {
+  return (
+    <button
+      {...props}
+      type={type}
+      aria-label={label}
+      aria-busy={loading || undefined}
+      className={cx("ui-icon-button", className)}
+      data-size={size}
+      disabled={disabled || loading}
+      title={label}
+    >
+      {loading ? <Spinner label={label} /> : icon}
+    </button>
+  );
+}
+
+export function CountBadge({
+  count,
+  label,
+  className,
+}: {
+  count: number;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cx("ui-count-badge", className)}
+      aria-label={`${count} ${label}`}
+    >
+      {count}
+    </span>
+  );
+}
+
+export interface FilterChipProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  selected: boolean;
+  label: string;
+  count?: number;
+}
+
+export function FilterChip({
+  selected,
+  label,
+  count,
+  className,
+  type = "button",
+  ...props
+}: FilterChipProps) {
+  return (
+    <button
+      {...props}
+      type={type}
+      aria-pressed={selected}
+      className={cx("ui-filter-chip", className)}
+    >
+      <span>{label}</span>
+      {count !== undefined ? <CountBadge count={count} label={label} /> : null}
+    </button>
+  );
+}
+
+export interface FilePickerButtonProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "onChange" | "onSelect" | "size"> {
+  children: ReactNode;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  leadingIcon?: ReactNode;
+  onSelect: (file: File | undefined) => void;
+}
+
+export function FilePickerButton({
+  children,
+  variant = "secondary",
+  size = "medium",
+  leadingIcon,
+  onSelect,
+  disabled,
+  className,
+  ...inputProps
+}: FilePickerButtonProps) {
+  return (
+    <label
+      className={cx("ui-button", "ui-file-picker-button", className)}
+      data-size={size}
+      data-variant={variant}
+      data-disabled={disabled || undefined}
+      aria-disabled={disabled || undefined}
+    >
+      {leadingIcon}
+      <span>{children}</span>
+      <input
+        {...inputProps}
+        className="ui-visually-hidden"
+        type="file"
+        disabled={disabled}
+        onChange={(event) => {
+          onSelect(event.currentTarget.files?.[0]);
+          event.currentTarget.value = "";
+        }}
+      />
+    </label>
+  );
+}

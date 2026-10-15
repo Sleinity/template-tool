@@ -1,0 +1,3956 @@
+{
+  "schemaVersion": "sdk-v2-optimization-evidence-v1",
+  "node": "v24.19.0",
+  "platform": "darwin",
+  "arch": "arm64",
+  "profile": "counters-not-timing",
+  "limitation": "Real ZIPs and Blob-backed sources; no DOM, text settlement, exact font activation or Studio rendering. Recovery timing includes native record capture/save.",
+  "fixtures": [
+    {
+      "id": "exporter-061-now-hiring",
+      "sha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    {
+      "id": "exporter-061-cover",
+      "sha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    {
+      "id": "exporter-061-carrousel",
+      "sha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    }
+  ],
+  "rows": [
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.6197500000000673,
+      "p95Ms": 3.6669580000000224,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.7200829999999314,
+      "p95Ms": 3.8256249999999454,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.469250000000102,
+      "p95Ms": 3.666500000000042,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.6764579999999114,
+      "p95Ms": 3.8144170000000486,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.436042000000043,
+      "p95Ms": 3.7855839999999716,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.5649579999999332,
+      "p95Ms": 3.902249999999867,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.163250000000062,
+      "p95Ms": 3.269959000000199,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.279708000000028,
+      "p95Ms": 3.323917000000165,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.027291999999761,
+      "p95Ms": 3.3818749999995816,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.0961670000001504,
+      "p95Ms": 3.1227090000002136,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.5489160000001903,
+      "p95Ms": 0.6030409999998483,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.5948339999999916,
+      "p95Ms": 0.6096669999997175,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.6050829999999223,
+      "p95Ms": 0.6717499999999745,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.698207999999795,
+      "p95Ms": 0.7262500000001637,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.5082079999997404,
+      "p95Ms": 0.5814589999999953,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.5292919999997139,
+      "p95Ms": 0.5472079999999551,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.5011250000002292,
+      "p95Ms": 0.556416999999783,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.5046250000000327,
+      "p95Ms": 0.5485409999996591,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.4783750000001419,
+      "p95Ms": 0.4979169999996884,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.4873330000000351,
+      "p95Ms": 0.5030000000001564,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 4.481667000000016,
+      "p95Ms": 5.517708999999741,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.728625000000193,
+      "p95Ms": 6.51241600000003,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 4.322500000000218,
+      "p95Ms": 4.393999999999778,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.191291000000092,
+      "p95Ms": 5.603416000000379,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 4.065583000000061,
+      "p95Ms": 4.137292000000343,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 4.481708000000253,
+      "p95Ms": 4.936875000000327,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.718083000000206,
+      "p95Ms": 3.9410000000002583,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.5644170000000486,
+      "p95Ms": 4.382625000000189,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.6034999999997126,
+      "p95Ms": 3.765124999999898,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.5105829999997695,
+      "p95Ms": 4.10004200000003,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.835417000000234,
+      "p95Ms": 5.861750000000029,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.5715000000000146,
+      "p95Ms": 6.689416000000165,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.907999999999902,
+      "p95Ms": 6.0437080000001515,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.1202079999998205,
+      "p95Ms": 7.065042000000176,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.924958000000061,
+      "p95Ms": 6.025500000000193,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.838792000000012,
+      "p95Ms": 6.3622919999997976,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.615832999999839,
+      "p95Ms": 5.666666999999961,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.878709000000072,
+      "p95Ms": 6.805957999999919,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.14587500000016,
+      "p95Ms": 6.65954099999999,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.862540999999965,
+      "p95Ms": 6.503374999999778,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.9090000000001055,
+      "p95Ms": 5.941625000000386,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.082124999999905,
+      "p95Ms": 6.230999999999767,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.626374999999825,
+      "p95Ms": 5.785417000000052,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.337209000000257,
+      "p95Ms": 6.45575000000008,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.864790999999968,
+      "p95Ms": 6.121458999999959,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.737957999999708,
+      "p95Ms": 6.065833999999995,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.20154199999979,
+      "p95Ms": 6.227958000000399,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.16150000000016,
+      "p95Ms": 6.236583999999311,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.114207999999962,
+      "p95Ms": 6.117625000000771,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.52233299999989,
+      "p95Ms": 5.6200419999995574,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.439499999999498,
+      "p95Ms": 1.5646249999999782,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.4002920000002632,
+      "p95Ms": 1.4839590000001408,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.3354580000004717,
+      "p95Ms": 1.358459000000039,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.3403749999997672,
+      "p95Ms": 1.4851250000001528,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.3913329999995767,
+      "p95Ms": 1.3922499999998763,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.323833000000377,
+      "p95Ms": 1.386333999999806,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.3604999999997744,
+      "p95Ms": 1.4264169999996739,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.2766670000000886,
+      "p95Ms": 1.310124999999971,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.283499999999549,
+      "p95Ms": 1.3789579999993293,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.2657499999995707,
+      "p95Ms": 1.3440840000002936,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 280
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 7.254541000000245,
+      "p95Ms": 7.36620800000037,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 7.34991699999955,
+      "p95Ms": 9.264374999999745,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 7.386665999999423,
+      "p95Ms": 8.488999999999578,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 7.723875000000589,
+      "p95Ms": 8.403291999999965,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.918582999999671,
+      "p95Ms": 8.263249999999971,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 7.035042000000431,
+      "p95Ms": 7.240499999999884,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.978041000000303,
+      "p95Ms": 7.114375000000109,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.737207999999555,
+      "p95Ms": 7.188707999999679,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 7.24474999999984,
+      "p95Ms": 8.369166000000405,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 7.350292000000081,
+      "p95Ms": 8.176375000000007,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.67595799999981,
+      "p95Ms": 13.128624999999374,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 11.962875000000167,
+      "p95Ms": 11.974249999999302,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 11.861917000000176,
+      "p95Ms": 11.98833299999933,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.319999999999709,
+      "p95Ms": 11.369166000000405,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.678540999999313,
+      "p95Ms": 11.979333000000224,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 12.143291999999747,
+      "p95Ms": 12.207667000000583,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 11.872832999999446,
+      "p95Ms": 11.983125000000655,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.803499999999985,
+      "p95Ms": 11.965624999999818,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.146375000000262,
+      "p95Ms": 11.460667000000285,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 11.338459000000512,
+      "p95Ms": 11.694124999999985,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 28
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 4.921541000000616,
+      "p95Ms": 5.037083999999595,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.1220830000002024,
+      "p95Ms": 5.342000000000553,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.29070800000045,
+      "p95Ms": 5.3145000000004075,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.225917000000663,
+      "p95Ms": 5.3087500000001455,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 4.949207999999999,
+      "p95Ms": 4.974500000000262,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.0578749999995125,
+      "p95Ms": 5.470041999999921,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.320125000000189,
+      "p95Ms": 5.3290420000003,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.054165999999896,
+      "p95Ms": 5.059792000000016,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.060333000000355,
+      "p95Ms": 5.186292000000321,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.09112499999992,
+      "p95Ms": 5.410791000000245,
+      "work": {
+        "validateTemplatePackageV2": 10,
+        "schemaEvaluations": 10,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.1172919999999067,
+      "p95Ms": 1.1947079999999914,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.172708999999486,
+      "p95Ms": 1.2333749999997963,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.0816249999998035,
+      "p95Ms": 1.1515000000008513,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.0886250000003201,
+      "p95Ms": 1.1144999999996799,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.057042000000365,
+      "p95Ms": 1.0653749999992215,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.0933750000003783,
+      "p95Ms": 1.1216670000003433,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.9984169999997903,
+      "p95Ms": 1.006375000000844,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.056457999999111,
+      "p95Ms": 1.1103330000005371,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 1.0864590000001044,
+      "p95Ms": 1.1335419999995793,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 1.114332999999533,
+      "p95Ms": 1.115125000000262,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 260
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.799291999999696,
+      "p95Ms": 6.073999999998705,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.052208999999493,
+      "p95Ms": 6.054000000000087,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.9876660000009,
+      "p95Ms": 6.0182500000009895,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.183207999998558,
+      "p95Ms": 7.3246670000007725,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.009167000000161,
+      "p95Ms": 6.256999999999607,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.3297079999993,
+      "p95Ms": 6.5885419999995065,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 6.227415999999721,
+      "p95Ms": 6.289375000000291,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 6.330292000000554,
+      "p95Ms": 7.508583000000726,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 5.835833000001003,
+      "p95Ms": 6.12041599999975,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 5.581249999999272,
+      "p95Ms": 5.925083000000086,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 21
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 10.715667000000394,
+      "p95Ms": 10.801666999999725,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 10.636999999998807,
+      "p95Ms": 10.641999999999825,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 10.568583000000217,
+      "p95Ms": 10.662041999999929,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 10.254332999998951,
+      "p95Ms": 10.259792000000743,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 9.732458999998926,
+      "p95Ms": 9.85558299999866,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 10.157624999999825,
+      "p95Ms": 10.549457999999504,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 10.463834000000134,
+      "p95Ms": 10.612082999999984,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.275207999999111,
+      "p95Ms": 11.361791999999696,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 11.025292000000263,
+      "p95Ms": 11.251625000000786,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 11.017874999999549,
+      "p95Ms": 11.162791000000652,
+      "work": {
+        "validateTemplatePackageV2": 35,
+        "schemaEvaluations": 31
+      },
+      "nodes": 26
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.792041999999128,
+      "p95Ms": 3.869290999999066,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 4.009749999999258,
+      "p95Ms": 4.3666250000005675,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.969082999999955,
+      "p95Ms": 4.108874999999898,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.8429159999996045,
+      "p95Ms": 4.02520899999945,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.8306250000005093,
+      "p95Ms": 3.8938749999997526,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.768500000000131,
+      "p95Ms": 3.854583000000275,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.691999999999098,
+      "p95Ms": 3.706624999998894,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 4.0862079999988055,
+      "p95Ms": 4.154583000001367,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 3.909584000000905,
+      "p95Ms": 4.046125000000757,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 3.8644580000000133,
+      "p95Ms": 3.9034169999995356,
+      "work": {
+        "validateTemplatePackageV2": 25,
+        "schemaEvaluations": 20,
+        "materializeTemplateFieldContentV2": 5,
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.4207079999996495,
+      "p95Ms": 0.4307910000006814,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.45870900000045367,
+      "p95Ms": 0.4756250000009459,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.4102499999989959,
+      "p95Ms": 0.41745799999989686,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.40049999999973807,
+      "p95Ms": 0.4087500000005093,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.42770800000107556,
+      "p95Ms": 0.4332079999985581,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.45112499999959255,
+      "p95Ms": 0.45483299999978044,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.42537500000071304,
+      "p95Ms": 0.47912499999983993,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.4576249999990978,
+      "p95Ms": 0.5228749999987485,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 0.40766700000131095,
+      "p95Ms": 0.41416600000047765,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 0.4139579999991838,
+      "p95Ms": 0.4187920000003942,
+      "work": {
+        "createResolvedRenderTree": 5,
+        "resolvePrimitiveAppearance": 110
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 17.82641700000022,
+      "p95Ms": 23.159583000000566,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 17.40270799999962,
+      "p95Ms": 23.754290999999284,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 17.867999999998574,
+      "p95Ms": 23.471708000000945,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 17.739542000001165,
+      "p95Ms": 22.688208999999915,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 16.760208000001512,
+      "p95Ms": 22.897291999999652,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 17.171791999999186,
+      "p95Ms": 22.460582999998223,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 17.789624999999432,
+      "p95Ms": 23.612334000001283,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 17.826333999999406,
+      "p95Ms": 22.86858299999949,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 17.42487500000061,
+      "p95Ms": 22.782875000000786,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 17.535208999999668,
+      "p95Ms": 22.879417000000103,
+      "work": {
+        "validateTemplatePackageV2": 60,
+        "schemaEvaluations": 60
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 28.682749999999942,
+      "p95Ms": 34.298917000000074,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 29.47345900000073,
+      "p95Ms": 34.339083000000755,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 27.910249999998996,
+      "p95Ms": 30.271209000000454,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 28.29175000000032,
+      "p95Ms": 28.8660830000008,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 29.40887499999917,
+      "p95Ms": 34.481792000000496,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 28.822707999999693,
+      "p95Ms": 33.74408399999993,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 28.104166999999507,
+      "p95Ms": 30.40533300000061,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 27.32666699999936,
+      "p95Ms": 28.36620800000128,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "count": 5,
+      "medianMs": 29.16279200000099,
+      "p95Ms": 33.11458300000049,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "count": 5,
+      "medianMs": 30.286165999999866,
+      "p95Ms": 35.613124999999854,
+      "work": {
+        "validateTemplatePackageV2": 90,
+        "schemaEvaluations": 90
+      },
+      "nodes": 11
+    }
+  ],
+  "comparisons": [
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": -1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 0,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 1,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 2,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "current",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 3,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "before",
+      "equal": true
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "trial": 4,
+      "phase": "current",
+      "equal": true
+    }
+  ],
+  "summary": [
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "edit",
+      "beforeMedianMs": 3.436042000000043,
+      "currentMedianMs": 3.469250000000102,
+      "medianDeltaInterval": [
+        -0.20720799999980954,
+        0.12891599999989012
+      ],
+      "p95DeltaInterval": [
+        -0.25916599999936807,
+        0.15866699999992306
+      ]
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "tree",
+      "beforeMedianMs": 0.5082079999997404,
+      "currentMedianMs": 0.5292919999997139,
+      "medianDeltaInterval": [
+        -0.09312499999987267,
+        0.045917999999801395
+      ],
+      "p95DeltaInterval": [
+        -0.054500000000189175,
+        0.007876000000123895
+      ]
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "save",
+      "beforeMedianMs": 4.065583000000061,
+      "currentMedianMs": 4.322500000000218,
+      "medianDeltaInterval": [
+        -0.8687909999998737,
+        1.246958000000177
+      ],
+      "p95DeltaInterval": [
+        -1.2094160000006013,
+        0.9947070000002896
+      ]
+    },
+    {
+      "scenario": "exporter-061-now-hiring",
+      "operation": "recovery",
+      "beforeMedianMs": 5.924958000000061,
+      "currentMedianMs": 5.838792000000012,
+      "medianDeltaInterval": [
+        -0.2833340000001954,
+        -0.08616600000004837
+      ],
+      "p95DeltaInterval": [
+        -1.1392909999999574,
+        0.8276660000001357
+      ]
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "edit",
+      "beforeMedianMs": 6.114207999999962,
+      "currentMedianMs": 5.737957999999708,
+      "medianDeltaInterval": [
+        -0.7108340000004318,
+        0.1731249999997999
+      ],
+      "p95DeltaInterval": [
+        -0.6703330000000278,
+        0.28937499999938154
+      ]
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "tree",
+      "beforeMedianMs": 1.3403749999997672,
+      "currentMedianMs": 1.3354580000004717,
+      "medianDeltaInterval": [
+        -0.06749999999919964,
+        0.08383299999968585
+      ],
+      "p95DeltaInterval": [
+        -0.12666600000011385,
+        0.11629199999970297
+      ]
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "save",
+      "beforeMedianMs": 7.24474999999984,
+      "currentMedianMs": 7.34991699999955,
+      "medianDeltaInterval": [
+        -0.3372090000011667,
+        0.24083300000074814
+      ],
+      "p95DeltaInterval": [
+        -1.0227500000000873,
+        1.8981669999993755
+      ]
+    },
+    {
+      "scenario": "exporter-061-cover",
+      "operation": "recovery",
+      "beforeMedianMs": 11.67595799999981,
+      "currentMedianMs": 11.872832999999446,
+      "medianDeltaInterval": [
+        0.0693329999994603,
+        0.5419170000004669
+      ],
+      "p95DeltaInterval": [
+        -1.1543750000000728,
+        0.6191669999989244
+      ]
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "edit",
+      "beforeMedianMs": 5.054165999999896,
+      "currentMedianMs": 5.1220830000002024,
+      "medianDeltaInterval": [
+        0.030791999999564723,
+        0.2659590000002936
+      ],
+      "p95DeltaInterval": [
+        0.0057500000002619345,
+        0.4955419999996593
+      ]
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "tree",
+      "beforeMedianMs": 1.0864590000001044,
+      "currentMedianMs": 1.0933750000003783,
+      "medianDeltaInterval": [
+        -0.058040999999320775,
+        0.055416999999579275
+      ],
+      "p95DeltaInterval": [
+        -0.10395799999969313,
+        0.05629200000112178
+      ]
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "save",
+      "beforeMedianMs": 6.009167000000161,
+      "currentMedianMs": 6.052208999999493,
+      "medianDeltaInterval": [
+        -0.2545830000017304,
+        0.3205409999991389
+      ],
+      "p95DeltaInterval": [
+        -1.306416999999783,
+        0.3315419999998994
+      ]
+    },
+    {
+      "scenario": "exporter-061-carrousel",
+      "operation": "recovery",
+      "beforeMedianMs": 10.715667000000394,
+      "currentMedianMs": 10.568583000000217,
+      "medianDeltaInterval": [
+        -0.8113739999989775,
+        0.42516600000089966
+      ],
+      "p95DeltaInterval": [
+        -0.7497089999997115,
+        0.693875000000844
+      ]
+    },
+    {
+      "scenario": "family",
+      "operation": "edit",
+      "beforeMedianMs": 3.8429159999996045,
+      "currentMedianMs": 3.8644580000000133,
+      "medianDeltaInterval": [
+        -0.3942079999997077,
+        0.2177080000001297
+      ],
+      "p95DeltaInterval": [
+        -0.44795800000247255,
+        0.4973340000015014
+      ]
+    },
+    {
+      "scenario": "family",
+      "operation": "tree",
+      "beforeMedianMs": 0.4207079999996495,
+      "currentMedianMs": 0.42537500000071304,
+      "medianDeltaInterval": [
+        -0.03224999999838474,
+        0.0380010000008042
+      ],
+      "p95DeltaInterval": [
+        -0.043749999998908606,
+        0.044834000000264496
+      ]
+    },
+    {
+      "scenario": "family",
+      "operation": "save",
+      "beforeMedianMs": 17.739542000001165,
+      "currentMedianMs": 17.535208999999668,
+      "medianDeltaInterval": [
+        -0.4237090000005992,
+        0.41158399999767425
+      ],
+      "p95DeltaInterval": [
+        -0.43670900000142865,
+        0.7834990000010293
+      ]
+    },
+    {
+      "scenario": "family",
+      "operation": "recovery",
+      "beforeMedianMs": 28.682749999999942,
+      "currentMedianMs": 28.822707999999693,
+      "medianDeltaInterval": [
+        -0.5861669999994774,
+        1.1233739999988757
+      ],
+      "p95DeltaInterval": [
+        -0.7377080000005662,
+        2.498541999999361
+      ]
+    }
+  ]
+}

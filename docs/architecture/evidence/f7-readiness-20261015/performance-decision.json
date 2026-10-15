@@ -1,0 +1,243 @@
+{
+  "decision": "accept-runtime-timing",
+  "baseline": "f4afd50a5f336fa02afb3f1fd634afec2afe10b0301b564eaa1279b3a11f4481",
+  "candidate": "c6b328bd699c5aaf39c6b8e818085fe95c7e3da8576c7346836d1d1e5db66335",
+  "coverBenefit": [
+    "family-cold-1/0",
+    "family-switch/1"
+  ],
+  "repeatedConfirmedRegressions": [],
+  "retained": [
+    {
+      "name": "minimal",
+      "packetSha256": "305640d4e2dc77b5ac736393a68419e73951d8569f781a0c3eac0cd998bee078",
+      "measuredSteps": 120
+    },
+    {
+      "name": "minimal-repeat",
+      "packetSha256": "1a6ec51e1e514aabcd340902105e420d8971b791958883552e5d68f66cdef869",
+      "measuredSteps": 120
+    },
+    {
+      "name": "counters",
+      "packetSha256": "22822ea51bb8722c319f0e1893a940bedbf56ba9ce0972203e5b6f1d9c8c5e37",
+      "measuredSteps": 120
+    },
+    {
+      "name": "counters-balanced",
+      "packetSha256": "48d10cc70d28efcda595242dba4bb5ddb47388ab145944a5cc6d74cf872209c3",
+      "measuredSteps": 120
+    },
+    {
+      "name": "control-repeat",
+      "packetSha256": "206ddf9bba2ed9a8741178ae4bbc048fe43a0678f9c28c41ecafb7127829f203",
+      "measuredSteps": 10
+    },
+    {
+      "name": "warm-repeat",
+      "packetSha256": "39ca846d8eef4debd63ef67a6c3a8a9c7e9e21e8732a0c17f90f0b1ed5f00096",
+      "measuredSteps": 60
+    },
+    {
+      "name": "final-warm-repeat",
+      "packetSha256": "36171aee8b63fcb100e3da5a178a9e32bc11164eb88c96dfcc52a95b614b4cb7",
+      "measuredSteps": 60
+    }
+  ],
+  "instrumentationOverhead": {
+    "method": "Balanced detailed minus minimal per-case medians, separate passes; descriptive and confounded by run order, not an isolated causal overhead estimate.",
+    "milliseconds": [
+      {
+        "case": "single-0/0",
+        "metrics": {
+          "readyMs": {
+            "before": -3.200000047683716,
+            "current": 2
+          },
+          "previewMs": {
+            "before": -8.899999976158142,
+            "current": 3.200000047683716
+          },
+          "pngMs": {
+            "before": 3.6999999284744263,
+            "current": 1.100000023841858
+          }
+        }
+      },
+      {
+        "case": "single-1/0",
+        "metrics": {
+          "readyMs": {
+            "before": 6.3999998569488525,
+            "current": 1.1999999284744263
+          },
+          "previewMs": {
+            "before": 15.700000047683716,
+            "current": 0.8000000715255737
+          },
+          "pngMs": {
+            "before": -0.6000000238418579,
+            "current": -2.5
+          }
+        }
+      },
+      {
+        "case": "single-2/0",
+        "metrics": {
+          "readyMs": {
+            "before": -3,
+            "current": -4.200000166893005
+          },
+          "previewMs": {
+            "before": -3,
+            "current": -6.899999976158142
+          },
+          "pngMs": {
+            "before": 1.2000000476837158,
+            "current": -7.600000023841858
+          }
+        }
+      },
+      {
+        "case": "family-cold-0/0",
+        "metrics": {
+          "readyMs": {
+            "before": 1.899999976158142,
+            "current": -2.700000047683716
+          },
+          "previewMs": {
+            "before": 5.100000023841858,
+            "current": 3.1999999284744263
+          },
+          "pngMs": {
+            "before": 10.299999952316284,
+            "current": 36.200000047683716
+          }
+        }
+      },
+      {
+        "case": "family-cold-1/0",
+        "metrics": {
+          "readyMs": {
+            "before": 1.6999999284744263,
+            "current": 6.299999952316284
+          },
+          "previewMs": {
+            "before": 2.0999999046325684,
+            "current": 4.200000047683716
+          },
+          "pngMs": {
+            "before": 6.200000166893005,
+            "current": -9
+          }
+        }
+      },
+      {
+        "case": "family-cold-2/0",
+        "metrics": {
+          "readyMs": {
+            "before": -1.2000000476837158,
+            "current": 0.5000001192092896
+          },
+          "previewMs": {
+            "before": -2.200000047683716,
+            "current": -2.9000000953674316
+          },
+          "pngMs": {
+            "before": 1.4000000953674316,
+            "current": 10.699999928474426
+          }
+        }
+      },
+      {
+        "case": "family-switch/0",
+        "metrics": {
+          "readyMs": {
+            "before": -4.799999952316284,
+            "current": 0.3999999761581421
+          },
+          "previewMs": {
+            "before": 10.400000095367432,
+            "current": -0.5
+          }
+        }
+      },
+      {
+        "case": "family-switch/1",
+        "metrics": {
+          "readyMs": {
+            "before": -0.7000000476837158,
+            "current": 5.400000095367432
+          },
+          "previewMs": {
+            "before": -2.9000000953674316,
+            "current": 8.5
+          }
+        }
+      },
+      {
+        "case": "family-switch/2",
+        "metrics": {
+          "readyMs": {
+            "before": -1.899999976158142,
+            "current": 2.100000023841858
+          },
+          "previewMs": {
+            "before": 19.5,
+            "current": -30.700000047683716
+          }
+        }
+      },
+      {
+        "case": "family-switch/3",
+        "metrics": {
+          "readyMs": {
+            "before": 0,
+            "current": -0.10000014305114746
+          },
+          "previewMs": {
+            "before": 7.100000023841858,
+            "current": 2.3999998569488525
+          }
+        }
+      },
+      {
+        "case": "family-switch/4",
+        "metrics": {
+          "readyMs": {
+            "before": -3.1999999284744263,
+            "current": -0.7999999523162842
+          },
+          "previewMs": {
+            "before": 6.699999809265137,
+            "current": -0.8000000715255737
+          }
+        }
+      },
+      {
+        "case": "family-switch/5",
+        "metrics": {
+          "readyMs": {
+            "before": -4.0000001192092896,
+            "current": 0.6999999284744263
+          },
+          "previewMs": {
+            "before": -2,
+            "current": -3.200000047683716
+          },
+          "pngMs": {
+            "before": 2.899999976158142,
+            "current": -4.799999952316284
+          }
+        }
+      }
+    ],
+    "warmTiming": "Confirmed warm increases persist in detailed tracing; an additional independent minimal five-pair Family sequence has no confirmed increases. Counter-pass timings are not production timing acceptance inputs."
+  },
+  "limitations": [
+    "Five trials per case/run; finite local-environment evidence.",
+    "Every flag remains in the analyses, including descriptive tails and detailed warm-case flags.",
+    "Before/current packets retain original baseline candidateId; explicit checkpoint identities distinguish the changed runtime.",
+    "No universal latency, PNG speedup or transfer-size claim."
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "baseline": false,
+  "chromium": "149.0.7827.55",
+  "events": [
+    {
+      "name": "open-request",
+      "ms": 63.39999997615814
+    },
+    {
+      "name": "older-version-change-kept-open",
+      "ms": 63.60000002384186
+    },
+    {
+      "name": "blocked",
+      "ms": 63.700000047683716
+    },
+    {
+      "name": "all-callers-rejected",
+      "ms": 63.800000071525574
+    },
+    {
+      "name": "blocker-closed",
+      "ms": 63.89999997615814
+    },
+    {
+      "name": "upgradeneeded",
+      "ms": 64
+    },
+    {
+      "name": "success",
+      "ms": 64.5
+    },
+    {
+      "name": "open-request",
+      "ms": 64.5
+    },
+    {
+      "name": "success",
+      "ms": 64.70000004768372
+    },
+    {
+      "name": "retry-accepted",
+      "ms": 64.70000004768372
+    }
+  ],
+  "beforeClose": {
+    "requests": 1,
+    "outcomes": [
+      "rejected",
+      "rejected",
+      "rejected",
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      },
+      {
+        "name": "TemplateStorageBlockedError",
+        "code": "template-storage-blocked",
+        "databaseName": "template-package-platform",
+        "requestedVersion": 5,
+        "retryable": true,
+        "message": "Local storage is blocked. Close other tabs or windows of this app, then retry."
+      }
+    ]
+  },
+  "requests": 2,
+  "stores": [
+    "assetReferences",
+    "assets",
+    "fontMappings",
+    "managedFonts",
+    "metadata",
+    "outputDrafts",
+    "templateFamilies",
+    "templateFamilyDrafts",
+    "templateRecovery",
+    "templates"
+  ],
+  "cached": true,
+  "hosts": [
+    {
+      "kind": "single",
+      "before": {
+        "opens": 1,
+        "writes": 0,
+        "notifications": 1,
+        "outcomes": [
+          {
+            "operation": "asset-read",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-asset",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-list",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-record",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-bytes",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-mapping",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-link",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-unlink",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-delete",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-inspect",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-begin",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-complete",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-discard",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-ownership",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-export-preflight",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-auto-link",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "single-restore",
+            "outcome": "blocked-snapshot",
+            "code": "saved-session-load-failed"
+          },
+          {
+            "operation": "font-upload",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-save",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "save-first",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "save-queued",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          }
+        ]
+      },
+      "after": {
+        "opens": 2,
+        "writes": 6,
+        "notifications": 2,
+        "stores": [
+          "assetReferences",
+          "assets",
+          "fontMappings",
+          "managedFonts",
+          "metadata",
+          "outputDrafts",
+          "templateFamilies",
+          "templateFamilyDrafts",
+          "templateRecovery",
+          "templates"
+        ]
+      },
+      "events": [
+        {
+          "event": "blocker-version-change",
+          "ms": 343.3000000715256
+        },
+        {
+          "event": "blocked",
+          "ms": 343.40000009536743
+        },
+        {
+          "event": "all-operations-settled",
+          "ms": 344.90000009536743
+        },
+        {
+          "event": "upgradeneeded",
+          "ms": 345.10000002384186
+        },
+        {
+          "event": "success",
+          "ms": 345.8000000715256
+        },
+        {
+          "event": "success",
+          "ms": 346.40000009536743
+        }
+      ]
+    },
+    {
+      "kind": "family",
+      "before": {
+        "opens": 1,
+        "writes": 0,
+        "notifications": 1,
+        "outcomes": [
+          {
+            "operation": "asset-read",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-asset",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-list",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-record",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-bytes",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-mapping",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-link",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-unlink",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-delete",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-inspect",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-begin",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-complete",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-discard",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-ownership",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-export-preflight",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-auto-link",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "family-restore",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "font-upload",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "recovery-save",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "save-first",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          },
+          {
+            "operation": "save-queued",
+            "outcome": "rejected",
+            "code": "template-storage-blocked"
+          }
+        ]
+      },
+      "after": {
+        "opens": 2,
+        "writes": 6,
+        "notifications": 2,
+        "stores": [
+          "assetReferences",
+          "assets",
+          "fontMappings",
+          "managedFonts",
+          "metadata",
+          "outputDrafts",
+          "templateFamilies",
+          "templateFamilyDrafts",
+          "templateRecovery",
+          "templates"
+        ]
+      },
+      "events": [
+        {
+          "event": "blocker-version-change",
+          "ms": 334.5
+        },
+        {
+          "event": "blocked",
+          "ms": 334.60000002384186
+        },
+        {
+          "event": "all-operations-settled",
+          "ms": 336.10000002384186
+        },
+        {
+          "event": "upgradeneeded",
+          "ms": 336.90000009536743
+        },
+        {
+          "event": "success",
+          "ms": 337.60000002384186
+        },
+        {
+          "event": "success",
+          "ms": 338.5
+        }
+      ]
+    }
+  ],
+  "packed": {
+    "archives": [
+      {
+        "file": "sleinity-template-core-1.0.0.tgz",
+        "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185"
+      },
+      {
+        "file": "sleinity-template-browser-1.0.0.tgz",
+        "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8"
+      },
+      {
+        "file": "sleinity-template-react-1.0.0.tgz",
+        "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b"
+      }
+    ],
+    "manager": "pnpm",
+    "strictDeclarations": true
+  }
+}

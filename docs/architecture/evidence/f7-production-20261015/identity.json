@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "f7-evidence-identity-v1",
+  "candidateId": "unpublished-1.0.0-7c43aa0bfbb5165f5153293f3ebf8db6ba58e7b5663861da8bba7abc198bedc2",
+  "runtimeSourcesVerified": 353,
+  "profileJsonSha256": "fa774e1372051699bca0378e01b47d74865a853a2e62eca79b84d5a7325a15a1",
+  "profileGzipSha256": "5dfdeef365afd4e18bd7ab8e30a1a306c95cc4b295c5c6779d15daff55e21ff1",
+  "tooling": [
+    {
+      "file": "scripts/f7/run.mjs",
+      "sha256": "ea3b98e61b82dc2db96eddc16a7c680c51a9e996c3547cdeebb940cdf98357ef"
+    },
+    {
+      "file": "scripts/f7/probe.ts",
+      "sha256": "058e411553ecee9046b29c13a310fe853ed30e3d71e11b0917d42b4b3d20828c"
+    },
+    {
+      "file": "scripts/f7/instrumentation.mjs",
+      "sha256": "ce264e3943fe68e6f5f6e3d675b5070b6afdc8c53320af102834d1a2ff63394b"
+    },
+    {
+      "file": "scripts/f7/index.html",
+      "sha256": "478cc6e96e4a4326ee1b9e1673f50567196663c40c9286686c194ba226410211"
+    },
+    {
+      "file": "scripts/f7/analyze.mjs",
+      "sha256": "d43f0e8ea86ab3b06ebdb2b7770fcf2d4cee0323d69da29246a4d36cde2ae6d8"
+    },
+    {
+      "file": "scripts/f7/validate-evidence.mjs",
+      "sha256": "a006aeb1f81f853055b0f487a3297bdf9efadee8c802cf125fe6f9a02c00c747"
+    }
+  ],
+  "nonFinalAttempts": [
+    {
+      "name": "f7-pilot-20261015",
+      "validForAcceptance": false,
+      "cause": "Harness passed initial Family selection using the wrong load signature; PNG dimension assertion rejected the substituted selection."
+    },
+    {
+      "name": "f7-pilot2-20261015",
+      "validForAcceptance": false,
+      "cause": "Harness attempted another export after successful export completed the recovery lifecycle; rejected by existing product guards."
+    },
+    {
+      "name": "f7-pilot3-20261015",
+      "validForAcceptance": false,
+      "cause": "Passing one-pair corrected pilot; preliminary only. Final five-pair run is the accepted evidence."
+    }
+  ],
+  "noRuntimeChanges": true,
+  "noReferencePromotion": true
+}

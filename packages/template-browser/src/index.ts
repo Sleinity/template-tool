@@ -18,6 +18,7 @@ export * from "./editor/textMeasurement";
 export * from "./import";
 export * from "./session/index";
 export * from "./enrichment";
+export type { ResolvedProductRenderIdentityV1 } from "./runtime/renderIdentity";
 export {
   createTextFitResult,
   type FieldTextFitResult,

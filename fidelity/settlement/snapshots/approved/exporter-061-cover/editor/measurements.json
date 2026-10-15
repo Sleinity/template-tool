@@ -1,0 +1,900 @@
+{
+  "metadata": {
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "byteSize": 1325041,
+      "canvas": {
+        "height": 1350,
+        "width": 1080
+      },
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+      "filename": "template-package-cover-v0.6.1.zip",
+      "id": "exporter-061-cover",
+      "packageVersion": "1.0",
+      "rootNodeId": "987:6771",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    "scenarioId": null,
+    "surface": "editor"
+  },
+  "schemaVersion": "measurement-snapshot-envelope-v1",
+  "snapshot": {
+    "capturedAt": null,
+    "environmentProfile": "chromium-headless",
+    "fixture": {
+      "id": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    "provenance": {
+      "captureRunId": null,
+      "rendererMode": "editor",
+      "route": "/templates/single:templateId/output"
+    },
+    "readiness": {
+      "assets": "ready",
+      "fonts": "ready",
+      "framesObserved": null,
+      "geometryStable": true
+    },
+    "records": [
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6771:semantic",
+          "graph:container"
+        ],
+        "id": "987:6771:bounds",
+        "nodeId": "987:6771",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 1350,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6772:semantic",
+          "graph:container"
+        ],
+        "id": "987:6772:bounds",
+        "nodeId": "987:6772",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 392,
+          "width": 1080,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6773:semantic",
+          "graph:container"
+        ],
+        "id": "987:6773:bounds",
+        "nodeId": "987:6773",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 215.9999,
+          "width": 920,
+          "x": 72,
+          "y": 88
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6773:text.style"
+        ],
+        "id": "987:6773:font-readiness",
+        "nodeId": "987:6773",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+            "classification": "exact",
+            "cssFamily": "__template_font_9062978ead3d7a3e_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Funnel Display",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              768.9843,
+              0,
+              740.7812,
+              14.7032,
+              280.1406,
+              768.9845,
+              0,
+              740.7812,
+              14.7032,
+              280.1406
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 65,
+                "family": "__template_font_9062978ead3d7a3e_0_static",
+                "style": "normal",
+                "weight": "400"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Funnel Display",
+            "runtimeFamily": "__template_font_9062978ead3d7a3e_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 400
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6773:text.characters",
+          "node:987:6773:text.style"
+        ],
+        "id": "987:6773:text-box",
+        "nodeId": "987:6773",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 215.9999,
+          "scrollHeight": 220,
+          "scrollWidth": 920,
+          "width": 920
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6774:semantic",
+          "graph:container"
+        ],
+        "id": "987:6774:bounds",
+        "nodeId": "987:6774",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 838.0001,
+          "width": 1080,
+          "x": 0,
+          "y": 392
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "intrinsic",
+        "dependencies": [
+          "asset:asset:image:6ead0168:state"
+        ],
+        "id": "987:6774:intrinsic-image",
+        "nodeId": "987:6774",
+        "property": "intrinsic-image",
+        "readiness": "ready",
+        "source": "image-decode",
+        "unit": "pixels",
+        "valid": true,
+        "value": {
+          "height": 1125,
+          "width": 1500
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6775:semantic",
+          "graph:container"
+        ],
+        "id": "987:6775:bounds",
+        "nodeId": "987:6775",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 96.0001,
+          "width": 296.5468,
+          "x": 735.4531,
+          "y": 1085.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6776:semantic",
+          "graph:container"
+        ],
+        "id": "987:6776:bounds",
+        "nodeId": "987:6776",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 96.0001,
+          "width": 184.5469,
+          "x": 735.4531,
+          "y": 1085.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6777:semantic",
+          "graph:container"
+        ],
+        "id": "987:6777:bounds",
+        "nodeId": "987:6777",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 60.0001,
+          "width": 112.547,
+          "x": 771.4531,
+          "y": 1103.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6777:text.style"
+        ],
+        "id": "987:6777:font-readiness",
+        "nodeId": "987:6777",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+            "classification": "exact",
+            "cssFamily": "__template_font_9062978ead3d7a3e_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Funnel Display",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              112.5469,
+              112.547
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 5,
+                "family": "__template_font_9062978ead3d7a3e_0_static",
+                "style": "normal",
+                "weight": "400"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Funnel Display",
+            "runtimeFamily": "__template_font_9062978ead3d7a3e_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 400
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6777:text.characters",
+          "node:987:6777:text.style"
+        ],
+        "id": "987:6777:text-box",
+        "nodeId": "987:6777",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 60.0001,
+          "scrollHeight": 60,
+          "scrollWidth": 113,
+          "width": 112.547
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6778:semantic",
+          "graph:container"
+        ],
+        "id": "987:6778:bounds",
+        "nodeId": "987:6778",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 96.0001,
+          "width": 95.9999,
+          "x": 936,
+          "y": 1085.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6779:semantic",
+          "graph:container"
+        ],
+        "id": "987:6779:bounds",
+        "nodeId": "987:6779",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 24,
+          "x": 972,
+          "y": 1122
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6780:semantic",
+          "graph:container"
+        ],
+        "id": "987:6780:bounds",
+        "nodeId": "987:6780",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 120,
+          "width": 1080,
+          "x": 0,
+          "y": 1230
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6781:semantic",
+          "graph:container"
+        ],
+        "id": "987:6781:bounds",
+        "nodeId": "987:6781",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 984,
+          "x": 48,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6782:semantic",
+          "graph:container"
+        ],
+        "id": "987:6782:bounds",
+        "nodeId": "987:6782",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 207,
+          "x": 48,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6783:semantic",
+          "graph:container"
+        ],
+        "id": "987:6783:bounds",
+        "nodeId": "987:6783",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 207,
+          "x": 48,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6784:semantic",
+          "graph:container"
+        ],
+        "id": "987:6784:bounds",
+        "nodeId": "987:6784",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 17.6876,
+          "width": 12.5781,
+          "x": 72.5469,
+          "y": 1283.9531
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6785:semantic",
+          "graph:container"
+        ],
+        "id": "987:6785:bounds",
+        "nodeId": "987:6785",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 23.6407,
+          "width": 22.5469,
+          "x": 48,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6786:semantic",
+          "graph:container"
+        ],
+        "id": "987:6786:bounds",
+        "nodeId": "987:6786",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 3.875,
+          "width": 4.1406,
+          "x": 52.1407,
+          "y": 1294.25
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6787:semantic",
+          "graph:container"
+        ],
+        "id": "987:6787:bounds",
+        "nodeId": "987:6787",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 3.5,
+          "width": 4.1407,
+          "x": 48,
+          "y": 1298.1407
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6788:semantic",
+          "graph:container"
+        ],
+        "id": "987:6788:bounds",
+        "nodeId": "987:6788",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 18.1875,
+          "width": 18.0157,
+          "x": 86.1718,
+          "y": 1283.7656
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6789:semantic",
+          "graph:container"
+        ],
+        "id": "987:6789:bounds",
+        "nodeId": "987:6789",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 17.8282,
+          "width": 19.1093,
+          "x": 105.6406,
+          "y": 1283.7968
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6790:semantic",
+          "graph:container"
+        ],
+        "id": "987:6790:bounds",
+        "nodeId": "987:6790",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 19.7969,
+          "x": 127.6093,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6791:semantic",
+          "graph:container"
+        ],
+        "id": "987:6791:bounds",
+        "nodeId": "987:6791",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 23.6407,
+          "width": 20.5469,
+          "x": 150.9218,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6792:semantic",
+          "graph:container"
+        ],
+        "id": "987:6792:bounds",
+        "nodeId": "987:6792",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 23.6407,
+          "width": 3.9687,
+          "x": 174.3281,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6793:semantic",
+          "graph:container"
+        ],
+        "id": "987:6793:bounds",
+        "nodeId": "987:6793",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 18.2032,
+          "width": 18.3437,
+          "x": 181.4219,
+          "y": 1283.7656
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6794:semantic",
+          "graph:container"
+        ],
+        "id": "987:6794:bounds",
+        "nodeId": "987:6794",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 18.2032,
+          "width": 17.4063,
+          "x": 201.7812,
+          "y": 1283.7656
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6795:semantic",
+          "graph:container"
+        ],
+        "id": "987:6795:bounds",
+        "nodeId": "987:6795",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 23.6407,
+          "width": 17.2657,
+          "x": 221.7031,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6796:semantic",
+          "graph:container"
+        ],
+        "id": "987:6796:bounds",
+        "nodeId": "987:6796",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 18.2187,
+          "width": 15.7187,
+          "x": 239.2656,
+          "y": 1283.7813
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6797:semantic",
+          "graph:container"
+        ],
+        "id": "987:6797:bounds",
+        "nodeId": "987:6797",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 728.9999,
+          "x": 303,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "scene",
+        "dependencies": [
+          "node:987:6798:semantic",
+          "graph:container"
+        ],
+        "id": "987:6798:bounds",
+        "nodeId": "987:6798",
+        "property": "bounds",
+        "readiness": "ready",
+        "source": "dom-bounds",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "width": 728.9999,
+          "x": 303,
+          "y": 1277.9999
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "none",
+        "dependencies": [
+          "node:987:6798:text.style"
+        ],
+        "id": "987:6798:font-readiness",
+        "nodeId": "987:6798",
+        "property": "font-readiness",
+        "readiness": "ready",
+        "source": "font-face-set",
+        "unit": "boolean",
+        "valid": true,
+        "value": {
+          "documentStatus": "loaded",
+          "font": {
+            "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+            "classification": "exact",
+            "cssFamily": "__template_font_9062978ead3d7a3e_0_static, system-ui, sans-serif",
+            "faceIndex": 0,
+            "fallbackFamily": "system-ui, sans-serif",
+            "family": "Funnel Display",
+            "fontState": "exact",
+            "paintRangeWidths": [
+              561.9999,
+              562
+            ],
+            "paintRuns": [
+              {
+                "characterCount": 45,
+                "family": "__template_font_9062978ead3d7a3e_0_static",
+                "style": "normal",
+                "weight": "400"
+              }
+            ],
+            "ready": true,
+            "requestedFamily": "Funnel Display",
+            "runtimeFamily": "__template_font_9062978ead3d7a3e_0_static",
+            "status": "loaded",
+            "style": "normal",
+            "weight": 400
+          },
+          "requestedReady": null
+        }
+      },
+      {
+        "approximation": null,
+        "confidence": "high",
+        "coordinateSpace": "element",
+        "dependencies": [
+          "node:987:6798:text.characters",
+          "node:987:6798:text.style"
+        ],
+        "id": "987:6798:text-box",
+        "nodeId": "987:6798",
+        "property": "text-box",
+        "readiness": "ready",
+        "source": "dom-scroll",
+        "unit": "scene-px",
+        "valid": true,
+        "value": {
+          "height": 24,
+          "scrollHeight": 31,
+          "scrollWidth": 729,
+          "width": 728.9999
+        }
+      }
+    ],
+    "revision": {
+      "assets": 1,
+      "container": 1,
+      "epoch": 1,
+      "fonts": 1,
+      "overrides": 0,
+      "package": 1,
+      "scene": 1
+    },
+    "schemaVersion": "measurement-snapshot-v1",
+    "surface": "editor"
+  }
+}

@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
 import { createCanonicalSceneGraph, type CanonicalSceneGraphV1 } from "@sleinity/template-core";
 import { createCoreLayoutRoute } from "./createCoreLayoutRoute";
 import { settleCoreLayout } from "./settleCoreLayout";
-import type { CoreLayoutRouteV1, CoreLayoutSettlementV1, IntrinsicTextMeasurementV1 } from "./types";
+import type { CoreLayoutRouteV1, CoreLayoutSettlementV1, IntrinsicTextMeasurementV1, RenderedTextLineObservationV1 } from "./types";
 import { applyVerticalTrimCompatibilityRoute } from "./verticalTextTrim";
 import { packageRuntimeFontSignature } from "@sleinity/template-browser";
 
@@ -11,10 +11,13 @@ export interface CoreLayoutRuntimeState {
   mode: "authoritative";
   canonicalRevision: string;
   revision: string;
+  publicationGeneration: number;
   route: CoreLayoutRouteV1;
   preliminary: CoreLayoutSettlementV1;
   settled: CoreLayoutSettlementV1;
-  publishTextMeasurement(measurement: Omit<IntrinsicTextMeasurementV1, "revision">): void;
+  textLineObservations: Readonly<Record<string, RenderedTextLineObservationV1>>;
+  publishTextMeasurement(measurement: Omit<IntrinsicTextMeasurementV1, "revision" | "publicationGeneration">): void;
+  publishTextLineObservation(observation: Omit<RenderedTextLineObservationV1, "revision" | "publicationGeneration">): void;
 }
 
 function stableSignature(value: unknown): string {
@@ -25,6 +28,7 @@ function stableSignature(value: unknown): string {
 }
 
 function renderSemanticRevisionInput(scene: CanonicalSceneGraphV1): unknown {
+  const structurallyExcludedNodeIds = scene.nodeOrder.filter((nodeId) => !scene.nodes[nodeId].appearance.visible.value);
   return {
     schemaVersion: scene.schemaVersion,
     canvas: scene.canvas,
@@ -70,16 +74,23 @@ function renderSemanticRevisionInput(scene: CanonicalSceneGraphV1): unknown {
       };
     }),
     fonts: scene.fonts.map((font) => ({ family: font.family, style: font.style, weight: font.weight, postScriptName: font.postScriptName, usedBy: font.usedBy })),
+    ...(structurallyExcludedNodeIds.length ? { structurallyExcludedNodeIds } : {}),
   };
 }
 
 export function useCoreLayoutRuntime(packageValue: TemplatePackageV1): CoreLayoutRuntimeState {
-  const [, setFontEpoch] = useState(0);
+  const [fontEpoch, setFontEpoch] = useState(0);
   const [measurements, setMeasurements] = useState<Record<string, IntrinsicTextMeasurementV1>>({});
+  const [textLineObservations, setTextLineObservations] = useState<Record<string, RenderedTextLineObservationV1>>({});
   const scene = useMemo(() => createCanonicalSceneGraph(packageValue).graph, [packageValue]);
   const packageSignature = useMemo(() => stableSignature(renderSemanticRevisionInput(scene)), [scene]);
   const fontSignature = packageRuntimeFontSignature(packageValue);
   const revision = `${packageSignature}|${stableSignature(fontSignature)}`;
+  const generation = useRef({ packageValue, fontEpoch, value: 0 });
+  if (generation.current.packageValue !== packageValue || generation.current.fontEpoch !== fontEpoch) {
+    generation.current = { packageValue, fontEpoch, value: generation.current.value + 1 };
+  }
+  const publicationGeneration = generation.current.value;
   const baseRoute = useMemo(() => createCoreLayoutRoute(scene), [scene]);
 
   useEffect(() => {
@@ -93,15 +104,20 @@ export function useCoreLayoutRuntime(packageValue: TemplatePackageV1): CoreLayou
     };
   }, []);
 
-  useEffect(() => setMeasurements({}), [revision]);
+  // Clear the previous publication before child passive effects publish freshly
+  // validated local samples. A passive clear would erase those current samples.
+  useLayoutEffect(() => setMeasurements({}), [publicationGeneration, revision]);
+  useLayoutEffect(() => setTextLineObservations({}), [publicationGeneration, revision]);
 
-  const publishTextMeasurement = useCallback((measurement: Omit<IntrinsicTextMeasurementV1, "revision">) => {
-    const current = { ...measurement, revision };
+  const publishTextMeasurement = useCallback((measurement: Omit<IntrinsicTextMeasurementV1, "revision" | "publicationGeneration">) => {
+    if (baseRoute.nodes[measurement.nodeId]?.participation !== "active") return;
+    const current = { ...measurement, revision, publicationGeneration };
     setMeasurements((previous) => {
       const existing = previous[measurement.nodeId];
       if (
         existing &&
         existing.revision === revision &&
+        existing.publicationGeneration === publicationGeneration &&
         Math.abs(existing.width - current.width) < 0.01 &&
         Math.abs(existing.height - current.height) < 0.01 &&
         existing.lineCount === current.lineCount &&
@@ -114,13 +130,50 @@ export function useCoreLayoutRuntime(packageValue: TemplatePackageV1): CoreLayou
       ) return previous;
       return { ...previous, [measurement.nodeId]: current };
     });
-  }, [revision]);
+  }, [baseRoute.nodes, publicationGeneration, revision]);
 
+  const currentMeasurements = useMemo(() => Object.fromEntries(
+    Object.entries(measurements).filter(([, measurement]) =>
+      measurement.revision === revision &&
+      measurement.publicationGeneration === publicationGeneration,
+    ),
+  ), [measurements, publicationGeneration, revision]);
+  const publishTextLineObservation = useCallback((observation: Omit<RenderedTextLineObservationV1, "revision" | "publicationGeneration">) => {
+    if (baseRoute.nodes[observation.nodeId]?.participation !== "active") return;
+    const current = { ...observation, revision, publicationGeneration };
+    setTextLineObservations((previous) => {
+      const existing = previous[observation.nodeId];
+      if (
+        existing?.revision === revision &&
+        existing.publicationGeneration === publicationGeneration &&
+        existing.lineCount === current.lineCount &&
+        existing.fontState === current.fontState
+      ) return previous;
+      return { ...previous, [observation.nodeId]: current };
+    });
+  }, [baseRoute.nodes, publicationGeneration, revision]);
+  const currentTextLineObservations = useMemo(() => Object.fromEntries(
+    Object.entries(textLineObservations).filter(([, observation]) =>
+      observation.revision === revision &&
+      observation.publicationGeneration === publicationGeneration,
+    ),
+  ), [publicationGeneration, revision, textLineObservations]);
   const route = useMemo(
-    () => applyVerticalTrimCompatibilityRoute(scene, baseRoute, measurements),
-    [baseRoute, measurements, scene],
+    () => applyVerticalTrimCompatibilityRoute(scene, baseRoute, currentMeasurements),
+    [baseRoute, currentMeasurements, scene],
   );
-  const preliminary = useMemo(() => settleCoreLayout({ scene, route, revision }), [revision, route, scene]);
-  const settled = useMemo(() => settleCoreLayout({ scene, route, revision, textMeasurements: Object.values(measurements) }), [measurements, revision, route, scene]);
-  return { mode: "authoritative", canonicalRevision: packageSignature, revision, route, preliminary, settled, publishTextMeasurement };
+  const preliminary = useMemo(() => settleCoreLayout({ scene, route, revision, publicationGeneration }), [publicationGeneration, revision, route, scene]);
+  const settled = useMemo(() => settleCoreLayout({ scene, route, revision, publicationGeneration, textMeasurements: Object.values(measurements) }), [measurements, publicationGeneration, revision, route, scene]);
+  return {
+    mode: "authoritative",
+    canonicalRevision: packageSignature,
+    revision,
+    publicationGeneration,
+    route,
+    preliminary,
+    settled,
+    textLineObservations: currentTextLineObservations,
+    publishTextMeasurement,
+    publishTextLineObservation,
+  };
 }

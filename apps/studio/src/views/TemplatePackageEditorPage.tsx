@@ -29,30 +29,12 @@ import {
 import { TemplatePackageDiagnosticsPanel } from "../components/template-package/editor/TemplatePackageDiagnosticsPanel";
 import { TemplatePackageFieldEditor } from "../components/template-package/editor/TemplatePackageFieldEditor";
 import { validatePackageFieldConstraints } from "@sleinity/template-core/editor";
-import {
-  collectTemplatePackageRenderWarnings,
-  ScaledTemplatePackagePreview,
-  TemplatePackageRenderer,
-  type TemplatePackageMotionRenderMode,
-} from "@sleinity/template-react";
-import {
-  createResolvedRenderTree,
-  type FontReadinessReport,
-  type PackageEditorFieldWarning,
-  type TemplatePackageEditorSession,
-  type EditableFieldBinding,
-  type TemplatePackageV1,
-} from "@sleinity/template-core";
-import {
-  exportTemplatePackagePng,
-  measureTextFieldFit,
-  PackagePngExportError,
-  prepareTemplatePackageFonts,
-  validatePackageJpgExportReadiness,
-  type FieldTextFitResult,
-  type PackagePngExportDiagnostic,
-  type DraftAutosaveState,
-} from "@sleinity/template-browser";
+import {type TemplatePackageMotionRenderMode} from "@sleinity/template-react";
+import {collectTemplatePackageRenderWarnings, ScaledTemplatePackagePreview, TemplatePackageRenderer} from "../../../../packages/template-react/test/legacyEntry";
+import {createResolvedRenderTree, type FontReadinessReport, type PackageEditorFieldWarning, type EditableFieldBinding, type TemplatePackageV1} from "@sleinity/template-core";
+import {type TemplatePackageEditorSession} from "../../../../packages/template-core/test/legacyEntry";
+import {exportTemplatePackagePng, measureTextFieldFit, PackagePngExportError, prepareTemplatePackageFonts, validatePackageJpgExportReadiness, type FieldTextFitResult, type PackagePngExportDiagnostic} from "@sleinity/template-browser";
+import {type DraftAutosaveState} from "../../../../packages/template-browser/test/legacyEntry";
 import { getPackageMotionSummary } from "@sleinity/template-core/motion";
 import { createRuntimeRoutingHarnessApi } from "../fidelity/runtimeRoutingDevHarness";
 

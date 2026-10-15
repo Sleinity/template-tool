@@ -1,10 +1,7 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import figmaPluginV041 from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
-import {
-  canOpenTemplatePackageEditor,
-  type TemplatePackageEditorSession,
-} from "@sleinity/template-core/editor";
+import {canOpenTemplatePackageEditor, type TemplatePackageEditorSession} from "../../../../packages/template-core/test/legacyEntry";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
 import { linkPackageMotionValue } from "@sleinity/template-core/motion";
 import { validateTemplatePackage } from "@sleinity/template-core";

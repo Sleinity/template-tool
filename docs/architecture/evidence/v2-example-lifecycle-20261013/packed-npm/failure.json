@@ -1,0 +1,44 @@
+{
+  "error": "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded.",
+  "rows": [
+    {
+      "scenario": "default/alias ",
+      "status": "pass"
+    },
+    {
+      "scenario": "default/alias ?fields-v2",
+      "status": "pass"
+    },
+    {
+      "scenario": "explicit V1 precedence",
+      "status": "pass"
+    }
+  ],
+  "detail": {
+    "body": "Public SDK · V2 field host\nLoad V2 JSON or exporter ZIP \n\nCannot assign to read only property 'dispose' of object '#<Object>'",
+    "stats": {
+      "created": [
+        {
+          "url": "blob:http://127.0.0.1:55579/28a910bc-b922-4917-9f0a-d28a09ffa3fe",
+          "type": "image/png"
+        },
+        {
+          "url": "blob:http://127.0.0.1:55579/e2f7eedb-6d4a-4c3a-94dc-a53cd9d6c427",
+          "type": "image/svg+xml"
+        }
+      ],
+      "revoked": [],
+      "pipelines": 1,
+      "parses": 0,
+      "preparations": 0,
+      "uploads": 0,
+      "candidateDisposals": 0,
+      "sessionDisposals": 0,
+      "notifications": 0,
+      "registryReads": 2,
+      "activations": 0,
+      "commits": 0
+    },
+    "pending": null
+  }
+}

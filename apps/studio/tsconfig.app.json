@@ -22,7 +22,6 @@
       "@sleinity/template-browser/session": ["../../packages/template-browser/src/session.ts"],
       "@sleinity/template-react": ["../../packages/template-react/src/index.ts"],
       "@sleinity/template-react/editor": ["../../packages/template-react/src/editor.tsx"],
-      "@sleinity/template-react/importer": ["../../packages/template-react/src/importer.tsx"],
       "@sleinity/template-react/inspection": ["../../packages/template-react/src/inspection.ts"],
       "@sleinity/template-react/renderer-internal": ["../../packages/template-react/src/renderer-internal.ts"]
     },

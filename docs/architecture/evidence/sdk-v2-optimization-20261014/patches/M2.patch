@@ -1,0 +1,94 @@
+diff --git a/packages/template-browser/src/session/templateSessionV2.ts b/packages/template-browser/src/session/templateSessionV2.ts
+index 0e31e2f..536690b 100644
+--- a/packages/template-browser/src/session/templateSessionV2.ts
++++ b/packages/template-browser/src/session/templateSessionV2.ts
+@@ -506,16 +506,21 @@ export function createTemplateSessionV2(
+       };
+     });
+   };
++  // The base and published replacement assets are immutable session-owned data.
++  // A merged shell belongs to one operation; it is never retained as a cache.
++  const materializationInput = (
++    basePackage: TemplatePackageV2,
++    sessionAssets: TemplatePackageV2["assets"],
++  ): TemplatePackageV2 => Object.keys(sessionAssets).length === 0
++    ? basePackage
++    : deepFreeze({ ...basePackage, assets: { ...basePackage.assets, ...sessionAssets } });
+   const materialize = (
+     basePackage: TemplatePackageV2,
+     content: TemplateFieldContentStateV1,
+     sessionAssets: TemplatePackageV2["assets"],
++    input = { ...basePackage, assets: { ...basePackage.assets, ...sessionAssets } },
+   ) => {
+-    const materializationInput = {
+-      ...basePackage,
+-      assets: { ...basePackage.assets, ...sessionAssets },
+-    };
+-    const result = materializeTemplateFieldContentV2(materializationInput, content);
++    const result = materializeTemplateFieldContentV2(input, content);
+     let rendererPackage: TemplatePackageV1 | null = null;
+     let resolvedTree: ResolvedRenderTreeV1 | null = null;
+     if (result.workingPackage) {
+@@ -528,7 +533,7 @@ export function createTemplateSessionV2(
+       workingPackage: result.workingPackage,
+       rendererPackage,
+       resolvedTree,
+-      fields: fieldStates(materializationInput, content, result),
++      fields: fieldStates(input, content, result),
+       readiness: nextReadiness,
+       status: result.workingPackage ? "ready" as const : "blocked" as const,
+       error: result.workingPackage
+@@ -577,10 +582,7 @@ export function createTemplateSessionV2(
+       throw new Error("Load a TemplatePackageV2 before editing fields.");
+     }
+     const operationRevision = snapshot.operationRevision + 1;
+-    const packageValue = {
+-      ...cloneValue(snapshot.basePackage),
+-      assets: { ...cloneValue(snapshot.basePackage.assets), ...cloneValue(snapshot.sessionAssets) },
+-    };
++    const packageValue = materializationInput(snapshot.basePackage, snapshot.sessionAssets);
+     const result = mutateTemplateFieldContentV2(packageValue, snapshot.contentState, command);
+     if (!result.accepted) return mutationResponse(result);
+     let sessionAssets = snapshot.sessionAssets;
+@@ -601,7 +603,10 @@ export function createTemplateSessionV2(
+     currentSettlementRevision = null;
+     currentFontRevision = null;
+     currentPublicationGeneration = null;
+-    const derived = materialize(snapshot.basePackage, result.state, sessionAssets);
++    const derived = materialize(snapshot.basePackage, result.state, sessionAssets,
++      sessionAssets === snapshot.sessionAssets
++        ? packageValue
++        : materializationInput(snapshot.basePackage, sessionAssets));
+     publish({
+       operationRevision,
+       contentState: result.state,
+diff --git a/packages/template-core/src/family/fieldRulesV2.ts b/packages/template-core/src/family/fieldRulesV2.ts
+index ca944b9..bf3478e 100644
+--- a/packages/template-core/src/family/fieldRulesV2.ts
++++ b/packages/template-core/src/family/fieldRulesV2.ts
+@@ -3,7 +3,6 @@ import type { MaterializeTemplateFieldContentResultV2 } from "../materializeTemp
+ import { isCalendarDateValueV1, isColorValueV1 } from "../fieldValuesV2";
+ import {
+   createTemplateFieldContentStateV1,
+-  validateTemplateFieldContentForPackageV2,
+ } from "../templateFieldContentV2";
+ import type {
+   EditableFieldDefinitionV2,
+@@ -829,16 +828,12 @@ export function materializeTemplateFieldFamilyVariantV2(
+         }),
+     ),
+   });
+-  const contentValidation = validateTemplateFieldContentForPackageV2(
+-    resolved.packageValue,
+-    packageContentState,
+-  );
+   const materialization = materializeTemplateFieldContentV2(
+     resolved.packageValue,
+     packageContentState,
+   );
+   return {
+-    valid: familyContentValidation.valid && contentValidation.valid && materialization.valid,
++    valid: familyContentValidation.valid && materialization.valid,
+     familyId: family.id,
+     variantId,
+     familyContentRevision: content.revision,

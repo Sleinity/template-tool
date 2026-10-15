@@ -13,7 +13,7 @@ import type {
   TemplatePackageV1,
 } from "@sleinity/template-core";
 import type { LoadedSourceDiagnosticReport } from "@sleinity/template-browser/importer";
-import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import type {SavedTemplateRecord} from "../../../../../packages/template-browser/test/legacyEntry";
 import {
   getDiagnosticAudience,
   getPackageQualityPrimaryTarget,

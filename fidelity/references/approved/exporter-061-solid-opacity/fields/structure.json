@@ -1,0 +1,1886 @@
+{
+  "assetReadiness": {
+    "backgrounds": [],
+    "images": []
+  },
+  "backendRouting": {
+    "availability": {
+      "backends": [
+        {
+          "availability": "unavailable",
+          "backend": "canvas-offscreen",
+          "capabilityBoundary": [
+            "effects",
+            "advanced-compositing",
+            "complex-masks",
+            "raster-fallback"
+          ],
+          "reason": "ADR 0012 remains Proposed; no source fixture currently requires an offscreen owner."
+        },
+        {
+          "availability": "unavailable",
+          "backend": "webgl",
+          "capabilityBoundary": [
+            "shader-paints",
+            "advanced-compositing"
+          ],
+          "reason": "No source-certified capability currently authorizes a WebGL runtime owner."
+        }
+      ],
+      "schemaVersion": "resolved-backend-availability-v1"
+    },
+    "decisionRevision": "ecc1fb2c",
+    "decisions": [
+      {
+        "confidence": "high",
+        "decisionId": "backend:811:451:e909955e",
+        "disposition": "semantic-owner",
+        "editability": "indirect",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": false,
+          "backend": null,
+          "description": null,
+          "reasonCodes": []
+        },
+        "nodeId": "811:451",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "dom-css",
+            "capabilityId": "PNT-PRIMITIVE-CSS",
+            "family": "paint",
+            "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+            "runtimeOwner": "primitive-dom-css",
+            "supportLevel": "native"
+          }
+        ],
+        "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-PRIMITIVE-CSS"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:d02d7c12",
+          "placement": null,
+          "resolved": "e909955e",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:1dd6264c"
+        },
+        "runtimeOwner": "primitive-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "dom-css",
+        "supportLevel": "native",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "high",
+        "decisionId": "backend:811:452:e6de8b39",
+        "disposition": "semantic-owner",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": false,
+          "backend": null,
+          "description": null,
+          "reasonCodes": []
+        },
+        "nodeId": "811:452",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "dom-css",
+            "capabilityId": "PNT-PRIMITIVE-CSS",
+            "family": "paint",
+            "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+            "runtimeOwner": "primitive-dom-css",
+            "supportLevel": "native"
+          }
+        ],
+        "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-PRIMITIVE-CSS"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:3c13b4db",
+          "placement": null,
+          "resolved": "e6de8b39",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:4c84e734"
+        },
+        "runtimeOwner": "primitive-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "dom-css",
+        "supportLevel": "native",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "medium",
+        "decisionId": "backend:811:453:93501a03",
+        "disposition": "degraded-fallback",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": true,
+          "backend": "compatibility",
+          "description": "paint-outside-opaque-solid-subset",
+          "reasonCodes": [
+            "paint-outside-opaque-solid-subset"
+          ]
+        },
+        "nodeId": "811:453",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "compatibility",
+            "capabilityId": "PNT-LEGACY-COMPATIBILITY",
+            "family": "paint",
+            "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+            "runtimeOwner": "legacy-dom-css",
+            "supportLevel": "approximated"
+          }
+        ],
+        "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-LEGACY-COMPATIBILITY"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:16ff4394",
+          "placement": null,
+          "resolved": "93501a03",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:998fb37c"
+        },
+        "runtimeOwner": "legacy-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "compatibility",
+        "supportLevel": "approximated",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "medium",
+        "decisionId": "backend:811:454:6e7c0443",
+        "disposition": "degraded-fallback",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": true,
+          "backend": "compatibility",
+          "description": "paint-outside-opaque-solid-subset",
+          "reasonCodes": [
+            "paint-outside-opaque-solid-subset"
+          ]
+        },
+        "nodeId": "811:454",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "compatibility",
+            "capabilityId": "PNT-LEGACY-COMPATIBILITY",
+            "family": "paint",
+            "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+            "runtimeOwner": "legacy-dom-css",
+            "supportLevel": "approximated"
+          }
+        ],
+        "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-LEGACY-COMPATIBILITY"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:2c2acb74",
+          "placement": null,
+          "resolved": "6e7c0443",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:e9f65438"
+        },
+        "runtimeOwner": "legacy-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "compatibility",
+        "supportLevel": "approximated",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "medium",
+        "decisionId": "backend:811:455:2265b931",
+        "disposition": "degraded-fallback",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": true,
+          "backend": "compatibility",
+          "description": "paint-outside-opaque-solid-subset",
+          "reasonCodes": [
+            "paint-outside-opaque-solid-subset"
+          ]
+        },
+        "nodeId": "811:455",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "compatibility",
+            "capabilityId": "PNT-LEGACY-COMPATIBILITY",
+            "family": "paint",
+            "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+            "runtimeOwner": "legacy-dom-css",
+            "supportLevel": "approximated"
+          }
+        ],
+        "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-LEGACY-COMPATIBILITY"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:6261f6c0",
+          "placement": null,
+          "resolved": "2265b931",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:a7921c8b"
+        },
+        "runtimeOwner": "legacy-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "compatibility",
+        "supportLevel": "approximated",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "medium",
+        "decisionId": "backend:811:456:8e2fa436",
+        "disposition": "degraded-fallback",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": true,
+          "backend": "compatibility",
+          "description": "paint-outside-opaque-solid-subset",
+          "reasonCodes": [
+            "paint-outside-opaque-solid-subset"
+          ]
+        },
+        "nodeId": "811:456",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "compatibility",
+            "capabilityId": "PNT-LEGACY-COMPATIBILITY",
+            "family": "paint",
+            "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+            "runtimeOwner": "legacy-dom-css",
+            "supportLevel": "approximated"
+          }
+        ],
+        "reason": "The existing compatibility paint helpers remain the coherent owner outside a certified primitive route.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-LEGACY-COMPATIBILITY"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:8d6671ce",
+          "placement": null,
+          "resolved": "8e2fa436",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:f7580025"
+        },
+        "runtimeOwner": "legacy-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "compatibility",
+        "supportLevel": "approximated",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      },
+      {
+        "confidence": "high",
+        "decisionId": "backend:811:457:fd42c5c2",
+        "disposition": "semantic-owner",
+        "editability": "read-only",
+        "exportSafety": "safe",
+        "fallback": {
+          "active": false,
+          "backend": null,
+          "description": null,
+          "reasonCodes": []
+        },
+        "nodeId": "811:457",
+        "owners": [
+          {
+            "backend": "dom-css",
+            "capabilityId": "LAY-CORE-OR-COMPATIBILITY",
+            "family": "layout",
+            "reason": "Core layout routing remains capability-selected at runtime with coherent compatibility boundaries.",
+            "runtimeOwner": "core-layout",
+            "supportLevel": "emulated"
+          },
+          {
+            "backend": "dom-css",
+            "capabilityId": "PNT-PRIMITIVE-CSS",
+            "family": "paint",
+            "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+            "runtimeOwner": "primitive-dom-css",
+            "supportLevel": "native"
+          }
+        ],
+        "reason": "PrimitiveAppearanceV1 is authoritative for the eligible source-certified primitive.",
+        "requiredCapabilities": [
+          "LAY-CORE-OR-COMPATIBILITY",
+          "PNT-PRIMITIVE-CSS"
+        ],
+        "revisions": {
+          "asset": null,
+          "geometry": "primitive-geometry-v1:ef5e9b65",
+          "placement": null,
+          "resolved": "fd42c5c2",
+          "settlement": null,
+          "source": "pkg_811_451_1787842019313:pkg_811_451_1787842019313:primitive-tree-v1:66560262:primitive-source-v1:f60ed7de"
+        },
+        "runtimeOwner": "primitive-dom-css",
+        "schemaVersion": "resolved-backend-decision-v1",
+        "scope": "node",
+        "selectedBackend": "dom-css",
+        "supportLevel": "native",
+        "unavailableBackendIds": [
+          "canvas-offscreen",
+          "webgl"
+        ]
+      }
+    ]
+  },
+  "diagnostics": [],
+  "fixtureHashes": {
+    "embeddedPreviewSha256": "8787f6bab82826d91ad15da801a8d1699ea455f105c7d3a8c7878754d08214e3",
+    "modelSha256": "5f1a84a21ca476672ef6059fe0f803262096551a84870d23f26ee5c45023039c",
+    "zipSha256": "7e09ef2d2d8dc7eab18584305558bd02ffd3d88945b848b47908060b185a9160"
+  },
+  "fixtureId": "exporter-061-solid-opacity",
+  "fontReadiness": {
+    "fonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      }
+    ],
+    "status": "loaded"
+  },
+  "nodeCount": 7,
+  "nodes": [
+    {
+      "bounds": {
+        "height": 1500,
+        "width": 1000,
+        "x": 0,
+        "y": 0
+      },
+      "clipOrMaskStrategy": "normalized",
+      "dataAttributes": {
+        "data-package-clip-source": "normalized",
+        "data-package-clips-content": "true",
+        "data-package-node-id": "811:451",
+        "data-package-node-name": "fixture 1",
+        "data-package-node-type": "FRAME",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "dom-css",
+        "data-package-primitive-clipping-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:d02d7c12",
+        "data-package-primitive-kind": "rectangular-frame",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:90ad2bec",
+        "data-package-primitive-paint-strategy": "dom-css-single-solid",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-bounds": "{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}",
+        "data-package-primitive-source-revision": "primitive-source-v1:1dd6264c",
+        "data-package-primitive-stroke-strategy": "none",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -32387,
+          "y": -23820
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:451",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fixture 1",
+      "order": 0,
+      "parentId": null,
+      "positioningRole": "ROOT",
+      "primitiveAppearance": {
+        "ancestorClipChain": [],
+        "axisAligned": true,
+        "backend": "dom-css",
+        "clippingBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "computed": {
+          "backgroundColor": "rgb(242, 239, 232)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:d02d7c12",
+        "kind": "rectangular-frame",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:90ad2bec"
+        ],
+        "paintStrategy": "dom-css-single-solid",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceBounds": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sourceRevision": "primitive-source-v1:1dd6264c",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "none"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 1500,
+          "width": 1000,
+          "x": -32387,
+          "y": -23820
+        },
+        "relative": {
+          "height": 1500,
+          "width": 1000,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": "FIXED",
+        "containerPrimaryAxis": "HUG"
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "FRAME"
+    },
+    {
+      "bounds": {
+        "height": 176.0001,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 107.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:452",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "dom-css",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:3c13b4db",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:67577ad0",
+        "data-package-primitive-paint-strategy": "dom-css-single-solid",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":108,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":108,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-revision": "primitive-source-v1:4c84e734",
+        "data-package-primitive-stroke-strategy": "none",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23712
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 108
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:452",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 1,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "dom-css",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgb(43, 43, 36)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:3c13b4db",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "primitive-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:67577ad0"
+        ],
+        "paintStrategy": "dom-css-single-solid",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 108
+        },
+        "sourceBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 108
+        },
+        "sourceRevision": "primitive-source-v1:4c84e734",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "none"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23712
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 108
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 176,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 324
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:453",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "compatibility",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-fallbacks": "paint-outside-opaque-solid-subset",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:16ff4394",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "compatibility-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:81f43142",
+        "data-package-primitive-paint-strategy": "compatibility",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":324,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":324,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-revision": "primitive-source-v1:998fb37c",
+        "data-package-primitive-stroke-strategy": "compatibility",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23496
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 324
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:453",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 2,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "compatibility",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(43, 43, 36, 0.75)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [
+          "paint-outside-opaque-solid-subset"
+        ],
+        "geometryRevision": "primitive-geometry-v1:16ff4394",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "compatibility-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:81f43142"
+        ],
+        "paintStrategy": "compatibility",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 324
+        },
+        "sourceBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 324
+        },
+        "sourceRevision": "primitive-source-v1:998fb37c",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "compatibility"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23496
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 324
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 175,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 539.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:454",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "compatibility",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-fallbacks": "paint-outside-opaque-solid-subset",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:2c2acb74",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "compatibility-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:1ad608fc",
+        "data-package-primitive-paint-strategy": "compatibility",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":540,\"width\":710,\"height\":175}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":540,\"width\":710,\"height\":175}",
+        "data-package-primitive-source-revision": "primitive-source-v1:e9f65438",
+        "data-package-primitive-stroke-strategy": "compatibility",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 175,
+          "width": 710,
+          "x": -32242,
+          "y": -23280
+        },
+        "relative": {
+          "height": 175,
+          "width": 710,
+          "x": 145,
+          "y": 540
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:454",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 3,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "compatibility",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(43, 43, 36, 0.5)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [
+          "paint-outside-opaque-solid-subset"
+        ],
+        "geometryRevision": "primitive-geometry-v1:2c2acb74",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "compatibility-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:1ad608fc"
+        ],
+        "paintStrategy": "compatibility",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 175,
+          "width": 710,
+          "x": 145,
+          "y": 540
+        },
+        "sourceBounds": {
+          "height": 175,
+          "width": 710,
+          "x": 145,
+          "y": 540
+        },
+        "sourceRevision": "primitive-source-v1:e9f65438",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "compatibility"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 175,
+          "width": 710,
+          "x": -32242,
+          "y": -23280
+        },
+        "relative": {
+          "height": 175,
+          "width": 710,
+          "x": 145,
+          "y": 540
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 176,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 755
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:455",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "compatibility",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-fallbacks": "paint-outside-opaque-solid-subset",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:6261f6c0",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "compatibility-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:51ab8461",
+        "data-package-primitive-paint-strategy": "compatibility",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":755,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":755,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-revision": "primitive-source-v1:a7921c8b",
+        "data-package-primitive-stroke-strategy": "compatibility",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23065
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 755
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:455",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 4,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "compatibility",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(43, 43, 36, 0.25)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [
+          "paint-outside-opaque-solid-subset"
+        ],
+        "geometryRevision": "primitive-geometry-v1:6261f6c0",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "compatibility-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:51ab8461"
+        ],
+        "paintStrategy": "compatibility",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 755
+        },
+        "sourceBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 755
+        },
+        "sourceRevision": "primitive-source-v1:a7921c8b",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "compatibility"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -23065
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 755
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 176.0002,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 970.9999
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:456",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "compatibility",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-fallbacks": "paint-outside-opaque-solid-subset",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:8d6671ce",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "compatibility-authoritative",
+        "data-package-primitive-paint-order": "0:SOLID:ordinary-visible",
+        "data-package-primitive-paint-revisions": "primitive-paint-v1:21c2a4f1",
+        "data-package-primitive-paint-strategy": "compatibility",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":971,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":971,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-revision": "primitive-source-v1:f7580025",
+        "data-package-primitive-stroke-strategy": "compatibility",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -22849
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 971
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:456",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 5,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "compatibility",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(213, 213, 47, 0.4)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [
+          "paint-outside-opaque-solid-subset"
+        ],
+        "geometryRevision": "primitive-geometry-v1:8d6671ce",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "compatibility-authoritative",
+        "paintOrder": "0:SOLID:ordinary-visible",
+        "paintRevisions": [
+          "primitive-paint-v1:21c2a4f1"
+        ],
+        "paintStrategy": "compatibility",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 971
+        },
+        "sourceBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 971
+        },
+        "sourceRevision": "primitive-source-v1:f7580025",
+        "strokeGeometry": null,
+        "strokeOrder": null,
+        "strokeRevisions": [],
+        "strokeStrategy": "compatibility"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -22849
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 971
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    },
+    {
+      "bounds": {
+        "height": 176,
+        "width": 709.9999,
+        "x": 145.0001,
+        "y": 1187
+      },
+      "clipOrMaskStrategy": null,
+      "dataAttributes": {
+        "data-package-node-id": "811:457",
+        "data-package-node-name": "fill-stack-hidden-middle-solid",
+        "data-package-node-type": "RECTANGLE",
+        "data-package-primitive-ancestor-clip-chain": "[{\"nodeId\":\"811:451\",\"bounds\":{\"x\":0,\"y\":0,\"width\":1000,\"height\":1500}}]",
+        "data-package-primitive-axis-aligned": "true",
+        "data-package-primitive-backend": "dom-css",
+        "data-package-primitive-corner-clamp-reason": "none",
+        "data-package-primitive-corner-clamped": "false",
+        "data-package-primitive-corner-effective": "[0,0,0,0]",
+        "data-package-primitive-corner-normalization-scale": "1",
+        "data-package-primitive-corner-normalization-scales": "[1,1,1,1]",
+        "data-package-primitive-corner-requested": "[0,0,0,0]",
+        "data-package-primitive-geometry-revision": "primitive-geometry-v1:ef5e9b65",
+        "data-package-primitive-kind": "rectangle",
+        "data-package-primitive-ownership": "primitive-authoritative",
+        "data-package-primitive-paint-strategy": "none",
+        "data-package-primitive-schema": "primitive-appearance-v1",
+        "data-package-primitive-settled-bounds": "{\"x\":145,\"y\":1187,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-bounds": "{\"x\":145,\"y\":1187,\"width\":710,\"height\":176}",
+        "data-package-primitive-source-revision": "primitive-source-v1:f60ed7de",
+        "data-package-primitive-stroke-geometry": "{\"alignment\":\"INSIDE\",\"weight\":6,\"sourcePathBounds\":{\"x\":145,\"y\":1187,\"width\":710,\"height\":176},\"fillBounds\":{\"x\":145,\"y\":1187,\"width\":710,\"height\":176},\"centerPathBounds\":{\"x\":148,\"y\":1190,\"width\":704,\"height\":170},\"innerStrokeBounds\":{\"x\":151,\"y\":1193,\"width\":698,\"height\":164},\"outerStrokeBounds\":{\"x\":145,\"y\":1187,\"width\":710,\"height\":176},\"visualStrokeBounds\":{\"x\":145,\"y\":1187,\"width\":710,\"height\":176},\"cornerGeometry\":{\"fill\":[0,0,0,0],\"inner\":[0,0,0,0],\"centerLine\":[0,0,0,0],\"outer\":[0,0,0,0]}}",
+        "data-package-primitive-stroke-order": "0:SOLID:INSIDE",
+        "data-package-primitive-stroke-revisions": "primitive-stroke-v1:170ac149",
+        "data-package-primitive-stroke-strategy": "css-inset-shadow",
+        "data-package-render-strategy": "semantic",
+        "data-package-resolved-node": "true",
+        "data-package-runtime-ownership": "unsupported",
+        "data-package-runtime-settlement": "core-697d03d251d7b2b6",
+        "data-package-text-clipping-active": "false"
+      },
+      "diagnostics": [],
+      "exportedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -22633
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 1187
+        }
+      },
+      "fallbackReason": null,
+      "font": null,
+      "id": "811:457",
+      "imageAssetId": null,
+      "imageIntrinsicDimensions": null,
+      "imagePlacement": null,
+      "imageSlot": null,
+      "layoutMode": "NONE",
+      "maskPlacement": null,
+      "name": "fill-stack-hidden-middle-solid",
+      "order": 6,
+      "parentId": "811:451",
+      "positioningRole": "ABSOLUTE",
+      "primitiveAppearance": {
+        "ancestorClipChain": [
+          {
+            "bounds": {
+              "height": 1500,
+              "width": 1000,
+              "x": 0,
+              "y": 0
+            },
+            "nodeId": "811:451"
+          }
+        ],
+        "axisAligned": true,
+        "backend": "dom-css",
+        "clippingBounds": null,
+        "computed": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px solid rgb(229, 231, 235)",
+          "borderRadius": "0px",
+          "boxShadow": "rgb(0, 0, 0) 0px 0px 0px 6px inset",
+          "opacity": "1",
+          "svgFillPath": null,
+          "svgGradientDefinition": null,
+          "svgGradientStopCount": 0,
+          "svgGradientTransform": null,
+          "svgOrderedNormalPaintClip": null,
+          "svgOrderedNormalPaintGeometryPath": null,
+          "svgOrderedNormalPaintLayerCount": 0,
+          "svgOrderedNormalPaintStack": null,
+          "svgOrderedSolidClip": null,
+          "svgOrderedSolidGeometryPath": null,
+          "svgOrderedSolidLayerCount": 0,
+          "svgOrderedSolidStack": null,
+          "svgStrategy": null,
+          "svgStrokePath": null
+        },
+        "cornerClampReason": "none",
+        "cornerClamped": false,
+        "cornerNormalizationScale": 1,
+        "cornerNormalizationScales": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "effectiveCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "fallbacks": [],
+        "geometryRevision": "primitive-geometry-v1:ef5e9b65",
+        "kind": "rectangle",
+        "linearGradient": null,
+        "orderedNormalPaintStack": null,
+        "orderedSolidStack": null,
+        "ownership": "primitive-authoritative",
+        "paintOrder": null,
+        "paintRevisions": [],
+        "paintStrategy": "none",
+        "requestedCorners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "schemaVersion": "primitive-appearance-v1",
+        "settledBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 1187
+        },
+        "sourceBounds": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 1187
+        },
+        "sourceRevision": "primitive-source-v1:f60ed7de",
+        "strokeGeometry": {
+          "alignment": "INSIDE",
+          "centerPathBounds": {
+            "height": 170,
+            "width": 704,
+            "x": 148,
+            "y": 1190
+          },
+          "cornerGeometry": {
+            "centerLine": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "fill": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "inner": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "outer": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "fillBounds": {
+            "height": 176,
+            "width": 710,
+            "x": 145,
+            "y": 1187
+          },
+          "innerStrokeBounds": {
+            "height": 164,
+            "width": 698,
+            "x": 151,
+            "y": 1193
+          },
+          "outerStrokeBounds": {
+            "height": 176,
+            "width": 710,
+            "x": 145,
+            "y": 1187
+          },
+          "sourcePathBounds": {
+            "height": 176,
+            "width": 710,
+            "x": 145,
+            "y": 1187
+          },
+          "visualStrokeBounds": {
+            "height": 176,
+            "width": 710,
+            "x": 145,
+            "y": 1187
+          },
+          "weight": 6
+        },
+        "strokeOrder": "0:SOLID:INSIDE",
+        "strokeRevisions": [
+          "primitive-stroke-v1:170ac149"
+        ],
+        "strokeStrategy": "css-inset-shadow"
+      },
+      "renderStrategy": "semantic",
+      "resolvedBounds": {
+        "absolute": {
+          "height": 176,
+          "width": 710,
+          "x": -32242,
+          "y": -22633
+        },
+        "relative": {
+          "height": 176,
+          "width": 710,
+          "x": 145,
+          "y": 1187
+        }
+      },
+      "sizingRoles": {
+        "childAlign": "INHERIT",
+        "childGrow": 0,
+        "childHorizontal": "FIXED",
+        "childVertical": "FIXED",
+        "containerCounterAxis": null,
+        "containerPrimaryAxis": null
+      },
+      "textContentHash": null,
+      "textGeometry": null,
+      "textMeasurement": null,
+      "transform": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "type": "RECTANGLE"
+    }
+  ],
+  "orderedNodeIds": [
+    "811:451",
+    "811:452",
+    "811:453",
+    "811:454",
+    "811:455",
+    "811:456",
+    "811:457"
+  ],
+  "packageVersion": "1.0",
+  "productRenderIdentity": {
+    "assetRevision": "62a56f0e",
+    "backendDecisionRevision": "ecc1fb2c",
+    "canonicalRevision": "16fce83c",
+    "exportSafety": "safe",
+    "fontRevision": "84e23576",
+    "identityId": "product-render:ad2616d9",
+    "packageId": "pkg_811_451_1787842019313",
+    "packageRevision": "e873c2fa",
+    "placementRevision": "741638a5",
+    "readiness": "ready",
+    "resolvedRevision": "05231be5",
+    "schemaVersion": "resolved-product-render-identity-v1",
+    "settlementRevision": "66ab941b"
+  },
+  "rendererFallbacks": [],
+  "rendererMode": "static",
+  "resolvedTreeVersion": "resolved-render-tree-v1",
+  "rootDimensions": {
+    "background": "rgba(242, 239, 232, 1)",
+    "height": 1500,
+    "width": 1000
+  },
+  "rootNodeId": "811:451",
+  "route": "/templates/new",
+  "runtimeRouting": {
+    "compatibilityNodeCount": 7,
+    "fallbacks": null,
+    "iterationCount": 1,
+    "measurementCount": 0,
+    "mode": "authoritative",
+    "readiness": "unsupported",
+    "recomputedNodeIds": [],
+    "revision": "16fce83c|84e23576",
+    "routedNodeCount": 0,
+    "settlementId": "core-697d03d251d7b2b6",
+    "settlementMs": 0
+  },
+  "schemaVersion": 1,
+  "surface": "fields",
+  "warnings": []
+}

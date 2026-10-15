@@ -1,4 +1,88 @@
+## Unpublished 1.0.0 candidate — V2-only / exporter 0.6.1
+
+Retire V1 host workflows; retain source-schema 1.0 normalization and the private renderer bridge. ZIP import requires exporter 0.6.1; canonical schema remains 2.2. Existing V2 records and recovery remain supported, and historical stored bytes are untouched. Reduce duplicate validation, primitive interpretation and asset-collection scene copying without adding caches or backends.
+
 # @sleinity/template-browser
+
+## 1.0.0
+
+### Major Changes
+
+- Advance the canonical TemplatePackage and content contract to schema 2.2. Image
+  fields now require one `replacementPlacement` policy—Fill, Fit, or Crop—instead
+  of an allowed-placement set plus a separate default. Exporter 1.0 input receives
+  provenance-preserving normalization and defaults to Fill, while canonical 2.0
+  and 2.1 packages require reimport.
+
+  Keep imported Figma placement separate from replacement policy, enforce the
+  policy across single and Family sessions, use Fill when a Crop-policy host does
+  not supply crop data, and restore imported placement on Reset. Add current saved
+  session and Family envelopes plus lightweight `Reimport required` Library
+  records for incompatible saved work.
+
+- Replace the supported draft catalogue with a template-scoped recovery repository. This is a breaking pre-1.0 API change: draft list/get/save/delete helpers and Family `saveDraft` are no longer available through supported entry points. Generic template and session persistence remains available.
+
+  Recovery provides inspect, fresh/resume, owned save, discard, and export completion for single and Family canonical payloads. Persistent ownership prevents superseded sessions and late autosaves from restoring completed work. Successful export callbacks complete only their matching recovery session; failed cleanup can be retried without exporting again.
+
+### Minor Changes
+
+- 944c51b: Correct and extend Template Family selection while preserving the published 0.8 tuple contract. Independent selection properties now resolve their combined option values to one concrete ZIP variant, expose availability without silently changing another property, and can be interleaved with editable fields through an optional stable control order. Studio authors properties and assignments directly on variant rows, and React exposes the same ordered selector-and-field inventory additively.
+- Add public atomic V2 session configuration transactions and Core canonical
+  configuration reconciliation, including stable choice identity and revision-safe
+  configuration changes. Preserve corrective mutations for semantically invalid
+  content. Correct local Blob image carriers/dimension ingestion and acquire React
+  renderer publication leases on committed mounts with operation-current async
+  callbacks. Prove Studio and external controls against the same public contracts.
+- Add the strict TemplatePackageV2 field-contract foundation: seven discriminated
+  field definitions, exact imported bindings, stable choices, portable editor
+  order, opaque Color normalization, V1-to-V2 parsing and diagnostics, rendered
+  line-validation evidence types, and atomic Template Family configuration
+  overrides. Add the DOM-free seven-field semantic kernel, one immutable revisioned
+  content reducer, typed mutation helpers, deterministic Number/Date formatting,
+  exact Color/Image/Boolean materialization, ordered safe host descriptors, and a
+  pure one-way V2 package materializer. V1 compatibility APIs remain available alongside the recommended V2 native
+  session/renderer path. They do not imply canonical saved-record migration.
+
+  Extend `date-display-v1` with deterministic prefix, suffix, separator,
+  year-first, day/month and month/day presentation. Loose exporter input now
+  normalizes unambiguous numeric displayed dates to canonical `YYYY-MM-DD`, using
+  the recorded export year only when the displayed value intentionally omits it.
+
+  Add canonical V2 Browser/React sessions and structural Boolean rendering. Add
+  Family content V3 with one shared Image asset/default placement, sparse
+  variant-only placement overrides, current saved-record validation, typed Family Image
+  controller methods, and the ordinary affine editor-Crop path with
+  cover-within-canonical aspect adaptation.
+
+  Use typed `<type>:<name>` field identities and portable content/order/overrides.
+  The current canonical contract is schema 2.2, superseding the intermediate 2.1
+  roadmap. Canonical 2.0/2.1 packages and incompatible saved envelopes require
+  reimport; no migration-on-read promise remains. Source schema 1.0 still uses
+  provenance-preserving normalization. Different field types may share a source
+  name; compatible repeated Booleans merge into a multi-target control. Descendant
+  controls follow participation without discarding canonical child content.
+
+- Add `runTemplatePackageImportPipelineV2` to the curated importer entry. Hosts receive canonical V2 packages, separate import/normalization evidence, explicit blocked/error outcomes and idempotent resource disposal. Studio ZIP ingestion now uses this operation while retaining existing authoring and session authorities. Compiler experiments remain private.
+
+### Patch Changes
+
+- Correct V2 line-evidence invalidation, repairable single-template Crop
+  persistence, atomic Family Choice reconciliation, and reference-aware Family
+  replacement-asset cleanup without changing public APIs or schemas.
+- Serialize single and Family session saves, bound ZIP decoded output and cumulative reads, add explicit import URL ownership, and expose existing V2 source assembly through the importer entry point. Reuse decoded previews and derive confirmation release metadata from the package manifest while retaining historical Family confirmations.
+
+  Complete compatibility-session cancellation cleanup and save-held resource leases. Remove measured pre-materialization copies and cache strict validation only for deeply immutable packages, without changing canonical content, output or readiness semantics.
+
+- Add V2 Family selection-property metadata, portable tuple resolution and
+  availability helpers, atomic configuration mutations, independent editor-control
+  ordering, and session option selection without changing canonical Family content.
+- Updated dependencies
+- Updated dependencies [944c51b]
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+- Updated dependencies
+  - @sleinity/template-core@1.0.0
 
 ## 0.8.0
 

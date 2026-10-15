@@ -1,0 +1,300 @@
+{
+  "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+  "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+  "evidence": [
+    {
+      "phase": "single activation",
+      "requirement": [
+        {
+          "id": "rethink-600",
+          "family": "Rethink Sans",
+          "postScriptName": "RethinkSans-SemiBold",
+          "style": "SemiBold",
+          "cssStyle": "normal",
+          "weight": 600,
+          "usedBy": [
+            "headline"
+          ],
+          "characters": "Deal of the week",
+          "editable": true,
+          "mixedStyle": false,
+          "source": "figma",
+          "availableInFigma": true,
+          "resolution": {
+            "managedFontId": "managed-font:523d8be1ea86:0",
+            "match": "exact",
+            "classification": "exact",
+            "confirmed": true,
+            "requestId": "rethink-600",
+            "faceIndex": 0,
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "effectiveFamily": "Rethink Sans",
+            "effectiveWeight": 600,
+            "effectiveStyle": "normal",
+            "effectiveStretch": "normal",
+            "effectiveAxes": []
+          },
+          "assetId": "asset:font:523d8be1ea86:0"
+        }
+      ],
+      "revision": 1,
+      "readiness": {
+        "state": "pending",
+        "exportReady": false,
+        "deterministic": "ready",
+        "renderValidation": "not-required",
+        "assets": "ready",
+        "fonts": "pending",
+        "renderer": "pending",
+        "reasons": [
+          "Font readiness is pending.",
+          "Renderer settlement/readiness is pending."
+        ],
+        "contentRevision": 0,
+        "materializationRevision": "field-materialization-v1:657e4e50"
+      },
+      "exportReady": true,
+      "faces": [
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded"
+        }
+      ]
+    },
+    {
+      "phase": "shared activation",
+      "requirement": [
+        {
+          "id": "rethink-600",
+          "family": "Rethink Sans",
+          "postScriptName": "RethinkSans-SemiBold",
+          "style": "SemiBold",
+          "cssStyle": "normal",
+          "weight": 600,
+          "usedBy": [
+            "headline"
+          ],
+          "characters": "Deal of the week",
+          "editable": true,
+          "mixedStyle": false,
+          "source": "figma",
+          "availableInFigma": true,
+          "resolution": {
+            "managedFontId": "managed-font:523d8be1ea86:0",
+            "match": "exact",
+            "classification": "exact",
+            "confirmed": true,
+            "requestId": "rethink-600",
+            "faceIndex": 0,
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "effectiveFamily": "Rethink Sans",
+            "effectiveWeight": 600,
+            "effectiveStyle": "normal",
+            "effectiveStretch": "normal",
+            "effectiveAxes": []
+          },
+          "assetId": "asset:font:523d8be1ea86:0"
+        }
+      ],
+      "selectedVariantId": "portrait",
+      "revision": 1,
+      "readiness": {
+        "state": "pending",
+        "exportReady": false,
+        "deterministic": "ready",
+        "renderValidation": "not-required",
+        "assets": "ready",
+        "fonts": "pending",
+        "renderer": "pending",
+        "reasons": [],
+        "contentRevision": 0,
+        "materializationRevision": "field-materialization-v1:657e4e50"
+      },
+      "exportReady": true,
+      "faces": [
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded"
+        }
+      ]
+    },
+    {
+      "phase": "variant reactivation after external face removal",
+      "requirement": [
+        {
+          "id": "rethink-600",
+          "family": "Rethink Sans",
+          "postScriptName": "RethinkSans-SemiBold",
+          "style": "SemiBold",
+          "cssStyle": "normal",
+          "weight": 600,
+          "usedBy": [
+            "headline"
+          ],
+          "characters": "Deal of the week",
+          "editable": true,
+          "mixedStyle": false,
+          "source": "figma",
+          "availableInFigma": true,
+          "resolution": {
+            "managedFontId": "managed-font:523d8be1ea86:0",
+            "match": "exact",
+            "classification": "exact",
+            "confirmed": true,
+            "requestId": "rethink-600",
+            "faceIndex": 0,
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "effectiveFamily": "Rethink Sans",
+            "effectiveWeight": 600,
+            "effectiveStyle": "normal",
+            "effectiveStretch": "normal",
+            "effectiveAxes": []
+          },
+          "assetId": "asset:font:523d8be1ea86:0"
+        }
+      ],
+      "selectedVariantId": "landscape",
+      "revision": 2,
+      "readiness": {
+        "state": "pending",
+        "exportReady": false,
+        "deterministic": "ready",
+        "renderValidation": "not-required",
+        "assets": "ready",
+        "fonts": "pending",
+        "renderer": "pending",
+        "reasons": [],
+        "contentRevision": 0,
+        "materializationRevision": "field-materialization-v1:657e4e50"
+      },
+      "exportReady": true,
+      "faces": [
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded"
+        }
+      ]
+    },
+    {
+      "phase": "surviving session",
+      "requirement": [
+        {
+          "id": "rethink-600",
+          "family": "Rethink Sans",
+          "postScriptName": "RethinkSans-SemiBold",
+          "style": "SemiBold",
+          "cssStyle": "normal",
+          "weight": 600,
+          "usedBy": [
+            "headline"
+          ],
+          "characters": "Deal of the week",
+          "editable": true,
+          "mixedStyle": false,
+          "source": "figma",
+          "availableInFigma": true,
+          "resolution": {
+            "managedFontId": "managed-font:523d8be1ea86:0",
+            "match": "exact",
+            "classification": "exact",
+            "confirmed": true,
+            "requestId": "rethink-600",
+            "faceIndex": 0,
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "effectiveFamily": "Rethink Sans",
+            "effectiveWeight": 600,
+            "effectiveStyle": "normal",
+            "effectiveStretch": "normal",
+            "effectiveAxes": []
+          },
+          "assetId": "asset:font:523d8be1ea86:0"
+        }
+      ],
+      "selectedVariantId": "landscape",
+      "revision": 2,
+      "readiness": {
+        "state": "pending",
+        "exportReady": false,
+        "deterministic": "ready",
+        "renderValidation": "not-required",
+        "assets": "ready",
+        "fonts": "pending",
+        "renderer": "pending",
+        "reasons": [],
+        "contentRevision": 0,
+        "materializationRevision": "field-materialization-v1:657e4e50"
+      },
+      "exportReady": true,
+      "faces": [
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded"
+        }
+      ]
+    },
+    {
+      "phase": "reactivation after disposal",
+      "requirement": [
+        {
+          "id": "rethink-600",
+          "family": "Rethink Sans",
+          "postScriptName": "RethinkSans-SemiBold",
+          "style": "SemiBold",
+          "cssStyle": "normal",
+          "weight": 600,
+          "usedBy": [
+            "headline"
+          ],
+          "characters": "Deal of the week",
+          "editable": true,
+          "mixedStyle": false,
+          "source": "figma",
+          "availableInFigma": true,
+          "resolution": {
+            "managedFontId": "managed-font:523d8be1ea86:0",
+            "match": "exact",
+            "classification": "exact",
+            "confirmed": true,
+            "requestId": "rethink-600",
+            "faceIndex": 0,
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "effectiveFamily": "Rethink Sans",
+            "effectiveWeight": 600,
+            "effectiveStyle": "normal",
+            "effectiveStretch": "normal",
+            "effectiveAxes": []
+          },
+          "assetId": "asset:font:523d8be1ea86:0"
+        }
+      ],
+      "revision": 1,
+      "readiness": {
+        "state": "pending",
+        "exportReady": false,
+        "deterministic": "ready",
+        "renderValidation": "not-required",
+        "assets": "ready",
+        "fonts": "pending",
+        "renderer": "pending",
+        "reasons": [
+          "Font readiness is pending.",
+          "Renderer settlement/readiness is pending."
+        ],
+        "contentRevision": 0,
+        "materializationRevision": "field-materialization-v1:657e4e50"
+      },
+      "exportReady": true,
+      "faces": [
+        {
+          "family": "__template_font_523d8be1ea86cb25_0_static",
+          "status": "loaded"
+        }
+      ]
+    }
+  ]
+}

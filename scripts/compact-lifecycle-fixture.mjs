@@ -38,6 +38,8 @@ function bounds(x, y, width, height) {
 export async function createCompactLifecycleFixture() {
   const packageValue = {
     schemaVersion: "1.0",
+    // Synthetic current-producer smoke input, not a source-fidelity fixture.
+    source: { type: "figma", rootNodeId: "root", pluginVersion: "0.6.1", packageContract: "template-package-v1" },
     packageId: "sdk-session-browser-smoke",
     name: "SDK Session Browser Smoke",
     canvas: {

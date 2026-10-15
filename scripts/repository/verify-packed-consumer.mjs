@@ -1,4 +1,5 @@
 import {
+  copyFile,
   mkdtemp,
   mkdir,
   readFile,
@@ -10,6 +11,8 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { gzipSync } from "node:zlib";
+import { extractCandidateExamples } from "./local-sdk-candidate.mjs";
+import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
 const workspace = await mkdtemp(path.join(os.tmpdir(), "template-sdk-consumer-"));
@@ -17,6 +20,9 @@ const archivesDirectory = path.join(workspace, "archives");
 const consumerDirectory = path.join(workspace, "consumer");
 const packageNames = ["template-core", "template-browser", "template-react"];
 const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
+const manager = process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "pnpm";
+const archiveIndex=process.argv.indexOf("--archives");
+const supplied=archiveIndex<0?null:path.resolve(process.argv[archiveIndex+1]);
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -39,6 +45,12 @@ try {
   ]);
 
   for (const packageName of packageNames) {
+    if (supplied) {
+      const archive=(await readdir(supplied)).find(file=>file.startsWith(`sleinity-${packageName}-`)&&file.endsWith(".tgz"));
+      if(!archive)throw Error(`Missing supplied archive for ${packageName}`);
+      await copyFile(path.join(supplied,archive),path.join(archivesDirectory,archive));
+      continue;
+    }
     run(pnpmExecutable, ["pack", "--pack-destination", archivesDirectory], {
       cwd: path.join(root, "packages", packageName),
     });
@@ -112,7 +124,7 @@ try {
         module: "ESNext",
         moduleResolution: "Bundler",
         strict: true,
-        skipLibCheck: true,
+        skipLibCheck: false,
         jsx: "react-jsx",
         noEmit: true,
       },
@@ -125,87 +137,33 @@ try {
   );
   await writeFile(
     path.join(consumerDirectory, "src/main.tsx"),
-    `import { useState } from "react";
-import { createRoot } from "react-dom/client";
-import { createTemplateSession } from "@sleinity/template-browser/session";
-import {
-  TemplateSessionProvider,
-  TemplateSessionRenderer,
-  TemplateInspectionPreview,
-  TemplateInspectionViewport,
-  useTemplateSessionSnapshot,
-} from "@sleinity/template-react";
-import { TemplateImportWizard } from "@sleinity/template-react/importer";
-import {
-  TemplateSessionViewport,
-  useTemplateSessionDiagnosticSummary,
-  useTemplateSessionEditableField,
-  useTemplateSessionEditableFields,
-  type TemplateSessionViewportSnapshotV1,
-} from "@sleinity/template-react/editor";
-import type { FieldConstraintValidation } from "@sleinity/template-core/editor";
-import type { PackageAssetSafetyIssue } from "@sleinity/template-core/assets";
-import type { FontRequirement } from "@sleinity/template-core/fonts";
-import type { PackageMotionSummary } from "@sleinity/template-core/motion";
-import type { SettlementComparisonV1 } from "@sleinity/template-core/inspection";
-import type { AssetReliabilityReport } from "@sleinity/template-browser/assets";
-import type { ManagedFontRecord } from "@sleinity/template-browser/fonts";
-import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
-import type { PackagePngExportDiagnostic } from "@sleinity/template-browser/capture";
-import type { FigmaMcpMetadata } from "@sleinity/template-browser/enrichment";
-import type { PackageQualityReport } from "@sleinity/template-react/inspection";
-import "@sleinity/template-react/importer.css";
-
-type CuratedSdkContract = [
-  FieldConstraintValidation,
-  PackageAssetSafetyIssue,
-  FontRequirement,
-  PackageMotionSummary,
-  SettlementComparisonV1,
-  AssetReliabilityReport,
-  ManagedFontRecord,
-  SavedTemplateRecord,
-  PackagePngExportDiagnostic,
-  FigmaMcpMetadata,
-  PackageQualityReport,
-];
-const curatedContractTypecheck: CuratedSdkContract | null = null;
-
-const session = createTemplateSession();
-
-function Player() {
-  const snapshot = useTemplateSessionSnapshot();
-  const fields = useTemplateSessionEditableFields();
-  const firstField = useTemplateSessionEditableField(fields[0]?.field.id ?? "missing");
-  const diagnostics = useTemplateSessionDiagnosticSummary();
-  const viewportSnapshot: TemplateSessionViewportSnapshotV1 | null = null;
-  void firstField;
-  void viewportSnapshot;
-  return <main data-status={snapshot.status}>
-    <output data-diagnostic-status={diagnostics.status}>{fields.length}</output>
-    <TemplateSessionViewport mode="editor" fallback={<p>Waiting</p>} />
-    <TemplateSessionRenderer mode="static" fallback={<p>Waiting</p>} />
-    {snapshot.workingPackage ? <>
-      <TemplateInspectionPreview packageValue={snapshot.workingPackage} showControls={false} />
-      <TemplateInspectionViewport packageValue={snapshot.workingPackage} />
-    </> : null}
-  </main>;
-}
-
-function App() {
-  const [runtime] = useState(() => session);
-  void curatedContractTypecheck;
-  return <TemplateSessionProvider session={runtime}>
-    <TemplateImportWizard options={{ session: runtime }} onComplete={() => undefined} />
-    <Player />
-  </TemplateSessionProvider>;
-}
-
-createRoot(document.getElementById("root")!).render(<App />);
+    `import {createRoot} from "react-dom/client";
+import {createTemplateSessionV2,createTemplateFieldFamilySessionV2,type TextFieldControllerV2,type TemplateFieldFamilyImageControllerV3} from "@sleinity/template-browser/session";
+import {TemplateFieldSessionV2Provider,TemplateFieldSessionRendererV2,useTemplateFieldSessionV2Snapshot,useTemplateFieldControllersV2} from "@sleinity/template-react/editor";
+import type {SavedTemplateSessionRecordV2} from "@sleinity/template-browser/persistence";
+import {FieldRulesV2Host} from "./FieldRulesV2Host";
+const session=createTemplateSessionV2();const family=createTemplateFieldFamilySessionV2();void family;
+function Probe(){const snapshot=useTemplateFieldSessionV2Snapshot();const fields=useTemplateFieldControllersV2();const text=fields.find((field):field is TextFieldControllerV2=>field.type==="text");const setter:((value:string)=>unknown)|undefined=text?.setValue;const crop:TemplateFieldFamilyImageControllerV3["setVariantPlacement"]|undefined=undefined;const record:SavedTemplateSessionRecordV2|null=null;void setter;void crop;void record;return <main data-status={snapshot.status}><output data-v2-status={snapshot.status}>{fields.length}</output><TemplateFieldSessionRendererV2 fallback={<p>Waiting for V2 content</p>}/></main>;}
+createRoot(document.getElementById("root")!).render(<TemplateFieldSessionV2Provider session={session}><Probe/><FieldRulesV2Host/></TemplateFieldSessionV2Provider>);
 `,
   );
 
-  run(pnpmExecutable, ["install", "--prefer-offline"], {
+  for (const file of ["FieldRulesV2Host.tsx", "fieldHostLifecycle.ts"]) {
+    await writeFile(path.join(consumerDirectory, "src", file), await readFile(
+      path.join(root, "examples/template-editor-integration/src", file), "utf8",
+    ));
+  }
+
+  if (supplied) {
+    const guide = await readFile(path.join(supplied, "SDK-V2-INTEGRATION.md"), "utf8");
+    const examples = extractCandidateExamples(guide);
+    for (const [index, source] of examples.entries()) {
+      await writeFile(path.join(consumerDirectory, "src", `candidate-guide-${index}.tsx`), source);
+    }
+    console.log(`Typechecking ${examples.length} literal delivered guide examples against supplied archives.`);
+  }
+
+  run(manager, manager === "npm" ? ["install", "--ignore-scripts", "--no-audit", "--no-fund", "--prefer-offline"] : ["install", "--prefer-offline"], {
     cwd: consumerDirectory,
     env: { ...process.env, CI: "true" },
   });
@@ -232,9 +190,6 @@ createRoot(document.getElementById("root")!).render(<App />);
     }
     if (packageName === "template-react") {
       for (const fileName of [
-        "importer.js",
-        "importer.d.ts",
-        "importer.css",
         "editor.js",
         "editor.d.ts",
       ]) {
@@ -250,6 +205,96 @@ createRoot(document.getElementById("root")!).render(<App />);
           );
         }
       }
+    }
+  }
+
+  const browserInstalled = path.join(consumerDirectory, "node_modules/@sleinity/template-browser");
+  const browserManifest = JSON.parse(await readFile(path.join(browserInstalled, "package.json"), "utf8"));
+  if (JSON.stringify(browserManifest.sdkInternalExports) !== JSON.stringify(["./session-internal"]))
+    throw new Error("Packed Browser must mark the React integration entry unsupported.");
+  for (const extension of ["js", "d.ts"]) await readFile(path.join(browserInstalled, "dist", `session-internal.${extension}`));
+  const reactDist = path.join(consumerDirectory, "node_modules/@sleinity/template-react/dist");
+  const reactRuntime = (await Promise.all((await readdir(reactDist)).filter(file => file.endsWith(".js")).map(file => readFile(path.join(reactDist, file), "utf8")))).join("\n");
+  if (!reactRuntime.includes("@sleinity/template-browser/session-internal"))
+    throw new Error("Packed React must externalize its restricted Browser integration dependency.");
+  for (const file of (await readdir(reactDist)).filter(file => file.endsWith(".d.ts"))) {
+    const declaration = await readFile(path.join(reactDist, file), "utf8");
+    if (/session-internal|SessionSnapshotReader|InternalSessionView|SingleSessionView|FamilySessionView|useFieldSessionSnapshotV2/.test(declaration))
+      throw new Error(`Packed React declarations expose private reader types: ${file}`);
+  }
+
+  // Exercise the new operation from installed archives, not workspace aliases.
+  // This portable synthetic source is contract coverage, not Figma certification.
+  const { zipSync, strToU8, unzipSync } = await import("fflate");
+  const {createCompactLifecycleFixture}=await import("../compact-lifecycle-fixture.mjs");
+  const fixture = await createCompactLifecycleFixture();
+  const portablePackage = JSON.parse(new TextDecoder().decode(unzipSync(fixture.bytes)["template.json"]));
+  const portableFiles = { "template.json": strToU8(JSON.stringify(portablePackage)) };
+  const portableAssets = [];
+  for (const [id, asset] of Object.entries(portablePackage.assets ?? {})) {
+    if (asset.type !== "image" || !asset.dataUrl) continue;
+    const assetPath = `assets/image-${portableAssets.length}.png`;
+    const bytes = Buffer.from(asset.dataUrl.split(",")[1], "base64");
+    portableFiles[assetPath] = bytes;
+    portableAssets.push({ id, type: "image", path: assetPath, mimeType: asset.mimeType ?? "image/png", byteSize: bytes.length });
+  }
+  portableFiles["assets.json"] = strToU8(JSON.stringify({ version: 1, assets: portableAssets }));
+  await writeFile(path.join(consumerDirectory, "import-contract.zip"), zipSync(portableFiles));
+  await writeFile(path.join(consumerDirectory, "verify-import.mjs"), `
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import * as browserRoot from "@sleinity/template-browser";
+import * as browserFonts from "@sleinity/template-browser/fonts";
+import * as browserCapture from "@sleinity/template-browser/capture";
+import * as importer from "@sleinity/template-browser/importer";
+import { createTemplateSessionV2 } from "@sleinity/template-browser/session";
+import { InMemoryTemplateSessionRepositoryV2 } from "@sleinity/template-browser/persistence";
+assert.equal(browserRoot.prepareTemplatePackageFonts, browserFonts.prepareTemplatePackageFonts, "Font activation must have one implementation across packed entries.");
+assert.equal(browserRoot.runtimeFontFaceSignature, browserFonts.runtimeFontFaceSignature);
+assert.equal(browserRoot.getManagedFontRegistry, browserFonts.getManagedFontRegistry, "Registry lifetime must remain shared across entries.");
+assert.equal(browserRoot.exportTemplatePackagePng, browserCapture.exportTemplatePackagePng, "PNG capture must have one implementation across packed entries.");
+assert.equal(browserRoot.runTemplatePackageImportPipelineV2, undefined);
+for(const specifier of ["@sleinity/template-browser/session","@sleinity/template-browser/persistence","@sleinity/template-browser/importer","@sleinity/template-react"]) {
+  const api = await import(specifier);
+  for(const name of ["createTemplateSession","createTemplateFamilySession","createTemplateImportWizard","loadTemplateImportConfirmation","InMemoryTemplateRepository","TemplateImportWizard","TemplateSessionViewport"]) assert.equal(api[name],undefined, name+" is retired");
+}
+for(const specifier of ["@sleinity/template-core","@sleinity/template-core/editor","@sleinity/template-core/family"]) {const api=await import(specifier);for(const name of ["importTemplatePackage","createTemplateFamily","updateTemplatePackageField","updatePackageEditableFieldRule"]) assert.equal(api[name],undefined,name+" is retired");}
+await assert.rejects(import("@sleinity/template-react/importer"), {code:"ERR_PACKAGE_PATH_NOT_EXPORTED"});
+await assert.rejects(import("@sleinity/template-react/importer.css"), {code:"ERR_PACKAGE_PATH_NOT_EXPORTED"});
+assert.equal(importer.createV2ImportOperation, undefined);
+assert.equal(importer.compileZipSource, undefined);
+for (const name of ["createSingleSessionSnapshotReader", "createFamilySessionSnapshotReader"]) {
+  assert.equal(browserRoot[name], undefined, "Restricted reader must not enter the root API.");
+  assert.equal(importer[name], undefined, "Restricted reader must not enter supported importer APIs.");
+}
+const bytes = await readFile(new URL("./import-contract.zip", import.meta.url));
+const result = await importer.runTemplatePackageImportPipelineV2({ format: "zip", sourceId: "packed-source", sourceName: "contract.zip", buffer: bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), fontRegistry: null });
+const repository = new InMemoryTemplateSessionRepositoryV2();
+const session = createTemplateSessionV2({ repository });
+const restored = createTemplateSessionV2({ repository });
+try {
+  assert.equal(result.status, "ready"); assert.equal(result.sourceId, "packed-source");
+  assert.equal(result.package, result.parseResult.package);
+  session.load(result.package); assert.equal(session.getSnapshot().status, "ready");
+  result.dispose(); result.dispose();
+  const text = session.getFieldControllers().find(field => field.type === "text" || field.type === "textarea");
+  assert(text && text.setValue("ABC").accepted);
+  const saved = await session.save(); await restored.loadSaved(saved.id);
+  assert.deepEqual(restored.getSnapshot().contentState, session.getSnapshot().contentState);
+  assert.deepEqual(restored.getSnapshot().workingPackage.nodes, session.getSnapshot().workingPackage.nodes);
+} finally { session.dispose(); restored.dispose(); result.dispose(); }
+console.log("Packed public V2 ZIP import/edit/save/reload and private-export checks passed.");
+`);
+  console.log(run(process.execPath, ["verify-import.mjs"], { cwd: consumerDirectory }).trim());
+
+  if (supplied) {
+    for (const name of ["single", "family"]) {
+      const source = await readFile(path.join(root, `scripts/repository/verify-sdk-061-${name}-host.mjs`), "utf8");
+      const relocated = source.replaceAll('"../fidelity/core.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/fidelity/core.mjs")).href))
+        .replaceAll('"../fidelity/gate-profile.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/fidelity/gate-profile.mjs")).href))
+        .replaceAll('"./sdk-061-family-profile.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/repository/sdk-061-family-profile.mjs")).href));
+      await writeFile(path.join(consumerDirectory, `verify-exact-${name}.mjs`), relocated);
+      console.log(run(process.execPath, [`verify-exact-${name}.mjs`], { cwd: consumerDirectory }).trim());
     }
   }
 

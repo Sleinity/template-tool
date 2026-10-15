@@ -1,0 +1,62 @@
+[
+  {
+    "label": "npm-consumer",
+    "command": "node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/r07-20261013",
+    "started": "2026-10-13T10:27:37.258Z",
+    "durationMs": 8405,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/npm-consumer.log",
+    "logSha256": "e96d4c0c9321261aea43ea13d1a3649014df543167a3efb9f4bb9f2470cec742"
+  },
+  {
+    "label": "pnpm-consumer",
+    "command": "TEMPLATE_CONSUMER_PACKAGE_MANAGER=pnpm node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/r07-20261013",
+    "started": "2026-10-13T10:27:45.665Z",
+    "durationMs": 6073,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/pnpm-consumer.log",
+    "logSha256": "524b657c88399cc07ba9801fc1fd3e852933d3bc50f54f21d236497f05f13cb3"
+  },
+  {
+    "label": "r01-host",
+    "command": "node scripts/repository/verify-host-font-authority.mjs --archives release-verification-artifacts/r07-20261013 --output fidelity/evidence/r07/host-font",
+    "started": "2026-10-13T10:27:51.738Z",
+    "durationMs": 20668,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/r01-host.log",
+    "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+  },
+  {
+    "label": "r04-unit",
+    "command": "node scripts/repository/verify-blocked-storage-unit.mjs",
+    "started": "2026-10-13T10:28:12.406Z",
+    "durationMs": 1068,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/r04-unit.log",
+    "logSha256": "b0ce9d9f417c739dd19a7411e4f80f5a9291c1cf10fad22c8f76dc7532c270d8"
+  },
+  {
+    "label": "r04-npm",
+    "command": "node scripts/repository/verify-blocked-storage.mjs --archives release-verification-artifacts/r07-20261013 --manager npm --output fidelity/evidence/r07/storage-npm",
+    "started": "2026-10-13T10:28:13.474Z",
+    "durationMs": 4174,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/r04-npm.log",
+    "logSha256": "337bd1a8a3906417841f2d1894f8f435b8c34fb568c4d389401deba7725f0ba6"
+  },
+  {
+    "label": "r04-pnpm",
+    "command": "node scripts/repository/verify-blocked-storage.mjs --archives release-verification-artifacts/r07-20261013 --manager pnpm --output fidelity/evidence/r07/storage-pnpm",
+    "started": "2026-10-13T10:28:17.649Z",
+    "durationMs": 3751,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/r04-pnpm.log",
+    "logSha256": "7dc3a782ae59cad4175658418e61ed54ac177c91216f6ad9f5f0c2347dad5dda"
+  }
+]

@@ -1,0 +1,132 @@
+[
+  {
+    "label": "font-reactivation",
+    "command": "pnpm font:reactivation:verify",
+    "started": "2026-10-13T10:23:21.396Z",
+    "durationMs": 3712,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/font-reactivation.log",
+    "logSha256": "c8d4f62d0c813ca2599df6a6461c654c8e10de72d86c26766180095dc2ece741"
+  },
+  {
+    "label": "font-routing",
+    "command": "pnpm runtime-routing:fonts",
+    "started": "2026-10-13T10:23:25.111Z",
+    "durationMs": 7289,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/font-routing.log",
+    "logSha256": "4cb3af0d94ead028783a75eca9ce56700a6641fe8e5696a5f44b5db4dddff1a4"
+  },
+  {
+    "label": "text-trim",
+    "command": "pnpm runtime-routing:text-trim",
+    "started": "2026-10-13T10:23:32.400Z",
+    "durationMs": 6046,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/text-trim.log",
+    "logSha256": "dc381501e347495a0fc87bd7400fe0a7475fd1baa17985a9bf2729a2fff22517"
+  },
+  {
+    "label": "routing",
+    "command": "pnpm runtime-routing:scenarios",
+    "started": "2026-10-13T10:23:38.447Z",
+    "durationMs": 8033,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/routing.log",
+    "logSha256": "28498cc1755e245e845ff76826024ec23c7d16a077b386db354dfa60a01c5ac0"
+  },
+  {
+    "label": "setup",
+    "command": "pnpm studio:setup",
+    "started": "2026-10-13T10:23:46.480Z",
+    "durationMs": 20009,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/setup.log",
+    "logSha256": "e7565a1673b919d4ae703b34086de27b63ba4f9f9f61f9c8872d13a3ba1f728b"
+  },
+  {
+    "label": "drafts",
+    "command": "pnpm studio:drafts",
+    "started": "2026-10-13T10:24:06.490Z",
+    "durationMs": 35911,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/drafts.log",
+    "logSha256": "9fb7596f8c5ccc4dc4ddc51748934935cb792c2612902b9aa8d845183feff77a"
+  },
+  {
+    "label": "field-rules",
+    "command": "pnpm field-rules:studio",
+    "started": "2026-10-13T10:24:42.401Z",
+    "durationMs": 15821,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/field-rules.log",
+    "logSha256": "1ef83058e54a9b6260aad89402031d7579d2bebcff1827c8b6634aff84a86522"
+  },
+  {
+    "label": "family-parity",
+    "command": "pnpm studio:family-parity",
+    "started": "2026-10-13T10:24:58.223Z",
+    "durationMs": 37020,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/family-parity.log",
+    "logSha256": "31cc9886eb9c5acb29e8c06f72a26b1140660b448572011dffdd266f0e26ba4c"
+  },
+  {
+    "label": "workflow",
+    "command": "pnpm studio:workflow-acceptance",
+    "started": "2026-10-13T10:25:35.243Z",
+    "durationMs": 19468,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/workflow.log",
+    "logSha256": "a1030a1a5957634b5b9313a41122c0bf4729a4e1d97f0dc7d0fdf58c78041999"
+  },
+  {
+    "label": "output-workspace",
+    "command": "node scripts/studio-product/verify.mjs --output fidelity/evidence/r07/output-workspace",
+    "started": "2026-10-13T10:25:54.712Z",
+    "durationMs": 55637,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/output-workspace.log",
+    "logSha256": "5dd866a2b1525a2893c771242714760335c9b24b5aa11153e9a92f84e8683e28"
+  },
+  {
+    "label": "output-lifecycle",
+    "command": "node scripts/editor-performance/verify.mjs --output fidelity/evidence/r07/output-lifecycle",
+    "started": "2026-10-13T10:26:50.349Z",
+    "durationMs": 22201,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/output-lifecycle.log",
+    "logSha256": "a267016b892be77cf9cdfadb5798d0186f11d91c5f897c59081f0c524a47d43c"
+  },
+  {
+    "label": "storage-retry",
+    "command": "node scripts/repository/verify-studio-blocked-storage.mjs --output fidelity/evidence/r07/studio-storage",
+    "started": "2026-10-13T10:27:12.551Z",
+    "durationMs": 10083,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/storage-retry.log",
+    "logSha256": "1ebb6c27ba70509cb7e79e5e82d3c64eee48c42e2fc9e456cdef48a4a89a9e0f"
+  },
+  {
+    "label": "storage-fonts",
+    "command": "node scripts/repository/verify-studio-storage-fonts.mjs --output fidelity/evidence/r07/studio-storage-fonts",
+    "started": "2026-10-13T10:27:22.634Z",
+    "durationMs": 3055,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/r07-raster-20261013/checks/storage-fonts.log",
+    "logSha256": "038a29b8820a843a33d5494218d66e679a1f4d9f438183e47fbf922d4030b568"
+  }
+]

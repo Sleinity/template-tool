@@ -1,0 +1,27 @@
+[
+  {
+    "id": "public-contract",
+    "script": "scripts/repository/verify-packed-consumer.mjs",
+    "args": [
+      "--archives",
+      "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/f7-readiness-20261015"
+    ],
+    "exitCode": 0,
+    "error": null
+  },
+  {
+    "id": "delivered-example",
+    "script": "scripts/example-lifecycle/verify.mjs",
+    "args": [
+      "--archives",
+      "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/f7-readiness-20261015",
+      "--delivered",
+      "--manager",
+      "pnpm",
+      "--output",
+      "/tmp/f7-packed-retry/pnpm"
+    ],
+    "exitCode": 0,
+    "error": null
+  }
+]

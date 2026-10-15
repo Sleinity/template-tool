@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { strFromU8, strToU8, unzipSync, zipSync } from "fflate";
 import { createStudioViteServer } from "./studio-vite-server.mjs";
@@ -22,7 +23,14 @@ const exactFontPath = path.join(
   "fonts",
   "rethink-sans-600.ttf",
 );
-await writeFile(fixturePath, fixture.bytes);
+const previewPng = Uint8Array.from(Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M/wHwAF/gL+XyT9WQAAAABJRU5ErkJggg==",
+  "base64",
+));
+await writeFile(fixturePath, zipSync({
+  ...unzipSync(fixture.bytes),
+  "preview.png": previewPng,
+}, { level: 0 }));
 const createFamilyVariantFixture = async ({ outputPath, id, title, withNote = false }) => {
   const entries = unzipSync(fixture.bytes);
   const packageValue = JSON.parse(strFromU8(entries["template.json"]));
@@ -68,6 +76,7 @@ const createFamilyVariantFixture = async ({ outputPath, id, title, withNote = fa
   await writeFile(outputPath, zipSync({
     ...entries,
     "template.json": strToU8(JSON.stringify(packageValue)),
+    "preview.png": previewPng,
   }, { level: 0 }));
 };
 await createFamilyVariantFixture({
@@ -134,12 +143,21 @@ try {
   });
   const page = await context.newPage();
   const consoleErrors = [];
+  let allowBlobTeardownErrors = false;
   page.on("console", (message) => {
-    if (message.type() === "error") consoleErrors.push(message.text());
+    if (message.type() === "error") {
+      if (
+        allowBlobTeardownErrors &&
+        message.text().includes("net::ERR_FILE_NOT_FOUND") &&
+        message.location().url.startsWith("blob:")
+      ) return;
+      consoleErrors.push(`${message.text()} (${message.location().url || page.url()})`);
+    }
   });
   page.on("pageerror", (error) => consoleErrors.push(error.message));
 
-  await page.goto(`${baseUrl}/`);
+  // Existing V1 saved-work lifecycle is explicitly isolated after the V2 cutover.
+  await page.goto(`${baseUrl}/templates?studio-mode=family-template-fidelity`);
   await waitForPath(page, "/templates");
   await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
   await page.getByText("Choose a template, then create content for any of its variants.").waitFor();
@@ -173,6 +191,30 @@ try {
   ].entries()) {
     await variantNameInputs.nth(index).fill(title);
   }
+  const variantMenuTrigger = page.getByRole("button", {
+    name: "More actions for Blue Portrait",
+    exact: true,
+  });
+  await variantMenuTrigger.click();
+  const variantMenu = page.getByRole("menu").last();
+  await variantMenu.waitFor();
+  const variantMenuBounds = await variantMenu.boundingBox();
+  if (
+    !variantMenuBounds ||
+    variantMenuBounds.x < 0 ||
+    variantMenuBounds.y < 0 ||
+    variantMenuBounds.x + variantMenuBounds.width > 1280 ||
+    variantMenuBounds.y + variantMenuBounds.height > 900
+  ) {
+    throw new Error("The variant action menu was clipped or escaped the viewport.");
+  }
+  if (!(await variantMenu.evaluate((element) => element.parentElement === document.body))) {
+    throw new Error("The variant action menu was not portalled above its clipping list.");
+  }
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() =>
+    document.activeElement?.getAttribute("aria-label") === "More actions for Blue Portrait",
+  );
   const previewTrigger = page.locator(".family-property-table tbody tr").first().getByRole("button", { name: "Preview" });
   await previewTrigger.click();
   const variantDrawer = page.getByRole("dialog", { name: "Blue Portrait" });
@@ -223,6 +265,81 @@ try {
   await page.locator('.family-font-row[data-ready="true"]').waitFor({ timeout: 30_000 });
   await page.getByRole("button", { name: "Continue to fields" }).click();
   await page.getByTestId("family-step-fields").waitFor();
+  const exactTextNode = page.locator('[data-package-text-runtime-font-family^="__template_font_"]').first();
+  await exactTextNode.waitFor({ timeout: 30_000 });
+  const runtimeFamily = await exactTextNode.getAttribute("data-package-text-runtime-font-family");
+  if (!runtimeFamily) throw new Error("The family preview did not publish a private exact-font family.");
+  await page.waitForFunction((family) => {
+    const normalize = (value) => value.replace(/^['"]|['"]$/g, "");
+    const registeredFace = Array.from(document.fonts).some((candidate) =>
+      normalize(candidate.family) === family && candidate.status === "loaded"
+    );
+    const cssOwner = Array.from(document.querySelectorAll("style[data-template-managed-font]"))
+      .some((node) => node.dataset.templateManagedFont === family && node.isConnected);
+    return registeredFace || cssOwner;
+  }, runtimeFamily, { timeout: 30_000 });
+  const exactFontEvidence = await page.evaluate((family) => {
+    const normalize = (value) => value.replace(/^['"]|['"]$/g, "");
+    const face = Array.from(document.fonts).find((candidate) =>
+      normalize(candidate.family) === family && candidate.status === "loaded"
+    );
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (!context) return { registered: Boolean(face), metricDelta: 0 };
+    const sample = "Deal of the week WWW iii";
+    context.font = `600 96px ${JSON.stringify(family)}, system-ui`;
+    const exactWidth = context.measureText(sample).width;
+    context.font = "600 96px system-ui";
+    const fallbackWidth = context.measureText(sample).width;
+    return {
+      registered: Boolean(face),
+      metricDelta: Math.abs(exactWidth - fallbackWidth),
+      family,
+      registeredFamilies: Array.from(document.fonts).map((candidate) => ({
+        family: candidate.family,
+        status: candidate.status,
+      })),
+      styleOwnerConnected: Array.from(document.querySelectorAll("style[data-template-managed-font]"))
+        .some((node) => node.dataset.templateManagedFont === family && node.isConnected),
+    };
+  }, runtimeFamily);
+  if (
+    (!exactFontEvidence.registered && !exactFontEvidence.styleOwnerConnected) ||
+    exactFontEvidence.metricDelta < 0.5
+  ) {
+    throw new Error(
+      `The family preview declared an exact font without a loaded, metrically distinct private face: ${JSON.stringify(exactFontEvidence)}`,
+    );
+  }
+  // The legacy package-only inspection viewport does not own managed-font
+  // preparation. External face removal is exercised by the public V2 lifecycle
+  // harness; keep this explicit probe to reproduce the old unsupported assumption.
+  const probeExternalRemoval = process.argv.includes("--probe-external-font-removal");
+  const fontEvidence = async () => page.evaluate((family) => ({
+    selectedVariant: document.querySelector(".context-preview-dock__trigger")?.textContent,
+    faces: [...document.fonts].filter(face => face.family.replace(/^['"]|['"]$/g, "") === family).map(face => ({ family: face.family, status: face.status, weight: face.weight, style: face.style })),
+    renderIdentities: [...document.querySelectorAll("[data-template-package-canvas]")].map(node => Object.fromEntries([...node.attributes].filter(attribute => /revision|readiness|identity/.test(attribute.name)).map(attribute => [attribute.name, attribute.value]))),
+  }), runtimeFamily);
+  const lifecycleEvidence = { runtimeFamily, probeExternalRemoval, binaryHash: createHash("sha256").update(await readFile(exactFontPath)).digest("hex"), before: await fontEvidence() };
+  if (probeExternalRemoval) await page.evaluate((family) => {
+    const face = [...document.fonts].find(candidate => candidate.family.replace(/^['"]|['"]$/g, "") === family);
+    if (face) document.fonts.delete(face);
+  }, runtimeFamily);
+  await page.locator(".context-preview-dock__trigger").click();
+  await page.getByRole("textbox", { name: "Search variants" }).fill("Blue Landscape");
+  await page.getByRole("option").filter({ hasText: "Blue Landscape" }).click();
+  try {
+  await page.waitForFunction((family) => {
+    const normalize = (value) => value.replace(/^['"]|['"]$/g, "");
+    return Array.from(document.fonts).some((candidate) =>
+      normalize(candidate.family) === family && candidate.status === "loaded"
+    );
+  }, runtimeFamily, { timeout: 30_000 });
+  } finally {
+    lifecycleEvidence.after = await fontEvidence();
+    await mkdir("fidelity/evidence/prerelease-20260929", { recursive: true });
+    await writeFile(`fidelity/evidence/prerelease-20260929/legacy-font-${probeExternalRemoval ? "removal-probe" : "switch"}.json`, JSON.stringify(lifecycleEvidence, null, 2));
+  }
   await page.getByText("All variants").first().waitFor();
   await page.locator(".family-field-card--attention .family-field-card__summary").first().click();
   await page.locator(".family-unmatched-field").getByRole("button", {
@@ -292,6 +409,54 @@ try {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.getByRole("button", { name: "Add template" }).click();
   await waitForPath(page, "/templates");
+  const familyThumbnail = page.getByRole("img", { name: "Studio family smoke preview" });
+  try { await familyThumbnail.waitFor({ timeout: 30_000 }); }
+  catch (error) {
+    await mkdir("fidelity/evidence/prerelease-20260929", { recursive: true });
+    await writeFile("fidelity/evidence/prerelease-20260929/legacy-thumbnail-blocker.json", JSON.stringify(await page.evaluate(() => ({ url: location.href, cards: [...document.querySelectorAll(".family-template-card")].map(card => ({ text: card.textContent, image: card.querySelector("img")?.outerHTML, thumbnail: card.querySelector(".template-thumbnail")?.outerHTML })) })), null, 2));
+    throw error;
+  }
+  await page.waitForFunction(() =>
+    document.querySelector('img[alt="Studio family smoke preview"]')?.getAttribute("data-loaded") === "true",
+  );
+  if (!(await familyThumbnail.getAttribute("src"))?.startsWith("blob:")) {
+    throw new Error("The saved family card did not resolve the first variant preview.png asset.");
+  }
+  const restorationPage = await context.newPage();
+  await restorationPage.goto(`${baseUrl}/templates?studio-mode=family-template-fidelity`);
+  await restorationPage.getByRole("heading", { name: "Templates", exact: true }).waitFor();
+  const restoredFamilyThumbnail = restorationPage.getByRole("img", { name: "Studio family smoke preview" });
+  try { await restoredFamilyThumbnail.waitFor({ timeout: 30_000 }); }
+  catch (error) {
+    await mkdir("fidelity/evidence/prerelease-20260929", { recursive: true });
+    await writeFile("fidelity/evidence/prerelease-20260929/legacy-restored-thumbnail-blocker.json", JSON.stringify(await restorationPage.evaluate(() => ({ url: location.href, cards: [...document.querySelectorAll(".family-template-card")].map(card => ({ text: card.textContent, thumbnail: card.querySelector(".template-thumbnail")?.outerHTML })) })), null, 2));
+    throw error;
+  }
+  await restorationPage.waitForFunction(() =>
+    document.querySelector('img[alt="Studio family smoke preview"]')?.getAttribute("data-loaded") === "true",
+  );
+  if (!(await restoredFamilyThumbnail.getAttribute("src"))?.startsWith("blob:")) {
+    throw new Error("The saved family preview.png was not restored in a fresh page session.");
+  }
+  await restorationPage.close();
+  await page.setViewportSize({ width: 390, height: 650 });
+  const familyMenuTrigger = page.getByRole("button", {
+    name: "Actions for Studio family smoke",
+    exact: true,
+  });
+  await familyMenuTrigger.click();
+  const familyMenuBounds = await page.getByRole("menu").last().boundingBox();
+  if (
+    !familyMenuBounds ||
+    familyMenuBounds.x < 0 ||
+    familyMenuBounds.y < 0 ||
+    familyMenuBounds.x + familyMenuBounds.width > 390 ||
+    familyMenuBounds.y + familyMenuBounds.height > 650
+  ) {
+    throw new Error("The responsive family-card menu was clipped or escaped the viewport.");
+  }
+  await page.keyboard.press("Escape");
+  await page.setViewportSize({ width: 1280, height: 900 });
   await page.getByRole("button", {
     name: "Open template Studio family smoke",
   }).click();
@@ -325,7 +490,9 @@ try {
   await page.getByRole("dialog").getByRole("button", { name: "Start new" }).waitFor();
   await page.getByRole("dialog").getByRole("button", { name: "Cancel" }).click();
 
+  allowBlobTeardownErrors = true;
   await page.goto(`${baseUrl}/templates?studio-mode=single-template-fidelity`);
+  allowBlobTeardownErrors = false;
   await page.getByRole("heading", { name: "Templates", exact: true }).waitFor();
 
   await page.getByRole("button", { name: "Add template" }).first().click();

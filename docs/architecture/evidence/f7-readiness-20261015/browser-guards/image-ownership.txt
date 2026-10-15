@@ -1,0 +1,2 @@
+Single/Family embedded render and PNG, receiving renderer ownership and final cleanup passed.
+

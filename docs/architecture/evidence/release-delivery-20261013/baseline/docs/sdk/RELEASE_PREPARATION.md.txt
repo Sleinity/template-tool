@@ -1,0 +1,82 @@
+# Unpublished SDK release preparation
+
+The workspace's Core, Browser and React packages remain **0.8.0** during this
+milestone. This is an unpublished source candidate, not the published 0.8.0
+release and not authorization to reuse its tag. All three archives must come
+from the same candidate and match its checksums.
+
+## Current release changes
+
+Pending changesets are inventoried with exact hashes in the architecture evidence
+record. `pnpm exec changeset status` currently requests a major update for the
+fixed three-package train. No changeset is consumed and no version is applied here.
+
+| Change | Consumer impact |
+| --- | --- |
+| Typed V2 fields, canonical content and native single/Family sessions | New preferred seven-field editing path; content, Choice identity and placements stay canonical |
+| Canonical package schema 2.2 and singular image replacement policy | Breaking: one Fill/Fit/Crop policy replaces allowed modes/default; canonical 2.0/2.1 requires reimport; source schema 1.0 normalization remains |
+| Template-scoped recovery | Breaking: supported draft list/get/save/delete APIs and Family `saveDraft` removed; generic template/session persistence retained |
+| V2 ZIP import | Supported importer operation, separated import/parse evidence, blocked/error outcomes and explicit disposal |
+| Family selection/configuration | Shared content, explicit selectors, atomic configuration and review-first reimport |
+| Lifecycle and source-fidelity corrections | Save queue, asset hydration/leases, exact imported Color, evidence freshness, mask and paint/vector corrections; current individually reviewed references retained |
+| Private architecture consolidation | Compiler results, Family preparation and session snapshot/save/hydration/evidence helpers remain internal; no universal session contract for hosts |
+
+Some early changeset prose describes intermediate schema migrations that were
+superseded by schema 2.2. Final release notes must use current code and the current
+schema/recovery contracts, not promise those intermediate compatibility paths.
+The recovery changeset describes a break even though its frontmatter says minor;
+the existing schema changeset already requests major for the fixed train. Resolve
+that classification explicitly during version selection rather than silently
+rewriting pending changesets now.
+
+There are no existing-host upgrade-certification requirements. Current accepted
+templates and internal consumers still require verification. Published migration
+guides remain historical; V1 wizard/confirmation/session APIs remain supported
+compatibility journeys. Older ZIPs are outside the tested exporter 0.6.1 fidelity
+baseline and must not be advertised as certified source representations.
+
+## Produce and verify a candidate
+
+Run commands from a cleanly identified worktree, retaining any existing changes:
+
+```sh
+pnpm ci:portable
+pnpm release-local:verify release-verification-artifacts/<unique-candidate>
+node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/<unique-candidate>
+TEMPLATE_CONSUMER_PACKAGE_MANAGER=pnpm node scripts/repository/verify-runtime-release-consumer.mjs --archives release-verification-artifacts/<unique-candidate>
+node scripts/repository/verify-template-editor-reference.mjs --archives release-verification-artifacts/<unique-candidate>
+node scripts/repository/verify-template-family-reference.mjs --archives release-verification-artifacts/<unique-candidate>
+pnpm sdk:gate:061 -- --run-id <unique-source-authoritative-run>
+```
+
+Packing builds first and packs sequentially. `LOCAL-CANDIDATE-MANIFEST.json`
+records commit, dirty/untracked source inventory, archive hashes, dependencies,
+supported/restricted entries, tooling and exact fixture/font identities.
+`certification: not-yet-verified` is intentional: creating archives never proves
+consumer or fidelity success. Per-package-manager verification reports bind to
+that manifest and those archives. The durable architecture record supplies the
+overall decision and retains failures as well as final successes.
+
+The consumers install archives without source aliases or private registry
+credentials, compile the current V2 guide, and run the exact single/Family
+contracts against installed packages. The browser lifecycle and packed editor/
+Family references provide separate automated rendering/export evidence.
+
+Use the established macOS headless profile for the three-export fidelity gate.
+Verify Node 22 and pnpm 11.9.0 from the release workflow separately; do not compare
+Linux/visible-browser output to macOS headless approved pixels. Each capture,
+comparison and source-review disposition must refer to the same run. Reusing a
+previous reviewed disposition requires exact identity verification, never just
+stable output. References and tolerances cannot change during this milestone.
+
+## Handoff and decision
+
+Start with `SDK-V2-INTEGRATION.md` from the local bundle. The bundle includes
+compatibility documentation with an explicit unpublished notice. Distribution
+remains UNLICENSED and authorized for Sleinity-owned applications.
+
+A passing local candidate is **ready for versioning and publication preparation**.
+It is not published, tagged, registry-verified or approved for a new public
+version. Missing prerequisites or failed consumers/gates remain release blockers.
+The later publication step selects the version, reconciles release notes and
+version-specific declaration expectations, and uses the guarded tag workflow.

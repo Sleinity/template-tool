@@ -1,0 +1,6 @@
+---
+"@sleinity/template-react": patch
+---
+
+Keep source-certified full-parent ALPHA masks aligned with live editor layout so
+Boolean structural reflow does not clip active sibling content with stale insets.

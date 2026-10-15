@@ -1,0 +1,63 @@
+diff --git a/packages/template-core/src/primitives/resolvePrimitiveAppearance.ts b/packages/template-core/src/primitives/resolvePrimitiveAppearance.ts
+index aa66978..cc603cf 100644
+--- a/packages/template-core/src/primitives/resolvePrimitiveAppearance.ts
++++ b/packages/template-core/src/primitives/resolvePrimitiveAppearance.ts
+@@ -1197,6 +1197,14 @@ export function primitiveTreeRevision(packageValue: TemplatePackageV1): string {
+       ancestorClipChain: collectPrimitiveAncestorClipChain(packageValue, node),
+     }).sourceRevision,
+   );
++  return primitiveTreeRevisionFromSourceRevisions(packageValue, nodeRevisions);
++}
++
++/** Construction-local reuse; callers preserve the original source-node order. */
++export function primitiveTreeRevisionFromSourceRevisions(
++  packageValue: TemplatePackageV1,
++  nodeRevisions: readonly string[],
++): string {
+   return `primitive-tree-v1:${stableHash({
+     packageId: packageValue.packageId,
+     rootNodeId: packageValue.rootNodeId,
+diff --git a/packages/template-core/src/resolved/createResolvedRenderTree.ts b/packages/template-core/src/resolved/createResolvedRenderTree.ts
+index 75821b9..cc924ec 100644
+--- a/packages/template-core/src/resolved/createResolvedRenderTree.ts
++++ b/packages/template-core/src/resolved/createResolvedRenderTree.ts
+@@ -44,7 +44,7 @@ import { resolvePackageMaskRelationships, stableMaskContractHash } from "../mask
+ import {
+   collectPrimitiveAncestorClipChain,
+   hasPrimitiveMaskRelationship,
+-  primitiveTreeRevision,
++  primitiveTreeRevisionFromSourceRevisions,
+   resolvePrimitiveAppearance,
+   resolvePrimitiveCanvasAuthority,
+ } from "../primitives";
+@@ -1566,7 +1566,6 @@ export function createResolvedRenderTree(
+   const missingFonts = new Set<string>();
+   const maskResolution = resolvePackageMaskRelationships(packageValue);
+   const compositing = resolveSourceCompositing(packageValue);
+-  const currentPrimitiveTreeRevision = primitiveTreeRevision(packageValue);
+   for (const relationship of maskResolution.relationships) {
+     if (relationship.renderStrategy !== "css-clip-path") {
+       warnings.push({
+@@ -1577,12 +1576,17 @@ export function createResolvedRenderTree(
+       });
+     }
+   }
++  const primitiveSourceRevisions: string[] = [];
+   const unresolvedNodes = Object.fromEntries(
+-    Object.values(packageValue.nodes).map((node) => [
+-      node.id,
+-      resolveNode(node, packageValue, warnings, missingFonts, maskResolution.relationships,
+-        compositing[node.id] ?? null),
+-    ]),
++    Object.values(packageValue.nodes).map((node) => {
++      const resolved = resolveNode(node, packageValue, warnings, missingFonts,
++        maskResolution.relationships, compositing[node.id] ?? null);
++      primitiveSourceRevisions.push(resolved.primitiveAppearance.sourceRevision);
++      return [node.id, resolved];
++    }),
++  );
++  const currentPrimitiveTreeRevision = primitiveTreeRevisionFromSourceRevisions(
++    packageValue, primitiveSourceRevisions,
+   );
+   const sourceDecisionRevision = `${packageValue.packageId}:${currentPrimitiveTreeRevision}`;
+   const nodes = Object.fromEntries(

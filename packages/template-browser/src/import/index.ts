@@ -1,7 +1,4 @@
-export * from "./runTemplatePackageImportPipeline";
-export * from "./layeredSourceDiagnostics";
-export * from "./templateCreationGate";
-export * from "./templateImportCompatibility";
-export * from "./templateImportIntegrity";
+/** Existing root-level read-only diagnostics and V2 reimport contracts. */
 export * from "./templateImportValidation";
-export * from "./templateImportWizard";
+export * from "./layeredSourceDiagnostics";
+export * from "./templateReimportV2";

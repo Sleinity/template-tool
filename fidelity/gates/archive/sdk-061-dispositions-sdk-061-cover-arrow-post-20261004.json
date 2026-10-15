@@ -1,0 +1,266 @@
+{
+  "environmentSha256": "552d5d1f9dc67e8ea863f1238dc17f50456ebfd90408d58ab099d0ddbdc26fac",
+  "fixtures": [
+    {
+      "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+      "id": "exporter-061-now-hiring",
+      "scene": {
+        "cause": "Scene candidate is valid, but its source contract has no approved snapshot for this fixture.",
+        "comparison": "unapproved",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-now-hiring --run-id <new-unique-run-id>",
+        "reviewerRationale": "Retained as unapproved structural evidence; no semantic scene source review or guarded promotion occurred.",
+        "sourceReview": "pending"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-now-hiring --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "71a8f4dd90d2b5fb4f3d84aa78dbed64d5ea01f336897ce9f3eb4d21c42771dc",
+          "capture": "complete-stable",
+          "cause": "No approved surface reference; scaled capture needs source review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-now-hiring/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact embedded preview and default PNG share the overall composition, but 1.78% of source-sized pixels differ by more than 10 in an RGB channel. Text/image placement requires source-level review before approval. This surface was captured twice but has not been individually source-reviewed.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "candidatePngSha256": "962e1968e41a9219a9c933b71cb98f3ee8a9a73b9ec2bcff691a3616c1937b31",
+          "capture": "complete-stable",
+          "cause": "No approved surface reference; scaled capture needs source review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-now-hiring/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact embedded preview and default PNG share the overall composition, but 1.78% of source-sized pixels differ by more than 10 in an RGB channel. Text/image placement requires source-level review before approval. This surface was captured twice but has not been individually source-reviewed.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "candidatePngSha256": "b229151f680df4e7155c5891571b8f9c608c05aa705ae46ac6c30df924e82951",
+          "capture": "complete-stable",
+          "cause": "No approved reference; source-preview difference requires resolution.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-now-hiring/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact embedded preview and default PNG share the overall composition, but 1.78% of source-sized pixels differ by more than 10 in an RGB channel. Text/image placement requires source-level review before approval. Compared at exact source dimensions.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+          "capture": "complete-stable",
+          "cause": "No approved surface reference; scaled capture needs source review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-now-hiring/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-now-hiring --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact embedded preview and default PNG share the overall composition, but 1.78% of source-sized pixels differ by more than 10 in an RGB channel. Text/image placement requires source-level review before approval. This surface was captured twice but has not been individually source-reviewed.",
+          "sourceReview": "pending"
+        }
+      },
+      "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    {
+      "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+      "id": "exporter-061-cover",
+      "scene": {
+        "cause": "Scene candidate is valid, but its source contract has no approved snapshot for this fixture.",
+        "comparison": "unapproved",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-cover --run-id <new-unique-run-id>",
+        "reviewerRationale": "Retained as unapproved structural evidence; no semantic scene source review or guarded promotion occurred.",
+        "sourceReview": "pending"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-cover --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "5b1a7a4f96038129fa1f4f8b4a9a416a7d2bb1a4f5499a18ec1cdde7b3752962",
+          "capture": "complete-stable",
+          "cause": "Arrow SVG ownership corrected; footer fade and approved reference remain unresolved.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-cover/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact source SVG is one open stroked arrow. The VECTOR wrapper no longer paints a CSS stroke on any of the four surfaces. The changed pixels are confined to the 24×24 arrow bounds; the white parent circle is retained and the arrow-region comparison to the embedded preview improves. The separate SOLID + IMAGE + DARKEN footer fade still differs from source and needs a Phase 9 compositing disposition. This stored capture is not a live interactive approval.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "candidatePngSha256": "de4f4fcc6c29d0cde340b2c905a932d2c18cc4b0f626b303882224ec4527af2b",
+          "capture": "complete-stable",
+          "cause": "Arrow SVG ownership corrected; footer fade and approved reference remain unresolved.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-cover/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact source SVG is one open stroked arrow. The VECTOR wrapper no longer paints a CSS stroke on any of the four surfaces. The changed pixels are confined to the 24×24 arrow bounds; the white parent circle is retained and the arrow-region comparison to the embedded preview improves. The separate SOLID + IMAGE + DARKEN footer fade still differs from source and needs a Phase 9 compositing disposition. This stored capture is not a live interactive approval.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "candidatePngSha256": "0e3893d8b55bbfc021d57fcec737a6c6d73d51c7714c63d5902768df5cb3daab",
+          "capture": "complete-stable",
+          "cause": "Arrow SVG ownership corrected; footer fade and approved reference remain unresolved.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-cover/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact source SVG is one open stroked arrow. The VECTOR wrapper no longer paints a CSS stroke on any of the four surfaces. The changed pixels are confined to the 24×24 arrow bounds; the white parent circle is retained and the arrow-region comparison to the embedded preview improves. The separate SOLID + IMAGE + DARKEN footer fade still differs from source and needs a Phase 9 compositing disposition. This stored capture is not a live interactive approval.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "candidatePngSha256": "d08259665cafb36bf34d7063f1f071ec46fac85d0f0902648628032e7117370b",
+          "capture": "complete-stable",
+          "cause": "Arrow SVG ownership corrected; footer fade and approved reference remain unresolved.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-cover/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-cover --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact source SVG is one open stroked arrow. The VECTOR wrapper no longer paints a CSS stroke on any of the four surfaces. The changed pixels are confined to the 24×24 arrow bounds; the white parent circle is retained and the arrow-region comparison to the embedded preview improves. The separate SOLID + IMAGE + DARKEN footer fade still differs from source and needs a Phase 9 compositing disposition. This stored capture is not a live interactive approval.",
+          "sourceReview": "pending"
+        }
+      },
+      "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    {
+      "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+      "id": "exporter-061-carrousel",
+      "scene": {
+        "cause": "Scene candidate is valid, but its source contract has no approved snapshot for this fixture.",
+        "comparison": "unapproved",
+        "regenerate": "node scripts/scene-graph/cli.mjs compare --fixture exporter-061-carrousel --run-id <new-unique-run-id>",
+        "reviewerRationale": "Retained as unapproved structural evidence; no semantic scene source review or guarded promotion occurred.",
+        "sourceReview": "pending"
+      },
+      "settlement": {
+        "editor": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "cause": "Stable observational bundle has no approved reference for this fixture/surface.",
+          "comparison": "fail-or-unapproved",
+          "regenerate": "node scripts/settlement/cli.mjs compare --fixture exporter-061-carrousel --fidelity-run sdk-061-cover-arrow-post-20261004 --run-id <new-unique-run-id>",
+          "reviewerRationale": "No settlement source review or guarded promotion occurred; readiness evidence is retained in this capture run.",
+          "sourceReview": "pending"
+        }
+      },
+      "surfaces": {
+        "editor": {
+          "candidatePngSha256": "bdc7b4367d24289f56bfcf2974e5f071ea081c9cfbed43484df32bdce1528831",
+          "capture": "complete-stable",
+          "cause": "Approved reference missing; remaining source-preview differences require review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-carrousel/editor",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact ZIP Color source value now survives normalization, initial materialization, and Reset. This is established by numeric source/package checks, not PNG pixels. The capture is complete and stable; its unchanged image hash relative to the earlier run does not approve the remaining source-preview differences.",
+          "sourceReview": "pending"
+        },
+        "fields": {
+          "candidatePngSha256": "b40a4b6d945439817a74605606b8ca6857916540497d3d22ebb929236f8705b2",
+          "capture": "complete-stable",
+          "cause": "Approved reference missing; remaining source-preview differences require review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-carrousel/fields",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact ZIP Color source value now survives normalization, initial materialization, and Reset. This is established by numeric source/package checks, not PNG pixels. The capture is complete and stable; its unchanged image hash relative to the earlier run does not approve the remaining source-preview differences.",
+          "sourceReview": "pending"
+        },
+        "png-export": {
+          "candidatePngSha256": "d515fe31e0b148bc9b26231c04d603a625d7b9fbd3efac270aac5ba0fd133980",
+          "capture": "complete-stable",
+          "cause": "Approved reference missing; remaining source-preview differences require review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-carrousel/png-export",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact ZIP Color source value now survives normalization, initial materialization, and Reset. This is established by numeric source/package checks, not PNG pixels. The capture is complete and stable; its unchanged image hash relative to the earlier run does not approve the remaining source-preview differences.",
+          "sourceReview": "pending"
+        },
+        "validate": {
+          "candidatePngSha256": "60d7ca8f5fd7392d102515f92cb467ca85724980f1bf2f068538ebe989b9ba1f",
+          "capture": "complete-stable",
+          "cause": "Approved reference missing; remaining source-preview differences require review.",
+          "comparison": "unapproved",
+          "evidence": "fidelity/candidates/sdk-061-cover-arrow-post-20261004/exporter-061-carrousel/validate",
+          "regenerate": "node scripts/fidelity/cli.mjs compare --fixture exporter-061-carrousel --font-profile source-authoritative --run-id <new-unique-run-id>",
+          "reviewerRationale": "The exact ZIP Color source value now survives normalization, initial materialization, and Reset. This is established by numeric source/package checks, not PNG pixels. The capture is complete and stable; its unchanged image hash relative to the earlier run does not approve the remaining source-preview differences.",
+          "sourceReview": "pending"
+        }
+      },
+      "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    }
+  ],
+  "gate": "sdk-061",
+  "regenerate": "node scripts/fidelity/sdk-gate.mjs --run-id <new-unique-run-id>",
+  "runId": "sdk-061-cover-arrow-post-20261004",
+  "schemaVersion": "sdk-061-dispositions-v1",
+  "supersededBy": "sdk-061-cover-arrow-final-20261004",
+  "supersessionReason": "Bind final selected-owner code and two-pass exact-code captures to the release-gate disposition."
+}

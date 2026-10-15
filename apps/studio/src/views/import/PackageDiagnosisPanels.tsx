@@ -4,7 +4,7 @@ import type { TemplatePackageEnrichmentResult } from "@sleinity/template-browser
 import type { LoadedSourceDiagnosticReport } from "@sleinity/template-browser/importer";
 import type { validatePackageJpgExportReadiness } from "@sleinity/template-browser/capture";
 import { getPackageMotionSummary, type PackageMotionDiagnostic } from "@sleinity/template-core/motion";
-import { collectTemplatePackageRenderWarnings } from "@sleinity/template-react";
+import {collectTemplatePackageRenderWarnings} from "../../../../../packages/template-react/test/legacyEntry";
 import {
   type LoadedTemplatePackageSource,
   type PackageDiagnostic,
@@ -13,7 +13,7 @@ import {
   type FontReadinessReport,
 } from "@sleinity/template-core";
 import { comparePreviewReferenceDimensions } from "@sleinity/template-core/inspection";
-import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import type {SavedTemplateRecord} from "../../../../../packages/template-browser/test/legacyEntry";
 import { getDiagnosticCodeTitle } from "@sleinity/template-react/inspection";
 
 const formatBytes = (value: number | undefined): string => {

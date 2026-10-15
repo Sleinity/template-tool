@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Studio-independent React importing, family editing, rendering, and inspection for template applications.",
   "license": "UNLICENSED",
   "repository": {
@@ -10,9 +10,7 @@
   },
   "private": false,
   "type": "module",
-  "sideEffects": [
-    "./dist/importer.css"
-  ],
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md"
@@ -24,13 +22,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    },
-    "./importer": {
-      "types": "./dist/importer.d.ts",
-      "import": "./dist/importer.js"
-    },
-    "./importer.css": {
-      "default": "./dist/importer.css"
     },
     "./editor": {
       "types": "./dist/editor.d.ts",
@@ -53,7 +44,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/importer.tsx src/editor.tsx src/inspection.ts src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/inspection --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external @sleinity/template-browser/session --external @sleinity/template-browser/assets --external @sleinity/template-browser/capture --external @sleinity/template-browser/importer --external react --external react-dom",
+    "build": "tsup src/index.ts src/editor.tsx src/inspection.ts src/renderer-internal.ts --format esm --dts --sourcemap --clean --external @sleinity/template-core --external @sleinity/template-core/editor --external @sleinity/template-core/family --external @sleinity/template-core/inspection --external @sleinity/template-core/renderer-internal --external @sleinity/template-browser --external @sleinity/template-browser/session --external @sleinity/template-browser/session-internal --external @sleinity/template-browser/assets --external @sleinity/template-browser/fonts --external @sleinity/template-browser/capture --external @sleinity/template-browser/importer --external react --external react-dom",
     "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },

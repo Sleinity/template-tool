@@ -1,0 +1,520 @@
+{
+  "archiveIdentity": [
+    {
+      "bytes": 487348,
+      "dependencies": {
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3"
+      },
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "name": "@sleinity/template-core",
+      "peerDependencies": {},
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "sha256": "626f1673ff94594e21a718d698865e307e22c2a6aa4075d465bb316496189e8a",
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./family",
+        "./assets",
+        "./fonts",
+        "./motion",
+        "./inspection"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "bytes": 277593,
+      "dependencies": {
+        "@sleinity/template-core": "workspace:*",
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3",
+        "html-to-image": "^1.11.13"
+      },
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "name": "@sleinity/template-browser",
+      "peerDependencies": {},
+      "restrictedEntries": [
+        "./session-internal"
+      ],
+      "sha256": "7e3a431af18ee4a23e5e32b0c55e41d99569d4bf26a13380f05f9e780e1c2798",
+      "supportedEntries": [
+        ".",
+        "./session",
+        "./importer",
+        "./compatibility",
+        "./assets",
+        "./fonts",
+        "./persistence",
+        "./capture",
+        "./enrichment"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "bytes": 213279,
+      "dependencies": {
+        "@sleinity/template-browser": "workspace:*",
+        "@sleinity/template-core": "workspace:*"
+      },
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "name": "@sleinity/template-react",
+      "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+      },
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "sha256": "17219b572236ccf71cb663fd170b78921ad22e77b99f23eafc6d4e1382ecf165",
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./inspection"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "candidateId": "unpublished-1.0.0-7c43aa0bfbb5165f5153293f3ebf8db6ba58e7b5663861da8bba7abc198bedc2",
+  "disposition": {
+    "environmentSha256": "e42427d8aad14101b8f0eba099205c2e38908112ae4e15103b08347378eb15a2",
+    "fixtures": [
+      {
+        "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+        "id": "exporter-061-now-hiring",
+        "scene": {
+          "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "Current exact source has 11 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-now-hiring/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-now-hiring/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-now-hiring/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-now-hiring/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+        "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+      },
+      {
+        "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+        "id": "exporter-061-cover",
+        "scene": {
+          "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "Current exact source has 28 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-cover/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-cover/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-cover/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-cover/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+        "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+      },
+      {
+        "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+        "id": "exporter-061-carrousel",
+        "scene": {
+          "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "Current exact source has 26 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-carrousel/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-carrousel/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-carrousel/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+            "capture": "complete-stable",
+            "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-v2-optimized-20261015/exporter-061-carrousel/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-1-candidate-20261013k has byte-identical output, retained explicitly as supplementary historical evidence, despite changed SDK implementations and capture build identifier.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+        "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+      }
+    ],
+    "gate": "sdk-061",
+    "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+    "runId": "sdk-v2-optimized-20261015",
+    "schemaVersion": "sdk-061-dispositions-v1"
+  },
+  "environmentSha256": "e42427d8aad14101b8f0eba099205c2e38908112ae4e15103b08347378eb15a2",
+  "fonts": [
+    {
+      "id": "geist-mono-500-normal",
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25"
+    },
+    {
+      "id": "inter-tight-700-normal",
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28"
+    },
+    {
+      "id": "rethink-sans-600-normal",
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be"
+    },
+    {
+      "id": "funnel-display-400-normal",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99"
+    }
+  ],
+  "historicalReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-1-candidate-20261013k.json",
+  "manualLiveReview": false,
+  "observations": {
+    "exporter-061-carrousel": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior.",
+    "exporter-061-cover": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned.",
+    "exporter-061-now-hiring": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference."
+  },
+  "originalSourceFilesVerified": 3798,
+  "referencePromotion": false,
+  "reviewedAt": "2026-10-15T08:41:16.058Z",
+  "reviewer": "Codex stored-source/capture review",
+  "runId": "sdk-v2-optimized-20261015",
+  "schemaVersion": "optimized-candidate-source-review-v1",
+  "sourceIdentity": "7c43aa0bfbb5165f5153293f3ebf8db6ba58e7b5663861da8bba7abc198bedc2",
+  "surfaces": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "pngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "structureSha256": "255125d884c2954df6ad7fd6b3202cc6772f6451dc2ed8a67a5b5b14a891ba97",
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "pngSha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "structureSha256": "1e23b5027d769ab8aa83237764e38ee5810b6c81bf009f3b16698fce02038704",
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "pngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "structureSha256": "15244d170475f9bfa1f33a9e657b82ba13b6d2c04761defeac0d35fd8223e938",
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "pngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 11,
+      "sourceDifference": {
+        "percentage": 0.025185185185185185,
+        "pixels": 340
+      },
+      "structureSha256": "74cb1beee9d1f2ce61e2a7c1120637db0f9e6a6029237e4d264c2aefde1c6d31",
+      "surface": "png-export"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "pngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "structureSha256": "3fc8013e8c5572a4dab26bb3eef912226ab145571a06f859471b576a3f2776e0",
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "pngSha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "structureSha256": "9e1768ba7399880aa1e7096491400285bb11b61c77debbdea64d9e8498b56fc2",
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "pngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "structureSha256": "c042c9f21f8310dbee4c598db88d4edef39ffd581d2b806f80be48db80dbcd38",
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "pngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 28,
+      "sourceDifference": {
+        "percentage": 0.19410150891632372,
+        "pixels": 2830
+      },
+      "structureSha256": "136d17de390b272fb25591bf0582ee75774a07ad42d27ecdd1565265205d1365",
+      "surface": "png-export"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "pngSha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "structureSha256": "bf29b4fb0e3ea6b17bace4f1910251c7971a4e1b1a8cefd5e930ec060bcc690a",
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "pngSha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "structureSha256": "926ef18115885bc75f67d56af343967f52ac1841b0de26131ff2e37c2d22232a",
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "pngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "structureSha256": "87619d6f7c3d7c69ead96e36018e89105b7f1f2f84d6feb84c8a406c076640f9",
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "pngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "priorPngByteIdentical": true,
+      "priorRun": "sdk-1-candidate-20261013k",
+      "sourceBoundsVerified": 26,
+      "sourceDifference": {
+        "percentage": 0.08762538580246913,
+        "pixels": 1817
+      },
+      "structureSha256": "73a4b18ce541c664df109b7c16f3290ed20d18f13d70ef976feb8e3cec3f0153",
+      "surface": "png-export"
+    }
+  ]
+}

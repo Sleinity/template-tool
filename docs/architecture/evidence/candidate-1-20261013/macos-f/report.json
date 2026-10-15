@@ -1,0 +1,211 @@
+{
+  "status": "pass",
+  "archiveIdentities": [
+    {
+      "file": "sleinity-template-core-1.0.0.tgz",
+      "bytes": 532285,
+      "sha256": "363d07b79d12d73fdc87dfd6341271e9c7819c810a34287f82e86685c9258185"
+    },
+    {
+      "file": "sleinity-template-browser-1.0.0.tgz",
+      "bytes": 403000,
+      "sha256": "e8f7fc18f5ca0872bd639d0235ddcff496a8d9c794650be35bbcd242eeb3d1e8"
+    },
+    {
+      "file": "sleinity-template-react-1.0.0.tgz",
+      "bytes": 289360,
+      "sha256": "677254fd3fc6af2f85be0b4097ff9d4033d0eb44e6578190577cb641ab93c16b"
+    }
+  ],
+  "node": "v22.23.3",
+  "platform": "darwin",
+  "arch": "arm64",
+  "rows": [
+    {
+      "manager": "npm",
+      "name": "consumer",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-runtime-release-consumer.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 9781,
+      "exitCode": 0,
+      "logSha256": "fea832ae0c36d7afa08e6e74aeca2557c2ef039859e96ae10ba9d795e3e14fd8"
+    },
+    {
+      "manager": "npm",
+      "name": "example",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/example-lifecycle/verify.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--manager",
+        "npm",
+        "--delivered",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/npm/example"
+      ],
+      "durationMs": 18677,
+      "exitCode": 0,
+      "logSha256": "83511da951f34c97c4e7769ae9f394cf459dc643cd8d8a0d9e4684e4f604204b"
+    },
+    {
+      "manager": "npm",
+      "name": "fonts",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-host-font-authority.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/npm/fonts"
+      ],
+      "durationMs": 22402,
+      "exitCode": 0,
+      "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+    },
+    {
+      "manager": "npm",
+      "name": "storage",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-blocked-storage.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--manager",
+        "npm",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/npm/storage"
+      ],
+      "durationMs": 5594,
+      "exitCode": 0,
+      "logSha256": "9ed6063004e4e554155c6a8dc982f6b80b013f4f46d6ee595900d24b886a2059"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-single",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-template-editor-reference.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 12028,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "npm",
+      "name": "v1-family",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-template-family-reference.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 8318,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    },
+    {
+      "manager": "pnpm",
+      "name": "consumer",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-runtime-release-consumer.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 7334,
+      "exitCode": 0,
+      "logSha256": "e5c666b10354af48d5453c29981cb23e1ed820c1fd0564ec8d51ec615a2f6822"
+    },
+    {
+      "manager": "pnpm",
+      "name": "example",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/example-lifecycle/verify.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--manager",
+        "pnpm",
+        "--delivered",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/example"
+      ],
+      "durationMs": 19111,
+      "exitCode": 0,
+      "logSha256": "7b0042ddfc2877d1a4b46058e4f300b0173827f24897f60f255048fc7158a73e"
+    },
+    {
+      "manager": "pnpm",
+      "name": "fonts",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-host-font-authority.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/fonts"
+      ],
+      "durationMs": 21796,
+      "exitCode": 0,
+      "logSha256": "d2a46aab0da73ced29ddaa536807565752f375b44be1c099f2fa50505653d06b"
+    },
+    {
+      "manager": "pnpm",
+      "name": "storage",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-blocked-storage.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f",
+        "--manager",
+        "pnpm",
+        "--output",
+        "/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/candidate-1-20261013/macos-f/pnpm/storage"
+      ],
+      "durationMs": 4492,
+      "exitCode": 0,
+      "logSha256": "453b8a165189c7f7250e857646edc8d00f89d4dfa91f4d4945db30dfacf8e9b3"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-single",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-template-editor-reference.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 10231,
+      "exitCode": 0,
+      "logSha256": "68d82481afc994c62bc44855ac0ff3be45bcc57130531b02fa6f09496fdca072"
+    },
+    {
+      "manager": "pnpm",
+      "name": "v1-family",
+      "command": [
+        "/private/tmp/sdk-release-tooling-20261009b/node/package/bin/node",
+        "scripts/repository/verify-template-family-reference.mjs",
+        "--archives",
+        "/Users/niels/Documents/Projects/template-tool/release-verification-artifacts/sdk-1-candidate-20261013f"
+      ],
+      "durationMs": 7430,
+      "exitCode": 0,
+      "logSha256": "f4b01f2b64b874870b6d004b9562a7cd97baa7aa9d0046a32591a93e13aaeca4"
+    }
+  ],
+  "manualReview": false,
+  "ci": {
+    "commit": null,
+    "runId": null,
+    "attempt": null
+  },
+  "sourceSha256": "4701f6b66b1a6cfb5fdd5cd575dc3802c60fc50b55cedf2d9185cbcf9b5c87f6",
+  "workspaceSourceSha256": "3bb192d2bf38a286222fb8d44927ef1006fb687eb52591bccf3ad89664f55177"
+}

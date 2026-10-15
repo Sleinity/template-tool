@@ -1,13 +1,7 @@
 import { strToU8, zipSync } from "fflate";
 import simpleFixedPoster from "../../../src/template-package/fixtures/simple-fixed-poster.json";
-import {
-  importTemplatePackage,
-  normalizeTemplatePackageBundleTemplate,
-  parseTemplatePackage,
-  validateTemplatePackage,
-  validateTemplatePackageBundleSource,
-  type TemplatePackageV1,
-} from "../src";
+import {normalizeTemplatePackageBundleTemplate, parseTemplatePackage, validateTemplatePackage, validateTemplatePackageBundleSource, type TemplatePackageV1} from "../src";
+import {importTemplatePackage} from "./legacyEntry";
 import { loadTemplatePackageZipBundle } from "../src/bundle/loadTemplatePackageBundle";
 
 function assert(condition: unknown, message: string): asserts condition {

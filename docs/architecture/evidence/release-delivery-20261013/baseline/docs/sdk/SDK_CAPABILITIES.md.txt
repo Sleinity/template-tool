@@ -1,0 +1,352 @@
+# SDK 0.8.0 capability catalog
+
+Use this catalog to choose the smallest supported SDK surface for a host
+application. It describes the available building blocks and their ownership;
+the linked guides remain the detailed implementation authorities.
+
+## Start with the current V2 path
+
+This catalog describes the **unpublished workspace candidate**, whose packages
+still carry version 0.8.0. Published installation/migration instructions remain
+historical. Use the candidate manifest and exact archives to identify current
+behavior. See [V2 integration](V2_INTEGRATION.md) and
+[release preparation](RELEASE_PREPARATION.md).
+
+| I need to… | Start with | Owner |
+| --- | --- | --- |
+| Read a ZIP without browser resources | `importTemplatePackage()` from Core, then `parseTemplatePackageV2()` | Portable source reading/normalization/validation |
+| Import a canonical V2 ZIP in a browser | `runTemplatePackageImportPipelineV2()` from Browser `/importer` | Import/parse evidence, preview and explicit candidate disposal |
+| Assemble, promote or append Family designs | Browser `/importer` authoring operations | Isolated accepted-configuration transactions and source identities |
+| Edit one design | `createTemplateSessionV2()` or React `useTemplateSessionV2()` | Native single canonical lifecycle |
+| Edit a Family | `createTemplateFieldFamilySessionV2()` or React `useTemplateFieldFamilySessionV2()` | Shared content, selected effective package and placement overrides |
+| Render fields and export PNG | `TemplateFieldSessionRendererV2`, snapshot/controller hooks from React `/editor` | Current evidence, readiness and selected output |
+| Retain unfinished editing | Browser `/persistence` template recovery | One token-protected recovery slot per template; no draft catalogue |
+| Prepare exact fonts | Browser `/fonts` | Verified binary identity, explicit linking and private face activation |
+| Inspect technical quality | Core or React `/inspection` | Existing diagnostics and observational evidence |
+
+Choose the single path unless several designs actually share content. Hosts own
+forms, navigation, font acquisition choices, local-input coordination and delivery.
+SDK-internal entries are prohibited for hosts. The V1 wizard, confirmation and
+session examples below remain supported compatibility guidance; they are not the
+recommended new V2 ingestion/editing path.
+
+## Import and validation
+
+Use the core importer for portable ZIP loading and strict canonical validation:
+
+```ts
+import { importTemplatePackage } from "@sleinity/template-core";
+
+const result = importTemplatePackage(await file.arrayBuffer(), file.name);
+if (!result.importable || !result.workingPackage) {
+  showImportProblems(result.source.diagnostics, result.validation);
+} else {
+  useValidatedPackage(result.workingPackage);
+}
+```
+
+The core package owns ZIP reading, source normalization with provenance,
+canonical validation, package and field types, field mutation, renderer-neutral
+resolution and scene projections. It has no DOM, storage, React, runtime secret,
+or network requirement. It does not activate fonts, persist browser records,
+render UI, or capture PNGs. See the [core importer handoff](CORE_IMPORTER_HANDOFF.md).
+
+## Compatibility setup wizard
+
+The default React wizard owns Package, Fonts, Validate, Fields and Confirm:
+
+```tsx
+import {
+  TemplateImportWizard,
+  useTemplateImportWizard,
+} from "@sleinity/template-react/importer";
+import "@sleinity/template-react/importer.css";
+
+const wizard = useTemplateImportWizard();
+
+<TemplateImportWizard
+  wizard={wizard}
+  onComplete={(confirmation) => retainInHostStorage(confirmation)}
+/>;
+```
+
+For custom React presentation, compose `TemplateImportWizardProvider`,
+`useTemplateImportWizardSnapshot()` and `TemplateImportWizardPreview`. For a
+framework-neutral presentation, subscribe to the controller returned by
+`createTemplateImportWizard()` and call `dispose()` when its setup flow is
+permanently removed. The host owns the modal, page, navigation and completion
+action. The [import workflow guide](TEMPLATE_IMPORT_WIZARD.md) defines the full
+lifecycle and adapter contracts.
+
+## Template Families
+
+Template Families are additive. Use them only when several unmodified
+`TemplatePackageV1` ZIP variants should share stable host-facing fields and one
+content state. The portable contract lives at
+`@sleinity/template-core/family`:
+
+```ts
+import {
+  createTemplateFamilyFromPackage,
+  getTemplateFamilyFieldScope,
+  getTemplateFamilyFieldsForVariant,
+  materializeTemplateFamilyVariant,
+  parseTemplateFamilyContentStateV1,
+  parseTemplateFamilyV1,
+  resolveTemplateFamilyVariant,
+  updateTemplateFamilyContentField,
+  validateTemplateFamily,
+} from "@sleinity/template-core/family";
+```
+
+The first strictly imported package seeds stable family fields. Structurally
+parse stored or network-delivered family JSON with `parseTemplateFamilyV1()`
+and `parseTemplateFamilyContentStateV1()` before loading it; package payloads
+inside a family must still originate from the strict ZIP import boundary.
+Additional variants use exact field bindings; uncertain label/name matches
+remain review suggestions. `planTemplateFamilyFieldMatches()` also exposes imported rule
+differences and sparse override suggestions without applying them. Common rules
+provide defaults and sparse variant overrides replace or explicitly clear
+individual properties. Shared values—including image values backed by stable
+asset references—are preserved even when one variant reports them as invalid.
+Use `updateTemplateFamilyContentField()` for a portable type-checked content
+mutation; it never trims or rejects a correctly typed value because of one
+variant's input limit.
+
+A family field does not need to exist in every variant. Applicability is
+derived from bindings, never stored separately: `family-wide` means every
+variant, `variant-subset` means more than one but not all, `variant-specific`
+means exactly one, and `unbound` is invalid. Use
+`getTemplateFamilyFieldScope(family, fieldId)` to label a field and
+`getTemplateFamilyFieldsForVariant(family, variantId)` to build a
+variant-aware form. Each field still has one stable identity and persisted
+value, so selecting another variant hides non-applicable controls without
+deleting their content.
+
+For a headless browser setup, use
+`createTemplateFamilyImportWizard()` from the existing `importer` entry. For
+runtime editing, use `createTemplateFamilySession()` from the existing
+`session` entry. The family session owns one shared content state and composes
+one ordinary `TemplateSessionV1`:
+
+```ts
+import { createTemplateFamilySession } from "@sleinity/template-browser/session";
+
+const familySession = createTemplateFamilySession();
+familySession.load({ family, content, sharedImageAssets });
+familySession.setField(familyFieldId, "Shared headline");
+familySession.selectOption(colourPropertyId, blueOptionId);
+familySession.selectOption(dimensionPropertyId, portraitOptionId);
+
+const renderSession = familySession.renderSession;
+```
+
+Only the selected variant is materialized and rendered. Families without
+selection properties resolve from a stable `variantId`. With properties, every
+variant assigns one stable option per property and a complete tuple resolves
+at most one ZIP. Missing Cartesian combinations remain valid; option
+availability lets the host disable impossible choices without changing another
+selection.
+The host owns selector UI, navigation, product policy and publishing.
+
+React setup uses `TemplateFamilyImportWizardProvider`,
+`TemplateFamilyZipInput` and `TemplateFamilyImportPreview` from the existing
+React `importer` entry. React editing uses `TemplateFamilySessionProvider`,
+`useTemplateFamilyEditor()`, family field controllers and selection hooks from
+the existing React `editor` entry. `editor.fields` and
+`useTemplateFamilyEditableFields()` retain the complete family inventory;
+`editor.visibleFields` and `useTemplateFamilyVisibleFields()` include only
+fields applicable to the selected variant. Controllers expose their derived
+`scope`, all-family `issues` and `selectedVariantIssues`. Render
+`familySession.renderSession` through the same `TemplateSessionViewport`; there
+is no family renderer.
+
+Reimport is review-first: `planTemplateFamilyVariantReimport()` reports exact,
+added, removed, incompatible and unresolved targets before
+`applyTemplateFamilyVariantReimport()` performs an expected-revision atomic
+update. Capture remains current-variant only.
+
+## Field rules and editing
+
+During setup, `TemplateImportFieldRulesEditor` provides the optional shared UI
+for field order and supported input constraints. A custom shell may use the
+controller's field-rule snapshot and actions instead. Imported field identity,
+type, targets and defaults remain read-only.
+
+After confirmation, use the editor bindings inside a `TemplateSessionProvider`:
+
+```tsx
+import {
+  TemplateSessionViewport,
+  useTemplateSessionDiagnosticSummary,
+  useTemplateSessionEditableFields,
+} from "@sleinity/template-react/editor";
+
+function Editor() {
+  const fields = useTemplateSessionEditableFields();
+  const diagnostics = useTemplateSessionDiagnosticSummary();
+  return <>
+    <TemplateSessionViewport mode="editor" />
+    {fields.map((field) => renderHostControl(field))}
+    <output>{diagnostics.status}</output>
+  </>;
+}
+```
+
+`useTemplateSessionEditableField(fieldId)` selects one controller. Controllers
+expose descriptors, resolved values, target evidence and safe session mutations;
+they are not input components. The host owns forms, labels, image preparation,
+cropping UI and product actions. Core `editor` exports are supported low-level
+validation and mutation tools for non-React compositions.
+
+## Compatibility session, confirmation and reopening
+
+`createTemplateSession()` owns one revision-safe editable runtime. In React,
+prefer `useTemplateSession()` for StrictMode-safe creation and disposal. A
+setup wizard is temporary: retain its immutable confirmation in host-owned
+state or storage, create a fresh session, then reopen atomically:
+
+```ts
+import {
+  inspectTemplateRuntimeSupport,
+  loadTemplateImportConfirmation,
+} from "@sleinity/template-browser/compatibility";
+
+const support = await inspectTemplateRuntimeSupport();
+if (support.status !== "blocked") {
+  await loadTemplateImportConfirmation(session, confirmation);
+}
+```
+
+Do not persist a resolved render tree or readiness snapshot as authority.
+Reopening revalidates the package and rebuilds derived state. Dispose sessions,
+wizard controllers, object URLs and subscriptions when their owning host
+lifecycle ends.
+
+## Compatibility rendering and PNG capture
+
+For an ordinary React editor, `TemplateSessionViewport` is the preferred
+render-and-capture boundary. It fits the intrinsic renderer without changing
+template pixels and exposes current-revision readiness through its snapshot.
+Call `exportPng({ download: false })` on its handle only when `canExport` is
+true. The capture rejects pending or stale revisions.
+
+`TemplateSessionRenderer` is the lower-level session renderer.
+`TemplatePackageRenderer` renders a resolved package directly when the host
+intentionally owns the surrounding lifecycle. Browser `capture` exports are
+supported low-level primitives; they do not own rendering behavior and should
+not replace the viewport readiness contract in a normal React editor.
+
+## Diagnostics and inspection
+
+Use `TemplateImportValidationSummary` for a combined setup result and
+`TemplateImportRenderValidationSummary` only when a custom wizard needs the
+render report separately. After confirmation,
+`useTemplateSessionDiagnosticSummary()` projects existing package, font, asset,
+session and viewport evidence without running a second validation system.
+
+The core and React `inspection` entries are optional advanced surfaces for
+canonical-scene evidence, package quality, feature coverage and fidelity-risk
+projection. They report existing authority; they do not choose a renderer.
+Studio comparison views, issue packets, stress tools, visual-difference tools
+and fidelity harnesses are not SDK capabilities.
+
+## Persistence, assets, fonts and enrichment
+
+- `@sleinity/template-browser/persistence` provides IndexedDB and in-memory
+  repositories, saved-record validation and autosave coordination. Hosts may
+  instead store confirmations and product records through their own services.
+- Core `assets` resolves portable references. Browser `assets` owns ingestion,
+  browser storage and reliability checks.
+- Core `fonts` reports portable requirements and readiness. Browser `fonts`
+  owns OpenType inspection, managed font registration, exact matching and
+  activation through browser font APIs.
+- Browser `enrichment` is an optional, host-injected Figma evidence adapter.
+  Import, rendering and capture do not require it and do not perform an
+  SDK-owned external request.
+- Core `motion` owns renderer-neutral motion linking and evaluation. React owns
+  the rendered motion surface.
+
+Host authentication, cloud persistence, publishing, navigation, collaboration
+and catalogues stay outside the SDK. Browser-local defaults are conveniences,
+not a requirement to adopt the host's product storage policy.
+
+## Examples
+
+- [Minimal renderer](../../examples/minimal-renderer/README.md) demonstrates a
+  small supported React rendering integration. Use it to understand the basic
+  provider/session/renderer relationship.
+- [Template editor integration](../../examples/template-editor-integration/README.md)
+  is executable documentation for setup, confirmation, fresh-session reopening,
+  descriptor-driven editing, generic save/reload and template-scoped recovery and silent PNG capture. Copy
+  its SDK composition, not its in-memory dashboard or product presentation.
+- [Template Family integration](../../examples/template-family-integration/README.md)
+  demonstrates two real ZIP inputs, shared content, generic selection,
+  diagnostics, persistence/offline reopening, current-variant PNG capture and
+  reviewable reimport. It is executable documentation for family adoption.
+
+Neither example authorizes repository-relative, package-source, Studio, or
+`renderer-internal` imports in an external host.
+
+## Checked entry-point inventory
+
+The classifications and paths below are verified against
+[`config/sdk-entry-points.json`](../../config/sdk-entry-points.json); named
+exports are verified against
+[`config/sdk-public-api.json`](../../config/sdk-public-api.json). Broad roots
+remain supported, but focused entries reduce accidental coupling.
+
+<!-- sdk-capability-entry-points:start -->
+| Package | Entry | Classification | Representative exports |
+| --- | --- | --- | --- |
+| core | `@sleinity/template-core` | `supported-low-level-adapter` | `importTemplatePackage`, `validateTemplatePackage`, `createResolvedRenderTree` |
+| core | `@sleinity/template-core/assets` | `supported-low-level-adapter` | `inspectPackageAssetSafety`, `resolvePackageAssetReference` |
+| core | `@sleinity/template-core/editor` | `supported-low-level-adapter` | `validatePackageEditableFieldRules`, `updateTemplatePackageField`, `replaceTemplatePackageImage` |
+| core | `@sleinity/template-core/family` | `recommended-high-level-integration` | `TemplateFamilyV1`, `parseTemplateFamilyV1`, `parseTemplateFamilyContentStateV1`, `getTemplateFamilyOptionAvailability`, `getTemplateFamilyControlOrder`, `updateTemplateFamilyContentField`, `validateTemplateFamily`, `resolveTemplateFamilyVariant`, `materializeTemplateFamilyVariant` |
+| core | `@sleinity/template-core/fonts` | `supported-low-level-adapter` | `collectTemplatePackageFontRequirements`, `checkResolvedFontReadiness` |
+| core | `@sleinity/template-core/inspection` | `supported-advanced-inspection` | `createCanonicalSceneGraph`, `createMeasurementSnapshot`, `settleSceneGraph` |
+| core | `@sleinity/template-core/motion` | `supported-low-level-adapter` | `linkPackageMotionJson`, `evaluatePackageMotion` |
+| core | `@sleinity/template-core/renderer-internal` | `sdk-internal` | Prohibited for host applications |
+| browser | `@sleinity/template-browser` | `supported-low-level-adapter` | `createTemplateSession`, `createTemplateImportWizard` |
+| browser | `@sleinity/template-browser/assets` | `supported-low-level-adapter` | `ingestTemplatePackageAssets`, `createIndexedDbAssetStore` |
+| browser | `@sleinity/template-browser/capture` | `supported-low-level-adapter` | `exportTemplatePackagePng`, `waitForCurrentRuntimeSettlement` |
+| browser | `@sleinity/template-browser/compatibility` | `recommended-high-level-integration` | `inspectTemplateRuntimeSupport`, `inspectTemplateImportConfirmation`, `loadTemplateImportConfirmation` |
+| browser | `@sleinity/template-browser/enrichment` | `supported-low-level-adapter` | `enrichTemplatePackage`, `enrichTemplatePackageWithProvider` |
+| browser | `@sleinity/template-browser/fonts` | `supported-low-level-adapter` | `inspectOpenTypeFontBinary`, `uploadExactManagedFontForRequirement` |
+| browser | `@sleinity/template-browser/importer` | `recommended-high-level-integration` | `runTemplatePackageImportPipelineV2`, `appendTemplateSourcesV2`, `mutateTemplateFamilyV2`, `createTemplateFieldFamilyFromSourcesV2` |
+| browser | `@sleinity/template-browser/persistence` | `supported-low-level-adapter` | `InMemoryTemplateSessionRepositoryV2`, `createIndexedDbTemplateRecoveryRepository`, `TemplateRecoveryRepository` |
+| browser | `@sleinity/template-browser/session` | `recommended-high-level-integration` | `createTemplateSessionV2`, `TemplateSessionV2`, `createTemplateFieldFamilySessionV2`, `TemplateFieldFamilySessionV2` |
+| browser | `@sleinity/template-browser/session-internal` | `sdk-internal` | Prohibited for host applications |
+| react | `@sleinity/template-react` | `recommended-high-level-integration` | `useTemplateSession`, `TemplateSessionProvider`, `TemplateSessionRenderer`, `TemplatePackageRenderer` |
+| react | `@sleinity/template-react/editor` | `recommended-high-level-integration` | `TemplateFieldSessionRendererV2`, `useTemplateFieldSessionV2Snapshot`, `useTemplateFieldControllersV2` |
+| react | `@sleinity/template-react/importer` | `recommended-high-level-integration` | `TemplateImportWizard`, `useTemplateImportWizard`, `TemplateFamilyImportWizardProvider`, `useTemplateFamilyImportWizard`, `TemplateFamilyZipInput`, `TemplateFamilyImportPreview` |
+| react | `@sleinity/template-react/importer.css` | `recommended-high-level-integration` | Stylesheet for the default importer interface |
+| react | `@sleinity/template-react/inspection` | `supported-advanced-inspection` | `analyzeRendererFeatureCoverage`, `createTemplatePackageQualityReport`, `analyzeFidelityRisk` |
+| react | `@sleinity/template-react/renderer-internal` | `sdk-internal` | Prohibited for host applications |
+<!-- sdk-capability-entry-points:end -->
+
+## Context for a coding agent
+
+```text
+Integrate the exact unpublished Sleinity SDK candidate supplied by the host.
+Read SDK-V2-INTEGRATION.md and LOCAL-CANDIDATE-MANIFEST.json first. Verify all
+archive checksums and install the complete fixed dependency closure. Do not
+mix published 0.8.0 archives with same-version local candidate archives.
+
+Use Browser /importer runTemplatePackageImportPipelineV2 and accept only ready
+results. Keep source and V2 parse evidence separate; dispose candidates after
+successful ownership handoff or abandoned review. Use native single/Family V2
+sessions, typed controllers, atomic authoring/configuration transactions and
+React /editor TemplateFieldSessionRendererV2 for current readiness and PNG.
+Retain exact managed-font identity and canonical Choice/Color/Image semantics.
+Use template-scoped recovery for unfinished work; no draft catalogue.
+
+Hosts own product UI, navigation, input flush, font acquisition and delivery.
+Never import Studio, package src/, repository aliases, session-internal,
+renderer-internal or architectural experiments. Do not manufacture renderer
+line/font evidence or bypass readiness. Report chosen boundaries, ownership,
+installed archive identities, tests and any unverified scenarios.
+```
+
+Continue with [agent prompts](AGENT_INTEGRATION_PROMPTS.md). Published-version
+archive installation remains in [INSTALLATION.md](INSTALLATION.md).

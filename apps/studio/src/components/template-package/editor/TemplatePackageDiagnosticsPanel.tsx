@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import { TemplatePackageStressReports } from "../../../fidelity/TemplatePackageStressReports";
 import { TemplatePackageLayoutDebugger } from "../../../fidelity/TemplatePackageLayoutDebugger";
-import type { TemplatePackageRenderWarning } from "@sleinity/template-react";
+import type {TemplatePackageRenderWarning} from "../../../../../../packages/template-react/test/legacyEntry";
 import type {
   EditableFieldBinding,
   TemplatePackageValidationResult,

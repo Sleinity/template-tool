@@ -1,7 +1,7 @@
 # Current Figma Exporter to Template Tool Import Boundary
 
-> Repository revision: `88510e5f16d16e119692a25c59f1b712acf905a3`
-> Audit date: 2026-08-27
+> Repository baseline revision: `944c51b33433ce2e37ec05f7de66457d5154d5b4`
+> Audit and implementation date: 2026-08-31
 > Relevant packages: `@sleinity/template-core` 0.8.0,
 > `@sleinity/template-browser` 0.8.0, `@sleinity/template-react` 0.8.0
 
@@ -73,7 +73,7 @@ called out rather than silently rewriting the renderer-fidelity charter.
 8. [`validateTemplatePackage`](../../packages/template-core/src/validateTemplatePackage.ts)
    applies the strict JSON schema and then graph, layout, asset, field, font,
    mask, and motion semantic checks.
-9. [`importTemplatePackage`](../../packages/template-core/src/importTemplatePackage.ts)
+9. [`importTemplatePackage`](../../packages/template-core/src/bundle/loadTemplatePackageBundleSource.ts)
    exposes the framework-neutral core result: loaded-source evidence, imported
    baseline, working package, validation, and `importable`.
 10. [`buildZipPackageImportResult`](../../packages/template-browser/src/import/runTemplatePackageImportPipeline.ts)
@@ -168,11 +168,11 @@ without another supported representation or coordinated change.
 
 | Exporter/source value | Accepted today? | Import behavior | Canonical result | Provenance retained? | Recommended for new exporter output? | Candidate producer improvement? |
 | --- | --- | --- | --- | --- | --- | --- |
-| SOLID RGB plus paint opacity | Yes | Preserved unless the bounded 0.6.0 compatibility rule applies | Canonical SOLID | Yes | **Preferred**: RGB color alpha 1 with transparency in paint opacity when matching Figma semantics | A |
+| SOLID RGB plus paint opacity | Yes | Preserved unless the bounded 0.6.0 compatibility rule applies. Exact Figma exporter 0.6.1 alpha-1 plus paint-opacity source can derive separate renderer-internal native capability evidence without a repair record. | Canonical SOLID; no synthetic `solid-paint-source-v1` for clean 0.6.1 input | Yes | **Preferred**: RGB color alpha 1 with transparency in paint opacity when matching Figma semantics | A |
 | Exporter 0.6.0 mirrored `color.a === opacity` without same-index raw paint | Yes | Under exact finite/unit/equality predicate, color alpha becomes 1 and opacity applies once; `solid-paint-source-v1` records both values | Corrected canonical SOLID | Fully | **Legacy-tolerated**, not recommended | A |
 | Exporter 0.6.0 differing color alpha/opacity | Schema-dependent but not normalized as an alias | Values remain separate and provenance marks ambiguity | Canonical values remain but routed stack authority may reject them | Fully | **Unsupported** as deliberate ambiguous output | A |
 | Same-index `extensions.figma.rawFills` SOLID | Yes | Valid raw paint opacity owns normalization; conflicts are diagnosed | Canonical SOLID plus source record | Fully | **Provenance-only** alongside a correct canonical SOLID | D |
-| Canonical `GRADIENT_LINEAR` with stops/transform aliases | Yes | `gradientStops`/`stops` and `gradientTransform`/`transform` are paired with same-index raw evidence; missing canonical values may be hydrated | Canonical gradient plus `linear-gradient-source-v1` | Fully, including conflicts | **Preferred** to emit complete canonical values; raw data may remain provenance | A/D |
+| Canonical `GRADIENT_LINEAR` with stops/transform aliases | Yes | `gradientStops`/`stops` and `gradientTransform`/`transform` are paired with same-index raw evidence; missing canonical values may be hydrated. Complete 0.6.1 canonical/raw values must agree exactly; comparison tolerance is not widened. | Canonical gradient plus `linear-gradient-source-v1` | Fully, including conflicts | **Preferred** to emit complete canonical values; raw data may remain provenance | A/D |
 | Radial/angular/diamond gradients | Schema accepts | Preserved canonically, but current runtime support is capability-limited | Canonical paint | Yes | **Provenance-only** unless downstream capability is sufficient | C/D |
 | `VIDEO` paint with IMAGE or node-image fallback | Yes before strict validation | VIDEO is removed from canonical fills and preserved as unsupported Figma paint; static IMAGE remains | Static canonical image rendering | Yes | **Legacy-tolerated**; new output should emit the static canonical IMAGE and retain VIDEO only as provenance | A/D |
 | `VIDEO` without static fallback | Readable, but visually incomplete | Removed from canonical fills and warned | No static canonical paint for the video | Yes | **Unsupported** | A or C |
@@ -189,9 +189,10 @@ without another supported representation or coordinated change.
 | Exporter/source value | Accepted today? | Import behavior | Canonical result | Provenance retained? | Recommended for new exporter output? | Candidate producer improvement? |
 | --- | --- | --- | --- | --- | --- | --- |
 | Single-style text with family/style/weight/PostScript metadata | Yes | Strictly validated and used for font inference/matching | Canonical text payload | Yes | **Preferred** | A |
-| Mixed `styleRanges` | Yes | Used to infer per-face requirements; ranges are bounds-validated | Canonical style ranges and requirements | Yes | **Accepted**; completeness matters | A/C |
+| Mixed `styleRanges` | Yes | Bounds and existing fields are validated and preserved unchanged. They participate in per-face collection but are not replaced when explicit requirements exist. | Canonical style ranges | Yes | **Accepted**; completeness matters | A/C |
 | Missing or empty `fontRequirements` | Yes when inferable | Inferred from text nodes and editable text targets | Canonical inferred requirements with `source: "figma-inferred"` | Inference is diagnosed; text remains source evidence | **Legacy-tolerated** | A |
 | Exporter-authored complete `fontRequirements` | Yes | Preserved; importer does not replace a non-empty declaration | Canonical requirements | Yes | **Preferred** | A |
+| `extensions.figma.textStyleSegments` | Yes | Preserved as rich Figma source evidence and included in scene unmapped/provenance reporting | No new canonical text semantics | Fully | **Provenance-only** | D |
 | Metadata-only font requirement without binary | Yes | Managed registry later attempts exact/compatible/replacement matching | Canonical request; resolution is runtime-derived | Yes | **Accepted** | D unless embedding is coordinated |
 | `resolution`, managed font ID, private runtime family | Schema can store consumer records | Browser owns and updates these based on verified binaries/revisions | Runtime-managed font resolution | Yes | **Unsupported** for independent exporter authorship | D |
 | Outlined SVG text fallback | Yes when it references an SVG/vector asset | Validated; editable live text remains authoritative for editable nodes | Canonical fallback | Yes | **Accepted** for explicit fallback, not as a substitute for editable text semantics | C/D |
@@ -200,8 +201,10 @@ without another supported representation or coordinated change.
 
 | Exporter/source value | Accepted today? | Import behavior | Canonical result | Provenance retained? | Recommended for new exporter output? | Candidate producer improvement? |
 | --- | --- | --- | --- | --- | --- | --- |
-| `schemaVersion: "1.0"` | Required | Other versions are rejected; no historical schema migration runs | Canonical V1 | Yes | **Preferred** | B for any future version |
-| `source.type: "figma"`, `packageContract`, `pluginVersion` | Yes | Preserved; plugin version can select bounded compatibility logic | Canonical source metadata | Yes | **Preferred**, accurate and stable | A |
+| `schemaVersion: "1.0"` | Accepted source input | The existing installed V1 importer remains active until the Milestone 2 runtime cutover. The new `parseTemplatePackageV2` boundary validates V1 and normalizes unambiguous fields once into strict V2. | Source V1 today; strict canonical V2 through the explicit new boundary | Yes, including preserved legacy field provenance and normalization diagnostics | **Legacy source-compatible**; new canonical integrations target V2 | B |
+| `schemaVersion: "2.2"` | Accepted by the explicit V2 boundary | Strict discriminated field schema; type-qualified IDs; singular Image replacement policy; exact typed bindings and portable field order | Canonical V2 | Yes | **Current target contract** | B |
+| `schemaVersion: "2.0"` / `"2.1"` | Rejected | Older canonical contracts are not reinterpreted because Image replacement semantics changed | None | No | Re-export or reimport from loose 1.0 source | B |
+| `source.type: "figma"`, `packageContract`, `pluginVersion` | Yes | Preserved; plugin version can select bounded compatibility or native capability logic | Canonical source metadata | Yes | **Preferred**, accurate and stable. Filename suffixes are informational only. | A |
 | Figma `fileKey`, URL, document/page/root IDs, `exportedAt` | Yes when within the strict source shape | Preserved; bundled/user Figma URL may supplement file key/MCP status | Canonical source metadata | Yes | **Preferred** when accurately captured | A |
 | Unknown `source` properties such as exporter mode/MCP flags | Yes at source boundary | Removed before strict validation and returned as `compatibility.sourceExtras` | Not canonical | Yes on loaded-source result | **Provenance-only** | D or B if runtime meaning is desired |
 | Top-level `renderHints` | Yes | Removed before strict validation and exposed as compatibility data | Not canonical; does not become `rendererHints` | Yes on loaded-source result | **Legacy-tolerated** | B or stop producing |
@@ -454,6 +457,33 @@ source/import contract in `packages/template-core/test/coreSourceContract.test.t
 strict validation in `src/template-package/validateTemplatePackage.test.ts`,
 and the real ZIP lifecycle in
 `src/template-package/lifecycle/zipSavedTemplateLifecycle.test.tsx`.
+
+## Verified exporter 0.6.1 alignment
+
+The 2026-08-31 downstream audit used the exact supplied Deal of the Week ZIP
+(`dc2ba9c89fb588c30b4f175dd988f9a9f9400ea216cce40864c3c234b7d32e28`),
+the clean SOLID fixture (`7e09ef2d…a9160`), and the corrected gradient/mixed
+fixture (`e55ae505…fe8b`). All three pass strict source and canonical validation
+and the realistic ZIP lifecycle.
+
+- The Deal ZIP declares exporter 0.6.1 in `template.json`, contains 19 nodes,
+  seven editable fields, two exact-size assets, one explicit Rethink Sans
+  SemiBold requirement, four canonical style ranges, and four preserved rich
+  Figma text segments. No `FONT_REQUIREMENTS_INFERRED` diagnostic is emitted.
+- Clean 0.6.1 SOLIDs remain byte-for-byte canonical through normalization and
+  emit none of the historical SOLID alias/ambiguity/raw-canonicalization codes.
+- Corrected gradients retain complete stops, transforms, stop alpha, paint
+  opacity, visibility, blend mode, and exact raw agreement. They emit no
+  `LINEAR_GRADIENT_SOURCE_CONFLICT`.
+- Mixed nodes `811:459` and `811:460` have exact canonical/raw SOLID RGB
+  agreement and select `ordered-normal-paint-svg`. Isolated gradient nodes
+  `811:461` and `811:462` retain `linear-gradient-svg`.
+- The capability decision reads only `source.pluginVersion`; registered fixture
+  subdirectories and versioned ZIP filenames have no semantic authority.
+
+The canonical schema and supported public SDK are unchanged. Exporter 0.6.0
+continues to use the strict historical compatibility adapter, and packages
+without explicit font requirements continue to use downstream inference.
 
 ## Current-code and historical-documentation differences
 

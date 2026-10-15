@@ -3,8 +3,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import App from "./App";
 import * as bundleApi from "@sleinity/template-core";
 import * as importApi from "@sleinity/template-browser/importer";
-import type { TemplatePackageImportPipelineInput } from "@sleinity/template-browser/importer";
-import type { SavedTemplateRecord } from "@sleinity/template-browser/persistence";
+import type {TemplatePackageImportPipelineInput} from "../../../packages/template-browser/test/legacyImporter";
+import type {SavedTemplateRecord} from "../../../packages/template-browser/test/legacyEntry";
 import { TemplatePackageImportFlow } from "./views/TemplatePackageImportFlow";
 
 function assert(condition: unknown, message: string): void {
@@ -35,9 +35,11 @@ const importMarkup = renderToStaticMarkup(
 );
 
 assert(
-  appMarkup.includes("Templates") &&
-    appMarkup.includes("Add template"),
-  "The overview should expose the ZIP-only Templates product flow.",
+  appMarkup.includes("Library") &&
+    appMarkup.includes("Add template") &&
+    appMarkup.includes("Choose a template to create an output") &&
+    !appMarkup.includes("studio-draft-title"),
+  "Studio defaults to canonical V2 authoring and labels the isolated V1 archive compatibility entry.",
 );
 assert(
   importMarkup.includes("Template setup") &&

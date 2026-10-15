@@ -1,0 +1,123 @@
+--- a/packages/template-browser/src/session/templateSessionV2.ts
++++ b/packages/template-browser/src/session/templateSessionV2.ts
+@@ -1,6 +1,5 @@
+ import { resolvePackageAssetSource } from "@sleinity/template-core/assets";
+ import { retainSessionAssetUrls, sessionAssetUrlLeases } from "./sessionAssetUrlLeases";
+-import { createStoredAssetHydration } from "./storedAssetHydration";
+ import { createSerializedSaveQueue } from "./serializedSaveQueue";
+ import {
+   createResolvedRenderTree,
+@@ -759,23 +758,27 @@
+     const sessionAssets = cloneValue(record.sessionAssets);
+     const replacementUrls = new Map<string, string>();
+     const nextSourceUrls = new Set<string>();
+-    const hydration = createStoredAssetHydration({
+-      getManagedAsset: hash => repository.getManagedAsset(hash), objectUrls,
+-      isStale: () => disposed || snapshot.operationRevision !== operationRevision,
+-    });
+-    const release = hydration.release;
++    const byHash = new Map<string, string>();
++    const release = () => {
++      byHash.forEach(url => objectUrls.revoke(url));
++      byHash.clear();
++    };
+     try {
+       const maps = [{ assets: basePackage.assets, source: true }, { assets: sessionAssets, source: false }];
+       for (const carrier of maps) for (const asset of Object.values(carrier.assets)) {
+         if (!asset.hash || asset.dataUrl || asset.data || asset.svgString) continue;
+         // A persisted blob URL belongs to a previous session, not the restored binary.
+         if (asset.stableUrl?.startsWith("blob:")) delete asset.stableUrl;
+-        let url = hydration.getCachedUrl(asset.hash);
++        let url = byHash.get(asset.hash);
+         if (!url) {
+-          const result = await hydration.readUrl(asset.hash);
+-          if (result.status === "stale") return null;
+-          if (result.status === "missing") continue;
+-          url = result.url;
++          const stored = await repository.getManagedAsset(asset.hash);
++          if (disposed || snapshot.operationRevision !== operationRevision) {
++            release();
++            return null;
++          }
++          if (!stored) continue;
++          url = objectUrls.create(stored.blob);
++          byHash.set(asset.hash, url);
+         }
+         asset.source = "stored";
+         asset.storageKey = `sha256:${asset.hash}`;
+@@ -791,7 +794,7 @@
+       release();
+       throw error;
+     }
+-    return { basePackage, sessionAssets, replacementUrls, nextSourceUrls, release, transfer: hydration.transfer };
++    return { basePackage, sessionAssets, replacementUrls, nextSourceUrls, release };
+   };
+ 
+   return {
+@@ -914,7 +917,6 @@
+         incoming.forEach(url => leasedUrls.add(url));
+         hydrated.nextSourceUrls.forEach(url => sourceUrls.add(url));
+         hydrated.replacementUrls.forEach((url, assetId) => ownedUrls.set(assetId, url));
+-        hydrated.transfer();
+         releaseHydrated = undefined;
+         publish({
+           savedSessionId: record.id,
+--- a/packages/template-browser/src/session/templateFieldFamilySessionV2.ts
++++ b/packages/template-browser/src/session/templateFieldFamilySessionV2.ts
+@@ -1,5 +1,4 @@
+ import { retainSessionAssetUrls, sessionAssetUrlLeases as familyAssetUrlLeases } from "./sessionAssetUrlLeases";
+-import { createStoredAssetHydration } from "./storedAssetHydration";
+ import { createSerializedSaveQueue } from "./serializedSaveQueue";
+ import {
+   createTemplateFieldContentStateV1,
+@@ -975,22 +974,23 @@
+       }
+       const family = cloneValue(record.family);
+       const sessionAssets = cloneValue(record.sessionAssets);
++      const temporaryUrls = new Map<string, string>();
+       const replacementUrls = new Map<string, string>();
+       const nextSourceUrls = new Set<string>();
+       const stale = () => disposed || snapshot.operationRevision !== operationRevision;
+-      const hydration = createStoredAssetHydration({ getManagedAsset: hash => repository.getManagedAsset(hash), objectUrls, isStale: stale });
+       try {
+         const maps = [...family.variants.map((variant) => ({ assets: variant.packageValue.assets, source: true })), { assets: sessionAssets, source: false }];
+         for (const carrier of maps) for (const asset of Object.values(carrier.assets)) {
+           if (!asset.hash || asset.dataUrl || asset.data || asset.svgString) continue;
+           // Persisted blob URLs are never valid authority in a new session.
+           if (asset.stableUrl?.startsWith("blob:")) delete asset.stableUrl;
+-          let url = hydration.getCachedUrl(asset.hash);
++          let url = temporaryUrls.get(asset.hash);
+           if (!url) {
+-            const result = await hydration.readUrl(asset.hash);
+-            if (result.status === "stale") return snapshot;
+-            if (result.status === "missing") continue; // Existing readiness reports the missing source.
+-            url = result.url;
++            const stored = await repository.getManagedAsset(asset.hash);
++            if (stale()) { temporaryUrls.forEach((value) => objectUrls.revoke(value)); return snapshot; }
++            if (!stored) continue; // The resolved dependency/readiness path reports the missing source.
++            url = objectUrls.create(stored.blob);
++            temporaryUrls.set(asset.hash, url);
+           }
+           asset.stableUrl = url;
+           asset.source = "stored";
+@@ -999,17 +999,16 @@
+           else replacementUrls.set(asset.id, url);
+         }
+       } catch (cause) {
+-        hydration.release();
++        temporaryUrls.forEach((value) => objectUrls.revoke(value));
+         if (!stale()) publish({ status: "blocked", error: { code: "family-assets-unavailable", message: cause instanceof Error ? cause.message : "Saved Family assets could not be read." }, readiness: { ...snapshot.readiness, assets: "blocked", state: "blocked", exportReady: false } });
+         return snapshot;
+       }
+-      if (stale()) { hydration.release(); return snapshot; }
++      if (stale()) { temporaryUrls.forEach((value) => objectUrls.revoke(value)); return snapshot; }
+       revokeOwned();
+       revokeSources();
+-      hydration.getCreatedUrls().forEach((url) => retainUrl(url));
++      temporaryUrls.forEach((url) => retainUrl(url));
+       replacementUrls.forEach((url, assetId) => ownedUrls.set(assetId, url));
+       nextSourceUrls.forEach((url) => sourceUrls.add(url));
+-      hydration.transfer();
+       controllerGeneration += 1;
+       invalidateRuntime(family.variants.find((variant) => variant.id === record.selectedVariantId)?.packageValue);
+       const derived = derive(family, record.contentState, record.selectedVariantId, sessionAssets);

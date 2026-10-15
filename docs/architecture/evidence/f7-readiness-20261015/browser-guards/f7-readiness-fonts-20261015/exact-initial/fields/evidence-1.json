@@ -1,0 +1,682 @@
+{
+  "canvas": {
+    "displayedHeight": 373.0851745605469,
+    "displayedWidth": 276.359375,
+    "height": 1350,
+    "scaleX": 0.276359375,
+    "scaleY": 0.27635938856336806,
+    "width": 1000
+  },
+  "exact": {
+    "availableFaces": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100 900"
+      },
+      {
+        "family": "\"Geist Mono\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "\"Inter Tight\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "\"Rethink Sans\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "\"Funnel Display\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "\"Funnel Sans\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "\"Funnel Display\"",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "500"
+      }
+    ],
+    "documentStatus": "loaded",
+    "injected": [
+      {
+        "family": "\"Geist Mono\"",
+        "id": "geist-mono-500-normal",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "\"Inter Tight\"",
+        "id": "inter-tight-700-normal",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "\"Rethink Sans\"",
+        "id": "rethink-sans-600-normal",
+        "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "\"Funnel Display\"",
+        "id": "funnel-display-400-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "\"Funnel Sans\"",
+        "id": "funnel-sans-400-normal",
+        "sha256": "998a4eb52c6d2e718517f9dcfee774b09db1daca10971cee3ec7bd15602b8c3e",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "\"Funnel Display\"",
+        "id": "funnel-display-500-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "500"
+      }
+    ]
+  },
+  "fixture": {
+    "id": "now-hiring-post",
+    "rootNodeId": "387:340",
+    "zipSha256": "14f895cbba1919cc39175e276fb34d7e3f4a92354c2085fe67656365246b906b"
+  },
+  "fontManifest": [
+    {
+      "byteSize": 149328,
+      "defaultSourcePath": "/Users/niels/Documents/Codex/renderer-fidelity-fonts/geist-v1.7.2/GeistMono-Medium.ttf",
+      "family": "Geist Mono",
+      "id": "geist-mono-500-normal",
+      "license": "SIL Open Font License 1.1",
+      "path": "/Users/niels/Documents/Codex/renderer-fidelity-fonts/geist-v1.7.2/GeistMono-Medium.ttf",
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "source": "Official Vercel Geist v1.7.2 release asset",
+      "sourcePath": "${RENDERER_FIDELITY_FONT_DIR}/geist-v1.7.2/GeistMono-Medium.ttf",
+      "sourceUrl": "https://github.com/vercel/geist-font/releases/download/v1.7.2/geist-font-v1.7.2.zip",
+      "style": "normal",
+      "verifiedByteSize": 149328,
+      "verifiedSha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+      "weight": 500
+    },
+    {
+      "byteSize": 580572,
+      "defaultSourcePath": "/Users/niels/Library/Fonts/InterTight-VariableFont_wght.ttf",
+      "family": "Inter Tight",
+      "id": "inter-tight-700-normal",
+      "license": "Unverified in this run",
+      "path": "/Users/niels/Library/Fonts/InterTight-VariableFont_wght.ttf",
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "source": "Locally installed Inter Tight variable font",
+      "sourcePath": "${INTER_TIGHT_FIDELITY_FONT_PATH}",
+      "sourceUrl": null,
+      "style": "normal",
+      "verifiedByteSize": 580572,
+      "verifiedSha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+      "weight": 700
+    },
+    {
+      "byteSize": 59080,
+      "family": "Rethink Sans",
+      "id": "rethink-sans-600-normal",
+      "license": "SIL Open Font License 1.1",
+      "path": "/Users/niels/Documents/Projects/template-tool/apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+      "source": "Repository bundled Studio font",
+      "sourcePath": "apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+      "style": "normal",
+      "verifiedByteSize": 59080,
+      "verifiedSha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+      "weight": 600
+    },
+    {
+      "byteSize": 55900,
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "family": "Funnel Display",
+      "id": "funnel-display-400-normal",
+      "license": "SIL Open Font License 1.1 (embedded name record)",
+      "path": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+      "sourcePath": "${FUNNEL_DISPLAY_FIDELITY_FONT_PATH}",
+      "sourceUrl": null,
+      "style": "normal",
+      "verifiedByteSize": 55900,
+      "verifiedSha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "weight": 400
+    },
+    {
+      "byteSize": 55508,
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelSans[wght].ttf",
+      "family": "Funnel Sans",
+      "id": "funnel-sans-400-normal",
+      "license": "SIL Open Font License 1.1 (embedded name record)",
+      "path": "/Users/niels/Library/Fonts/FunnelSans[wght].ttf",
+      "sha256": "998a4eb52c6d2e718517f9dcfee774b09db1daca10971cee3ec7bd15602b8c3e",
+      "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+      "sourcePath": "${FUNNEL_SANS_FIDELITY_FONT_PATH}",
+      "sourceUrl": null,
+      "style": "normal",
+      "verifiedByteSize": 55508,
+      "verifiedSha256": "998a4eb52c6d2e718517f9dcfee774b09db1daca10971cee3ec7bd15602b8c3e",
+      "weight": 400
+    },
+    {
+      "byteSize": 55900,
+      "defaultSourcePath": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "family": "Funnel Display",
+      "id": "funnel-display-500-normal",
+      "license": "SIL Open Font License 1.1 (embedded name record)",
+      "path": "/Users/niels/Library/Fonts/FunnelDisplay[wght].ttf",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+      "sourcePath": "${FUNNEL_DISPLAY_FIDELITY_FONT_PATH}",
+      "sourceUrl": null,
+      "style": "normal",
+      "verifiedByteSize": 55900,
+      "verifiedSha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+      "weight": 500
+    }
+  ],
+  "readiness": {
+    "assetReadiness": {
+      "backgrounds": [
+        {
+          "ready": true,
+          "url": "blob:http://127.0.0.1:5173/01de6df5-e956-4bb7-8b19-384e49bca951"
+        }
+      ],
+      "images": []
+    },
+    "durationMs": 33.103000000000065,
+    "fontReadiness": {
+      "fonts": [
+        {
+          "family": "Rethink Sans",
+          "status": "unloaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "100 900"
+        },
+        {
+          "family": "\"Geist Mono\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "\"Inter Tight\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "\"Rethink Sans\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "\"Funnel Display\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "\"Funnel Sans\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "\"Funnel Display\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        }
+      ],
+      "status": "loaded"
+    },
+    "framesObserved": 4,
+    "stable": true
+  },
+  "runtimeRouting": {
+    "compatibilityNodeCount": 4,
+    "fallbacks": "378:23:absolute-compatibility-boundary,378:25:absolute-compatibility-boundary",
+    "iterationCount": 2,
+    "measurementCount": 4,
+    "mode": "authoritative",
+    "readiness": "ready",
+    "recomputedNodeIds": [
+      "387:340",
+      "387:341",
+      "387:336",
+      "378:27",
+      "378:22",
+      "378:21"
+    ],
+    "revision": "76bef832|4c1484af",
+    "routedNodeCount": 6,
+    "settlementId": "core-b9d8948bb271a623",
+    "settlementMs": 0
+  },
+  "scenario": "exact-initial",
+  "schemaVersion": "exact-font-surface-evidence-v1",
+  "surface": "fields",
+  "textNodes": [
+    {
+      "bounds": {
+        "height": 1350,
+        "width": 999.9999999999999,
+        "x": 0,
+        "y": 0
+      },
+      "fontReady": true,
+      "id": "387:340",
+      "textGeometry": null,
+      "textMeasurement": {
+        "height": 1350,
+        "scrollHeight": 1350,
+        "scrollWidth": 1000,
+        "width": 999.9999999999999
+      }
+    },
+    {
+      "bounds": {
+        "height": 989.1874770710305,
+        "width": 999.9999999999999,
+        "x": 0,
+        "y": 0
+      },
+      "fontReady": true,
+      "id": "387:341",
+      "textGeometry": null,
+      "textMeasurement": {
+        "height": 989.1874770710305,
+        "scrollHeight": 990,
+        "scrollWidth": 1000,
+        "width": 999.9999999999999
+      }
+    },
+    {
+      "bounds": {
+        "height": 172.9999128852527,
+        "width": 385.9998692542545,
+        "x": 0,
+        "y": 0
+      },
+      "fontReady": true,
+      "id": "378:25",
+      "textGeometry": null,
+      "textMeasurement": {
+        "height": 172.9999128852527,
+        "scrollHeight": 173,
+        "scrollWidth": 386,
+        "width": 385.9998692542545
+      }
+    },
+    {
+      "bounds": {
+        "height": 93.12508818834453,
+        "width": 305.59388604624866,
+        "x": 39.9998056482162,
+        "y": 39.99991411222097
+      },
+      "fontReady": true,
+      "id": "378:26",
+      "textGeometry": {
+        "actualFinalBaselineY": 93.12505015232811,
+        "actualFirstCapTopY": 0.000050152328110897315,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 121.5999984741211,
+          "width": 306
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 93,
+          "width": 306
+        },
+        "fontMetrics": {
+          "ascent": 124,
+          "baseline": 107,
+          "capHeight": 93.125,
+          "descent": 31,
+          "finalLineBaseline": 93.125,
+          "firstLineCapTop": 13.875,
+          "lineHeight": 121.5999984741211
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 107,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 13.875,
+          "resolvedFinalBaselineY": 93.125,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -13.875
+        },
+        "glyphPaintBounds": "12.625,108.25",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 93.125,
+          "width": 306
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 121.59375816700756,
+          "width": 303.04699426132186,
+          "x": 0,
+          "y": -13.874949847671889
+        },
+        "paintOffsetY": -13.875,
+        "semanticContentBox": {
+          "height": 93.12508818834453,
+          "width": 303.04699426132186,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 93.125,
+          "width": 306
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 93.12508818834453,
+        "scrollHeight": 124,
+        "scrollWidth": 306,
+        "width": 305.59388604624866
+      }
+    },
+    {
+      "bounds": {
+        "height": 173.00002331239716,
+        "width": 485.00001766834396,
+        "x": 514.9999823316559,
+        "y": 816.9999766876028
+      },
+      "fontReady": true,
+      "id": "378:23",
+      "textGeometry": null,
+      "textMeasurement": {
+        "height": 173.00002331239716,
+        "scrollHeight": 173,
+        "scrollWidth": 485,
+        "width": 485.00001766834396
+      }
+    },
+    {
+      "bounds": {
+        "height": 93.125198615489,
+        "width": 404.67221688245604,
+        "x": 554.9997879798722,
+        "y": 856.9997803726793
+      },
+      "fontReady": true,
+      "id": "378:24",
+      "textGeometry": {
+        "actualFinalBaselineY": 93.12505015232811,
+        "actualFirstCapTopY": 0.000050152328110897315,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 121.5999984741211,
+          "width": 405
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 93,
+          "width": 405
+        },
+        "fontMetrics": {
+          "ascent": 124,
+          "baseline": 107,
+          "capHeight": 93.125,
+          "descent": 31,
+          "finalLineBaseline": 93.125,
+          "firstLineCapTop": 13.875,
+          "lineHeight": 121.5999984741211
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 107,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 13.875,
+          "resolvedFinalBaselineY": 93.125,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -13.875
+        },
+        "glyphPaintBounds": "12.625,108.25",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 93.125,
+          "width": 405
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 121.59397902129649,
+          "width": 402.12532509752924,
+          "x": 0,
+          "y": -13.874949847671889
+        },
+        "paintOffsetY": -13.875,
+        "semanticContentBox": {
+          "height": 93.125198615489,
+          "width": 402.12532509752924,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 93.125,
+          "width": 405
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 93.125198615489,
+        "scrollHeight": 124,
+        "scrollWidth": 405,
+        "width": 404.67221688245604
+      }
+    },
+    {
+      "bounds": {
+        "height": 360.7968422744556,
+        "width": 999.9999999999999,
+        "x": 0,
+        "y": 989.1874770710305
+      },
+      "fontReady": true,
+      "id": "378:27",
+      "textGeometry": null,
+      "textMeasurement": {
+        "height": 360.7968422744556,
+        "scrollHeight": 361,
+        "scrollWidth": 1000,
+        "width": 999.9999999999999
+      }
+    },
+    {
+      "bounds": {
+        "height": 124.39043602771476,
+        "width": 919.999946994968,
+        "x": 39.9998056482162,
+        "y": 1029.1875016103959
+      },
+      "fontReady": true,
+      "id": "378:22",
+      "textGeometry": {
+        "actualFinalBaselineY": 124.39990576883673,
+        "actualFirstCapTopY": -0.00009384969354897521,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 144,
+          "width": 920
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 124,
+          "width": 920
+        },
+        "fontMetrics": {
+          "ascent": 40,
+          "baseline": 38,
+          "capHeight": 28.399999618530273,
+          "descent": 12,
+          "finalLineBaseline": 124.39999961853027,
+          "firstLineCapTop": 9.600000381469727,
+          "lineHeight": 48
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 38,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 9.600000381469727,
+          "resolvedFinalBaselineY": 124.39999961853027,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -9.600000381469727
+        },
+        "glyphPaintBounds": "8.959999084472656,134.64000129699707",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 124.39999961853027,
+          "width": 920
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 144.00008834171558,
+          "width": 919.999946994968,
+          "x": 0,
+          "y": -9.600094231163276
+        },
+        "paintOffsetY": -9.600000381469727,
+        "semanticContentBox": {
+          "height": 124.39043602771476,
+          "width": 919.999946994968,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 124.39999961853027,
+          "width": 920
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 124.39043602771476,
+        "scrollHeight": 136,
+        "scrollWidth": 920,
+        "width": 919.999946994968
+      }
+    },
+    {
+      "bounds": {
+        "height": 76.39084828905409,
+        "width": 919.999946994968,
+        "x": 39.9998056482162,
+        "y": 1233.5779867168415
+      },
+      "fontReady": true,
+      "id": "378:21",
+      "textGeometry": {
+        "actualFinalBaselineY": 76.40012662312566,
+        "actualFirstCapTopY": 0.00012700459537917652,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 96,
+          "width": 920
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 76,
+          "width": 920
+        },
+        "fontMetrics": {
+          "ascent": 40,
+          "baseline": 38,
+          "capHeight": 28.399999618530273,
+          "descent": 12,
+          "finalLineBaseline": 76.39999961853027,
+          "firstLineCapTop": 9.600000381469727,
+          "lineHeight": 48
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 38,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 9.600000381469727,
+          "resolvedFinalBaselineY": 76.39999961853027,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -9.600000381469727
+        },
+        "glyphPaintBounds": "8.959999084472656,90.4800033569336",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 76.39999961853027,
+          "width": 920
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 95.99983804018812,
+          "width": 919.999946994968,
+          "x": 0,
+          "y": -9.599873376874347
+        },
+        "paintOffsetY": -9.600000381469727,
+        "semanticContentBox": {
+          "height": 76.39084828905409,
+          "width": 919.999946994968,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 76.39999961853027,
+          "width": 920
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 76.39084828905409,
+        "scrollHeight": 88,
+        "scrollWidth": 920,
+        "width": 919.999946994968
+      }
+    }
+  ]
+}

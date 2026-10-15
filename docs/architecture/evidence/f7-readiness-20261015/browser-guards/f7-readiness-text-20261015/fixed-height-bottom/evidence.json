@@ -1,0 +1,399 @@
+{
+  "durationMs": 379.4659579999998,
+  "id": "fixed-height-bottom",
+  "imageSlots": [
+    {
+      "bounds": {
+        "height": 949.1875680880734,
+        "width": 960.0000234348217,
+        "x": 20.00000920653711,
+        "y": 19.999987290639638
+      },
+      "id": "387:336"
+    }
+  ],
+  "readiness": {
+    "assetReadiness": {
+      "backgrounds": [
+        {
+          "ready": true,
+          "url": "blob:http://127.0.0.1:5173/248f5dca-1286-4e39-8864-b31a5f4433d1"
+        }
+      ],
+      "images": []
+    },
+    "durationMs": 34.13091700000041,
+    "fontReadiness": {
+      "fonts": [
+        {
+          "family": "Rethink Sans",
+          "status": "unloaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "100 900"
+        },
+        {
+          "family": "\"Geist Mono\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "\"Inter Tight\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "\"Rethink Sans\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "\"Funnel Display\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "\"Funnel Sans\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "\"Funnel Display\"",
+          "status": "loaded",
+          "stretch": "normal",
+          "style": "normal",
+          "weight": "500"
+        }
+      ],
+      "status": "loaded"
+    },
+    "framesObserved": 4,
+    "stable": true
+  },
+  "runtimeRouting": {
+    "compatibilityNodeCount": 4,
+    "fallbacks": "378:23:absolute-compatibility-boundary,378:25:absolute-compatibility-boundary",
+    "iterationCount": 2,
+    "measurementCount": 4,
+    "mode": "authoritative",
+    "publicationGeneration": 5,
+    "readiness": "ready",
+    "recomputedNodeIds": [
+      "387:340",
+      "387:341",
+      "387:336",
+      "378:27",
+      "378:22",
+      "378:21"
+    ],
+    "revision": "3ae9e5cf|4c1484af",
+    "routedNodeCount": 6,
+    "settlementId": "core-8c0a196124b63a49",
+    "settlementMs": 0
+  },
+  "screenshotSha256": "20ac3798d331cbb3318f5051232ec839a29ef4801011521008f0d01180c052f2",
+  "trimNodes": [
+    {
+      "bounds": {
+        "height": 193.000017545117,
+        "width": 305.59373711084805,
+        "x": 39.999997489126244,
+        "y": 40.00001642917316
+      },
+      "id": "378:26",
+      "textGeometry": {
+        "actualFinalBaselineY": 192.99997464327618,
+        "actualFirstCapTopY": 99.87497464327616,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 121.5999984741211,
+          "width": 306
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 193,
+          "width": 306
+        },
+        "fontMetrics": {
+          "ascent": 124,
+          "baseline": 107,
+          "capHeight": 93.125,
+          "descent": 31,
+          "finalLineBaseline": 93.125,
+          "firstLineCapTop": 13.875,
+          "lineHeight": 121.5999984741211
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 107,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 13.875,
+          "resolvedFinalBaselineY": 93.125,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -13.875
+        },
+        "glyphPaintBounds": "12.625,108.25",
+        "justifyContent": "flex-end",
+        "layoutBox": {
+          "height": 93.125,
+          "width": 306
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 121.59374263012091,
+          "width": 303.0468741630421,
+          "x": 0,
+          "y": 85.99997464327616
+        },
+        "paintOffsetY": -13.875,
+        "semanticContentBox": {
+          "height": 93.1250389030421,
+          "width": 303.0468741630421,
+          "x": 0,
+          "y": 99.87497864207491
+        },
+        "trimmedTextBox": {
+          "height": 93.125,
+          "width": 306
+        },
+        "verticalAlignmentMode": "fixed-trim-bottom",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 193.000017545117,
+        "scrollHeight": 224,
+        "scrollWidth": 306,
+        "width": 305.59373711084805
+      }
+    },
+    {
+      "bounds": {
+        "height": 93.12512259882985,
+        "width": 404.67191584354646,
+        "x": 555.3281075912753,
+        "y": 856.0624454892435
+      },
+      "id": "378:24",
+      "textGeometry": {
+        "actualFinalBaselineY": 93.12499600120125,
+        "actualFirstCapTopY": -0.0000039987987499046085,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 121.5999984741211,
+          "width": 405
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 93,
+          "width": 405
+        },
+        "fontMetrics": {
+          "ascent": 124,
+          "baseline": 107,
+          "capHeight": 93.125,
+          "descent": 31,
+          "finalLineBaseline": 93.125,
+          "firstLineCapTop": 13.875,
+          "lineHeight": 121.5999984741211
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 107,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 13.875,
+          "resolvedFinalBaselineY": 93.125,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -13.875
+        },
+        "glyphPaintBounds": "12.625,108.25",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 93.125,
+          "width": 405
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 121.59365893433316,
+          "width": 402.1250528957405,
+          "x": 0,
+          "y": -13.87500399879875
+        },
+        "paintOffsetY": -13.875,
+        "semanticContentBox": {
+          "height": 93.12512259882985,
+          "width": 402.1250528957405,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 93.125,
+          "width": 405
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 93.12512259882985,
+        "scrollHeight": 124,
+        "scrollWidth": 405,
+        "width": 404.67191584354646
+      }
+    },
+    {
+      "bounds": {
+        "height": 124.39068846543093,
+        "width": 920.0000468696435,
+        "x": 39.999997489126244,
+        "y": 1029.1873498590564
+      },
+      "id": "378:22",
+      "textGeometry": {
+        "actualFinalBaselineY": 124.40009314411225,
+        "actualFirstCapTopY": 0.00009352558196873417,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 144,
+          "width": 920
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 124,
+          "width": 920
+        },
+        "fontMetrics": {
+          "ascent": 40,
+          "baseline": 38,
+          "capHeight": 28.399999618530273,
+          "descent": 12,
+          "finalLineBaseline": 124.39999961853027,
+          "firstLineCapTop": 9.600000381469727,
+          "lineHeight": 48
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 38,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 9.600000381469727,
+          "resolvedFinalBaselineY": 124.39999961853027,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -9.600000381469727
+        },
+        "glyphPaintBounds": "8.959999084472656,134.64000129699707",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 124.39999961853027,
+          "width": 920
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 143.9999419709205,
+          "width": 920.0000468696435,
+          "x": 0,
+          "y": -9.599906855887758
+        },
+        "paintOffsetY": -9.600000381469727,
+        "semanticContentBox": {
+          "height": 124.39068846543093,
+          "width": 920.0000468696435,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 124.39999961853027,
+          "width": 920
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 124.39068846543093,
+        "scrollHeight": 136,
+        "scrollWidth": 920,
+        "width": 920.0000468696435
+      }
+    },
+    {
+      "bounds": {
+        "height": 76.39048461969007,
+        "width": 920.0000468696435,
+        "x": 39.999997489126244,
+        "y": 1233.5781548786213
+      },
+      "id": "378:21",
+      "textGeometry": {
+        "actualFinalBaselineY": 76.39992575253673,
+        "actualFirstCapTopY": -0.00007386599354752832,
+        "authority": "authoritative",
+        "browserLineBox": {
+          "height": 96,
+          "width": 920
+        },
+        "clippingActive": false,
+        "clippingBox": {
+          "height": 76,
+          "width": 920
+        },
+        "fontMetrics": {
+          "ascent": 40,
+          "baseline": 38,
+          "capHeight": 28.399999618530273,
+          "descent": 12,
+          "finalLineBaseline": 76.39999961853027,
+          "firstLineCapTop": 9.600000381469727,
+          "lineHeight": 48
+        },
+        "fontState": "exact",
+        "glyphOrigin": {
+          "baselineFromBrowserOrigin": 38,
+          "browserLineBoxOriginY": 0,
+          "capTopFromBrowserOrigin": 9.600000381469727,
+          "resolvedFinalBaselineY": 76.39999961853027,
+          "resolvedFirstCapTopY": 0,
+          "translationY": -9.600000381469727
+        },
+        "glyphPaintBounds": "8.959999084472656,90.4800033569336",
+        "justifyContent": "flex-start",
+        "layoutBox": {
+          "height": 76.39999961853027,
+          "width": 920
+        },
+        "metricSource": "canvas-and-dom-calibration",
+        "paintBox": {
+          "height": 95.99990551675516,
+          "width": 920.0000468696435,
+          "x": 0,
+          "y": -9.600074247463274
+        },
+        "paintOffsetY": -9.600000381469727,
+        "semanticContentBox": {
+          "height": 76.39048461969007,
+          "width": 920.0000468696435,
+          "x": 0,
+          "y": 0
+        },
+        "trimmedTextBox": {
+          "height": 76.39999961853027,
+          "width": 920
+        },
+        "verticalAlignmentMode": "hug-trim-origin",
+        "verticalTrim": "cap-height-to-baseline"
+      },
+      "textMeasurement": {
+        "height": 76.39048461969007,
+        "scrollHeight": 88,
+        "scrollWidth": 920,
+        "width": 920.0000468696435
+      }
+    }
+  ]
+}

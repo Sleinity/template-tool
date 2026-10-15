@@ -31,6 +31,8 @@ const allSpecifications = [
   { fixtureId: "ordered-solid-paint-opacity", nodeId: "459:57" },
   { fixtureId: "ordered-solid-independent-corners", nodeId: "465:73" },
   { fixtureId: "ordered-solid-linear-normal", nodeId: "459:68" },
+  { fixtureId: "exporter-061-solid-opacity", nodeId: "811:452" },
+  { fixtureId: "exporter-061-linear-and-mixed-paints", nodeId: "811:459" },
 ];
 const fixtureFilter = args.fixture ? new Set(String(args.fixture).split(",")) : null;
 const specifications = fixtureFilter
@@ -136,8 +138,20 @@ try {
         runtimeFigmaRequests += 1;
         await route.abort("blockedbyclient");
       });
-      await page.reload({ waitUntil: "domcontentloaded" });
-      await page.getByTestId("package-editor-panel").waitFor();
+      // The legacy fidelity host is chosen by its query parameter. Its own
+      // navigation drops that parameter, so a plain reload would mount the
+      // current Studio Library instead of restoring the same test host.
+      const reloadUrl = new URL(page.url());
+      reloadUrl.searchParams.set("studio-mode", "single-template-fidelity");
+      await page.goto(reloadUrl.href, { waitUntil: "domcontentloaded" });
+      try {
+        await page.getByTestId("package-editor-panel").waitFor({ timeout: 10000 });
+      } catch (cause) {
+        const state = { url: page.url(), text: (await page.locator("body").innerText()).slice(0, 1200), consoleMessages };
+        writeFileSync(join(fixtureOutput, "reload-blocker.json"), stableStringify(state));
+        await page.screenshot({ path: join(fixtureOutput, "reload-blocker.png") });
+        throw new Error(`Primitive reload did not restore the editor: ${JSON.stringify(state)}`, { cause });
+      }
       const restored = await state("restored-with-figma-blocked");
       const identityEqual = stableStringify({
         sourceRevision: imported.primitiveAppearance.sourceRevision,

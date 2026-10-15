@@ -3,10 +3,7 @@ import {
   validateTemplatePackage,
   type TemplatePackageV1,
 } from "@sleinity/template-core";
-import {
-  createTemplateFamilyFromPackage,
-  validateTemplateFamily,
-} from "@sleinity/template-core/family";
+import {createTemplateFamilyFromPackage, validateTemplateFamily} from "../../../../packages/template-core/test/legacyEntry";
 import { packageQualityIssueMatchesSearch } from "@sleinity/template-react/inspection";
 import { createTemplateFamilyVariantQualityReport } from "./createTemplateFamilyVariantQualityReport";
 

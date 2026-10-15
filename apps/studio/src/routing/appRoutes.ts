@@ -4,6 +4,13 @@ export type AppRoute =
   | { kind: "template-settings"; templateId: string }
   | { kind: "draft-workspace"; draftId: string };
 
+export type StudioAppRoute = AppRoute | { kind: "existing-work"; workId: string } | { kind: "output-workspace"; templateId: string };
+
+export type ParsedStudioAppRoute = {
+  route: StudioAppRoute;
+  recognized: boolean;
+};
+
 export function parseAppRoute(pathname: string): AppRoute {
   const normalized = pathname.replace(/\/+$/, "") || "/";
   if (normalized === "/templates/new") return { kind: "new-template" };
@@ -27,6 +34,28 @@ export function parseAppRoute(pathname: string): AppRoute {
   return { kind: "templates" };
 }
 
+export function parseStudioAppRoute(pathname: string): ParsedStudioAppRoute {
+  const normalized = pathname.replace(/\/+$/, "") || "/";
+  const output = normalized.match(/^\/templates\/([^/]+)\/output$/);
+  if (output) return { route: { kind: "output-workspace", templateId: decodeURIComponent(output[1]) }, recognized: true };
+  const work = normalized.match(/^\/work\/([^/]+)$/);
+  if (work) {
+    return {
+      route: { kind: "existing-work", workId: decodeURIComponent(work[1]) },
+      recognized: true,
+    };
+  }
+  const route = parseAppRoute(normalized);
+  return {
+    route,
+    recognized:
+      normalized === "/" ||
+      normalized === "/templates" ||
+      normalized === "/templates/new" ||
+      route.kind !== "templates",
+  };
+}
+
 export function appRoutePath(route: AppRoute): string {
   switch (route.kind) {
     case "new-template":
@@ -38,4 +67,13 @@ export function appRoutePath(route: AppRoute): string {
     default:
       return "/templates";
   }
+}
+
+
+export function studioAppRoutePath(route: StudioAppRoute): string {
+  if (route.kind === "output-workspace") return `/templates/${encodeURIComponent(route.templateId)}/output`;
+  if (route.kind === "existing-work") {
+    return `/work/${encodeURIComponent(route.workId)}`;
+  }
+  return appRoutePath(route);
 }

@@ -1,5 +1,5 @@
+import {editableFieldRuleKey} from "../editor/packageFieldRules";
 import {
-  editableFieldRuleKey,
   getEffectiveEditableFields,
   getPackageFieldValue,
 } from "../editor";

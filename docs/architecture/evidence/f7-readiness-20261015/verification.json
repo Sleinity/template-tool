@@ -1,0 +1,189 @@
+{
+  "schemaVersion": "f7-readiness-verification-v1",
+  "checks": [
+    {
+      "label": "native-differential",
+      "command": "node scripts/f7/native.mjs /tmp/f7-native-accepted-20261015",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/attempts/f7-native-accepted-20261015.txt",
+      "logSha256": "344fbffbc04f03a5ac56fb8f52a15c4f4e26f0cd251dceaa75ec38013107eb0e"
+    },
+    {
+      "label": "portable",
+      "command": "pnpm test:portable",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/portable.txt",
+      "logSha256": "2bcc10bee7e1fbe5e826acd548018bba7d3f35df79215682037a427ce1322e6d"
+    },
+    {
+      "label": "strict-zip",
+      "command": "pnpm test:realistic-zip",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/strict.txt",
+      "logSha256": "1ae9bd29ee5e4bd3b2a7f7dfb6ae8b351e5d720ae72a3b6e8523cebc901dff88"
+    },
+    {
+      "label": "studio-types",
+      "command": "pnpm exec tsc -b --pretty false",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/types.txt",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "studio-build",
+      "command": "pnpm build",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/build.txt",
+      "logSha256": "3bd91e3f279c71ffb108c8b1d2c6f16e571cd0bdeb761052f95a6512d78ff6a9"
+    },
+    {
+      "label": "examples",
+      "command": "pnpm example:build",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/examples.txt",
+      "logSha256": "b246709f725491928ed741a2e8346d9cebd27a85a74e71ffc8d49ab1c2d7a48d"
+    },
+    {
+      "label": "sdk",
+      "command": "pnpm sdk:verify (registry-enabled retry)",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/sdk-retry.txt",
+      "logSha256": "e3aee94eccdf7998bd268f5bf28c2c58852cddaccd4a214510fb3d96912d2aa6"
+    },
+    {
+      "label": "docs-prepack",
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/docs-prepack-retry.txt",
+      "logSha256": "9296b2c14eeff99a864c96a6cb72e3c00894335343857275d267ec670cc03c97"
+    },
+    {
+      "label": "fresh-pack",
+      "command": "node scripts/repository/create-sdk-local-release-verification.mjs release-verification-artifacts/f7-readiness-20261015",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/pack.txt",
+      "logSha256": "9a8e66e03785406f182944fc7b153e3c55f4f11981a4b841875a4fd09757fcff"
+    },
+    {
+      "label": "source-review",
+      "command": "node scripts/fidelity/certify-f7-readiness.mjs",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/review-record.txt",
+      "logSha256": "1c1172aa35c09969515e95af239c24225dcb60419d90f8f056bfa216337a7795"
+    },
+    {
+      "label": "gate-assessment",
+      "command": "node scripts/fidelity/sdk-gate.mjs --run-id sdk-f7-readiness-20261015 --assess-existing",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/gate-assessed.txt",
+      "logSha256": "a40c69a56509d86aabf8c6e0678306e9dd08181c6bfecea06e98f75358b31a13"
+    },
+    {
+      "label": "packed-consumers",
+      "command": "node scripts/f7/packed.mjs release-verification-artifacts/f7-readiness-20261015 /tmp/f7-packed-retry (npm 11.6.0 on PATH)",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/packed-retry.txt",
+      "logSha256": "34f6ec4f8d356e9b4177c98e4b9bf325a77ace0659cdd4b5875eab6d594a1f93"
+    },
+    {
+      "label": "imperative-png",
+      "command": "node docs/architecture/evidence/f7-readiness-20261015/direct-png.mjs",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/direct-png.txt",
+      "logSha256": "bdf929ad37ab1379660b213641d962bbe8a9bd7b1f499203e4069a7dddba52c8"
+    },
+    {
+      "label": "session-react",
+      "command": "node scripts/repository/verify-session-contract-browser.mjs ",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/session-react.txt",
+      "logSha256": "b6713dec33a9ace12cafc335e247dc2cb6cb1726cd70708866cc1d877d93adc4"
+    },
+    {
+      "label": "image-ownership",
+      "command": "node scripts/repository/verify-image-replacement-ownership-browser.mjs ",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/image-ownership.txt",
+      "logSha256": "7c1f0c26bf4e5a63ebcabe9eeb1a77743c4626fd6b6f9205378663800c649093"
+    },
+    {
+      "label": "font-reactivation",
+      "command": "node scripts/repository/verify-font-reactivation.mjs ",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/font-reactivation.txt",
+      "logSha256": "07443b15e67a49cefa6e209fd25a617d0105a4c56964bf34325ec5767f012bc4"
+    },
+    {
+      "label": "output-lifecycle",
+      "command": "node scripts/editor-performance/verify.mjs --output /tmp/f7-browser-guards/output-lifecycle",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/output-lifecycle.txt",
+      "logSha256": "ae45370aa09b67c2545460c16a388b5151711612554f5ba5c48c549b372a81f6"
+    },
+    {
+      "label": "font-routing",
+      "command": "node scripts/runtime-routing/font-evidence.mjs --run-id f7-readiness-fonts-20261015",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/font-routing.txt",
+      "logSha256": "e2edb6c35b005989fee525af40a539a3a62eead8c1f6efaa095ca6440bdcf902"
+    },
+    {
+      "label": "text-trim",
+      "command": "node scripts/runtime-routing/text-trim.mjs --run-id f7-readiness-text-20261015",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/browser-guards/text-trim.txt",
+      "logSha256": "b19ccdf70a15ec9849f132a35a2328bed1c22bb033890253538dc249d76bbe19"
+    },
+    {
+      "label": "documentation-final",
+      "command": "pnpm docs:verify",
+      "exitCode": 0,
+      "log": "docs/architecture/evidence/f7-readiness-20261015/checks/docs-final.txt",
+      "logSha256": "6ee7f56d702693b1e224d2160b7fe17eaa2a02cdc105d2b4b39cb9762103a29a"
+    }
+  ],
+  "gateRun": "sdk-f7-readiness-20261015",
+  "gateDecision": "GO",
+  "nativeOutcomes": 38,
+  "productionDelta": [
+    "packages/template-browser/src/session/templateFieldFamilySessionV2.ts"
+  ],
+  "performanceDecision": "performance-decision.json",
+  "instrumentedWarmTimingLimitation": "Repeated detailed warm increases remain in evidence; no corresponding confirmed production timing increases in independent minimal repeats.",
+  "attempts": [
+    {
+      "id": "restricted-sdk-install",
+      "exitCode": 1,
+      "resolution": "SDK retry with registry access passes"
+    },
+    {
+      "id": "missing-npm-executable",
+      "exitCode": 1,
+      "resolution": "Retained npm 11.6.0 placed on PATH; both managers pass"
+    },
+    {
+      "id": "initial-doc-command",
+      "exitCode": 127,
+      "resolution": "Correct runtime PATH; documentation retry passes"
+    },
+    {
+      "id": "initial-gate",
+      "exitCode": 1,
+      "resolution": "Expected missing current-run source review; preserved then same run reassessed GO"
+    }
+  ],
+  "preExistingWhitespaceWarningsUnchanged": [
+    "docs/sdk/RUNTIME_HANDOFF.md",
+    "packages/template-browser/src/persistence/assetRepository.ts"
+  ],
+  "coverage": {
+    "nativeDifferential": true,
+    "automatedHeadlessBrowser": true,
+    "storedComparisonSheetReview": true,
+    "manualLiveUserBrowser": false,
+    "otherPlatform": false,
+    "published": false,
+    "tagged": false,
+    "referencePromotion": false
+  }
+}

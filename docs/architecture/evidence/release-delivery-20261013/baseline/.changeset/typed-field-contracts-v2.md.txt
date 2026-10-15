@@ -1,0 +1,33 @@
+---
+"@sleinity/template-core": minor
+"@sleinity/template-browser": minor
+"@sleinity/template-react": minor
+---
+
+Add the strict TemplatePackageV2 field-contract foundation: seven discriminated
+field definitions, exact imported bindings, stable choices, portable editor
+order, opaque Color normalization, V1-to-V2 parsing and diagnostics, rendered
+line-validation evidence types, and atomic Template Family configuration
+overrides. Add the DOM-free seven-field semantic kernel, one immutable revisioned
+content reducer, typed mutation helpers, deterministic Number/Date formatting,
+exact Color/Image/Boolean materialization, ordered safe host descriptors, and a
+pure one-way V2 package materializer. The installed V1 browser/session/renderer
+path remains unchanged until the separate Milestone 3 integration.
+
+Extend `date-display-v1` with deterministic prefix, suffix, separator,
+year-first, day/month and month/day presentation. Loose exporter input now
+normalizes unambiguous numeric displayed dates to canonical `YYYY-MM-DD`, using
+the recorded export year only when the displayed value intentionally omits it.
+
+Add canonical V2 Browser/React sessions and structural Boolean rendering. Add
+Family content V3 with one shared Image asset/default placement, sparse
+variant-only placement overrides, V2 saved-record migration, typed Family Image
+controller methods, and the ordinary affine editor-Crop path with
+cover-within-canonical aspect adaptation.
+
+Advance the canonical package/content contract to schema 2.1 with
+`<type>:<name>` field IDs. Migrate schema 2.0 templates, drafts, Families,
+content, ordering, overrides, and image placements on read. Different field
+types may share a source name; compatible repeated Booleans merge into one
+multi-target visibility control. Descendant editor controls follow structural
+participation without discarding canonical child content.

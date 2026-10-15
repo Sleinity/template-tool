@@ -1,0 +1,46 @@
+{
+  "chromium": "149.0.7827.55",
+  "evidence": "controlled storage rejection in already-open Studio",
+  "rows": [
+    {
+      "kind": "single",
+      "setupSaveRetry": true,
+      "restoreRetry": true,
+      "blockedNavigationRetainsWorkspace": true,
+      "retainedInput": true,
+      "latestRetry": true,
+      "modes": [
+        [
+          "resume",
+          "resume"
+        ],
+        [
+          "fresh",
+          "fresh"
+        ]
+      ],
+      "cleanupDownloads": 1,
+      "unhandledErrors": []
+    },
+    {
+      "kind": "family",
+      "setupSaveRetry": true,
+      "restoreRetry": true,
+      "blockedNavigationRetainsWorkspace": true,
+      "retainedInput": true,
+      "latestRetry": true,
+      "modes": [
+        [
+          "resume",
+          "resume"
+        ],
+        [
+          "fresh",
+          "fresh"
+        ]
+      ],
+      "cleanupDownloads": 1,
+      "unhandledErrors": []
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+import { createSetupInspection } from "../setup/setupInspection";
+import fixture from "../../../../src/template-package/fixtures/figma-plugin-v0.4.1.json";
+import { normalizeTemplatePackageV1ToV2, validateTemplatePackageV2, type TemplatePackageV1, type TemplateFieldConfigurationV2 } from "@sleinity/template-core";
+import { createTemplateFieldFamilySessionV2 } from "@sleinity/template-browser";
+import { createTemplateFieldFamilyFromSourcesV2 } from "@sleinity/template-browser/importer";
+import { parseNumberDraft, readableFieldLabel, validateFieldCandidate, familyFieldIssues } from "./fieldAuthoring";
+const assert = (value: unknown, message: string) => { if (!value) throw new Error(message); };
+for (const input of ["-", "+", "1.", "1e", "Infinity", "NaN"]) assert(!parseNumberDraft(input).complete, `${input} stays local`);
+for (const input of ["", "0", "-1", ".5", "1e2"]) assert(parseNumberDraft(input).complete, `${input} parses predictably`);
+assert(readableFieldLabel({ id: "date:endDate" }) === "End Date", "Technical fallback is readable");
+assert(readableFieldLabel({ id: "date:endDate", label: "My exact Label" }) === "My exact Label", "Authored labels unchanged");
+const packageValue = normalizeTemplatePackageV1ToV2(structuredClone(fixture) as unknown as TemplatePackageV1).package!;
+const nodeId = Object.values(packageValue.nodes).find(node => node.type === "TEXT")!.id;
+const definition = { id: "number:value", type: "number", label: "Value", binding: { kind: "text-characters", nodeId }, defaultValue: 12, configuration: { format: { schemaVersion: "number-display-v1", decimalPlaces: 1 } } } as const;
+packageValue.editableFields = [structuredClone(definition)]; packageValue.editableFieldOrder = [definition.id];
+assert(validateTemplatePackageV2(packageValue).valid, "Controlled source valid");
+const before = JSON.stringify(packageValue);
+const invalid = { ...definition, configuration: { format: { schemaVersion: "number-display-v1", decimalPlaces: 101 } } } as TemplateFieldConfigurationV2;
+assert(validateFieldCandidate({ packageValue }, invalid).some(issue => issue.property === "decimalPlaces"), "Precision maps to correct control");
+assert(JSON.stringify(packageValue) === before, "Candidate validation never mutates source");
+// Native package validation must match the private adapter, not another validator.
+const changed = { ...packageValue, editableFields: [{ ...definition, ...invalid }] };
+assert(!validateTemplatePackageV2(changed).valid, "SDK agrees with candidate rejection");
+
+const second = structuredClone(packageValue); second.packageId += "-second"; second.name = "Other design";
+second.editableFields[0] = { ...second.editableFields[0], configuration: { min: 0, max: 20 } } as typeof second.editableFields[number];
+const family = createTemplateFieldFamilyFromSourcesV2([packageValue, second], "Controlled Family");
+const findings = familyFieldIssues(family, { [definition.id]: { value: 30 } });
+assert(findings.some(issue => issue.variantId === family.variants[1].id && issue.fieldId === definition.id), "F09 reproduced: unselected design content violation is projected");
+assert(!findings.some(issue => issue.variantId === family.variants[0].id), "Selected unconstrained design stays clear");
+assert(validateFieldCandidate({ packageValue, family }, invalid).some(issue => issue.property === "decimalPlaces"), "Common invalid format blocks Apply across Family");
+console.log("Fields authoring contract tests passed.");
+
+const session = createTemplateFieldFamilySessionV2(); session.load(family);
+const controller = session.getFieldControllers().find(controller => controller.id === definition.id)!;
+if (controller.type !== "number") throw new Error("Expected Number controller.");
+assert(controller.setValue(30).accepted, "Selected unconstrained variant accepts shared value");
+assert(!session.getSnapshot().fields.some(field => field.blockingErrors.length), "Historical selected-only badge sees no error");
+assert(familyFieldIssues(family, session.getSnapshot().contentState!.values).some(issue => issue.variantId === family.variants[1].id), "F09 confirmed against native session: other design requires correction");
+const inspection = createSetupInspection(session);
+const intentional = session.getSnapshot().selectedVariantId;
+const content = session.getSnapshot().contentState;
+inspection.inspect(family.variants[1].id);
+assert(inspection.intentional() === intentional, "Inspection does not rewrite intentional selection");
+assert(session.getSnapshot().contentState === content, "Inspection borrows shared canonical content without persistence");
+inspection.restore();
+assert(session.getSnapshot().selectedVariantId === intentional, "Leaving inspection restores intentional selection");
+session.dispose();

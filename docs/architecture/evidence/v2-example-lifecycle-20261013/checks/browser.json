@@ -1,0 +1,132 @@
+[
+  {
+    "label": "font-reactivation",
+    "command": "pnpm font:reactivation:verify",
+    "started": "2026-10-13T12:04:29.497Z",
+    "durationMs": 4044,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/font-reactivation.log",
+    "logSha256": "c8d4f62d0c813ca2599df6a6461c654c8e10de72d86c26766180095dc2ece741"
+  },
+  {
+    "label": "font-routing",
+    "command": "pnpm runtime-routing:fonts",
+    "started": "2026-10-13T12:04:33.544Z",
+    "durationMs": 7709,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/font-routing.log",
+    "logSha256": "d111b447aea1302a43e4f0acffb5f765693758910c14ef3eea8ccb1aa56d7bbd"
+  },
+  {
+    "label": "text-trim",
+    "command": "pnpm runtime-routing:text-trim",
+    "started": "2026-10-13T12:04:41.254Z",
+    "durationMs": 6120,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/text-trim.log",
+    "logSha256": "d9737ad81d6212e4774c1c4409e69530de503d1f9a39908f66f65319845347e8"
+  },
+  {
+    "label": "routing",
+    "command": "pnpm runtime-routing:scenarios",
+    "started": "2026-10-13T12:04:47.374Z",
+    "durationMs": 8408,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/routing.log",
+    "logSha256": "28498cc1755e245e845ff76826024ec23c7d16a077b386db354dfa60a01c5ac0"
+  },
+  {
+    "label": "setup",
+    "command": "pnpm studio:setup",
+    "started": "2026-10-13T12:04:55.783Z",
+    "durationMs": 20705,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/setup.log",
+    "logSha256": "e7565a1673b919d4ae703b34086de27b63ba4f9f9f61f9c8872d13a3ba1f728b"
+  },
+  {
+    "label": "drafts",
+    "command": "pnpm studio:drafts",
+    "started": "2026-10-13T12:05:16.488Z",
+    "durationMs": 36146,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/drafts.log",
+    "logSha256": "9fb7596f8c5ccc4dc4ddc51748934935cb792c2612902b9aa8d845183feff77a"
+  },
+  {
+    "label": "field-rules",
+    "command": "pnpm field-rules:studio",
+    "started": "2026-10-13T12:05:52.634Z",
+    "durationMs": 16204,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/field-rules.log",
+    "logSha256": "1ef83058e54a9b6260aad89402031d7579d2bebcff1827c8b6634aff84a86522"
+  },
+  {
+    "label": "family-parity",
+    "command": "pnpm studio:family-parity",
+    "started": "2026-10-13T12:06:08.838Z",
+    "durationMs": 37116,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/family-parity.log",
+    "logSha256": "31cc9886eb9c5acb29e8c06f72a26b1140660b448572011dffdd266f0e26ba4c"
+  },
+  {
+    "label": "workflow",
+    "command": "pnpm studio:workflow-acceptance",
+    "started": "2026-10-13T12:06:45.954Z",
+    "durationMs": 18619,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/workflow.log",
+    "logSha256": "a1030a1a5957634b5b9313a41122c0bf4729a4e1d97f0dc7d0fdf58c78041999"
+  },
+  {
+    "label": "output-workspace",
+    "command": "node scripts/studio-product/verify.mjs --output fidelity/evidence/v2-example-lifecycle/output-workspace",
+    "started": "2026-10-13T12:07:04.574Z",
+    "durationMs": 56151,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/output-workspace.log",
+    "logSha256": "5dd866a2b1525a2893c771242714760335c9b24b5aa11153e9a92f84e8683e28"
+  },
+  {
+    "label": "output-lifecycle",
+    "command": "node scripts/editor-performance/verify.mjs --output fidelity/evidence/v2-example-lifecycle/output-lifecycle",
+    "started": "2026-10-13T12:08:00.727Z",
+    "durationMs": 20833,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/output-lifecycle.log",
+    "logSha256": "a267016b892be77cf9cdfadb5798d0186f11d91c5f897c59081f0c524a47d43c"
+  },
+  {
+    "label": "storage-retry",
+    "command": "node scripts/repository/verify-studio-blocked-storage.mjs --output fidelity/evidence/v2-example-lifecycle/studio-storage",
+    "started": "2026-10-13T12:08:21.560Z",
+    "durationMs": 10388,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/storage-retry.log",
+    "logSha256": "1ebb6c27ba70509cb7e79e5e82d3c64eee48c42e2fc9e456cdef48a4a89a9e0f"
+  },
+  {
+    "label": "storage-fonts",
+    "command": "node scripts/repository/verify-studio-storage-fonts.mjs --output fidelity/evidence/v2-example-lifecycle/studio-storage-fonts",
+    "started": "2026-10-13T12:08:31.948Z",
+    "durationMs": 3193,
+    "exitCode": 0,
+    "error": null,
+    "log": "docs/architecture/evidence/v2-example-lifecycle-20261013/checks/storage-fonts.log",
+    "logSha256": "038a29b8820a843a33d5494218d66e679a1f4d9f438183e47fbf922d4030b568"
+  }
+]

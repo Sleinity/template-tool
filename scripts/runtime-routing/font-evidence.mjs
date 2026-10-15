@@ -8,29 +8,19 @@ import { browserStructure, launchBrowser, waitForCurrentReadiness } from "../fid
 import { loadManifest, parseArguments, repoRoot, stableStringify, verifyFixture } from "../fidelity/core.mjs";
 import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 import { applyCompatibilityFontFallbacks } from "../repository/studio-font-harness.mjs";
+import { loadExactFontManifest } from "../fidelity/fonts.mjs";
 
 const args = parseArguments(process.argv.slice(2));
 const runId = String(args["run-id"] || `font-evidence-${new Date().toISOString().replace(/[:.]/g, "-")}`);
 const outputRoot = join(repoRoot, "fidelity", "runtime-routing", "font-evidence", runId);
-const fontManifest = JSON.parse(readFileSync(join(repoRoot, "fidelity", "fonts.json"), "utf8"));
-const defaultFontDirectory = "/Users/niels/Documents/Codex/renderer-fidelity-fonts";
-
 function sha256(bytes) { return createHash("sha256").update(bytes).digest("hex"); }
 function assert(condition, message) { if (!condition) throw new Error(message); }
-function resolvePath(font) {
-  return font.sourcePath
-    .replace("${RENDERER_FIDELITY_FONT_DIR}", process.env.RENDERER_FIDELITY_FONT_DIR || defaultFontDirectory)
-    .replace("${INTER_TIGHT_FIDELITY_FONT_PATH}", process.env.INTER_TIGHT_FIDELITY_FONT_PATH || font.defaultSourcePath || "");
-}
 
-const fonts = fontManifest.fonts.map((font) => {
-  const path = resolvePath(font);
-  assert(existsSync(path), `Exact font file is missing for ${font.id}: ${path}`);
-  const bytes = readFileSync(path);
-  assert(bytes.length === font.byteSize, `Exact font byte size mismatch for ${font.id}.`);
-  assert(sha256(bytes) === font.sha256, `Exact font SHA-256 mismatch for ${font.id}.`);
-  return { ...font, path, bytes, dataUrl: `data:font/ttf;base64,${bytes.toString("base64")}` };
-});
+const fonts = loadExactFontManifest().fonts.map(font => ({
+  ...font,
+  bytes: readFileSync(font.path),
+  dataUrl: `data:font/ttf;base64,${readFileSync(font.path).toString("base64")}`,
+}));
 
 const fixtureManifest = loadManifest();
 const fixture = fixtureManifest.fixtures.find((item) => item.id === "now-hiring-post");

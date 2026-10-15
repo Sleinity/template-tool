@@ -1,0 +1,49 @@
+Typechecking 6 literal delivered guide examples against supplied archives.
+Packed public V2 ZIP import/edit/save/reload and private-export checks passed.
+{
+  "schemaVersion": "sdk-061-single-host-v1",
+  "rows": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc",
+      "fieldTypes": [
+        "image",
+        "text",
+        "textarea",
+        "boolean"
+      ],
+      "v2ImportMs": 189.94,
+      "sessionMaterializeMs": 16.08
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09",
+      "fieldTypes": [
+        "textarea",
+        "boolean",
+        "text"
+      ],
+      "v2ImportMs": 17.75,
+      "sessionMaterializeMs": 10.75
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904",
+      "fieldTypes": [
+        "color",
+        "boolean",
+        "image",
+        "number",
+        "text",
+        "textarea",
+        "date"
+      ],
+      "v2ImportMs": 10.22,
+      "sessionMaterializeMs": 7.27
+    }
+  ],
+  "findings": []
+}
+SDK 0.6.1 public Family host (sdk-061): 3 exact sources, one design selector, configuration/defaults, standalone materialization and save/reload passed.
+Verified isolated tarball consumer build (969311 JavaScript bytes; 279500 gzip bytes).
+

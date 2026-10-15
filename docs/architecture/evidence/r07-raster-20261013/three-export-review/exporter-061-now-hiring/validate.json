@@ -1,0 +1,80 @@
+{
+  "capture": {
+    "approved": "fidelity/references/approved/exporter-061-now-hiring/validate/reference.png",
+    "approvedStructure": "fidelity/references/approved/exporter-061-now-hiring/validate/structure.json",
+    "candidate": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/validate/capture-1.png",
+    "currentStructure": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/validate/structure-1.json",
+    "failureArtifacts": "fidelity/artifacts/sdk-061-r07-review-20261013a/exporter-061-now-hiring/validate",
+    "geometry": {
+      "equal": true,
+      "extraNodes": [],
+      "geometryChanges": [],
+      "imagePlacementChanges": [],
+      "missingNodes": [],
+      "reorderedNodes": [],
+      "textGeometryChanges": [],
+      "textMeasurementChanges": [],
+      "tolerances": {
+        "height": 0.25,
+        "image": 0.25,
+        "text": 0.5,
+        "transform": 0.001,
+        "width": 0.25,
+        "x": 0.25,
+        "y": 0.25
+      }
+    },
+    "kind": "approved-match",
+    "nextAction": "Retain approved reference",
+    "pixel": {
+      "actualDimensions": {
+        "height": 415,
+        "width": 307
+      },
+      "allowedChangedPixelPercentage": 0,
+      "changedPixelCount": 0,
+      "changedPixelPercentage": 0,
+      "differenceBounds": null,
+      "dimensionsEqual": true,
+      "equal": true,
+      "exact": true,
+      "expectedDimensions": {
+        "height": 415,
+        "width": 307
+      },
+      "largeRegions": [],
+      "threshold": 0.1
+    },
+    "sourceComparison": null,
+    "status": "pass"
+  },
+  "environment": "fidelity/candidates/sdk-061-r07-review-20261013a/environment.json",
+  "fixtureId": "exporter-061-now-hiring",
+  "scene": {
+    "approved": "fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/scene.json",
+    "changeCount": 0,
+    "changes": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/scene-changes.json",
+    "current": "fidelity/scene-graph/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/scene.json",
+    "status": "pass"
+  },
+  "settlement": {
+    "differingFiles": [],
+    "sourceFidelityRun": "sdk-061-r07-review-20261013a",
+    "unapprovedFiles": []
+  },
+  "source": {
+    "byteSize": 2581861,
+    "canvas": {
+      "height": 1350,
+      "width": 1000
+    },
+    "filename": "template-package-now-hiring-v0.6.1.zip",
+    "packageNodes": 11,
+    "packageVersion": "1.0",
+    "preview": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/source-preview.png",
+    "previewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+    "rootNodeId": "987:6755",
+    "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+  },
+  "surface": "validate"
+}

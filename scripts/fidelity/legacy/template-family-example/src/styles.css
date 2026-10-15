@@ -1,0 +1,18 @@
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #172033;
+  background: #f3f5f9;
+}
+
+body { margin: 0; }
+header, main { max-width: 1180px; margin: 0 auto; padding: 24px; }
+header p:first-child { color: #5a67d8; font-weight: 700; text-transform: uppercase; }
+main, .workspace { display: grid; grid-template-columns: minmax(280px, 360px) 1fr; gap: 20px; }
+.panel { background: white; border: 1px solid #dfe4ec; border-radius: 14px; padding: 20px; }
+.controls, label { display: grid; gap: 10px; }
+label { margin-bottom: 14px; font-weight: 600; }
+input, select, button { font: inherit; padding: 10px 12px; }
+button { cursor: pointer; }
+.preview { min-height: 520px; background: #dfe4ec; border-radius: 14px; }
+.workspace { grid-column: 1 / -1; }
+@media (max-width: 800px) { main, .workspace { grid-template-columns: 1fr; } }

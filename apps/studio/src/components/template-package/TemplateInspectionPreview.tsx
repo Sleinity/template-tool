@@ -1,13 +1,7 @@
 import { Focus, Maximize2, ZoomIn, ZoomOut } from "lucide-react";
 import { useRef, useState } from "react";
-import {
-  TemplateInspectionViewport,
-  type ResolvedProductRenderIdentityV1,
-  type TemplateInspectionViewportHandle,
-  type TemplateInspectionViewportSnapshot,
-  type TemplatePackageMotionRenderMode,
-  type TemplatePackageRenderMode,
-} from "@sleinity/template-react";
+import {type ResolvedProductRenderIdentityV1, type TemplatePackageMotionRenderMode, type TemplatePackageRenderMode} from "@sleinity/template-react";
+import {TemplateInspectionViewport, type TemplateInspectionViewportHandle, type TemplateInspectionViewportSnapshot} from "../../../../../packages/template-react/test/legacyEntry";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
 import { IconButton } from "../ui";
 

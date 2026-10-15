@@ -1,0 +1,5 @@
+$ pnpm --filter './packages/*' typecheck
+Scope: 3 of 8 workspace projects
+$ tsc --noEmit -p tsconfig.json
+$ tsc --noEmit -p tsconfig.json
+$ tsc --noEmit -p tsconfig.json

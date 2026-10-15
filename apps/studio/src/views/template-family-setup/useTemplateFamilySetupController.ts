@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import type { SavedTemplateFamilyRecord } from "@sleinity/template-browser/persistence";
-import type { TemplateFamilyReimportPlanV1 } from "@sleinity/template-browser/importer";
+import type {SavedTemplateFamilyRecord} from "../../../../../packages/template-browser/test/legacyEntry";
+import type {TemplateFamilyReimportPlanV1} from "../../../../../packages/template-browser/test/legacyImporter";
 import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-react";
 
 export type FamilyFieldFilter = "all" | "shared" | "specific" | "attention";

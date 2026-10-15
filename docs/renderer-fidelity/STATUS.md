@@ -1,8 +1,588 @@
 # Renderer Fidelity Status
 
-Status date: 2026-08-04
-Current milestone: SDK 0.7.0 published stable release and first-implementation handoff
+## Family media readiness publication — 2026-10-15
+
+[ADR 0098](decisions/0098-family-media-readiness-publication.md) and [the implementation report](../architecture/f7-readiness-publication.md) record the bounded Family-only change. Decode completion reuses the current accepted materialization/tree and projects readiness/status/error, preserving semantic references and one publication per accepted source completion. Full authoring derivation, font/line/renderer revision guards and PNG raster authority remain unchanged. Native differential, separate paired production timing and browser lifecycle evidence are retained. Fresh unpublished 1.0.0 candidate `unpublished-1.0.0-440c932335c46a7015cb074079fcd5cd2767a28d78ff8e4fe9fe0921912ece35` is GO under run `sdk-f7-readiness-20261015`; the earlier certified candidate remains immutable. Cold Cover readiness improves by approximately 90–99 ms median across two minimal paired runs; detailed warm timing differences remain a separate tracing limitation. Reproduce and review the exact evidence in the report. No API/schema, rendering capability, cache, batching, reference or tolerance change is included.
+
+
+## F7 production profiling — 2026-10-15
+
+[The bounded profile](../architecture/f7-production-profiling.md) is complete after candidate certification reached GO. Seven production workload sequences yield 120 measured steps / 60 matched observation pairs after warmup; four lifecycle diagnostics and the full-application Family smoke pass. Cover repeats 15 unchanged media-triggered derivations, about 76–77 ms aggregate detailed CPU time, with 14–15 preceding initial mount. This supports a separately scoped readiness-publication ownership/implementation plan, not a measured speedup or permission to change runtime behavior. No media derivation overlaps recorded >50 ms long tasks; decode and renderer/font settlement remain separate contributors. Production sources, archives and approved evidence are unchanged. Reproduce with `node scripts/f7/run.mjs --output /tmp/f7-new-run --trials 5`, then `scripts/f7/analyze.mjs` and `scripts/f7/validate-evidence.mjs`; retain detailed and minimal profiles separately.
+
+## V2 SDK / exporter 0.6.1 boundary — 2026-10-15
+
+See [ADR 0097](decisions/0097-v2-only-sdk-and-061-source-admission.md) and [the implementation/evidence report](../architecture/sdk-v2-optimization.md). The unpublished 1.0.0 candidate supports V2 hosts and exporter 0.6.1 ZIPs only; source schema 1.0 normalization and canonical schema 2.2 remain. Historical readers are test-only. Validation, primitive revision assembly and save/recovery reuse existing authorities; no visual owner, capability, provenance, settlement or export-readiness semantics changed. The three-export candidate gate is now GO after a current run-bound stored-source/capture review and fresh public host checks; see [candidate certification](../architecture/sdk-v2-candidate-certification.md). This certifies the immutable unpublished archives in the recorded environment; subsequent profiling tooling has a separate worktree identity. No reference/snapshot/tolerance/fixture/font promotion is authorized. Reproduce with the exact commands and source checkpoints in the report/evidence, followed by a fresh `pnpm sdk:gate:061 -- --run-id <unique-run>`.
+
+## R07 Carrousel raster closure, 2026-10-13
+
+Gate `sdk-061-r07-raster-20261013a` is GO: 24 complete stable captures, 12/12
+renderer, 3/3 scene and 12/12 settlement passes with current run-bound source
+reviews. [The R07 report](../architecture/r07-carrousel-raster.md) proves the
+40% initial output viewport causes native sampling changes in two clipped
+thumbnails, reversibly, with identical final unrounded inputs. Source review
+warrants only Carrousel/editor's guarded reference update. All other references,
+snapshots, tolerances, fixture/font identities, production source and R04 archive
+bytes remain unchanged. No SDK release-ready claim follows from this gate.
+
+The R01/R04 NO-GO records below are historical; their repairs and separately
+bounded limitations remain intact.
+
+## Host font registry continuity, 2026-10-12
+
+ADR 0096 records the bounded R01 integration repair. Current evidence and limitations are in [the R01 report](../architecture/host-font-authority.md). This does not certify the complete SDK: R07 remains independently tracked, and a fresh gate result is recorded separately from packed-host tests.
+
+Final gate `sdk-061-host-font-authority-20261012b` retains 24 stable captures,
+11/12 renderer passes, three scene and 12 settlement passes. All 12 PNGs are
+byte-identical to the pre-repair run. R07 remains one changed Carrousel/editor
+pixel, so disposition is NO-GO. Twenty packed font scenarios, strict declarations,
+npm/pnpm consumers and the complete SDK suite pass; no reference is promoted.
+
+## Media underlay diagnostic correction, 2026-10-10
+
+ADR 0095 corrects a generic primitive-stack warning applied to Carrousel's
+already-supported SOLID → IMAGE media underlay. The existing owners, paint order,
+source values and renderer output remain unchanged. Unsupported stacks retain
+their existing warnings. Gate `sdk-061-media-underlay-20261010a` passes 24 stable
+captures and all 12 renderer/three scene/12 settlement comparisons, with all
+12 PNGs byte-identical to previously reviewed output. Current verification is in the
+[media underlay report](../architecture/media-solid-underlay.md).
+
+## Now Hiring text-update follow-up, 2026-10-10
+
+ADR 0094 records the reproduced changed-text fallback and Studio reduced-motion
+transition leak. Fresh current-DOM measurement and trim-commit validation are
+bounded to the existing mounted text hooks. Studio no longer invents reduced-motion
+height transitions. Gate `sdk-061-now-hiring-text-stability-20261010c` passes
+24 stable captures, 12 renderer, three scene and 12 settlement comparisons, all
+byte-identical reviewed PNGs and all 15 release/workflow checks. Forty-eight current
+Now Hiring traces retain one geometry per accepted revision/text. Timing is
+qualified: an initial Family median-handler flag [0.1, 0.3] ms remains recorded;
+an independent five-pair repetition does not confirm it. See the
+[Now Hiring report](../architecture/now-hiring-text-stability.md) and its durable
+record for both results. No references or tolerances change. Stored captures were
+inspected; manual live typing is not claimed. Failed experiments and the incomplete
+oversized trace remain historical evidence and do not count as passing checks.
+
+## Text geometry lifecycle, 2026-10-09
+
+ADR 0093 records the bounded correction and retained pre-change reproduction. Current verification results are in the [text geometry report](../architecture/text-geometry-stability.md). References and tolerances are protected; no shared settled graph is introduced.
+
+Final verification: `sdk-061-text-geometry-20261009d` passes 24 stable captures, 12 renderer, three scene and 12 settlement comparisons. All twelve reviewed PNG identities and 324 protected artifacts are unchanged. Thirty production and thirty development Date workload traces retain one unaffected geometry state. Isolated production timing detects no repeatable handler increase under the recorded five-pair analysis. Detailed tracing costs and the repaired analysis-harness defect remain explicit in the durable record. Stored captures were inspected; manual live typing is not claimed.
+
+
+## 2026-10-07: observational mask gate closed
+
+ADR 0092 projects the existing exact rectangular ALPHA mask resolution into
+observational settlement. Carrousel's declared source/parent/sibling scope,
+canonical bounds, clip insets and revision match the exact ZIP and all four
+recorded browser surfaces. Dependency metadata preserves complete Figma IDs;
+unknown properties invalidate safely, and output-route provenance omits
+volatile editor IDs. Missing, stale or unsupported mask evidence remains
+unresolved. Production pixels, canonical scenes and runtime authorities did
+not change.
+
+Run `sdk-061-mask-settlement-final-20261007a` has two complete stable captures per
+surface. All 12 renderer comparisons, three scene comparisons and 12 reviewed
+settlement bundles pass. The complete SDK gate, public single host and Color
+browser lifecycle report **GO**. This supersedes the earlier mask-range no-go
+below. General masks and the full observational graph remain outside runtime
+authority. [Current evidence](OBSERVATIONAL_MASK_SETTLEMENT.md) records hashes,
+commands, guard tests and review limits. The next separate milestone is
+internal compiler-result consolidation, without a production-session switch.
+
+## 2026-10-07: three-export source review and bounded Cover fade
+
+ADR 0091 selects one source-property-gated owner for Cover's exact opaque
+SOLID → FILL IMAGE → DARKEN linear-gradient stack. The fade and SVG arrow now
+appear together on all four capture surfaces and in a live Studio Cover editor
+review. A separate source-backed HUG text measurement correction removes the
+browser's terminal letter-spacing contribution; Now Hiring's 306/405 px
+exported text boxes now measure about 305.6/404.7 px. The exact-font two-pass
+run `sdk-061-three-review-final-20261007a` is complete and stable for all
+three exports. Twelve individually reviewed renderer references and three
+observational scene snapshots now pass. Eight ready Now Hiring/Cover
+settlement bundles pass. Carrousel's four settlement bundles remain unapproved:
+node `987:6813` retains an unresolved observational `mask-range` dependency.
+The active SDK gate is **no-go** pending that separate contract decision. See
+the [three-export baseline](../architecture/sdk-061-three-export-baseline.md)
+and [tracked dispositions](../../fidelity/gates/sdk-061-dispositions.json).
+
+## 2026-10-06: bounded Matrix and Matrix 2 compositing owner
+
+ADR 0090 adds one internal, source-property-gated paint and group owner for the
+opaque exporter 0.6.1 subset. It retains exact source colors and paint order,
+distinguishes pass-through from isolated NORMAL/OVERLAY groups, and suppresses
+the former singular-background owner. The first two-pass capture sharply
+reduces source-preview differences; remaining strong differences are confined
+to photographic image regions. Final-run evidence and comparison disposition
+are in the Phase 9 source gates. Cover's mixed image/gradient fade and missing
+approved Matrix references keep the overall fidelity gate **no-go**. No golden,
+snapshot, or tolerance was changed.
+
+## 2026-10-06: live Matrix 2 paint setup verified against the re-export
+
+The supplied [Figma Matrix 2 node](https://www.figma.com/design/Tb4DXmBGjBDkJ9eoBQwFYO/Niels-s-AI-Playground?node-id=1099-218&m=dev)
+was inspected read-only. Its 14 nodes and 14 paint entries match the current
+ZIP's exact floats, order, modes, visibility, group opacity, and hierarchy.
+The same external ZIP path now contains a new byte version; the old capture
+remains historical and a fresh exact-byte two-pass capture was made. The
+third `OVERLAY` group's three sampled image-interior pixels now support a
+bounded isolated-child/group-Overlay model. They do not establish general
+Overlay or transparent-edge behavior. Current renderer output still differs;
+references remain unapproved. See [the source gate](PHASE_9_GROUP_CONTROL_SOURCE_GATE.md)
+and ADR 0089. No production runtime authority changed; Phase 9 and the
+active three-export SDK gate remain **no-go**.
+
+## 2026-10-05: Matrix 2 certifies bounded group source behavior
+
+The exact exporter 0.6.1 Matrix 2 ZIP supplies matched `PASS_THROUGH` and
+`NORMAL` groups with identical DARKEN/MULTIPLY/SCREEN children and 80% group
+opacity. Eighteen flat-strip and six image-side preview samples distinguish
+group isolation and post-group opacity, including a two-paint 40%/100%
+child. Canonical and observational projections retain the source. A two-pass
+Validate/Fields/editor/PNG capture is complete and stable, but its current
+output differs materially from the embedded preview and all four renderer
+surfaces lack approved references. ADR 0088 and the [source gate](PHASE_9_GROUP_CONTROL_SOURCE_GATE.md)
+record the bounded contract. No renderer owner or backend was added. The
+unmatched `OVERLAY` group, transparent edge, and Cover mixed-stack fade remain
+open. Phase 9 and the three-export SDK gate remain **no-go**.
+
+## 2026-10-04: Phase 9 Matrix and Cover source gate is partial
+
+The exact exporter 0.6.1 Matrix research ZIP preserves six named, opaque
+SOLID blend modes over a CROP image and flat color. Source-pixel checks support
+the serialized per-paint math at sampled locations; the current stable
+four-surface capture paints DARKEN, MULTIPLY, SCREEN, and OVERLAY as plain pink.
+Cover retains its SOLID + IMAGE + DARKEN gradient source stack and remains a
+separate fade blocker. Neither ZIP establishes pass-through versus isolated
+groups or partial-alpha order, so no compositing backend or production visual
+owner was added. Result B and the next source prerequisite are recorded in
+[the Phase 9 source gate](PHASE_9_COMPOSITING_SOURCE_GATE.md) and ADR 0087.
+The active three-export SDK gate and approved references are unchanged.
+
+## 2026-10-04: Cover SVG arrow has one visual owner
+
+The exact exporter 0.6.1 Cover arrow SVG now owns its path and stroke pixels;
+the VECTOR wrapper no longer adds a CSS border when that SVG actually renders.
+The source stroke remains canonical data. Missing-source vectors, semantic
+shapes, and ordinary non-vector strokes retain their compatibility treatment.
+ADR 0086 records the ownership boundary. The stable two-pass three-export run
+`sdk-061-cover-arrow-final-20261004` changed only Cover's four surfaces; its
+source-sized PNG delta is confined to the 24×24 arrow node, while Now Hiring
+and Carrousel captures are byte-identical to the pre-change run. Cover's
+separate `SOLID + IMAGE + DARKEN` fade and unapproved references keep the SDK
+gate **no-go**. No approved reference, snapshot, or tolerance changed.
+
+## 2026-10-04: exact imported Color default preservation
+
+The hash-verified exporter 0.6.1 Carrousel ZIP's `color:backgroundColor`
+binding now keeps rectangle `987:6811` SOLID fill 0's exact source RGBA in
+the normalized base, initial materialization, and Reset. The 8-bit control
+hex is applied only for an explicit edit or a configured default different
+from the source paint. The public three-export host check and portable Core
+tests verify numeric source equality; PNG captures are regression evidence,
+not the Color-value oracle. The three-export SDK gate remains no-go while
+Cover source-fidelity and unapproved references remain unresolved. See
+[`sdk-061-three-export-baseline.md`](../architecture/sdk-061-three-export-baseline.md).
+
+Status date: 2026-09-20
+Current status: TemplatePackage 2.2 singular Image replacement policy implemented
+
+## 2026-09-20 — Singular Image replacement policy
+
+TemplatePackage 2.2 replaces multi-option Image authorization and its separate
+default with one required Fill, Fit, or Crop replacement policy. Imported Figma
+placement stays immutable. Crop hosts may author canonical Crop; otherwise an
+upload uses deterministic Fill. Draft Editors no longer expose placement mode
+buttons, and Studio Fields presents one radio group. Older canonical packages
+and saved envelopes require reimport and remain deletable. Renderer ownership,
+layout, approved references, snapshots, and tolerances are unchanged; see ADR
+0085.
+
+## 2026-09-15 — Full-parent live mask boundary
+
+The carousel field fixture exposed a paint defect after shared `CarVis` targets
+were disabled: the intended image groups left layout correctly, but the affected
+product-card retained source-derived mask insets and clipped its sibling discount
+and subtitle badges. Exact full-parent, first-child, `end_of_siblings` ALPHA mask
+scopes now lower to the stable parent clip boundary in editor mode. Static mask
+geometry keeps the existing affected-node inset path. Focused mask regression,
+the full unit suite, and live Studio evidence cover this correction. No schema,
+general mask capability, renderer golden, or tolerance changed; see ADR 0084.
+
+## 2026-09-14 — Nested and multi-target Boolean authoring
+
+Loose V1 normalization now resolves a same-ID Boolean container plus nested
+content marker into stable unique fields, and merges compatible repeated
+Boolean markers into one multi-target structural binding. Browser and React
+content editors omit descendant controls while any owning Boolean target is
+false and restore them with retained canonical values. The supplied carousel
+ZIP normalizes to strict V2 without field-ID blockers. Existing ADR 0078
+structural rendering is reused unchanged; no reference or tolerance changed.
+
+## Field Rules V2 closure corrections
+
+The post-implementation audit's four contract defects are corrected and verified:
+current runtime identity invalidates active line evaluations; finite canonical
+invalid Crop remains persistable and accessible for correction; common Family
+Choices reconcile independently of selected-variant presence without artificial
+content revisions; shared image assets survive until their final canonical
+reference disappears. No public API/schema or capability was added.
+
+The full [closure report](../field-rules/MILESTONE_7_REPORT.md#post-implementation-closure-corrections)
+records focused and broader verification. All 92 `field-rules-closure` PNGs equal
+the Milestone 7 baseline; references/tolerances are unchanged. Historical guarded
+failures remain separate. Field Rules V2 is closed within the established
+source-certified/runtime-supported boundaries; there is no further milestone.
+
+## Field Rules V2 Milestone 7 Studio and external hosts
+
+Studio defaults to V2 configuration/content authoring. All seven types, stable
+typed choices, opaque control roles, atomic editor ordering, Family common/sparse
+configuration and shared/variant Crop controls use public Browser sessions and
+the ordinary React bridge. The V1 workspace is explicitly isolated for old saved
+work; no renderer-value migration is attempted. See the
+[authoring guide](../field-rules/STUDIO_AND_HOSTS.md) and ADR 0081.
+
+The actual Studio/browser proof covers rule authoring, canonical editing, line
+invalid/warning/inactive states, Boolean show, Crop, PNG, reload, reviewed
+reimport, selected-variant validation and sparse framing/reset. An independent
+public-only host proves a brand palette, canonical Number/Date/Crop, portable
+ordering and PNG. Family framing remains product/runtime evidence, not a new
+multi-aspect source certification.
+
+Integration exposed bounded contract bugs: discarded StrictMode publisher
+leases, invalid Blob asset carriers, and uncorrectable existing semantic content
+errors. These are corrected at the existing React/Browser/Core boundaries.
+Configuration reconciliation and callbacks use current revision authorities;
+renderer ownership is unchanged.
+
+The fresh `field-rules-v2-m7` baseline is repeat-stable for all 23 fixtures × four
+surfaces. All 92 first-capture PNGs are byte-identical to
+`milestone-6-final-regression`. Guarded renderer/scene/settlement comparisons
+retain historical fail/unapproved classifications. No approved reference or
+tolerance changed. Package/lifecycle/host/runtime evidence is recorded in the
+Handoff and implementation report; no broader renderer subset is promoted.
+
+## Field Rules V2 Milestone 6 renderer-backed Textarea maxLines
+
+Accepted ADR 0080 makes clustered line boxes from the actual mounted text paint
+the sole visual-line authority. Active V2 Textareas publish revision-, font-,
+settlement-, participation-, and generation-bound evidence through
+`TemplateFieldSessionRendererV2`; fixed text observation does not become an
+intrinsic layout input. Empty text is one line, clipping does not reduce laid-out
+count, warning equality is advisory, and over-limit content remains editable
+while blocking export. Structurally excluded Textareas are inactive until shown.
+
+Session evidence updates do not rematerialize content. A session-issued
+generation range plus the renderer generation and exact measurement key rejects
+stale local hook state and delayed A/B/A or remounted publishers. Family
+variants evaluate shared text against their selected effective geometry and
+line rules without persisting counts.
+
+The exact registered `now-hiring-post` source bytes back the focused browser
+scenario. Validate-labelled, Fields-labelled, editor, and PNG renderer instances
+agree on one short line, two lines at the advisory threshold, four invalid
+lines, and one empty line. Invalid PNG export is rejected; corrected content
+exports at 1000×1350. The focused export profile embeds the registered image
+and uses deterministic system-font input; exact binary/font-epoch authority is
+covered separately by the existing font and text-trim gates. No approved
+reference, scene snapshot, settlement snapshot, or tolerance was updated.
+
+Final focused evidence is
+`fidelity/runtime-routing/textarea-max-lines/milestone-6-final/report.json`.
+Package typechecks/builds, full and strict realistic-ZIP tests, Stage 4A,
+routed/font/text-trim/Boolean/Textarea browser scenarios, the exact two-pass
+23-fixture baseline, API/boundary/release/docs checks, package archives, packed
+Core and external consumers, session smoke, Studio/example builds, and curated
+bundle budgets pass. The packed consumer mounts the public V2 renderer bridge.
+The final `fidelity/candidates/milestone-6-final-regression` run is repeat-stable
+for all 23 fixtures and all four surfaces.
+Guarded renderer/scene/settlement comparisons retain their documented
+fail/unapproved classifications. Studio browser smoke stops at its unrelated
+pre-existing Family variant-menu focus-label mismatch; the product build and
+session browser lifecycle pass. No update command ran.
+
+The final measured React renderer and V2 field-session bundle profiles are
+676,937/165,009 and 1,019,080/229,618 bytes/gzip, respectively, with the normal
+5% budget retained. Only requested fixed-width Textareas add an observer;
+intrinsic Textareas reuse their existing measurement and there is no hidden
+text tree or second wrapping pass.
+
+## Field Rules V2 Milestone 5 canonical Image Crop and Family framing
+
+Accepted ADR 0079 adds `TemplateFieldFamilyContentStateV3`: one shared Image
+value owns the replacement asset and shared/default placement, while sparse
+`variantImagePlacements[variantId][fieldId]` entries can override only Fill,
+Fit, or canonical Crop for a selected variant. Family Image controllers expose
+`setVariantPlacement()` and `resetVariantPlacement()`; ordinary
+`setPlacement()` changes the shared default without overwriting explicit
+variant framing. Replacing or resetting the shared asset clears every
+asset-bound override. V2 Family records migrate once to V3 and live runtime and
+new persistence use V3 only.
+
+Resolution composes the shared asset and effective placement into an ordinary
+package-scoped Image value before the existing V2 materializer and renderer.
+`editor-crop` now uses the established affine CROP owner. Square, Portrait, and
+Landscape slots derive centred cover crops by shrinking within the canonical
+source region; canonical state is never widened or mutated. Structurally valid
+but non-invertible persisted Family crops remain Crop, keep diagnostics, and
+block export; renderer fallback never rewrites them to Fill.
+
+Current-run typechecks, package/Studio builds, portable/full/strict realistic-ZIP
+suites, Stage 4A and routed browser scenarios, appearance baseline, API and
+package boundaries, documentation links, package archives, packed Core/external
+consumers, release contract, and curated bundle probes pass.
+The exact registered `deal-of-the-week-banner-crop-editable` source fixture is
+repeat-stable on Validate, Fields, editor, and PNG surfaces; its established
+640×640 CROP-region difference remains 0.19921875%. The full 23-fixture capture
+is stable. Guarded renderer, scene, and settlement comparisons retain their
+documented fail/unapproved states. The legacy replacement browser harness proves
+the imported state plus first-field Fill/Fit/Fill and PNG output, then still
+times out at its existing `package-editor-panel` lookup after persistence reload. No
+reference, snapshot, or tolerance update command ran.
+
+The implemented subset is host-authored canonical Fill/Fit/Crop, ordinary
+single-template affine Crop rendering, shared Family asset/default placement,
+and sparse variant placement framing with automatic aspect adaptation. A
+dedicated exporter-authored Square/Portrait/Landscape Family crop fixture and
+Studio crop UI remain outstanding evidence/UI work; no broader image stack,
+mask, sampling, or renderer capability is claimed.
+
+## Field Rules V2 Milestone 4 Boolean structural visibility
+
+Accepted ADR 0078 makes `appearance.visible=false` a shared pre-settlement
+structural exclusion. One derived participation projection removes controlled
+nodes/subtrees from routing, Auto Layout participants, gaps, HUG/FILL,
+measurement, media preload, masks, React content, and active export-safety
+aggregation while preserving canonical topology and descendant state. The same
+owner corrects V1 visibility behavior; no Boolean-specific renderer or public
+API was added.
+
+Async renderer publication now requires the repeatable semantic revision plus a
+renderer-local monotonic generation. The generation advances for new package
+objects and font epochs, stays outside deterministic geometry identity, and is
+omitted at zero. Portable tests prove true/false/true delayed measurement and
+Browser readiness rejection, vertical/horizontal gap closure, nested subtree,
+padding-only empty HUG, FILL redistribution, alignment, renderer/media pruning,
+persistence, and Family target switching. All package typechecks/builds, public
+API/boundary checks, portable/full tests, core routing scenarios, exact-font,
+text-trim, docs, and appearance checks pass. The pre-source 22-fixture baseline
+and the registered Boolean fixture's two-pass four-surface capture are
+repeat-stable. Guarded renderer/scene/settlement comparisons retain documented
+fail/unapproved states; mask/primitive browser scenarios time out at the existing
+editor-panel harness wait. No reference-update command ran.
+
+The local 2.48 MB V2 session observation completed 20 accepted mutations in
+281.30 ms (14.07 ms average) with one materialization per mutation. No separate
+Boolean dependency engine or renderer instance was introduced; routing uses the
+existing active-graph recomputation, while excluded React subtrees skip their
+former descendant measurement and media-preload work.
+
+Formal status is **Result A — source-certified for the registered subset**. The
+exact exporter-0.6.1 fixture
+`template-package-deal-of-the-week-post-boolean-v0.6.1.zip` is registered at ZIP
+SHA-256 `47a109f…b6ac`. Its two authentic Boolean targets prove distinct source
+behavior: `showHeadline` leaves a vertical HUG/FILL chain, shrinking the parent
+from 375.69 to 112 logical px and moving the following FILL participant to y=112;
+`showEnddate` leaves a fixed horizontal `SPACE_BETWEEN` row, whose 1000×32 box
+and surviving logo position remain unchanged. Both controlled subtrees are
+absent from DOM/measurement telemetry while false.
+
+The focused browser run covers default Validate and Fields previews, separate
+editor false/reset operations, resize-hidden-show, and real hidden PNG exports.
+Reset restores byte-identical PNG output (`e2d79e…e9d77`). The default PNG is
+1080×1920 and differs from the embedded source preview by 0.501254% under the
+unchanged diagnostic 0.1 comparison threshold; the known Rethink Sans 600
+replacement is recorded. The surviving header after headline exclusion and the
+surviving logo region after end-date exclusion each have zero changed pixels
+against the default PNG. No approved reference, scene snapshot, settlement
+snapshot, or tolerance was changed.
 Reference status: the 96-file approved renderer baseline remains guarded; scene and settlement references remain unchanged
+
+## Field Rules V2 Milestone 3 Browser integration
+
+Accepted ADR 0077 adds `createTemplateSessionV2()` as the canonical browser
+editing path. Its typed controllers dispatch the Core reducer, cache one derived
+materialization, expose ordered host-safe descriptors, and keep required
+`maxLines` evidence pending until an exact revision-bound publisher responds.
+Image Blob/data URL ingestion, managed asset references, object URLs, stale
+completion rejection, and disposal remain Browser responsibilities.
+
+Explicit `saved-template-session-v2` and `saved-template-field-family-v2`
+records persist configured V2 packages, canonical content, and asset references;
+they never persist a working package as authority. Review-first single-template
+reimport uses field IDs and compatible binding kinds, preserves configuration,
+choices, roles, content, and ordering, and requires reviewed removal. V2
+Template Field Families resolve common configuration plus atomic sparse variant
+overrides into the ordinary Core materializer while keeping one shared content
+state across variant switches.
+
+React exports V2 ownership/provider/snapshot/controller hooks with no Studio or
+renderer-internal dependency. The existing V1 Studio session remains isolated
+for compatibility and is not synchronized with or migrated into V2. This
+milestone changes no renderer semantics or approved references; Boolean reflow,
+line measurement, crop fidelity, and Studio V2 authoring remain pending.
+
+Current-run Core/Browser/React typechecks, all package builds, the Studio build,
+portable/full/strict-realistic lifecycle suites, public API contract, package
+boundaries, release contract, documentation links, archive inspection, packed
+Core, packed external React consumer, and curated entry-bundle gates pass. The
+packed consumer compiles the V2 provider, descriptors, discriminated controller,
+and typed Text mutation from real tarballs. Dedicated V2 persistence adapters
+removed an initially observed 231,960-byte legacy Browser bundle regression;
+legacy profiles remain within their existing budgets and new Browser/React V2
+profiles have explicit measured budgets. A 20-edit session probe on a
+2,476,585-byte package observed 15.87 ms per accepted mutation and exactly one
+materialization per mutation in the current Node runtime.
+
+## Field Rules V2 Milestone 2 Core semantic kernel
+
+Accepted ADR 0076 establishes `mutateTemplateFieldContentV2()` as the single
+deterministic V2 content reducer and `materializeTemplateFieldContentV2()` as
+the single one-way package materializer. All seven discriminated fields now
+have DOM-free Core parsing, validation, choice, warning/blocker, immutable
+revision, sparse override, reset, and materialization semantics. Convenience
+set/choice/image/reset functions only dispatch through the reducer.
+
+Text uses grapheme-based limits and rejects line separators. Textarea commits
+multiline content without approximating rendered lines and publishes
+revision-bound pending evidence requirements. Number and Date retain canonical
+values while applying bounded deterministic display formatting. Color accepts
+the opaque hex subset and changes RGB only at the exact import-resolved SOLID
+source index while preserving imported alpha/opacity. Image owns canonical
+replacement asset plus authorized Fill/Fit/Crop state; missing overrides retain
+complete imported authority. Boolean writes renderer-facing visibility only;
+structural layout exclusion remains Milestone 4.
+
+The materializer clones inputs, resolves values only from field definitions and
+canonical content state, reports default/override provenance, and emits a
+deterministic materialization identity. A pending configured `maxLines` blocks
+export readiness but never blocks editing. Ordered host descriptors omit
+renderer bindings and source provenance, and no parallel capability matrix was
+added.
+
+The production V1 browser/session/persistence/Family/React/Studio path remains
+unchanged and has no hidden synchronization with V2 state. No renderer behavior,
+fixture byte, approved reference, scene snapshot, or settlement snapshot was
+changed.
+
+Current-run Core and all-package typechecks pass. Portable and realistic-ZIP
+test suites pass, including the new all-seven-field kernel/materializer suite.
+All package builds, package-boundary checks, archive packing, documentation
+links, diff hygiene, and the isolated packed-Core DOM-free consumer pass. The
+intentional Core declaration baseline is 106,800 bytes / SHA-256
+`d9bd14e9a6a737e61949083455374168d4f1c67a815bda3e9e72122dcbefbb5f`.
+
+The aggregate `pnpm api:contract` command remains red only for the pre-existing
+browser `SavedTemplateFamilyWriteOptions` export in the root and persistence
+entries. A direct entry-by-entry comparison confirms no Core or other new API
+drift.
+
+## Field Rules V2 Milestone 1 architecture freeze
+
+Accepted ADR 0075 freezes `TemplatePackageV2`, seven discriminated field
+definitions, exact import-resolved bindings, stable choice-option IDs, portable
+`editableFieldOrder`, designer-authorized image replacement modes, opaque
+`#rrggbb` Color, atomic Template Family collection overrides, separately
+revisioned canonical content state, and the one-way materialization invariant.
+
+The framework-neutral Core now exposes strict V2 types/schema/semantic
+validation, `normalizeTemplatePackageV1ToV2`, `parseTemplatePackageV2`,
+the separately versioned canonical content-state schema/validator, portable
+order reconciliation, and atomic family-configuration resolution.
+Marker-only Color normalization accepts exactly one eligible SOLID fill and
+blocks zero/multiple candidates. The V2 schema rejects alpha-bearing Color,
+duplicate/unknown/omitted order IDs, invalid choice contracts, and unauthorized
+image defaults.
+
+This is intentionally a contract milestone. The installed import/session/
+renderer stack remains V1 until Milestone 2 can introduce canonical content,
+typed mutation, and one-way materialization as one coherent authority. No
+renderer behavior, fixture bytes, approved references, tolerances, scene
+snapshots, or settlement snapshots changed.
+
+Current-run Core/package typechecks, package builds, portable and realistic-ZIP
+tests, schema parsing, documentation links, and diff hygiene pass. The intended
+isolated Core declaration is 98,784 bytes / SHA-256
+`d408f2abce9b65e996d9d835014b112093294e02976db8afb951ed45bf2b231d`.
+The package-boundary check passes. The aggregate API contract retains only
+unrelated dirty-worktree drift from the existing family-persistence export,
+which remains owned by its existing work rather than this milestone.
+
+## Deal of the Week typography fidelity follow-up
+
+The remaining Deal of the Week source-preview difference is not evidence of a
+canonical typography, resolved-scene, settlement, or renderer-positioning
+defect. The package requests Rethink Sans SemiBold 600 but supplies no font
+binary, managed-font hash, or trustworthy PostScript name. The current fidelity
+harness therefore uses the Studio application replacement face registered as
+human-family `Rethink Sans`; the resolved tree correctly retains
+`fontStatus: missing` and no exact source binary identity is proven. The
+repository's variable application face is SHA-256 `c7002241…f3347`; its identity
+cannot be equated with the binary used by Figma.
+
+Current-run scene and settlement evidence preserves all four text nodes'
+characters, style ranges, sizes, line heights, letter spacing, alignments,
+auto-resize modes, leading trim, paragraph spacing, and source bounds. The first
+numeric divergence is browser measurement against the replacement face: the
+measured single-line widths are approximately 1.19, 2.02, and 1.41 scene pixels
+narrower for nodes `800:170`, `800:173`, and `734:76`; node `734:79` retains its
+1000-pixel width and measures 103.687 pixels high against the 104-pixel source
+box. There is no wrapping or line-count change.
+
+The stable PNG differs from the embedded preview by 10,493 pixels
+(0.506028%), but only 937 changed pixels fall within the four text regions. The
+remaining 9,556 pixels are predominantly image/vector raster differences and
+are outside this typography follow-up. The primary typography classification is
+`FONT BINARY / FACE MISMATCH`; no production change, tolerance change, or
+reference promotion is warranted. Deterministic exact-source typography still
+requires the existing managed-font workflow with the actual source binary.
+
+Measurement telemetry may label a loaded human-family face `exact` from a
+family/style/weight match. That label is not binary identity evidence; the
+resolved managed-font status and hash-gated font evidence remain authoritative.
+This audit does not redesign font readiness or measurement telemetry.
+
+## Figma exporter 0.6.1 downstream alignment
+
+Accepted ADR 0074 adds a renderer-internal native canonical SOLID evidence path
+for exactly Figma exporter `0.6.1`. A valid SOLID with unit canonical color
+alpha, finite unit paint opacity, supported visibility/blend semantics, and no
+contradictory same-index raw evidence can now enter the existing ordered-SOLID
+and bounded SOLID-then-linear-gradient owners without fabricated historical
+repair provenance. Exporter `0.6.0`, unidentified sources, and contradictory
+raw evidence retain their existing compatibility boundaries.
+
+The corrected 0.6.1 SOLID and gradient/mixed ZIPs pass strict import and the
+realistic lifecycle. In corrected ZIP `e55ae505…fe8b`, canonical and raw SOLID
+RGB agree exactly. Mixed nodes `811:459` and `811:460` select
+`ordered-normal-paint-svg` with native support and no fallback on all four
+surfaces; isolated gradients retain `linear-gradient-svg`. Full-precision
+gradients retain exact source-conflict detection, and historical rounded
+disagreement remains a conflict.
+
+Current browser capture `exporter-061-corrected-source-gate` is stable on all
+four surfaces and its PNG is pixel-exact against the embedded source preview
+(zero changed pixels). The superseded contradictory export remains external
+audit evidence only and is not the registered fixture.
+
+The current Deal of the Week 0.6.1 package preserves four canonical style
+ranges, four rich Figma text-segment records, and one explicit Rethink Sans
+requirement without `FONT_REQUIREMENTS_INFERRED`. All four browser surfaces
+load the harness's application replacement, while resolved managed-font status
+remains missing. Its PNG differs from the embedded preview by 10,493 pixels
+(0.506028%), so zero-tolerance source-raster closure is not claimed.
+
+All 22 registered fixtures were repeat-stable across Validate, Fields, editor,
+and PNG in run `exporter-061-alignment-all`; the corrected-source rerun above
+covers the final mixed fixture bytes. Guarded renderer, scene, and
+settlement comparisons retain historical/unapproved failures; the three new
+source fixtures remain unapproved. Save/reload browser persistence currently
+times out after reload for both the new fixtures and historical controls in the
+pre-existing dirty Studio worktree, so offline restoration is not claimed in
+this milestone. No schema, public SDK, tolerance, approved reference, or
+renderer implementation changed, and no reference-update command ran.
 
 ## SDK 0.7.0 — published stable release
 
@@ -1274,7 +1854,7 @@ Production build passes at 920.44 kB / 268.27 kB gzip for the main JavaScript ch
 
 Source-certified families now include core layout/text routing, exact managed-font identity, CAP_HEIGHT vertical trim and glyph placement, imported FILL/FIT/affine CROP, replacement Fill/Fit/reset/persistence, rectangular clipping, opaque rectangular ALPHA-mask lowering, the bounded primitive subset above, and isolated `GRADIENT_LINEAR` within the accepted ADR 0063 contract.
 
-Still compatibility-owned or deferred: hidden/partial/multiple paints or strokes, linear-gradient combinations outside the bounded certified subset, radial/angular/diamond gradients, gradient strokes, layout-included or independent-width strokes, dashes/caps/joins, primitive self-clipping with expanded strokes, corner smoothing, transforms outside the certified axis-aligned subset, partial/luminance/vector/nested masks, effects, blend/compositing, variables/components, arbitrary vector semantics, TILE, interactive editor crop, Canvas/WebGL/offscreen rendering, and one shared post-measurement graph.
+Still compatibility-owned or deferred: hidden/partial/multiple paints or strokes, linear-gradient combinations outside the bounded certified subset, radial/angular/diamond gradients, gradient strokes, layout-included or independent-width strokes, dashes/caps/joins, primitive self-clipping with expanded strokes, corner smoothing, transforms outside the certified axis-aligned subset, partial/luminance/vector/nested masks, effects, blend/compositing, variables/components, arbitrary vector semantics, TILE, Studio crop UI and exporter-authored multi-aspect Family crop certification, Canvas/WebGL/offscreen rendering, and one shared post-measurement graph.
 
 ## Asset-free strict lifecycle correction
 
@@ -1311,3 +1891,51 @@ The exact supplementary ZIP `c2a41a23ed57651f50406bf645779191480eca38514c2a748cb
 The second supplementary ZIP `d3904ce8b52c57111235482fecdd126a6ecf63ddbca1eb72a52e364dc927031b` (611,320 bytes; package/root `pkg_451_135_1784371485904` / `451:135`; preview `1a1a4575d1309c33bd09e5030d9df055231af11a0d524173043eaf05648b0d79`) plus screenshots `c7e991d2…a5ce` and `c0dded80…a88a` closes selected handles and controlled resize. The third-handle prediction is within 0.746/0.959 screenshot pixels; `451:175` retains byte-identical stops/transform across 554×240 and 710×240, with normalized source samples stable within one channel. Node `454:30` now uses stop alpha 0.8, not paint opacity; raw/canonical paint opacity remains 1. Formal result remains Result B on that single source property.
 
 Final ZIP `template-package-gradient-test-4.zip` is 193,635 bytes at `9da63d95f3a6b661a0c4818908abc39735e63a9b8cdf00e8aa42c243813a0ad3`, package/root `pkg_457_36_1784372293276` / `457:36`, exporter 0.6.0, with 1000×1500 preview `4d12e49e0b0734f092c34a9257fb3c8b6287ba07ddd638704056bdee8665afc4`. RECTANGLE `457:46` contains one raw/canonical linear-gradient paint at opacity 0.5, node opacity 1, opaque stops, and no competing appearance. The correct paint-opacity-then-source-over model matches within one channel; RGB-only, double, and ignored opacity differ by up to 47, 44, and 90. Formal cumulative decision is Result A: the source gate is closed. At that historical gate boundary production was unchanged and ADR 0063 was Proposed; the later accepted implementation and approved references are recorded at the top of this status.
+## 2026-09-13 carousel editor text reflow correction
+
+V2 materialization now reconciles imported text style ranges around a contiguous content edit. Inserted characters inherit the preceding adjacent run, following ranges shift with the edit, the immutable base package retains its imported ranges, and the materialization revision continues to bind the derived working package to canonical content. The renderer also preserves any text not covered by imported range endpoints, preventing stale or incomplete source metadata from silently dropping canonical characters.
+
+The FILL-inside-HUG route remains an explicit circular compatibility boundary. Its editor CSS now uses the child's intrinsic flex basis so text drives the HUG parent until declared min/max constraints clamp it; fixed and ordinary FILL distribution are unchanged. No route, backend, schema, persistence version, SDK field semantic, or approved reference changed.
+
+The exact local carousel package rendered all edited characters after the correction: title 30, subtitle 31, and headline 75. Title and subtitle badges expanded and wrapped at their imported 640 px maximum; the fixed/FILL/TRUNCATE headline retained its imported box and clipping. Portable tests, Core/React typechecks, full Studio build, `runtime-routing:stage4a`, `studio:drafts`, `field-rules:studio`, and desktop/768 px `studio:workflow-acceptance` passed. The 23-fixture four-surface fidelity capture `2026-09-13T16-58-18-728Z` was stable. Full renderer, scene, and settlement comparisons remain non-clean because this shared worktree contains earlier unapproved contract/fixture changes; no reference update or tolerance change ran.
+
+## 2026-09-14 type-qualified field identity
+
+TemplatePackage and canonical content schema 2.1 use `<type>:<name>` field IDs.
+Loose V1 input qualifies IDs before duplicate validation, accepts different
+types with the same source name, and merges compatible repeated Booleans into
+one ordered multi-target structural binding. Browser and React controller
+projection hides descendants of every false target while preserving their
+canonical content and order. Schema 2.0 saved sessions and Families migrate all
+field-keyed package, content, order, override, control, and image-placement data
+before current validation.
+
+The supplied carousel ZIP passed strict lifecycle at 2,301,391 bytes and SHA-256
+`d6613b5f2a8668b37d1ba190de0f9717d5a2e7f35c7e0e078cdc88b76498ab5d`.
+It imports without blockers and resolves `boolean:carVis` to targets `907:9933`
+and `907:9932`. Its source names the CTA Boolean `ctaVis`, producing
+`boolean:ctaVis`, while the nested text is independently `text:cta`.
+
+Current Core/Browser/React typechecks, package builds, full portable tests,
+Studio build, strict supplied-ZIP lifecycle, `studio:setup`, `studio:drafts`,
+`field-rules:studio`, `runtime-routing:boolean`, SDK API contract, package
+boundaries, repository TypeScript build, and documentation links pass. No
+renderer owner, fixture, golden reference, snapshot, or tolerance changed.
+
+
+## SDK hardening completion — 2026-09-25
+
+The importer driver blocker recorded earlier is resolved for current Studio.
+Single/Family compatibility save queues and stale-import cleanup are covered in
+addition to V2. The public-only host now imports a hash-gated 0.6.1 ZIP and verifies
+preview reuse, batch/incremental equivalence, selectors, replacement, removal and
+persistence.
+
+Measured Browser copying is reduced before the unchanged Core materializer.
+Strict package validation memoizes only recursively immutable plain data; mutable
+and newly configured input remains fully validated. All six measured workloads
+retain identical output/content/readiness hashes and one materialization per edit.
+The four current-export fixtures produce 16 byte-identical before/after surface
+PNGs and matching geometry. Approved-reference comparisons remain unapproved;
+no reference, schema, renderer owner, scene/settlement contract or tolerance changed.
+See [SDK verification](../sdk-hardening/verification.md) for current-run evidence.

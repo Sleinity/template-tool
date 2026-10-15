@@ -16,18 +16,8 @@ import type {
   PackageImageFieldConstraints,
   TemplatePackageV1,
 } from "@sleinity/template-core";
-import {
-  getPackageEditorFieldWarnings,
-  clearTemplatePackageImageOverride,
-  getEffectiveEditableFields,
-  getPackageEditorFieldTargetStatuses,
-  getPackageFieldOverrideValue,
-  getPackageFieldValue,
-  type PackageEditorFieldWarning,
-  replaceTemplatePackageImage,
-  setTemplatePackageImageReplacementMode,
-  updateTemplatePackageField,
-} from "@sleinity/template-core/editor";
+import {getPackageEditorFieldWarnings, getEffectiveEditableFields, getPackageEditorFieldTargetStatuses, getPackageFieldValue, type PackageEditorFieldWarning} from "@sleinity/template-core/editor";
+import {clearTemplatePackageImageOverride, getPackageFieldOverrideValue, replaceTemplatePackageImage, setTemplatePackageImageReplacementMode, updateTemplatePackageField} from "../../../../../../packages/template-core/test/legacyEntry";
 import {
   fieldCounter,
   resolveFieldBehavior,

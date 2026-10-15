@@ -2,10 +2,8 @@ import { packageRuntimeFontSignature } from "@sleinity/template-browser";
 import type { ResolvedRenderTreeV1 } from "@sleinity/template-core";
 import type { CoreLayoutRuntimeState } from "../internal/runtime-routing";
 import type { TemplatePackageV1 } from "@sleinity/template-core";
-import type { TemplateImportConfirmationV1 } from "@sleinity/template-browser/importer";
-
-export type ResolvedProductRenderIdentityV1 =
-  TemplateImportConfirmationV1["renderIdentity"];
+import type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-browser";
+export type { ResolvedProductRenderIdentityV1 } from "@sleinity/template-browser";
 
 function stableHash(value: unknown): string {
   const input = JSON.stringify(value);
@@ -17,8 +15,12 @@ function stableHash(value: unknown): string {
   return (hash >>> 0).toString(16).padStart(8, "0");
 }
 
-function aggregateExportSafety(tree: ResolvedRenderTreeV1): ResolvedProductRenderIdentityV1["exportSafety"] {
+function aggregateExportSafety(
+  tree: ResolvedRenderTreeV1,
+  runtime: CoreLayoutRuntimeState,
+): ResolvedProductRenderIdentityV1["exportSafety"] {
   return tree.nodeOrder.reduce<ResolvedProductRenderIdentityV1["exportSafety"]>((current, nodeId) => {
+    if (runtime.route.nodes[nodeId]?.participation !== "active") return current;
     const next = tree.nodes[nodeId].backendDecision.exportSafety;
     if (current === "blocked" || next === "blocked") return "blocked";
     if (current === "warning" || next === "warning") return "warning";
@@ -82,14 +84,19 @@ export function createResolvedProductRenderIdentity(input: {
   }));
   const settlementRevision = stableHash({
     semanticRevision: runtime.revision,
-    route: runtime.settled.nodeOrder.map((nodeId) => ({
+    route: runtime.settled.nodeOrder
+      .filter((nodeId) => runtime.route.nodes[nodeId]?.participation === "active")
+      .map((nodeId) => ({
       nodeId,
       ownership: runtime.route.nodes[nodeId].ownership,
       boundaryRootId: runtime.route.nodes[nodeId].boundaryRootId,
       reasonCodes: runtime.route.nodes[nodeId].reasonCodes,
     })),
+    ...(runtime.route.excludedNodeIds.length
+      ? { excludedNodeIds: runtime.route.excludedNodeIds }
+      : {}),
   });
-  const exportSafety = aggregateExportSafety(resolvedTree);
+  const exportSafety = aggregateExportSafety(resolvedTree, runtime);
   const hasRoutedCoreLayout = runtime.route.routedNodeIds.length > 0;
   const readiness: ResolvedProductRenderIdentityV1["readiness"] =
     !hasRoutedCoreLayout

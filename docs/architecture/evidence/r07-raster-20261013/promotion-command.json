@@ -1,0 +1,21 @@
+{
+  "command": [
+    "pnpm",
+    "fidelity:update",
+    "--",
+    "--run-id",
+    "sdk-061-r07-review-20261013a",
+    "--fixture",
+    "exporter-061-carrousel",
+    "--surface",
+    "editor",
+    "--reason",
+    "Source-reviewed native FILL thumbnail raster after the intentional 40% initial output viewport: reversible initial-zoom experiment, identical final camera/geometry/font/source/clip authority, every changed sample confined to two clipped source photographs, unchanged PNG/Validate/Fields. Replaces the historical Fit-initialized Carrousel editor reference only; no renderer, sampling, tolerance or source change.",
+    "--evidence-output",
+    "docs/architecture/evidence/r07-raster-20261013/promotion"
+  ],
+  "started": "2026-10-13T10:44:31.928Z",
+  "exitCode": 0,
+  "stdout": "[fidelity] fixture=exporter-061-carrousel surface=editor approved=/Users/niels/Documents/Projects/template-tool/fidelity/references/approved/exporter-061-carrousel/editor\n[fidelity] update-evidence=/Users/niels/Documents/Projects/template-tool/docs/architecture/evidence/r07-raster-20261013/promotion/2026-10-13T10-44-32-577Z/exporter-061-carrousel/editor\n",
+  "stderr": "$ node scripts/fidelity/cli.mjs update -- --run-id sdk-061-r07-review-20261013a --fixture exporter-061-carrousel --surface editor --reason 'Source-reviewed native FILL thumbnail raster after the intentional 40% initial output viewport: reversible initial-zoom experiment, identical final camera/geometry/font/source/clip authority, every changed sample confined to two clipped source photographs, unchanged PNG/Validate/Fields. Replaces the historical Fit-initialized Carrousel editor reference only; no renderer, sampling, tolerance or source change.' --evidence-output docs/architecture/evidence/r07-raster-20261013/promotion\n"
+}
