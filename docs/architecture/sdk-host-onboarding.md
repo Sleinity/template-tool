@@ -12,8 +12,9 @@ The [correction packet](evidence/sdk-release-publication-20261016/README.md)
 retains those exact historical captures/reports, using lossless gzip for the
 87.6 MB trial report. It changes no SDK source, delivered guide, starter,
 candidate archive, approved reference or tolerance. Candidate D remains frozen;
-the corrected commit must pass its source check and a clean-checkout portable
-gate. Moving the existing release tag requires explicit approval of the corrected
+the correction passed its source check and the complete portable gate from a
+clean macOS checkout under Node 22.23.3/pnpm 11.9.0. Moving the existing release
+tag requires explicit approval of the corrected
 commit. No SDK 2.0.0 package or public Release has been published.
 
 ## Current delivery — candidate D, 2026-10-16

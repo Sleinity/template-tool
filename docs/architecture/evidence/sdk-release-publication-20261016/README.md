@@ -35,3 +35,22 @@ failed publication attempt.
 See [the staging inventory](staging-inventory.json), [failure log](attempt-2-failure.log.txt.gz)
 and [verification record](verification.json). Subsequent checks must be recorded
 as current-run evidence; a locally satisfied link is insufficient.
+
+## Current correction checks
+
+Commit `02658bde13b263158994e13fb2eb6a0e43a603f3` passed
+`pnpm install --frozen-lockfile` and the complete `pnpm ci:portable` gate in a
+temporary shallow Git clone on macOS arm64 with Node 22.23.3/pnpm 11.9.0.
+The clone contained no ignored local evidence and remained clean afterward.
+All 261 Markdown files/901 local links passed. The gate also passed portable
+tests, package/Studio/example builds, types, public API/boundary/release checks,
+packed Node and V2 consumers, and curated bundle checks. See the
+[complete clean-checkout log](clean-portable.log.txt.gz) and
+[installation log](clean-install.log.txt.gz).
+
+All 1,055 certified candidate D source files matched in the clean clone. Frozen
+delivery/archive/starter checks passed, all 285 protected identities remained
+unchanged, and all 22 retained historical files matched their recorded hashes.
+The existing Linux certification still applies to the identical frozen candidate;
+the corrected tag's Linux publication gate has not run. Final record-only updates
+to this packet do not alter the certified source scope.
