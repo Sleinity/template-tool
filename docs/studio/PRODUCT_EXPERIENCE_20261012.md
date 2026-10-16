@@ -139,8 +139,10 @@ continuous typing, Now Hiring 9 → 18, Cover 14–15 → 19, Carrousel 15 → 1
 Family 15 → 19. This is presentation overhead, not additional canonical work.
 The existing 100/325 ms input schedule and 650 ms autosave remain unchanged.
 
-[Individual trials and summaries](../../fidelity/evidence/product-experience/performance-certified/production-paired.json)
+[Individual trials and summaries](../../fidelity/evidence/product-experience/performance-certified/production-paired.json.gz)
 are retained with sources, exact fixture/font identities and browser environment.
+The lossless gzip preserves the original JSON bytes (SHA-256
+`eb271f81090d8c446f43483f9823f4ca02805e467cc9e31d4339d08bddf31e7d`).
 Earlier `performance` and `performance-final` directories are intermediate
 runs; only `performance-certified` identifies the final production sources.
 

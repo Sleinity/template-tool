@@ -1,0 +1,170 @@
+{
+  "scope": "Historical link-target evidence only; no new promotions",
+  "files": [
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/validate/capture-1.png",
+      "bytes": 49700,
+      "sha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/fields/capture-1.png",
+      "bytes": 49767,
+      "sha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/editor/capture-1.png",
+      "bytes": 192792,
+      "sha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-carrousel/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-carrousel/png-export/capture-1.png",
+      "bytes": 912022,
+      "sha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/validate/capture-1.png",
+      "bytes": 55644,
+      "sha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/fields/capture-1.png",
+      "bytes": 55818,
+      "sha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/editor/capture-1.png",
+      "bytes": 294549,
+      "sha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-cover/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-cover/png-export/capture-1.png",
+      "bytes": 593287,
+      "sha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/validate/capture-1.png",
+      "bytes": 143858,
+      "sha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/fields/capture-1.png",
+      "bytes": 143281,
+      "sha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/editor/capture-1.png",
+      "bytes": 807438,
+      "sha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/evidence/r07-raster-20261013/three-export-review/exporter-061-now-hiring/README.md",
+      "file": "fidelity/candidates/sdk-061-r07-review-20261013a/exporter-061-now-hiring/png-export/capture-1.png",
+      "bytes": 1412015,
+      "sha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/fidelity-reference-review-20260930.md",
+      "file": "fidelity/evidence/reference-review-prerelease-20260930-final/index.json",
+      "bytes": 33903,
+      "sha256": "e53ba7fda8da0083ad3806a6ca98ce8b4c72fc46fcdae9b3edfec2d30a2cc481",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/architecture/fidelity-reference-review-20260930.md",
+      "file": "fidelity/evidence/reference-review-prerelease-20260930-final/review-dispositions.json",
+      "bytes": 67615,
+      "sha256": "1471d240ca5a962381cace20cfc514b14b8e1a14225a40c148ec737088ef2cec",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/COMPACT_FIELD_CARDS_20261012.md",
+      "file": "fidelity/evidence/compact-field-cards/after/single-color-off.png",
+      "bytes": 118789,
+      "sha256": "f0eb78ce0bf62921ab51cb4b74525f6707ce4001a5d1d0addce27ff385b2ea3b",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/COMPACT_FIELD_CARDS_20261012.md",
+      "file": "fidelity/evidence/compact-field-cards/before/single-color-off.png",
+      "bytes": 121235,
+      "sha256": "92eebfb601fec1549fa621df5a448090c033e2c0142178c6925665bf5606427e",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/COMPACT_FIELD_CARDS_20261012.md",
+      "file": "fidelity/evidence/compact-field-cards/measurements/measurement-after-family.json",
+      "bytes": 5449,
+      "sha256": "9beb8262b4ee133c946c58833c90ebb5535e81e543026877600f6e2165d38b26",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/OUTPUT_REFINEMENTS_20261012.md",
+      "file": "fidelity/evidence/output-refinements-20261012/exporter-061-carrousel-2048-initial.png",
+      "bytes": 263611,
+      "sha256": "2480be6f277ce3a2489f5f8b1b6e3e2077b851c64ab1fc70786ab7a8c04cfd49",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
+      "file": "fidelity/evidence/product-experience/performance-certified/production-paired.json.gz",
+      "bytes": 2384152,
+      "sha256": "bcc7177bda54dbbd0165028c9ed12434649bf4bb18703216fc6ab96a7fd23a6f",
+      "originalFile": "fidelity/evidence/product-experience/performance-certified/production-paired.json",
+      "originalBytes": 87598981,
+      "originalSha256": "eb271f81090d8c446f43483f9823f4ca02805e467cc9e31d4339d08bddf31e7d",
+      "encoding": "gzip-lossless-original-unchanged"
+    },
+    {
+      "source": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
+      "file": "fidelity/evidence/product-experience/after/exporter-061-carrousel-1440.png",
+      "bytes": 275736,
+      "sha256": "45b57351b11eabcbe85caf68be14785a00d1a14537444077a74e4df0d88306ef",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
+      "file": "fidelity/evidence/product-experience/after/family-768-preview.png",
+      "bytes": 136854,
+      "sha256": "595523003fc81c643726de61ec193d19c59fe2fbe139c0e777639fdd7602ffce",
+      "encoding": "original-bytes"
+    },
+    {
+      "source": "docs/studio/PRODUCT_EXPERIENCE_20261012.md",
+      "file": "fidelity/evidence/product-experience/after/host-theme-tokens.png",
+      "bytes": 375911,
+      "sha256": "6c019a34e17d73dfbdeb181006b39ed4cfdca80be7b91db78112b30c57ceacd8",
+      "encoding": "original-bytes"
+    }
+  ],
+  "retainedBytes": 8493426,
+  "excluded": [
+    "Original 87.6 MB local JSON remains ignored",
+    "Raw exporter ZIPs",
+    "Font binaries",
+    "Credentials",
+    "Unrelated local run output"
+  ]
+}

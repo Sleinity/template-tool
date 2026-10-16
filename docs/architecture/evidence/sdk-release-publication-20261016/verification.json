@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "sdk-publication-correction-v1",
+  "date": "2026-10-16",
+  "approvedCommit": "b158199baf06c9d5f59cf9c91b485429684bbb42",
+  "tag": "sdk-v2.0.0",
+  "tagMoved": false,
+  "published": false,
+  "failedRun": "https://github.com/Sleinity/template-tool/actions/runs/38874449309/attempts/2",
+  "failureStage": "ci:portable documentation links, before changeset publish",
+  "registryChecks": {
+    "core": {
+      "observedVersions": 13,
+      "2.0.0-present": false
+    },
+    "browser": {
+      "observedVersions": 13,
+      "2.0.0-present": false
+    },
+    "react": {
+      "observedVersions": 13,
+      "2.0.0-present": false
+    }
+  },
+  "historicalLinkTargetsRetained": 22,
+  "cleanCheckoutPortable": "pending",
+  "candidateDSourceVerification": "pending",
+  "sdkOrDeliveredContentChanged": false
+}

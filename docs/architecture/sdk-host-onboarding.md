@@ -1,5 +1,21 @@
 # SDK 2.0.0 host delivery and certification
 
+## Publication attempt — blocked before upload, 2026-10-16
+
+The user approved commit `b158199baf06c9d5f59cf9c91b485429684bbb42` for
+`sdk-v2.0.0`. That tag exists, but the [publication workflow](https://github.com/Sleinity/template-tool/actions/runs/38874449309)
+stopped during portable CI before publishing any package. Its clean checkout
+exposed 22 historical documentation targets that existed only in ignored local
+evidence directories. Local existence alone had made the earlier link check pass.
+
+The [correction packet](evidence/sdk-release-publication-20261016/README.md)
+retains those exact historical captures/reports, using lossless gzip for the
+87.6 MB trial report. It changes no SDK source, delivered guide, starter,
+candidate archive, approved reference or tolerance. Candidate D remains frozen;
+the corrected commit must pass its source check and a clean-checkout portable
+gate. Moving the existing release tag requires explicit approval of the corrected
+commit. No SDK 2.0.0 package or public Release has been published.
+
 ## Current delivery — candidate D, 2026-10-16
 
 **GO for publication approval:** immutable `sdk-2-host-20261016d` supersedes C.
@@ -17,10 +33,10 @@ members differ from C; SDK runtime/declarations and starter bytes are identical.
 The current [Linux receipt](https://github.com/Sleinity/template-tool/actions/runs/38872727783)
 passed against D's exact frozen set. C and its evidence remain immutable.
 
-The intended tag remains `sdk-v2.0.0`; no publication or tagging has occurred.
+The intended release remains `sdk-v2.0.0`; the blocked tag attempt is recorded above.
 Publication-mode handoff generation and its installed-archive consumer passed
 with explicit simulation provenance. Final publication and registry-derived
-round-trip verification remain separately approved operations.
+round-trip verification have not completed.
 
 ## Release boundary
 
