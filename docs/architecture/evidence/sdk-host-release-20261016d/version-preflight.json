@@ -1,0 +1,19 @@
+{
+  "checkedDate": "2026-10-16",
+  "intendedTag": "sdk-v2.0.0",
+  "tagExists": false,
+  "registry": {
+    "core": {
+      "version2Exists": false,
+      "versionsChecked": 13
+    },
+    "browser": {
+      "version2Exists": false,
+      "versionsChecked": 13
+    },
+    "react": {
+      "version2Exists": false,
+      "versionsChecked": 13
+    }
+  }
+}

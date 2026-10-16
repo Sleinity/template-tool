@@ -1,5 +1,27 @@
 # SDK 2.0.0 host delivery and certification
 
+## Current delivery — candidate D, 2026-10-16
+
+**GO for publication approval:** immutable `sdk-2-host-20261016d` supersedes C.
+[The current certification packet](evidence/sdk-host-release-20261016d/certification.json)
+binds source commit `81802f6` to the new archive identities, fresh macOS/Linux
+npm/pnpm acceptance and a fresh GO renderer/scene/settlement run. All four fresh
+hosts passed 16 scenarios; five guide examples compile. The same 285 protected
+identities remain unchanged.
+
+Candidate C's publication simulation exposed current guides with static
+unpublished labels. D uses delivery-context notices and neutral package README
+wording. A new regression checks registry-derived documentation while preserving
+historical wording; all 22 delivery tests pass. Only the three README archive
+members differ from C; SDK runtime/declarations and starter bytes are identical.
+The current [Linux receipt](https://github.com/Sleinity/template-tool/actions/runs/38872727783)
+passed against D's exact frozen set. C and its evidence remain immutable.
+
+The intended tag remains `sdk-v2.0.0`; no publication or tagging has occurred.
+Publication-mode handoff generation and its installed-archive consumer passed
+with explicit simulation provenance. Final publication and registry-derived
+round-trip verification remain separately approved operations.
+
 ## Release boundary
 
 The prepared SDK targets **2.0.0**, following the user's approval on 2026-10-15.
@@ -72,9 +94,9 @@ certified archives remain protected. Publication preparation uses supplied froze
 artifacts, and publication/tagging remain a separately approved final operation.
 
 
-## Final certification — 2026-10-16
+## Candidate C certification — recorded 2026-10-16, superseded
 
-**GO for publication approval.** Candidate `sdk-2-host-20261015c` binds source
+This recorded C decision is superseded by D above; its original evidence remains unchanged. Candidate `sdk-2-host-20261015c` binds source
 commit `c82ff3254a0eeb8d6af595f71e2b0c1d08e6d2c1` and immutable delivery bytes.
 [The certification packet](evidence/sdk-host-release-20261016/certification.json)
 contains complete identities, checksums, commands, failures/retries and limitations.
@@ -112,7 +134,7 @@ preserved and are not the approved delivery.
 Automated acceptance is complete. Bas's personal review follows this handoff and
 is not a publication prerequisite.
 
-- Obtain candidate C (or its separately verified registry-derived release assets)
+- Obtain candidate D (or its separately verified registry-derived release assets)
   and verify the exact manifest and `SHA256SUMS`.
 - Follow [onboarding](../sdk/QUICKSTART.md), using the standalone starter and one
   package manager; bring authorized exporter 0.6.1 ZIPs and exact font binaries.

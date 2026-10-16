@@ -2,7 +2,7 @@
 
 ## SDK 2.0 host release certification — 2026-10-16
 
-[The host-delivery report](../architecture/sdk-host-onboarding.md) and [candidate packet](../architecture/evidence/sdk-host-release-20261016/certification.json) record GO for immutable candidate `sdk-2-host-20261015c`: macOS/Linux npm/pnpm acceptance, 24 stable captures, 12 renderer, three scene and 12 settlement comparisons, with individual current stored-source review. Published 1.0.0 and prior local packets remain unchanged. All 285 protected identities are unchanged; no renderer/API/schema change or reference promotion occurred in preparation. The intended tag is `sdk-v2.0.0`; publication/tagging and registry round-trip verification remain separately approved operations.
+[The host-delivery report](../architecture/sdk-host-onboarding.md) and [current candidate packet](../architecture/evidence/sdk-host-release-20261016d/certification.json) record GO for immutable `sdk-2-host-20261016d`: macOS/Linux npm/pnpm acceptance, 24 stable captures, 12 renderer, three scene and 12 settlement comparisons, with individual current stored-source review. D corrects publication-context documentation labels; SDK code/declarations and starter bytes are identical to C. Published 1.0.0 and prior packets remain unchanged. All 285 protected identities remain unchanged; no renderer/API/schema change or reference promotion occurred. The intended tag is `sdk-v2.0.0`; publication/tagging and registry round-trip verification remain separately approved operations.
 
 ## Family media readiness publication — 2026-10-15
 
