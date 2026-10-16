@@ -1,0 +1,395 @@
+{
+  "files": [
+    {
+      "file": "FROZEN-CANDIDATE.json.gz",
+      "bytes": 304743,
+      "sha256": "053da1a1b81d376ee661789dca8893fc4dd0b92fc7fc18c902917ad033b68062"
+    },
+    {
+      "file": "LOCAL-CANDIDATE-MANIFEST.json.gz",
+      "bytes": 250158,
+      "sha256": "4bcd450329f495bc292447bdd9b6775f46008e28f29be3f95882ed071745e5db"
+    },
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json.gz",
+      "bytes": 7636,
+      "sha256": "dd159b8e8e2c2d5bdc8944015e0dbcc4c6cbaecbb0736340fcc83946fc55284d"
+    },
+    {
+      "file": "SHA256SUMS",
+      "bytes": 388,
+      "sha256": "ae2f8cd3bf9da22ba9f00f03553e3e20aeeb10c446d9c9e47114c4cb0e198225"
+    },
+    {
+      "file": "certification-staging.json",
+      "bytes": 5624,
+      "sha256": "3c56781d3d086784b2fa2bea49cfb9b8490c6e5ef09e56679bbb17e8e44a67de"
+    },
+    {
+      "file": "certification.json",
+      "bytes": 9404,
+      "sha256": "7183db2f46dfa7f504a8782a8a5a8b2b75192565c7823d0826c8f73184798f27"
+    },
+    {
+      "file": "delivery-bundle.json",
+      "bytes": 2023,
+      "sha256": "a5215b9e28096b77dadacc9e4a2c04dfa039048c102fcffaba4a219465e1dd54"
+    },
+    {
+      "file": "exporter-061-carrousel-review.png",
+      "bytes": 323103,
+      "sha256": "3b3d97f7533000182740a8703ff3161327d13d2c4328d539d443a565acf57274"
+    },
+    {
+      "file": "exporter-061-cover-review.png",
+      "bytes": 463013,
+      "sha256": "4b1d51c07b2514a08ab98ba22161f5e9e1b2cde82c9d6f381509861768a56f8b"
+    },
+    {
+      "file": "exporter-061-now-hiring-review.png",
+      "bytes": 1212025,
+      "sha256": "2e60482ff7149e5c7dbb83b5094fdcb7ace61d5e49407dd9750802429c94ff05"
+    },
+    {
+      "file": "first-linux-failure.json",
+      "bytes": 4276,
+      "sha256": "06067fb05a7e3a30fe029b8ca8f7ba3412750434360fe297998b51f022e2d5ad"
+    },
+    {
+      "file": "gate-before-review.json",
+      "bytes": 30650,
+      "sha256": "54d3ceafc6eb94fb493e3c3dd6d58c9674480c5bda167263e378bb0e56268fef"
+    },
+    {
+      "file": "linux/npm/consumer/focused-example/report.json",
+      "bytes": 22633,
+      "sha256": "b4817433ab0c4a4c1c668f9d0cc14f9ba137b23a38975d50c30c43d8e9404a13"
+    },
+    {
+      "file": "linux/npm/fonts/verification.json",
+      "bytes": 94565,
+      "sha256": "5971896e96b4bd9accbaa4058f21ab1f28d1f2b5278709c245c800e277d724bc"
+    },
+    {
+      "file": "linux/npm/starter/install.txt",
+      "bytes": 26,
+      "sha256": "e2dbe4b7211dc3d301aa61e426f73497d7f7697a6065af2cbb30eb96e2f1bb1f"
+    },
+    {
+      "file": "linux/npm/starter/report.json",
+      "bytes": 3955,
+      "sha256": "c22ec0610ba029592df994d5462d815445806f5a060166a4741bf54698551f9b"
+    },
+    {
+      "file": "linux/npm/storage/real-upgrade.json",
+      "bytes": 13427,
+      "sha256": "751ed6bde5beb7bbaa8db871b8c134c71549aa6da275580ea42b7e8afeb6ba46"
+    },
+    {
+      "file": "linux/npm-consumer.log.txt.gz",
+      "bytes": 1104,
+      "sha256": "3021d2ee895894ab0860f330f6e3b105a2bd0670545b0f28103a7daba907f901"
+    },
+    {
+      "file": "linux/npm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "f765a92ef20705f11061f6b3b8a3ff74da8c43f375d7f1462fd849dd72dc9b0f"
+    },
+    {
+      "file": "linux/npm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "9c0f1a1b80d092816d29a6dc0d4e22edaa8cb3fbf74e36d124bbcb022be00590"
+    },
+    {
+      "file": "linux/npm-storage.log.txt.gz",
+      "bytes": 1079,
+      "sha256": "abd19aee7f9af32a0ff97e2f65258b63ecc502d1d5aef606388456125f5896c6"
+    },
+    {
+      "file": "linux/pnpm/consumer/focused-example/report.json",
+      "bytes": 22634,
+      "sha256": "a7a8c39acad9aec93e25c8c805854664480e98431bc74d9492295a82a9cae470"
+    },
+    {
+      "file": "linux/pnpm/fonts/verification.json",
+      "bytes": 95991,
+      "sha256": "7e274b376134862b9ec1062b50d539b8282d551e634233d05fae28e40bc0a2f2"
+    },
+    {
+      "file": "linux/pnpm/starter/install.txt",
+      "bytes": 729,
+      "sha256": "a6cacc5292ee46215a80f93297a655f1fa4071757ab389850d776a4ef5ffb324"
+    },
+    {
+      "file": "linux/pnpm/starter/report.json",
+      "bytes": 3956,
+      "sha256": "28cfb52afc7ee70c18667a647a8f51017492d8f1eef677e55974cb43a2afd458"
+    },
+    {
+      "file": "linux/pnpm/storage/real-upgrade.json",
+      "bytes": 13460,
+      "sha256": "5577d9fad6ad70d87c50b035b1841ac7a1cb2eb28b694c360ef69ad20a97a823"
+    },
+    {
+      "file": "linux/pnpm-consumer.log.txt.gz",
+      "bytes": 1104,
+      "sha256": "95e16f1cc5ffab703cd9d76d53deb3989f451e74d7e3430e2925b02323c9cb70"
+    },
+    {
+      "file": "linux/pnpm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "f765a92ef20705f11061f6b3b8a3ff74da8c43f375d7f1462fd849dd72dc9b0f"
+    },
+    {
+      "file": "linux/pnpm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "789082d53ec7647dbe7cfece3ae83a9f767f7ca50056f6f2e1a11f0205e3de03"
+    },
+    {
+      "file": "linux/pnpm-storage.log.txt.gz",
+      "bytes": 1090,
+      "sha256": "c2d5be34477afaa38d95e893d3b0b4ea28df6c67f676495cfac6e4000ec6c08e"
+    },
+    {
+      "file": "linux/report.json",
+      "bytes": 5173,
+      "sha256": "3d25c2714563ce6378f46f4e492a3979fe573034d553d71b094921425243a4ee"
+    },
+    {
+      "file": "linux-workflow.json",
+      "bytes": 4276,
+      "sha256": "461df8f87e57015a99cf12335f284c1ae5270a08c7c5198ae402d09d47e696f0"
+    },
+    {
+      "file": "macos/npm/consumer/focused-example/report.json",
+      "bytes": 22633,
+      "sha256": "e07f25f4ef7be5d76b9d90dea562a75dabc1db8fefca8423d34542778e88a8ad"
+    },
+    {
+      "file": "macos/npm/fonts/verification.json",
+      "bytes": 94607,
+      "sha256": "e49d67fcb3f83750b5f0eb03e376917aa5661b963a57c62df9db55513656a9c6"
+    },
+    {
+      "file": "macos/npm/starter/install.txt",
+      "bytes": 26,
+      "sha256": "d28b2d72aea84b0adfd78e35e05676750167e6f8157ddafed575b2fbe1803369"
+    },
+    {
+      "file": "macos/npm/starter/report.json",
+      "bytes": 3958,
+      "sha256": "82325188c16dfc2d5b7b3eb3d9d7ca4a9b22e79a3c8fe4a6599e39bdd128ee31"
+    },
+    {
+      "file": "macos/npm/storage/real-upgrade.json",
+      "bytes": 13415,
+      "sha256": "d9f0d2aca06ef2a108c96d367e6d9eaf9eb4d3f5e46fa975854f2ee9ca28ed1c"
+    },
+    {
+      "file": "macos/npm-consumer.log.txt.gz",
+      "bytes": 1091,
+      "sha256": "d894f67d0459c82ff8b5edaf64aaf2098cd65f771e92c05a089bb560c0ab7163"
+    },
+    {
+      "file": "macos/npm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "44cfbb206e2e39daa6f6d0682f3054c8e1952252d04c53b805d7f66cb5c600f1"
+    },
+    {
+      "file": "macos/npm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "9c0f1a1b80d092816d29a6dc0d4e22edaa8cb3fbf74e36d124bbcb022be00590"
+    },
+    {
+      "file": "macos/npm-storage.log.txt.gz",
+      "bytes": 1085,
+      "sha256": "054c302fdee1e2fac3d63725e928f9fb9434bfcd2553182981c3fb386b178d8e"
+    },
+    {
+      "file": "macos/pnpm/consumer/focused-example/report.json",
+      "bytes": 22635,
+      "sha256": "81d5c2049ad2444baf10741844589b4ae01703828d027f1c24fa619ee6ade54b"
+    },
+    {
+      "file": "macos/pnpm/fonts/verification.json",
+      "bytes": 93172,
+      "sha256": "3b7c3509c6ed8d4b13667b67152ad36bf65915ba3cbcb3494f8ed4bb7209a591"
+    },
+    {
+      "file": "macos/pnpm/starter/install.txt",
+      "bytes": 673,
+      "sha256": "6cf44bdf94fcf599b602290c4dec87c080396f429ac3cf62cab80ca6ee11d52e"
+    },
+    {
+      "file": "macos/pnpm/starter/report.json",
+      "bytes": 3959,
+      "sha256": "f7d59b969d3f22482a2ee729fc448bfcae88d7fd456a553b9effe8e3d488edb8"
+    },
+    {
+      "file": "macos/pnpm/storage/real-upgrade.json",
+      "bytes": 13420,
+      "sha256": "9882db7ceb44a4cf2df4f4da400b0ab81a421a2b9ff3c5b3ce10d8cdc6f9c583"
+    },
+    {
+      "file": "macos/pnpm-consumer.log.txt.gz",
+      "bytes": 1088,
+      "sha256": "89a1a002047ce87b6248f691c27edeea25bddfa6f048e160750ff740a31be393"
+    },
+    {
+      "file": "macos/pnpm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "44cfbb206e2e39daa6f6d0682f3054c8e1952252d04c53b805d7f66cb5c600f1"
+    },
+    {
+      "file": "macos/pnpm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "789082d53ec7647dbe7cfece3ae83a9f767f7ca50056f6f2e1a11f0205e3de03"
+    },
+    {
+      "file": "macos/pnpm-storage.log.txt.gz",
+      "bytes": 1083,
+      "sha256": "069ada0a372ffea8e0c0f1925c19ffc934a1f232691f984d06df7ce3d761930f"
+    },
+    {
+      "file": "macos/report.json",
+      "bytes": 5514,
+      "sha256": "13be24ff4c66601c12330036eee1f028ef8c192ae232eb7c19179731015fce8e"
+    },
+    {
+      "file": "publication-consumer.json",
+      "bytes": 22634,
+      "sha256": "9ece1adaaee5c57d0e3864f026356325b2362914bccbe842592e4b2be100a8b0"
+    },
+    {
+      "file": "publication-upload-inventory.txt",
+      "bytes": 3150,
+      "sha256": "44f59501c1377904e9ef04f255eeb2b0c30241a786804ff54eba850f79eb5fcf"
+    },
+    {
+      "file": "review-binding.mjs.txt",
+      "bytes": 10632,
+      "sha256": "3b0f42e53c2e6d97af7f2fb803c60457041313fc1534158700b7bbdbee086389"
+    },
+    {
+      "file": "sdk-2-api.log.txt.gz",
+      "bytes": 122,
+      "sha256": "a22e81826f2c174c686eb4e5122c4d62abc7954564d1c3348d9b8fe831fe5d1b"
+    },
+    {
+      "file": "sdk-2-boundaries.log.txt.gz",
+      "bytes": 96,
+      "sha256": "6d6956f59c426a452caa825fd077988f6318bfd660c182f43688d7a07f0853bc"
+    },
+    {
+      "file": "sdk-2-cert-macos-c.log.txt.gz",
+      "bytes": 81,
+      "sha256": "af7d41f471363674c8fed2cacc0501ea818a320e3bd51a141b2d263ef29ad3ab"
+    },
+    {
+      "file": "sdk-2-ci-preparation-c.log.txt.gz",
+      "bytes": 192,
+      "sha256": "b19d7dcd6e1d4e45ea0f8a4923d9873e087933a26bdcdf5bc54c15a8cce06f06"
+    },
+    {
+      "file": "sdk-2-delivery-tests-final-c.log.txt.gz",
+      "bytes": 1255,
+      "sha256": "7ec920cf40c8fa18930294d0a8f341255bc36bc206b0b7be972240c9f54f142a"
+    },
+    {
+      "file": "sdk-2-docs-final-c.log.txt.gz",
+      "bytes": 111,
+      "sha256": "c2534011ffc88eebd69941d986b43f7aba81a7f27a2a713513a4bc7cc0c8a647"
+    },
+    {
+      "file": "sdk-2-example-build.log.txt.gz",
+      "bytes": 719,
+      "sha256": "3dead8e861d57778e41c85467cf8c0952aa1ac870b38ef5f813b7904b00d9b45"
+    },
+    {
+      "file": "sdk-2-final-handoff-audit.log.txt.gz",
+      "bytes": 102,
+      "sha256": "cf8c863d77f4f0af7be20a75eac426ba295d8792ec01e5de966f98019ea11d89"
+    },
+    {
+      "file": "sdk-2-final-handoff-docs.log.txt.gz",
+      "bytes": 112,
+      "sha256": "bfb643b7935bad5db882dc08100975399fc0ee2b8c0209e9dfe9963135f96e38"
+    },
+    {
+      "file": "sdk-2-portable.log.txt.gz",
+      "bytes": 2174,
+      "sha256": "3295d617517936a84c02b86609d52e01a99bf0b14ca99358f3da553e893b1d71"
+    },
+    {
+      "file": "sdk-2-publication-consumer-c.log.txt.gz",
+      "bytes": 1081,
+      "sha256": "3f271fba9d421968f2ef469f48096292f0b923f23eca8828b4c760f79cbc45af"
+    },
+    {
+      "file": "sdk-2-publication-preparation-c.log.txt.gz",
+      "bytes": 63,
+      "sha256": "444ec818e3d4a62b3f1c73d3db7f504f884e2ad29c5f6f910a7e2f3423878007"
+    },
+    {
+      "file": "sdk-2-release-contract-final.log.txt.gz",
+      "bytes": 147,
+      "sha256": "9b4b9ec9afb47b7428b1e66f04401b71027b26e093559f823deed120c69aa1f1"
+    },
+    {
+      "file": "sdk-2-renderer-assess-c.log.txt.gz",
+      "bytes": 760,
+      "sha256": "f5a6715ea6e9be916b8107f2c94c79a0a61da2d3f2f82334b0c012d8c1ed4696"
+    },
+    {
+      "file": "sdk-2-renderer-gate-c.log.txt.gz",
+      "bytes": 1188,
+      "sha256": "42ee0f239c052dfc880b5b73f820a777dcca3c8ff8921042eb90ad3ee54bbc3e"
+    },
+    {
+      "file": "sdk-2-repository-audit.log.txt.gz",
+      "bytes": 103,
+      "sha256": "fd30e417a75c687a29a556eb7e5683f2fc57531a20afbd7848744aa737907670"
+    },
+    {
+      "file": "sdk-2-sdk-verify-b.log.txt.gz",
+      "bytes": 3032,
+      "sha256": "6c01243c9a28dac1643ab02a7efb66f047861e6f6ddfb5ccf31d800faa66f0a4"
+    },
+    {
+      "file": "sdk-2-strict.log.txt.gz",
+      "bytes": 2221,
+      "sha256": "1f24da3667940dac75fb42e37218f0d2a6ede839bee10ad3391ddd6c731e0319"
+    },
+    {
+      "file": "sdk-2-studio-build.log.txt.gz",
+      "bytes": 2723,
+      "sha256": "2b0805b8081dd2bf22c4e93ff3a551ce1985ca407e750a3b1c06e36af27ff31d"
+    },
+    {
+      "file": "sdk-2-studio-types.log.txt.gz",
+      "bytes": 20,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "file": "sdk-2-types.log.txt.gz",
+      "bytes": 165,
+      "sha256": "9b5026c3a3ca07a839c45c55e9346cc8147ee2b144ecb2e0a7f471029d2d8bef"
+    },
+    {
+      "file": "sdk-gate.json",
+      "bytes": 59003,
+      "sha256": "5138ea7b0f009f45e9b6cff4e66a6f5728ee4bf18570e864f69e36f9b67d7e5e"
+    },
+    {
+      "file": "source-review.json",
+      "bytes": 37865,
+      "sha256": "2563ac3b0852948d15e47f1d12573cf3df39eb40d890127ef327839ff7efa6cb"
+    },
+    {
+      "file": "version-preflight.json",
+      "bytes": 364,
+      "sha256": "5bb285792958d7289c5e928d5e6cf721ca69432e449fdc5d74c9e770cc21def3"
+    }
+  ],
+  "policy": "Compact verification/source-review evidence only; no private exporter ZIP/font binaries or credentials."
+}

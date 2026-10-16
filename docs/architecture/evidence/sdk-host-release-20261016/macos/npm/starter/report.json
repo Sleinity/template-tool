@@ -1,0 +1,134 @@
+{
+  "status": "pass",
+  "manager": "npm",
+  "node": "v22.23.3",
+  "platform": "darwin",
+  "arch": "arm64",
+  "browser": "149.0.7827.55",
+  "deliveryManifestSha256": "c0e8f07d767abfa242b374c4edcf46e6cbcab0f6918b2417e45b860ac6d93b63",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "name": "@sleinity/template-core",
+      "version": "2.0.0",
+      "bytes": 486995,
+      "sha256": "6e5fb1d7903b84a5c054c57ef47dda5996549f2911ff586d7d802b1c86f3ff59"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "name": "@sleinity/template-browser",
+      "version": "2.0.0",
+      "bytes": 277334,
+      "sha256": "a909847f487e8e27a5e2af1b633b28d429648cf07a4d73baf9fc8048ee14025a"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "name": "@sleinity/template-react",
+      "version": "2.0.0",
+      "bytes": 212929,
+      "sha256": "36d420401b6a3a1f728cab8e2f2b912e6cfcec7357289160b28cc638656bcc1e"
+    }
+  ],
+  "starterSha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770",
+  "fixtures": [
+    {
+      "id": "exporter-061-now-hiring",
+      "sha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+    },
+    {
+      "id": "exporter-061-cover",
+      "sha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+    },
+    {
+      "id": "exporter-061-carrousel",
+      "sha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "geist-mono-500-normal",
+      "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25"
+    },
+    {
+      "id": "inter-tight-700-normal",
+      "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28"
+    },
+    {
+      "id": "rethink-sans-600-normal",
+      "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be"
+    },
+    {
+      "id": "funnel-display-400-normal",
+      "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99"
+    }
+  ],
+  "checks": [
+    {
+      "scenario": "unmodified-extracted-install-and-build",
+      "status": "pass"
+    },
+    {
+      "scenario": "corrupt-and-mismatched-font-block-before-exact-correction",
+      "status": "pass"
+    },
+    {
+      "scenario": "single-exact-zip-font-preparation",
+      "status": "pass"
+    },
+    {
+      "scenario": "seven-typed-controls-invalid-number-choices-both-modes-crop-reset",
+      "status": "pass",
+      "configuredDerivative": true
+    },
+    {
+      "scenario": "library-write-failure-preserves-editor-and-retries",
+      "status": "pass"
+    },
+    {
+      "scenario": "saved-library-survives-lease-start-failure-and-explicit-retry",
+      "status": "pass"
+    },
+    {
+      "scenario": "save-reload-resume-assets-and-fonts",
+      "status": "pass"
+    },
+    {
+      "scenario": "offline-reopen-after-app-load",
+      "status": "pass"
+    },
+    {
+      "scenario": "recovery-write-failure-manual-retry",
+      "status": "pass"
+    },
+    {
+      "scenario": "failed-import-preserves-accepted-work",
+      "status": "pass"
+    },
+    {
+      "scenario": "mixed-family-batch-blocked-atomically-and-cancelled",
+      "status": "pass"
+    },
+    {
+      "scenario": "three-source-family-selection-and-save",
+      "status": "pass"
+    },
+    {
+      "scenario": "current-family-png-completes-only-own-recovery",
+      "status": "pass"
+    },
+    {
+      "scenario": "cleanup-only-retry-no-second-export",
+      "status": "pass"
+    },
+    {
+      "scenario": "superseded-tab-cannot-write-current-token-and-current-owner-discards",
+      "status": "pass"
+    },
+    {
+      "scenario": "strictmode-root-unmount-disposes-owned-native-session",
+      "status": "pass"
+    }
+  ],
+  "coverage": "automated actual extracted application; build-local test observation; no workspace SDK aliases or Studio modules; offline reopening after app load, not offline app bootstrap",
+  "published": false
+}

@@ -1,8 +1,8 @@
 # Property-Authority Inventory
 
-## SDK 2.0 host release preparation — 2026-10-15
+## SDK 2.0 host release certification — 2026-10-16
 
-[The host-delivery report](../architecture/sdk-host-onboarding.md) records the current 2.0.0 target, documentation and complete starter. Published 1.0.0 and earlier local certification packets remain immutable historical identities. No renderer, public API or schema behavior changes in this preparation milestone. Fresh archive-bound certification is pending; earlier GO decisions do not certify these new delivery bytes.
+[The host-delivery report](../architecture/sdk-host-onboarding.md) and [candidate packet](../architecture/evidence/sdk-host-release-20261016/certification.json) record GO for immutable candidate `sdk-2-host-20261015c`: macOS/Linux npm/pnpm acceptance, 24 stable captures, 12 renderer, three scene and 12 settlement comparisons, with individual current stored-source review. Published 1.0.0 and prior local packets remain unchanged. All 285 protected identities are unchanged; no renderer/API/schema change or reference promotion occurred in preparation. The intended tag is `sdk-v2.0.0`; publication/tagging and registry round-trip verification remain separately approved operations.
 
 ## Family media readiness publication — 2026-10-15
 

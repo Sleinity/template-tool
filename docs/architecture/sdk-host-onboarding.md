@@ -70,3 +70,58 @@ renderer/scene/settlement gate. Packing keeps `not-yet-verified`; the certificat
 decision is recorded separately. Reference/fixture/font identities and previous
 certified archives remain protected. Publication preparation uses supplied frozen
 artifacts, and publication/tagging remain a separately approved final operation.
+
+
+## Final certification — 2026-10-16
+
+**GO for publication approval.** Candidate `sdk-2-host-20261015c` binds source
+commit `c82ff3254a0eeb8d6af595f71e2b0c1d08e6d2c1` and immutable delivery bytes.
+[The certification packet](evidence/sdk-host-release-20261016/certification.json)
+contains complete identities, checksums, commands, failures/retries and limitations.
+The packing/delivery manifests deliberately retain `not-yet-verified`; certification
+is a separate record and does not modify them.
+
+macOS arm64 and Linux x64 passed the same archive set under Node 22.23.3/pnpm
+11.9.0. Each platform passed npm and pnpm fresh hosts, installed consumers,
+font authority and storage/Retry gates. All four fresh applications passed 16
+scenarios, including actual root unmount; five delivered guide examples compile.
+[Linux workflow receipt](https://github.com/Sleinity/template-tool/actions/runs/38756093269)
+records the isolated source snapshot and successful run.
+
+Run `sdk-2-host-20261015c` is GO: 24 stable captures, 12 renderer comparisons,
+three scene comparisons and 12 settlement comparisons. The source-review packet
+records individual current-run decisions after personally reviewing stored sheets
+of the exact source and four surfaces. Earlier raster reviews are explicitly
+supplementary; current outputs are byte-identical. The prior disposition is
+archived. All 285 protected fixture/font/reference identities remain unchanged.
+
+The publication handoff generator, verifier, upload inventory and installed npm
+consumer passed using these frozen SDK archives with explicit simulation
+provenance. No upload, registry publication or tag was performed. The intended
+new tag is **`sdk-v2.0.0`**. The final evidence-only commit is the proposed release
+commit; it must still pass frozen source-scope verification. Previous published
+1.0.0 and local candidate archives/documentation remain unchanged.
+
+Candidate A's Linux failure exposed timezone-dependent ZIP metadata; a three-zone
+regression now proves deterministic starter bytes. Candidate B was superseded
+before freezing by the completed documentation/starter corrections. Both remain
+preserved and are not the approved delivery.
+
+## Bas handoff checklist
+
+Automated acceptance is complete. Bas's personal review follows this handoff and
+is not a publication prerequisite.
+
+- Obtain candidate C (or its separately verified registry-derived release assets)
+  and verify the exact manifest and `SHA256SUMS`.
+- Follow [onboarding](../sdk/QUICKSTART.md), using the standalone starter and one
+  package manager; bring authorized exporter 0.6.1 ZIPs and exact font binaries.
+- Exercise his application's single/Family inputs, styling and injected adapters;
+  preserve native validation, resource ownership and export guards.
+- Review [features](../sdk/FEATURES.md), [operations](../sdk/OPERATION_OUTCOMES.md),
+  [Studio reuse](../sdk/STUDIO_REFERENCE.md) and the [post-release redesign handoff](../sdk/STUDIO_REDESIGN_HANDOFF.md).
+
+Coverage remains automated Chromium on macOS/Linux plus stored-capture review;
+no manual live/accessibility or Bas review is claimed. Offline checks restore
+saved content after the application loads; no service-worker bootstrap is supplied.
+The Studio redesign, component extraction and further optimization remain separate.

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "sdk-host-release-certification-v1",
+  "recordedDate": "2026-10-16",
+  "decision": "GO",
+  "readyForPublicationApproval": true,
+  "version": "2.0.0",
+  "intendedTag": "sdk-v2.0.0",
+  "published": false,
+  "tagCreated": false,
+  "candidateDirectory": "release-verification-artifacts/sdk-2-host-20261015c",
+  "candidateId": "unpublished-2.0.0-827f7d8bcb45950b8bf310da780634bf1fbfc1900110782dc400f69698bc6657",
+  "sourceCommit": "c82ff3254a0eeb8d6af595f71e2b0c1d08e6d2c1",
+  "creationSourceFiles": 4723,
+  "creationSourceSha256": "827f7d8bcb45950b8bf310da780634bf1fbfc1900110782dc400f69698bc6657",
+  "certifiedSourceSha256": "4b51eab53e538cde6d8b7de9ca7b523ffc12091239a36ff6ef7417e2598f05e2",
+  "certifiedSourceFiles": 1055,
+  "frozenManifestSha256": "65de7eab047ad20ae7264f612dc3e9c9f4905b0dee25d575b463cc4a59845cd7",
+  "deliveryManifestSha256": "c0e8f07d767abfa242b374c4edcf46e6cbcab0f6918b2417e45b860ac6d93b63",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "name": "@sleinity/template-core",
+      "version": "2.0.0",
+      "bytes": 486995,
+      "sha256": "6e5fb1d7903b84a5c054c57ef47dda5996549f2911ff586d7d802b1c86f3ff59"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "name": "@sleinity/template-browser",
+      "version": "2.0.0",
+      "bytes": 277334,
+      "sha256": "a909847f487e8e27a5e2af1b633b28d429648cf07a4d73baf9fc8048ee14025a"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "name": "@sleinity/template-react",
+      "version": "2.0.0",
+      "bytes": 212929,
+      "sha256": "36d420401b6a3a1f728cab8e2f2b912e6cfcec7357289160b28cc638656bcc1e"
+    }
+  ],
+  "starter": {
+    "file": "SDK-HOST-STARTER.zip",
+    "bytes": 20477,
+    "sha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770"
+  },
+  "gate": {
+    "runId": "sdk-2-host-20261015c",
+    "go": true,
+    "stableCaptures": 24,
+    "rendererComparisons": 12,
+    "sceneComparisons": 3,
+    "settlementComparisons": 12,
+    "sourceReview": "source-review.json"
+  },
+  "platformAcceptance": {
+    "macos": {
+      "status": "pass",
+      "node": "v22.23.3",
+      "arch": "arm64",
+      "groups": 8,
+      "report": "macos/report.json"
+    },
+    "linux": {
+      "status": "pass",
+      "node": "v22.23.3",
+      "arch": "x64",
+      "groups": 8,
+      "report": "linux/report.json",
+      "workflow": "https://github.com/Sleinity/template-tool/actions/runs/38756093269",
+      "sourceSnapshotCommit": "b10fce372e476dbd6fa67742ddf8b7adb0917829"
+    }
+  },
+  "freshHost": {
+    "scenarioCountPerRun": 16,
+    "runs": [
+      "macos/npm",
+      "macos/pnpm",
+      "linux/npm",
+      "linux/pnpm"
+    ],
+    "starterHashEqualAcrossRuns": true,
+    "pnpm": "11.9.0",
+    "browser": "Chromium 149.0.7827.55",
+    "literalGuideExamplesCompiled": 5
+  },
+  "checks": [
+    {
+      "command": "pnpm test:portable",
+      "status": "pass",
+      "evidence": "sdk-2-portable.log.txt.gz",
+      "logSha256": "cde9339c8367d4ec86730fd5184d17786dd0d5c83c813cf01f80a5a1f4318e0e",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm test:realistic-zip",
+      "status": "pass",
+      "evidence": "sdk-2-strict.log.txt.gz",
+      "logSha256": "7837797e2ee43325aff9ffb7401a0841b7ba8c564dd06786e6d53df6e9b651c2",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm packages:typecheck",
+      "status": "pass",
+      "evidence": "sdk-2-types.log.txt.gz",
+      "logSha256": "14a8dd794206b6204c016b4fb8b7d56650f386f78cd00641be7afb06973dac5e",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm exec tsc -b --pretty false",
+      "status": "pass",
+      "evidence": "sdk-2-studio-types.log.txt.gz",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm build",
+      "status": "pass",
+      "evidence": "sdk-2-studio-build.log.txt.gz",
+      "logSha256": "ba9169ec304a6d75446016c43f970014a8575258007f078f374bc4a1d48bbdd2",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm example:build",
+      "status": "pass",
+      "evidence": "sdk-2-example-build.log.txt.gz",
+      "logSha256": "e23c5c27b4c593e01c88d7d8e6346e3e466fe412204c97b42d7a1db1f9ce98ad",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm api:contract",
+      "status": "pass",
+      "evidence": "sdk-2-api.log.txt.gz",
+      "logSha256": "0f8a13ddf612786aafbefc722613150b1cf439c76f72b0bfed6d398cb8e01cc3",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm boundaries:check",
+      "status": "pass",
+      "evidence": "sdk-2-boundaries.log.txt.gz",
+      "logSha256": "357b05d56b495eb176840c0b69c66a0ad9857d0b95e98f95d7c5ec64a5b6b8d3",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm sdk:verify",
+      "status": "pass",
+      "evidence": "sdk-2-sdk-verify-b.log.txt.gz",
+      "logSha256": "fdb44a1a5632ad9aeb34b0d658d67ae7f2ac86b7ab7dd691646fcebf79a89330",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "node --test scripts/release-delivery/*.test.mjs scripts/candidate-certification/frozen.test.mjs",
+      "status": "pass",
+      "evidence": "sdk-2-delivery-tests-final-c.log.txt.gz",
+      "logSha256": "a5a43a74c27b92bbd908ad0e66e761efd73bf4d936ad24a6d3eee4eb5dc40029",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm docs:verify",
+      "status": "pass",
+      "evidence": "sdk-2-docs-final-c.log.txt.gz",
+      "logSha256": "8efd60a7cff068c2fd6b383275c144dacb05f273104ad88e375d6aeca3eab287",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm release:contract",
+      "status": "pass",
+      "evidence": "sdk-2-release-contract-final.log.txt.gz",
+      "logSha256": "16dbe15ccc0b0d897bf1a41550c8268c3886e49c6ef94ec7536ac528a69c3942",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    },
+    {
+      "command": "pnpm repository:audit",
+      "status": "pass",
+      "evidence": "sdk-2-repository-audit.log.txt.gz",
+      "logSha256": "3238860b4e75250452846ac95819eef7a0ad6518974982e143ccef76f8cb0e1f",
+      "scope": "Current runtime source/contract; later starter/docs corrections covered by final frozen host gates."
+    }
+  ],
+  "publicationPreparation": {
+    "status": "pass",
+    "provenance": "test-simulation",
+    "archivesEqualToFrozen": true,
+    "deliveryFiles": 49,
+    "checkedLinks": 188,
+    "installedArchiveConsumer": "pass",
+    "uploadInventoryGenerated": true,
+    "uploadExecuted": false,
+    "registryRoundTrip": "Deferred until separately approved publication"
+  },
+  "nonFinalAttempts": [
+    {
+      "candidate": "sdk-2-host-20261015a",
+      "linuxRun": "38754209679",
+      "outcome": "Failed before fixture decryption: ZIP local-clock timestamp differed by builder timezone. Preserved; corrected and independently tested in three timezones."
+    },
+    {
+      "candidate": "sdk-2-host-20261015b",
+      "outcome": "Superseded before freezing by final inspection/motion recipes, starter draft visibility/unmount coverage and installed-package links."
+    },
+    {
+      "check": "First broad SDK verification",
+      "outcome": "Shared build-output race caused missing declarations; the clean sequential SDK verification passed."
+    }
+  ],
+  "protectedIdentitiesUnchanged": 285,
+  "previousCandidateArchivesAndDocumentsUnchanged": true,
+  "evidenceClasses": {
+    "automatedBrowser": true,
+    "personallyReviewedStoredCaptureSheets": true,
+    "manualLiveInteractionReview": false,
+    "manualAccessibilityReview": false,
+    "BasPersonalReview": false,
+    "referencePromotion": false
+  },
+  "limitations": [
+    "Chromium acceptance only; no Safari/Firefox certification.",
+    "Offline template restoration after application load, not offline application bootstrap.",
+    "Choice/crop configurations used for supplemental control coverage are derivatives, not additional exporter certifications.",
+    "No new optimization or general performance claim.",
+    "Publication/tagging and post-publication registry-derived verification require separate approval."
+  ],
+  "finalCommitPolicy": "The final certification commit may add only evidence, source-review dispositions and non-delivered programme status/handoff text. Frozen source-scope validation must pass at the proposed tag target; shipped source/delivery corrections require a new candidate."
+}

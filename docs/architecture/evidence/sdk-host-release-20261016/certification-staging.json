@@ -1,0 +1,128 @@
+{
+  "review": "Evidence/dispositions and non-delivered programme status only. Frozen certified source/delivery unchanged. Excludes this staging inventory and the evidence inventory to avoid recursive hashes.",
+  "candidateSourceCommit": "c82ff3254a0eeb8d6af595f71e2b0c1d08e6d2c1",
+  "files": [
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm-consumer.log.txt.gz",
+      "bytes": 1104,
+      "sha256": "3021d2ee895894ab0860f330f6e3b105a2bd0670545b0f28103a7daba907f901"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "f765a92ef20705f11061f6b3b8a3ff74da8c43f375d7f1462fd849dd72dc9b0f"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "9c0f1a1b80d092816d29a6dc0d4e22edaa8cb3fbf74e36d124bbcb022be00590"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm-storage.log.txt.gz",
+      "bytes": 1079,
+      "sha256": "abd19aee7f9af32a0ff97e2f65258b63ecc502d1d5aef606388456125f5896c6"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm/fonts/verification.json",
+      "bytes": 94565,
+      "sha256": "5971896e96b4bd9accbaa4058f21ab1f28d1f2b5278709c245c800e277d724bc"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/npm/storage/real-upgrade.json",
+      "bytes": 13427,
+      "sha256": "751ed6bde5beb7bbaa8db871b8c134c71549aa6da275580ea42b7e8afeb6ba46"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm-consumer.log.txt.gz",
+      "bytes": 1104,
+      "sha256": "95e16f1cc5ffab703cd9d76d53deb3989f451e74d7e3430e2925b02323c9cb70"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "f765a92ef20705f11061f6b3b8a3ff74da8c43f375d7f1462fd849dd72dc9b0f"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "789082d53ec7647dbe7cfece3ae83a9f767f7ca50056f6f2e1a11f0205e3de03"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm-storage.log.txt.gz",
+      "bytes": 1090,
+      "sha256": "c2d5be34477afaa38d95e893d3b0b4ea28df6c67f676495cfac6e4000ec6c08e"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm/fonts/verification.json",
+      "bytes": 95991,
+      "sha256": "7e274b376134862b9ec1062b50d539b8282d551e634233d05fae28e40bc0a2f2"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/linux/pnpm/storage/real-upgrade.json",
+      "bytes": 13460,
+      "sha256": "5577d9fad6ad70d87c50b035b1841ac7a1cb2eb28b694c360ef69ad20a97a823"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm-consumer.log.txt.gz",
+      "bytes": 1091,
+      "sha256": "d894f67d0459c82ff8b5edaf64aaf2098cd65f771e92c05a089bb560c0ab7163"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "44cfbb206e2e39daa6f6d0682f3054c8e1952252d04c53b805d7f66cb5c600f1"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "9c0f1a1b80d092816d29a6dc0d4e22edaa8cb3fbf74e36d124bbcb022be00590"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm-storage.log.txt.gz",
+      "bytes": 1085,
+      "sha256": "054c302fdee1e2fac3d63725e928f9fb9434bfcd2553182981c3fb386b178d8e"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm/fonts/verification.json",
+      "bytes": 94607,
+      "sha256": "e49d67fcb3f83750b5f0eb03e376917aa5661b963a57c62df9db55513656a9c6"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/npm/storage/real-upgrade.json",
+      "bytes": 13415,
+      "sha256": "d9f0d2aca06ef2a108c96d367e6d9eaf9eb4d3f5e46fa975854f2ee9ca28ed1c"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm-consumer.log.txt.gz",
+      "bytes": 1088,
+      "sha256": "89a1a002047ce87b6248f691c27edeea25bddfa6f048e160750ff740a31be393"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm-fonts.log.txt.gz",
+      "bytes": 344,
+      "sha256": "44cfbb206e2e39daa6f6d0682f3054c8e1952252d04c53b805d7f66cb5c600f1"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm-fresh-starter.log.txt.gz",
+      "bytes": 62,
+      "sha256": "789082d53ec7647dbe7cfece3ae83a9f767f7ca50056f6f2e1a11f0205e3de03"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm-storage.log.txt.gz",
+      "bytes": 1083,
+      "sha256": "069ada0a372ffea8e0c0f1925c19ffc934a1f232691f984d06df7ce3d761930f"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm/fonts/verification.json",
+      "bytes": 93172,
+      "sha256": "3b7c3509c6ed8d4b13667b67152ad36bf65915ba3cbcb3494f8ed4bb7209a591"
+    },
+    {
+      "file": "docs/architecture/evidence/sdk-host-release-20261016/macos/pnpm/storage/real-upgrade.json",
+      "bytes": 13420,
+      "sha256": "9882db7ceb44a4cf2df4f4da400b0ab81a421a2b9ff3c5b3ce10d8cdc6f9c583"
+    }
+  ],
+  "privateInputsIncluded": false,
+  "referencePromotion": false
+}

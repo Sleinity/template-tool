@@ -1,43 +1,43 @@
 {
-  "environmentSha256": "71a1b9277636f7efafbeb34e787d8699bf5f7f5ed79862c3b04f99875960bbd5",
+  "environmentSha256": "c13b9e7412b78e053d60a1544c225f9b02bb7a7681dea368925425a99cc95bca",
   "fixtures": [
     {
       "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
       "id": "exporter-061-now-hiring",
       "scene": {
-        "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+        "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
         "comparison": "pass",
         "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
-        "reviewerRationale": "Current exact source has 11 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference.",
+        "reviewerRationale": "All 11 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current.",
         "sourceReview": "reviewed-source-faithful"
       },
       "settlement": {
         "editor": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -45,45 +45,45 @@
         "editor": {
           "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-now-hiring/editor",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-now-hiring/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. The fitted editor preserves composition under the recorded camera history. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
           "candidatePngSha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-now-hiring/fields",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-now-hiring/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. Field outlines are inspection UI and absent from PNG. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
           "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-now-hiring/png-export",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-now-hiring/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. The source-sized PNG contains no inspection/application UI. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
           "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-now-hiring/validate",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-now-hiring/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the photo retains its subject and aspect, NOW/HIRING badges occupy the source corners, and headline/body/CTA retain their text, wrapping, hierarchy and olive/yellow paints. Current source-sized PNG differs from the source at the same 340 comparator pixels documented by the prior source review; exact managed font identities, source bounds and current placement evidence support retaining that bounded raster difference. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. Bounds-first scaled inspection remains intentional. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -94,39 +94,39 @@
       "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
       "id": "exporter-061-cover",
       "scene": {
-        "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+        "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
         "comparison": "pass",
         "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
-        "reviewerRationale": "Current exact source has 28 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned.",
+        "reviewerRationale": "All 28 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border.",
         "sourceReview": "reviewed-source-faithful"
       },
       "settlement": {
         "editor": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -134,45 +134,45 @@
         "editor": {
           "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-cover/editor",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-cover/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. The fitted editor preserves composition under the recorded camera history. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
           "candidatePngSha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-cover/fields",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-cover/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. Field outlines are inspection UI and absent from PNG. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
           "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-cover/png-export",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-cover/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. The source-sized PNG contains no inspection/application UI. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
           "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-cover/validate",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-cover/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the phone/hand, continuous dark footer fade, open SVG arrow inside the white circle, outlined Swipe control and footer wordmark are present with the source hierarchy. Exact source-sized PNG has the previously reviewed 2830 comparator pixels of text/image raster differences. The source-indexed SOLID/IMAGE/DARKEN owner and single vector stroke remain visible; no hard image edge or duplicate arrow border has returned. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. Bounds-first scaled inspection remains intentional. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -183,39 +183,39 @@
       "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
       "id": "exporter-061-carrousel",
       "scene": {
-        "cause": "Current semantic/provenance evidence equals the unchanged approved scene.",
+        "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
         "comparison": "pass",
         "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
-        "reviewerRationale": "Current exact source has 26 nodes. Source IDs and exported bounds were cross-checked on each surface; scene comparison passes. Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior.",
+        "reviewerRationale": "All 26 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale.",
         "sourceReview": "reviewed-source-faithful"
       },
       "settlement": {
         "editor": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with editor's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with fields's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with png-export's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
-          "cause": "Current same-run observational settlement equals the unchanged approved bundle.",
+          "cause": "Current same-run observational settlement equals unchanged approved evidence.",
           "comparison": "pass",
           "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
-          "reviewerRationale": "Reviewed with validate's current source/geometry/media evidence and exact fonts. No new settlement authority is inferred; Carrousel retains ADR 0092 declared mask-scope evidence.",
+          "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -223,45 +223,45 @@
         "editor": {
           "candidatePngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-carrousel/editor",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-carrousel/editor",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The fitted editor capture retains source composition under its recorded viewport/camera history. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. The fitted editor preserves composition under the recorded camera history. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "fields": {
           "candidatePngSha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-carrousel/fields",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-carrousel/fields",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The field inspection outlines are intentional UI evidence and absent from export. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. Field outlines are inspection UI and absent from PNG. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "png-export": {
           "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-carrousel/png-export",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-carrousel/png-export",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The source-sized export has no inspection outlines or application UI. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. The source-sized PNG contains no inspection/application UI. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         },
         "validate": {
           "candidatePngSha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
           "capture": "complete-stable",
-          "cause": "Current stored-source review supports this surface; no new visual/data difference.",
+          "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
           "comparison": "pass",
-          "evidence": "fidelity/candidates/sdk-f7-readiness-20261015/exporter-061-carrousel/validate",
-          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-v2-optimized-20261015.json",
+          "evidence": "fidelity/candidates/sdk-2-host-20261015c/exporter-061-carrousel/validate",
+          "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-f7-readiness-20261015.json",
           "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-          "reviewerRationale": "Personally inspected the exact embedded preview and all four current stored captures: the rotated central image, two partially clipped thumbnails, discount/subtitle badges, two-column layout, headline, CTA and footer retain source intent. The source spelling in-storeee is preserved. The declared rectangular mask and current CROP/FILL evidence retain distinct roles. Source-sized PNG retains the previously reviewed 1817 comparator-pixel difference; the R07 viewport-history raster rationale remains bounded to its documented native sampling behavior. The bounds-first scaled inspection presentation was reviewed independently. All exported source bounds match by deep equality, fonts are exact and assets decode. Prior run sdk-v2-optimized-20261015 has byte-identical output, retained explicitly as supplementary historical evidence, with independently verified unchanged output; the Family-only runtime delta is bound to the retained candidate checkpoint. This is a new current-run decision, not transferred approval.",
+          "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. Bounds-first scaled inspection remains intentional. Prior run sdk-f7-readiness-20261015 is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
           "sourceReview": "reviewed-source-faithful"
         }
       },
@@ -271,6 +271,6 @@
   ],
   "gate": "sdk-061",
   "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
-  "runId": "sdk-f7-readiness-20261015",
+  "runId": "sdk-2-host-20261015c",
   "schemaVersion": "sdk-061-dispositions-v1"
 }
