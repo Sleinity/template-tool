@@ -41,6 +41,10 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Verify candidate before decrypting fixtures
         run: node scripts/candidate-certification/frozen.mjs verify "$RUNNER_TEMP/candidate-inputs/archives" --sources
+      - name: Verify the clean checkout portable gate
+        run: pnpm ci:portable
+      - name: Verify release input and publication contracts
+        run: node --test scripts/candidate-certification/*.test.mjs scripts/release-delivery/*.test.mjs
       - name: Restore authenticated exact fixtures
         run: node scripts/candidate-certification/fixtures.mjs restore "$RUNNER_TEMP/candidate-inputs/fixtures.enc" "$RUNNER_TEMP/sdk-fixtures"
         env:
@@ -48,6 +52,10 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - name: Functional acceptance of supplied archives only
         run: node scripts/candidate-certification/run.mjs --archives "$RUNNER_TEMP/candidate-inputs/archives" --output "$RUNNER_TEMP/candidate-results"
+      - name: Rehearse both prepublication reference entry commands
+        run: |
+          node scripts/repository/verify-template-editor-reference.mjs --archives "$RUNNER_TEMP/candidate-inputs/archives"
+          node scripts/repository/verify-template-family-reference.mjs --archives "$RUNNER_TEMP/candidate-inputs/archives"
       - name: Remove decrypted fixtures
         if: always()
         run: rm -rf "$RUNNER_TEMP/sdk-fixtures"

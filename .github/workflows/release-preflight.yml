@@ -1,0 +1,44 @@
+name: SDK certified-input release preflight
+on:
+  push:
+    branches: ['codex/sdk-*-release-preflight-*']
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - uses: ./.github/actions/sdk-certified-inputs
+        with:
+          certification-run-id: ${{ vars.SDK_RELEASE_CERTIFICATION_RUN_ID }}
+          frozen-sha256: ${{ vars.SDK_RELEASE_FROZEN_SHA256 }}
+          fixture-key: ${{ secrets.SDK_CERT_FIXTURE_KEY }}
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Rehearse exact prepublication reference commands
+        run: |
+          node scripts/repository/verify-template-editor-reference.mjs --archives "$SDK_CERTIFIED_ARCHIVES"
+          node scripts/repository/verify-template-family-reference.mjs --archives "$SDK_CERTIFIED_ARCHIVES"
+      - name: Rehearse inventory-driven publication preparation without publication
+        run: node scripts/release-delivery/simulate-publication.mjs "$SDK_CERTIFIED_ARCHIVES" "$RUNNER_TEMP/sdk-publication-rehearsal"
+      - name: Remove decrypted preflight fixtures
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-preflight-results
+          path: ${{ runner.temp }}/sdk-publication-rehearsal/
+          retention-days: 3
+          if-no-files-found: warn

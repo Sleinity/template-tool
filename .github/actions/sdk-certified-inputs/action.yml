@@ -1,0 +1,38 @@
+name: Restore certified SDK test inputs
+description: Bind a successful certification artifact to the approved manifest before decrypting exact test fixtures.
+inputs:
+  certification-run-id:
+    required: true
+    description: Completed frozen-candidate workflow run from this repository
+  frozen-sha256:
+    required: true
+    description: SHA-256 of its approved FROZEN-CANDIDATE.json
+  fixture-key:
+    required: true
+    description: AES-GCM key held in the SDK_CERT_FIXTURE_KEY secret
+runs:
+  using: composite
+  steps:
+    - name: Require successful current certification
+      shell: bash
+      run: node scripts/candidate-certification/release-inputs.mjs check-run "$SDK_CERTIFICATION_RUN_ID"
+      env:
+        GH_TOKEN: ${{ github.token }}
+        SDK_CERTIFICATION_RUN_ID: ${{ inputs.certification-run-id }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: frozen-candidate-inputs
+        repository: ${{ github.repository }}
+        github-token: ${{ github.token }}
+        run-id: ${{ inputs.certification-run-id }}
+        path: ${{ runner.temp }}/sdk-certified-inputs
+    - name: Verify approved archives and current source before decryption
+      shell: bash
+      run: node scripts/candidate-certification/release-inputs.mjs verify "$RUNNER_TEMP/sdk-certified-inputs/archives"
+      env:
+        SDK_RELEASE_FROZEN_SHA256: ${{ inputs.frozen-sha256 }}
+    - name: Restore authenticated exact fixtures
+      shell: bash
+      run: node scripts/candidate-certification/fixtures.mjs restore "$RUNNER_TEMP/sdk-certified-inputs/fixtures.enc" "$RUNNER_TEMP/sdk-fixtures"
+      env:
+        SDK_CERT_FIXTURE_KEY: ${{ inputs.fixture-key }}

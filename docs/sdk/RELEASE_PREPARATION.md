@@ -21,3 +21,7 @@ Run the source-authoritative three-export renderer/scene/settlement gate. Review
 Preparation ends with the source commit, intended tag, immutable candidate/checksums, archive-bound cross-platform reports, current guides, complete starter and Bas's [onboarding checklist](QUICKSTART.md). Bas's personal review follows automated acceptance and is not the publication gate.
 
 Before tagging, verify the guarded publication preparation path reproduces the certified source/artifact inputs. Publication/tagging need explicit approval. Afterwards, registry-derived packages and release assets must pass the same host workflows before declaring the released handoff complete. Never present local/simulated provenance as registry verification. The distribution remains UNLICENSED, for Sleinity-owned applications only.
+
+Bind the protected release jobs to the current certification run and approved
+frozen manifest using the [release environment setup](GITHUB_SETUP.md). Exact
+browser fixtures are authenticated test inputs, never public delivery assets.

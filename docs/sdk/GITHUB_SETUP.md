@@ -37,6 +37,23 @@ therefore never probes those external paths. Local renderer releases still run
 commands. Portable CI is a distribution and contract gate, not a replacement
 for the private source-fidelity gate.
 
+Private browser hosts run in frozen-candidate certification and the protected
+release workflow. Before releasing, set repository variables
+`SDK_RELEASE_CERTIFICATION_RUN_ID` to the successful current certification run
+and `SDK_RELEASE_FROZEN_SHA256` to its approved `FROZEN-CANDIDATE.json` hash.
+That run must retain its `frozen-candidate-inputs` artifact; the fixture key stays
+in `SDK_CERT_FIXTURE_KEY`. Both release jobs require a successful run from this
+repository, verify the approved manifest and current source before decryption,
+restore the exact ZIP/font inputs, and remove decrypted files even on failure.
+Missing, expired or mismatched inputs block release; refresh certification rather
+than substituting fixtures. Do not upload private inputs as release assets.
+
+The certification workflow rehearses the clean portable gate and both exact
+reference-entry commands. The registry-derived handoff additionally checks fresh
+npm/pnpm starters, native consumers, font authority and blocked storage before
+uploading public assets. Portable pull-request CI has no private-input browser
+step and makes no exact-font/source-fidelity claim.
+
 The release workflow publishes to the authenticated GitHub npm registry with
 its repository-scoped workflow token and pushes the Changesets package tags
 after publication. It also attaches checksum-verified archives and

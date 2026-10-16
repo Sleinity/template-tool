@@ -1,5 +1,21 @@
 # SDK 2.0.0 host delivery and certification
 
+## Release automation correction — in progress, 2026-10-16
+
+The user approved the corrected `c6f489a` tag target. Its
+[Linux release run](https://github.com/Sleinity/template-tool/actions/runs/38877292992)
+passed `ci:portable`, then stopped at exact packed-reference acceptance because
+the workflow had not provisioned its private ZIP/font inputs. No package upload
+ran. The tag remains on `c6f489a`.
+
+The [automation correction contract](sdk-release-automation.md) binds both
+release jobs to a successful current certification artifact and an independently
+approved frozen-manifest hash before decryption. It preserves exact checks,
+adds their clean-checkout/release-path rehearsal and retains portable public CI
+without private-input probes. Candidate E and a new tag-target review are required
+because automation and delivered maintainer guidance changed. Candidate D remains
+immutable; no SDK runtime or example change is included.
+
 ## Publication attempt — blocked before upload, 2026-10-16
 
 The user approved commit `b158199baf06c9d5f59cf9c91b485429684bbb42` for

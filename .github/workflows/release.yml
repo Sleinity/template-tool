@@ -13,6 +13,7 @@ on:
         type: boolean
 
 permissions:
+  actions: read
   contents: write
   packages: write
 
@@ -36,10 +37,15 @@ jobs:
         run: node scripts/repository/sdk-runtime-manifest.mjs env >> "$GITHUB_ENV"
       - run: pnpm install --frozen-lockfile
       - run: pnpm ci:portable
+      - uses: ./.github/actions/sdk-certified-inputs
+        with:
+          certification-run-id: ${{ vars.SDK_RELEASE_CERTIFICATION_RUN_ID }}
+          frozen-sha256: ${{ vars.SDK_RELEASE_FROZEN_SHA256 }}
+          fixture-key: ${{ secrets.SDK_CERT_FIXTURE_KEY }}
       - name: Install pinned Chromium for packed reference acceptance
         run: pnpm exec playwright install chromium
-      - run: pnpm template-editor:acceptance
-      - run: pnpm template-family:acceptance
+      - run: node scripts/repository/verify-template-editor-reference.mjs --archives "$SDK_CERTIFIED_ARCHIVES"
+      - run: node scripts/repository/verify-template-family-reference.mjs --archives "$SDK_CERTIFIED_ARCHIVES"
       - run: pnpm release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,6 +54,9 @@ jobs:
           git tag --list '@sleinity/*' | while IFS= read -r tag; do
             git push origin "refs/tags/${tag}:refs/tags/${tag}"
           done
+      - name: Remove decrypted release test fixtures
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
 
   handoff:
     needs: publish
@@ -76,6 +85,11 @@ jobs:
       - name: Verify current source before a manual handoff refresh
         if: github.event_name == 'workflow_dispatch'
         run: pnpm ci:portable
+      - uses: ./.github/actions/sdk-certified-inputs
+        with:
+          certification-run-id: ${{ vars.SDK_RELEASE_CERTIFICATION_RUN_ID }}
+          frozen-sha256: ${{ vars.SDK_RELEASE_FROZEN_SHA256 }}
+          fixture-key: ${{ secrets.SDK_CERT_FIXTURE_KEY }}
       - name: Verify published core consumer
         run: pnpm published-core:verify
         env:
@@ -101,16 +115,23 @@ jobs:
       - name: Verify secret-free vendored runtime consumer (npm)
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
-          --archives release-artifacts
+          --archives release-artifacts --output "$RUNNER_TEMP/sdk-publication-acceptance/npm/consumer"
         env:
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
       - name: Verify secret-free vendored runtime consumer (pnpm)
         run: >-
           node scripts/repository/verify-runtime-release-consumer.mjs
-          --archives release-artifacts
+          --archives release-artifacts --output "$RUNNER_TEMP/sdk-publication-acceptance/pnpm/consumer"
         env:
           TEMPLATE_CONSUMER_PACKAGE_MANAGER: pnpm
           TEMPLATE_RUNTIME_RELEASE_VERSION: ${{ env.SDK_VERSION }}
+      - name: Verify fresh hosts, font authority and storage from published archives
+        run: |
+          for manager in npm pnpm; do
+            node scripts/host-starter/verify.mjs --archives release-artifacts --manager "$manager" --output "$RUNNER_TEMP/sdk-publication-acceptance/$manager/starter"
+            TEMPLATE_CONSUMER_PACKAGE_MANAGER="$manager" node scripts/repository/verify-host-font-authority.mjs --archives release-artifacts --output "$RUNNER_TEMP/sdk-publication-acceptance/$manager/fonts"
+            node scripts/repository/verify-blocked-storage.mjs --archives release-artifacts --manager "$manager" --output "$RUNNER_TEMP/sdk-publication-acceptance/$manager/storage"
+          done
       - name: Verify packed template editor reference from published archives
         run: >-
           node scripts/repository/verify-template-editor-reference.mjs
@@ -145,3 +166,13 @@ jobs:
           gh release upload "$SDK_RELEASE_TAG" "${release_assets[@]}" --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Remove decrypted release test fixtures
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-host-acceptance
+          path: ${{ runner.temp }}/sdk-publication-acceptance/
+          retention-days: 3
+          if-no-files-found: warn
