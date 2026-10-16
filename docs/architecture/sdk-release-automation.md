@@ -51,6 +51,13 @@ automated browser checks separately from stored-capture/source review.
 
 ## Current evidence and blocker
 
+The human subsequently approved encrypted CI setup. The isolated E preparation
+exposed an unhydrated `--no-checkout` clone; its pushed run was cancelled without
+accepting results. The corrected helper uses a normal checkout and validates the
+complete staged-path inventory before changing the secret. A real-clone regression
+and negative staging tests bring tooling coverage to 31 passing cases. Candidate F
+must renew certification for that helper change; E's bytes/evidence remain retained.
+
 [Candidate E](evidence/sdk-host-release-20261016e/progress.json) has passed all
 local npm/pnpm host groups, the complete portable gate, 29 tooling tests and a
 fresh individually reviewed 24-capture/12-renderer/3-scene/12-settlement gate.

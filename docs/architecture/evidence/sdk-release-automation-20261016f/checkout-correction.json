@@ -1,0 +1,15 @@
+{
+  "scope": "Test-only certification checkout and staged-input guard",
+  "previousAttempt": "https://github.com/Sleinity/template-tool/actions/runs/38881726573",
+  "previousAttemptDecision": "cancelled; no acceptance used",
+  "issue": "--no-checkout clone did not hydrate tracked evidence; subsequent push was mistakenly executed after failed inspection",
+  "addedPathsOutsideApprovedInputDirectory": 0,
+  "rawFixturesOrKeyCommitted": false,
+  "fix": "Normal full clone; real-clone regression; exact staged paths verified before any secret update; key wiped in finally",
+  "toolingTests": 31,
+  "toolingStatus": "pass",
+  "humanEncryptedSetupApproval": "Approve encrypted CI setup",
+  "sdkRuntimeOrExampleChanges": false,
+  "tagMovedBeyondC6": false,
+  "published": false
+}

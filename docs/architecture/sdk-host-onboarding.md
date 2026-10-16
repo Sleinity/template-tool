@@ -1,5 +1,22 @@
 # SDK 2.0.0 host delivery and certification
 
+## Candidate F snapshot correction — in progress, 2026-10-16
+
+The human explicitly approved encrypted fixture transfer and fixture-secret
+replacement. E's prepared certification snapshot then exposed a checkout bug:
+`git clone --no-checkout` followed by a same-commit branch switch had not hydrated
+tracked historical evidence. The isolated E branch was pushed despite the failed
+extra snapshot check; [its run](https://github.com/Sleinity/template-tool/actions/runs/38881726573)
+was cancelled and no result accepted. Added files were limited to the approved
+encrypted inputs and public SDK delivery; no raw fixtures or key were committed.
+
+Candidate F will replace E for certification. Its snapshot helper performs a
+normal full checkout, with a real-clone regression covering tracked evidence,
+ignored inputs and preservation of user changes. A staged-path guard now runs
+before secret replacement and rejects any change outside the approved input
+files. All 31 tooling tests pass. SDK/runtime/example code remains unchanged;
+the existing release tag is still `c6f489a` and no SDK 2.0.0 package is published.
+
 ## Release automation correction — local checks pass; CI setup pending, 2026-10-16
 
 The user approved the corrected `c6f489a` tag target. Its
