@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "workflow": ".github/workflows/release.yml",
+  "samePrepareStep": true,
+  "onlyModification": "provenance registry-download -> test-simulation",
+  "registryPackSubstitute": "copy supplied local archives, exactly one pack per package",
+  "packed": [
+    "@sleinity/template-core@2.0.0",
+    "@sleinity/template-browser@2.0.0",
+    "@sleinity/template-react@2.0.0"
+  ],
+  "manifestFiles": 49,
+  "uploadInventoryVerified": true,
+  "uploaded": false,
+  "published": false,
+  "tagged": false,
+  "logs": "Generated 49 delivery files and 168 verified local links for 2.0.0.\nVerified 2.0.0 delivery: 49 files, 189 links; provenance test-simulation.\n"
+}

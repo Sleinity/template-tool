@@ -1,0 +1,11 @@
+{
+  "baseline": "59c56692508cb7548e0b3ef84c64f50635514fe9",
+  "baselineSimulatorSha256": "08188f05fee59af8b2861b9cb22634c55bb6ca3c7b65a986aca8dd470e4fae47",
+  "baselineExitCode": 1,
+  "baselineFailure": "Missing isolated node_modules/react/package.json",
+  "candidateUnitRegression": "scripts/release-delivery/simulate-publication.test.mjs",
+  "candidateToolingTests": 32,
+  "candidateTestsPassed": true,
+  "privateInputsUsed": false,
+  "sourceReset": false
+}

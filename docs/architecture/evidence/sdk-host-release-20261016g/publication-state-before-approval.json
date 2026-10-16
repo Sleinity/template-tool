@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-10-16T13:23:11.014Z",
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "versions": [
+        "1.0.0",
+        "0.8.0",
+        "0.7.0",
+        "0.6.0",
+        "0.5.0",
+        "0.4.2",
+        "0.4.1",
+        "0.4.0",
+        "0.3.0",
+        "0.2.2",
+        "0.2.1",
+        "0.2.0",
+        "0.1.0"
+      ],
+      "version200Exists": false
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "versions": [
+        "1.0.0",
+        "0.8.0",
+        "0.7.0",
+        "0.6.0",
+        "0.5.0",
+        "0.4.2",
+        "0.4.1",
+        "0.4.0",
+        "0.3.0",
+        "0.2.2",
+        "0.2.1",
+        "0.2.0",
+        "0.1.0"
+      ],
+      "version200Exists": false
+    },
+    {
+      "name": "@sleinity/template-react",
+      "versions": [
+        "1.0.0",
+        "0.8.0",
+        "0.7.0",
+        "0.6.0",
+        "0.5.0",
+        "0.4.2",
+        "0.4.1",
+        "0.4.0",
+        "0.3.0",
+        "0.2.2",
+        "0.2.1",
+        "0.2.0",
+        "0.1.0"
+      ],
+      "version200Exists": false
+    }
+  ],
+  "releaseExists": false,
+  "tag": {
+    "name": "sdk-v2.0.0",
+    "objectSha": "79ee18b1fe68233a7afbcbeaf501218f3d05de47",
+    "target": "c6f489afd2dff5f1661d36f12091a29dc6537554"
+  },
+  "readOnly": true
+}

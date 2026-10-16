@@ -49,21 +49,30 @@ new candidate identities; existing candidate D and prior certification remain
 immutable. The new final commit/tag target requires human approval. Record
 automated browser checks separately from stored-capture/source review.
 
-## Current evidence — candidate G correction pending certification
+## Current evidence — candidate G is GO for publication approval
 
-[Candidate F's retained packet](evidence/sdk-host-release-20261016f/progress.json)
-records passing macOS/Linux archive hosts, Linux clean portable checks, strict
-ZIP tests and a fresh individually reviewed 24/12/3/12 GO gate. The shared
-certified-input action and both reference commands also passed in the
-[release rehearsal](https://github.com/Sleinity/template-tool/actions/runs/38884477741).
-The subsequent isolated publication simulation failed because it omitted
-`node_modules`, which starter generation needs to read installed tool versions.
-F is not release-certified around that failure.
+[The final packet](evidence/sdk-host-release-20261016g/certification.json) records
+passing macOS/Linux supplied-archive hosts, the clean Linux portable gate,
+32 tooling tests, strict ZIP tests and current source-reviewed 24/12/3/12 evidence.
+The shared certified-input action, reference commands and actual publication
+preparation/upload-inventory step all passed in
+[rehearsal 38906939936](https://github.com/Sleinity/template-tool/actions/runs/38906939936).
+The release variables select certification run `38905061349` and frozen-manifest
+SHA-256 `96852f55d8634e72420106110e86e8766bd23fcb1526c514d3e3bbdb066fdfe4`.
 
-The bounded correction links installed dependencies into that isolated workspace.
-A new executable regression reproduced the exact failure before the fix and
-passes afterward; all 32 tooling tests pass. Candidate G must renew certification
-and the shared-action rehearsal. SDK/runtime/example source is unchanged; F and
-previous archives/evidence remain immutable. Explicit encrypted CI setup approval
-covers the same seven private inputs and fixture-key replacement. The release tag
-remains on `c6f489a`; no SDK 2.0.0 package is published.
+F's retained rehearsal failed because its isolated simulator omitted installed
+dependencies needed for starter generation. G links them into that workspace;
+a public-stub regression reproduces F's exact failure and passes with the fix.
+All SDK archives and starter bytes remain identical to D/E/F. Earlier E's cancelled
+snapshot and both stopped publication attempts remain recorded in the packets.
+No production source, API, renderer, schema or reference changed here.
+
+Explicit encrypted CI setup approval covers the same seven ZIP/font inputs and
+fixture-key replacement. Staged snapshots contained only the 57 approved input
+paths; raw inputs/key were absent. Successful certification and rehearsal jobs
+removed decrypted inputs. The three-day artifact must still exist when release
+runs; missing/expired evidence blocks decryption and publication.
+
+The final evidence-only commit requires approval as the new tag target. The
+existing tag remains `c6f489a`; SDK 2.0.0 is not published. Simulated packing is
+separate from the registry-derived acceptance required after approved publication.

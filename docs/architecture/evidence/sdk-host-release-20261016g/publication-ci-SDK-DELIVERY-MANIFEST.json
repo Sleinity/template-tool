@@ -1,0 +1,1480 @@
+{
+  "schemaVersion": "sdk-delivery-manifest-v1",
+  "version": "2.0.0",
+  "targetRelease": "2.0.0",
+  "mode": "release",
+  "provenance": "test-simulation",
+  "scope": "runtime",
+  "certification": "not-yet-verified",
+  "inventorySha256": "4613d6a9299a9c7f47c92fda232b47a382a2eba3fabb996d89cfed20f8a9b041",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "name": "@sleinity/template-core",
+      "version": "2.0.0",
+      "bytes": 487029,
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "name": "@sleinity/template-browser",
+      "version": "2.0.0",
+      "bytes": 277369,
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "name": "@sleinity/template-react",
+      "version": "2.0.0",
+      "bytes": 212961,
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9"
+    }
+  ],
+  "files": [
+    {
+      "file": "SDK-HOST-STARTER.zip",
+      "classification": "starter",
+      "bytes": 20477,
+      "sha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770",
+      "sources": [
+        {
+          "source": "examples/template-editor-integration/index.html",
+          "file": "index.html",
+          "sha256": "223b784c5b57478547913036381d21e0b2b4123ecf4498f02b259121572bcc63"
+        },
+        {
+          "source": "examples/template-editor-integration/tsconfig.json",
+          "file": "tsconfig.json",
+          "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808"
+        },
+        {
+          "source": "examples/template-editor-integration/tsconfig.app.json",
+          "file": "tsconfig.app.json",
+          "sha256": "60994336f02be4eb77eb366f24bd97a7872fcc6eb345f168135db6ceb184fb84"
+        },
+        {
+          "source": "examples/template-editor-integration/tsconfig.node.json",
+          "file": "tsconfig.node.json",
+          "sha256": "e344dd58972e2d25c45a8e9933c8dbc07d4d7d058375c18a40cc91719902edad"
+        },
+        {
+          "source": "examples/template-editor-integration/vite.config.ts",
+          "file": "vite.config.ts",
+          "sha256": "eca485c281977125366d4800553256e419f364984e615f75a2d2bae54f7857fd"
+        },
+        {
+          "source": "examples/template-editor-integration/src/CompleteHost.tsx",
+          "file": "src/CompleteHost.tsx",
+          "sha256": "34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca"
+        },
+        {
+          "source": "examples/template-editor-integration/src/FieldRulesV2Host.tsx",
+          "file": "src/FieldRulesV2Host.tsx",
+          "sha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51"
+        },
+        {
+          "source": "examples/template-editor-integration/src/fieldHostLifecycle.ts",
+          "file": "src/fieldHostLifecycle.ts",
+          "sha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681"
+        },
+        {
+          "source": "examples/template-editor-integration/src/main.tsx",
+          "file": "src/main.tsx",
+          "sha256": "efbdb7f6381c7bbb7620f6431825c2d74ca0cd05006b1cc5f1621fa3a49997f2"
+        },
+        {
+          "source": "examples/template-editor-integration/src/starterPersistence.ts",
+          "file": "src/starterPersistence.ts",
+          "sha256": "83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9"
+        },
+        {
+          "source": "examples/template-editor-integration/src/styles.css",
+          "file": "src/styles.css",
+          "sha256": "948bf7858aeb67b893c0a35c5b797d9b22b99b07bcbd94c711bb6567d04964ec"
+        }
+      ]
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "source": "docs/sdk/V2_INTEGRATION.md",
+      "classification": "current",
+      "sourceSha256": "3a5a6b8cea3308a83e28083c20efa5136cc4ce3d2273b6ffad61800b24b18579",
+      "bytes": 20496,
+      "sha256": "7303632964a10f0b3780289ec1df64ffb3e0d4df393f7b4ee31443a829507f6c"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "source": "docs/sdk/HOST_LIFECYCLE.md",
+      "classification": "current",
+      "sourceSha256": "14b9940e42cba312c8b60b317fdcf0bafda66042a9927aa9c4d99ddf9801b2f6",
+      "bytes": 4443,
+      "sha256": "518321935e76273d67fb2dd85b3186bcbecd92eea0cd4763b3317906793343e4"
+    },
+    {
+      "file": "SDK-2.0-RELEASE-NOTES.md",
+      "source": "docs/sdk/SDK_2_0_RELEASE_NOTES.md",
+      "classification": "current",
+      "sourceSha256": "0d67027225fbfc1c7e06764643669df61d355c3d76dbc41da4f37b627a2ee108",
+      "bytes": 2087,
+      "sha256": "e5d058ddfb79c0c7c7c092b467695582a5b39c27f97b41e3f00ea46b37f8017f"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "source": "docs/sdk/SDK_2_0_MIGRATION.md",
+      "classification": "current",
+      "sourceSha256": "eb1de2351cea1b82f4f07ed5bb409b8767f7d3390cb9f3e27d14ff7b1c591d0d",
+      "bytes": 2754,
+      "sha256": "8d2e4f264c082198fcc244900af425e67200faecf3929bf7b74d1fe8bf6707fe"
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "source": "docs/sdk/OPERATION_OUTCOMES.md",
+      "classification": "current",
+      "sourceSha256": "6d41bfda9803ed9610ef6aed09e4ee44a43c32c8f9ea8ba96c6d1902a708b4b0",
+      "bytes": 3810,
+      "sha256": "2e2abe0f1d872f0c5a06a3fb0e120b19911a06cfb02651c31e1919efdc6b5e22"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "source": "docs/sdk/SDK_1_0_RELEASE_NOTES.md",
+      "classification": "historical",
+      "sourceSha256": "e857798396b6c7f90249e55558dc3eeefc8c444188ba3cf0be693e2bdf7e5da6",
+      "bytes": 2201,
+      "sha256": "dc7f69e4382d3151a896203d7cbc0b138287c305beecd6cc74e90b63727cfff5"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "source": "docs/sdk/SDK_1_0_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "70c510e3add51df5241b7b86e2cc0841bd9b793f50246411634615f4335537f9",
+      "bytes": 2685,
+      "sha256": "6e718e9d7684fc04e3ca73004574b04e4c2ced491e1509eff40a7d94e60f5c26"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "source": "docs/sdk/INSTALLATION.md",
+      "classification": "current",
+      "sourceSha256": "58cc01133f6fee838c7be6da6a9faaa99d4a15b3adc93feccd0eb0d499963916",
+      "bytes": 1576,
+      "sha256": "4b783d98e766bbe6f986b3b2fd20eccd8d98d01e7ede9c6c60315ed723ea6182"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "source": "docs/sdk/SDK_CAPABILITIES.md",
+      "classification": "current",
+      "sourceSha256": "4e0c920c6915453a17b779c4f6828b23087c2f2d429de5634d07bcdc9696631a",
+      "bytes": 3752,
+      "sha256": "fdd4b5257818a6b5527656d43c2ef1f80e0d985c7e5643485ed858785384e37f"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "source": "docs/sdk/AGENT_INTEGRATION_PROMPTS.md",
+      "classification": "current",
+      "sourceSha256": "ef99645a427d24dfa540cd4d8733b4e18bc79ed273ee68250c43b8265727b3f7",
+      "bytes": 5509,
+      "sha256": "c1cd11c204a94be37bed090e902f0ab0a91748854b8e99cabcfed55795079077"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "source": "docs/sdk/RELEASE_PREPARATION.md",
+      "classification": "current",
+      "sourceSha256": "ccaf50efe76765f27bbbd8e5a2bebcddff0d6308806f935bcff944fd79ba7048",
+      "bytes": 3377,
+      "sha256": "3e8490938442d414b43a933415e2572731ebd17a3db28cb2f2fcfd7ac19b35e5"
+    },
+    {
+      "file": "SDK-README.md",
+      "source": "docs/sdk/README.md",
+      "classification": "current",
+      "sourceSha256": "63d4fbf340f79481e7d9b89a1c6b20b524b409574957c3dccf29d0e011a9c609",
+      "bytes": 2333,
+      "sha256": "c6dc947cb7fdaf4a406332ff509ee46f0363503cc1766c41ab431ff2e21669c4"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "source": "docs/sdk/CORE_IMPORTER_HANDOFF.md",
+      "classification": "current",
+      "sourceSha256": "43542a67bd28ba66df868756b469c10d7fd729f380f8c615daaaef6ea6d7f26d",
+      "bytes": 1546,
+      "sha256": "1605d23e5b5d12ce6b2a7e74d6473fe27ea4396048439e604a30dd543b8b1f47"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "source": "docs/sdk/RUNTIME_HANDOFF.md",
+      "classification": "current",
+      "sourceSha256": "3fdba6c7f23a83aa57627e4c4674d3321d12227612b0cb677a428327f1e9592a",
+      "bytes": 2904,
+      "sha256": "e4b937cf637cc32fa945409ba87cc5dc29e7c2f1d0e92e62f4b449458a8dcb67"
+    },
+    {
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "source": "docs/sdk/TEMPLATE_IMPORT_WIZARD.md",
+      "classification": "historical",
+      "sourceSha256": "c55a082dd38a417db0027bc026e316bbf9c3c3f7fa04f6ead0d058f712f3c289",
+      "bytes": 10677,
+      "sha256": "2806fd09194d9ef790e4a6ed80d1621448a03139c36d4c166f2b91a7f3f583b9"
+    },
+    {
+      "file": "CONSUMER-COMPATIBILITY.md",
+      "source": "docs/sdk/CONSUMER_COMPATIBILITY.md",
+      "classification": "current",
+      "sourceSha256": "d91b1ba2028ef1e5f3ed1a59d6c4290b36bde5ae50309669d37cd4edb9e28d2c",
+      "bytes": 4636,
+      "sha256": "d91b1ba2028ef1e5f3ed1a59d6c4290b36bde5ae50309669d37cd4edb9e28d2c"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "source": "docs/sdk/TROUBLESHOOTING.md",
+      "classification": "current",
+      "sourceSha256": "c8fd02760bcdf4c2139ee3669d74f88f4f95ceb138e38a89e95b53b59d785492",
+      "bytes": 2671,
+      "sha256": "ac3b3c0c6965ea9c9f654857d34dabd5eb65d6a1b90477d3a2e4a55dcaf791bb"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "source": "docs/sdk/STUDIO_REFERENCE.md",
+      "classification": "current",
+      "sourceSha256": "064dd297a494b8e896070a86dd3d7b6934190f2b930e5c7639b0ca3c60f9e65c",
+      "bytes": 7341,
+      "sha256": "488ed0c417c5211b28269a5fed2b61492f5544f4113cc9c23675d6ac73f2c690"
+    },
+    {
+      "file": "GITHUB-SETUP.md",
+      "source": "docs/sdk/GITHUB_SETUP.md",
+      "classification": "publication-preparation",
+      "sourceSha256": "30fd661df5e2b62e379dd5499390c80d4a0c3262eb94fe269f542a303b9446e5",
+      "bytes": 3672,
+      "sha256": "30fd661df5e2b62e379dd5499390c80d4a0c3262eb94fe269f542a303b9446e5"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "source": "docs/field-rules/BROWSER_SESSION.md",
+      "classification": "current",
+      "sourceSha256": "3ec8cb74d696e413984525f9a3657e96c56d4a446a11d7500c6869b328555809",
+      "bytes": 7586,
+      "sha256": "263ce903b9ca4b1103b3eb294331686f15cdb7c56f5be070dde259628e5d4766"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "source": "docs/field-rules/STUDIO_AND_HOSTS.md",
+      "classification": "current",
+      "sourceSha256": "1ee457fe85d74e9440f4110579da1debff14eaaaa1aeaf51bf55aca63dde761d",
+      "bytes": 14472,
+      "sha256": "7436bdb930ac8fb90edc438f96609a2c12b2c0b728c151d70ba8ef0e1dfd0cc4"
+    },
+    {
+      "file": "TEMPLATE-RECOVERY.md",
+      "source": "docs/architecture/template-recovery.md",
+      "classification": "current",
+      "sourceSha256": "ec4783aa7f502e494ce80633db03adbe07cc1314eebb4cc954c4c783be328503",
+      "bytes": 7247,
+      "sha256": "ec4783aa7f502e494ce80633db03adbe07cc1314eebb4cc954c4c783be328503"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "source": "examples/template-editor-integration/README.md",
+      "classification": "current",
+      "sourceSha256": "196d8854d1b1f0c6a0c1e6c94749e4888a71def3e4a286eade52248889e7536d",
+      "bytes": 1288,
+      "sha256": "90d14444c1e09edec782d371de63dcf9bddba77e68a5792a61a26c0d2def90ec"
+    },
+    {
+      "file": "FieldRulesV2Host.tsx",
+      "source": "examples/template-editor-integration/src/FieldRulesV2Host.tsx",
+      "classification": "current",
+      "sourceSha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51",
+      "bytes": 9443,
+      "sha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51"
+    },
+    {
+      "file": "fieldHostLifecycle.ts",
+      "source": "examples/template-editor-integration/src/fieldHostLifecycle.ts",
+      "classification": "current",
+      "sourceSha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681",
+      "bytes": 14172,
+      "sha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681"
+    },
+    {
+      "file": "MINIMAL-RENDERER-V2.md",
+      "source": "examples/minimal-renderer/README.md",
+      "classification": "current",
+      "sourceSha256": "4e0aed7c63d04e3e16a364c70e403c0b61884350e6959e03f17e68e44c7406de",
+      "bytes": 391,
+      "sha256": "912021f3a01c7f413fe4f9c1a968264b38f18ed268022020eb2e777cf3590107"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "source": "examples/template-family-integration/README.md",
+      "classification": "current",
+      "sourceSha256": "196d8854d1b1f0c6a0c1e6c94749e4888a71def3e4a286eade52248889e7536d",
+      "bytes": 1103,
+      "sha256": "f874a5fd5c883f9f41e0703c79a485e2b71dbf28cf391df36009086364ebb289"
+    },
+    {
+      "file": "sdk-entry-points.json",
+      "source": "config/sdk-entry-points.json",
+      "classification": "current",
+      "sourceSha256": "bbf955ee6f35e5d5c0fdd17abbae04949fce720fbcbedbf137cb5a120f3ea7af",
+      "bytes": 3736,
+      "sha256": "bbf955ee6f35e5d5c0fdd17abbae04949fce720fbcbedbf137cb5a120f3ea7af"
+    },
+    {
+      "file": "sdk-public-api.json",
+      "source": "config/sdk-public-api.json",
+      "classification": "current",
+      "sourceSha256": "5201e9d5dafa0c146bb4bb2629f8bd7dd30f688719874b09cc2c484702b0640c",
+      "bytes": 55416,
+      "sha256": "5201e9d5dafa0c146bb4bb2629f8bd7dd30f688719874b09cc2c484702b0640c"
+    },
+    {
+      "file": "SDK-0.8-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_8_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "a21735dca091c8eaa57d8dec946c0da2f51b8c285526fbdb7a56586dcf7e3d53",
+      "bytes": 4816,
+      "sha256": "1dbccd78e809a2c46c8cfccfddc44176ca98c1dbd6e47866ab8eb38955a40855"
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_7_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "0fe6698881b2879f0e6bcef98bac18a8245f895d8bfa1ecaba363fbf5c8ae1b8",
+      "bytes": 3199,
+      "sha256": "546d568bb27f4cd8248b0f4957f10796a0dd756eeaf9c4191abac33a22bbea9e"
+    },
+    {
+      "file": "SDK-0.6-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_6_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "62e15d8daa218529e7adaed765d7e7fadb6ddb1f55f0f57a8d3047ce82465b1e",
+      "bytes": 5128,
+      "sha256": "ef9d670cafc8190a6d12cbf8e4a87e82cb3fea455288f0d32cad4f884116df88"
+    },
+    {
+      "file": "SDK-0.5-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_5_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "527e98e4068f68fccfe56a71bd0950e9138524f82fd5c246b824115a2b505c88",
+      "bytes": 1675,
+      "sha256": "8eb831c3c72302c80ac3d038b8b200537fd9d01bb1504607b00228a8b2badc24"
+    },
+    {
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_4_2_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "75ae6753f48bf743e6df328c9ef690a550048ae8c497d903cf001abb7f694343",
+      "bytes": 1110,
+      "sha256": "bd06a0dbdc71527ac00ea2b21c5397868c54e1536e661156452067ebae871d24"
+    },
+    {
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_4_1_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "caaad462a4a22c37a00f80f2c127a78defe38b913c30e289096fba7eddc4e07e",
+      "bytes": 1570,
+      "sha256": "b49feb5e2cb57c4be455bbba655bcf04b744760ef5cd9c5fbed4c21bbd4d1a29"
+    },
+    {
+      "file": "SDK-0.4-MIGRATION.md",
+      "source": "docs/sdk/SDK_0_4_MIGRATION.md",
+      "classification": "historical",
+      "sourceSha256": "9429c80ad51bb049a92bbff7939d7bf77bfc5234b89ed34ea576cf918b9fc3f0",
+      "bytes": 1802,
+      "sha256": "abfdf131472b357fdd7bbda2f5ef8115e4d9daa7623bf3ca33a63ac17b11b09e"
+    },
+    {
+      "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "source": "docs/sdk/SDK_0_2_TO_0_7_LOVABLE_HANDOFF.md",
+      "classification": "historical",
+      "sourceSha256": "f7d5bf7a630adb060e69a7f34a7be545269543f3de82b8346c53624ff3060779",
+      "bytes": 6925,
+      "sha256": "d1c0101e0635af0ec4f8b8fc1c42bacfd1f37f8e65b83b3c38227f8e0fd6130e"
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "source": "docs/sdk/QUICKSTART.md",
+      "classification": "current",
+      "sourceSha256": "5b4d698756ce69e55771c497a072a870e4bca4e82ec041e1d738fe94b5607851",
+      "bytes": 3462,
+      "sha256": "6357c5e83bc20995ffc293e81cbcc44cc9f81ff23931188aecb7ded94c12b266"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "source": "docs/sdk/HOST_IMPLEMENTATION.md",
+      "classification": "current",
+      "sourceSha256": "8be0a5fcbac1559671e75f02a649dab490efa2fe9dd3a762c68c9c4bed6e18e8",
+      "bytes": 4852,
+      "sha256": "25a31b3569a3f46986661e31f1a3cc798f06a3a8ced7282dc7e65f0b1c5d47c2"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "source": "docs/sdk/FEATURES.md",
+      "classification": "current",
+      "sourceSha256": "a50b879d21ca8981ee28da31879569e368a0ced2382ed34bac36e3bfb919544a",
+      "bytes": 5268,
+      "sha256": "452c80c92f64016dfbb32a54d7c4447543096dde2e0e98b67a59c80436c37587"
+    },
+    {
+      "file": "SDK-API-GUIDE.md",
+      "source": "docs/sdk/API_GUIDE.md",
+      "classification": "current",
+      "sourceSha256": "1cb1074f4fa2394c55574f968d08c2d80e33dc861074e95be108d3f0f7afa248",
+      "bytes": 2335,
+      "sha256": "e372559ea156fa9b27dfa3c4d6b67b027e4403d24aa6149a0dfb87972a052d7e"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "source": "docs/sdk/HISTORY.md",
+      "classification": "current",
+      "sourceSha256": "98949b327bf23d864612f88dad7e7e71b55e95e4f51652fb5dfe0f12421d1f83",
+      "bytes": 1293,
+      "sha256": "f06a85b63c09ccd3e3a7318c1b7e0fb4d6b7ff3b3f2df909e12ab9727b90a8ff"
+    },
+    {
+      "file": "STUDIO-REDESIGN-HANDOFF.md",
+      "source": "docs/sdk/STUDIO_REDESIGN_HANDOFF.md",
+      "classification": "current",
+      "sourceSha256": "eaae0cfff802ad116b1ecdf0968263559345d897c76430f95e7c542713c91009",
+      "bytes": 1742,
+      "sha256": "27d933161dbcb8dc572cd7c8049668bd2d737799197753db018ca7fd69a24a02"
+    },
+    {
+      "file": "CompleteHost.tsx",
+      "source": "examples/template-editor-integration/src/CompleteHost.tsx",
+      "classification": "current",
+      "sourceSha256": "34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca",
+      "bytes": 15634,
+      "sha256": "34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca"
+    },
+    {
+      "file": "starterPersistence.ts",
+      "source": "examples/template-editor-integration/src/starterPersistence.ts",
+      "classification": "current",
+      "sourceSha256": "83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9",
+      "bytes": 9997,
+      "sha256": "83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9"
+    },
+    {
+      "file": "SDK-1.0-HISTORY.md",
+      "source": "docs/sdk/history/sdk-v1.0.0/README.md",
+      "classification": "historical",
+      "sourceSha256": "2600c192a910a035da9daa9782096aca60042623dacb97992588e3a2c8eec17b",
+      "bytes": 550,
+      "sha256": "d6449027ed3634d5fafed8a6d35c1a454654315c249ea1ff2d0c976fc4cecfc1"
+    },
+    {
+      "file": "SHA256SUMS",
+      "classification": "checksums",
+      "bytes": 388,
+      "sha256": "b665103eec4533659302bca9b28f91b57b0f0862c47796aad541f899d3a3b679"
+    },
+    {
+      "file": "CORE-SHA256SUMS",
+      "classification": "checksums",
+      "bytes": 99,
+      "sha256": "f2c8ebd87d0589f0b3539768a9eb8a6fa1e3c61712d4f408ace3dac5f64a72a2"
+    }
+  ],
+  "links": [
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md#choices-ordering-and-configuration-transactions",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "V2-EXAMPLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "FIELD-RULES-BROWSER-SESSION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "target": "TEMPLATE-RECOVERY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "target": "V2-EXAMPLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "target": "TEMPLATE-RECOVERY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-RELEASE-NOTES.md",
+      "target": "SDK-2.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-RELEASE-NOTES.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-1.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "target": "TEMPLATE-RECOVERY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "target": "SDK-1.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "target": "SDK-0.8-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "target": "TEMPLATE-RECOVERY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "target": "SHA256SUMS",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "target": "SDK-DELIVERY-MANIFEST.json",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "target": "SDK-0.8-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "target": "SDK-API-GUIDE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-CAPABILITIES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-RELEASE-PREPARATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "target": "SDK-0.8-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "target": "SDK-2.0-RELEASE-NOTES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "target": "SDK-2.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "target": "GITHUB-SETUP.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-API-GUIDE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "STUDIO-REFERENCE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "CONSUMER-COMPATIBILITY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-TROUBLESHOOTING.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-CAPABILITIES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "AGENT-INTEGRATION-PROMPTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-2.0-RELEASE-NOTES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-2.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-RELEASE-PREPARATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-RUNTIME-HANDOFF.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-README.md",
+      "target": "SDK-HISTORY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "target": "sleinity-template-core-2.0.0.tgz",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "target": "SDK-RUNTIME-HANDOFF.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-HOST-STARTER.zip",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "sleinity-template-core-2.0.0.tgz",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "sleinity-template-browser-2.0.0.tgz",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "sleinity-template-react-2.0.0.tgz",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "TEMPLATE-RECOVERY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-2.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-CAPABILITIES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "SDK-0.8-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "target": "https://github.com/Sleinity/template-tool",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "target": "CONSUMER-COMPATIBILITY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "target": "SDK-HISTORY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/packages/template-react/src/fieldSessionV2.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/packages/template-react/test/sessionLifecycle.browser.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/examples/template-editor-integration/src/FieldRulesV2Host.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/example-lifecycle/verify.mjs",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/FieldContentEditorV2.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/deferredFieldDrafts.test.ts",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/FieldConfigurationEditorV2.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/field-rules/choiceAuthoring.test.ts",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/FamilyVariantPropertyTable.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/repository/verify-sdk-061-family-host.mjs",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/FamilyFontPreparationPanel.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/repository/verify-font-reactivation.mjs",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/EditorLayout.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-family/ContextPreviewDock.test.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/workspace/DraftEditor.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/scripts/editor-performance/verify.mjs",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-package/quality/TemplatePackageQualityPanel.tsx",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "https://github.com/Sleinity/template-tool/blob/bf1c1e2bd04cc9ca16e0b0c8bf3d017cc9bec924/apps/studio/src/components/template-package/quality/TemplatePackageQualityPanels.test.ts",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "STUDIO-REDESIGN-HANDOFF.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "target": "SDK-2.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "target": "FieldRulesV2Host.tsx",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "target": "SDK-1.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-HOST-STARTER.zip",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "CompleteHost.tsx",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "starterPersistence.ts",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "fieldHostLifecycle.ts",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "FieldRulesV2Host.tsx",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "STUDIO-REFERENCE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "MINIMAL-RENDERER-V2.md",
+      "target": "FieldRulesV2Host.tsx",
+      "kind": "local-verified"
+    },
+    {
+      "file": "MINIMAL-RENDERER-V2.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "MINIMAL-RENDERER-V2.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.8-MIGRATION.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "target": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.6-MIGRATION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.5-MIGRATION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-0.4-MIGRATION.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "target": "SDK-INSTALLATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "target": "SDK-HOST-IMPLEMENTATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "SDK-HOST-LIFECYCLE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "CONSUMER-COMPATIBILITY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "target": "STUDIO-REFERENCE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "SDK-QUICKSTART.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "SDK-API-GUIDE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "SDK-V2-INTEGRATION.md#read-only-inspection-and-motion",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "SDK-V2-INTEGRATION.md#read-only-inspection-and-motion",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "SDK-OPERATION-OUTCOMES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "target": "STUDIO-REFERENCE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-API-GUIDE.md",
+      "target": "SDK-V2-INTEGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-API-GUIDE.md",
+      "target": "SDK-FEATURES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-1.0-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-1.0-RELEASE-NOTES.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-1.0-HISTORY.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.8-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.7-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.6-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.5-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.4.2-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.4.1-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.4-MIGRATION.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "target": "TEMPLATE-IMPORT-WIZARD.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "STUDIO-REDESIGN-HANDOFF.md",
+      "target": "STUDIO-REFERENCE.md",
+      "kind": "local-verified"
+    },
+    {
+      "file": "SDK-1.0-HISTORY.md",
+      "target": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0",
+      "kind": "external-unchecked"
+    },
+    {
+      "file": "SDK-1.0-HISTORY.md",
+      "target": "SDK-README.md",
+      "kind": "local-verified"
+    }
+  ],
+  "uploadFiles": [
+    "sleinity-template-core-2.0.0.tgz",
+    "sleinity-template-browser-2.0.0.tgz",
+    "sleinity-template-react-2.0.0.tgz",
+    "SDK-HOST-STARTER.zip",
+    "SDK-V2-INTEGRATION.md",
+    "SDK-HOST-LIFECYCLE.md",
+    "SDK-2.0-RELEASE-NOTES.md",
+    "SDK-2.0-MIGRATION.md",
+    "SDK-OPERATION-OUTCOMES.md",
+    "SDK-1.0-RELEASE-NOTES.md",
+    "SDK-1.0-MIGRATION.md",
+    "SDK-INSTALLATION.md",
+    "SDK-CAPABILITIES.md",
+    "AGENT-INTEGRATION-PROMPTS.md",
+    "SDK-RELEASE-PREPARATION.md",
+    "SDK-README.md",
+    "SDK-CORE-HANDOFF.md",
+    "SDK-RUNTIME-HANDOFF.md",
+    "TEMPLATE-IMPORT-WIZARD.md",
+    "CONSUMER-COMPATIBILITY.md",
+    "SDK-TROUBLESHOOTING.md",
+    "STUDIO-REFERENCE.md",
+    "GITHUB-SETUP.md",
+    "FIELD-RULES-BROWSER-SESSION.md",
+    "FIELD-RULES-STUDIO-AND-HOSTS.md",
+    "TEMPLATE-RECOVERY.md",
+    "V2-EXAMPLE.md",
+    "FieldRulesV2Host.tsx",
+    "fieldHostLifecycle.ts",
+    "MINIMAL-RENDERER-V2.md",
+    "FAMILY-EXAMPLE-V2.md",
+    "sdk-entry-points.json",
+    "sdk-public-api.json",
+    "SDK-0.8-MIGRATION.md",
+    "SDK-0.7-MIGRATION.md",
+    "SDK-0.6-MIGRATION.md",
+    "SDK-0.5-MIGRATION.md",
+    "SDK-0.4.2-MIGRATION.md",
+    "SDK-0.4.1-MIGRATION.md",
+    "SDK-0.4-MIGRATION.md",
+    "SDK-0.2-TO-0.7-HISTORICAL.md",
+    "SDK-QUICKSTART.md",
+    "SDK-HOST-IMPLEMENTATION.md",
+    "SDK-FEATURES.md",
+    "SDK-API-GUIDE.md",
+    "SDK-HISTORY.md",
+    "STUDIO-REDESIGN-HANDOFF.md",
+    "CompleteHost.tsx",
+    "starterPersistence.ts",
+    "SDK-1.0-HISTORY.md",
+    "SHA256SUMS",
+    "CORE-SHA256SUMS",
+    "SDK-DELIVERY-MANIFEST.json"
+  ]
+}

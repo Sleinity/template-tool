@@ -1,0 +1,521 @@
+{
+  "archiveIdentity": [
+    {
+      "bytes": 487029,
+      "dependencies": {
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3"
+      },
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "name": "@sleinity/template-core",
+      "peerDependencies": {},
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e",
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./family",
+        "./assets",
+        "./fonts",
+        "./motion",
+        "./inspection"
+      ],
+      "version": "2.0.0"
+    },
+    {
+      "bytes": 277369,
+      "dependencies": {
+        "@sleinity/template-core": "workspace:*",
+        "ajv": "^8.20.0",
+        "fflate": "^0.8.3",
+        "html-to-image": "^1.11.13"
+      },
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "name": "@sleinity/template-browser",
+      "peerDependencies": {},
+      "restrictedEntries": [
+        "./session-internal"
+      ],
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2",
+      "supportedEntries": [
+        ".",
+        "./session",
+        "./importer",
+        "./compatibility",
+        "./assets",
+        "./fonts",
+        "./persistence",
+        "./capture",
+        "./enrichment"
+      ],
+      "version": "2.0.0"
+    },
+    {
+      "bytes": 212961,
+      "dependencies": {
+        "@sleinity/template-browser": "workspace:*",
+        "@sleinity/template-core": "workspace:*"
+      },
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "name": "@sleinity/template-react",
+      "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+      },
+      "restrictedEntries": [
+        "./renderer-internal"
+      ],
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9",
+      "supportedEntries": [
+        ".",
+        "./editor",
+        "./inspection"
+      ],
+      "version": "2.0.0"
+    }
+  ],
+  "candidateId": "unpublished-2.0.0-4a5931bd3d72fa33ad3711f1e76e8759b0e91f5e8a9ae69f8497395ccdbbe4e1",
+  "certifiedSourceSha256": "1e79c296cb7d3cbb2326fd3c24628e2d59981b576c3768636708f3281458415c",
+  "creationFilesVerified": 5001,
+  "disposition": {
+    "environmentSha256": "4bf7e4103d6a71a75796cb0a09559162b021b899733ed7f532e953ba79e716aa",
+    "fixtures": [
+      {
+        "embeddedPreviewSha256": "466e7275c87cf7ab115d08727c7e15e6e4cb8a340e17e627615a87414e6b2a30",
+        "id": "exporter-061-now-hiring",
+        "scene": {
+          "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "All 11 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-now-hiring/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. The fitted editor preserves composition under the recorded camera history. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-now-hiring/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. Field outlines are inspection UI and absent from PNG. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-now-hiring/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. The source-sized PNG contains no inspection/application UI. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-now-hiring/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current. Bounds-first scaled inspection remains intentional. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "5e0b7afef598fba6244c65a8937d2f8c748b2e938f90350c6561d2e5156d07c2",
+        "zipSha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+      },
+      {
+        "embeddedPreviewSha256": "0dd23b9bf10fda2f5816c4bbaa0340c9009786591e119ecd6661495cac3fa336",
+        "id": "exporter-061-cover",
+        "scene": {
+          "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "All 28 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-cover/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. The fitted editor preserves composition under the recorded camera history. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-cover/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. Field outlines are inspection UI and absent from PNG. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-cover/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. The source-sized PNG contains no inspection/application UI. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-cover/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border. Bounds-first scaled inspection remains intentional. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "ddff9abd7cb1043f3df557367f666328ad45433506841dbfb47867ebc5abb4b1",
+        "zipSha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+      },
+      {
+        "embeddedPreviewSha256": "d4eec221b3ef201c473795aaa12e6ce75a4f88c945c04604d4333ea8692b135d",
+        "id": "exporter-061-carrousel",
+        "scene": {
+          "cause": "Same-run scene evidence matches unchanged approved semantics/provenance.",
+          "comparison": "pass",
+          "regenerate": "pnpm scene:compare -- --gate sdk-061 --run-id <new-unique-run>",
+          "reviewerRationale": "All 26 source nodes and bounds were cross-checked on all four current surfaces. Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale.",
+          "sourceReview": "reviewed-source-faithful"
+        },
+        "settlement": {
+          "editor": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with editor source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with fields source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with png-export source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "cause": "Current same-run observational settlement equals unchanged approved evidence.",
+            "comparison": "pass",
+            "regenerate": "pnpm settlement:compare -- --gate sdk-061 --fidelity-run <same-run> --run-id <same-run>",
+            "reviewerRationale": "Reviewed with validate source bounds, current media/typography and exact font identity. No new settlement authority or tolerance is inferred.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "surfaces": {
+          "editor": {
+            "candidatePngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-carrousel/editor",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. The fitted editor preserves composition under the recorded camera history. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "fields": {
+            "candidatePngSha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-carrousel/fields",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. Field outlines are inspection UI and absent from PNG. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "png-export": {
+            "candidatePngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-carrousel/png-export",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. The source-sized PNG contains no inspection/application UI. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          },
+          "validate": {
+            "candidatePngSha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+            "capture": "complete-stable",
+            "cause": "Current source, stored captures, exact fonts and structural evidence support this surface.",
+            "comparison": "pass",
+            "evidence": "fidelity/candidates/sdk-2-host-20261016g/exporter-061-carrousel/validate",
+            "priorSourceReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+            "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+            "reviewerRationale": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale. Bounds-first scaled inspection remains intentional. Prior run sdk-2-host-20261016f is explicitly retained as supplementary historical evidence with byte-identical raster output. The current run uses Node 22.23.3/pnpm 11.9.0; the earlier toolchain differs and is not reused as current-run acceptance. Runtime/source equivalence is separately checked. This is a current individual decision, not copied approval.",
+            "sourceReview": "reviewed-source-faithful"
+          }
+        },
+        "templateJsonSha256": "2db62356644280ba849a5b9df8ecdc949d000940091b57ed6ed265d86f8948e5",
+        "zipSha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+      }
+    ],
+    "gate": "sdk-061",
+    "regenerate": "pnpm sdk:gate:061 -- --run-id <new-unique-run>",
+    "runId": "sdk-2-host-20261016g",
+    "schemaVersion": "sdk-061-dispositions-v1"
+  },
+  "environmentChanges": {},
+  "environmentSha256": "4bf7e4103d6a71a75796cb0a09559162b021b899733ed7f532e953ba79e716aa",
+  "historicalReview": "fidelity/gates/archive/sdk-061-dispositions-sdk-2-host-20261016f.json",
+  "manualLiveReview": false,
+  "observations": {
+    "exporter-061-carrousel": "Personally inspected the current stored source/capture sheet: the rotated central image, clipped thumbnails, discount/subtitle badges, two-column composition, headline/CTA/footer and source spelling in-storeee remain intact. The declared rectangular mask and CROP/FILL evidence retain their separate roles. The source-sized PNG retains the historically reviewed 1817 comparator-pixel difference under the R07 native sampling rationale.",
+    "exporter-061-cover": "Personally inspected the current stored source/capture sheet: the phone/hand composition, continuous footer fade, open arrow inside its white circle, outlined Swipe control and footer wordmark preserve source intent. The source-sized PNG retains the historically reviewed 2830 comparator-pixel text/image raster difference; there is no returned hard image edge or duplicate arrow border.",
+    "exporter-061-now-hiring": "Personally inspected the current stored source/capture sheet: the photo subject/aspect, NOW/HIRING corner badges, olive/yellow paints, body wrapping and CTA hierarchy match the exact source intent. The source-sized PNG retains the historically reviewed 340 comparator-pixel raster difference; exact fonts, source bounds and placement evidence remain current."
+  },
+  "protectedIdentitiesUnchanged": 285,
+  "referencePromotion": false,
+  "reviewedAt": "2026-10-16T13:05:14.704Z",
+  "runId": "sdk-2-host-20261016g",
+  "runtimeCheckpointChanges": [
+    {
+      "file": "packages/template-core/package.json",
+      "kind": "version-metadata-only"
+    },
+    {
+      "file": "packages/template-browser/src/import/templateRuntimeSupport.ts",
+      "kind": "whitespace-only-identical-printed-TypeScript"
+    },
+    {
+      "file": "packages/template-browser/src/persistence/assetRepository.ts",
+      "kind": "whitespace-only-identical-printed-TypeScript"
+    },
+    {
+      "file": "packages/template-browser/package.json",
+      "kind": "version-metadata-only"
+    },
+    {
+      "file": "packages/template-react/package.json",
+      "kind": "version-metadata-only"
+    },
+    {
+      "file": "config/sdk-public-api.json",
+      "kind": "API-inventory-version-only"
+    }
+  ],
+  "runtimeCheckpointFiles": 359,
+  "schemaVersion": "sdk-host-release-source-review-v1",
+  "sourceCommit": "9e105073e605b270ee81f92bafc0b54606a01816",
+  "sourceIdentity": "4a5931bd3d72fa33ad3711f1e76e8759b0e91f5e8a9ae69f8497395ccdbbe4e1",
+  "storedCaptureReview": true,
+  "surfaces": [
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "b06bac6cf3696cdc29bae62ef1d55683d9c9befab7bd8ae5417a77d53af311cb",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "02f236952c519213cc0bc061d6211e6bcc54e1b3623d76e7471dd26856d5c734",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "717fd0e6cf432fa88104ce884d4b8706aef10775aac76670454e601a81528715",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 11,
+      "sourceDifference": null,
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-now-hiring",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "0ac7af46825bdad7b9d2fe424236c73af7871241fa22fc8db9c722013d430262",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 11,
+      "sourceDifference": {
+        "percentage": 0.025185185185185185,
+        "pixels": 340
+      },
+      "surface": "png-export"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "7cd53c80311cbc8ab9336ef1797ce3f172b4f8e56cb4d36621fe0dae257a28a3",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "aa7b0058ffbc41bb858bb6c8d960919bcd24ec48aab36dbdf516dc8391860e75",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "8c06998c93be14f32e0e0043b0b0ea3ed61e3e1ed70be26888fb2c2165261c0a",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 28,
+      "sourceDifference": null,
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-cover",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "6b5c076ca055504b437895a44d492a05225241ea014b77cdc8db62d4f22ebf78",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 28,
+      "sourceDifference": {
+        "percentage": 0.19410150891632372,
+        "pixels": 2830
+      },
+      "surface": "png-export"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "0a637aaaea212d633e8410f2f1f998fa203bae0b3c3e5ce9a6d6a4e03795be52",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "surface": "validate"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "f49f8cf99dac7387e601535450aaf9353d581dfae8df94b93ed8322d3c5fb2b2",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "surface": "fields"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 26,
+      "sourceDifference": null,
+      "surface": "editor"
+    },
+    {
+      "fixtureId": "exporter-061-carrousel",
+      "historicalRun": "sdk-2-host-20261016f",
+      "pngSha256": "7ed78fe832f9abeb2f18937c682b7d81e7953ff8c366e629706340332dbe42f8",
+      "priorRasterByteIdentical": true,
+      "sourceBoundsVerified": 26,
+      "sourceDifference": {
+        "percentage": 0.08762538580246913,
+        "pixels": 1817
+      },
+      "surface": "png-export"
+    }
+  ]
+}

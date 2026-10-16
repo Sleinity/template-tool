@@ -1,5 +1,24 @@
 # Renderer Fidelity Status
 
+## SDK 2.0 candidate G certification — GO for publication approval, 2026-10-16
+
+[The current release packet](../architecture/evidence/sdk-host-release-20261016g/certification.json)
+and [host report](../architecture/sdk-host-onboarding.md) supersede pending notes
+below. G passes macOS/Linux archive hosts (eight groups each; four 16-case starters),
+clean Linux portable checks, strict ZIP tests, 32 tooling tests and the individually
+reviewed 24/12/3/12 source-fidelity gate. The shared-action release rehearsal also
+passes input binding/restoration, both reference commands and publication handoff
+preparation. F's isolated simulator defect and G's regression are retained.
+
+SDK archives/starter equal D/E/F; all 285 protected identities remain unchanged.
+No renderer/API/schema/runtime change or reference promotion occurred. Keep the
+current `sdk-v2.0.0` target `c6f489a` until the human approves the final evidence-only
+commit as its replacement. No SDK 2.0.0 package is published. After approval,
+complete protected publication and registry-derived host/asset verification;
+retain existing candidates and the separately recorded certification decision.
+Automated browser coverage and personally reviewed stored captures are distinct;
+manual live/accessibility review and Bas's review have not occurred.
+
 ## SDK 2.0 automation rehearsal correction — 2026-10-16
 
 [The current release report](../architecture/sdk-host-onboarding.md) supersedes

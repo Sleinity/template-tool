@@ -1,5 +1,45 @@
 # SDK 2.0.0 host delivery and certification
 
+## Candidate G — GO for publication approval, 2026-10-16
+
+[The final certification packet](evidence/sdk-host-release-20261016g/certification.json)
+binds immutable `sdk-2-host-20261016g` to source commit `9e10507`, 1,062 certified
+source files and frozen-manifest SHA-256
+`96852f55d8634e72420106110e86e8766bd23fcb1526c514d3e3bbdb066fdfe4`.
+Its three SDK archives and starter equal D, E and F byte for byte. G changes only
+the isolated publication simulator and its executable regression within F's
+certified source scope; no SDK, Studio or example runtime changes are included.
+
+All eight host groups pass on each platform, with npm/pnpm starters passing 16
+checks each under Node 22.23.3/pnpm 11.9.0 and Chromium 149.0.7827.55. Seven literal
+delivered guide examples typecheck against installed archives. Linux's clean
+[certification run](https://github.com/Sleinity/template-tool/actions/runs/38905061349)
+also passes the full portable gate, 32 tooling tests and both reference commands;
+macOS strict ZIP tests pass. The fresh individually reviewed source gate is GO:
+24 stable captures, 12 renderer, three scene and 12 settlement comparisons.
+All 285 protected identities and earlier candidate bytes remain unchanged.
+
+The [shared-action release rehearsal](https://github.com/Sleinity/template-tool/actions/runs/38906939936)
+passes against that successful certification artifact and exact manifest hash.
+It restores inputs through the same composite action as release, runs both
+reference commands and generates the publication handoff/upload inventory.
+Both local npm/pnpm consumers also pass against its simulated publication-context
+guidance. The baseline simulator failure is retained alongside the passing fix.
+Neither simulation contacts the package registry to publish or uploads a Release.
+
+Certification inputs use the human-approved encrypted setup for the same seven
+private ZIP/font identities; raw inputs/key are not committed and decrypted CI
+inputs were removed. The packing manifest remains `not-yet-verified`; certification
+is recorded separately. Stored-capture review and automated browser checks are
+separate evidence classes; manual live/accessibility and Bas review are unperformed.
+
+The current tag remains `sdk-v2.0.0` at `c6f489a`, with no SDK 2.0.0 package or
+public Release. Obtain approval of the final evidence-only commit before replacing
+that tag and publishing. Verify the frozen source scope at that exact target;
+a shipped-source correction requires a new candidate. After publication, verify
+registry-derived packages/assets through the same host workflows before declaring
+the released handoff complete. Bas's checklist is in [Quickstart](../sdk/QUICKSTART.md).
+
 ## Candidate F rehearsal finding; candidate G correction — 2026-10-16
 
 [Candidate F's retained packet](evidence/sdk-host-release-20261016f/progress.json)

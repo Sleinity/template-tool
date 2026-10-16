@@ -1,0 +1,61 @@
+{
+  "status": "prepared",
+  "branch": "codex/sdk-2.0.0-certification-20261016g",
+  "commit": "8e79c68f86f5503e7653315f02b4f7596605d221",
+  "sourceSha256": "1e79c296cb7d3cbb2326fd3c24628e2d59981b576c3768636708f3281458415c",
+  "workspaceSourceSha256": "4a5931bd3d72fa33ad3711f1e76e8759b0e91f5e8a9ae69f8497395ccdbbe4e1",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "bytes": 487029,
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "bytes": 277369,
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "bytes": 212961,
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9"
+    }
+  ],
+  "encryptedFixtures": {
+    "encryptedSha256": "3068210befa968c10374c7015aa1030df2aed17a706ee4205e3de1e45cf34cdc",
+    "files": [
+      {
+        "file": "fixtures/V2 Tests/template-package-now-hiring-v0.6.1.zip",
+        "sha256": "43059fd365c366b4723afc54c03634a84a3adba51cc504efc4d6c9be3d0e6cbc"
+      },
+      {
+        "file": "fixtures/V2 Tests/template-package-cover-v0.6.1.zip",
+        "sha256": "086559ca6e5cf2cc8527ed45638eeaf1669c0081b966bf24f44f5141099d0c09"
+      },
+      {
+        "file": "fixtures/V2 Tests/template-package-carrousel-v0.6.1.zip",
+        "sha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+      },
+      {
+        "file": "fonts/geist-v1.7.2/GeistMono-Medium.ttf",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25"
+      },
+      {
+        "file": "fonts/inter-tight-700-normal.bin",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28"
+      },
+      {
+        "file": "fonts/funnel-display-400-normal.bin",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99"
+      },
+      {
+        "file": "fonts/funnel-sans-400-normal.bin",
+        "sha256": "998a4eb52c6d2e718517f9dcfee774b09db1daca10971cee3ec7bd15602b8c3e"
+      }
+    ]
+  },
+  "plaintextFixturesCommitted": false,
+  "privateKeyCommitted": false,
+  "stagedPathsVerified": true,
+  "published": false
+}

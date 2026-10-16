@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "sdk-host-release-certification-v1",
+  "recordedDate": "2026-10-16",
+  "decision": "GO",
+  "readyForPublicationApproval": true,
+  "version": "2.0.0",
+  "intendedTag": "sdk-v2.0.0",
+  "published": false,
+  "existingTagTarget": "c6f489afd2dff5f1661d36f12091a29dc6537554",
+  "tagMoved": false,
+  "candidateDirectory": "release-verification-artifacts/sdk-2-host-20261016g",
+  "candidateId": "unpublished-2.0.0-4a5931bd3d72fa33ad3711f1e76e8759b0e91f5e8a9ae69f8497395ccdbbe4e1",
+  "sourceCommit": "9e105073e605b270ee81f92bafc0b54606a01816",
+  "creationSourceFiles": 5001,
+  "creationSourceSha256": "4a5931bd3d72fa33ad3711f1e76e8759b0e91f5e8a9ae69f8497395ccdbbe4e1",
+  "certifiedSourceFiles": 1062,
+  "certifiedSourceSha256": "1e79c296cb7d3cbb2326fd3c24628e2d59981b576c3768636708f3281458415c",
+  "frozenManifestSha256": "96852f55d8634e72420106110e86e8766bd23fcb1526c514d3e3bbdb066fdfe4",
+  "deliveryManifestSha256": "1e61a7b72ab8d8aeb93b6535eea095381ad54c8d6db9715a112b5522c64ed4be",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "bytes": 487029,
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "bytes": 277369,
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "bytes": 212961,
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9"
+    }
+  ],
+  "starter": {
+    "file": "SDK-HOST-STARTER.zip",
+    "bytes": 20477,
+    "sha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770"
+  },
+  "gate": {
+    "runId": "sdk-2-host-20261016g",
+    "go": true,
+    "stableCaptures": 24,
+    "rendererComparisons": 12,
+    "sceneComparisons": 3,
+    "settlementComparisons": 12,
+    "sourceReview": "source-review.json"
+  },
+  "platformAcceptance": {
+    "macos": {
+      "status": "pass",
+      "node": "v22.23.3",
+      "arch": "arm64",
+      "groups": 8,
+      "report": "macos/report.json"
+    },
+    "linux": {
+      "status": "pass",
+      "node": "v22.23.3",
+      "arch": "x64",
+      "groups": 8,
+      "report": "linux/report.json",
+      "workflow": "https://github.com/Sleinity/template-tool/actions/runs/38905061349",
+      "sourceSnapshotCommit": "8e79c68f86f5503e7653315f02b4f7596605d221"
+    }
+  },
+  "freshHost": {
+    "scenarioCountPerRun": 16,
+    "runs": [
+      "macos/npm",
+      "macos/pnpm",
+      "linux/npm",
+      "linux/pnpm"
+    ],
+    "starterHashEqualAcrossRuns": true,
+    "pnpm": "11.9.0",
+    "browser": "Chromium 149.0.7827.55",
+    "literalGuideExamplesCompiled": 7
+  },
+  "checks": [
+    {
+      "command": "pnpm ci:portable",
+      "status": "pass",
+      "environment": "clean Linux certification checkout",
+      "evidence": "linux-ci.log.txt.gz"
+    },
+    {
+      "command": "pnpm test:realistic-zip",
+      "status": "pass",
+      "evidence": "strict.log.txt.gz"
+    },
+    {
+      "command": "node --test scripts/candidate-certification/*.test.mjs scripts/release-delivery/*.test.mjs",
+      "status": "pass",
+      "cases": 32,
+      "environments": [
+        "macOS",
+        "clean Linux certification checkout"
+      ],
+      "evidence": "tooling-tests.log.txt.gz"
+    },
+    {
+      "command": "pnpm docs:verify",
+      "status": "pass",
+      "evidence": "docs-final.log.txt.gz"
+    }
+  ],
+  "publicationPreparation": {
+    "status": "pass",
+    "provenance": "test-simulation",
+    "sameSharedActionAsRelease": true,
+    "workflow": "https://github.com/Sleinity/template-tool/actions/runs/38906939936",
+    "sourceCommit": "9e105073e605b270ee81f92bafc0b54606a01816",
+    "certificationRun": "38905061349",
+    "frozenManifestSha256": "96852f55d8634e72420106110e86e8766bd23fcb1526c514d3e3bbdb066fdfe4",
+    "exactArchiveReferenceCommands": "pass",
+    "actualPrepareStep": "pass",
+    "installedArchiveConsumer": {
+      "npm": "pass",
+      "pnpm": "pass"
+    },
+    "uploadInventoryGenerated": true,
+    "uploadExecuted": false,
+    "registryRoundTrip": "Pending separately approved publication"
+  },
+  "fixtureProvisioning": {
+    "humanApproval": "Explicit approval of encrypted CI setup; same seven exact ZIP/font identities as F.",
+    "cipher": "AES-256-GCM",
+    "rawInputsCommitted": false,
+    "keyCommitted": false,
+    "stagedInputFiles": 57,
+    "sourceFilesVerifiedBeforeTransfer": 1062,
+    "artifactRetentionDays": 3,
+    "decryptedLinuxFixturesRemoved": true,
+    "decryptedPreflightFixturesRemoved": true
+  },
+  "supersedes": "sdk-2-host-20261016f",
+  "supersededPacket": "../sdk-host-release-20261016f/progress.json",
+  "nonFinalAttempts": [
+    {
+      "source": "b158199baf06c9d5f59cf9c91b485429684bbb42",
+      "run": "38874449309",
+      "outcome": "Publication stopped before upload: environment/tag policy, then missing tracked historical documentation targets."
+    },
+    {
+      "source": "c6f489afd2dff5f1661d36f12091a29dc6537554",
+      "run": "38877292992",
+      "outcome": "Portable passed; publication stopped before upload because private reference inputs were not restored."
+    },
+    {
+      "candidate": "E",
+      "run": "38881726573",
+      "outcome": "Cancelled; unhydrated isolated source snapshot invalidated acceptance. No result accepted."
+    },
+    {
+      "candidate": "F",
+      "run": "38882581162",
+      "outcome": "Portable, host and source-fidelity checks pass; separate preflight 38884477741 failed isolated simulator dependency setup. Retained without release certification."
+    }
+  ],
+  "sourceDeltaEvidence": "source-delta.json",
+  "regressionEvidence": "simulation-regression.json",
+  "archiveAndStarterBytesEqualDThroughG": true,
+  "protectedIdentitiesUnchanged": 285,
+  "previousCandidateBytesVerified": true,
+  "evidenceClasses": {
+    "automatedBrowser": true,
+    "personallyReviewedStoredCaptureSheets": true,
+    "manualLiveInteractionReview": false,
+    "manualAccessibilityReview": false,
+    "BasPersonalReview": false,
+    "referencePromotion": false
+  },
+  "limitations": [
+    "Chromium acceptance only; no Safari/Firefox certification.",
+    "Offline template reopening after application load, not offline application bootstrap.",
+    "Supplemental Choice/crop configurations are tested derivatives, not additional exporter certifications.",
+    "No runtime or performance improvement claim from this automation correction.",
+    "Publication preparation uses an observable npm-pack substitute; actual registry-derived acceptance follows approved publication.",
+    "Certification input artifact expires after three days; missing/expired input fails closed."
+  ],
+  "finalCommitPolicy": "Only evidence, source-review dispositions and non-delivered status/handoff text may change after this freeze. Verify the certified source scope at the exact proposed release commit. Moving the existing release tag and publication require approval of that final commit.",
+  "stagingInventory": "staging-inventory.json",
+  "publicationStateBeforeApproval": "publication-state-before-approval.json"
+}

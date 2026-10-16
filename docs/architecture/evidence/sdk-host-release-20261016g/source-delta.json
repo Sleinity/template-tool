@@ -1,0 +1,31 @@
+{
+  "baseline": "sdk-2-host-20261016f",
+  "candidate": "sdk-2-host-20261016g",
+  "changed": [
+    {
+      "file": "scripts/release-delivery/simulate-publication.mjs",
+      "bytes": 3798,
+      "sha256": "b49b9e25e67da031d6ecfee92a85a63538ab1420fd2311a3ae3200f71f4aab87"
+    },
+    {
+      "file": "scripts/release-delivery/simulate-publication.test.mjs",
+      "bytes": 1694,
+      "sha256": "4ed08a4d068fc4afd6a73a801200dd3e6a00888ceb7fa7cad90fd66bcb2ca082"
+    }
+  ],
+  "removed": [],
+  "archiveAndStarterBytesEqual": true,
+  "protectedIdentitiesUnchanged": 285,
+  "priorCandidatesBytesVerified": [
+    "d",
+    "e",
+    "f"
+  ],
+  "priorVerification": "Compared files to their retained frozen byte identities; historical guidance is not checked against the changed current documentation contract.",
+  "priorFrozenManifestHashes": {
+    "d": "2633ddb8ed031532292ea04cd51ebb171f9b33f92099f95718c062e5218293bf",
+    "e": "6f4a90a3a6f76a2ac09eb6afb95fde76c5f51b02f26e0fdeaa616d71f3ab6d0b",
+    "f": "4351741a5d424f8fd416957f2395899f1d55c7c8e318a1a407ec01ae7184ff46"
+  },
+  "priorManifestIdentityVerifiedAgainstRetainedPackets": true
+}

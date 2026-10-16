@@ -1,0 +1,36 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: node:internal/fs/promises:639
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/private/var/folders/tp/4117k51d4t38t28l1034z3_h0000gn/T/sdk-publication-path-aDekK6/node_modules/react/package.json'
+    at async open (node:internal/fs/promises:639:25)
+    at async readFile (node:internal/fs/promises:1252:14)
+    at async installed (file:///Users/niels/Documents/Projects/template-tool/scripts/release-delivery/starter.mjs:23:46)
+    at async createStarter (file:///Users/niels/Documents/Projects/template-tool/scripts/release-delivery/starter.mjs:24:33)
+    at async generateDeliveryBundle (file:///Users/niels/Documents/Projects/template-tool/scripts/release-delivery/bundle.mjs:84:41)
+    at async file:///Users/niels/Documents/Projects/template-tool/scripts/release-delivery/cli.mjs:8:20 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/var/folders/tp/4117k51d4t38t28l1034z3_h0000gn/T/sdk-publication-path-aDekK6/node_modules/react/package.json'
+}
+
+Node.js v22.23.3
+
+
+1 !== 0
+
+    at file:///private/var/folders/tp/4117k51d4t38t28l1034z3_h0000gn/T/publication-regression-baseline-5aCTxm/baseline.mjs:16:410 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.23.3
