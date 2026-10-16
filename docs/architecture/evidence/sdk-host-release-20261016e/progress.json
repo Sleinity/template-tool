@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "sdk-release-certification-progress-v1",
+  "candidateId": "unpublished-2.0.0-ff0ab829a8271716f42ffb8a23a6c8adb6310d6a795c3a5bf855e008660d70e6",
+  "sourceCommit": "8a8241f5a7ceb5d3a80286e5967e49713f777d93",
+  "certifiedSourceSha256": "ec4d30966023c953b71f8068a47def41dc45536a626001a4a759c031e0c83248",
+  "sourceFiles": 1059,
+  "frozenManifestSha256": "6f4a90a3a6f76a2ac09eb6afb95fde76c5f51b02f26e0fdeaa616d71f3ab6d0b",
+  "decision": "NOT_READY_FOR_PUBLICATION",
+  "archiveAndStarterIdentity": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e",
+      "equalToD": true
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2",
+      "equalToD": true
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9",
+      "equalToD": true
+    },
+    {
+      "file": "SDK-HOST-STARTER.zip",
+      "sha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770",
+      "equalToD": true
+    }
+  ],
+  "macos": {
+    "status": "pass",
+    "groups": 8,
+    "starterScenariosPerManager": 16,
+    "node": "v22.23.3",
+    "pnpm": "11.9.0",
+    "browser": "149.0.7827.55"
+  },
+  "sourceFidelity": {
+    "runId": "sdk-2-host-20261016e",
+    "go": true,
+    "stableCaptures": 24,
+    "rendererComparisons": 12,
+    "sceneComparisons": 3,
+    "settlementComparisons": 12,
+    "currentStoredCaptureReview": true,
+    "manualLiveReview": false,
+    "protectedIdentitiesUnchanged": 285,
+    "referencePromotion": false
+  },
+  "tooling": {
+    "cases": 29,
+    "status": "pass"
+  },
+  "portableLocal": {
+    "status": "pass",
+    "command": "pnpm ci:portable",
+    "node": "v22.23.3",
+    "pnpm": "11.9.0",
+    "log": "portable.log.txt.gz",
+    "logSha256": "2e01d32609ff3d90e3e66c15dc510d22a419bbc46f7565d9764fdbe74fd455bf"
+  },
+  "linux": "not-run",
+  "releaseInputActionRehearsal": "not-run",
+  "blocker": "Automatic approval review rejected encrypted private ZIP/font transfer and SDK_CERT_FIXTURE_KEY replacement; explicit approval requested and pending. No retry or workaround executed.",
+  "tagTargetUnchanged": "c6f489afd2dff5f1661d36f12091a29dc6537554",
+  "published": false,
+  "evidenceCorrection": {
+    "description": "The temporary review helper initially wrote E records to two D evidence paths. Original D bytes were restored from the unchanged committed packet; E records were moved to E. The helper output path was corrected.",
+    "previousEvidenceRestoredAndVerified": true,
+    "originalDCertificationUnchanged": true
+  },
+  "registryPreflight": {
+    "checkedAt": "2026-10-16T09:30:07.531582+00:00",
+    "packages": [
+      {
+        "package": "@sleinity/template-core",
+        "existingVersions": 13,
+        "2.0.0-present": false
+      },
+      {
+        "package": "@sleinity/template-browser",
+        "existingVersions": 13,
+        "2.0.0-present": false
+      },
+      {
+        "package": "@sleinity/template-react",
+        "existingVersions": 13,
+        "2.0.0-present": false
+      }
+    ]
+  },
+  "currentDocumentation": {
+    "markdownFiles": 262,
+    "localLinks": 910,
+    "status": "pass"
+  },
+  "sourceBindingAfterEvidence": "frozen verify --sources passed"
+}

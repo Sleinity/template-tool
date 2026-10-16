@@ -1,5 +1,19 @@
 # Renderer Fidelity Handoff
 
+## SDK 2.0 release automation correction — 2026-10-16
+
+Continue from [candidate E's progress packet](../architecture/evidence/sdk-host-release-20261016e/progress.json)
+and [the release-input contract](../architecture/sdk-release-automation.md).
+Local macOS npm/pnpm hosts, portable checks, 29 tooling tests and the source-reviewed
+24/12/3/12 gate pass; frozen SDK archives/starter equal D and protected identities
+remain unchanged. Linux and the shared-input-action rehearsal are pending.
+Automatic approval review blocked encrypted private fixture transfer and fixture
+secret replacement before execution; explicit approval was requested. Do not
+retry those actions without it or infer overall certification from local GO.
+Keep the `c6f489a` release tag and prior candidates immutable while completing
+certification, then obtain approval for the final corrected tag target. No SDK
+2.0.0 package has been published and no reference promotion is authorized.
+
 ## SDK 2.0 host release certification — 2026-10-16
 
 [The host-delivery report](../architecture/sdk-host-onboarding.md) and [current candidate packet](../architecture/evidence/sdk-host-release-20261016d/certification.json) record GO for immutable `sdk-2-host-20261016d`: macOS/Linux npm/pnpm acceptance, 24 stable captures, 12 renderer, three scene and 12 settlement comparisons, with individual current stored-source review. D corrects publication-context documentation labels; SDK code/declarations and starter bytes are identical to C. Published 1.0.0 and prior packets remain unchanged. All 285 protected identities remain unchanged; no renderer/API/schema change or reference promotion occurred. The intended tag is `sdk-v2.0.0`; publication/tagging and registry round-trip verification remain separately approved operations.

@@ -1,5 +1,17 @@
 # Renderer Fidelity Status
 
+## SDK 2.0 release automation correction — 2026-10-16
+
+[The release report](../architecture/sdk-host-onboarding.md) records candidate E's
+local checks: all eight macOS npm/pnpm groups, portable checks, 29 tooling tests
+and fresh individually source-reviewed 24/12/3/12 fidelity evidence pass. SDK
+archives and starter bytes equal D; all 285 protected identities remain unchanged.
+Linux and the new shared-input-action rehearsal await explicit approval for
+encrypted private fixture transfer and CI-key replacement, which automatic
+approval review blocked before execution. E is not yet certified for publication.
+No reference promotion or runtime/API/schema change occurred; the existing
+`sdk-v2.0.0` tag remains on `c6f489a`, and SDK 2.0.0 is not published.
+
 ## SDK 2.0 host release certification — 2026-10-16
 
 [The host-delivery report](../architecture/sdk-host-onboarding.md) and [current candidate packet](../architecture/evidence/sdk-host-release-20261016d/certification.json) record GO for immutable `sdk-2-host-20261016d`: macOS/Linux npm/pnpm acceptance, 24 stable captures, 12 renderer, three scene and 12 settlement comparisons, with individual current stored-source review. D corrects publication-context documentation labels; SDK code/declarations and starter bytes are identical to C. Published 1.0.0 and prior packets remain unchanged. All 285 protected identities remain unchanged; no renderer/API/schema change or reference promotion occurred. The intended tag is `sdk-v2.0.0`; publication/tagging and registry round-trip verification remain separately approved operations.

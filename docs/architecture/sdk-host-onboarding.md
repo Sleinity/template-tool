@@ -1,6 +1,6 @@
 # SDK 2.0.0 host delivery and certification
 
-## Release automation correction — in progress, 2026-10-16
+## Release automation correction — local checks pass; CI setup pending, 2026-10-16
 
 The user approved the corrected `c6f489a` tag target. Its
 [Linux release run](https://github.com/Sleinity/template-tool/actions/runs/38877292992)
@@ -15,6 +15,22 @@ adds their clean-checkout/release-path rehearsal and retains portable public CI
 without private-input probes. Candidate E and a new tag-target review are required
 because automation and delivered maintainer guidance changed. Candidate D remains
 immutable; no SDK runtime or example change is included.
+
+[Candidate E's current progress packet](evidence/sdk-host-release-20261016e/progress.json)
+records eight passing macOS npm/pnpm groups, 16 starter scenarios per manager,
+the complete local portable gate and 29 tooling tests. Its fresh source-reviewed
+three-export gate is GO: 24 stable captures, 12 renderer, three scene and 12
+settlement comparisons. The three SDK archives and starter are byte-identical
+to D, and all 285 protected identities are unchanged. This is not yet a complete
+release certification: Linux and the shared certified-input action rehearsal
+have not run.
+
+Automatic approval review rejected the prepared CI setup because it would
+upload encrypted private ZIP/font inputs and replace `SDK_CERT_FIXTURE_KEY`.
+Explicit approval for those data-transfer/secret-setting actions was requested;
+no retry or workaround was executed. E's new source/automation identities remain
+separate from the unchanged certified package bytes. Publication is still stopped
+before package upload, with `sdk-v2.0.0` on the previously approved `c6f489a`.
 
 ## Publication attempt — blocked before upload, 2026-10-16
 

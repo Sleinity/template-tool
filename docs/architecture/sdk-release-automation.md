@@ -48,3 +48,18 @@ or performance change is expected or claimed. A source/delivery correction needs
 new candidate identities; existing candidate D and prior certification remain
 immutable. The new final commit/tag target requires human approval. Record
 automated browser checks separately from stored-capture/source review.
+
+## Current evidence and blocker
+
+[Candidate E](evidence/sdk-host-release-20261016e/progress.json) has passed all
+local npm/pnpm host groups, the complete portable gate, 29 tooling tests and a
+fresh individually reviewed 24-capture/12-renderer/3-scene/12-settlement gate.
+All three SDK archives and the starter remain byte-identical to D. No production
+performance change is claimed.
+
+Automatic approval review blocked `prepare-branch.mjs` before process creation
+because it would transfer encrypted private ZIP/font inputs to GitHub and
+replace the repository fixture secret. Explicit approval is pending; Linux and
+the shared-input-action rehearsal remain unrun. No certification GO for release,
+new tag movement or publication is claimed. The protected publication tag is
+still `c6f489a`.

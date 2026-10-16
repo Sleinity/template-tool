@@ -1,0 +1,800 @@
+{
+  "status": "pass",
+  "manager": "npm",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2"
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9"
+    }
+  ],
+  "chromium": "149.0.7827.55",
+  "fixture": {
+    "id": "exporter-061-carrousel",
+    "sha256": "6bd49eaf67453273f9da99da117d5db35abea9d85cf58af4412336e405f4f904"
+  },
+  "deliveredCopies": true,
+  "evidence": "automated packed focused single-source component with test-only entry scaffold; complete application covered by fresh-host gate; checkpoints test-only; synthetic scenarios separate from source certification",
+  "rows": [
+    {
+      "scenario": "focused lifecycle scaffold ",
+      "status": "pass"
+    },
+    {
+      "scenario": "focused lifecycle scaffold ?fields-v2",
+      "status": "pass"
+    },
+    {
+      "scenario": "focused scaffold ignores retired query",
+      "status": "pass"
+    },
+    {
+      "scenario": "exact Carrousel custom",
+      "status": "pass",
+      "importedColor": null,
+      "resetColor": "#e5b2ff",
+      "importedUrls": 2,
+      "finalReleases": 2,
+      "statsBefore": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/f91ae9cb-718e-4cec-a2ca-99e44c8ed5c4",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/88f46ac6-57d7-41e6-a445-d5304f532599",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/ee62cafe-dbc0-4291-8630-c8198b0b2a22",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 4,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 9,
+        "registryReads": 7,
+        "activations": 1,
+        "commits": 13,
+        "editorCommits": 8
+      },
+      "statsAfter": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/f91ae9cb-718e-4cec-a2ca-99e44c8ed5c4",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/88f46ac6-57d7-41e6-a445-d5304f532599",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/ee62cafe-dbc0-4291-8630-c8198b0b2a22",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 4,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 12,
+        "registryReads": 9,
+        "activations": 1,
+        "commits": 13,
+        "editorCommits": 11
+      },
+      "final": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/f91ae9cb-718e-4cec-a2ca-99e44c8ed5c4",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/88f46ac6-57d7-41e6-a445-d5304f532599",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/ee62cafe-dbc0-4291-8630-c8198b0b2a22",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/f91ae9cb-718e-4cec-a2ca-99e44c8ed5c4",
+          "blob:http://127.0.0.1:58068/88f46ac6-57d7-41e6-a445-d5304f532599"
+        ],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 4,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 20,
+        "registryReads": 18,
+        "activations": 1,
+        "commits": 13,
+        "editorCommits": 21
+      }
+    },
+    {
+      "scenario": "exact Carrousel default",
+      "status": "pass",
+      "importedColor": null,
+      "resetColor": "#e5b2ff",
+      "importedUrls": 2,
+      "finalReleases": 2,
+      "statsBefore": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/a86da2f3-3af8-4586-9432-0723276704ef",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/c6f9b38c-040c-4374-ab96-8fce77838ce6",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/1ec5fc73-0782-4091-bfa7-4378005edf75",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 7,
+        "registryReads": 7,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 5
+      },
+      "statsAfter": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/a86da2f3-3af8-4586-9432-0723276704ef",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/c6f9b38c-040c-4374-ab96-8fce77838ce6",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/1ec5fc73-0782-4091-bfa7-4378005edf75",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 12,
+        "registryReads": 10,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 10
+      },
+      "final": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/a86da2f3-3af8-4586-9432-0723276704ef",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/c6f9b38c-040c-4374-ab96-8fce77838ce6",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/1ec5fc73-0782-4091-bfa7-4378005edf75",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/a86da2f3-3af8-4586-9432-0723276704ef",
+          "blob:http://127.0.0.1:58068/c6f9b38c-040c-4374-ab96-8fce77838ce6"
+        ],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 18,
+        "registryReads": 18,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 18
+      }
+    },
+    {
+      "scenario": "exact Carrousel embedded",
+      "status": "pass",
+      "importedColor": null,
+      "resetColor": "#e5b2ff",
+      "importedUrls": 2,
+      "finalReleases": 2,
+      "statsBefore": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/56fafeaa-5413-4493-be01-d1a0f3dc4c28",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/e03f0686-eea7-418f-89e7-1022fdc0a2fd",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 9,
+        "registryReads": 0,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 8
+      },
+      "statsAfter": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/56fafeaa-5413-4493-be01-d1a0f3dc4c28",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/e03f0686-eea7-418f-89e7-1022fdc0a2fd",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 14,
+        "registryReads": 0,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 13
+      },
+      "final": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/56fafeaa-5413-4493-be01-d1a0f3dc4c28",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/e03f0686-eea7-418f-89e7-1022fdc0a2fd",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/56fafeaa-5413-4493-be01-d1a0f3dc4c28",
+          "blob:http://127.0.0.1:58068/e03f0686-eea7-418f-89e7-1022fdc0a2fd"
+        ],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 2,
+        "uploads": 3,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 20,
+        "registryReads": 0,
+        "activations": 1,
+        "commits": 11,
+        "editorCommits": 21
+      }
+    },
+    {
+      "scenario": "linked-unavailable-correction",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/59b3869d-6771-4ce6-8703-bce9e1b4bb57",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/c24428f5-acc3-403e-9733-5ea7f52617cb",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/b941b207-ee5a-42ba-bdb5-80cd4f1f0d1a",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/59b3869d-6771-4ce6-8703-bce9e1b4bb57",
+          "blob:http://127.0.0.1:58068/c24428f5-acc3-403e-9733-5ea7f52617cb"
+        ],
+        "pipelines": 1,
+        "parses": 1,
+        "preparations": 3,
+        "uploads": 1,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 9,
+        "registryReads": 10,
+        "activations": 1,
+        "commits": 9,
+        "editorCommits": 8
+      }
+    },
+    {
+      "scenario": "cancel-fonts",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/95e458a4-4393-4f95-9a10-cccd69e6ddfd",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/51011b8a-53c1-4de4-8a55-4a6c4b4b9468",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/c03737f8-20a3-4687-a1c1-2ac190adbf46",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/95e458a4-4393-4f95-9a10-cccd69e6ddfd",
+          "blob:http://127.0.0.1:58068/51011b8a-53c1-4de4-8a55-4a6c4b4b9468"
+        ],
+        "pipelines": 1,
+        "parses": 2,
+        "preparations": 2,
+        "uploads": 1,
+        "candidateDisposals": 1,
+        "sessionDisposals": 2,
+        "notifications": 8,
+        "registryReads": 4,
+        "activations": 1,
+        "commits": 10,
+        "editorCommits": 6
+      }
+    },
+    {
+      "scenario": "registry-fonts",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/b8cff2a8-a3a6-4a67-830f-f1fbadd95e08",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/ffb93b59-2fe6-48ba-bf77-9e16ea9990e7",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/77986197-181f-4ae8-9833-c52d98dd4a2a",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/b8cff2a8-a3a6-4a67-830f-f1fbadd95e08",
+          "blob:http://127.0.0.1:58068/ffb93b59-2fe6-48ba-bf77-9e16ea9990e7"
+        ],
+        "pipelines": 1,
+        "parses": 2,
+        "preparations": 2,
+        "uploads": 1,
+        "candidateDisposals": 1,
+        "sessionDisposals": 2,
+        "notifications": 8,
+        "registryReads": 4,
+        "activations": 1,
+        "commits": 12,
+        "editorCommits": 6
+      }
+    },
+    {
+      "scenario": "unmount-fonts",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/69ebe9bf-9ff0-4bd5-a6c9-893c333f5089",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/b2b918d3-d604-4bbd-a3f2-95d725f39d61",
+            "type": "image/svg+xml"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/001af226-52d3-4e5a-9654-8341864b92f6",
+            "type": "font/ttf"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/69ebe9bf-9ff0-4bd5-a6c9-893c333f5089",
+          "blob:http://127.0.0.1:58068/b2b918d3-d604-4bbd-a3f2-95d725f39d61"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 2,
+        "uploads": 1,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 2,
+        "registryReads": 4,
+        "activations": 1,
+        "commits": 5
+      }
+    },
+    {
+      "scenario": "receiving-owner",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/d76f936c-e279-4ea3-a8c8-d55304d93319",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/34c35cc5-8ebe-4f81-8514-83e44607516b",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/d76f936c-e279-4ea3-a8c8-d55304d93319",
+          "blob:http://127.0.0.1:58068/34c35cc5-8ebe-4f81-8514-83e44607516b"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 1,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 1,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 5
+      }
+    },
+    {
+      "scenario": "save-success",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/4c21ae18-c84c-49c6-86bf-fc8c76baf2f2",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/81d24374-e4bc-4b9b-b4d5-2f4834ab1e5a",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/4c21ae18-c84c-49c6-86bf-fc8c76baf2f2",
+          "blob:http://127.0.0.1:58068/81d24374-e4bc-4b9b-b4d5-2f4834ab1e5a"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 1,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 1,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 5
+      }
+    },
+    {
+      "scenario": "save-rejection",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/a840f267-e188-46b6-a906-621eed1f7cc2",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/1cb03fc2-b8be-4245-afc6-02366baa2b68",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/a840f267-e188-46b6-a906-621eed1f7cc2",
+          "blob:http://127.0.0.1:58068/1cb03fc2-b8be-4245-afc6-02366baa2b68"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 1,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 1,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 5
+      }
+    },
+    {
+      "scenario": "cancel-read",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 0,
+        "parses": 0,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 0,
+        "notifications": 0,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 3
+      }
+    },
+    {
+      "scenario": "cancel-pipeline",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/bfe7a74a-b93c-4c34-b573-4e96995b5c65",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/9ad4e37e-2555-4b14-b736-143a86671a7a",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/bfe7a74a-b93c-4c34-b573-4e96995b5c65",
+          "blob:http://127.0.0.1:58068/9ad4e37e-2555-4b14-b736-143a86671a7a"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 0,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 3
+      }
+    },
+    {
+      "scenario": "unmount-pipeline",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/e447edec-1654-4ec2-8090-cb17cbd9a090",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/d99ecaff-8928-4417-8c72-e07212dfc3fe",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/e447edec-1654-4ec2-8090-cb17cbd9a090",
+          "blob:http://127.0.0.1:58068/d99ecaff-8928-4417-8c72-e07212dfc3fe"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 0,
+        "notifications": 0,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 2
+      }
+    },
+    {
+      "scenario": "cancel-staged",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/0233d83a-6894-4d30-b741-97f91dbd8ca7",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/fe7b3018-3dc4-4dd3-9bc3-15d9b2446c38",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/0233d83a-6894-4d30-b741-97f91dbd8ca7",
+          "blob:http://127.0.0.1:58068/fe7b3018-3dc4-4dd3-9bc3-15d9b2446c38"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 1,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 1,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 5
+      }
+    },
+    {
+      "scenario": "staged-load-error",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/f7a17592-cd9c-4359-a421-a5016ecbb7f2",
+            "type": "image/png"
+          },
+          {
+            "url": "blob:http://127.0.0.1:58068/4739d206-8a7a-4d4b-a233-6515f112038b",
+            "type": "image/svg+xml"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/f7a17592-cd9c-4359-a421-a5016ecbb7f2",
+          "blob:http://127.0.0.1:58068/4739d206-8a7a-4d4b-a233-6515f112038b"
+        ],
+        "pipelines": 1,
+        "parses": 0,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 0,
+        "registryReads": 2,
+        "activations": 0,
+        "commits": 3
+      }
+    },
+    {
+      "scenario": "overlap-error",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 0,
+        "parses": 2,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 1,
+        "notifications": 7,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 6,
+        "editorCommits": 6
+      }
+    },
+    {
+      "scenario": "malformed",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 1,
+        "parses": 3,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 1,
+        "sessionDisposals": 1,
+        "notifications": 8,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 11,
+        "editorCommits": 14
+      }
+    },
+    {
+      "scenario": "seven-types",
+      "status": "pass",
+      "stats": {
+        "created": [
+          {
+            "url": "blob:http://127.0.0.1:58068/ec907816-6224-4e6c-b494-e422aa60537d",
+            "type": "image/png"
+          }
+        ],
+        "revoked": [
+          "blob:http://127.0.0.1:58068/ec907816-6224-4e6c-b494-e422aa60537d"
+        ],
+        "pipelines": 0,
+        "parses": 2,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 1,
+        "notifications": 136,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 5,
+        "editorCommits": 137
+      }
+    },
+    {
+      "scenario": "restricted-choices",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 0,
+        "parses": 4,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 2,
+        "notifications": 70,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 9,
+        "editorCommits": 73
+      }
+    },
+    {
+      "scenario": "late-image-error",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 0,
+        "parses": 4,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 2,
+        "notifications": 16,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 9,
+        "editorCommits": 20
+      }
+    },
+    {
+      "scenario": "late-export-error",
+      "status": "pass",
+      "stats": {
+        "created": [],
+        "revoked": [],
+        "pipelines": 0,
+        "parses": 4,
+        "preparations": 0,
+        "uploads": 0,
+        "candidateDisposals": 0,
+        "sessionDisposals": 2,
+        "notifications": 16,
+        "registryReads": 0,
+        "activations": 0,
+        "commits": 9,
+        "editorCommits": 20
+      }
+    }
+  ]
+}
