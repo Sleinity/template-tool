@@ -1,2 +1,0 @@
-$ node scripts/verify-doc-links.mjs
-Documentation links passed: 246 Markdown files, 770 local links.

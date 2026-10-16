@@ -1,9 +1,0 @@
-{
-  "evidence": "executed original release generator plus current generated local bundle/source inspection",
-  "publicationV2GuideMissing": true,
-  "publicationLeadsWithV1": true,
-  "localAnchoredLinkNotRewritten": true,
-  "archiveV2CoverageConditionalOnLocalManifest": true,
-  "changesetRecovery": "minor despite breaking removal",
-  "supersededMigrationPromise": true
-}

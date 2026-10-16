@@ -1,7 +1,0 @@
----
-"@sleinity/template-browser": patch
----
-
-Correct V2 line-evidence invalidation, repairable single-template Crop
-persistence, atomic Family Choice reconciliation, and reference-aware Family
-replacement-asset cleanup without changing public APIs or schemas.
