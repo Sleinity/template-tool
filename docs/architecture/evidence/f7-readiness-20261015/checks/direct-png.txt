@@ -1,1 +1,0 @@
-Direct pending/blocked PNG attempts reject; stale evidence rejects; current settled PNG succeeds.

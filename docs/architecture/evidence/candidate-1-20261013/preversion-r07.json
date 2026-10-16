@@ -1,7 +1,0 @@
-{
-  "status": "pass",
-  "currentRun": "sdk-1-preversion-carrousel-20261013a",
-  "priorRun": "sdk-061-release-delivery-20261013a",
-  "pngSha256": "a75ce8622b75df92f19ff612f5f3e8b97cb1cfe7ba07fe1c5b9ce3337f4ece39",
-  "review": "Retains R07 source-reviewed reference; identical editor rasters. No promotion."
-}

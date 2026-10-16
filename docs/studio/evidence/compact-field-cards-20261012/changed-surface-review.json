@@ -1,6 +1,0 @@
-{
-  "beforeRun": "sdk-061-fields-usability-20261011b",
-  "afterRun": "sdk-061-compact-field-cards-20261012a",
-  "result": "All 12 source-sized captures are byte-identical to the previously reviewed run; no changed surface requires a new source-fidelity disposition.",
-  "surfaces": []
-}

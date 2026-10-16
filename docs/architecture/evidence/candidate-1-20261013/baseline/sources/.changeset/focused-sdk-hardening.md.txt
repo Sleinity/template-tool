@@ -1,8 +1,0 @@
----
-"@sleinity/template-core": patch
-"@sleinity/template-browser": patch
----
-
-Serialize single and Family session saves, bound ZIP decoded output and cumulative reads, add explicit import URL ownership, and expose existing V2 source assembly through the importer entry point. Reuse decoded previews and derive confirmation release metadata from the package manifest while retaining historical Family confirmations.
-
-Complete compatibility-session cancellation cleanup and save-held resource leases. Remove measured pre-materialization copies and cache strict validation only for deeply immutable packages, without changing canonical content, output or readiness semantics.
