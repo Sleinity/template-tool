@@ -1,0 +1,3081 @@
+{
+  "baseline": false,
+  "equalFamily": false,
+  "compatibility": false,
+  "synthetic": true,
+  "sourceCertification": false,
+  "manualReview": false,
+  "instrumentation": "Test-only commit counter and deferred raster barrier; no production source modification.",
+  "environment": {
+    "node": "v22.23.3",
+    "platform": "linux",
+    "arch": "x64",
+    "chromium": "149.0.7827.55",
+    "chromiumExecutable": "/home/runner/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "deviceScaleFactor": 1,
+    "build": "production"
+  },
+  "node": "v22.23.3",
+  "manager": "pnpm",
+  "font": {
+    "id": "rethink-sans-600-normal",
+    "family": "Rethink Sans",
+    "weight": 600,
+    "style": "normal",
+    "sourcePath": "apps/studio/src/assets/fonts/rethink-sans-600.ttf",
+    "byteSize": 59080,
+    "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+    "source": "Repository bundled Studio font",
+    "license": "SIL Open Font License 1.1"
+  },
+  "archives": [
+    {
+      "name": "template-core",
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "sha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e"
+    },
+    {
+      "name": "template-browser",
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "sha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2"
+    },
+    {
+      "name": "template-react",
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "sha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9"
+    }
+  ],
+  "rows": [
+    {
+      "kind": "single",
+      "mode": "custom",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 14,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 2,
+            "blobs": 1,
+            "notifications": 13,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 3
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 7
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 174,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:d54d0db2"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b5ae1a89",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "148794a5",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 22,
+            "blobs": 1,
+            "notifications": 173,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 23
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 87
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 16,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:f320fa2d"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 25,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 31,
+            "blobs": 3,
+            "notifications": 196,
+            "identities": 25,
+            "commits": 0,
+            "readsCompleted": 34
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 22,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "publicationGeneration": 0,
+          "stats": {
+            "records": 61,
+            "blobs": 10,
+            "notifications": 265,
+            "identities": 35,
+            "commits": 0,
+            "readsCompleted": 71
+          },
+          "held": 0,
+          "mounted": false
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "e2eb0b94a404054752b760f0d1918b6dbb291a473acab2df09a91e16370ad685",
+      "exportMs": 78,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 1,
+      "p95EditMs": 1.599999999976717,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "single",
+      "mode": "default",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 15,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 2,
+            "blobs": 1,
+            "notifications": 14,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 3
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 8
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 175,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:d54d0db2"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b5ae1a89",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "148794a5",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 22,
+            "blobs": 1,
+            "notifications": 174,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 23
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 88
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:f320fa2d"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 24,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 30,
+            "blobs": 3,
+            "notifications": 190,
+            "identities": 24,
+            "commits": 0,
+            "readsCompleted": 33
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:f320fa2d"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 24,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 33,
+            "blobs": 4,
+            "notifications": 190,
+            "identities": 24,
+            "commits": 0,
+            "readsCompleted": 37
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "e2eb0b94a404054752b760f0d1918b6dbb291a473acab2df09a91e16370ad685",
+      "exportMs": 78,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 1,
+      "p95EditMs": 1.599999999976717,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "single",
+      "mode": "embedded",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 16,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:27cc8715"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:c51b39ff",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "fc10d45d",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "0f88c803",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 15,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 7
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 176,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:433d7d89"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:2b7df2dd",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "b3d27bc8",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "0f88c803",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 175,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 87
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:88ba1715"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 24,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:59bf4627",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "fc10d45d",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 191,
+            "identities": 24,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:88ba1715"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": null,
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 24,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:59bf4627",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "fc10d45d",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 191,
+            "identities": 24,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "e2eb0b94a404054752b760f0d1918b6dbb291a473acab2df09a91e16370ad685",
+      "exportMs": 74,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 1.8000000000465661,
+      "p95EditMs": 2.700000000069849,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "single",
+      "mode": "missing",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 0,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 0
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "missing-binary",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 1,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 2
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "corrupt",
+      "blocked": true,
+      "nativeState": {
+        "status": "ready",
+        "revision": 20,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is pending.",
+            "Renderer settlement/readiness is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 4,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:ba94cf95",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "504d18e8",
+          "fontRevision": "bead5f4c",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 7,
+          "blobs": 1,
+          "notifications": 19,
+          "identities": 6,
+          "commits": 0,
+          "readsCompleted": 8
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "preparation": {
+        "reliable": false,
+        "exportReady": false,
+        "required": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "missing": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "fallback": [],
+        "unknown": [],
+        "groups": [
+          {
+            "family": "Rethink Sans",
+            "faces": [
+              {
+                "id": "rethink-600",
+                "family": "Rethink Sans",
+                "weight": 600,
+                "style": "normal",
+                "usedBy": [
+                  "headline"
+                ],
+                "characters": "Host font authority",
+                "postScriptName": "RethinkSans-SemiBold",
+                "editable": true,
+                "assetId": "asset:font:523d8be1ea86:0",
+                "resolution": {
+                  "managedFontId": "managed-font:523d8be1ea86:0",
+                  "match": "exact",
+                  "classification": "exact",
+                  "confirmed": true,
+                  "requestId": "rethink-600",
+                  "faceIndex": 0,
+                  "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                  "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                  "effectiveFamily": "Rethink Sans",
+                  "effectiveWeight": 600,
+                  "effectiveStyle": "normal",
+                  "effectiveStretch": "normal",
+                  "effectiveAxes": []
+                },
+                "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                "faceIndex": 0,
+                "status": "missing",
+                "source": "unresolved",
+                "verified": false,
+                "deterministicForExport": false,
+                "glyphCoverage": "unverified"
+              }
+            ]
+          }
+        ],
+        "unverified": []
+      },
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "mismatch",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "face-mismatch",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "rejection",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "single",
+      "mode": "null-managed",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:headline\".",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": null,
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 0,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 0
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "custom",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 14,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 2,
+            "blobs": 1,
+            "notifications": 13,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 3
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 7
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 174,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:d54d0db2"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b5ae1a89",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "148794a5",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 22,
+            "blobs": 1,
+            "notifications": 173,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 23
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 87
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 16,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:73c70a85"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-2",
+          "canvas": {
+            "width": 600,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 26,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:6bfe0459",
+            "packageId": "sdk-session-browser-smoke-second",
+            "packageRevision": "7f863237",
+            "canonicalRevision": "4865fd75",
+            "resolvedRevision": "b0f2cbc4",
+            "backendDecisionRevision": "e4819516",
+            "settlementRevision": "068749d7",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 32,
+            "blobs": 3,
+            "notifications": 204,
+            "identities": 26,
+            "commits": 0,
+            "readsCompleted": 35
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 22,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "publicationGeneration": 0,
+          "stats": {
+            "records": 62,
+            "blobs": 10,
+            "notifications": 274,
+            "identities": 36,
+            "commits": 0,
+            "readsCompleted": 72
+          },
+          "held": 0,
+          "mounted": false
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "723f8fae59601f8aa51565ced5cd8ac2030933134e4f715392a5b0b972bc3374",
+      "exportMs": 64,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 2.299999999930151,
+      "p95EditMs": 3.599999999976717,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "family",
+      "mode": "default",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 15,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:b3fb1f0c"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b98effa5",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "7dcb5d24",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 2,
+            "blobs": 1,
+            "notifications": 14,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 3
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 8
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 175,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:d54d0db2"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:b5ae1a89",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "148794a5",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 22,
+            "blobs": 1,
+            "notifications": 174,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 23
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 88
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:73c70a85"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-2",
+          "canvas": {
+            "width": 600,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 25,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:6bfe0459",
+            "packageId": "sdk-session-browser-smoke-second",
+            "packageRevision": "7f863237",
+            "canonicalRevision": "4865fd75",
+            "resolvedRevision": "b0f2cbc4",
+            "backendDecisionRevision": "e4819516",
+            "settlementRevision": "068749d7",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 31,
+            "blobs": 3,
+            "notifications": 198,
+            "identities": 25,
+            "commits": 0,
+            "readsCompleted": 34
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:73c70a85"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-2",
+          "canvas": {
+            "width": 600,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 25,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:6bfe0459",
+            "packageId": "sdk-session-browser-smoke-second",
+            "packageRevision": "7f863237",
+            "canonicalRevision": "4865fd75",
+            "resolvedRevision": "b0f2cbc4",
+            "backendDecisionRevision": "e4819516",
+            "settlementRevision": "068749d7",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 34,
+            "blobs": 4,
+            "notifications": 198,
+            "identities": 25,
+            "commits": 0,
+            "readsCompleted": 38
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 1,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "723f8fae59601f8aa51565ced5cd8ac2030933134e4f715392a5b0b972bc3374",
+      "exportMs": 81,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 2.099999999976717,
+      "p95EditMs": 2.800000000046566,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "family",
+      "mode": "embedded",
+      "before": {
+        "state": {
+          "status": "ready",
+          "revision": 16,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 0,
+            "materializationRevision": "field-materialization-v1:27cc8715"
+          },
+          "contentRevision": 0,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 1,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:c51b39ff",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "fc10d45d",
+            "canonicalRevision": "b0f42ae3",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "3173afb9",
+            "fontRevision": "89fea53d",
+            "assetRevision": "0f88c803",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 15,
+            "identities": 2,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 7
+        }
+      },
+      "afterTyping": {
+        "state": {
+          "status": "ready",
+          "revision": 176,
+          "operationRevision": 21,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 20,
+            "materializationRevision": "field-materialization-v1:433d7d89"
+          },
+          "contentRevision": 20,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Font edit 19",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-1",
+          "canvas": {
+            "width": 480,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 21,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:2b7df2dd",
+            "packageId": "sdk-session-browser-smoke",
+            "packageRevision": "b3d27bc8",
+            "canonicalRevision": "73f7cd8c",
+            "resolvedRevision": "7b1ac7de",
+            "backendDecisionRevision": "5b929652",
+            "settlementRevision": "9ea54707",
+            "fontRevision": "89fea53d",
+            "assetRevision": "0f88c803",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 175,
+            "identities": 22,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1,
+          "commits": 87
+        }
+      },
+      "typingAfter": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:008c5601"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-2",
+          "canvas": {
+            "width": 600,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 25,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:c0fd094e",
+            "packageId": "sdk-session-browser-smoke-second",
+            "packageRevision": "4d8fcd82",
+            "canonicalRevision": "4865fd75",
+            "resolvedRevision": "b0f2cbc4",
+            "backendDecisionRevision": "e4819516",
+            "settlementRevision": "068749d7",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 199,
+            "identities": 25,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "after": {
+        "state": {
+          "status": "ready",
+          "revision": 9,
+          "operationRevision": 1,
+          "readiness": {
+            "state": "ready",
+            "exportReady": true,
+            "deterministic": "ready",
+            "renderValidation": "ready",
+            "assets": "ready",
+            "fonts": "ready",
+            "renderer": "ready",
+            "reasons": [],
+            "contentRevision": 21,
+            "materializationRevision": "field-materialization-v1:008c5601"
+          },
+          "contentRevision": 21,
+          "field": [
+            {
+              "id": "textarea:headline",
+              "value": "Host font authority",
+              "validation": "valid"
+            }
+          ],
+          "selected": "variant-2",
+          "canvas": {
+            "width": 600,
+            "height": 240,
+            "background": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "coordinateSpace": "figma"
+          },
+          "routedNodes": "2",
+          "publicationGeneration": 25,
+          "identity": {
+            "schemaVersion": "resolved-product-render-identity-v1",
+            "identityId": "product-render:c0fd094e",
+            "packageId": "sdk-session-browser-smoke-second",
+            "packageRevision": "4d8fcd82",
+            "canonicalRevision": "4865fd75",
+            "resolvedRevision": "b0f2cbc4",
+            "backendDecisionRevision": "e4819516",
+            "settlementRevision": "068749d7",
+            "fontRevision": "89fea53d",
+            "assetRevision": "c9b59e8e",
+            "placementRevision": "741638a5",
+            "exportSafety": "safe",
+            "readiness": "ready"
+          },
+          "stats": {
+            "records": 0,
+            "blobs": 0,
+            "notifications": 199,
+            "identities": 25,
+            "commits": 0,
+            "readsCompleted": 0
+          },
+          "held": 0,
+          "mounted": true
+        },
+        "counts": {
+          "urls": 0,
+          "revoked": 0,
+          "activations": 1
+        }
+      },
+      "pngHash": "723f8fae59601f8aa51565ced5cd8ac2030933134e4f715392a5b0b972bc3374",
+      "exportMs": 56,
+      "positiveDownload": "sdk-session-browser-smoke-2026-10-16.png",
+      "medianEditMs": 4.5,
+      "p95EditMs": 5.300000000046566,
+      "downloads": 0,
+      "errors": []
+    },
+    {
+      "kind": "family",
+      "mode": "missing",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 0,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 0
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "missing-binary",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 1,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 2
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "corrupt",
+      "blocked": true,
+      "nativeState": {
+        "status": "ready",
+        "revision": 20,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "pending",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is pending.",
+            "Renderer settlement/readiness is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 4,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:ba94cf95",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "504d18e8",
+          "fontRevision": "bead5f4c",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 7,
+          "blobs": 1,
+          "notifications": 19,
+          "identities": 6,
+          "commits": 0,
+          "readsCompleted": 8
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "preparation": {
+        "reliable": false,
+        "exportReady": false,
+        "required": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "missing": [
+          {
+            "id": "rethink-600",
+            "family": "Rethink Sans",
+            "weight": 600,
+            "style": "normal",
+            "usedBy": [
+              "headline"
+            ],
+            "characters": "Host font authority",
+            "postScriptName": "RethinkSans-SemiBold",
+            "editable": true,
+            "assetId": "asset:font:523d8be1ea86:0",
+            "resolution": {
+              "managedFontId": "managed-font:523d8be1ea86:0",
+              "match": "exact",
+              "classification": "exact",
+              "confirmed": true,
+              "requestId": "rethink-600",
+              "faceIndex": 0,
+              "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+              "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+              "effectiveFamily": "Rethink Sans",
+              "effectiveWeight": 600,
+              "effectiveStyle": "normal",
+              "effectiveStretch": "normal",
+              "effectiveAxes": []
+            },
+            "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+            "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+            "faceIndex": 0,
+            "status": "missing",
+            "source": "unresolved",
+            "verified": false,
+            "deterministicForExport": false,
+            "glyphCoverage": "unverified"
+          }
+        ],
+        "fallback": [],
+        "unknown": [],
+        "groups": [
+          {
+            "family": "Rethink Sans",
+            "faces": [
+              {
+                "id": "rethink-600",
+                "family": "Rethink Sans",
+                "weight": 600,
+                "style": "normal",
+                "usedBy": [
+                  "headline"
+                ],
+                "characters": "Host font authority",
+                "postScriptName": "RethinkSans-SemiBold",
+                "editable": true,
+                "assetId": "asset:font:523d8be1ea86:0",
+                "resolution": {
+                  "managedFontId": "managed-font:523d8be1ea86:0",
+                  "match": "exact",
+                  "classification": "exact",
+                  "confirmed": true,
+                  "requestId": "rethink-600",
+                  "faceIndex": 0,
+                  "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                  "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                  "effectiveFamily": "Rethink Sans",
+                  "effectiveWeight": 600,
+                  "effectiveStyle": "normal",
+                  "effectiveStretch": "normal",
+                  "effectiveAxes": []
+                },
+                "runtimeFamily": "__template_font_523d8be1ea86cb25_0_static",
+                "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+                "faceIndex": 0,
+                "status": "missing",
+                "source": "unresolved",
+                "verified": false,
+                "deterministicForExport": false,
+                "glyphCoverage": "unverified"
+              }
+            ]
+          }
+        ],
+        "unverified": []
+      },
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "mismatch",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "face-mismatch",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "rejection",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 1,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 1
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    },
+    {
+      "kind": "family",
+      "mode": "null-managed",
+      "state": {
+        "status": "ready",
+        "revision": 6,
+        "operationRevision": 1,
+        "readiness": {
+          "state": "blocked",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "blocked",
+          "renderer": "ready",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant.",
+            "Font readiness is blocked."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:b3fb1f0c"
+        },
+        "contentRevision": 0,
+        "field": [
+          {
+            "id": "textarea:headline",
+            "value": "Host font authority",
+            "validation": "pending"
+          }
+        ],
+        "selected": "variant-1",
+        "canvas": {
+          "width": 480,
+          "height": 240,
+          "background": {
+            "r": 1,
+            "g": 1,
+            "b": 1,
+            "a": 1
+          },
+          "coordinateSpace": "figma"
+        },
+        "routedNodes": "2",
+        "publicationGeneration": 1,
+        "identity": {
+          "schemaVersion": "resolved-product-render-identity-v1",
+          "identityId": "product-render:15f9b94d",
+          "packageId": "sdk-session-browser-smoke",
+          "packageRevision": "7dcb5d24",
+          "canonicalRevision": "b0f42ae3",
+          "resolvedRevision": "7b1ac7de",
+          "backendDecisionRevision": "5b929652",
+          "settlementRevision": "399b3164",
+          "fontRevision": "54be1944",
+          "assetRevision": "c9b59e8e",
+          "placementRevision": "741638a5",
+          "exportSafety": "safe",
+          "readiness": "ready"
+        },
+        "stats": {
+          "records": 0,
+          "blobs": 0,
+          "notifications": 5,
+          "identities": 1,
+          "commits": 0,
+          "readsCompleted": 0
+        },
+        "held": 0,
+        "mounted": true
+      },
+      "blocked": true,
+      "downloads": 0
+    }
+  ],
+  "failures": []
+}

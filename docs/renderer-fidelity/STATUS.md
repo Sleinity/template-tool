@@ -1,5 +1,17 @@
 # Renderer Fidelity Status
 
+## SDK 2.0 automation rehearsal correction — 2026-10-16
+
+[The current release report](../architecture/sdk-host-onboarding.md) supersedes
+older pending-approval notes below. Explicit encrypted CI setup is approved.
+F passed macOS/Linux archive hosts, portable/strict checks and the source-reviewed
+24/12/3/12 gate. Its release rehearsal passed fixture restoration and reference
+commands, then exposed missing installed dependencies in the isolated simulator.
+A regression reproduces that failure; the narrow test-only fix passes all 32
+tooling tests. G must renew certification and the rehearsal. No production source,
+reference, tolerance or protected identity changed. Preserve F and earlier packets;
+keep the existing release tag on `c6f489a` pending approval of the final target.
+
 ## SDK 2.0 release automation correction — 2026-10-16
 
 [The release report](../architecture/sdk-host-onboarding.md) records candidate E's

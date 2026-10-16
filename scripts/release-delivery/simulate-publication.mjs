@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';import{readFile,writeFile,mkdir,mkdtemp,symlink,cp,rm}from'node:fs/promises';import{tmpdir}from'node:os';import{join,resolve}from'node:path';import{spawnSync}from'node:child_process';import{verifyDeliveryBundle,readDeliveryArchives}from'./bundle.mjs';
 const archives=resolve(process.argv[2]??'release-verification-artifacts/release-delivery-20261013a'),output=resolve(process.argv[3]??'release-verification-artifacts/release-delivery-publication-simulation-20261013a'),temporary=await mkdtemp(join(tmpdir(),'sdk-publication-path-'));
 const records=await readDeliveryArchives(archives),version=records[0].version;
-try{await mkdir(join(temporary,'bin'));for(const dir of['config','docs','examples','packages'])await symlink(resolve(dir),join(temporary,dir),'dir');await mkdir(join(temporary,'scripts/repository'),{recursive:true});await cp('scripts/repository/sdk-runtime-manifest.mjs',join(temporary,'scripts/repository/sdk-runtime-manifest.mjs'));await symlink(resolve('scripts/release-delivery'),join(temporary,'scripts/release-delivery'),'dir');await writeFile(join(temporary,'bin','npm'),`#!/bin/sh
+try{await mkdir(join(temporary,'bin'));for(const dir of['config','docs','examples','packages','node_modules'])await symlink(resolve(dir),join(temporary,dir),'dir');await mkdir(join(temporary,'scripts/repository'),{recursive:true});await cp('scripts/repository/sdk-runtime-manifest.mjs',join(temporary,'scripts/repository/sdk-runtime-manifest.mjs'));await symlink(resolve('scripts/release-delivery'),join(temporary,'scripts/release-delivery'),'dir');await writeFile(join(temporary,'bin','npm'),`#!/bin/sh
 set -eu
 [ "$1" = pack ] || exit 94
 case "$2" in

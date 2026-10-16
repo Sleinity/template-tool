@@ -1,0 +1,28 @@
+{
+  "status": "not-release-certified",
+  "candidate": "sdk-2-host-20261016f",
+  "sourceCommit": "59c56692508cb7548e0b3ef84c64f50635514fe9",
+  "certifiedSourceSha256": "544225dcfb5c42930907449140df9dc19c791864d1b99e4a8704231754a32f2d",
+  "frozenManifestSha256": "4351741a5d424f8fd416957f2395899f1d55c7c8e318a1a407ec01ae7184ff46",
+  "macosGroups": 8,
+  "linuxGroups": 8,
+  "linuxRun": "https://github.com/Sleinity/template-tool/actions/runs/38882581162",
+  "linuxPortable": "pass",
+  "toolingTests": 31,
+  "strictZip": "pass",
+  "rendererGate": "GO",
+  "captures": 24,
+  "rendererComparisons": 12,
+  "sceneComparisons": 3,
+  "settlementComparisons": 12,
+  "preflightRun": "https://github.com/Sleinity/template-tool/actions/runs/38884477741",
+  "preflightPassed": [
+    "shared certified-input restore and identity checks",
+    "exact prepublication single and Family reference commands"
+  ],
+  "preflightFailed": "Isolated publication simulator omitted node_modules; starter generation could not read react/package.json. No SDK/runtime behavior implicated.",
+  "next": "Retain F; renew certification after the isolated simulator correction and executable regression.",
+  "published": false,
+  "tagMoved": false,
+  "referencePromotion": false
+}

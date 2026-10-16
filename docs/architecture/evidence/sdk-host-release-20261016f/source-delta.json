@@ -1,0 +1,21 @@
+{
+  "changedCertifiedPaths": [
+    ".github/actions/sdk-certified-inputs/action.yml",
+    ".github/workflows/candidate-certification.yml",
+    ".github/workflows/ci.yml",
+    ".github/workflows/release-preflight.yml",
+    ".github/workflows/release.yml",
+    "docs/sdk/GITHUB_SETUP.md",
+    "docs/sdk/RELEASE_PREPARATION.md",
+    "scripts/candidate-certification/prepare-branch.mjs",
+    "scripts/candidate-certification/release-inputs.mjs",
+    "scripts/candidate-certification/release-inputs.test.mjs",
+    "scripts/candidate-certification/snapshot.mjs",
+    "scripts/candidate-certification/snapshot.test.mjs",
+    "scripts/release-delivery/workflow.mjs",
+    "scripts/release-delivery/workflow.test.mjs"
+  ],
+  "runtimeSourcesUnchanged": true,
+  "packageArchiveAndStarterBytesUnchanged": true,
+  "previousCandidate": "sdk-2-host-20261016d"
+}

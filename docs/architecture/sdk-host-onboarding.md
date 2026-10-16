@@ -1,5 +1,24 @@
 # SDK 2.0.0 host delivery and certification
 
+## Candidate F rehearsal finding; candidate G correction — 2026-10-16
+
+[Candidate F's retained packet](evidence/sdk-host-release-20261016f/progress.json)
+records passing macOS/Linux archive hosts, Linux clean portable checks, strict
+ZIP tests and a fresh individually reviewed 24/12/3/12 GO gate. The shared
+certified-input action and both reference commands also passed in the
+[release rehearsal](https://github.com/Sleinity/template-tool/actions/runs/38884477741).
+The subsequent isolated publication simulation failed because it omitted
+`node_modules`, which starter generation needs to read installed tool versions.
+F is not release-certified around that failure.
+
+The bounded correction links installed dependencies into that isolated workspace.
+A new executable regression reproduced the exact failure before the fix and
+passes afterward; all 32 tooling tests pass. Candidate G must renew certification
+and the shared-action rehearsal. SDK/runtime/example source is unchanged; F and
+previous archives/evidence remain immutable. Explicit encrypted CI setup approval
+covers the same seven private inputs and fixture-key replacement. The release tag
+remains on `c6f489a`; no SDK 2.0.0 package is published.
+
 ## Candidate F snapshot correction — in progress, 2026-10-16
 
 The human explicitly approved encrypted fixture transfer and fixture-secret

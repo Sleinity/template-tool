@@ -1,0 +1,1140 @@
+{
+  "capturesComplete": true,
+  "comparisons": {
+    "renderer": [
+      {
+        "fixtureId": "exporter-061-now-hiring",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 415,
+            "width": 307
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 415,
+            "width": 307
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "validate"
+      },
+      {
+        "fixtureId": "exporter-061-now-hiring",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 415,
+            "width": 307
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 415,
+            "width": 307
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "fields"
+      },
+      {
+        "fixtureId": "exporter-061-now-hiring",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 1180,
+            "width": 874
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 1180,
+            "width": 874
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "editor"
+      },
+      {
+        "fixtureId": "exporter-061-now-hiring",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 1350,
+            "width": 1000
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 1350,
+            "width": 1000
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "png-export"
+      },
+      {
+        "fixtureId": "exporter-061-cover",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 415,
+            "width": 333
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 415,
+            "width": 333
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "validate"
+      },
+      {
+        "fixtureId": "exporter-061-cover",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 415,
+            "width": 333
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 415,
+            "width": 333
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "fields"
+      },
+      {
+        "fixtureId": "exporter-061-cover",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 1094,
+            "width": 874
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 1094,
+            "width": 874
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "editor"
+      },
+      {
+        "fixtureId": "exporter-061-cover",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 1350,
+            "width": 1080
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 1350,
+            "width": 1080
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "png-export"
+      },
+      {
+        "fixtureId": "exporter-061-carrousel",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 221,
+            "width": 392
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 221,
+            "width": 392
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "validate"
+      },
+      {
+        "fixtureId": "exporter-061-carrousel",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 221,
+            "width": 392
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 221,
+            "width": 392
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "fields"
+      },
+      {
+        "fixtureId": "exporter-061-carrousel",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 492,
+            "width": 874
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 492,
+            "width": 874
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "editor"
+      },
+      {
+        "fixtureId": "exporter-061-carrousel",
+        "geometry": {
+          "equal": true,
+          "extraNodes": [],
+          "geometryChanges": [],
+          "imagePlacementChanges": [],
+          "missingNodes": [],
+          "reorderedNodes": [],
+          "textGeometryChanges": [],
+          "textMeasurementChanges": [],
+          "tolerances": {
+            "height": 0.25,
+            "image": 0.25,
+            "text": 0.5,
+            "transform": 0.001,
+            "width": 0.25,
+            "x": 0.25,
+            "y": 0.25
+          }
+        },
+        "pixel": {
+          "actualDimensions": {
+            "height": 1080,
+            "width": 1920
+          },
+          "allowedChangedPixelPercentage": 0,
+          "changedPixelCount": 0,
+          "changedPixelPercentage": 0,
+          "differenceBounds": null,
+          "dimensionsEqual": true,
+          "equal": true,
+          "exact": true,
+          "expectedDimensions": {
+            "height": 1080,
+            "width": 1920
+          },
+          "largeRegions": [],
+          "threshold": 0.1
+        },
+        "status": "pass",
+        "surface": "png-export"
+      }
+    ],
+    "scene": [
+      {
+        "approvedPath": "/Users/niels/Documents/Projects/template-tool/fidelity/scene-graph/snapshots/approved/exporter-061-now-hiring/scene.json",
+        "comparison": {
+          "actualSha256": null,
+          "equal": true,
+          "expectedSha256": null,
+          "firstDifference": null
+        },
+        "fixtureId": "exporter-061-now-hiring",
+        "status": "pass"
+      },
+      {
+        "approvedPath": "/Users/niels/Documents/Projects/template-tool/fidelity/scene-graph/snapshots/approved/exporter-061-cover/scene.json",
+        "comparison": {
+          "actualSha256": null,
+          "equal": true,
+          "expectedSha256": null,
+          "firstDifference": null
+        },
+        "fixtureId": "exporter-061-cover",
+        "status": "pass"
+      },
+      {
+        "approvedPath": "/Users/niels/Documents/Projects/template-tool/fidelity/scene-graph/snapshots/approved/exporter-061-carrousel/scene.json",
+        "comparison": {
+          "actualSha256": null,
+          "equal": true,
+          "expectedSha256": null,
+          "firstDifference": null
+        },
+        "fixtureId": "exporter-061-carrousel",
+        "status": "pass"
+      }
+    ],
+    "settlement": [
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-now-hiring",
+        "surface": "validate"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-now-hiring",
+        "surface": "fields"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-now-hiring",
+        "surface": "editor"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-now-hiring",
+        "surface": "png-export"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-cover",
+        "surface": "validate"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-cover",
+        "surface": "fields"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-cover",
+        "surface": "editor"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-cover",
+        "surface": "png-export"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-carrousel",
+        "surface": "validate"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-carrousel",
+        "surface": "fields"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-carrousel",
+        "surface": "editor"
+      },
+      {
+        "equal": true,
+        "files": [
+          {
+            "file": "dependency.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "measurements.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "settled.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "trace.json",
+            "firstDifference": null,
+            "status": "pass"
+          },
+          {
+            "file": "comparison.json",
+            "firstDifference": null,
+            "status": "pass"
+          }
+        ],
+        "fixtureId": "exporter-061-carrousel",
+        "surface": "png-export"
+      }
+    ]
+  },
+  "environment": {
+    "approximateProcessMemoryBytes": 471302144,
+    "approximateSystemMemoryBytes": 17179869184,
+    "architecture": "arm64",
+    "browser": "Chromium",
+    "browserVersion": "149.0.7827.55",
+    "buildIdentifier": "1362f2002557b1202889ecce451470d091285e4c268e847628370fde35edeb34",
+    "captureScale": 1,
+    "devicePixelRatio": 1,
+    "fallbackFonts": [],
+    "fontDecisions": [
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "byteSize": 149328,
+        "classification": "exact",
+        "fontId": "geist-mono-500-normal",
+        "requestedFamily": "Geist Mono",
+        "requestedStyle": "normal",
+        "requestedWeight": 500,
+        "requirementId": "font:geist-mono:medium",
+        "source": "Official Vercel Geist v1.7.2 release asset",
+        "uploadAndLinkMs": 120.3662919999997
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "byteSize": 580572,
+        "classification": "exact",
+        "fontId": "inter-tight-700-normal",
+        "requestedFamily": "Inter Tight",
+        "requestedStyle": "normal",
+        "requestedWeight": 700,
+        "requirementId": "font:inter-tight:bold",
+        "source": "Locally installed Inter Tight variable font",
+        "uploadAndLinkMs": 158.9731670000001
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "byteSize": 55900,
+        "classification": "exact",
+        "fontId": "funnel-display-400-normal",
+        "requestedFamily": "Funnel Display",
+        "requestedStyle": "normal",
+        "requestedWeight": 400,
+        "requirementId": "font:funnel-display:regular",
+        "source": "Locally installed variable font; parsed family and 300–800 weight axis verified",
+        "uploadAndLinkMs": 103.61204200000066
+      },
+      {
+        "action": "Upload exact source-authoritative face",
+        "binaryHash": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "byteSize": 59080,
+        "classification": "exact",
+        "fontId": "rethink-sans-600-normal",
+        "requestedFamily": "Rethink Sans",
+        "requestedStyle": "normal",
+        "requestedWeight": 600,
+        "requirementId": "font:rethink-sans:semibold",
+        "source": "Repository bundled Studio font",
+        "uploadAndLinkMs": 113.03583400000025
+      }
+    ],
+    "fontProfile": "source-authoritative",
+    "fontSources": [
+      {
+        "byteSize": 149328,
+        "family": "Geist Mono",
+        "id": "geist-mono-500-normal",
+        "sha256": "90b15711dc3779b2e64e8aff5228154dd019a90bce4947549c4a8a8a43f2ac25",
+        "style": "normal",
+        "weight": 500
+      },
+      {
+        "byteSize": 580572,
+        "family": "Inter Tight",
+        "id": "inter-tight-700-normal",
+        "sha256": "4b8ef9ed255ebe7341aa566554c0f3e87ee10ce06d2085f07ccf66f41ef96c28",
+        "style": "normal",
+        "weight": 700
+      },
+      {
+        "byteSize": 59080,
+        "family": "Rethink Sans",
+        "id": "rethink-sans-600-normal",
+        "sha256": "523d8be1ea86cb2563d503c8de51bfd2c69ab78cdfb72038873adf9cdfcbe2be",
+        "style": "normal",
+        "weight": 600
+      },
+      {
+        "byteSize": 55900,
+        "family": "Funnel Display",
+        "id": "funnel-display-400-normal",
+        "sha256": "9062978ead3d7a3e8b339e41204a5b551e66bc4a5659fa2c845bb0749431af99",
+        "style": "normal",
+        "weight": 400
+      }
+    ],
+    "gitCommit": null,
+    "loadedFonts": [
+      {
+        "family": "Rethink Sans",
+        "status": "unloaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "100 900"
+      },
+      {
+        "family": "__template_font_90b15711dc3779b2_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "__template_font_4b8ef9ed255ebe73_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "__template_font_9062978ead3d7a3e_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "__template_font_523d8be1ea86cb25_0_static",
+        "status": "loaded",
+        "stretch": "normal",
+        "style": "normal",
+        "weight": "600"
+      }
+    ],
+    "locale": "en-US",
+    "nodeVersion": "v22.23.3",
+    "operatingSystem": "darwin 25.5.0",
+    "packageManager": "pnpm/11.9.0 npm/? node/v22.23.3 darwin arm64",
+    "schemaVersion": 1,
+    "testTimestamp": "2026-10-16T09:47:46.161Z",
+    "timezone": "UTC",
+    "viewport": {
+      "height": 1600,
+      "width": 1440
+    }
+  },
+  "fixtureIds": [
+    "exporter-061-now-hiring",
+    "exporter-061-cover",
+    "exporter-061-carrousel"
+  ],
+  "gate": "sdk-061",
+  "go": false,
+  "results": [
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "public-single"
+    },
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "public-family"
+    },
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "color-browser"
+    },
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "renderer"
+    },
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "scene"
+    },
+    {
+      "error": null,
+      "exitCode": 0,
+      "label": "settlement"
+    },
+    {
+      "error": "SDK gate disposition invalid: cross-run disposition; environment identity differs",
+      "exitCode": 1,
+      "label": "source-review"
+    }
+  ],
+  "runId": "sdk-2-host-20261016f",
+  "schemaVersion": "sdk-061-gate-run-v1",
+  "sourceReview": null
+}
