@@ -1,4 +1,4 @@
-# Prepare the unpublished SDK 2.0.0 release
+# SDK 2.0.0 release preparation
 
 Core, Browser and React are already versioned 2.0.0. This major version is authorized because published 1.0.0 retains V1 APIs removed by the current contract. Preserve all published 1.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.0` operation; stop if that tag/version already exists.
 

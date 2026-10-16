@@ -2,7 +2,9 @@
 
 Build a React/TypeScript template editor for a Sleinity-owned application. Start with the complete host starter; the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
 
-This is the **unpublished 2.0.0 release contract**. Packing and local certification do not mean a version is published. Use one verified delivery; do not combine archives from different candidates.
+<!-- delivery-context:start -->
+This describes the **SDK 2.0.0 contract**. A version label, packing or local certification does not establish publication. Verify delivery provenance and use one verified archive set.
+<!-- delivery-context:end -->
 
 | Identity | Current contract |
 | --- | --- |

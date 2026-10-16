@@ -1,6 +1,8 @@
 # Migrating from SDK 1.0.0 to 2.0.0
 
-SDK 2.0.0 is the upcoming, unpublished fixed train for Core, Browser and React.
+<!-- delivery-context:start -->
+SDK 2.0.0 is the fixed train for Core, Browser and React. Verify delivery provenance; version labels alone do not establish publication.
+<!-- delivery-context:end -->
 The [published 1.0.0 release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v1.0.0)
 and its artifacts remain immutable. Do not mix packages from these releases.
 

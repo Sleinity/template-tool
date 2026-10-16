@@ -1,8 +1,12 @@
-# SDK 2.0.0 candidate release notes
+# SDK 2.0.0 release notes
 
-Core, Browser and React form one upcoming **2.0.0** fixed train. The published
-1.0.0 artifacts remain unchanged. This candidate is not published by packing or
-certification; final tagging and publication require separate approval.
+<!-- delivery-context:start -->
+Core, Browser and React form one 2.0.0 fixed train. Verify the delivery's archive
+identity and provenance; packing and certification are separate from publication.
+<!-- delivery-context:end -->
+
+The published 1.0.0 artifacts remain unchanged. Tagging and publication require
+separate approval; release notes do not authorize them.
 
 ## Breaking changes from 1.0.0
 

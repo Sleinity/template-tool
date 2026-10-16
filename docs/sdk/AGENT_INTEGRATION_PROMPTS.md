@@ -1,8 +1,8 @@
-# Agent prompts for the current unpublished V2 SDK candidate
+# Agent prompts for SDK 2.0.0 V2 hosts
 
 Read [host onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md), [V2 integration](V2_INTEGRATION.md), [capabilities](SDK_CAPABILITIES.md) and
 [release preparation](RELEASE_PREPARATION.md) first. Current archives retain the
-unpublished 2.0.0 candidate label. Identify source and
+2.0.0 version or local-candidate label. Identify source and
 archive hashes before changing a host. Give one track at a time.
 
 ## 1. Audit the host
@@ -16,7 +16,7 @@ Report host/SDK ownership and supported package imports. No Studio, repository
 source, package src/, renderer-internal or session-internal imports.
 ```
 
-## 2. Install the supplied candidate
+## 2. Install one verified delivery
 
 ```text
 Verify LOCAL-CANDIDATE-MANIFEST.json and SHA256SUMS against all supplied archives.

@@ -1,6 +1,6 @@
 # @sleinity/template-core 2.0.0
 
-Portable source reading, strict canonical validation, typed field/Family semantics and read-only inspection. This is an unpublished fixed-train candidate for Sleinity-owned applications.
+Portable source reading, strict canonical validation, typed field/Family semantics and read-only inspection. Part of the fixed-version SDK train for Sleinity-owned applications. Verify the supplied delivery provenance; version labels alone do not establish publication.
 
 Start with [host onboarding](https://github.com/Sleinity/template-tool/blob/f85741a7fbe185dad31484590cdf0906e6932f07/docs/sdk/QUICKSTART.md), [the feature guide](https://github.com/Sleinity/template-tool/blob/f85741a7fbe185dad31484590cdf0906e6932f07/docs/sdk/FEATURES.md) and [supported entries](https://github.com/Sleinity/template-tool/blob/f85741a7fbe185dad31484590cdf0906e6932f07/docs/sdk/API_GUIDE.md). Typical entry: `@sleinity/template-core`. Runtime hosts install all three packages at the same verified version. Core-only consumers need no React.
 

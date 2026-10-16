@@ -57,7 +57,7 @@ Browser-local managed fonts and IndexedDB records are not cross-device artifacts
 
 ## Current admission and persistence
 
-The unpublished 2.0.0 candidate exposes V2 host workflows. ZIP sources must declare schema 1.0 and exporter 0.6.1. Canonical packages remain schema 2.2. V1 confirmation/session/persistence workflows are retired, with no migration or deletion of historical stored bytes. Current V2 records retain their own strict compatibility handling.
+SDK 2.0.0 exposes V2 host workflows. ZIP sources must declare schema 1.0 and exporter 0.6.1. Canonical packages remain schema 2.2. V1 confirmation/session/persistence workflows are retired, with no migration or deletion of historical stored bytes. Current V2 records retain their own strict compatibility handling.
 
 ## Revision and export contract
 
