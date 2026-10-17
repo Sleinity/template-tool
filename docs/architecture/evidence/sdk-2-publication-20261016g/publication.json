@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "sdk-published-handoff-v1",
+  "status": "released-and-verified",
+  "recordedAt": "2026-10-16T14:44:01.098937+00:00",
+  "version": "2.0.0",
+  "releaseCommit": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae",
+  "sdkTag": {
+    "name": "sdk-v2.0.0",
+    "object": "7281f6492d9691370ca18a9b7c94aa50ff07e736",
+    "target": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae"
+  },
+  "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.0",
+  "releaseId": 415064501,
+  "workflow": "https://github.com/Sleinity/template-tool/actions/runs/38911241564/attempts/3",
+  "successfulAttempt": 3,
+  "humanApproval": "Approve tag replacement and publication \u2014 exact G commit, all three packages and registry-derived handoff. Same-source retry and handoff reviews used that approval.",
+  "registry": "https://npm.pkg.github.com",
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "version": "2.0.0",
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "bytes": 487029,
+      "sha256": "e3ab407cdb896faf10966e930612d1932cc340ce78a29e54211a9cdf9dfcaf4c",
+      "integrity": "sha512-nxHGV6Vmkc/thTRwPRNzd90SI1lLbpQMfKjLf5rsM2AFrxXMjGU1rjvHGVRhqh/jdKufQ8Im3LaN7EVTjWef2Q==",
+      "shasum": "0ab2f62d830e1461c6e1e375f7d0dc43e496d537",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-core/2.0.0/0ab2f62d830e1461c6e1e375f7d0dc43e496d537"
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "version": "2.0.0",
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "bytes": 277369,
+      "sha256": "4248973a7cecabbbbea09e76b52b3f45c3a8b1edd0a2fda52a3d52022f5c935f",
+      "integrity": "sha512-myVapp1dqweDgomQsovf4SzgAZZUF7fMthQ6xTUMVD+mb95Rdd0C8yOWWy2NR/i9F2FjpVx2Yy8T4LVtymteEQ==",
+      "shasum": "f367cead9e50c3ef688062840ef6eaec2da8beed",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-browser/2.0.0/f367cead9e50c3ef688062840ef6eaec2da8beed"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "version": "2.0.0",
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "bytes": 212961,
+      "sha256": "d839435b1874c8b2b2d17f06725dde967ccc6ff7f2e39efe434b869490a4674c",
+      "integrity": "sha512-2xMNURBC+YC7AuHwLIujAXA2WItAbBTh0a4KanJzk3EZDBuSuX7ofcwPrtDj7cMOi4k/iPosSQiY0fWA+dwsAQ==",
+      "shasum": "06a72eff090e643bde52c5d03d94c2dce247f356",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-react/2.0.0/06a72eff090e643bde52c5d03d94c2dce247f356"
+    }
+  ],
+  "sourceCertification": {
+    "packet": "../sdk-host-release-20261016g/certification.json",
+    "decision": "GO",
+    "frozenManifestSha256": "96852f55d8634e72420106110e86e8766bd23fcb1526c514d3e3bbdb066fdfe4",
+    "certifiedSourceSha256": "1e79c296cb7d3cbb2326fd3c24628e2d59981b576c3768636708f3281458415c",
+    "runtimeSourceChangedDuringPublication": false,
+    "allPublishedRegularFileContentsEqualCertifiedG": true,
+    "registryTarContainerHashesSeparatelyRecorded": true,
+    "referencePromotion": false
+  },
+  "assets": {
+    "count": 53,
+    "provenance": "registry-download",
+    "anonymousDownload": "pass",
+    "sizesAndGithubDigests": "pass",
+    "completeDeliveryEqualMacTestedInputs": true,
+    "registryAndReleaseTarballsByteIdentical": true,
+    "starterByteIdenticalToCertifiedG": true,
+    "bundleVerification": "49 files; 189 links; fixed 2.0.0 contract",
+    "evidence": "whole-delivery-equivalence.json"
+  },
+  "postPublicationAcceptance": {
+    "macos": {
+      "groups": 8,
+      "allPass": true,
+      "node": "22.23.3",
+      "browser": "149.0.7827.55",
+      "inputProvenance": "Locally generated from direct registry downloads; all 53 files are byte-identical to anonymous public Release downloads.",
+      "report": "macos/report.json"
+    },
+    "linux": {
+      "groups": 8,
+      "allPass": true,
+      "node": "22.23.3",
+      "browser": "149.0.7827.55",
+      "inputProvenance": "Protected handoff from registry downloads before uploading those bytes. Verified by matching archive hashes in four native consumer/starter reports.",
+      "report": "release-success-receipt.json"
+    },
+    "freshStarterChecksPerRun": 16,
+    "freshStarterRuns": 4,
+    "packageManagers": [
+      "npm",
+      "pnpm 11.9.0"
+    ],
+    "literalDeliveredGuideExamplesCompiled": 7,
+    "publicSingleAndFamilyReferences": "pass",
+    "publishedCoreNativeConsumer": "pass",
+    "fontsStorageRecoveryCropPng": "pass",
+    "privateRegistryCredentialsNeededForVendoredHosts": false
+  },
+  "packageVersionTags": {
+    "allThreeRetained": true,
+    "target": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae",
+    "existingVersionTagsReplaced": false,
+    "notes": "Partial attempts did not retain their package tags; retention listed no tag after final attempt. Missing tags were explicitly created without force after registry content verification."
+  },
+  "failedAttempts": [
+    {
+      "attempt": 1,
+      "result": "Core published; Browser/React prepack failed while concurrent dependency builds cleaned declarations.",
+      "receipt": "attempt1-receipt.json",
+      "log": "attempt1-failed.log.txt.gz"
+    },
+    {
+      "attempt": 2,
+      "result": "Core skipped; Browser published; React prepack failed during Browser declaration rebuild.",
+      "receipt": "attempt2-receipt.json",
+      "log": "attempt2-failed.log.txt.gz"
+    }
+  ],
+  "recovery": {
+    "sameApprovedSourceAndWorkflow": true,
+    "protectedEnvironmentReviewApplied": true,
+    "alreadyPublishedVersionsSkipped": true,
+    "packageVersionsOverwritten": false,
+    "credentialScopeChanged": false,
+    "directLocalPublicationAttempted": false
+  },
+  "automationFollowUp": {
+    "status": "required before the next new SDK version train",
+    "scope": [
+      "Serialize prepack/publish or publish verified immutable archives to avoid dependency declaration races.",
+      "Require and verify every expected package-version tag instead of accepting an empty retained-tag list."
+    ],
+    "currentReleaseImpact": "Resolved by same-source protected retries and verified tag retention; no SDK runtime defect or published-content difference was found.",
+    "implementedInThisRelease": false
+  },
+  "protectedIdentitiesUnchanged": 285,
+  "privateFixtureFontsOrKeysInReleaseAssets": false,
+  "decryptedCiFixturesRemoved": true,
+  "evidenceClasses": {
+    "automatedBrowser": true,
+    "sourceFidelityStoredCaptureReview": "Retained G certification; exact shipped regular-file equality binds it to registry/release contents.",
+    "manualLiveInteractionReview": false,
+    "manualAccessibilityReview": false,
+    "BasPersonalReview": false
+  },
+  "limitations": [
+    "Chromium acceptance; Safari/Firefox not certified.",
+    "Offline template reopening after application load, not offline application bootstrap.",
+    "Supplemental field configurations are tested derivatives.",
+    "No new general performance/optimization claim.",
+    "Publication prepack concurrency and expected-tag retention need a future automation correction; released SDK consumption is verified."
+  ],
+  "basOnboarding": {
+    "starter": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HOST-STARTER.zip",
+    "guide": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-QUICKSTART.md",
+    "requires": "All three 2.0.0 archives in vendor/, exporter 0.6.1 ZIPs and licensed exact font inputs."
+  },
+  "finalDocumentationCheck": {
+    "status": "pass",
+    "markdownFiles": 264,
+    "localLinks": 945,
+    "evidence": "documentation.log.txt.gz"
+  }
+}

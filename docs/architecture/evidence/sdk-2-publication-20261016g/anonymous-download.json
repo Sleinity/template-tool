@@ -1,0 +1,434 @@
+{
+  "status": "pass",
+  "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.0",
+  "releaseId": 415064501,
+  "downloadedAt": "2026-10-16T14:40:38.782293+00:00",
+  "authorizationHeaders": false,
+  "curlUserConfigDisabled": true,
+  "assets": [
+    {
+      "file": "AGENT-INTEGRATION-PROMPTS.md",
+      "bytes": 5509,
+      "sha256": "c1cd11c204a94be37bed090e902f0ab0a91748854b8e99cabcfed55795079077",
+      "githubDigest": "sha256:c1cd11c204a94be37bed090e902f0ab0a91748854b8e99cabcfed55795079077",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/AGENT-INTEGRATION-PROMPTS.md",
+      "anonymous": true
+    },
+    {
+      "file": "CompleteHost.tsx",
+      "bytes": 15634,
+      "sha256": "34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca",
+      "githubDigest": "sha256:34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/CompleteHost.tsx",
+      "anonymous": true
+    },
+    {
+      "file": "CONSUMER-COMPATIBILITY.md",
+      "bytes": 4636,
+      "sha256": "d91b1ba2028ef1e5f3ed1a59d6c4290b36bde5ae50309669d37cd4edb9e28d2c",
+      "githubDigest": "sha256:d91b1ba2028ef1e5f3ed1a59d6c4290b36bde5ae50309669d37cd4edb9e28d2c",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/CONSUMER-COMPATIBILITY.md",
+      "anonymous": true
+    },
+    {
+      "file": "CORE-SHA256SUMS",
+      "bytes": 99,
+      "sha256": "823b10f06a26c05f2af9e186ae0641ccd75bdf748c6c4880fc841d02ddcbb1f0",
+      "githubDigest": "sha256:823b10f06a26c05f2af9e186ae0641ccd75bdf748c6c4880fc841d02ddcbb1f0",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/CORE-SHA256SUMS",
+      "anonymous": true
+    },
+    {
+      "file": "FAMILY-EXAMPLE-V2.md",
+      "bytes": 1103,
+      "sha256": "f874a5fd5c883f9f41e0703c79a485e2b71dbf28cf391df36009086364ebb289",
+      "githubDigest": "sha256:f874a5fd5c883f9f41e0703c79a485e2b71dbf28cf391df36009086364ebb289",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/FAMILY-EXAMPLE-V2.md",
+      "anonymous": true
+    },
+    {
+      "file": "FIELD-RULES-BROWSER-SESSION.md",
+      "bytes": 7586,
+      "sha256": "263ce903b9ca4b1103b3eb294331686f15cdb7c56f5be070dde259628e5d4766",
+      "githubDigest": "sha256:263ce903b9ca4b1103b3eb294331686f15cdb7c56f5be070dde259628e5d4766",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/FIELD-RULES-BROWSER-SESSION.md",
+      "anonymous": true
+    },
+    {
+      "file": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "bytes": 14472,
+      "sha256": "7436bdb930ac8fb90edc438f96609a2c12b2c0b728c151d70ba8ef0e1dfd0cc4",
+      "githubDigest": "sha256:7436bdb930ac8fb90edc438f96609a2c12b2c0b728c151d70ba8ef0e1dfd0cc4",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "anonymous": true
+    },
+    {
+      "file": "fieldHostLifecycle.ts",
+      "bytes": 14172,
+      "sha256": "444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681",
+      "githubDigest": "sha256:444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/fieldHostLifecycle.ts",
+      "anonymous": true
+    },
+    {
+      "file": "FieldRulesV2Host.tsx",
+      "bytes": 9443,
+      "sha256": "305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51",
+      "githubDigest": "sha256:305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/FieldRulesV2Host.tsx",
+      "anonymous": true
+    },
+    {
+      "file": "GITHUB-SETUP.md",
+      "bytes": 3672,
+      "sha256": "30fd661df5e2b62e379dd5499390c80d4a0c3262eb94fe269f542a303b9446e5",
+      "githubDigest": "sha256:30fd661df5e2b62e379dd5499390c80d4a0c3262eb94fe269f542a303b9446e5",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/GITHUB-SETUP.md",
+      "anonymous": true
+    },
+    {
+      "file": "MINIMAL-RENDERER-V2.md",
+      "bytes": 391,
+      "sha256": "912021f3a01c7f413fe4f9c1a968264b38f18ed268022020eb2e777cf3590107",
+      "githubDigest": "sha256:912021f3a01c7f413fe4f9c1a968264b38f18ed268022020eb2e777cf3590107",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/MINIMAL-RENDERER-V2.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "bytes": 6925,
+      "sha256": "d1c0101e0635af0ec4f8b8fc1c42bacfd1f37f8e65b83b3c38227f8e0fd6130e",
+      "githubDigest": "sha256:d1c0101e0635af0ec4f8b8fc1c42bacfd1f37f8e65b83b3c38227f8e0fd6130e",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.2-TO-0.7-HISTORICAL.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.4-MIGRATION.md",
+      "bytes": 1802,
+      "sha256": "abfdf131472b357fdd7bbda2f5ef8115e4d9daa7623bf3ca33a63ac17b11b09e",
+      "githubDigest": "sha256:abfdf131472b357fdd7bbda2f5ef8115e4d9daa7623bf3ca33a63ac17b11b09e",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.4-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.4.1-MIGRATION.md",
+      "bytes": 1570,
+      "sha256": "b49feb5e2cb57c4be455bbba655bcf04b744760ef5cd9c5fbed4c21bbd4d1a29",
+      "githubDigest": "sha256:b49feb5e2cb57c4be455bbba655bcf04b744760ef5cd9c5fbed4c21bbd4d1a29",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.4.1-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.4.2-MIGRATION.md",
+      "bytes": 1110,
+      "sha256": "bd06a0dbdc71527ac00ea2b21c5397868c54e1536e661156452067ebae871d24",
+      "githubDigest": "sha256:bd06a0dbdc71527ac00ea2b21c5397868c54e1536e661156452067ebae871d24",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.4.2-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.5-MIGRATION.md",
+      "bytes": 1675,
+      "sha256": "8eb831c3c72302c80ac3d038b8b200537fd9d01bb1504607b00228a8b2badc24",
+      "githubDigest": "sha256:8eb831c3c72302c80ac3d038b8b200537fd9d01bb1504607b00228a8b2badc24",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.5-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.6-MIGRATION.md",
+      "bytes": 5128,
+      "sha256": "ef9d670cafc8190a6d12cbf8e4a87e82cb3fea455288f0d32cad4f884116df88",
+      "githubDigest": "sha256:ef9d670cafc8190a6d12cbf8e4a87e82cb3fea455288f0d32cad4f884116df88",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.6-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.7-MIGRATION.md",
+      "bytes": 3199,
+      "sha256": "546d568bb27f4cd8248b0f4957f10796a0dd756eeaf9c4191abac33a22bbea9e",
+      "githubDigest": "sha256:546d568bb27f4cd8248b0f4957f10796a0dd756eeaf9c4191abac33a22bbea9e",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.7-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-0.8-MIGRATION.md",
+      "bytes": 4816,
+      "sha256": "1dbccd78e809a2c46c8cfccfddc44176ca98c1dbd6e47866ab8eb38955a40855",
+      "githubDigest": "sha256:1dbccd78e809a2c46c8cfccfddc44176ca98c1dbd6e47866ab8eb38955a40855",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-0.8-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-1.0-HISTORY.md",
+      "bytes": 550,
+      "sha256": "d6449027ed3634d5fafed8a6d35c1a454654315c249ea1ff2d0c976fc4cecfc1",
+      "githubDigest": "sha256:d6449027ed3634d5fafed8a6d35c1a454654315c249ea1ff2d0c976fc4cecfc1",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-1.0-HISTORY.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-1.0-MIGRATION.md",
+      "bytes": 2685,
+      "sha256": "6e718e9d7684fc04e3ca73004574b04e4c2ced491e1509eff40a7d94e60f5c26",
+      "githubDigest": "sha256:6e718e9d7684fc04e3ca73004574b04e4c2ced491e1509eff40a7d94e60f5c26",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-1.0-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-1.0-RELEASE-NOTES.md",
+      "bytes": 2201,
+      "sha256": "dc7f69e4382d3151a896203d7cbc0b138287c305beecd6cc74e90b63727cfff5",
+      "githubDigest": "sha256:dc7f69e4382d3151a896203d7cbc0b138287c305beecd6cc74e90b63727cfff5",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-1.0-RELEASE-NOTES.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-2.0-MIGRATION.md",
+      "bytes": 2775,
+      "sha256": "3571defc4eceaedf9e42c418e338b6cc0af8c282d463fa660abb41e3a55f8a2d",
+      "githubDigest": "sha256:3571defc4eceaedf9e42c418e338b6cc0af8c282d463fa660abb41e3a55f8a2d",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-2.0-MIGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-2.0-RELEASE-NOTES.md",
+      "bytes": 2108,
+      "sha256": "5e3be3b9d2064ba9645401cd7cc01d15a18992d8fd155e7975b320cf0c7fbb02",
+      "githubDigest": "sha256:5e3be3b9d2064ba9645401cd7cc01d15a18992d8fd155e7975b320cf0c7fbb02",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-2.0-RELEASE-NOTES.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-API-GUIDE.md",
+      "bytes": 2335,
+      "sha256": "e372559ea156fa9b27dfa3c4d6b67b027e4403d24aa6149a0dfb87972a052d7e",
+      "githubDigest": "sha256:e372559ea156fa9b27dfa3c4d6b67b027e4403d24aa6149a0dfb87972a052d7e",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-API-GUIDE.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-CAPABILITIES.md",
+      "bytes": 3752,
+      "sha256": "fdd4b5257818a6b5527656d43c2ef1f80e0d985c7e5643485ed858785384e37f",
+      "githubDigest": "sha256:fdd4b5257818a6b5527656d43c2ef1f80e0d985c7e5643485ed858785384e37f",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-CAPABILITIES.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-CORE-HANDOFF.md",
+      "bytes": 1567,
+      "sha256": "6e06b63ec1b30b6a8203fe7a2a30b3eacbc310ea5a13b6208c00c6b9939125af",
+      "githubDigest": "sha256:6e06b63ec1b30b6a8203fe7a2a30b3eacbc310ea5a13b6208c00c6b9939125af",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-CORE-HANDOFF.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json",
+      "bytes": 46834,
+      "sha256": "a9745c9347a68da26ee2e26db60be2467d2cfed9db50eb1a9753376b0857c150",
+      "githubDigest": "sha256:a9745c9347a68da26ee2e26db60be2467d2cfed9db50eb1a9753376b0857c150",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-DELIVERY-MANIFEST.json",
+      "anonymous": true
+    },
+    {
+      "file": "sdk-entry-points.json",
+      "bytes": 3736,
+      "sha256": "bbf955ee6f35e5d5c0fdd17abbae04949fce720fbcbedbf137cb5a120f3ea7af",
+      "githubDigest": "sha256:bbf955ee6f35e5d5c0fdd17abbae04949fce720fbcbedbf137cb5a120f3ea7af",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/sdk-entry-points.json",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-FEATURES.md",
+      "bytes": 5268,
+      "sha256": "452c80c92f64016dfbb32a54d7c4447543096dde2e0e98b67a59c80436c37587",
+      "githubDigest": "sha256:452c80c92f64016dfbb32a54d7c4447543096dde2e0e98b67a59c80436c37587",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-FEATURES.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-HISTORY.md",
+      "bytes": 1293,
+      "sha256": "f06a85b63c09ccd3e3a7318c1b7e0fb4d6b7ff3b3f2df909e12ab9727b90a8ff",
+      "githubDigest": "sha256:f06a85b63c09ccd3e3a7318c1b7e0fb4d6b7ff3b3f2df909e12ab9727b90a8ff",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HISTORY.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-HOST-IMPLEMENTATION.md",
+      "bytes": 4852,
+      "sha256": "25a31b3569a3f46986661e31f1a3cc798f06a3a8ced7282dc7e65f0b1c5d47c2",
+      "githubDigest": "sha256:25a31b3569a3f46986661e31f1a3cc798f06a3a8ced7282dc7e65f0b1c5d47c2",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HOST-IMPLEMENTATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-HOST-LIFECYCLE.md",
+      "bytes": 4443,
+      "sha256": "518321935e76273d67fb2dd85b3186bcbecd92eea0cd4763b3317906793343e4",
+      "githubDigest": "sha256:518321935e76273d67fb2dd85b3186bcbecd92eea0cd4763b3317906793343e4",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HOST-LIFECYCLE.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-HOST-STARTER.zip",
+      "bytes": 20477,
+      "sha256": "63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770",
+      "githubDigest": "sha256:63623ee2540fc6270353571f25c42b081f274940b0f99ad0a18bd07a82f83770",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HOST-STARTER.zip",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-INSTALLATION.md",
+      "bytes": 1597,
+      "sha256": "8bd37127ad6da7500056aeba3403956d196f881cf5efa145ed4e812ce67aa27a",
+      "githubDigest": "sha256:8bd37127ad6da7500056aeba3403956d196f881cf5efa145ed4e812ce67aa27a",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-INSTALLATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-OPERATION-OUTCOMES.md",
+      "bytes": 3810,
+      "sha256": "2e2abe0f1d872f0c5a06a3fb0e120b19911a06cfb02651c31e1919efdc6b5e22",
+      "githubDigest": "sha256:2e2abe0f1d872f0c5a06a3fb0e120b19911a06cfb02651c31e1919efdc6b5e22",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-OPERATION-OUTCOMES.md",
+      "anonymous": true
+    },
+    {
+      "file": "sdk-public-api.json",
+      "bytes": 55416,
+      "sha256": "5201e9d5dafa0c146bb4bb2629f8bd7dd30f688719874b09cc2c484702b0640c",
+      "githubDigest": "sha256:5201e9d5dafa0c146bb4bb2629f8bd7dd30f688719874b09cc2c484702b0640c",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/sdk-public-api.json",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-QUICKSTART.md",
+      "bytes": 3462,
+      "sha256": "6357c5e83bc20995ffc293e81cbcc44cc9f81ff23931188aecb7ded94c12b266",
+      "githubDigest": "sha256:6357c5e83bc20995ffc293e81cbcc44cc9f81ff23931188aecb7ded94c12b266",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-QUICKSTART.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-README.md",
+      "bytes": 2354,
+      "sha256": "e24594cf1543b02e5bbb77a0b6d1e432d9319f42ef8b1858d7a87f355df37614",
+      "githubDigest": "sha256:e24594cf1543b02e5bbb77a0b6d1e432d9319f42ef8b1858d7a87f355df37614",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-README.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-RELEASE-PREPARATION.md",
+      "bytes": 3377,
+      "sha256": "3e8490938442d414b43a933415e2572731ebd17a3db28cb2f2fcfd7ac19b35e5",
+      "githubDigest": "sha256:3e8490938442d414b43a933415e2572731ebd17a3db28cb2f2fcfd7ac19b35e5",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-RELEASE-PREPARATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-RUNTIME-HANDOFF.md",
+      "bytes": 2927,
+      "sha256": "b2a9c50e568eae1fbb7432f1321a9789e955205df73142999f2bd1454d6f97a3",
+      "githubDigest": "sha256:b2a9c50e568eae1fbb7432f1321a9789e955205df73142999f2bd1454d6f97a3",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-RUNTIME-HANDOFF.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-TROUBLESHOOTING.md",
+      "bytes": 2671,
+      "sha256": "ac3b3c0c6965ea9c9f654857d34dabd5eb65d6a1b90477d3a2e4a55dcaf791bb",
+      "githubDigest": "sha256:ac3b3c0c6965ea9c9f654857d34dabd5eb65d6a1b90477d3a2e4a55dcaf791bb",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-TROUBLESHOOTING.md",
+      "anonymous": true
+    },
+    {
+      "file": "SDK-V2-INTEGRATION.md",
+      "bytes": 20517,
+      "sha256": "397d91a6b1bb0c7bea45180ed1853145b02da8aa6612c9ec39c7375b9696182d",
+      "githubDigest": "sha256:397d91a6b1bb0c7bea45180ed1853145b02da8aa6612c9ec39c7375b9696182d",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-V2-INTEGRATION.md",
+      "anonymous": true
+    },
+    {
+      "file": "SHA256SUMS",
+      "bytes": 388,
+      "sha256": "e31c00369c563f97e6a972d94d081741f2cf5fd05cf8c6c5b39e39618c64ba5c",
+      "githubDigest": "sha256:e31c00369c563f97e6a972d94d081741f2cf5fd05cf8c6c5b39e39618c64ba5c",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SHA256SUMS",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "bytes": 277369,
+      "sha256": "4248973a7cecabbbbea09e76b52b3f45c3a8b1edd0a2fda52a3d52022f5c935f",
+      "githubDigest": "sha256:4248973a7cecabbbbea09e76b52b3f45c3a8b1edd0a2fda52a3d52022f5c935f",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/sleinity-template-browser-2.0.0.tgz",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "bytes": 487029,
+      "sha256": "e3ab407cdb896faf10966e930612d1932cc340ce78a29e54211a9cdf9dfcaf4c",
+      "githubDigest": "sha256:e3ab407cdb896faf10966e930612d1932cc340ce78a29e54211a9cdf9dfcaf4c",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/sleinity-template-core-2.0.0.tgz",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "bytes": 212961,
+      "sha256": "d839435b1874c8b2b2d17f06725dde967ccc6ff7f2e39efe434b869490a4674c",
+      "githubDigest": "sha256:d839435b1874c8b2b2d17f06725dde967ccc6ff7f2e39efe434b869490a4674c",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/sleinity-template-react-2.0.0.tgz",
+      "anonymous": true
+    },
+    {
+      "file": "starterPersistence.ts",
+      "bytes": 9997,
+      "sha256": "83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9",
+      "githubDigest": "sha256:83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/starterPersistence.ts",
+      "anonymous": true
+    },
+    {
+      "file": "STUDIO-REDESIGN-HANDOFF.md",
+      "bytes": 1742,
+      "sha256": "27d933161dbcb8dc572cd7c8049668bd2d737799197753db018ca7fd69a24a02",
+      "githubDigest": "sha256:27d933161dbcb8dc572cd7c8049668bd2d737799197753db018ca7fd69a24a02",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/STUDIO-REDESIGN-HANDOFF.md",
+      "anonymous": true
+    },
+    {
+      "file": "STUDIO-REFERENCE.md",
+      "bytes": 7341,
+      "sha256": "488ed0c417c5211b28269a5fed2b61492f5544f4113cc9c23675d6ac73f2c690",
+      "githubDigest": "sha256:488ed0c417c5211b28269a5fed2b61492f5544f4113cc9c23675d6ac73f2c690",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/STUDIO-REFERENCE.md",
+      "anonymous": true
+    },
+    {
+      "file": "TEMPLATE-IMPORT-WIZARD.md",
+      "bytes": 10677,
+      "sha256": "2806fd09194d9ef790e4a6ed80d1621448a03139c36d4c166f2b91a7f3f583b9",
+      "githubDigest": "sha256:2806fd09194d9ef790e4a6ed80d1621448a03139c36d4c166f2b91a7f3f583b9",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/TEMPLATE-IMPORT-WIZARD.md",
+      "anonymous": true
+    },
+    {
+      "file": "TEMPLATE-RECOVERY.md",
+      "bytes": 7247,
+      "sha256": "ec4783aa7f502e494ce80633db03adbe07cc1314eebb4cc954c4c783be328503",
+      "githubDigest": "sha256:ec4783aa7f502e494ce80633db03adbe07cc1314eebb4cc954c4c783be328503",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/TEMPLATE-RECOVERY.md",
+      "anonymous": true
+    },
+    {
+      "file": "V2-EXAMPLE.md",
+      "bytes": 1309,
+      "sha256": "506094193f686d5bd44e82839ce6f13370df48af83d2b8be0442ea6cff75de0a",
+      "githubDigest": "sha256:506094193f686d5bd44e82839ce6f13370df48af83d2b8be0442ea6cff75de0a",
+      "url": "https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/V2-EXAMPLE.md",
+      "anonymous": true
+    }
+  ]
+}

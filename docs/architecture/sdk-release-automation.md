@@ -49,7 +49,34 @@ new candidate identities; existing candidate D and prior certification remain
 immutable. The new final commit/tag target requires human approval. Record
 automated browser checks separately from stored-capture/source review.
 
-## Current evidence — candidate G is GO for publication approval
+## Publication result — SDK 2.0.0 released and verified
+
+[The publication packet](evidence/sdk-2-publication-20261016g/publication.json)
+records all three registry versions and 53 public Release assets bound to
+`a1564a9`. Mac/Linux npm/pnpm hosts, exact references, anonymous public downloads
+and complete registry/Release/certified-file equivalence pass. Source-bound G
+certification and all previous immutable artifacts remain separate.
+
+Actual publication exposed a gap in the pack-only rehearsal: Changesets starts
+package prepack builds concurrently, and `--clean` temporarily removes dependency
+declarations. Attempt one published Core; attempt two skipped Core and published
+Browser; attempt three skipped both and published React. All checks and protected
+reviews remained active on the same approved source. Published package regular-file
+bytes match G; their registry tar-container hashes are separately recorded.
+
+The tag-retention step also found no package tags to push. The expected three
+version tags were explicitly created without force at the approved commit after
+registry-content verification. No existing package version/tag was overwritten.
+No source/workflow or credential-scope change was used to complete publication.
+
+Before another new SDK version train, implement a separately verified correction:
+serialize prepack/publish or publish verified immutable archives, rehearse the
+actual publisher lifecycle, and require every expected package tag at the correct
+commit. Do not treat the previous npm-pack substitution as coverage of Changesets
+publication concurrency. This follow-up is outstanding; SDK 2.0.0 host consumption
+and public delivery are verified.
+
+## Prepublication certification record — candidate G
 
 [The final packet](evidence/sdk-host-release-20261016g/certification.json) records
 passing macOS/Linux supplied-archive hosts, the clean Linux portable gate,
@@ -73,6 +100,7 @@ paths; raw inputs/key were absent. Successful certification and rehearsal jobs
 removed decrypted inputs. The three-day artifact must still exist when release
 runs; missing/expired evidence blocks decryption and publication.
 
-The final evidence-only commit requires approval as the new tag target. The
-existing tag remains `c6f489a`; SDK 2.0.0 is not published. Simulated packing is
-separate from the registry-derived acceptance required after approved publication.
+At this prepublication checkpoint, the evidence-only target still required approval
+and the existing tag remained `c6f489a`. The human subsequently approved `a1564a9`;
+actual publication and registry-derived acceptance are recorded above. Simulated
+packing remains separate from actual publisher-lifecycle coverage.

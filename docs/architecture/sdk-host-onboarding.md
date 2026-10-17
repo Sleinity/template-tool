@@ -1,5 +1,35 @@
 # SDK 2.0.0 host delivery and certification
 
+## SDK 2.0.0 — published and verified, 2026-10-16
+
+[The public Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.0)
+contains all three registry-derived archives, 49 delivery files and the manifest
+(53 assets total). [The publication packet](evidence/sdk-2-publication-20261016g/publication.json)
+binds the release and package tags to approved commit `a1564a9`. Every published
+package regular file matches certified G; registry tar-container identities are
+recorded separately. All public archive bytes match direct registry downloads.
+
+Eight host groups pass on each platform, with four npm/pnpm starters passing
+16 checks each. All 53 anonymous public downloads are byte-identical to the
+registry-derived delivery tested on macOS. Linux's protected handoff passed its
+native consumers, fresh hosts, fonts/storage, exact references, visibility and
+cleanup before upload. Source-bound G review remains separately retained; no
+new reference/tolerance/fixture/font or production source change occurred.
+
+The first two protected attempts exposed concurrent prepack declaration races,
+publishing Core then Browser. The final same-source retry published React;
+existing versions were skipped and never overwritten. Missing package-version
+tags were retained explicitly at the approved commit. All attempts are preserved.
+Correct prepack concurrency and expected-tag retention before the next new SDK
+version train; this automation follow-up does not block verified SDK consumption.
+
+Bas can use the [starter](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-HOST-STARTER.zip)
+and [onboarding guide](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.0/SDK-QUICKSTART.md)
+with the three archives in `vendor/`, exporter 0.6.1 ZIPs and licensed exact fonts.
+His personal review follows automated handoff. The [Studio redesign handoff](../sdk/STUDIO_REDESIGN_HANDOFF.md)
+remains the separate next product work; no component extraction or UI redesign
+is included in this release.
+
 ## Candidate G — GO for publication approval, 2026-10-16
 
 [The final certification packet](evidence/sdk-host-release-20261016g/certification.json)

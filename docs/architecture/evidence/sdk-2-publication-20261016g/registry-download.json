@@ -1,0 +1,38 @@
+{
+  "status": "pass",
+  "source": "authenticated direct npm registry download; credential held only in process memory",
+  "registry": "https://npm.pkg.github.com",
+  "version": "2.0.0",
+  "rows": [
+    {
+      "name": "@sleinity/template-core",
+      "version": "2.0.0",
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "bytes": 487029,
+      "sha256": "e3ab407cdb896faf10966e930612d1932cc340ce78a29e54211a9cdf9dfcaf4c",
+      "integrity": "sha512-nxHGV6Vmkc/thTRwPRNzd90SI1lLbpQMfKjLf5rsM2AFrxXMjGU1rjvHGVRhqh/jdKufQ8Im3LaN7EVTjWef2Q==",
+      "shasum": "0ab2f62d830e1461c6e1e375f7d0dc43e496d537",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-core/2.0.0/0ab2f62d830e1461c6e1e375f7d0dc43e496d537"
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "version": "2.0.0",
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "bytes": 277369,
+      "sha256": "4248973a7cecabbbbea09e76b52b3f45c3a8b1edd0a2fda52a3d52022f5c935f",
+      "integrity": "sha512-myVapp1dqweDgomQsovf4SzgAZZUF7fMthQ6xTUMVD+mb95Rdd0C8yOWWy2NR/i9F2FjpVx2Yy8T4LVtymteEQ==",
+      "shasum": "f367cead9e50c3ef688062840ef6eaec2da8beed",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-browser/2.0.0/f367cead9e50c3ef688062840ef6eaec2da8beed"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "version": "2.0.0",
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "bytes": 212961,
+      "sha256": "d839435b1874c8b2b2d17f06725dde967ccc6ff7f2e39efe434b869490a4674c",
+      "integrity": "sha512-2xMNURBC+YC7AuHwLIujAXA2WItAbBTh0a4KanJzk3EZDBuSuX7ofcwPrtDj7cMOi4k/iPosSQiY0fWA+dwsAQ==",
+      "shasum": "06a72eff090e643bde52c5d03d94c2dce247f356",
+      "tarball": "https://npm.pkg.github.com/download/@sleinity/template-react/2.0.0/06a72eff090e643bde52c5d03d94c2dce247f356"
+    }
+  ]
+}

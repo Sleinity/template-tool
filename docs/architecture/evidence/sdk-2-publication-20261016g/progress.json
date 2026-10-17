@@ -1,0 +1,67 @@
+{
+  "status": "released-and-verified",
+  "version": "2.0.0",
+  "releaseCommit": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae",
+  "tag": "sdk-v2.0.0",
+  "workflow": "https://github.com/Sleinity/template-tool/actions/runs/38911241564",
+  "humanApproved": true,
+  "attempt1": {
+    "published": [
+      "@sleinity/template-core@2.0.0"
+    ],
+    "unpublished": [
+      "@sleinity/template-browser@2.0.0",
+      "@sleinity/template-react@2.0.0"
+    ],
+    "failure": "Concurrent prepack rebuilds cleaned dependency declaration outputs during dependent DTS compilation. SDK verification had passed before publication.",
+    "publishedCoreCompleteRegularFileContentsEqualFrozenG": true,
+    "publishedCoreTarContainerEqualFrozenG": false
+  },
+  "recovery": {
+    "attempt": 3,
+    "sameCommitAndSource": true,
+    "sameProtectedWorkflow": true,
+    "skipsAlreadyPublishedVersions": true,
+    "credentialScopeChanged": false,
+    "directLocalPublicationAttempted": false,
+    "remainingUnpublished": [],
+    "noDependencyPackagePrepackExpected": "Core and Browser already published and will be skipped."
+  },
+  "handoffComplete": true,
+  "registryDerivedHostAcceptance": "pass on macOS and Linux; all 53 anonymous public asset bytes equal tested delivery",
+  "attempt2": {
+    "published": [
+      "@sleinity/template-browser@2.0.0"
+    ],
+    "skippedImmutable": [
+      "@sleinity/template-core@2.0.0"
+    ],
+    "unpublished": [
+      "@sleinity/template-react@2.0.0"
+    ],
+    "failure": "React prepack could not resolve Browser font declarations while Browser rebuilt them.",
+    "coreAndBrowserCompleteContentsEqualFrozenG": true
+  },
+  "publishedPackages": [
+    "@sleinity/template-core@2.0.0",
+    "@sleinity/template-browser@2.0.0",
+    "@sleinity/template-react@2.0.0"
+  ],
+  "pendingPackages": [],
+  "attempt3": {
+    "publicationJob": "success",
+    "sourceCommit": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae",
+    "allRegistryPackageRegularFileContentsEqualG": true,
+    "handoff": "success"
+  },
+  "packageTags": {
+    "names": [
+      "@sleinity/template-core@2.0.0",
+      "@sleinity/template-browser@2.0.0",
+      "@sleinity/template-react@2.0.0"
+    ],
+    "commit": "a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae",
+    "existingTagsReplaced": false
+  },
+  "finalReport": "publication.json"
+}

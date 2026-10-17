@@ -1,5 +1,26 @@
 # Renderer Fidelity Handoff
 
+## SDK 2.0.0 published and verified — 2026-10-16
+
+[The public Release](https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.0)
+and [publication packet](../architecture/evidence/sdk-2-publication-20261016g/publication.json)
+record all three registry versions and the SDK/package tags at approved `a1564a9`.
+Every published package regular file equals certified G; all 53 anonymous public
+assets equal the registry-derived delivery tested on macOS. Mac/Linux each pass
+eight host groups and both managers' 16-case starters. Linux's protected handoff
+also passes the exact references, visibility and cleanup. Retained G source review
+is linked by shipped-content identity; no new capture or reference promotion is
+claimed. All 285 protected identities remain unchanged.
+
+Two partial attempts exposed concurrent prepack declaration races; protected
+same-source retries skipped immutable versions until the train was complete.
+Package tags were explicitly retained after verification. Before the next SDK
+version train, correct prepack concurrency and require expected-tag retention.
+This automation follow-up is separate from verified SDK consumption and the
+post-release Studio redesign. Keep released artifacts/tags and earlier evidence
+immutable; no runtime/API/schema, fixture/font or tolerance change is included.
+Bas's personal review and manual live/accessibility review remain unperformed.
+
 ## SDK 2.0 candidate G certification — GO for publication approval, 2026-10-16
 
 [The current release packet](../architecture/evidence/sdk-host-release-20261016g/certification.json)

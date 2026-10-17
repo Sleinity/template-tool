@@ -1,0 +1,3 @@
+a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae	refs/tags/@sleinity/template-browser@2.0.0
+a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae	refs/tags/@sleinity/template-core@2.0.0
+a1564a9ba6cffeacf0ffe14f1c475e6d1bed5cae	refs/tags/@sleinity/template-react@2.0.0

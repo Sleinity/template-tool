@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "rows": [
+    {
+      "name": "@sleinity/template-core",
+      "file": "sleinity-template-core-2.0.0.tgz",
+      "allRegularFileContentsEqualG": true,
+      "frozenSha256": "56b208bcd2c8786285387c946de292064b2473c38b0c790196482c8dabdfe27e",
+      "registrySha256": "e3ab407cdb896faf10966e930612d1932cc340ce78a29e54211a9cdf9dfcaf4c",
+      "archiveBytesEqualG": false
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "file": "sleinity-template-browser-2.0.0.tgz",
+      "allRegularFileContentsEqualG": true,
+      "frozenSha256": "00678379d087b7010fb89bd95d760de99dc2aa3af93b4a5bb0eb29ab4e9434c2",
+      "registrySha256": "4248973a7cecabbbbea09e76b52b3f45c3a8b1edd0a2fda52a3d52022f5c935f",
+      "archiveBytesEqualG": false
+    },
+    {
+      "name": "@sleinity/template-react",
+      "file": "sleinity-template-react-2.0.0.tgz",
+      "allRegularFileContentsEqualG": true,
+      "frozenSha256": "ea8086396a66640491bc092ec2fff37fcb3e44731203505d15deff97429063c9",
+      "registrySha256": "d839435b1874c8b2b2d17f06725dde967ccc6ff7f2e39efe434b869490a4674c",
+      "archiveBytesEqualG": false
+    }
+  ]
+}
