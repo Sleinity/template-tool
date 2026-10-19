@@ -23,6 +23,9 @@ const pnpmExecutable = process.env.TEMPLATE_PNPM_EXECUTABLE ?? "pnpm";
 const manager = process.env.TEMPLATE_CONSUMER_PACKAGE_MANAGER ?? "pnpm";
 const archiveIndex=process.argv.indexOf("--archives");
 const supplied=archiveIndex<0?null:path.resolve(process.argv[archiveIndex+1]);
+// Explicit functional acceptance keeps strict source certification as the default.
+const withoutSourceFidelity = process.argv.includes("--without-source-fidelity");
+if (withoutSourceFidelity && !supplied) throw new Error("Functional acceptance requires supplied archives.");
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -287,7 +290,7 @@ console.log("Packed public V2 ZIP import/edit/save/reload and private-export che
 `);
   console.log(run(process.execPath, ["verify-import.mjs"], { cwd: consumerDirectory }).trim());
 
-  if (supplied) {
+  if (supplied && !withoutSourceFidelity) {
     for (const name of ["single", "family"]) {
       const source = await readFile(path.join(root, `scripts/repository/verify-sdk-061-${name}-host.mjs`), "utf8");
       const relocated = source.replaceAll('"../fidelity/core.mjs"', JSON.stringify(pathToFileURL(path.join(root, "scripts/fidelity/core.mjs")).href))
@@ -297,6 +300,8 @@ console.log("Packed public V2 ZIP import/edit/save/reload and private-export che
       console.log(run(process.execPath, [`verify-exact-${name}.mjs`], { cwd: consumerDirectory }).trim());
     }
   }
+
+  if (withoutSourceFidelity) console.log("Functional archive acceptance: exact-source fidelity checks are outside this run.");
 
   run(process.execPath, [
     path.join(consumerDirectory, "node_modules/typescript/bin/tsc"),

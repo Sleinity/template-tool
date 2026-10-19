@@ -104,3 +104,11 @@ At this prepublication checkpoint, the evidence-only target still required appro
 and the existing tag remained `c6f489a`. The human subsequently approved `a1564a9`;
 actual publication and registry-derived acceptance are recorded above. Simulated
 packing remains separate from actual publisher-lifecycle coverage.
+
+## SDK 2.0.1 patch authorization
+
+On 2026-10-19 the human approved a bounded template-independent functional patch
+release and publication. Its [contract](sdk-2-0-1-patch-release.md) separates
+field-rule regressions and supplied-archive npm/pnpm acceptance from source-pixel
+certification. It publishes verified archives sequentially and verifies every
+package tag; the full certification path for other releases remains in place.

@@ -19,7 +19,8 @@ permissions:
 
 jobs:
   publish:
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/sdk-v')
+    # SDK 2.0.1 uses the separately approved functional patch workflow.
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/sdk-v') && github.ref != 'refs/tags/sdk-v2.0.1'
     runs-on: ubuntu-latest
     environment: private-sdk-release
     steps:

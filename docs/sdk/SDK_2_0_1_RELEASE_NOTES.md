@@ -1,7 +1,7 @@
 # SDK 2.0.1 — bugfix release
 
 <!-- delivery-context:start -->
-Core, Browser and React are versioned 2.0.1. This candidate awaits protected release certification and publication.
+Core, Browser and React are versioned 2.0.1. This candidate uses the approved template-independent functional patch gate before publication.
 <!-- delivery-context:end -->
 
 - Preserve shared Family choices when reordering fields or changing labels and unrelated rules.
@@ -12,5 +12,5 @@ Core, Browser and React are versioned 2.0.1. This candidate awaits protected rel
 No public API, schema or saved-data migration changes. Upgrade Core, Browser and
 React together on the fixed 2.0.1 train.
 
-This patch requires no host migration. The published baseline remains 2.0.0
-until certification and publication complete.
+This patch requires no host migration. Validation covers field-rule regressions
+and installed packages; it does not claim new source-pixel certification.

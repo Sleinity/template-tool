@@ -9,6 +9,7 @@ import { loadSdkEntryPointInventory } from "./sdk-entry-points.mjs";
 
 import { loadDeliveryInventory } from "../release-delivery/bundle.mjs";
 import { assertDeliveryWorkflow } from "../release-delivery/workflow.mjs";
+import { assertPatchWorkflow } from "../release-delivery/patch-workflow.mjs";
 const root = process.cwd();
 const retiredActivePaths = [
   "docs/sdk/BAS_NARROWCASTING_LOVABLE_PROMPTS.md",
@@ -153,6 +154,7 @@ if (
   );
 }
 assertDeliveryWorkflow(workflow);
+assertPatchWorkflow(await readFile(path.join(root, ".github/workflows/sdk-2-0-1-patch.yml"), "utf8"), workflow);
 
 const distribution = await loadRuntimeDistribution(root);
 if (

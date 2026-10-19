@@ -1,0 +1,133 @@
+name: SDK 2.0.1 functional patch release
+
+on:
+  push:
+    branches: [codex/field-rules-patch-2-0-1]
+    tags: [sdk-v2.0.1]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-2.0.1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm ci:portable
+      - run: node --test scripts/release-delivery/*.test.mjs
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Field-rule and choice renderer regressions
+        run: pnpm field-rules:studio
+      - name: Studio draft and setup regressions
+        run: |
+          pnpm studio:drafts
+          pnpm studio:setup
+      - name: Build the sequential patch archive train
+        run: node scripts/release-delivery/patch.mjs pack "$RUNNER_TEMP/sdk-2.0.1-candidate"
+      - name: Test supplied archives with npm and pnpm and rehearse archive publication
+        run: node scripts/release-delivery/patch.mjs accept "$RUNNER_TEMP/sdk-2.0.1-candidate"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sdk-2.0.1-candidate-${{ github.sha }}
+          path: ${{ runner.temp }}/sdk-2.0.1-candidate/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Retain functional regression reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-2.0.1-regressions-${{ github.sha }}
+          path: |
+            fidelity/evidence/field-rules*/**/report.json
+            fidelity/evidence/studio-*/**/report.json
+          retention-days: 7
+          if-no-files-found: warn
+
+  publish:
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v2.0.1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: private-sdk-release
+    permissions:
+      actions: read
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: "@sleinity"
+      - name: Resolve fixed SDK release metadata
+        run: node scripts/repository/sdk-runtime-manifest.mjs env >> "$GITHUB_ENV"
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: sdk-2.0.1-candidate-${{ github.sha }}
+          path: ${{ runner.temp }}/sdk-2.0.1-candidate/
+      - name: Publish only the accepted archives and retain all package tags
+        run: node scripts/release-delivery/patch.mjs publish "$RUNNER_TEMP/sdk-2.0.1-candidate"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare registry-derived delivery
+        run: |
+          mkdir -p release-artifacts
+          while IFS= read -r package_name; do
+            npm pack "${package_name}@${SDK_VERSION}" --registry=https://npm.pkg.github.com --pack-destination=release-artifacts
+          done < <(node scripts/repository/sdk-runtime-manifest.mjs package-names)
+          node scripts/release-delivery/cli.mjs generate --archives release-artifacts --output release-artifacts --mode release --provenance registry-download
+          node scripts/release-delivery/cli.mjs verify release-artifacts
+          node scripts/release-delivery/patch.mjs compare release-artifacts "$RUNNER_TEMP/sdk-2.0.1-candidate"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: pnpm packages:build
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Verify registry-derived archives in secret-free installed hosts
+        run: node scripts/release-delivery/patch.mjs accept release-artifacts
+      - name: Verify published Core consumer
+        run: pnpm published-core:verify
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify distribution and publish the complete GitHub handoff
+        run: |
+          actual_visibility="$(gh api "repos/${GITHUB_REPOSITORY}" --jq .visibility)"
+          test "$actual_visibility" = "$SDK_RELEASE_VISIBILITY"
+          test "$SDK_LICENSE_POLICY" = "sleinity-tools-only"
+          test "$SDK_AUTHORIZED_USE" = "Sleinity-owned applications"
+          release_asset_paths="$(node scripts/release-delivery/cli.mjs upload-paths release-artifacts)"
+          mapfile -t release_assets <<< "$release_asset_paths"
+          gh release view "$SDK_RELEASE_TAG" >/dev/null 2>&1 || gh release create "$SDK_RELEASE_TAG" --verify-tag --draft --title "$SDK_RELEASE_TITLE" --notes-file release-artifacts/SDK-2.0.1-RELEASE-NOTES.md
+          gh release upload "$SDK_RELEASE_TAG" "${release_assets[@]}" --clobber
+          gh release edit "$SDK_RELEASE_TAG" --draft=false --latest --title "$SDK_RELEASE_TITLE" --notes-file release-artifacts/SDK-2.0.1-RELEASE-NOTES.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sdk-2.0.1-publication-acceptance
+          path: release-artifacts/
+          retention-days: 7
+          if-no-files-found: warn

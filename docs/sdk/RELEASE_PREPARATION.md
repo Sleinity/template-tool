@@ -1,8 +1,16 @@
 # SDK 2.0.1 release preparation
 
-Core, Browser and React are versioned 2.0.1 after applying the field-rule patch Changeset. This patch retains the 2.0.0 API and schema contracts. Preserve all published 1.0.0 and 2.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.1` operation; stop if that tag/version already exists. The documented publisher-lifecycle correction and fresh candidate certification remain prerequisites.
+Core, Browser and React are versioned 2.0.1 after applying the field-rule patch Changeset. This patch retains the 2.0.0 API and schema contracts. Preserve all published 1.0.0 and 2.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.1` operation; stop if that tag/version already exists. The human approved a bounded template-independent patch release on 2026-10-19; its workflow retains the protected release environment and publishes accepted archives sequentially.
 
 The current release supports V2 hosts, raw source schema 1.0/exporter 0.6.1 ZIP admission and canonical schema 2.2. Retired V1 workflows are not compatibility routes. Existing current V2 records/resources/recovery remain supported; historical bytes stay untouched. See [release notes](SDK_2_0_1_RELEASE_NOTES.md) and [breaking changes](SDK_2_0_MIGRATION.md).
+
+## Approved 2.0.1 functional patch path
+
+For this field-rule patch only, the repository workflow `.github/workflows/sdk-2-0-1-patch.yml` runs portable CI, field-rule/choice/renderer transactions, Studio drafts/setup, API/boundary checks and delivery mutation tests. It builds the three archives sequentially and validates those exact files in secret-free npm/pnpm consumers, including public import/edit/save/reopen, font authority, blocked storage and PNG currentness. The archive publisher is rehearsed with `npm publish --dry-run --ignore-scripts` and then publishes the same accepted bytes without concurrent prepack builds.
+
+The scope guard permits only the reviewed native session and React field-session changes relative to `sdk-v2.0.0`; API/schema/renderer implementation changes cannot use this path. Archive hashes and source commit bind the acceptance receipt. Registry integrity must match the accepted bytes before all package tags are retained. A retry may reuse already-published versions only when their exact integrity and tag commit match; it never overwrites them. Registry-derived packages undergo installed-consumer acceptance before the draft becomes a public GitHub release.
+
+Private exact-template ZIPs and source-pixel certification are outside this approved patch acceptance. No fixture, font hash, golden or tolerance is replaced or changed. This does not claim new source-fidelity certification. Other SDK releases retain the complete certification process below. The detailed repository contract is `docs/architecture/sdk-2-0-1-patch-release.md`.
 
 ## Review and commit
 
