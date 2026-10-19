@@ -189,7 +189,13 @@ try {
   await page.getByTestId('studio-draft-editor').waitFor(); assert(await page.getByLabel('Amount', { exact: true }).inputValue() === '', 'Invalid input stays visible during attempted navigation');
   await page.getByLabel('Body', { exact: true }).fill('Two lines\nTyped content');
   await page.getByLabel('Amount', { exact: true }).fill('25'); await page.getByLabel('Date', { exact: true }).fill('2026-12-20');
-  await page.getByLabel('Brand', { exact: true }).fill('#112233'); await page.getByLabel('Show body', { exact: true }).uncheck();
+  await page.getByLabel('Brand', { exact: true }).fill('#112233');
+  // Canonical controls queue behind pending painted text validation. A trusted
+  // click may be accepted before React can reflect its final checked state.
+  const showBody = page.getByLabel('Show body', { exact: true });
+  await showBody.click();
+  await page.waitForFunction(input => input?.isConnected && !input.checked, await showBody.elementHandle());
+  assert(!await showBody.isChecked(), 'Queued visibility applies after text validation.');
   await page.getByLabel('Replace Hero', { exact: true }).setInputFiles({ name: 'replacement.svg', mimeType: 'image/svg+xml', buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="red"/></svg>') });
   assert(await page.getByRole('button', { name: 'Fit', exact: true }).count() === 0, 'Draft hides image framing mode controls.');
   assert(await page.getByText('Adjust crop', { exact: true }).count() === 0, 'Draft hides image crop controls.');
