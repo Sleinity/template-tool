@@ -16,6 +16,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      TEMPLATE_PACKAGE_FIXTURE_DIR: ${{ runner.temp }}/sdk-patch-no-private-fixtures
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,7 +38,7 @@ jobs:
       - name: Studio draft and setup regressions
         run: |
           pnpm studio:drafts
-          pnpm studio:setup
+          pnpm studio:setup --without-source-fidelity
       - name: Build the sequential patch archive train
         run: node scripts/release-delivery/patch.mjs pack "$RUNNER_TEMP/sdk-2.0.1-candidate"
       - name: Test supplied archives with npm and pnpm and rehearse archive publication
@@ -63,6 +65,8 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v2.0.1'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      TEMPLATE_PACKAGE_FIXTURE_DIR: ${{ runner.temp }}/sdk-patch-no-private-fixtures
     environment: private-sdk-release
     permissions:
       actions: read

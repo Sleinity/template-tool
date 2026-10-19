@@ -51,6 +51,6 @@ test('acceptance is bound to exact source, archive identities and both installed
 test('patch workflow keeps tag-only protected publication and accepted-byte handoff order', () => assert(assertPatchWorkflow(source, standard)));
 test('patch workflow mutations cannot skip regressions, artifact ownership or registry acceptance', () => {
   for (const changed of [source.replace('tags: [sdk-v2.0.1]', 'tags: [sdk-v*]'), source.replace('needs: verify', 'needs: skipped'), source.replace('environment: private-sdk-release', 'environment: none'),
-    source.replace('pnpm field-rules:studio', 'pnpm skipped'), source.replace('patch.mjs compare', 'patch.mjs skipped'), source.replace('patch.mjs accept release-artifacts', 'patch.mjs skipped release-artifacts'), source.replace('--draft=false', '--draft=true'), source.replace('actions/download-artifact@v4', 'actions/skipped@v4')]) assert.throws(() => assertPatchWorkflow(changed, standard));
+    source.replace('pnpm field-rules:studio', 'pnpm skipped'), source.replace('studio:setup --without-source-fidelity', 'studio:setup'), source.replace('patch.mjs compare', 'patch.mjs skipped'), source.replace('patch.mjs accept release-artifacts', 'patch.mjs skipped release-artifacts'), source.replace('--draft=false', '--draft=true'), source.replace('actions/download-artifact@v4', 'actions/skipped@v4')]) assert.throws(() => assertPatchWorkflow(changed, standard));
   assert.throws(() => assertPatchWorkflow(source, standard.replace("&& github.ref != 'refs/tags/sdk-v2.0.1'", '')));
 });
