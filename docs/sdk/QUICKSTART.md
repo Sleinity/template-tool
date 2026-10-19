@@ -6,9 +6,9 @@ Audience: Bas and other React/TypeScript host implementers. No SDK repository ch
 
 ## Obtain one delivery
 
-Use the approved SDK 2.0.0 delivery when released. Before publication, use the explicitly identified local candidate supplied by the SDK maintainer. The published 1.0.0 release has a different contract; do not substitute its archives.
+Use the approved SDK 2.0.1 delivery when released. Before publication, use the explicitly identified local candidate supplied by the SDK maintainer. The published 1.0.0 release has a different contract; do not substitute its archives.
 
-Obtain all three `sleinity-template-*-2.0.0.tgz` archives, `SHA256SUMS`, the delivery manifest and `SDK-HOST-STARTER.zip`. Verify delivery hashes before use. Unzip the starter into a new application directory and put the three archives in its `vendor/` directory. Its dependencies and pnpm overrides already use these relative files.
+Obtain all three `sleinity-template-*-2.0.1.tgz` archives, `SHA256SUMS`, the delivery manifest and `SDK-HOST-STARTER.zip`. Verify delivery hashes before use. Unzip the starter into a new application directory and put the three archives in its `vendor/` directory. Its dependencies and pnpm overrides already use these relative files.
 
 ```sh
 # In the directory containing the supplied package archives:

@@ -2,6 +2,8 @@
 import { createHash } from "node:crypto";
 
 export const workspaceCoreDeclarationContracts = Object.freeze({
+  // Patch retains the exact published 2.0.0 public declaration.
+  "2.0.1": Object.freeze({ bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" }),
   "2.0.0": Object.freeze({ bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" }),
   // Retained unpublished V2-only draft identity; not the published 1.0 compatibility contract.
   "1.0.0": Object.freeze({ bytes: 105096, sha256: "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263" }),

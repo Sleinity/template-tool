@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-react",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Studio-independent React importing, family editing, rendering, and inspection for template applications.",
   "license": "UNLICENSED",
   "repository": {

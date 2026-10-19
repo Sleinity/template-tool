@@ -18,4 +18,4 @@ Use supported package entries. The delivery contains `sdk-entry-points.json` and
 
 The [complete integration guide](V2_INTEGRATION.md) contains checked TypeScript examples. The [feature guide](FEATURES.md) links behavior to examples and limits. Font and source/evidence contracts retain versioned names such as V1 where required; that is distinct from retired V1 host workflows.
 
-Never import `renderer-internal`, `session-internal`, package `src/`, Studio modules or test adapters. Internal entries may be physically exported for the fixed repository train but are not supported host contracts. No styled editor/control package or general SDK theme API is provided in 2.0.0.
+Never import `renderer-internal`, `session-internal`, package `src/`, Studio modules or test adapters. Internal entries may be physically exported for the fixed repository train but are not supported host contracts. No styled editor/control package or general SDK theme API is provided in 2.0.1.

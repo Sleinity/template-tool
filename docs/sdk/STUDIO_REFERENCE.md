@@ -1,4 +1,4 @@
-# Studio reuse catalogue for SDK 2.0.0
+# Studio reuse catalogue for SDK 2.0.1
 
 Studio is an application reference, not a supported UI package. Bas can reuse public SDK components directly and adapt example/application patterns. Never import Studio modules, package source or internal entries into a host.
 
@@ -24,6 +24,6 @@ Studio uses 100/325 ms input scheduling and 650 ms autosave as product policy. T
 
 ## Reuse limits and next milestone
 
-The source audit exposes coupling to Studio routing, record annotations, draft coordinators, measurement adapters, font-upload state and issue navigation. Before extracting styled SDK components, redesign the intended authoring/output flows and validate them in Studio. See [the redesign handoff](STUDIO_REDESIGN_HANDOFF.md). SDK 2.0.0 adds no styled component exports, universal session, new theme contract or selectable rendering backend.
+The source audit exposes coupling to Studio routing, record annotations, draft coordinators, measurement adapters, font-upload state and issue navigation. Before extracting styled SDK components, redesign the intended authoring/output flows and validate them in Studio. See [the redesign handoff](STUDIO_REDESIGN_HANDOFF.md). SDK 2.0.1 adds no styled component exports, universal session, new theme contract or selectable rendering backend.
 
 Start with [onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). Source references help explain behavior; the released public declarations and candidate-bound starter define the host integration.

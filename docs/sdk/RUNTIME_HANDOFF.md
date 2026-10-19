@@ -1,4 +1,4 @@
-# SDK 2.0.0 host handoff
+# SDK 2.0.1 host handoff
 
 Start with [the first-host guide](QUICKSTART.md), [installation](INSTALLATION.md), [implementation](HOST_IMPLEMENTATION.md) and [features](FEATURES.md). The SDK is an unpublished candidate until the separately approved release completes; verify artifact hashes and provenance.
 

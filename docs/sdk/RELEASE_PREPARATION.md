@@ -1,8 +1,8 @@
-# SDK 2.0.0 release preparation
+# SDK 2.0.1 release preparation
 
-Core, Browser and React are already versioned 2.0.0. This major version is authorized because published 1.0.0 retains V1 APIs removed by the current contract. Preserve all published 1.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.0` operation; stop if that tag/version already exists.
+Core, Browser and React are versioned 2.0.1 after applying the field-rule patch Changeset. This patch retains the 2.0.0 API and schema contracts. Preserve all published 1.0.0 and 2.0.0 artifacts. Publication requires a separately approved `sdk-v2.0.1` operation; stop if that tag/version already exists. The documented publisher-lifecycle correction and fresh candidate certification remain prerequisites.
 
-The current release supports V2 hosts, raw source schema 1.0/exporter 0.6.1 ZIP admission and canonical schema 2.2. Retired V1 workflows are not compatibility routes. Existing current V2 records/resources/recovery remain supported; historical bytes stay untouched. See [release notes](SDK_2_0_RELEASE_NOTES.md) and [breaking changes](SDK_2_0_MIGRATION.md).
+The current release supports V2 hosts, raw source schema 1.0/exporter 0.6.1 ZIP admission and canonical schema 2.2. Retired V1 workflows are not compatibility routes. Existing current V2 records/resources/recovery remain supported; historical bytes stay untouched. See [release notes](SDK_2_0_1_RELEASE_NOTES.md) and [breaking changes](SDK_2_0_MIGRATION.md).
 
 ## Review and commit
 

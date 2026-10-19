@@ -1,6 +1,6 @@
 # Portable Core integration
 
-Core 2.0.0 provides DOM-free ZIP/source reading, canonical parsing, validation, typed fields, Family semantics and read-only inspection. It does not own browser fonts, sessions, React or PNG readiness. For an editor start with [the complete host guide](QUICKSTART.md).
+Core 2.0.1 provides DOM-free ZIP/source reading, canonical parsing, validation, typed fields, Family semantics and read-only inspection. It does not own browser fonts, sessions, React or PNG readiness. For an editor start with [the complete host guide](QUICKSTART.md).
 
 ```ts
 import { createZipBundleReader, loadTemplatePackageBundleSource, parseTemplatePackageV2 } from "@sleinity/template-core";

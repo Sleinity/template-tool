@@ -1,6 +1,6 @@
 {
   "schemaVersion": "sdk-delivery-inventory-v1",
-  "targetRelease": "2.0.0",
+  "targetRelease": "2.0.1",
   "documents": [
     {
       "source": "docs/sdk/V2_INTEGRATION.md",
@@ -16,13 +16,13 @@
     {
       "source": "docs/sdk/SDK_2_0_RELEASE_NOTES.md",
       "file": "SDK-2.0-RELEASE-NOTES.md",
-      "classification": "current",
-      "transform": "context"
+      "classification": "historical"
     },
     {
       "source": "docs/sdk/SDK_2_0_1_RELEASE_NOTES.md",
       "file": "SDK-2.0.1-RELEASE-NOTES.md",
-      "classification": "publication-preparation"
+      "classification": "current",
+      "transform": "context"
     },
     {
       "source": "docs/sdk/SDK_2_0_MIGRATION.md",

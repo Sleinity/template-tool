@@ -1,5 +1,14 @@
 # @sleinity/template-editor-integration
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [1cd4181]
+  - @sleinity/template-core@2.0.1
+  - @sleinity/template-browser@2.0.1
+  - @sleinity/template-react@2.0.1
+
 ## 0.1.3
 
 ### Patch Changes

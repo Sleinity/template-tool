@@ -1,8 +1,8 @@
-# Agent prompts for SDK 2.0.0 V2 hosts
+# Agent prompts for SDK 2.0.1 V2 hosts
 
 Read [host onboarding](QUICKSTART.md), [host implementation](HOST_IMPLEMENTATION.md), [V2 integration](V2_INTEGRATION.md), [capabilities](SDK_CAPABILITIES.md) and
 [release preparation](RELEASE_PREPARATION.md) first. Current archives retain the
-2.0.0 version or local-candidate label. Identify source and
+2.0.1 version or local-candidate label. Identify source and
 archive hashes before changing a host. Give one track at a time.
 
 ## 1. Audit the host

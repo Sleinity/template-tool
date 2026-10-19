@@ -1,6 +1,6 @@
 # Historical SDK documentation
 
-[Current host documentation](README.md) describes SDK 2.0.0, V2 workflows, exporter 0.6.1 and canonical schema 2.2. Historical documents explain the artifacts released or reviewed at their recorded date; they do not override current admission, persistence or public APIs.
+[Current host documentation](README.md) describes SDK 2.0.1, V2 workflows, exporter 0.6.1 and canonical schema 2.2. Historical documents explain the artifacts released or reviewed at their recorded date; they do not override current admission, persistence or public APIs.
 
 Published 1.0.0 guidance is preserved as [migration](SDK_1_0_MIGRATION.md), [release notes](SDK_1_0_RELEASE_NOTES.md) and [exact downloaded assets with provenance](history/sdk-v1.0.0/README.md). Its original candidate wording is historical; the release was published on 2026-10-14.
 

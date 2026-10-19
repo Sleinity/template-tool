@@ -1,4 +1,4 @@
-# SDK 2.0.0 troubleshooting
+# SDK 2.0.1 troubleshooting
 
 Use stable issue codes for decisions and the operation's actual result/rejection contract. See [operation outcomes](OPERATION_OUTCOMES.md).
 

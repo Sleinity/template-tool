@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-19T14:08:50.198995+00:00",
+  "status": "versioned-candidate-awaiting-certification",
+  "version": "2.0.1",
+  "packageVersions": {
+    "core": "2.0.1",
+    "browser": "2.0.1",
+    "react": "2.0.1"
+  },
+  "checks": {
+    "ciPortable": {
+      "exitCode": 0,
+      "log": "ci-portable.log.txt.gz"
+    },
+    "releaseDelivery": {
+      "passed": 22,
+      "failed": 0,
+      "log": "delivery-tests.log.txt.gz"
+    },
+    "publicApiVersionMetadataOnly": true,
+    "publishedCoreDeclarationIdentityRetained": true
+  },
+  "pending": [
+    "Exact carousel ZIP is missing locally; fresh exact-fixture certification is not complete.",
+    "Existing publisher-lifecycle and protected publication prerequisites remain; no tag or registry publish authorized/executed by versioning."
+  ],
+  "published": false
+}

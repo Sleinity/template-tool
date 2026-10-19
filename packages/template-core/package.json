@@ -1,6 +1,6 @@
 {
   "name": "@sleinity/template-core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Framework-neutral TemplatePackage import, validation, scene, field, and Template Family contracts.",
   "license": "UNLICENSED",
   "repository": {

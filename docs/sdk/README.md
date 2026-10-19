@@ -1,14 +1,14 @@
-# Template SDK 2.0.0
+# Template SDK 2.0.1
 
 Build a React/TypeScript template editor for a Sleinity-owned application. Start with the complete host starter; the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
 
 <!-- delivery-context:start -->
-This describes the **SDK 2.0.0 contract**. A version label, packing or local certification does not establish publication. Verify delivery provenance and use one verified archive set.
+This describes the **SDK 2.0.1 contract**. A version label, packing or local certification does not establish publication. Verify delivery provenance and use one verified archive set.
 <!-- delivery-context:end -->
 
 | Identity | Current contract |
 | --- | --- |
-| SDK packages | Core, Browser and React, all 2.0.0 |
+| SDK packages | Core, Browser and React, all 2.0.1 |
 | Accepted ZIP exporter | Figma exporter 0.6.1 only |
 | Raw source schema | 1.0 |
 | Canonical package schema | 2.2 |
@@ -34,9 +34,9 @@ This describes the **SDK 2.0.0 contract**. A version label, packing or local cer
 
 ## Release and history
 
-[Prepared 2.0.1 bugfix notes](SDK_2_0_1_RELEASE_NOTES.md) describe the next patch Changeset.
+[2.0.1 bugfix notes](SDK_2_0_1_RELEASE_NOTES.md) describe the versioned patch candidate.
 
-[Release notes](SDK_2_0_RELEASE_NOTES.md), [breaking changes](SDK_2_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
+[Release notes](SDK_2_0_1_RELEASE_NOTES.md) ([2.0.0 notes](SDK_2_0_RELEASE_NOTES.md)), [breaking changes](SDK_2_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
 
 V1 editing/wizard/confirmation/persistence workflows are retired. Source normalization and versioned read-only evidence remain where required; names ending in V1 do not imply a supported V1 editing journey. Existing current V2 records and recovery are preserved. No migration or deletion of unknown historical work is provided.
 

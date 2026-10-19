@@ -15,3 +15,7 @@ assert.deepEqual(workspaceCoreDeclarationContracts["2.0.0"], candidate);
 assert.notDeepEqual(candidate, expected, 'V2-only retirement intentionally changes the upcoming major release');
 assert.doesNotThrow(() => assertCoreDeclarationIdentity("2.0.0", candidate));
 assert.throws(() => assertCoreDeclarationIdentity("2.0.0", historicalCoreDeclarationContract), /drifted/);
+
+assert.deepEqual(workspaceCoreDeclarationContracts["2.0.1"], workspaceCoreDeclarationContracts["2.0.0"], "Patch retains the protected published declaration identity");
+assert.doesNotThrow(() => assertCoreDeclarationIdentity("2.0.1", candidate));
+assert.throws(() => assertCoreDeclarationIdentity("2.0.1", historicalCoreDeclarationContract), /drifted/);
