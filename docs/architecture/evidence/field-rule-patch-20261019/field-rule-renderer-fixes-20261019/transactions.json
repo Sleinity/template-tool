@@ -1,0 +1,30 @@
+{
+  "browser": "149.0.7827.55",
+  "reports": [
+    {
+      "family": false,
+      "passed": true,
+      "checks": [
+        "slow painted evidence suppresses provisional autosave",
+        "visibility queues after text",
+        "rollback preserves imported default",
+        "restored candidate clears input error",
+        "reload during validation keeps accepted recovery",
+        "PNG drains validation"
+      ]
+    },
+    {
+      "family": true,
+      "passed": true,
+      "checks": [
+        "slow painted evidence suppresses provisional autosave",
+        "visibility queues after text",
+        "rollback preserves imported default",
+        "restored candidate clears input error",
+        "reload during validation keeps accepted recovery",
+        "PNG drains validation",
+        "Family switch waits for rollback"
+      ]
+    }
+  ]
+}

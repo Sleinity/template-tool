@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "scope": "Isolated Changesets version probe; workspace Changeset, package manifests, changelogs and lockfile not consumed/changed.",
+  "packages": [
+    {
+      "name": "@sleinity/template-core",
+      "version": "2.0.1",
+      "changelogGenerated": true
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "version": "2.0.1",
+      "changelogGenerated": true
+    },
+    {
+      "name": "@sleinity/template-react",
+      "version": "2.0.1",
+      "changelogGenerated": true
+    }
+  ],
+  "workspaceSourcesPreserved": true,
+  "log": "\ud83e\udd8b  All files have been updated. Review them and commit at your leisure\n"
+}

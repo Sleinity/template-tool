@@ -2,11 +2,13 @@ import { useEffect, useLayoutEffect, useRef, useState, type CompositionEvent } f
 import { canonicalTemplateFieldValueKeyV1, normalizeColorInputV1, isCalendarDateValueV1, formatTemplateNumberV1, formatTemplateCalendarDateV1, type ImageReplacementPlacementV1 } from "@sleinity/template-core";
 import type { TemplateFieldControllerV2, TemplateFieldFamilyImageControllerV3, TemplateSessionV2MutationResult } from "@sleinity/template-browser/session";
 import { Button, CheckboxField, Input, Select, Textarea, MediaInput } from "../components/ui";
-import { acceptStudioTextareaInput, acceptStudioTextInput, studioTextCounter, type StudioTextLineMeasure } from "./studioTextLimits";
+import { acceptStudioTextInput, studioTextCounter } from "./studioTextLimits";
 import { choiceValueLabel } from "./choiceAuthoring";
+import type { ReactTemplateFieldSessionV2 } from "@sleinity/template-react";
+import { commitRenderedTextareaDraft, type RenderedTextareaOutcome } from "./renderedTextareaDrafts";
 import { DeferredFieldDraftCoordinator } from "./deferredFieldDrafts";
 
-export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordinator, draftContext, variantPlacement, onPendingChange, compact = false, imageUrl, measureLines, getCurrentController }: {
+export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordinator, draftContext, variantPlacement, onPendingChange, compact = false, imageUrl, session, getCurrentController }: {
   imageUrl?: string;
   compact?: boolean;
   controller: TemplateFieldControllerV2;
@@ -14,7 +16,7 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
   sessionIdentity?: object;
   draftCoordinator: DeferredFieldDraftCoordinator;
   draftContext: string;
-  measureLines?: StudioTextLineMeasure;
+  session: ReactTemplateFieldSessionV2;
   onPendingChange?: (id: string, pending: boolean) => void;
   variantPlacement?: ImageReplacementPlacementV1;
 }) {
@@ -32,9 +34,11 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
   const context = useRef({ sessionIdentity, draftCoordinator, draftKey });
   if (context.current.sessionIdentity !== sessionIdentity || context.current.draftCoordinator !== draftCoordinator || context.current.draftKey !== draftKey) context.current = { sessionIdentity, draftCoordinator, draftKey };
   const mounted = useRef(false);
+  const validationAbort = useRef(new AbortController());
   useLayoutEffect(() => {
     mounted.current = true;
-    return () => { mounted.current = false; draftCoordinator.cancel(draftKey); };
+    validationAbort.current = new AbortController();
+    return () => { mounted.current = false; validationAbort.current.abort(); draftCoordinator.cancel(draftKey); };
   }, [sessionIdentity, draftCoordinator, draftKey]);
   const focus = () => document.getElementById(inputId)?.focus();
   const report = (result: TemplateSessionV2MutationResult) => {
@@ -49,14 +53,25 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
     : reason === "measurement-pending"
       ? "Wait for the preview to finish measuring before adding more text."
       : `Maximum of ${field.type === "text" || field.type === "textarea" ? field.configuration.maxCharacters : "the configured"} characters reached.`;
-  const edit = (value: string, previousValue?: string, previousInput?: string | null) => {
+  const settle = (result: TemplateSessionV2MutationResult | RenderedTextareaOutcome) => {
+    if (!("disposition" in result)) { report(result); return; }
+    if (result.disposition === "canceled" && result.accepted) return;
+    if (result.accepted) {
+      setInput(null); setError(null); setLimitNotice(result.notice ?? null);
+      if (result.disposition === "restored") focus();
+    } else setError(result.blockingErrors?.map(issue => issue.message).join("\n") || "This text could not be applied.");
+  };
+  const mutate = (action: () => TemplateSessionV2MutationResult) => {
+    void draftCoordinator.runMutation(action).then(report).catch(cause => { if (mounted.current) setError(String(cause)); });
+  };
+  const edit = (value: string, previousValue?: string, previousInput?: string | null, beforeComposition?: string) => {
     if (field.type === "text" || field.type === "textarea") {
       const previous = previousValue ?? input ?? field.value;
       const constrained = acceptStudioTextInput(previous, value, field.configuration.maxCharacters);
       if (!constrained.accepted) {
         setInput(previousInput === undefined ? input : previousInput);
-        setLimitNotice(rejectionMessage(constrained.reason ?? "characters"));
-        return false;
+        setLimitNotice(rejectionMessage("characters"));
+        return "characters" as const;
       }
       setLimitNotice(null);
     }
@@ -66,16 +81,23 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
       const valid = field.type === "number" ? value.trim() !== "" && Number.isFinite(parsed) : field.type === "date" ? isCalendarDateValueV1(value) : field.type === "color" ? normalizeColorInputV1(value) !== null : true;
       if (!valid) setError(field.type === "number" ? "Enter a complete number." : field.type === "color" ? "Enter a color such as #E5B2FF." : "Enter a complete date.");
       else setError(null);
-      let committed: TemplateSessionV2MutationResult | undefined;
+      let committed: TemplateSessionV2MutationResult | RenderedTextareaOutcome | undefined;
+      const captured = context.current;
+      const signal = validationAbort.current.signal;
       draftCoordinator.schedule(draftKey, {
         valid,
         focus,
-        commit: () => {
+        commit: async () => {
+          if (!mounted.current || context.current !== captured) return { accepted: false, stale: true };
+          if (field.type === "textarea" && field.configuration.maxLines !== undefined) {
+            committed = await draftCoordinator.withProvisional(() => commitRenderedTextareaDraft({ session, fieldId: field.id, value, beforeComposition, signal, isCurrent: () => mounted.current && context.current === captured }));
+            return committed;
+          }
           const result = field.type === "number" ? field.setValue(parsed) : field.type === "color" ? field.setValue(normalizeColorInputV1(value)!) : field.setValue(value);
           committed = result;
           return result;
         },
-        onSettled: () => { if (committed) report(committed); },
+        onSettled: () => { if (committed) settle(committed); },
         onFailure: setError,
       });
     }
@@ -83,8 +105,9 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
   };
   const choices = "choices" in field.configuration ? field.configuration.choices : undefined;
   const restricted = choices?.mode === "restricted";
-  const selectedChoice = choices?.options.find(option => option.id === field.selectedChoiceId)
-    ?? choices?.options.find(option => canonicalTemplateFieldValueKeyV1(option.value) === canonicalTemplateFieldValueKeyV1(field.value as string | number));
+  const selectedChoice = choices?.options.find(option =>
+    (field.selectedChoiceId === undefined || option.id === field.selectedChoiceId) &&
+    canonicalTemplateFieldValueKeyV1(option.value) === canonicalTemplateFieldValueKeyV1(field.value as string | number));
   const validation = field.renderValidation;
   const renderedLineMaximumReached = field.type === "textarea" &&
     field.configuration.maxLines !== undefined &&
@@ -113,9 +136,12 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
       composing.current = false; setIsComposing(false);
       const start = compositionStart.current ?? { input, value: input ?? field.value };
       compositionStart.current = null;
-      if (!edit(event.currentTarget.value, start.value, start.input)) {
-        edit(start.value, start.value, start.input);
-        setLimitNotice(rejectionMessage("characters"));
+      const result = edit(event.currentTarget.value, start.value, start.input, start.value);
+      if (result !== true) {
+        if (start.value === field.value) draftCoordinator.cancel(draftKey);
+        else edit(start.value, start.value, start.input);
+        setInput(start.input);
+        setLimitNotice(rejectionMessage(result));
       }
     },
   } : {};
@@ -150,14 +176,14 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
     ...(validation.state === "invalid" ? validation.errors.map(issue => issue.message) : []),
   ])];
   return <section className="v2-content" aria-label={`Edit ${field.label}`}>
-    {compact ? <div className="studio-output-field-heading">{field.type === "boolean" ? <CheckboxField id={inputId} label={field.label} checked={field.value} onChange={value => report(field.setValue(value))} /> : <span>{field.label}</span>}<Button size="small" variant="quiet" aria-label={`Reset ${field.label}`} onClick={reset}>Reset</Button></div> : <h3>{field.label}</h3>}
+    {compact ? <div className="studio-output-field-heading">{field.type === "boolean" ? <CheckboxField id={inputId} label={field.label} checked={field.value} onChange={value => mutate(() => field.setValue(value))} /> : <span>{field.label}</span>}<Button size="small" variant="quiet" aria-label={`Reset ${field.label}`} onClick={reset}>Reset</Button></div> : <h3>{field.label}</h3>}
     {!restricted && field.type === "text" && <Input id={inputId} label={field.label} value={textValue} className="field-editor-input__control" controlAdornment={counterAdornment} {...compositionProps} onChange={(event) => onTextChange(event.target.value)} />}
     {!restricted && field.type === "textarea" && <Textarea id={inputId} label={field.label} value={textValue} className="field-editor-input__control" controlAdornment={counterAdornment} {...compositionProps} onChange={(event) => onTextChange(event.target.value)} />}
     {!restricted && field.type === "number" && <Input id={inputId} label={field.label} type="text" inputMode="decimal" value={input ?? String(field.value)} helpText={field.configuration.format ? `Preview: ${formatTemplateNumberV1(field.value, field.configuration.format)}` : undefined} onChange={(event) => edit(event.target.value)} />}
     {!restricted && field.type === "date" && <div className="studio-output-date"><Input id={inputId} label={field.label} type="text" inputMode="numeric" placeholder="YYYY-MM-DD" value={input ?? field.value} helpText={field.configuration.format ? `Preview: ${formatTemplateCalendarDateV1(field.value, field.configuration.format)}` : undefined} onChange={event => edit(event.target.value)} /><Input label={`Choose ${field.label}`} aria-label={`Choose ${field.label}`} type="date" value={isCalendarDateValueV1(input ?? field.value) ? input ?? field.value : ""} onChange={event => { if (event.target.value) edit(event.target.value); }} /></div>}
     {!restricted && field.type === "color" && <div className="studio-output-color" data-invalid={!normalizeColorInputV1(input ?? field.value) || undefined}><Input label={`Choose ${field.label}`} aria-label={`Choose ${field.label}`} type="color" value={normalizeColorInputV1(input ?? field.value) ?? field.value} onChange={event => edit(event.target.value)} /><Input id={inputId} label={field.label} value={input ?? field.value} spellCheck={false} onChange={event => edit(event.target.value)} /></div>}
-    {field.type === "boolean" && !compact && <label className="v2-check"><input type="checkbox" checked={field.value} onChange={(event) => report(field.setValue(event.target.checked))} />{field.label} visible</label>}
-    {field.type === "image" && <ImageContentEditorV2 key={resetCount} sessionIdentity={sessionIdentity} compact={compact} inputId={inputId} imageUrl={imageUrl} field={field} report={report} variantPlacement={variantPlacement} onFailure={setError} onPending={(pending) => onPendingChange?.(`${field.id}:replacement`, pending)} onCropPending={(pending) => onPendingChange?.(`${field.id}:crop`, pending)} />}
+    {field.type === "boolean" && !compact && <label className="v2-check"><input type="checkbox" checked={field.value} onChange={(event) => { const value = event.target.checked; mutate(() => field.setValue(value)); }} />{field.label} visible</label>}
+    {field.type === "image" && <ImageContentEditorV2 key={resetCount} sessionIdentity={sessionIdentity} compact={compact} inputId={inputId} imageUrl={imageUrl} field={field} report={report} runMutation={action => draftCoordinator.runMutation(action)} variantPlacement={variantPlacement} onFailure={setError} onPending={(pending) => onPendingChange?.(`${field.id}:replacement`, pending)} onCropPending={(pending) => onPendingChange?.(`${field.id}:crop`, pending)} />}
     {choices && "selectChoice" in field && <>
       <Select id={restricted ? inputId : `${inputId}-choices`} label={`${field.label} choices`} disabled={isComposing} value={selectedChoice?.id ?? ""} helpText={restricted ? "Select one of the configured values." : "Choose a suggestion or enter your own value above."} onChange={event => {
         const choiceId = event.target.value;
@@ -165,28 +191,27 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
         const option = choices.options.find(candidate => candidate.id === choiceId);
         if (option && (field.type === "text" || field.type === "textarea")) {
           const previous = input ?? field.value;
-          const constrained = field.type === "textarea" ? acceptStudioTextareaInput(previous, String(option.value), {
-            maxCharacters: field.configuration.maxCharacters, maxLines: field.configuration.maxLines,
-            measureLines, currentVisualLines: "visualLines" in field.renderValidation ? field.renderValidation.visualLines : undefined,
-            inactive: field.renderValidation.state === "inactive",
-          }) : acceptStudioTextInput(previous, String(option.value), field.configuration.maxCharacters);
+          const constrained = acceptStudioTextInput(previous, String(option.value), field.configuration.maxCharacters);
           if (!constrained.accepted) { setLimitNotice(rejectionMessage(constrained.reason ?? "characters")); return; }
         }
         setLimitNotice(null);
-        let result: TemplateSessionV2MutationResult | undefined;
+        let result: TemplateSessionV2MutationResult | RenderedTextareaOutcome | undefined;
+        const signal = validationAbort.current.signal;
         const selectionContext = context.current;
         // Supersede this field’s draft, including invalid input, while serializing
         // behind any running commit. The coordinator rejects abandoned generations.
         draftCoordinator.schedule(draftKey, {
           valid: true, focus,
-          commit: () => {
+          commit: async () => {
             if (!mounted.current || context.current !== selectionContext) return { accepted: false, stale: true };
             const current = getCurrentController ? getCurrentController() : currentController.current;
             if (!current || !("selectChoice" in current)) return { accepted: false, stale: true };
-            result = current.selectChoice(choiceId);
+            result = current.type === "textarea" && current.configuration.maxLines !== undefined
+              ? await draftCoordinator.withProvisional(() => commitRenderedTextareaDraft({ session, fieldId: field.id, choiceId, signal, isCurrent: () => mounted.current && context.current === selectionContext }))
+              : current.selectChoice(choiceId);
             return result;
           },
-          onSettled: () => { if (result && mounted.current && context.current === selectionContext) report(result); }, onFailure: message => { if (mounted.current && context.current === selectionContext) setError(message); },
+          onSettled: () => { if (result && mounted.current && context.current === selectionContext) settle(result); }, onFailure: message => { if (mounted.current && context.current === selectionContext) setError(message); },
         });
         void draftCoordinator.flushKey(draftKey);
       }}><option value="" disabled>{restricted ? "Choose a value" : "Custom value"}</option>{choices.options.map(option => <option key={option.id} value={option.id}>{option.label || choiceValueLabel(field, option.value)}</option>)}</Select>
@@ -206,9 +231,10 @@ export function FieldContentEditorV2({ controller, sessionIdentity, draftCoordin
   </section>;
 }
 
-function ImageContentEditorV2({ field, report, variantPlacement, onPending, onFailure, onCropPending, compact, imageUrl, inputId, sessionIdentity }: {
+function ImageContentEditorV2({ field, report, variantPlacement, onPending, onFailure, onCropPending, compact, imageUrl, inputId, sessionIdentity, runMutation }: {
   compact: boolean; imageUrl?: string; inputId?: string; onCropPending(value: boolean): void;
   sessionIdentity?: object;
+  runMutation<T>(action: () => T | Promise<T>): Promise<T>;
   onPending(value: boolean): void; onFailure(message: string): void;
   field: Extract<TemplateFieldControllerV2, { type: "image" }>;
   report(result: TemplateSessionV2MutationResult): void;
@@ -235,15 +261,16 @@ function ImageContentEditorV2({ field, report, variantPlacement, onPending, onFa
     transform: [[region.width, 0, region.x], [0, region.height, region.y]],
   } });
   const apply = (value: ImageReplacementPlacementV1) => {
-    const result = scope === "variant" && familyField ? familyField.setVariantPlacement(value) : field.setPlacement(value);
-    report(result);
-    if (result.accepted) { acceptedRegion.current = region; setCropDirty(false); onCropPending(false); }
+    void runMutation(() => scope === "variant" && familyField ? familyField.setVariantPlacement(value) : field.setPlacement(value)).then(result => {
+      report(result);
+      if (result.accepted) { acceptedRegion.current = region; setCropDirty(false); onCropPending(false); }
+    }).catch(cause => onFailure(String(cause)));
   };
   const replace = (file: File | undefined) => {
     if (!file) return;
     const token = ++work.current;
     onPending(true); setReading(true);
-    void field.replaceImage({ blob: file }).then(result => { if (work.current === token) report(result); }).catch(cause => { if (work.current === token) onFailure(String(cause)); }).finally(() => { if (work.current === token) { onPending(false); setReading(false); } });
+    void runMutation(() => field.replaceImage({ blob: file })).then(result => { if (work.current === token) report(result); }).catch(cause => { if (work.current === token) onFailure(String(cause)); }).finally(() => { if (work.current === token) { onPending(false); setReading(false); } });
   };
   return <>
     {compact ? <MediaInput id={inputId} label={null} inputAriaLabel={`Replace ${field.label}`} previewSrc={imageUrl} actionLabel="Replace image" accept="image/*" loading={reading} disabled={cropDirty} onSelect={replace} /> : <Input label={`Replace ${field.label}`} type="file" accept="image/*" onChange={(event) => {
@@ -255,7 +282,7 @@ function ImageContentEditorV2({ field, report, variantPlacement, onPending, onFa
     {familyField && !compact && <>
       <Select label="Framing scope" disabled={cropDirty} value={scope} onChange={(event) => setScope(event.target.value as typeof scope)}><option value="shared">Shared/default framing</option><option value="variant">This variant only</option></Select>
       <p>{variantPlacement ? `Variant override: ${variantPlacement.mode}` : "Inheriting shared/default placement"}</p>
-      <Button variant="quiet" onClick={() => report(familyField.resetVariantPlacement())}>Reset variant placement</Button>
+      <Button variant="quiet" onClick={() => { void runMutation(() => familyField.resetVariantPlacement()).then(report).catch(cause => onFailure(String(cause))); }}>Reset variant placement</Button>
     </>}
     {!compact && replacementPolicy === "crop" && <details open><summary>Adjust crop</summary><fieldset><legend>Crop source region</legend>
       <p>Normalized source coordinates (0–1). The live preview uses the ordinary SDK crop renderer. Adjust framing, then apply.</p>

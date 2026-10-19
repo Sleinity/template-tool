@@ -5,6 +5,10 @@ import { normalizeTemplatePackageV1ToV2 } from "@sleinity/template-core";
 import { launchBrowser } from "../fidelity/browser.mjs";
 import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 
+async function waitInput(input, value) {
+  await input.page().waitForFunction(([element, expected]) => element?.isConnected && element.value === expected, [await input.elementHandle(), value]);
+}
+
 // Product integration fixture, not new Figma source certification or a golden.
 const root = process.cwd();
 const output = resolve(root, "fidelity/evidence/field-rules-v2-studio");
@@ -115,9 +119,10 @@ try {
   assert(await page.getByText("Maximum of 3 rendered lines reached.", { exact: true }).count() === 1, "The exact line maximum shows one maximum status.");
   assert(await page.getByText("Warning: Rendered content uses 3 visual lines.", { exact: true }).count() === 0, "The exact line maximum replaces the advisory warning.");
   await page.getByLabel("Body", { exact: true }).fill("One\nTwo\nThree\nFour");
-  assert(await page.getByLabel("Body", { exact: true }).inputValue() === "One\nTwo\nThree\nFour", "Active Studio preserves the literal local draft before renderer validation.");
-  await page.getByText("4 / 3 rendered lines · invalid", { exact: true }).waitFor();
-  assert(!await page.getByRole("button", { name: "Export PNG", exact: true }).isEnabled(), "Deferred maxLines validation blocks export after preview catch-up.");
+  await waitInput(page.getByLabel("Body", { exact: true }), "One\nTwo\nThree");
+  assert(await page.getByLabel("Body", { exact: true }).inputValue() === "One\nTwo\nThree", "Typing rejects a candidate beyond the rendered-line limit.");
+  await ready();
+  assert(await page.getByRole("button", { name: "Export PNG", exact: true }).isEnabled(), "Rejected growth preserves the current exportable content.");
   await page.getByLabel("Show body visible").uncheck();
   await page.getByText("Inactive — excluded from layout").waitFor();
   assert(await page.getByLabel("Headline", { exact: true }).count() === 0, "Studio omits a field control nested below any false Boolean target.");
@@ -214,6 +219,7 @@ try {
   await page.getByLabel("Selected variant").selectOption({ label: "Portrait" });
   await page.getByText("2 / 1 rendered lines · invalid", { exact: true }).waitFor();
   assert(await page.getByLabel("Headline", { exact: true }).inputValue() === "Flushed before Family switch", "A pending edit flushes before the Family variant changes.");
+  await waitInput(page.getByLabel("Body", { exact: true }), "One\nTwo");
   assert(await page.getByLabel("Body", { exact: true }).inputValue() === "One\nTwo", "Family switching retains shared canonical text.");
   await page.getByLabel("Amount", { exact: true }).fill("-");
   await page.getByLabel("Selected variant").selectOption({ label: "Landscape" });
@@ -274,3 +280,12 @@ try {
   await writeFile(resolve(output, "failure.json"), JSON.stringify({ error: String(error), errors, checks, text: await page.locator("body").innerText(), telemetry: await page.locator("[data-template-package-canvas], [data-text-measurement-state], [data-package-node-id]").evaluateAll((elements) => elements.map((element) => ({ ...element.dataset }))) }, null, 2));
   throw error;
 } finally { await context.close(); await browser.close(); await server.close(); }
+
+// Keep output-limit and Family-default regressions in the standard rule gate.
+await import("./audit-regressions.mjs");
+
+await import("./architecture-audit.mjs");
+await import("./renderer-transactions.mjs");
+
+// Choices/configuration and restricted repair are required field-rule regressions.
+await import("./choices-audit.mjs");

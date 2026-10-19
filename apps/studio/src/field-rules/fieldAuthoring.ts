@@ -1,8 +1,8 @@
-import { validateTemplatePackageV2, validateTemplateFieldValueV2, type TemplatePackageV2, type TemplateFieldConfigurationV2 } from "@sleinity/template-core";
-import { resolveTemplateFamilyConfigurationV2, resolveTemplateFieldFamilyVariantV2, type TemplateFieldFamilyV2, type TemplateFieldFamilyVariantFieldOverrideV2 } from "@sleinity/template-core/family";
+import { validateTemplatePackageV2, type TemplatePackageV2, type TemplateFieldConfigurationV2 } from "@sleinity/template-core";
+import { materializeTemplateFieldFamilyVariantV2, createTemplateFieldFamilyContentStateV3, type TemplateFieldFamilyContentStateV3, resolveTemplateFamilyConfigurationV2, resolveTemplateFieldFamilyVariantV2, type TemplateFieldFamilyV2, type TemplateFieldFamilyVariantFieldOverrideV2 } from "@sleinity/template-core/family";
 
 export type FieldAuthoringContext = { packageValue: TemplatePackageV2; family?: TemplateFieldFamilyV2 | null; variantId?: string };
-export type AuthoringIssue = { code: string; message: string; fieldId?: string; property?: string; design: string; variantId?: string };
+export type AuthoringIssue = { code: string; message: string; fieldId?: string; property?: string; design: string; variantId?: string; severity?: "warning" | "error" };
 const propertyFor = (code: string, path = "") => code.includes("precision") ? "decimalPlaces" : code.includes("range") ? "max" : code.includes("line-warning") ? "warningAtLines" : path.split("/").reverse().find(part => ["maxCharacters", "maxLines", "warningAtLines", "min", "max", "step", "decimalPlaces", "prefix", "suffix", "decimalSeparator", "thousandSeparator", "preset", "separator"].includes(part));
 
 /** Isolated candidates only. Native sessions still own acceptance and reconciliation. */
@@ -28,13 +28,14 @@ export function validateFieldCandidate(context: FieldAuthoringContext, field: Te
 }
 
 /** Canonical configuration/content findings for every design; never renderer readiness. */
-export function familyFieldIssues(family: TemplateFieldFamilyV2, values: Readonly<Record<string, { value: unknown }>>): AuthoringIssue[] {
-  return family.variants.flatMap(variant => {
-    const resolved = resolveTemplateFieldFamilyVariantV2(family, variant.id);
+export function familyFieldIssues(family: TemplateFieldFamilyV2, content: TemplateFieldFamilyContentStateV3 | null, assets: TemplatePackageV2["assets"] = {}): AuthoringIssue[] {
+  const source = Object.keys(assets).length ? { ...family, variants: family.variants.map(variant => ({ ...variant, packageValue: { ...variant.packageValue, assets: { ...variant.packageValue.assets, ...assets } } })) } : family;
+  const state = content ?? createTemplateFieldFamilyContentStateV3(family);
+  return source.variants.flatMap(variant => {
+    const result = materializeTemplateFieldFamilyVariantV2(source, variant.id, state);
     const base = { design: variant.label ?? variant.packageValue.name, variantId: variant.id };
-    const configuration = resolved.issues.filter(issue => issue.severity === "error").map(issue => ({ ...base, code: issue.code, message: issue.message, fieldId: issue.fieldId, property: propertyFor(issue.code) }));
-    const content = resolved.packageValue?.editableFields.flatMap(field => validateTemplateFieldValueV2(field, values[field.id] ? values[field.id].value : field.defaultValue).issues.map(issue => ({ ...base, code: issue.code, message: issue.message, fieldId: field.id }))) ?? [];
-    return [...configuration, ...content];
+    const issues: AuthoringIssue[] = [...result.issues, ...(result.materialization?.fieldIssues ?? [])].map(issue => ({ ...base, code: issue.code, message: issue.message, fieldId: issue.fieldId, severity: issue.severity, property: propertyFor(issue.code) }));
+    return issues.filter((issue, index) => issues.findIndex(other => other.code === issue.code && other.fieldId === issue.fieldId && other.message === issue.message && other.severity === issue.severity) === index);
   });
 }
 

@@ -1,0 +1,43 @@
+{
+  "browser": "149.0.7827.55",
+  "reports": [
+    {
+      "family": false,
+      "passed": true,
+      "typing": {
+        "samples": 30,
+        "p50Ms": 0,
+        "p95Ms": 5.300000071525574
+      },
+      "scenarios": [
+        "imported image defaults",
+        "grapheme maximum",
+        "newline and wrapped-line maximum",
+        "IME rejection and rollback",
+        "inactive fields",
+        "existing overflow repair",
+        "PNG and recovery completion"
+      ]
+    },
+    {
+      "family": true,
+      "passed": true,
+      "typing": {
+        "samples": 22,
+        "p50Ms": 0,
+        "p95Ms": 5.600000023841858
+      },
+      "scenarios": [
+        "imported image defaults",
+        "grapheme maximum",
+        "newline and wrapped-line maximum",
+        "IME rejection and rollback",
+        "inactive fields",
+        "existing overflow repair",
+        "PNG and recovery completion",
+        "stricter selected design",
+        "shared content preservation"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { type TemplateFieldConfigurationV2 } from "@sleinity/template-core";
 import { type TemplateFieldFamilyVariantFieldOverrideV2 } from "@sleinity/template-core/family";
-import { measureRenderedTextLines } from "@sleinity/template-browser";
 import { type TemplateReimportPlanV2 } from "@sleinity/template-browser/importer";
 import { TemplateFieldSessionRendererV2, useTemplateFieldSessionV2Snapshot, type ReactTemplateFieldSessionV2, type TemplateFieldSessionRendererV2Handle } from "@sleinity/template-react";
 import { Button, Input, Select } from "../components/ui";
@@ -95,7 +94,7 @@ export function StudioFieldWorkspaceV2({ session, onBack, transitionBusy = false
     {family && variant && "selectVariant" in session && <Select label="Selected variant" value={variant.id} onChange={(event) => { const next = event.target.value; void run(async () => { if (!await flushDrafts()) return; operation.current += 1; session.selectVariant(next); setReview(null); }); }}>
       {family.variants.map((entry) => <option key={entry.id} value={entry.id}>{variantDisplayLabels[entry.id] ?? entry.label ?? entry.id}</option>)}
     </Select>}
-    <div className="v2-inline v2-workspace-tabs"><Button aria-pressed={tab === "configure"} variant={tab === "configure" ? "primary" : "secondary"} onClick={() => setTab("configure")}>Configure fields</Button><Button aria-pressed={tab === "edit"} variant={tab === "edit" ? "primary" : "secondary"} onClick={() => setTab("edit")}>Edit content</Button></div>
+    <div className="v2-inline v2-workspace-tabs"><Button aria-pressed={tab === "configure"} variant={tab === "configure" ? "primary" : "secondary"} onClick={() => void run(async () => { if (await flushDrafts()) setTab("configure"); })}>Configure fields</Button><Button aria-pressed={tab === "edit"} variant={tab === "edit" ? "primary" : "secondary"} onClick={() => void run(async () => { if (await flushDrafts()) setTab("edit"); })}>Edit content</Button></div>
     {notice && <p role="status">{notice}</p>}{error && <p role="alert">{error}</p>}
     <div className="v2-workspace"><aside className="v2-card">
       {tab === "configure" ? <>
@@ -108,12 +107,8 @@ export function StudioFieldWorkspaceV2({ session, onBack, transitionBusy = false
         {currentField && <FieldConfigurationEditorV2 key={`${scope}:${variant?.id}:${currentField.id}:${JSON.stringify(currentField)}:${JSON.stringify(variant?.fieldOverrides?.[currentField.id])}`} authoringContext={{ packageValue, family, variantId: scope === "variant" ? variant?.id : undefined }} field={currentField} choiceSources={choiceAuthoringSources(currentField.id, packageValue.editableFields, family, scope === "variant" ? variant?.id : undefined)} inheritedField={family?.fields.find((field) => field.id === currentField.id)} variant={Boolean(family && scope === "variant")} override={variant?.fieldOverrides?.[currentField.id]} onSave={configureField} />}
       </> : <><h2>Canonical content</h2>{session.getFieldControllers().map((field) => {
         const definition = packageValue.editableFields.find((candidate) => candidate.id === field.id);
-        const measureLines = field.type === "textarea" && definition ? (value: string) => measureRenderedTextLines(
-          measurementRoot.current,
-          { nodeId: definition.binding.nodeId } as Parameters<typeof measureRenderedTextLines>[1],
-          value,
-        ) : undefined;
-        return <FieldContentEditorV2 sessionIdentity={session} key={`${variant?.id}:${field.id}`} draftCoordinator={draftCoordinator} draftContext={variant?.id ?? "single"} controller={field} measureLines={measureLines} variantPlacement={"variantImagePlacements" in (snapshot.contentState ?? {}) && variant ? (snapshot.contentState as import("@sleinity/template-core/family").TemplateFieldFamilyContentStateV3).variantImagePlacements[variant.id]?.[field.id] : undefined} />;
+
+        return <FieldContentEditorV2 sessionIdentity={session} key={`${variant?.id}:${field.id}`} draftCoordinator={draftCoordinator} draftContext={variant?.id ?? "single"} controller={field} session={session} variantPlacement={"variantImagePlacements" in (snapshot.contentState ?? {}) && variant ? (snapshot.contentState as import("@sleinity/template-core/family").TemplateFieldFamilyContentStateV3).variantImagePlacements[variant.id]?.[field.id] : undefined} />;
       })}</>}
     </aside><section className="v2-card v2-preview"><h2>Live preview</h2>
       <Select label="Preview surface" value={previewMode} onChange={(event) => setPreviewMode(event.target.value as typeof previewMode)}><option value="editor">Editor</option><option value="static">Validate / Fields</option></Select>

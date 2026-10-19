@@ -1,0 +1,60 @@
+{
+  "scope": "Exact copies of compact field-rule audit evidence, plus one synthetic fixture screenshot. Live user screenshot, logs, fonts, ZIP inputs and archives excluded.",
+  "files": [
+    {
+      "source": "field-rule-renderer-fixes-20261019/verification.json",
+      "sha256": "b4475044274d1cb09715c25999a64cc5da3be734059ead86b73042afa4f90a0d",
+      "file": "field-rule-renderer-fixes-20261019/verification.json"
+    },
+    {
+      "source": "field-rule-renderer-fixes-20261019/architecture.json",
+      "sha256": "a42cce2a5e9dbde7934dc8f769b2a78df41aea213b8c354ea76c43b54fdcf0f1",
+      "file": "field-rule-renderer-fixes-20261019/architecture.json"
+    },
+    {
+      "source": "field-rule-renderer-fixes-20261019/transactions.json",
+      "sha256": "507cf1b433a48498e61fbd1daa26be254b0395bf79eb42e87243fda32378d2aa",
+      "file": "field-rule-renderer-fixes-20261019/transactions.json"
+    },
+    {
+      "source": "field-rule-renderer-architecture-20261019/report.json",
+      "sha256": "a42cce2a5e9dbde7934dc8f769b2a78df41aea213b8c354ea76c43b54fdcf0f1",
+      "file": "field-rule-renderer-architecture-20261019/report.json"
+    },
+    {
+      "source": "field-rule-renderer-architecture-20261019/verification.json",
+      "sha256": "53c22f9112d188593594883389d3d68b7e3ab97392059f3d5629caabd642fa8d",
+      "file": "field-rule-renderer-architecture-20261019/verification.json"
+    },
+    {
+      "source": "field-rules-audit-20261019/report.json",
+      "sha256": "a7bdd9171e73e670255b4b8475065ad2ad5527e46ca9174a0c3000a1117202cb",
+      "file": "field-rules-audit-20261019/report.json"
+    },
+    {
+      "source": "choices-renderer-audit-20261019/restricted-mismatch.png",
+      "sha256": "f2edb0331291e1bdb9341e155cabbf55fcdb6d4ab3d2e5d58699dd56d0d10710",
+      "file": "choices-renderer-audit-20261019/restricted-mismatch.png"
+    },
+    {
+      "source": "choices-renderer-audit-20261019/report.json",
+      "sha256": "88d24d481d1ab7b293440447f88e64cd5047f83551e5b78aa6ba2a988280ea16",
+      "file": "choices-renderer-audit-20261019/report.json"
+    },
+    {
+      "source": "choices-renderer-audit-20261019/verification.json",
+      "sha256": "5604b9d80ac45b89b66edc44359539424d4845cf95273cb7af40c5f017427563",
+      "file": "choices-renderer-audit-20261019/verification.json"
+    },
+    {
+      "source": "choices-renderer-fixes-20261019/verification.json",
+      "sha256": "418f6bed01afe78fe1cc7ecc210c338d773fad2ac1f6121e5f0e6844d839dc9b",
+      "file": "choices-renderer-fixes-20261019/verification.json"
+    },
+    {
+      "source": "choices-renderer-fixes-20261019/report.json",
+      "sha256": "095cd84b39f971c46a4d961dcd8b903a9486843b36d0e9bf202fcb6aee9a0dc9",
+      "file": "choices-renderer-fixes-20261019/report.json"
+    }
+  ]
+}

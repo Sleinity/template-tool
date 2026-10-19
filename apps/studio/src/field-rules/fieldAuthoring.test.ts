@@ -3,7 +3,9 @@ import fixture from "../../../../src/template-package/fixtures/figma-plugin-v0.4
 import { normalizeTemplatePackageV1ToV2, validateTemplatePackageV2, type TemplatePackageV1, type TemplateFieldConfigurationV2 } from "@sleinity/template-core";
 import { createTemplateFieldFamilySessionV2 } from "@sleinity/template-browser";
 import { createTemplateFieldFamilyFromSourcesV2 } from "@sleinity/template-browser/importer";
-import { parseNumberDraft, readableFieldLabel, validateFieldCandidate, familyFieldIssues } from "./fieldAuthoring";
+import { parseNumberDraft, readableFieldLabel, validateFieldCandidate, familyFieldIssues as projectFamilyFieldIssues } from "./fieldAuthoring";
+import { createTemplateFieldFamilyContentStateV3, type TemplateFieldFamilyV2, type TemplateFieldFamilyContentStateV3 } from "@sleinity/template-core/family";
+const familyFieldIssues = (family: TemplateFieldFamilyV2, values: Readonly<Record<string, { value: unknown; selectedChoiceId?: string }>>) => projectFamilyFieldIssues(family, { ...createTemplateFieldFamilyContentStateV3(family), values: values as TemplateFieldFamilyContentStateV3["values"] });
 const assert = (value: unknown, message: string) => { if (!value) throw new Error(message); };
 for (const input of ["-", "+", "1.", "1e", "Infinity", "NaN"]) assert(!parseNumberDraft(input).complete, `${input} stays local`);
 for (const input of ["", "0", "-1", ".5", "1e2"]) assert(parseNumberDraft(input).complete, `${input} parses predictably`);
@@ -46,3 +48,37 @@ assert(session.getSnapshot().contentState === content, "Inspection borrows share
 inspection.restore();
 assert(session.getSnapshot().selectedVariantId === intentional, "Leaving inspection restores intentional selection");
 session.dispose();
+
+// Imported image defaults are source state, not replacement content.
+const imagePackage = normalizeTemplatePackageV1ToV2(structuredClone(fixture) as unknown as TemplatePackageV1).package!;
+const imageNode = Object.values(imagePackage.nodes).find(node => node.image?.assetId)!;
+const imageField = { id: "image:photo", type: "image", label: "Photo", binding: { kind: "image-content", nodeId: imageNode.id }, defaultValue: { assetId: imageNode.image!.assetId!, placement: { mode: "imported" } }, configuration: { replacementPlacement: "fill" } } as const;
+imagePackage.editableFields = [structuredClone(imageField)]; imagePackage.editableFieldOrder = [imageField.id];
+const imageOther = structuredClone(imagePackage); imageOther.packageId += "-other";
+const imageFamily = createTemplateFieldFamilyFromSourcesV2([imagePackage, imageOther], "Image rules");
+assert(validateTemplatePackageV2(imagePackage).valid, "Imported image source is valid");
+assert(familyFieldIssues(imageFamily, {}).length === 0, "Untouched imported Family images do not produce replacement-placement errors");
+assert(familyFieldIssues(imageFamily, { [imageField.id]: { value: { assetId: imageField.defaultValue.assetId, placement: { mode: "fill" } } } }).length === 0, "Valid shared replacement stays clear across designs");
+const importedOverrideIssues = familyFieldIssues(imageFamily, { [imageField.id]: { value: { assetId: imageField.defaultValue.assetId, placement: { mode: "imported" } } } });
+assert(importedOverrideIssues.some(issue => issue.severity === "error" && issue.fieldId === imageField.id), "Imported placement is still rejected when persisted as a replacement override");
+const imageInvalid = familyFieldIssues(imageFamily, { [imageField.id]: { value: { assetId: imageField.defaultValue.assetId, placement: { mode: "fit" } } } });
+assert(imageInvalid.length === 2 && imageInvalid.every(issue => issue.code === "field-v2.image-placement-unauthorized"), "Real policy conflicts remain visible for both designs");
+const warningPackage = structuredClone(packageValue);
+warningPackage.editableFields = [{ id: "text:title", type: "text", binding: { kind: "text-characters", nodeId }, defaultValue: "Hi", configuration: { maxCharacters: 10, warningAtCharacters: 8 } }];
+warningPackage.editableFieldOrder = ["text:title"];
+const warningOther = structuredClone(warningPackage); warningOther.packageId += "-warning";
+const warningFamily = createTemplateFieldFamilyFromSourcesV2([warningPackage, warningOther], "Warnings");
+
+const warnings = familyFieldIssues(warningFamily, { "text:title": { value: "12345678" } });
+assert(warnings.length === 2 && warnings.every(issue => issue.severity === "warning"), "Cross-design advisory warnings retain their severity instead of becoming red errors");
+console.log("Family imported-image provenance and warning-severity regressions passed.");
+
+const fitFamily = structuredClone(imageFamily);
+fitFamily.variants[1].fieldOverrides = { [imageField.id]: { type: "image", configuration: { replacementPlacement: "fit" } } };
+const placed = { ...createTemplateFieldFamilyContentStateV3(fitFamily), values: { [imageField.id]: { value: { assetId: imageField.defaultValue.assetId, placement: { mode: "fill" as const } } } }, variantImagePlacements: { [fitFamily.variants[1].id]: { [imageField.id]: { mode: "fit" as const } } } };
+assert(projectFamilyFieldIssues(fitFamily, placed).length === 0, "Effective per-design Fit must agree with Core and omit false errors");
+assert(projectFamilyFieldIssues(fitFamily, { ...placed, variantImagePlacements: {} }).some(issue => issue.code === "field-v2.image-placement-unauthorized"), "Removing only placement must expose the real policy conflict");
+const supplied = structuredClone(placed); supplied.values[imageField.id].value.assetId = "replacement-only";
+const replacement = { ...imagePackage.assets[imageField.defaultValue.assetId], id: "replacement-only" };
+assert(projectFamilyFieldIssues(fitFamily, supplied, { "replacement-only": replacement }).length === 0, "Session replacement assets participate in diagnostic authority");
+assert(projectFamilyFieldIssues(fitFamily, supplied).some(issue => issue.severity === "error"), "Missing replacement assets are not hidden");

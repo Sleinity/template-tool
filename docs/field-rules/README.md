@@ -14,6 +14,11 @@ unchanged; legacy saved work is explicitly isolated, not silently converted.
 - [Browser session, persistence, reimport, and React integration](BROWSER_SESSION.md)
 - [Boolean structural visibility](BOOLEAN_STRUCTURAL_VISIBILITY.md)
 - [Studio authoring and external hosts](STUDIO_AND_HOSTS.md)
+- [2026-10-19 Studio field-rules audit](FIELD_RULES_AUDIT_20261019.md)
+- [2026-10-19 field rule to renderer architecture audit](FIELD_RULE_TO_RENDERER_AUDIT_20261019.md)
+- [2026-10-19 renderer boundary fixes and verification](FIELD_RULE_RENDERER_FIXES_20261019.md)
+- [2026-10-19 choices to renderer audit](CHOICES_RENDERER_AUDIT_20261019.md)
+- [2026-10-19 choices fixes and regression closure](CHOICES_RENDERER_FIXES_20261019.md)
 - [Milestone 7 implementation and verification report](MILESTONE_7_REPORT.md)
 
 The strict schemas are

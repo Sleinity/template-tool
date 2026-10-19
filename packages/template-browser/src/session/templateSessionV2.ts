@@ -355,6 +355,8 @@ export function createTemplateSessionV2(
   let currentFontRevision: string | null = null;
   let currentPublicationGeneration: number | null = null;
   let publicationLeaseBase = 0;
+  let minimumPublicationGeneration = 0;
+  let runtimeLoadState: "active" | "loading" | "failed" = "active";
   let snapshot = emptySnapshot();
   let disposed = false;
   const saveQueue = createSerializedSaveQueue();
@@ -402,6 +404,18 @@ export function createTemplateSessionV2(
   };
   const revokeSources = () => {
     for (const url of [...sourceUrls]) { sourceUrls.delete(url); releaseUrl(url); }
+  };
+  const invalidateRuntime = (packageValue: TemplatePackageV2 | null) => {
+    runtimeLoadState = "active";
+    if (currentPublicationGeneration !== null) {
+      minimumPublicationGeneration = Math.max(minimumPublicationGeneration, currentPublicationGeneration + 1);
+    }
+    fieldRenderValidation.clear();
+    runtimeFonts = packageValue?.fontRequirements?.length ? "pending" : "not-required";
+    runtimeRenderer = packageValue ? "pending" : "not-required";
+    currentSettlementRevision = null;
+    currentFontRevision = null;
+    currentPublicationGeneration = null;
   };
   const assetReadiness = (
     content: TemplateFieldContentStateV1,
@@ -454,9 +468,10 @@ export function createTemplateSessionV2(
     if (runtimeFonts === "blocked") reasons.push("Font readiness is blocked.");
     if (runtimeRenderer === "pending") reasons.push("Renderer settlement/readiness is pending.");
     if (runtimeRenderer === "blocked") reasons.push("Renderer settlement/readiness is blocked.");
-    const blocked = deterministic === "blocked" || renderValidation === "blocked" ||
+    if (runtimeLoadState !== "active") reasons.push(runtimeLoadState === "loading" ? "Saved session restoration is pending." : "Session loading failed.");
+    const blocked = runtimeLoadState === "failed" || deterministic === "blocked" || renderValidation === "blocked" ||
       assets.state === "blocked" || runtimeFonts === "blocked" || runtimeRenderer === "blocked";
-    const pending = renderValidation === "pending" || assets.state === "pending" ||
+    const pending = runtimeLoadState === "loading" || renderValidation === "pending" || assets.state === "pending" ||
       runtimeFonts === "pending" || runtimeRenderer === "pending";
     return {
       state: blocked ? "blocked" : pending ? "pending" : "ready",
@@ -598,11 +613,7 @@ export function createTemplateSessionV2(
         revokeOwned(previousAssetId);
       }
     }
-    fieldRenderValidation.clear();
-    runtimeRenderer = "pending";
-    currentSettlementRevision = null;
-    currentFontRevision = null;
-    currentPublicationGeneration = null;
+    invalidateRuntime(snapshot.basePackage);
     const derived = materialize(snapshot.basePackage, result.state, sessionAssets,
       sessionAssets === snapshot.sessionAssets
         ? packageValue
@@ -752,11 +763,7 @@ export function createTemplateSessionV2(
       delete sessionAssets[previousAssetId];
       revokeOwned(previousAssetId);
     }
-    fieldRenderValidation.clear();
-    runtimeRenderer = "pending";
-    currentSettlementRevision = null;
-    currentFontRevision = null;
-    currentPublicationGeneration = null;
+    invalidateRuntime(snapshot.basePackage);
     const derived = materialize(snapshot.basePackage, result.state, sessionAssets);
     publish({ contentState: result.state, sessionAssets, ...derived });
     return mutationResponse(result);
@@ -820,15 +827,19 @@ export function createTemplateSessionV2(
       recordGeneration += 1;
       reservedSaveId = undefined;
       const operationRevision = snapshot.operationRevision + 1;
+      invalidateRuntime(snapshot.basePackage);
       const parsed = parseTemplatePackageV2(source);
       if (!parsed.package) {
+        runtimeLoadState = "failed";
         publish({
           operationRevision,
+          readiness: { ...snapshot.readiness, state: "blocked", exportReady: false, renderer: "blocked" },
           status: "blocked",
           error: { code: "package-invalid", message: parsed.diagnostics[0]?.message ?? "Template source could not normalize to V2.", diagnostics: parsed.diagnostics },
         });
         return snapshot;
       }
+      runtimeLoadState = "active";
       const content = contentState ?? createTemplateFieldContentStateV1(parsed.package);
       const retained = Object.values(parsed.package.assets).filter(asset => asset.stableUrl && sessionAssetUrlLeases.has(asset.stableUrl));
       const urls = new Set(retained.map(asset => asset.stableUrl!));
@@ -837,12 +848,7 @@ export function createTemplateSessionV2(
       revokeSources();
       revokeOwned();
       for (const url of urls) { leasedUrls.add(url); sourceUrls.add(url); }
-      fieldRenderValidation.clear();
-      runtimeFonts = parsed.package.fontRequirements?.length ? "pending" : "not-required";
-      runtimeRenderer = "pending";
-      currentSettlementRevision = null;
-      currentFontRevision = null;
-      currentPublicationGeneration = null;
+      invalidateRuntime(parsed.package);
       const derived = materialize(parsed.package, content, {});
       publish({
         operationRevision,
@@ -873,12 +879,7 @@ export function createTemplateSessionV2(
       if (!validation.valid) throw new Error(validation.diagnostics.map((issue) => issue.message).join("\n"));
       const contentState = reconcileTemplateFieldConfigurationV2(basePackage, snapshot.contentState);
       controllerGeneration += 1;
-      fieldRenderValidation.clear();
-      runtimeFonts = basePackage.fontRequirements?.length ? "pending" : "not-required";
-      runtimeRenderer = "pending";
-      currentSettlementRevision = null;
-      currentFontRevision = null;
-      currentPublicationGeneration = null;
+      invalidateRuntime(basePackage);
       const derived = materialize(basePackage, contentState, snapshot.sessionAssets);
       publish({ operationRevision: snapshot.operationRevision + 1, basePackage: deepFreeze(basePackage), contentState, ...derived });
       return snapshot;
@@ -888,25 +889,24 @@ export function createTemplateSessionV2(
       recordGeneration += 1;
       reservedSaveId = undefined;
       const operationRevision = snapshot.operationRevision + 1;
-      publish({ operationRevision });
+      invalidateRuntime(snapshot.basePackage);
+      runtimeLoadState = "loading";
+      publish({ operationRevision, readiness: { ...snapshot.readiness, state: "pending", exportReady: false, renderer: "pending" } });
       let releaseHydrated: (() => void) | undefined;
       try {
         const record = await repository.getTemplateSessionV2(id);
         if (disposed || snapshot.operationRevision !== operationRevision) return snapshot;
         if (!record) {
-          publish({ status: "blocked", error: { code: "saved-session-not-found", message: `Saved V2 template session "${id}" was not found.` } });
+          runtimeLoadState = "failed";
+          publish({ readiness: { ...snapshot.readiness, state: "blocked", exportReady: false, renderer: "blocked" }, status: "blocked", error: { code: "saved-session-not-found", message: `Saved V2 template session "${id}" was not found.` } });
           return snapshot;
         }
         const hydrated = await hydrateRecord(record, operationRevision);
         if (!hydrated) return snapshot;
         releaseHydrated = hydrated.release;
         if (disposed || snapshot.operationRevision !== operationRevision) return snapshot;
-        fieldRenderValidation.clear();
-        runtimeFonts = hydrated.basePackage.fontRequirements?.length ? "pending" : "not-required";
-        runtimeRenderer = "pending";
-        currentSettlementRevision = null;
-        currentFontRevision = null;
-        currentPublicationGeneration = null;
+        runtimeLoadState = "active";
+        invalidateRuntime(hydrated.basePackage);
         const derived = materialize(hydrated.basePackage, record.contentState, hydrated.sessionAssets);
         // Hold every incoming URL before releasing the previous accepted ownership.
         const incoming = new Set([...hydrated.nextSourceUrls, ...hydrated.replacementUrls.values()]);
@@ -932,7 +932,8 @@ export function createTemplateSessionV2(
         });
       } catch (error) {
         if (!disposed && snapshot.operationRevision === operationRevision) {
-          publish({ status: "blocked", error: { code: "saved-session-load-failed", message: error instanceof Error ? error.message : "Saved V2 template session failed to load." } });
+          runtimeLoadState = "failed";
+          publish({ readiness: { ...snapshot.readiness, state: "blocked", exportReady: false, renderer: "blocked" }, status: "blocked", error: { code: "saved-session-load-failed", message: error instanceof Error ? error.message : "Saved V2 template session failed to load." } });
         }
       } finally {
         releaseHydrated?.();
@@ -986,12 +987,7 @@ export function createTemplateSessionV2(
       );
       const operationRevision = snapshot.operationRevision + 1;
       controllerGeneration += 1;
-      fieldRenderValidation.clear();
-      runtimeFonts = applied.packageValue.fontRequirements?.length ? "pending" : "not-required";
-      runtimeRenderer = "pending";
-      currentSettlementRevision = null;
-      currentFontRevision = null;
-      currentPublicationGeneration = null;
+      invalidateRuntime(applied.packageValue);
       const derived = materialize(applied.packageValue, applied.contentState, snapshot.sessionAssets);
       publish({
         operationRevision,
@@ -1006,7 +1002,7 @@ export function createTemplateSessionV2(
       const materialization = snapshot.materialization;
       const field = snapshot.basePackage?.editableFields.find((candidate) => candidate.id === evidence.fieldId);
       if (
-        !field || field.type !== "textarea" ||
+        runtimeLoadState !== "active" || !field || field.type !== "textarea" ||
         !snapshot.contentState ||
         evidence.packageIdentity !== snapshot.basePackage?.packageId ||
         evidence.contentRevision !== snapshot.contentState.revision ||
@@ -1027,10 +1023,11 @@ export function createTemplateSessionV2(
     publishRuntimeReadiness(evidence) {
       assertActive();
       if (
-        evidence.contentRevision !== snapshot.contentState?.revision ||
+        runtimeLoadState !== "active" || evidence.contentRevision !== snapshot.contentState?.revision ||
         evidence.materializationRevision !== snapshot.materialization?.materializationRevision ||
         !Number.isSafeInteger(evidence.publicationGeneration) ||
         evidence.publicationGeneration < publicationLeaseBase ||
+        evidence.publicationGeneration < minimumPublicationGeneration ||
         (currentPublicationGeneration !== null &&
           evidence.publicationGeneration < currentPublicationGeneration)
       ) return false;
@@ -1081,12 +1078,8 @@ export function createTemplateSessionV2(
       reservedSaveId = undefined;
       revokeSources();
       revokeOwned();
-      fieldRenderValidation.clear();
-      runtimeFonts = "not-required";
-      runtimeRenderer = "not-required";
-      currentSettlementRevision = null;
-      currentFontRevision = null;
-      currentPublicationGeneration = null;
+      invalidateRuntime(null);
+      runtimeLoadState = "active";
       controllerGeneration += 1;
       const empty = emptySnapshot();
       publish({

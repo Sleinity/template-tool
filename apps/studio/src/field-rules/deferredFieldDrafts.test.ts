@@ -116,3 +116,17 @@ const make = () => { const clock = new Clock(); return { clock, coordinator: new
   assert(events.join() === "old-start,old-end,choice", "Choice waits for an active commit and suppresses its abandoned callback");
   coordinator.dispose();
 }
+
+{
+  const { coordinator } = make(); let release!: () => void; const order: string[] = [];
+  coordinator.schedule("hidden-text", { valid: true, commit: () => coordinator.withProvisional(async () => {
+    order.push("candidate"); await new Promise<void>(resolve => release = resolve); order.push("restored"); return { accepted: true };
+  }) });
+  coordinator.schedule("incomplete-number", { valid: false, commit: () => ({ accepted: false }) });
+  const visibility = coordinator.runMutation(() => { order.push("visibility"); });
+  await tick();
+  assert(coordinator.getSummarySnapshot().provisionalCount === 1 && order.join() === "candidate", "Mutation barrier drains earlier drafts and exposes provisional state");
+  release(); await visibility;
+  assert(order.join() === "candidate,restored,visibility" && coordinator.provisionalCount === 0 && coordinator.invalidCount === 1, "Other mutations wait for validation without flushing unrelated invalid input");
+  coordinator.dispose();
+}

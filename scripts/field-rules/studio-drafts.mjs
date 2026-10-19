@@ -4,6 +4,10 @@ import { normalizeTemplatePackageV1ToV2 } from "@sleinity/template-core";
 import { launchBrowser } from "../fidelity/browser.mjs";
 import { createStudioViteServer } from "../repository/studio-vite-server.mjs";
 
+async function waitInput(input, value) {
+  await input.page().waitForFunction(([element, expected]) => element?.isConnected && element.value === expected, [await input.elementHandle(), value]);
+}
+
 // Product integration fixture, not new Figma source certification or a golden.
 const root = process.cwd();
 const output = resolve(root, "fidelity/evidence/studio-phase-5-drafts");
@@ -165,19 +169,20 @@ try {
   assert(await page.getByRole('button', { name: /Open (diagnostics|issues)/, exact: true }).count() === 0, 'Line validation does not require an Issues drawer.');
   const exportReadyBeforeLineOverflow = await page.getByRole('button', { name: 'Export PNG', exact: true }).isEnabled();
   await page.getByLabel('Body', { exact: true }).fill('One\nTwo\nThree');
-  assert(await page.getByLabel('Body', { exact: true }).inputValue() === 'One\nTwo\nThree', 'Typing preserves the literal local draft before renderer validation.');
-  assert(await page.locator('[data-package-node-id="58:60"]').innerText() === bodyPreviewBeforeOverflow, 'A typing event does not synchronously update the canonical preview.');
+  await waitInput(page.getByLabel('Body', { exact: true }), 'One\nTwo');
+  assert(await page.getByLabel('Body', { exact: true }).inputValue() === 'One\nTwo', 'Typing rejects content beyond the rendered-line maximum.');
   await page.waitForTimeout(1100);
   const bodyAfterOverflow = (await all()).find((record) => record.id === recoveryRecord.id);
-  assert(bodyAfterOverflow.contentState.revision > bodyBeforeOverflow.contentState.revision, 'A paused textarea draft commits canonical content before renderer validation.');
-  assert(await page.locator('[data-package-node-id="58:60"]').innerText() !== bodyPreviewBeforeOverflow, 'Preview catches up after the typing pause.');
-  assert(await page.getByLabel('Body', { exact: true }).locator('xpath=ancestor::section[contains(@class,"v2-content")]').locator('.ui-field__error').count() > 0, 'Renderer line overflow is shown inline beside its control.');
-  assert(exportReadyBeforeLineOverflow && !await page.getByRole('button', { name: 'Export PNG', exact: true }).isEnabled(), 'Renderer line overflow blocks export after deferred validation.');
+  assert(bodyAfterOverflow.contentState.revision > bodyBeforeOverflow.contentState.revision && JSON.stringify(bodyAfterOverflow.contentState.values) === JSON.stringify(bodyBeforeOverflow.contentState.values), 'Painted rejection advances revisions and saves only the restored accepted values.');
+  assert(await page.locator('[data-package-node-id="58:60"]').innerText() === bodyPreviewBeforeOverflow, 'Rejected line overflow preserves the preview.');
+  assert(exportReadyBeforeLineOverflow && await page.getByRole('button', { name: 'Export PNG', exact: true }).isEnabled(), 'Rejected line overflow leaves the accepted output exportable.');
   await page.getByLabel('Body', { exact: true }).fill('One\nTwo'); await page.waitForTimeout(450);
   await page.getByLabel('Body choices', { exact: true }).selectOption('overflow');
+  await waitInput(page.getByLabel('Body', { exact: true }), 'One\nTwo');
   assert(await page.getByLabel('Body', { exact: true }).inputValue() === 'One\nTwo', 'Suggested choices cannot bypass the visual-line guard.');
   await page.getByLabel('Body', { exact: true }).fill('W'.repeat(1000));
-  assert(await page.getByLabel('Body', { exact: true }).inputValue() === 'W'.repeat(1000), 'Automatic wrapping retains the literal local typing draft.');
+  await waitInput(page.getByLabel('Body', { exact: true }), 'One\nTwo');
+  assert(await page.getByLabel('Body', { exact: true }).inputValue() === 'One\nTwo', 'Automatic wrapping cannot bypass the visual-line maximum.');
   await page.getByLabel('Body', { exact: true }).fill('One\nTwo');
   await page.getByLabel('Amount', { exact: true }).fill('');
   await page.getByRole('button', { name: /Back to (templates|Library)/, exact: true }).click();

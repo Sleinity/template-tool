@@ -21,7 +21,7 @@ const browserClock: DeferredDraftClock = {
   clearTimeout: timer => clearTimeout(timer),
 };
 type Entry = DeferredFieldDraft & { generation: number; firstPendingAt: number; dueAt: number };
-export type DeferredDraftSummary = Readonly<{ pendingCount: number; invalidCount: number; composingCount: number }>;
+export type DeferredDraftSummary = Readonly<{ pendingCount: number; invalidCount: number; composingCount: number; provisionalCount: number }>;
 
 /** Studio-owned coalescing. Native canonical mutations and save scheduling stay independent. */
 export class DeferredFieldDraftCoordinator {
@@ -29,10 +29,12 @@ export class DeferredFieldDraftCoordinator {
   private listeners = new Set<() => void>();
   private revision = 0;
   private generation = 0;
+  private provisional = 0;
+  private mutationSerial = 0;
   private timer?: ReturnType<typeof setTimeout>;
   private active: Promise<boolean> | null = null;
   private activeEntry: Entry | null = null;
-  private summary: DeferredDraftSummary = { pendingCount: 0, invalidCount: 0, composingCount: 0 };
+  private summary: DeferredDraftSummary = { pendingCount: 0, invalidCount: 0, composingCount: 0, provisionalCount: 0 };
 
   constructor(readonly delayMs: number, readonly maxWaitMs = 325, private readonly clock: DeferredDraftClock = browserClock) {}
   subscribe = (listener: () => void) => { this.listeners.add(listener); return () => this.listeners.delete(listener); };
@@ -40,7 +42,30 @@ export class DeferredFieldDraftCoordinator {
   getSummarySnapshot = () => this.summary;
   get pendingCount() { return this.summary.pendingCount; }
   get invalidCount() { return this.summary.invalidCount; }
-  get dirty() { return this.entries.size > 0; }
+  get dirty() { return this.entries.size > 0 || this.provisional > 0; }
+  get provisionalCount() { return this.provisional; }
+  async withProvisional<T>(action: () => Promise<T>): Promise<T> {
+    this.provisional++; this.notify();
+    try { return await action(); }
+    finally { this.provisional--; this.notify(); }
+  }
+  /** Other canonical writes share the active transaction barrier, without
+   * forcing unrelated incomplete local drafts to commit. */
+  async runMutation<T>(action: () => T | Promise<T>): Promise<T> {
+    const preceding = [...this.entries].filter(([, entry]) => entry.valid).map(([key]) => key);
+    const key = `mutation:${++this.mutationSerial}`;
+    let result: T | undefined, failure: unknown, ran = false;
+    this.schedule(key, { valid: true, commit: async () => {
+      ran = true;
+      try { result = await action(); } catch (error) { failure = error; }
+      return { accepted: true };
+    } });
+    for (const earlier of preceding) await this.flushKey(earlier);
+    await this.flushKey(key);
+    if (failure) throw failure;
+    if (!ran) throw new Error("This editing session is no longer current.");
+    return result as T;
+  }
   /** Presentation navigation only; never flushes or accepts a draft. */
   focusFirstInvalid() {
     const entry = [...this.entries.values()].find(value => !value.valid && !value.composing);
@@ -49,7 +74,7 @@ export class DeferredFieldDraftCoordinator {
 
   private notify() {
     const pendingCount = this.entries.size, invalidCount = [...this.entries.values()].filter(entry => !entry.valid && !entry.composing).length, composingCount = [...this.entries.values()].filter(entry => entry.composing).length;
-    if (pendingCount !== this.summary.pendingCount || invalidCount !== this.summary.invalidCount || composingCount !== this.summary.composingCount) this.summary = { pendingCount, invalidCount, composingCount };
+    if (pendingCount !== this.summary.pendingCount || invalidCount !== this.summary.invalidCount || composingCount !== this.summary.composingCount || this.provisional !== this.summary.provisionalCount) this.summary = { pendingCount, invalidCount, composingCount, provisionalCount: this.provisional };
     this.revision += 1;
     this.listeners.forEach(listener => listener());
   }

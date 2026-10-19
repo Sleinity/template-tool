@@ -1,0 +1,137 @@
+{
+  "createdAt": "2026-10-19T13:37:01.483954+00:00",
+  "status": "passed",
+  "scope": "Close choices audit C1/C2 only; preserve prior worktree work.",
+  "head": "40faa9629cc407fd084d70297dcde4c30ce92c3c",
+  "browser": "149.0.7827.55",
+  "choices": {
+    "passed": 88,
+    "total": 88,
+    "remainingFindings": 0
+  },
+  "priorArchitecture": {
+    "passed": 50,
+    "total": 50
+  },
+  "checks": [
+    {
+      "command": "node scripts/run-tests.mjs --portable (before fix)",
+      "exitCode": 1,
+      "expectedFailure": true,
+      "evidence": "before-fix-regression.log"
+    },
+    {
+      "command": "node scripts/run-tests.mjs --portable",
+      "exitCode": 0,
+      "evidence": "portable.log"
+    },
+    {
+      "command": "node scripts/field-rules/studio-v2.mjs",
+      "exitCode": 0,
+      "evidence": "field-rules-gate.log",
+      "includes": "88 choices checks, earlier 50 architecture checkpoints, Studio and host output, line limits, delayed-evidence transactions"
+    },
+    {
+      "command": "pnpm packages:build",
+      "exitCode": 0,
+      "evidence": "package-build.log"
+    },
+    {
+      "command": "pnpm packages:typecheck",
+      "exitCode": 0,
+      "evidence": "package-types.log"
+    },
+    {
+      "command": "tsc -b apps/studio/tsconfig.json --pretty false",
+      "exitCode": 0,
+      "evidence": "studio-types.log"
+    },
+    {
+      "command": "pnpm --filter @sleinity/template-studio build",
+      "exitCode": 0,
+      "evidence": "studio-build.log"
+    },
+    {
+      "command": "/Users/niels/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/repository/sdk-api-contract.mjs --check",
+      "exitCode": 0,
+      "evidence": "api-contract.log"
+    },
+    {
+      "command": "/Users/niels/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/repository/verify-package-boundaries.mjs",
+      "exitCode": 0,
+      "evidence": "boundaries.log"
+    },
+    {
+      "command": "/Users/niels/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/verify-doc-links.mjs",
+      "exitCode": 0,
+      "evidence": "documentation.log"
+    },
+    {
+      "command": "/Users/niels/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --check scripts/field-rules/choices-audit.mjs",
+      "exitCode": 0,
+      "evidence": "syntax.log"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "evidence": "whitespace.log"
+    },
+    {
+      "command": "/Users/niels/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node node_modules/typescript/bin/tsc --noEmit --skipLibCheck --strict --esModuleInterop --resolveJsonModule --moduleResolution bundler --target ES2020 --module esnext --jsx react-jsx packages/template-browser/test/familyChoiceReconciliation.test.ts",
+      "exitCode": 0,
+      "evidence": "regression-types.log"
+    }
+  ],
+  "sourceSha256": {
+    "apps/studio/src/field-rules/FieldContentEditorV2.tsx": "6d030a0fd9f36963b566e2209ff4cd836f8fee8359f497d16a499d1e742fba37",
+    "apps/studio/src/field-rules/StudioFieldRulesV2.tsx": "4db01a2551c0bd8ae69bdc8ed746b4155d4bb944d742b8052a65277e13a99a6e",
+    "apps/studio/src/field-rules/choiceAuthoring.ts": "2e71039b01f7cb85843cae2f75353d4e28a77a7321e561fb9def22642a5955f9",
+    "apps/studio/src/field-rules/deferredFieldDrafts.test.ts": "5c296833d80a17c5292f82afe22579dbfbcd46d5a2f8e5bf2cf73d038699b021",
+    "apps/studio/src/field-rules/deferredFieldDrafts.ts": "a277b06f381c90f1d11a38ec6e9c338ea17787154e3e7066a624e6a5a2318b5a",
+    "apps/studio/src/field-rules/fieldAuthoring.test.ts": "53f947f99182cf63d486faf7353fc499621398710eb581ec741d301fd9f8ce2d",
+    "apps/studio/src/field-rules/fieldAuthoring.ts": "607b9bdc7d29aaa44e3cd41751febefb51e5a9899a8f1efd61526b9367ca0134",
+    "apps/studio/src/field-rules/renderedTextareaDrafts.test.ts": "1bacc98c9dcd8e3a067ab25bdcec17f33dea8eaf518d5b09342078db8e73b744",
+    "apps/studio/src/field-rules/renderedTextareaDrafts.ts": "7db456f35da83d749e9e96e754f7a31539a49ddec7f0504b8893b36fd2185a47",
+    "apps/studio/src/field-rules/studioTextLimits.test.ts": "6337238aa9c3ef9bf8a14836d3e36a5bbda9f44c868e2cd8208e8df4a424f2a1",
+    "apps/studio/src/field-rules/studioTextLimits.ts": "667aa81b5cca8ee5a5d2333ea220a09009c1b739c9c49676106039e5e7e9ac25",
+    "apps/studio/src/setup/SetupFields.tsx": "43887eadc5ca5af5e4a84b4e1c3a71eb94aee2eb96676819c58ae610095427ad",
+    "apps/studio/src/workspace/DraftEditor.tsx": "782a3d6e1ac963fc4871b2ee18c60191baebc3da73c76789e1816c3eae16edb7",
+    "docs/field-rules/CHOICES_RENDERER_AUDIT_20261019.md": "f5053a985036ef0529b981f893e379b029a15d440130aa53218f69515bbdc74a",
+    "docs/field-rules/CHOICES_RENDERER_FIXES_20261019.md": "9cd53762c48e10099133422939a58bbf37d77e83b6249aa57bae1d43b5dad430",
+    "docs/field-rules/README.md": "c7c4db81bd222eb4962e0f90242692a8637373050b39476c37246b078757468c",
+    "docs/field-rules/STUDIO_AND_HOSTS.md": "c6bde31fd49a331aa5f077f8c0a3d451b5c435c610349af2159674b1fbc27ca2",
+    "packages/template-browser/src/import/templateReimportV2.ts": "da75d9f7bc140951d1a34712cae5f0e78f4630d89859249219ec1ae5a5c4cb1d",
+    "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "752328befb769db046e795be0bee028a83a435b944cae18231af94bae8718492",
+    "packages/template-browser/src/session/templateSessionV2.ts": "1e6d37473452ccd36fd3272468b95050cd9f955067fc520de9698014c595a60e",
+    "packages/template-browser/test/familyChoiceReconciliation.test.ts": "68fe9ecd146d9ea05a3d67086953ec81d89ad669acaf8e4094d250296e117a11",
+    "packages/template-browser/test/nativeReloadEvidence.test.ts": "e539c8be86aec350ae01cd104e762a2497a941c94931d6dc8d6ecaa42ff01226",
+    "packages/template-core/src/fieldSemanticKernelV2.ts": "eff188114903bec5c3616d511fb41aed0eb3891e715dfe36689d1fcdf0ea5402",
+    "packages/template-core/src/materializeTemplateFieldContentV2.ts": "f2f8d5f3dc57fc64a640117502b2ab874affce2d52e5e123295acdb397ba3be7",
+    "packages/template-core/src/templateFieldContentV2.ts": "39efec6e5e12f48f8f606c203e793e09ac05246fd8ec63668aedfa03a7214759",
+    "packages/template-react/src/fieldSessionV2.tsx": "69019d5a636ba802d98ad70c87caaa478b7fd951b2142863259acc74f59d567f",
+    "scripts/field-rules/architecture-audit.mjs": "e761369848084d6f4f05875cd0cabec977d7647695e0541d0b6962cfb6ca2492",
+    "scripts/field-rules/audit-regressions.mjs": "322364fa3d2967f46542045ff5a65c364e68e5e88425433750d05568d3bde714",
+    "scripts/field-rules/choices-audit.mjs": "da7c1552980b01539935fe9e268e9771f374866facef55e90cd79c272ceae8e8",
+    "scripts/field-rules/renderer-transactions.mjs": "487bc32615ac08baef7feec00738c7ba75dd1380d5c1921b511d2e6afb879eea",
+    "scripts/field-rules/studio-drafts.mjs": "059e17be66813be9c693307440bdc673b5c6ff2aefa74f6d28c89c7d0634b442",
+    "scripts/field-rules/studio-setup.mjs": "aac42afdfe614414a57a2d32459d737bd47c015b9596d2ccae19a3ac8b180ba7",
+    "scripts/field-rules/studio-v2.mjs": "11ae2a28e7758dd5accd0bce83492a3f17f9cf2553001f62a3e32f66c1518d6c",
+    "src/test-suite.ts": "f406ef1cd7f2138fb094f1ad9f424fc244f4750f344776a11f145be17922db88"
+  },
+  "changedSinceAudit": [
+    "apps/studio/src/field-rules/FieldContentEditorV2.tsx",
+    "docs/field-rules/CHOICES_RENDERER_AUDIT_20261019.md",
+    "docs/field-rules/README.md",
+    "packages/template-browser/src/session/templateFieldFamilySessionV2.ts",
+    "scripts/field-rules/choices-audit.mjs",
+    "scripts/field-rules/studio-v2.mjs",
+    "src/test-suite.ts"
+  ],
+  "unrelatedAuditedSourcesPreserved": true,
+  "limits": [
+    "System-font integration evidence; no source-design pixel certification.",
+    "Registered /Users/niels/Documents/Templates/V2 Tests/template-package-carrousel-v0.6.1.zip remains unavailable; exact-font gate not rerun/certified.",
+    "Existing Studio large-chunk build advisory remains."
+  ],
+  "keyboardEvidence": "Real type-ahead keys plus Enter, a native change event, accepted value/provenance, cleared errors and export readiness in both mismatch/unknown-ID cases."
+}

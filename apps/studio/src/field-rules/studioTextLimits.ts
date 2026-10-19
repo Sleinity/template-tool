@@ -54,57 +54,13 @@ export function studioTextCounter(value: string, maximum?: number) {
 export function acceptStudioTextInput(previous: string, next: string, maximum?: number): StudioTextInputResult {
   const previousCount = countTemplateFieldGraphemesV1(previous);
   const nextCount = countTemplateFieldGraphemesV1(next);
-  const accepted = maximum === undefined || nextCount <= maximum || nextCount < previousCount;
+  const accepted = next === previous || maximum === undefined || nextCount <= maximum || nextCount < previousCount;
   return { accepted, value: accepted ? next : previous, count: accepted ? nextCount : previousCount, reason: accepted ? null : "characters" };
 }
-
-export type StudioTextLineMeasure = (value: string) => number | null;
 
 export interface StudioTextInputResult {
   accepted: boolean;
   value: string;
   count: number;
-  lines?: number | null;
-  reason?: "characters" | "lines" | "measurement-pending" | null;
-}
-
-export function acceptStudioTextareaInput(previous: string, next: string, options: {
-  maxCharacters?: number;
-  maxLines?: number;
-  measureLines?: StudioTextLineMeasure;
-  currentVisualLines?: number;
-  inactive?: boolean;
-}): StudioTextInputResult {
-  const characters = acceptStudioTextInput(previous, next, options.maxCharacters);
-  if (!characters.accepted) return { ...characters, reason: "characters" as const };
-  if (options.maxLines === undefined || options.inactive || next === previous) {
-    return { ...characters, reason: null };
-  }
-  const previousCount = countTemplateFieldGraphemesV1(previous);
-  const nextCount = countTemplateFieldGraphemesV1(next);
-  const nextLines = options.measureLines?.(next) ?? null;
-  if (nextLines === null) {
-    const accepted = nextCount < previousCount;
-    return {
-      accepted,
-      value: accepted ? next : previous,
-      count: accepted ? nextCount : previousCount,
-      reason: accepted ? null : "measurement-pending" as const,
-    };
-  }
-  if (nextLines <= options.maxLines) {
-    return { ...characters, lines: nextLines, reason: null };
-  }
-  const previousLines = options.measureLines?.(previous) ?? options.currentVisualLines ?? null;
-  const repairingExistingOverflow = previousLines !== null && previousLines > options.maxLines && nextCount < previousCount;
-  if (repairingExistingOverflow) {
-    return { ...characters, lines: nextLines, reason: null };
-  }
-  return {
-    accepted: false,
-    value: previous,
-    count: previousCount,
-    lines: previousLines,
-    reason: "lines" as const,
-  };
+  reason?: "characters" | null;
 }

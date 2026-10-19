@@ -1,4 +1,4 @@
-import { acceptStudioTextareaInput, acceptStudioTextInput, normalizeStudioFamilyTextLimits, normalizeStudioTextField, studioCharacterWarningAt, studioTextCounter } from "./studioTextLimits";
+import { acceptStudioTextInput, normalizeStudioFamilyTextLimits, normalizeStudioTextField, studioCharacterWarningAt, studioTextCounter } from "./studioTextLimits";
 import type { TemplateFieldFamilyV2 } from "@sleinity/template-core/family";
 
 function assert(condition: unknown, message: string): asserts condition { if (!condition) throw new Error(message); }
@@ -18,16 +18,6 @@ const repaired = acceptStudioTextInput("123456", "12345", 5);
 assert(repaired.accepted, "Persisted over-limit values can be shortened.");
 assert(acceptStudioTextInput("👨‍👩‍👧‍👦é", "👨‍👩‍👧‍👦éx", 2).accepted === false, "Composed emoji and combining-mark results are rejected by grapheme count.");
 
-const wrappedLines = (value: string) => Math.max(1, Math.ceil(Array.from(value).length / 5));
-assert(acceptStudioTextareaInput("12345", "1234567890", { maxLines: 2, measureLines: wrappedLines }).accepted, "The exact rendered-line maximum remains accepted.");
-const rejectedWrap = acceptStudioTextareaInput("1234567890", "12345678901", { maxLines: 2, measureLines: wrappedLines });
-assert(!rejectedWrap.accepted && rejectedWrap.reason === "lines" && rejectedWrap.value === "1234567890", "The first candidate beyond the rendered-line maximum preserves the accepted value.");
-assert(!acceptStudioTextareaInput("one\ntwo", "one\ntwo\nthree", { maxLines: 2, measureLines: (value) => value.split("\n").length }).accepted, "Explicit newlines use the rendered-line maximum.");
-assert(acceptStudioTextareaInput("12345678901", "1234567890", { maxLines: 2, measureLines: wrappedLines, currentVisualLines: 3 }).accepted, "Persisted visual-line overflow can be shortened without forced truncation.");
-assert(!acceptStudioTextareaInput("short", "longer", { maxLines: 2 }).accepted, "Growth waits when the active preview cannot be measured.");
-assert(acceptStudioTextareaInput("longer", "short", { maxLines: 2 }).accepted, "Deletion remains available while preview measurement is unavailable.");
-assert(acceptStudioTextareaInput("one\ntwo\nthree", "one\ntwo\nthree plus", { maxLines: 2, measureLines: (value) => value.split("\n").length, inactive: true }).accepted, "Structurally inactive fields do not apply a visual-line guard.");
-
 const normalized = normalizeStudioTextField({ id: "text:title", type: "text", binding: { kind: "text-characters", nodeId: "title" }, defaultValue: "Title", configuration: { maxCharacters: 25, warningAtCharacters: 24 } });
 assert(normalized.configuration.warningAtCharacters === 20, "Studio replaces configurable character warnings with the fixed 80% value.");
 const unlimited = normalizeStudioTextField({ ...normalized, configuration: { warningAtCharacters: 5 } });
@@ -46,3 +36,5 @@ assert(!Object.prototype.hasOwnProperty.call(secondOverride ?? {}, "warningAtCha
 assert(family.variants.every((variant) => (variant.packageValue.editableFields[0]?.configuration as Record<string, unknown>).warningAtCharacters === 20), "Family source snapshots use the same derived warning configuration.");
 const clearedOverride = normalizeStudioFamilyTextLimits({ ...family, variants: [{ ...family.variants[0]!, fieldOverrides: { "text:title": { type: "text", configuration: { maxCharacters: null, warningAtCharacters: 4 } } } }] });
 assert((clearedOverride.variants[0]?.fieldOverrides?.["text:title"]?.configuration as Record<string, unknown>).warningAtCharacters === null, "Clearing a variant maximum also clears its warning override.");
+
+assert(acceptStudioTextInput("existing overflow", "existing overflow", 3).accepted, "An unchanged over-limit value is not silently truncated or rejected as a new edit.");

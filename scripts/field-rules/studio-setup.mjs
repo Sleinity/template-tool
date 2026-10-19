@@ -441,8 +441,8 @@ try {
   await page.goto(server.resolvedUrls.local[0]);
   await page.getByRole("button", { name: "Add template", exact: true }).click();
   const manifest = JSON.parse(await readFile(resolve(root, "fidelity/fixtures.json"), "utf8"));
-  const zipFixture = manifest.fixtures.find((entry) => entry.id === "deal-of-the-week-banner");
-  const zipBytes = await readFile(resolve(process.env.TEMPLATE_PACKAGE_FIXTURE_DIR ?? manifest.defaultFixtureDirectory, zipFixture.filename));
+  const zipFixture = manifest.fixtures.find((entry) => entry.id === "exporter-061-deal-of-the-week-post");
+  const zipBytes = await readFile(zipFixture.sourcePath.replace("${TEMPLATE_PACKAGE_FIXTURE_DIR}", process.env.TEMPLATE_PACKAGE_FIXTURE_DIR ?? manifest.defaultFixtureDirectory));
   assert(createHash("sha256").update(zipBytes).digest("hex") === zipFixture.zipSha256, "Real ZIP must match the registered bytes.");
   await page.getByLabel("Import source packages").setInputFiles({ name: zipFixture.filename, mimeType: "application/zip", buffer: zipBytes });
   await page.getByRole("button", { name: "Continue to fonts", exact: true }).click();

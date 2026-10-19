@@ -1,0 +1,102 @@
+{
+  "createdAt": "2026-10-19T11:41:41.880464+00:00",
+  "head": "40faa9629cc407fd084d70297dcde4c30ce92c3c",
+  "scope": "Architecture audit of current working tree, including prior uncommitted field-rule fixes. No production behavior changed in this audit pass.",
+  "sourceSha256": {
+    "packages/template-core/src/fieldSemanticKernelV2.ts": "eff188114903bec5c3616d511fb41aed0eb3891e715dfe36689d1fcdf0ea5402",
+    "packages/template-core/src/templateFieldContentV2.ts": "39efec6e5e12f48f8f606c203e793e09ac05246fd8ec63668aedfa03a7214759",
+    "packages/template-core/src/materializeTemplateFieldContentV2.ts": "f2f8d5f3dc57fc64a640117502b2ab874affce2d52e5e123295acdb397ba3be7",
+    "packages/template-core/src/family/fieldRulesV2.ts": "d1a6d16d12983f975811df7ff32ad8f96cc16e10230756c9b146223788c9c606",
+    "packages/template-browser/src/session/templateSessionV2.ts": "ec03b947a4f3c66a3390253eacb679c93242466d83a6da6925ee4294c5c22fef",
+    "packages/template-browser/src/session/templateFieldFamilySessionV2.ts": "c1bacbd668741f4f92097a7c7b0b00ac317f7ee20b2758c040b68c262343e419",
+    "packages/template-browser/src/session/fieldRenderEvidence.ts": "e3d1a03ab7a3713bc0e0ca7810457b831ce73f664b0857ceddcd8211cb540166",
+    "packages/template-browser/src/editor/textMeasurement.ts": "a4d71a02bff7527c18321ea811fafa64fd337765a5478c5dcec3dd009e380e72",
+    "packages/template-react/src/fieldSessionV2.tsx": "69019d5a636ba802d98ad70c87caaa478b7fd951b2142863259acc74f59d567f",
+    "packages/template-react/src/render/TemplatePackageRenderer.tsx": "f7f181089ab15e842d654282b4ef90008532b1db49438cc4e5daf0e0f3f46e31",
+    "apps/studio/src/field-rules/studioTextLimits.ts": "bdae0a5ae7a3b46b4ad6c371a04561d35da08cf1ee6d8e020dc65726e3c7e010",
+    "apps/studio/src/field-rules/FieldContentEditorV2.tsx": "c8d236d70aa4b629fbdda18c9322a74315e28cfab30c433ce75d8ac2fd0ee2a2",
+    "apps/studio/src/field-rules/fieldAuthoring.ts": "0bef4dd71ada3b95884fc3aa8b9aff51980505e0972b346b6dd347ce8c28e8ea",
+    "apps/studio/src/setup/SetupFields.tsx": "e4deaa6bb83395ebca6944057905c941b9be83ea4d2d0ff0ad1bb393e61e4ea1",
+    "scripts/field-rules/architecture-audit.mjs": "68eef0f80cf354d71c30776cef43635d9c2496787d234efe6751c5b91ee3a0b7"
+  },
+  "checks": [
+    {
+      "command": "node scripts/run-tests.mjs --portable",
+      "exitCode": 0,
+      "log": "portable.log",
+      "interpretation": "passed"
+    },
+    {
+      "command": "node scripts/field-rules/architecture-audit.mjs --check",
+      "exitCode": 1,
+      "log": "architecture-browser.log",
+      "interpretation": "completed with confirmed architecture gaps"
+    },
+    {
+      "command": "node scripts/field-rules/audit-regressions.mjs",
+      "exitCode": 0,
+      "log": "output-matrix.log",
+      "interpretation": "passed"
+    },
+    {
+      "command": "node scripts/field-rules/family-media.mjs",
+      "exitCode": 0,
+      "log": "family-media.log",
+      "interpretation": "passed"
+    },
+    {
+      "command": "node scripts/verify-doc-links.mjs",
+      "exitCode": 0,
+      "result": "266 Markdown files, 960 local links passed"
+    },
+    {
+      "command": "node scripts/repository/verify-package-boundaries.mjs",
+      "exitCode": 0,
+      "result": "clean"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "result": "clean"
+    }
+  ],
+  "newBrowserCheckpoints": {
+    "status": "gaps-found",
+    "checkpointCount": 50,
+    "passedCheckpointCount": 46,
+    "diagnosticGapCount": 4
+  },
+  "distinctOpenFindings": [
+    {
+      "priority": "P1",
+      "finding": "Previous-width mirror rejects valid HUG candidate",
+      "modes": [
+        "single",
+        "family"
+      ]
+    },
+    {
+      "priority": "P2",
+      "finding": "Family diagnostics omit effective variant image placement",
+      "modes": [
+        "family"
+      ]
+    },
+    {
+      "priority": "P2",
+      "finding": "Native single-session identical-source reload accepts old evidence",
+      "modes": [
+        "single"
+      ],
+      "ordinaryReactBridgeProtected": true
+    }
+  ],
+  "limits": {
+    "exactFontOrPixelCertification": false,
+    "missingRegisteredFixture": {
+      "path": "/Users/niels/Documents/Templates/V2 Tests/template-package-carrousel-v0.6.1.zip",
+      "exists": false
+    },
+    "userSavedRecordsMutated": false
+  }
+}

@@ -16,13 +16,28 @@ Core validates the candidate atomically. Content editors call typed controllers.
 The ordinary `TemplateFieldSessionRendererV2` supplies preview, line evidence,
 readiness and guarded PNG. Studio never reads working nodes back into content.
 
-The Draft Editor adds a host-only input guard before those controller calls.
-Character overflow is grapheme-counted, while Textarea candidates use the mounted
-preview node's current width and computed typography through the existing Browser
-measurement helper. A rejected candidate leaves canonical content and revisions
-unchanged. The SDK's direct controller contract and renderer-backed validation
-remain authoritative and unchanged; existing invalid saved content stays visible
-and can be reduced without automatic truncation.
+The Draft Editor rejects character overflow immediately by grapheme count.
+Textarea line limits use an asynchronous Studio transaction: preview the candidate
+through the native controller, await current painted evidence, then accept or
+restore the previous default, choice or custom value. The previous-width mirror
+is not a candidate veto. Rollback advances native revisions normally. Composition
+retains its pre-composition draft, and newer input cannot be replaced by an older
+callback. Measurement failure has a 10-second deadline and restores an owned
+checkpoint instead of inventing valid evidence.
+
+Provisional revisions never enter recovery capture. Other canonical writes queue
+behind validation; Save, navigation, design selection and PNG drain the queue.
+Already-invalid content remains visible and can be repaired progressively. The
+SDK's direct controller contract remains unchanged: render-invalid values may be
+kept editable and block export.
+
+The React evidence publisher also follows the mounted renderer lifecycle. If a
+canonical error temporarily removes the renderer, recovery obtains a fresh
+committed publication lease; restarting the inner renderer's generation counter
+cannot leave current line validation stuck pending. Ordinary edits keep the
+existing lease, and stale evidence remains rejected. Family diagnostics consume
+full effective content and assets; native reload/restore requires fresh
+publication evidence.
 
 ## Configuration and output persistence
 
@@ -82,7 +97,11 @@ reordering preserve IDs. Apply/Discard and navigation guards remain transactiona
 
 Suggested values accompany ordinary input; Options only uses a dropdown.
 Matching imported defaults and literal values display the matching option without
-creating saved selection identity. A deliberate choice replaces that field's
+creating saved selection identity. A saved choice ID is displayed as selected
+only when both its ID and canonical value match the effective option. Unknown or
+incompatible provenance shows a repair placeholder and the actual canonical
+value; selecting a configured option performs an ordinary native mutation.
+A deliberate choice replaces that field's
 invalid or queued draft, waits for active commits, then uses its latest native
 controller. Unrelated drafts remain untouched. Unlisted restricted content stays
 visible and blocked until corrected; Studio never selects the first option silently.
@@ -123,12 +142,20 @@ filtered order.
 
 Choices identifies **Inherited**, **Overridden**, or **Disabled for this design**.
 Use shared value removes the atomic override; Disable for this design writes the
-existing explicit null clear. These controls do not change shared content or defaults.
+existing explicit null clear. These controls preserve imported defaults; changing
+the effective option ID/value mapping reconciles selections as described below.
 
 Common Choice changes reconcile shared content even when the selected variant
 lacks that field. Core's existing removal behavior clears selection provenance
 while retaining the canonical value. Explicit variant choices remain intact;
-switching variants never reconciles shared values. A configuration transaction
+switching variants never reconciles shared values. Family configuration reconciles
+only fields whose option ID/value mappings changed under the affected authority.
+Field order, option order/labels, field labels, choice mode and unrelated rules
+preserve canonical entries, including already incompatible selections. Selected
+design updates compare previous and next effective choices; changes to another
+field or a nonselected design cannot reinterpret that selection. Actual option
+value changes, removal, clear and inheritance still use Core reconciliation.
+A configuration transaction
 publishes at most one materialization and, only if entries changed, one content
 revision.
 

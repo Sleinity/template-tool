@@ -1,0 +1,79 @@
+{
+  "changesets": [
+    {
+      "releases": [
+        {
+          "name": "@sleinity/template-core",
+          "type": "patch"
+        },
+        {
+          "name": "@sleinity/template-browser",
+          "type": "patch"
+        },
+        {
+          "name": "@sleinity/template-react",
+          "type": "patch"
+        }
+      ],
+      "summary": "Fix stale renderer readiness after reload, reset and saved-session restoration.\nPreserve shared Family choices during ordering and unrelated configuration edits,\nand restore renderer publication after correcting invalid content.\n\nStudio now validates textarea line limits against the visible renderer, restores\nrejected edits without saving provisional content, uses effective Family image\ndiagnostics, and exposes invalid choice selections for repair.\n\nNo public API or saved-data migration changes. Core advances with the fixed SDK\ntrain; its portable behavior is unchanged.",
+      "id": "field-rule-renderer-reliability"
+    }
+  ],
+  "releases": [
+    {
+      "name": "@sleinity/template-core",
+      "type": "patch",
+      "oldVersion": "2.0.0",
+      "changesets": [
+        "field-rule-renderer-reliability"
+      ],
+      "newVersion": "2.0.1"
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "type": "patch",
+      "oldVersion": "2.0.0",
+      "changesets": [
+        "field-rule-renderer-reliability"
+      ],
+      "newVersion": "2.0.1"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "type": "patch",
+      "oldVersion": "2.0.0",
+      "changesets": [
+        "field-rule-renderer-reliability"
+      ],
+      "newVersion": "2.0.1"
+    },
+    {
+      "name": "@sleinity/template-studio",
+      "type": "none",
+      "oldVersion": "0.1.0",
+      "changesets": [],
+      "newVersion": "0.1.0"
+    },
+    {
+      "name": "@sleinity/template-minimal-renderer",
+      "type": "none",
+      "oldVersion": "0.1.0",
+      "changesets": [],
+      "newVersion": "0.1.0"
+    },
+    {
+      "name": "@sleinity/template-editor-integration",
+      "type": "patch",
+      "oldVersion": "0.1.3",
+      "changesets": [],
+      "newVersion": "0.1.4"
+    },
+    {
+      "name": "@sleinity/template-family-integration",
+      "type": "patch",
+      "oldVersion": "0.8.1",
+      "changesets": [],
+      "newVersion": "0.8.2"
+    }
+  ]
+}

@@ -52,6 +52,11 @@ renderer or an A/B/A measurement cannot regain authority. Evidence publication
 updates controller/readiness projections without rematerializing canonical
 content.
 
+Single and Family sessions retain a publication watermark across invalidation,
+including identical-source reload/reset. Saved-record restoration suspends runtime
+publication until accepted data is available; failed loads remain non-exportable.
+A newer accepted operation supersedes the old restore.
+
 Active Textareas are pending until current reliable evidence arrives. Counts at
 or below `maxLines` are valid; counts above are invalid. Line warnings are
 inclusive and non-blocking. Structurally excluded Textareas publish `inactive`,

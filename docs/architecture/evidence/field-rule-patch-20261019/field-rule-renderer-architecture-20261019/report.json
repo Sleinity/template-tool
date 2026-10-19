@@ -1,0 +1,523 @@
+{
+  "status": "passed",
+  "browser": "149.0.7827.55",
+  "checkpointCount": 50,
+  "passedCheckpointCount": 50,
+  "diagnosticGapCount": 0,
+  "reports": [
+    {
+      "family": false,
+      "checks": [
+        {
+          "name": "Native initial runtime accepted",
+          "passed": true
+        },
+        {
+          "name": "Native initial line accepted textarea:hug",
+          "passed": true
+        },
+        {
+          "name": "Native initial line accepted textarea:body",
+          "passed": true
+        },
+        {
+          "name": "Native same-source reload rejects old publisher evidence",
+          "passed": true,
+          "diagnostic": true,
+          "details": {
+            "beforeReloadReady": true,
+            "staleRuntimeAccepted": false,
+            "staleLinesAccepted": [
+              false,
+              false
+            ],
+            "readiness": {
+              "state": "pending",
+              "exportReady": false,
+              "deterministic": "ready",
+              "renderValidation": "pending",
+              "assets": "ready",
+              "fonts": "not-required",
+              "renderer": "pending",
+              "reasons": [
+                "Rendered line validation is pending for field \"textarea:hug\".",
+                "Rendered line validation is pending for field \"textarea:body\".",
+                "Renderer settlement/readiness is pending."
+              ],
+              "contentRevision": 0,
+              "materializationRevision": "field-materialization-v1:8ecf8f43"
+            },
+            "operationRevisionBefore": 1,
+            "operationRevisionAfter": 2
+          }
+        },
+        {
+          "name": "StrictMode initial publication settles",
+          "passed": true
+        },
+        {
+          "name": "renderer transaction textarea:body",
+          "passed": true,
+          "details": {
+            "accepted": true,
+            "disposition": "accepted"
+          }
+        },
+        {
+          "name": "Fixed/FILL-width guard agrees at line boundary",
+          "passed": true,
+          "details": {
+            "id": "textarea:body",
+            "previous": "Body",
+            "candidate": "One\nTwo",
+            "previousWidth": 984,
+            "currentWidth": 984,
+            "predictedLines": 2,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 1,
+              "visualLines": 2,
+              "warnings": [
+                {
+                  "code": "field-v2.warning-lines",
+                  "fieldId": "textarea:body",
+                  "severity": "warning",
+                  "message": "Rendered content uses 2 visual lines.",
+                  "blocksExport": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "renderer transaction textarea:hug",
+          "passed": true,
+          "details": {
+            "accepted": true,
+            "disposition": "accepted"
+          }
+        },
+        {
+          "name": "Native HUG candidate remains valid",
+          "passed": true,
+          "details": {
+            "id": "textarea:hug",
+            "previous": "Hi",
+            "candidate": "A considerably longer heading",
+            "previousWidth": 24,
+            "currentWidth": 326,
+            "predictedLines": 20,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 2,
+              "visualLines": 1,
+              "warnings": []
+            }
+          }
+        },
+        {
+          "name": "HUG candidate transaction/paint agreement",
+          "passed": true,
+          "diagnostic": true,
+          "details": {
+            "id": "textarea:hug",
+            "previous": "Hi",
+            "candidate": "A considerably longer heading",
+            "previousWidth": 24,
+            "currentWidth": 326,
+            "predictedLines": 20,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 2,
+              "visualLines": 1,
+              "warnings": []
+            }
+          }
+        },
+        {
+          "name": "native commit textarea:hug \"Hi\"",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 0",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 1",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 2",
+          "passed": true
+        },
+        {
+          "name": "Three full bridge remounts recover current evidence",
+          "passed": true
+        },
+        {
+          "name": "Font-registry scope replacement republishes current evidence",
+          "passed": true
+        },
+        {
+          "name": "native commit textarea:body \"One\\nTwo\\nThree\"",
+          "passed": true
+        },
+        {
+          "name": "Native visual overflow stays editable and blocks export",
+          "passed": true
+        },
+        {
+          "name": "Bridge refuses PNG for invalid current lines",
+          "passed": true
+        },
+        {
+          "name": "native commit textarea:body \"One\\nTwo\"",
+          "passed": true
+        },
+        {
+          "name": "Maximum boundary warning is nonblocking",
+          "passed": true
+        },
+        {
+          "name": "Canonical mutation during export rejects superseded PNG",
+          "passed": true
+        },
+        {
+          "name": "Current renderer recovers and exports PNG",
+          "passed": true
+        }
+      ],
+      "guardGap": false,
+      "nativeReload": {
+        "beforeReloadReady": true,
+        "staleRuntimeAccepted": false,
+        "staleLinesAccepted": [
+          false,
+          false
+        ],
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for field \"textarea:hug\".",
+            "Rendered line validation is pending for field \"textarea:body\".",
+            "Renderer settlement/readiness is pending."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:8ecf8f43"
+        },
+        "operationRevisionBefore": 1,
+        "operationRevisionAfter": 2
+      }
+    },
+    {
+      "family": true,
+      "checks": [
+        {
+          "name": "Native initial runtime accepted",
+          "passed": true
+        },
+        {
+          "name": "Native initial line accepted textarea:hug",
+          "passed": true
+        },
+        {
+          "name": "Native initial line accepted textarea:body",
+          "passed": true
+        },
+        {
+          "name": "Native same-source reload rejects old publisher evidence",
+          "passed": true,
+          "diagnostic": true,
+          "details": {
+            "beforeReloadReady": true,
+            "staleRuntimeAccepted": false,
+            "staleLinesAccepted": [
+              false,
+              false
+            ],
+            "readiness": {
+              "state": "pending",
+              "exportReady": false,
+              "deterministic": "ready",
+              "renderValidation": "pending",
+              "assets": "ready",
+              "fonts": "not-required",
+              "renderer": "pending",
+              "reasons": [
+                "Rendered line validation is pending for the selected variant."
+              ],
+              "contentRevision": 0,
+              "materializationRevision": "field-materialization-v1:8ecf8f43"
+            },
+            "operationRevisionBefore": 1,
+            "operationRevisionAfter": 2
+          }
+        },
+        {
+          "name": "Variant-specific Fill/Fit content is natively valid",
+          "passed": true,
+          "details": {
+            "nativeVariants": [
+              {
+                "valid": true,
+                "issues": []
+              },
+              {
+                "valid": true,
+                "issues": []
+              }
+            ],
+            "studioIssues": []
+          }
+        },
+        {
+          "name": "Studio all-design image diagnostics agree with effective placement",
+          "passed": true,
+          "diagnostic": true,
+          "details": {
+            "nativeVariants": [
+              {
+                "valid": true,
+                "issues": []
+              },
+              {
+                "valid": true,
+                "issues": []
+              }
+            ],
+            "studioIssues": []
+          }
+        },
+        {
+          "name": "StrictMode initial publication settles",
+          "passed": true
+        },
+        {
+          "name": "renderer transaction textarea:body",
+          "passed": true,
+          "details": {
+            "accepted": true,
+            "disposition": "accepted"
+          }
+        },
+        {
+          "name": "Fixed/FILL-width guard agrees at line boundary",
+          "passed": true,
+          "details": {
+            "id": "textarea:body",
+            "previous": "Body",
+            "candidate": "One\nTwo",
+            "previousWidth": 984,
+            "currentWidth": 984,
+            "predictedLines": 2,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 1,
+              "visualLines": 2,
+              "warnings": [
+                {
+                  "code": "field-v2.warning-lines",
+                  "fieldId": "textarea:body",
+                  "severity": "warning",
+                  "message": "Rendered content uses 2 visual lines.",
+                  "blocksExport": false
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "renderer transaction textarea:hug",
+          "passed": true,
+          "details": {
+            "accepted": true,
+            "disposition": "accepted"
+          }
+        },
+        {
+          "name": "Native HUG candidate remains valid",
+          "passed": true,
+          "details": {
+            "id": "textarea:hug",
+            "previous": "Hi",
+            "candidate": "A considerably longer heading",
+            "previousWidth": 24,
+            "currentWidth": 326,
+            "predictedLines": 20,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 2,
+              "visualLines": 1,
+              "warnings": []
+            }
+          }
+        },
+        {
+          "name": "HUG candidate transaction/paint agreement",
+          "passed": true,
+          "diagnostic": true,
+          "details": {
+            "id": "textarea:hug",
+            "previous": "Hi",
+            "candidate": "A considerably longer heading",
+            "previousWidth": 24,
+            "currentWidth": 326,
+            "predictedLines": 20,
+            "guard": {
+              "accepted": true,
+              "outcome": {
+                "accepted": true,
+                "disposition": "accepted"
+              }
+            },
+            "actual": {
+              "state": "valid",
+              "contentRevision": 2,
+              "visualLines": 1,
+              "warnings": []
+            }
+          }
+        },
+        {
+          "name": "native commit textarea:hug \"Hi\"",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 0",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 1",
+          "passed": true
+        },
+        {
+          "name": "Bridge unmount releases handle 2",
+          "passed": true
+        },
+        {
+          "name": "Three full bridge remounts recover current evidence",
+          "passed": true
+        },
+        {
+          "name": "Font-registry scope replacement republishes current evidence",
+          "passed": true
+        },
+        {
+          "name": "native commit textarea:body \"One\\nTwo\\nThree\"",
+          "passed": true
+        },
+        {
+          "name": "Native visual overflow stays editable and blocks export",
+          "passed": true
+        },
+        {
+          "name": "Bridge refuses PNG for invalid current lines",
+          "passed": true
+        },
+        {
+          "name": "native commit textarea:body \"One\\nTwo\"",
+          "passed": true
+        },
+        {
+          "name": "Maximum boundary warning is nonblocking",
+          "passed": true
+        },
+        {
+          "name": "Stricter Family selection blocks while retaining content",
+          "passed": true
+        },
+        {
+          "name": "native commit textarea:body \"One\"",
+          "passed": true
+        },
+        {
+          "name": "Canonical mutation during export rejects superseded PNG",
+          "passed": true
+        },
+        {
+          "name": "Current renderer recovers and exports PNG",
+          "passed": true
+        }
+      ],
+      "guardGap": false,
+      "nativeReload": {
+        "beforeReloadReady": true,
+        "staleRuntimeAccepted": false,
+        "staleLinesAccepted": [
+          false,
+          false
+        ],
+        "readiness": {
+          "state": "pending",
+          "exportReady": false,
+          "deterministic": "ready",
+          "renderValidation": "pending",
+          "assets": "ready",
+          "fonts": "not-required",
+          "renderer": "pending",
+          "reasons": [
+            "Rendered line validation is pending for the selected variant."
+          ],
+          "contentRevision": 0,
+          "materializationRevision": "field-materialization-v1:8ecf8f43"
+        },
+        "operationRevisionBefore": 1,
+        "operationRevisionAfter": 2
+      },
+      "imageDiagnostics": {
+        "nativeVariants": [
+          {
+            "valid": true,
+            "issues": []
+          },
+          {
+            "valid": true,
+            "issues": []
+          }
+        ],
+        "studioIssues": []
+      }
+    }
+  ]
+}

@@ -34,6 +34,8 @@ This describes the **SDK 2.0.0 contract**. A version label, packing or local cer
 
 ## Release and history
 
+[Prepared 2.0.1 bugfix notes](SDK_2_0_1_RELEASE_NOTES.md) describe the next patch Changeset.
+
 [Release notes](SDK_2_0_RELEASE_NOTES.md), [breaking changes](SDK_2_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
 
 V1 editing/wizard/confirmation/persistence workflows are retired. Source normalization and versioned read-only evidence remain where required; names ending in V1 do not imply a supported V1 editing journey. Existing current V2 records and recovery are preserved. No migration or deletion of unknown historical work is provided.

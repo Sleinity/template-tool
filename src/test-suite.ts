@@ -49,6 +49,7 @@ import "./template-package/resolved/createResolvedRenderTree.test";
 import "../packages/template-core/test/scene.test";
 import "../packages/template-browser/test/templateSession.test";
 await import("../packages/template-browser/test/templateSessionV2.test");
+await import("../packages/template-browser/test/familyChoiceReconciliation.test");
 await import("../packages/template-browser/test/sessionResourceLifecycle.test");
 await import("../packages/template-browser/test/storedAssetHydrationScope.test");
 await import("../packages/template-browser/test/storedAssetHydration.test");
@@ -96,3 +97,6 @@ await import("../packages/template-browser/test/importPipelineV2.test");
 await import("../packages/template-browser/test/familySourcePreparation.test");
 await import("../packages/template-react/test/textMeasurementInputs.test");
 await import("../packages/template-browser/test/familyMediaReadiness.test");
+
+await import("../packages/template-browser/test/nativeReloadEvidence.test");
+await import("../apps/studio/src/field-rules/renderedTextareaDrafts.test");

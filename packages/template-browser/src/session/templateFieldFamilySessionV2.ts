@@ -139,6 +139,15 @@ export type TemplateFieldFamilyControllerV3 =
   | Exclude<TemplateFieldControllerV2, ImageFieldControllerV2>
   | TemplateFieldFamilyImageControllerV3;
 
+// Reconciliation is a content edit. Presentation and validation-only changes
+// must not reinterpret a selection that is incompatible in the current design.
+function choiceValuesKey(field: TemplateFieldFamilyFieldV2 | undefined): string | undefined {
+  const choices = field && "choices" in field.configuration ? field.configuration.choices : undefined;
+  return choices && JSON.stringify(choices.options
+    .map(option => [option.id, option.value] as const)
+    .sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0));
+}
+
 function cloneValue<T>(value: T): T {
   return typeof structuredClone === "function"
     ? structuredClone(value)
@@ -293,6 +302,7 @@ export function createTemplateFieldFamilySessionV2(
   let currentFontRevision: string | null = null;
   let currentPublicationGeneration: number | null = null;
   let publicationLeaseBase = 0;
+  let runtimeLoadState: "active" | "loading" | "failed" = "active";
 
   const assertActive = () => {
     if (disposed) throw new Error("TemplateFieldFamilySessionV2 has been disposed.");
@@ -345,6 +355,7 @@ export function createTemplateFieldFamilySessionV2(
     return retained;
   };
   const invalidateRuntime = (packageValue?: TemplatePackageV2 | null) => {
+    runtimeLoadState = "active";
     // Configuration may change without changing canonical content. Keep a
     // watermark so first-A evidence cannot return after configuration A/B/A.
     if (currentPublicationGeneration !== null) {
@@ -366,7 +377,7 @@ export function createTemplateFieldFamilySessionV2(
     media: ReturnType<typeof referencedFamilyMedia>,
   ) => {
     const materialization = result.materialization;
-    const deterministicBlocked = !result.valid || !workingPackage;
+    const deterministicBlocked = runtimeLoadState === "failed" || !result.valid || !workingPackage;
     const requiredLineFields = materialization?.pendingRenderValidation.filter((item) => item.blocksExport) ?? [];
     const invalidLines = requiredLineFields.some((item) => {
       const status = fieldRenderValidation.get(item.fieldId);
@@ -377,7 +388,7 @@ export function createTemplateFieldFamilySessionV2(
       return !status || status.state === "not-required" || status.contentRevision !== content.revision ||
         (status.state !== "valid" && status.state !== "invalid" && status.state !== "inactive");
     });
-    const pendingMedia = media.some((asset) => decodedSources.get(asset.source)?.state === "pending");
+    const pendingMedia = runtimeLoadState === "loading" || media.some((asset) => decodedSources.get(asset.source)?.state === "pending");
     const failedMedia = media.filter((asset) => decodedSources.get(asset.source)?.state === "blocked");
     const missingSourceNodes = Object.values(resolvedTree?.nodes ?? {}).filter((node) => (node.image?.missingAsset || node.vector?.missingAsset));
     const missingAsset = failedMedia.length > 0 || missingSourceNodes.length > 0 || workingPackage && Object.values(content.values).some((entry) =>
@@ -539,8 +550,8 @@ export function createTemplateFieldFamilySessionV2(
         (status.state !== "valid" && status.state !== "invalid" && status.state !== "inactive");
     });
     const deterministicBlocked = snapshot.readiness.deterministic === "blocked";
-    const otherBlocked = snapshot.readiness.assets === "blocked" || runtimeFonts === "blocked" || runtimeRenderer === "blocked";
-    const otherPending = snapshot.readiness.assets === "pending" || runtimeFonts === "pending" || runtimeRenderer === "pending";
+    const otherBlocked = runtimeLoadState === "failed" || snapshot.readiness.assets === "blocked" || runtimeFonts === "blocked" || runtimeRenderer === "blocked";
+    const otherPending = runtimeLoadState === "loading" || snapshot.readiness.assets === "pending" || runtimeFonts === "pending" || runtimeRenderer === "pending";
     return publish({
       fields: snapshot.fields.map((item) => ({
         ...item,
@@ -892,6 +903,7 @@ export function createTemplateFieldFamilySessionV2(
     load(family, loadOptions = {}) {
       assertActive();
       recordGeneration += 1;
+      runtimeLoadState = "active";
       const selectedVariantId = loadOptions.selectedVariantId ?? family.variants[0]?.id;
       if (!selectedVariantId) throw new Error("A V2 Template Field Family requires at least one variant.");
       const contentState = loadOptions.contentState
@@ -955,9 +967,7 @@ export function createTemplateFieldFamilySessionV2(
       const commonChoiceChanges = new Set<string>();
       for (const field of update.fields ?? []) {
         const previous = snapshot.family.fields.find((entry) => entry.id === field.id)!;
-        const previousChoices = "choices" in previous.configuration ? previous.configuration.choices : undefined;
-        const nextChoices = "choices" in field.configuration ? field.configuration.choices : undefined;
-        if (JSON.stringify(previousChoices) === JSON.stringify(nextChoices)) continue;
+        if (choiceValuesKey(previous) === choiceValuesKey(field)) continue;
         commonChoiceChanges.add(field.id);
         if (!values[field.id]?.selectedChoiceId) continue;
         const source = family.variants.find((variant) => variant.packageValue.editableFields.some((entry) => entry.id === field.id))!.packageValue;
@@ -974,12 +984,18 @@ export function createTemplateFieldFamilySessionV2(
         values[field.id] = reconciled.values[field.id];
       }
       if (update.variants?.some((variant) => variant.id === snapshot.selectedVariantId)) {
-        const reconciled = reconcileTemplateFieldConfigurationV2(effective, {
-          ...createTemplateFieldContentStateV1(effective),
-          values: Object.fromEntries(Object.entries(values).filter(([id]) =>
-            !commonChoiceChanges.has(id) && effective.editableFields.some((entry) => entry.id === id))),
-        });
-        Object.assign(values, reconciled.values);
+        const previousFields = new Map(snapshot.effectivePackage?.editableFields.map(field => [field.id, field]));
+        const variantChoiceChanges = new Set(effective.editableFields
+          .filter(field => choiceValuesKey(previousFields.get(field.id)) !== choiceValuesKey(field))
+          .map(field => field.id));
+        if (variantChoiceChanges.size) {
+          const reconciled = reconcileTemplateFieldConfigurationV2(effective, {
+            ...createTemplateFieldContentStateV1(effective),
+            values: Object.fromEntries(Object.entries(values).filter(([id]) =>
+              !commonChoiceChanges.has(id) && variantChoiceChanges.has(id))),
+          });
+          Object.assign(values, reconciled.values);
+        }
       }
       const changed = JSON.stringify(values) !== JSON.stringify(snapshot.contentState.values);
       if (changed && !Number.isSafeInteger(snapshot.contentState.revision + 1)) throw new Error("Content revision is exhausted.");
@@ -996,11 +1012,22 @@ export function createTemplateFieldFamilySessionV2(
       assertActive();
       recordGeneration += 1;
       const operationRevision = snapshot.operationRevision + 1;
-      publish({ operationRevision });
-      const record = await repository.getTemplateFieldFamilyV3(id);
+      invalidateRuntime(snapshot.effectivePackage);
+      runtimeLoadState = "loading";
+      publish({ operationRevision, readiness: { ...snapshot.readiness, state: "pending", exportReady: false, renderer: "pending" } });
+      let record: Awaited<ReturnType<typeof repository.getTemplateFieldFamilyV3>>;
+      try { record = await repository.getTemplateFieldFamilyV3(id); }
+      catch (cause) {
+        if (!disposed && snapshot.operationRevision === operationRevision) {
+          runtimeLoadState = "failed";
+          publish({ status: "blocked", error: { code: "family-assets-unavailable", message: cause instanceof Error ? cause.message : "Saved Family could not be read." }, readiness: { ...snapshot.readiness, state: "blocked", exportReady: false, renderer: "blocked" } });
+        }
+        throw cause;
+      }
       if (disposed || snapshot.operationRevision !== operationRevision) return snapshot;
       if (!record) {
-        publish({ status: "blocked", error: { code: "family-not-found", message: `Saved V2 Template Field Family "${id}" was not found.` } });
+        runtimeLoadState = "failed";
+        publish({ readiness: { ...snapshot.readiness, state: "blocked", exportReady: false, renderer: "blocked" }, status: "blocked", error: { code: "family-not-found", message: `Saved V2 Template Field Family "${id}" was not found.` } });
         return snapshot;
       }
       const family = cloneValue(record.family);
@@ -1030,7 +1057,7 @@ export function createTemplateFieldFamilySessionV2(
         }
       } catch (cause) {
         hydration.release();
-        if (!stale()) publish({ status: "blocked", error: { code: "family-assets-unavailable", message: cause instanceof Error ? cause.message : "Saved Family assets could not be read." }, readiness: { ...snapshot.readiness, assets: "blocked", state: "blocked", exportReady: false } });
+        if (!stale()) { runtimeLoadState = "failed"; publish({ status: "blocked", error: { code: "family-assets-unavailable", message: cause instanceof Error ? cause.message : "Saved Family assets could not be read." }, readiness: { ...snapshot.readiness, assets: "blocked", state: "blocked", exportReady: false } }); }
         return snapshot;
       }
       if (stale()) { hydration.release(); return snapshot; }
@@ -1041,6 +1068,7 @@ export function createTemplateFieldFamilySessionV2(
       nextSourceUrls.forEach((url) => sourceUrls.add(url));
       hydration.transfer();
       controllerGeneration += 1;
+      runtimeLoadState = "active";
       invalidateRuntime(family.variants.find((variant) => variant.id === record.selectedVariantId)?.packageValue);
       const derived = derive(family, record.contentState, record.selectedVariantId, sessionAssets);
       publish({
@@ -1097,7 +1125,7 @@ export function createTemplateFieldFamilySessionV2(
       assertActive();
       const field = snapshot.effectivePackage?.editableFields.find((candidate) => candidate.id === evidence.fieldId);
       if (
-        !field || field.type !== "textarea" || !snapshot.family || !snapshot.contentState || !snapshot.selectedVariantId ||
+        runtimeLoadState !== "active" || !field || field.type !== "textarea" || !snapshot.family || !snapshot.contentState || !snapshot.selectedVariantId ||
         evidence.packageIdentity !== snapshot.effectivePackage?.packageId ||
         evidence.contentRevision !== snapshot.contentState.revision ||
         evidence.materializationRevision !== snapshot.familyMaterialization?.materialization?.materializationRevision ||
@@ -1114,7 +1142,7 @@ export function createTemplateFieldFamilySessionV2(
     publishRuntimeReadiness(evidence) {
       assertActive();
       if (
-        !snapshot.family || !snapshot.contentState || !snapshot.selectedVariantId ||
+        runtimeLoadState !== "active" || !snapshot.family || !snapshot.contentState || !snapshot.selectedVariantId ||
         evidence.contentRevision !== snapshot.contentState.revision ||
         evidence.materializationRevision !== snapshot.familyMaterialization?.materialization?.materializationRevision ||
         !Number.isSafeInteger(evidence.publicationGeneration) ||
@@ -1271,6 +1299,7 @@ export function createTemplateFieldFamilySessionV2(
     },
     reset() {
       assertActive();
+      runtimeLoadState = "active";
       recordGeneration += 1;
       revokeOwned();
       revokeSources();

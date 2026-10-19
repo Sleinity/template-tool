@@ -1,0 +1,58 @@
+import { createTemplateSessionV2 } from "../src/session/templateSessionV2";
+import { createTemplateFieldFamilySessionV2 } from "../src/session/templateFieldFamilySessionV2";
+import { createTemplateFieldFamilyFromSourcesV2 } from "../src/import/templateSourceAssemblyV2";
+import { InMemoryTemplateSessionRepositoryV2 } from "../src/persistence/v2SessionRepositories";
+import { assert, v2Package, deferred } from "./sessionContract.fixtures";
+
+for (const family of [false, true]) {
+  const source = v2Package();
+  const value = createTemplateFieldFamilyFromSourcesV2([source], "Reload ownership");
+  const repository = new InMemoryTemplateSessionRepositoryV2();
+  const native = family ? createTemplateFieldFamilySessionV2({ repository }) : createTemplateSessionV2({ repository });
+  const load = () => family ? (native as ReturnType<typeof createTemplateFieldFamilySessionV2>).load(value) : (native as ReturnType<typeof createTemplateSessionV2>).load(source);
+  load();
+  const lease = native.beginRuntimeEvidencePublication();
+  const snapshot = native.getSnapshot();
+  const pkg = "basePackage" in snapshot ? snapshot.basePackage! : snapshot.effectivePackage!;
+  const materialization = "materialization" in snapshot ? snapshot.materialization! : snapshot.familyMaterialization!.materialization!;
+  const evidence = { contentRevision: snapshot.contentState!.revision, materializationRevision: materialization.materializationRevision!, settlementRevision: "old-settlement", fontRevision: "old-font", publicationGeneration: lease + 1, fonts: "ready" as const, renderer: "ready" as const };
+  const lines = { ...evidence, schemaVersion: "field-layout-evidence-v1" as const, fieldId: "textarea:body", packageIdentity: pkg.packageId, participation: "active" as const, reliability: "reliable" as const, measuredVisualLines: 1 };
+  assert(native.publishRuntimeReadiness(evidence) && native.publishFieldLayoutEvidence(lines));
+  load();
+  assert(!native.publishRuntimeReadiness(evidence) && !native.publishFieldLayoutEvidence(lines), "Identical reload rejects the old operation's runtime and lines");
+  native.reset(); load();
+  assert(!native.publishRuntimeReadiness(evidence), "Reset/reload retains the generation watermark");
+  const fresh = { ...evidence, publicationGeneration: lease + 2 };
+  assert(native.publishRuntimeReadiness(fresh) && native.publishFieldLayoutEvidence({ ...lines, ...fresh }), "New generation can validate identical canonical data");
+  const record = await native.save();
+  const gate = deferred<void>();
+  const singleRead = repository.getTemplateSessionV2.bind(repository);
+  const familyRead = repository.getTemplateFieldFamilyV3.bind(repository);
+  repository.getTemplateSessionV2 = async id => { await gate.promise; return singleRead(id); };
+  repository.getTemplateFieldFamilyV3 = async id => { await gate.promise; return familyRead(id); };
+  const restoration = native.loadSaved(record.id);
+  assert(!native.getSnapshot().readiness.exportReady && !native.publishRuntimeReadiness(fresh), "Unresolved restore suspends native readiness and publication");
+  gate.resolve(); await restoration;
+  assert(!native.publishRuntimeReadiness(fresh), "Restoration cannot resurrect earlier evidence");
+  const restored = native.getSnapshot();
+  const restoredMaterialization = "materialization" in restored ? restored.materialization! : restored.familyMaterialization!.materialization!;
+  assert(native.publishRuntimeReadiness({ ...fresh, contentRevision: restored.contentState!.revision, materializationRevision: restoredMaterialization.materializationRevision!, publicationGeneration: lease + 3 }), "Restored current renderer can publish");
+  repository.getTemplateSessionV2 = async () => { throw new Error("Injected read failure"); };
+  repository.getTemplateFieldFamilyV3 = async () => { throw new Error("Injected read failure"); };
+  try { await native.loadSaved(record.id); } catch (error) { assert(family && (error as Error).message === "Injected read failure"); }
+  assert(native.getSnapshot().status === "blocked" && !native.getSnapshot().readiness.exportReady, "Failed reads remain non-exportable");
+  assert(!native.publishRuntimeReadiness({ ...fresh, publicationGeneration: lease + 4 }), "Late evidence cannot clear a failed restore");
+  load(); assert(native.publishRuntimeReadiness({ ...fresh, publicationGeneration: lease + 4 }), "A valid load recovers after failed restoration");
+  const supersededGate = deferred<void>();
+  repository.getTemplateSessionV2 = async id => { await supersededGate.promise; return singleRead(id); };
+  repository.getTemplateFieldFamilyV3 = async id => { await supersededGate.promise; return familyRead(id); };
+  const supersededRestore = native.loadSaved(record.id);
+  const title = native.getFieldControllers().find(field => field.type === "text")!;
+  assert(title.type === "text" && title.setValue("New intent").accepted, "An explicit accepted edit supersedes an older restore");
+  supersededGate.resolve(); await supersededRestore;
+  const edited = native.getSnapshot();
+  const editedMaterialization = "materialization" in edited ? edited.materialization! : edited.familyMaterialization!.materialization!;
+  assert(native.publishRuntimeReadiness({ ...fresh, contentRevision: edited.contentState!.revision, materializationRevision: editedMaterialization.materializationRevision!, publicationGeneration: lease + 5 }), "A superseding accepted operation releases the old restore suspension");
+  native.dispose();
+}
+console.log("Native single/Family identical reload, restore suspension and failure recovery passed.");

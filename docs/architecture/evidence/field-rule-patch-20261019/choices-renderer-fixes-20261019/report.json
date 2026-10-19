@@ -1,0 +1,638 @@
+{
+  "date": "2026-10-19T13:34:54.697Z",
+  "status": "passed",
+  "browser": "149.0.7827.55",
+  "scope": "Source-driven contract and Studio integration; system font; no pixel certification",
+  "checkpointCount": 88,
+  "passedCheckpointCount": 88,
+  "findings": [
+    {
+      "id": "C1",
+      "priority": "P1",
+      "name": "Design-only field-order update silently rewrites shared selected-choice content",
+      "reproduced": false,
+      "details": {
+        "before": {
+          "schemaVersion": "template-field-family-content-v3",
+          "familyId": "family-8aa12641-3905-4685-a0d4-49e465570457",
+          "revision": 1,
+          "values": {
+            "text:title": {
+              "value": "Alpha",
+              "selectedChoiceId": "primary"
+            }
+          },
+          "variantImagePlacements": {}
+        },
+        "after": {
+          "schemaVersion": "template-field-family-content-v3",
+          "familyId": "family-8aa12641-3905-4685-a0d4-49e465570457",
+          "revision": 1,
+          "values": {
+            "text:title": {
+              "value": "Alpha",
+              "selectedChoiceId": "primary"
+            }
+          },
+          "variantImagePlacements": {}
+        },
+        "choicesUnchanged": true,
+        "selectedVariantId": "variant-2",
+        "originalDesignAfterReturn": {
+          "value": "Alpha",
+          "errors": []
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "priority": "P2",
+      "name": "Restricted dropdown shows ID-matched option instead of incompatible canonical value",
+      "reproduced": false,
+      "details": {
+        "before": {
+          "value": "Alpha",
+          "selectedChoiceId": "primary"
+        },
+        "displayed": "",
+        "currentValueShown": true,
+        "entry": {
+          "value": "Bravo",
+          "selectedChoiceId": "primary"
+        },
+        "events": 1,
+        "exportReady": true,
+        "errors": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "scope": "native-single",
+      "name": "typed canonical choice text:title",
+      "passed": true,
+      "details": {
+        "value": "Beta",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "typed canonical choice textarea:body",
+      "passed": true,
+      "details": {
+        "value": "One\nTwo",
+        "selectedChoiceId": "safe"
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "typed canonical choice number:amount",
+      "passed": true,
+      "details": {
+        "value": 12.5,
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "typed canonical choice date:date",
+      "passed": true,
+      "details": {
+        "value": "2026-04-16",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "typed canonical choice color:brand",
+      "passed": true,
+      "details": {
+        "value": "#aabbcc",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "materializer applies canonical text and formatted Number/Date",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "Color choice lowers to indexed RGB without changing alpha",
+      "passed": true,
+      "details": {
+        "r": 0.6666666666666666,
+        "g": 0.7333333333333333,
+        "b": 0.8,
+        "a": 1
+      }
+    },
+    {
+      "scope": "native-single",
+      "name": "unknown ID is atomic rejection",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "character warnings remain advisory",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "save/reload preserves canonical choices and provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "runtime evidence is never restored as readiness",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "reimport can retain authored choices",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "reimport retains canonical value and stable option identity",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "stale reimport plan cannot overwrite a newer choice",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "zero choice round trips through native persistence",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "literal matching an option clears provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "label/reorder retains choice value and ID",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "selected option value edit reconciles canonical content",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "removing option keeps literal value and clears provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-single",
+      "name": "reset returns to imported default with no override",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "typed canonical choice text:title",
+      "passed": true,
+      "details": {
+        "value": "Beta",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "typed canonical choice textarea:body",
+      "passed": true,
+      "details": {
+        "value": "One\nTwo",
+        "selectedChoiceId": "safe"
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "typed canonical choice number:amount",
+      "passed": true,
+      "details": {
+        "value": 12.5,
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "typed canonical choice date:date",
+      "passed": true,
+      "details": {
+        "value": "2026-04-16",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "typed canonical choice color:brand",
+      "passed": true,
+      "details": {
+        "value": "#aabbcc",
+        "selectedChoiceId": "alternate"
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "materializer applies canonical text and formatted Number/Date",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "Color choice lowers to indexed RGB without changing alpha",
+      "passed": true,
+      "details": {
+        "r": 0.6666666666666666,
+        "g": 0.7333333333333333,
+        "b": 0.8,
+        "a": 1
+      }
+    },
+    {
+      "scope": "native-family",
+      "name": "unknown ID is atomic rejection",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "character warnings remain advisory",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "save/reload preserves canonical choices and provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "runtime evidence is never restored as readiness",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "reimport can retain authored choices",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "reimport retains canonical value and stable option identity",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "stale reimport plan cannot overwrite a newer choice",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "zero choice round trips through native persistence",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "literal matching an option clears provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "label/reorder retains choice value and ID",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "selected option value edit reconciles canonical content",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "removing option keeps literal value and clears provenance",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "reset returns to imported default with no override",
+      "passed": true
+    },
+    {
+      "scope": "core",
+      "name": "restricted custom literal",
+      "passed": true,
+      "details": [
+        {
+          "code": "field-v2.warning-characters",
+          "fieldId": "text:title",
+          "severity": "warning",
+          "message": "Title has reached its 3-character warning threshold.",
+          "blocksExport": false
+        },
+        {
+          "code": "field-v2.restricted-choice",
+          "fieldId": "text:title",
+          "severity": "error",
+          "message": "Title only accepts configured choice values.",
+          "blocksExport": true
+        }
+      ]
+    },
+    {
+      "scope": "core",
+      "name": "mismatching ID/value",
+      "passed": true,
+      "details": [
+        {
+          "code": "field-v2.warning-characters",
+          "fieldId": "text:title",
+          "severity": "warning",
+          "message": "Title has reached its 3-character warning threshold.",
+          "blocksExport": false
+        },
+        {
+          "code": "field-v2.choice-value-mismatch",
+          "fieldId": "text:title",
+          "severity": "error",
+          "message": "Selected choice identity does not match the submitted canonical value.",
+          "blocksExport": true
+        }
+      ]
+    },
+    {
+      "scope": "core",
+      "name": "unknown provenance with matching value",
+      "passed": true,
+      "details": [
+        {
+          "code": "field-v2.warning-characters",
+          "fieldId": "text:title",
+          "severity": "warning",
+          "message": "Title has reached its 3-character warning threshold.",
+          "blocksExport": false
+        },
+        {
+          "code": "field-v2.choice-id-unknown",
+          "fieldId": "text:title",
+          "severity": "error",
+          "message": "Choice \"missing\" is not configured for Title.",
+          "blocksExport": true
+        }
+      ]
+    },
+    {
+      "scope": "core",
+      "name": "duplicate canonical choice values are rejected",
+      "passed": true
+    },
+    {
+      "scope": "core",
+      "name": "options obey ordinary hard character rules",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "switch preserves shared value and exposes real mismatch",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "C1: order-only configuration retains the incompatible shared entry and revision",
+      "passed": true
+    },
+    {
+      "scope": "native-family",
+      "name": "C1: original design retains its accepted choice after order-only configuration",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "matching imported default displays option without creating provenance",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "Title choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "Amount choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "Date choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "Brand choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "overflow choice remains provisional and absent from recovery",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "painted overflow restores preceding choice and provenance at newer revision",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "restored choice leaves no false Check input",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "choice supersedes its own local draft",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "choice does not overwrite another field's invalid draft",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "choice repairs its own invalid numeric draft including zero",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "accepted choice state reaches durable recovery",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "recovery restores accepted choices across all five types",
+      "passed": true
+    },
+    {
+      "scope": "studio-single",
+      "name": "guarded PNG produces a real PNG from accepted choice content",
+      "passed": true,
+      "details": {
+        "bytes": 62711,
+        "sha256": "666338cee385973777a09d6e978870cf90e8eefae80b3faab95527d4fd8733bc"
+      }
+    },
+    {
+      "scope": "studio-family",
+      "name": "matching imported default displays option without creating provenance",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "Title choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "Amount choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "Date choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "Brand choice reaches canonical controller and visible renderer",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "overflow choice remains provisional and absent from recovery",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "painted overflow restores preceding choice and provenance at newer revision",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "restored choice leaves no false Check input",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "choice supersedes its own local draft",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "choice does not overwrite another field's invalid draft",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "choice repairs its own invalid numeric draft including zero",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "compatible design switch preserves shared choice provenance",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "accepted choice state reaches durable recovery",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "recovery restores accepted choices across all five types",
+      "passed": true
+    },
+    {
+      "scope": "studio-family",
+      "name": "guarded PNG produces a real PNG from accepted choice content",
+      "passed": true,
+      "details": {
+        "bytes": 62711,
+        "sha256": "666338cee385973777a09d6e978870cf90e8eefae80b3faab95527d4fd8733bc"
+      }
+    },
+    {
+      "scope": "studio-restricted-mismatch",
+      "name": "invalid choice blocks PNG until corrected",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-mismatch",
+      "name": "C2: incompatible provenance displays a placeholder and the actual canonical value",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-mismatch",
+      "name": "C2: keyboard selection commits the configured option and restores export readiness",
+      "passed": true,
+      "details": {
+        "entry": {
+          "value": "Bravo",
+          "selectedChoiceId": "primary"
+        },
+        "events": 1,
+        "exportReady": true,
+        "errors": []
+      }
+    },
+    {
+      "scope": "studio-restricted-mismatch",
+      "name": "repaired control clears its current-value error",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-mismatch",
+      "name": "Reset restores the matching imported default without inventing provenance",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-unknown",
+      "name": "invalid choice blocks PNG until corrected",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-unknown",
+      "name": "C2: incompatible provenance displays a placeholder and the actual canonical value",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-unknown",
+      "name": "C2: keyboard selection commits the configured option and restores export readiness",
+      "passed": true,
+      "details": {
+        "entry": {
+          "value": "Alpha",
+          "selectedChoiceId": "replacement"
+        },
+        "events": 1,
+        "exportReady": true,
+        "errors": []
+      }
+    },
+    {
+      "scope": "studio-restricted-unknown",
+      "name": "repaired control clears its current-value error",
+      "passed": true
+    },
+    {
+      "scope": "studio-restricted-unknown",
+      "name": "Reset restores the matching imported default without inventing provenance",
+      "passed": true
+    },
+    {
+      "scope": "browser",
+      "name": "no uncaught page errors",
+      "passed": true,
+      "details": []
+    }
+  ]
+}

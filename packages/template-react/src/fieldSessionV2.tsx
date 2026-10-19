@@ -192,6 +192,7 @@ export const TemplateFieldSessionRendererV2 = forwardRef<
   const scopeIsCurrent = useCallback((scope: RuntimePublisherScope | null) =>
     Boolean(scope?.active && scopeRef.current === scope), []);
   const { reader, view: snapshot } = useFieldSessionSnapshotV2(session);
+  const rendererAvailable = snapshot.status === "ready" && Boolean(snapshot.rendererPackage && snapshot.resolvedTree);
   const hostRef = useRef<HTMLDivElement>(null);
   const latestLineEvidence = useRef(new Map<string, {
     contextKey: string;
@@ -205,6 +206,10 @@ export const TemplateFieldSessionRendererV2 = forwardRef<
   const [identity, setIdentity] = useState<ResolvedProductRenderIdentityV1 | null>(null);
   const identityRef = useRef<{ scope: RuntimePublisherScope; value: ResolvedProductRenderIdentityV1 } | null>(null);
   useLayoutEffect(() => {
+    if (!rendererAvailable) return;
+    // A canonical error unmounts the inner renderer and its local generation
+    // counter. Recovery needs a fresh lease so new evidence cannot be mistaken
+    // for an older publication from before that unmount.
     const scope: RuntimePublisherScope = {
       session, registryInput: fontRegistry,
       fontRegistry: fontRegistry === undefined ? getManagedFontRegistry() : fontRegistry,
@@ -220,7 +225,7 @@ export const TemplateFieldSessionRendererV2 = forwardRef<
       scope.active = false;
       if (scopeRef.current === scope) scopeRef.current = null;
     };
-  }, [session, fontRegistry]);
+  }, [session, fontRegistry, rendererAvailable]);
   const configuredPackage = snapshot.configuredPackage;
   const contentRevision = snapshot.contentRevision;
   const operationRevision = snapshot.operationRevision;

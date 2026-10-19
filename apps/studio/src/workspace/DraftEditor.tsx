@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import { getTemplateFieldFamilyVariantSelectionV2, resolveTemplateFieldFamilyEditorControlsV2, resolveTemplateFieldFamilySelectionV2 } from "@sleinity/template-core/family";
 import { TemplateRecoveryCleanupError, SupersededTemplateRecoveryError, type TemplateRecoveryLease } from "@sleinity/template-browser/persistence";
 import { resolvePackageAssetSource } from "@sleinity/template-core/assets";
-import { measureRenderedTextLines } from "@sleinity/template-browser";
 import { useTemplateFieldSessionV2Snapshot, type ReactTemplateFieldSessionV2, type TemplateFieldSessionRendererV2Handle } from "@sleinity/template-react";
 import { EditorLayout } from "../components/EditorLayout";
 import { AppShell, PageWorkspace, PageHeader, PageContent, Alert, Button, PreviewWorkspace, Select, Status, WorkspaceSidePanel } from "../components/ui";
@@ -53,12 +52,13 @@ export function DraftEditor({ session, record, lease, onExported, onBack, guard,
   const [autosave] = useState(() => createStudioAutosave<StudioRecord>((value) => studioRecords.recovery.save(lease, value), setStatus, 650, setError));
   const signature = `${snapshot.contentState?.revision}:${"selectedVariantId" in snapshot ? snapshot.selectedVariantId : ""}`;
   const previous = useRef(signature);
+  const draftSummary = useSyncExternalStore(draftCoordinator.subscribe, draftCoordinator.getSummarySnapshot, draftCoordinator.getSummarySnapshot);
   useEffect(() => {
-    if (previous.current === signature) return;
+    if (draftCoordinator.provisionalCount || previous.current === signature) return;
     previous.current = signature;
     try { autosave.schedule(studioRecords.capture(session, record, record)); }
     catch (cause) { setError(cause); }
-  }, [signature, session, record, autosave]);
+  }, [signature, session, record, autosave, draftSummary.provisionalCount, draftCoordinator]);
   useEffect(() => {
     autosave.activate();
     const scope = lifecycle.current;
@@ -197,12 +197,8 @@ export function DraftEditor({ session, record, lease, onExported, onBack, guard,
       const controller = controllers.find((candidate) => candidate.id === control.fieldId);
       const definition = packageValue?.editableFields.find((candidate) => candidate.id === control.fieldId);
       const imageAsset = controller?.type === "image" && controller.value.assetId ? snapshot.sessionAssets[controller.value.assetId] ?? packageValue?.assets[controller.value.assetId] : undefined;
-      const measureLines = controller?.type === "textarea" && definition ? (value: string) => measureRenderedTextLines(
-        measurementRoot.current,
-        { nodeId: definition.binding.nodeId } as Parameters<typeof measureRenderedTextLines>[1],
-        value,
-      ) : undefined;
-      return controller ? <fieldset className="studio-draft-field-control" data-output-field={controller.id} data-active={activeFieldId === controller.id || undefined} onFocusCapture={() => setActiveFieldId(controller.id)} disabled={Boolean(pendingSelections)} key={`${variantId}:${controller.id}`}><FieldContentEditorV2 sessionIdentity={session} compact draftCoordinator={draftCoordinator} draftContext={variantId ?? "single"} imageUrl={resolvePackageAssetSource(imageAsset) ?? undefined} controller={definition?.label?.trim() ? controller : { ...controller, label: controller.id.replace(/^[^:]+:/u, "").replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").replace(/^./, value => value.toUpperCase()) }} getCurrentController={() => session.getFieldControllers().find(field => field.id === controller.id)} measureLines={measureLines} onPendingChange={pendingChanged} variantPlacement={snapshot.contentState && "variantImagePlacements" in snapshot.contentState && variantId ? snapshot.contentState.variantImagePlacements[variantId]?.[controller.id] : undefined} />{activeFieldId === controller.id && previewTargetState(snapshot.resolvedTree, definition?.binding.nodeId) !== "visible" && snapshot.fields.find(field => field.descriptor.id === controller.id)?.renderValidation.state !== "inactive" && <p className="ui-supporting-copy">{previewTargetState(snapshot.resolvedTree, definition?.binding.nodeId) === "hidden" ? "Hidden in this design." : "Preview location unavailable."}</p>}</fieldset> : null;
+
+      return controller ? <fieldset className="studio-draft-field-control" data-output-field={controller.id} data-active={activeFieldId === controller.id || undefined} onFocusCapture={() => setActiveFieldId(controller.id)} disabled={Boolean(pendingSelections)} key={`${variantId}:${controller.id}`}><FieldContentEditorV2 sessionIdentity={session} compact draftCoordinator={draftCoordinator} draftContext={variantId ?? "single"} imageUrl={resolvePackageAssetSource(imageAsset) ?? undefined} controller={definition?.label?.trim() ? controller : { ...controller, label: controller.id.replace(/^[^:]+:/u, "").replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/[_-]+/g, " ").replace(/^./, value => value.toUpperCase()) }} getCurrentController={() => session.getFieldControllers().find(field => field.id === controller.id)} session={session} onPendingChange={pendingChanged} variantPlacement={snapshot.contentState && "variantImagePlacements" in snapshot.contentState && variantId ? snapshot.contentState.variantImagePlacements[variantId]?.[controller.id] : undefined} />{activeFieldId === controller.id && previewTargetState(snapshot.resolvedTree, definition?.binding.nodeId) !== "visible" && snapshot.fields.find(field => field.descriptor.id === controller.id)?.renderValidation.state !== "inactive" && <p className="ui-supporting-copy">{previewTargetState(snapshot.resolvedTree, definition?.binding.nodeId) === "hidden" ? "Hidden in this design." : "Preview location unavailable."}</p>}</fieldset> : null;
     })}</div>
   </WorkspaceSidePanel>;
   const preview = <PreviewWorkspace className="studio-draft-preview">

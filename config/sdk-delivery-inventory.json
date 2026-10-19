@@ -20,6 +20,11 @@
       "transform": "context"
     },
     {
+      "source": "docs/sdk/SDK_2_0_1_RELEASE_NOTES.md",
+      "file": "SDK-2.0.1-RELEASE-NOTES.md",
+      "classification": "publication-preparation"
+    },
+    {
       "source": "docs/sdk/SDK_2_0_MIGRATION.md",
       "file": "SDK-2.0-MIGRATION.md",
       "classification": "current",
