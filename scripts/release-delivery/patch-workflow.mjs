@@ -2,7 +2,7 @@
 export function assertPatchWorkflow(source, standard) {
   if (!source.includes('tags: [sdk-v2.0.1]') || /workflow_dispatch/.test(source)) throw Error('The patch path must be tag-only and bounded to 2.0.1');
   if (!standard.includes("&& github.ref != 'refs/tags/sdk-v2.0.1'")) throw Error('Only one workflow may publish 2.0.1');
-  if (!source.includes('TEMPLATE_PACKAGE_FIXTURE_DIR: ${{ runner.temp }}/sdk-patch-no-private-fixtures')) throw Error('Functional patch acceptance must prove independence from private fixtures');
+  if (!source.includes('TEMPLATE_PACKAGE_FIXTURE_DIR: /tmp/sdk-patch-no-private-fixtures')) throw Error('Functional patch acceptance must prove independence from private fixtures');
   const split = source.indexOf('\n  publish:');
   const verify = source.slice(0, split), publish = source.slice(split);
   if (split < 0 || !publish.includes('needs: verify') || !publish.includes("if: github.event_name == 'push' && github.ref == 'refs/tags/sdk-v2.0.1'")) throw Error('Only a verified patch tag may publish');
