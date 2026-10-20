@@ -62,3 +62,7 @@ fidelity/evidence/**
 !fidelity/evidence/phase-12-import-inspector-visible/REVIEW.md
 !fidelity/evidence/milestone-7-alpha-mask/
 !fidelity/evidence/milestone-7-alpha-mask/report.md
+
+# Internal acceptance and public release projections
+release-artifacts/
+public-release-artifacts/

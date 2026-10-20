@@ -1,0 +1,61 @@
+name: Refresh published SDK host kit
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-host-kit-2.0.1
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment: private-sdk-release
+    permissions:
+      contents: write
+    env:
+      TEMPLATE_PACKAGE_FIXTURE_DIR: /tmp/host-kit-no-private-fixtures
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node --test scripts/release-delivery/*.test.mjs
+      - name: Read published archives and preserve legacy asset identities
+        run: node scripts/release-delivery/publication.mjs prepare-refresh "$RUNNER_TEMP/host-kit"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build additive public projection
+        run: |
+          source_revision="$(git rev-parse sdk-v2.0.1^{commit})"
+          node scripts/release-delivery/host-kit.mjs generate "$RUNNER_TEMP/host-kit/internal" "$RUNNER_TEMP/host-kit/public" --additive --source-revision "$source_revision" --delivery-revision "$GITHUB_SHA"
+          node scripts/release-delivery/host-kit.mjs verify "$RUNNER_TEMP/host-kit/public" --additive
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Accept the exact extracted kit without registry credentials
+        run: |
+          for manager in npm pnpm; do
+            node scripts/host-starter/verify-kit.mjs --delivery "$RUNNER_TEMP/host-kit/public" --additive --manager "$manager"
+          done
+      - name: Publish additive assets and update the entry point after download verification
+        run: node scripts/release-delivery/publication.mjs publish "$RUNNER_TEMP/host-kit/public" --additive --baseline "$RUNNER_TEMP/host-kit"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sdk-host-kit-${{ github.run_id }}
+          path: ${{ runner.temp }}/host-kit/
+          retention-days: 7
+          if-no-files-found: warn

@@ -1,0 +1,105 @@
+{
+  "status": "pass",
+  "workflowRun": "39420108637",
+  "updateRevision": "3b3bbdaddab95273feb4f28d7ef9045314860651",
+  "previousKitSha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9",
+  "kitSha256": "999ca1a5663c287b0e2c02f18b54805944a7ad2f9a290775ce03f14226d0e90a",
+  "changelogSha256": "f0f200fc5ee2b7eb8ed7d06cca4ef01c7448ac5a41d686c39a04ec4b65a862aa",
+  "changedFiles": [
+    "CHANGELOG.md",
+    "DELIVERY.json",
+    "README.md"
+  ],
+  "preservedSdkArchives": [
+    {
+      "id": 658865644,
+      "name": "sleinity-template-browser-2.0.1.tgz",
+      "size": 278997,
+      "digest": "sha256:624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "id": 658865642,
+      "name": "sleinity-template-core-2.0.1.tgz",
+      "size": 487031,
+      "digest": "sha256:4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "id": 658865643,
+      "name": "sleinity-template-react-2.0.1.tgz",
+      "size": 213161,
+      "digest": "sha256:94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    }
+  ],
+  "assetCount": 7,
+  "files": [
+    {
+      "file": "template-sdk-2.0.1-host-kit.zip",
+      "bytes": 1056999,
+      "sha256": "999ca1a5663c287b0e2c02f18b54805944a7ad2f9a290775ce03f14226d0e90a"
+    },
+    {
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "bytes": 487031,
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "bytes": 278997,
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "bytes": 213161,
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    },
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json",
+      "bytes": 8397,
+      "sha256": "3ac94facae2f4a5b8c7d458fb5dfc363dca325bf5286ecb0e35066d58aa8f0a4"
+    },
+    {
+      "file": "SHA256SUMS",
+      "bytes": 571,
+      "sha256": "7dd9a2c600138194ecdfb14e376f0c7e148d64472e2610fee0f7579bf6bae3ad"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "bytes": 7632,
+      "sha256": "f0f200fc5ee2b7eb8ed7d06cca4ef01c7448ac5a41d686c39a04ec4b65a862aa"
+    }
+  ],
+  "tags": [
+    {
+      "name": "sdk-v2.0.1",
+      "object": {
+        "sha": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Sleinity/template-tool/git/commits/1fac7d63d4ccaf4daa5a4503a6e7df1b61305822"
+      }
+    },
+    {
+      "name": "@sleinity/template-core@2.0.1",
+      "object": {
+        "sha": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Sleinity/template-tool/git/commits/1fac7d63d4ccaf4daa5a4503a6e7df1b61305822"
+      }
+    },
+    {
+      "name": "@sleinity/template-browser@2.0.1",
+      "object": {
+        "sha": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Sleinity/template-tool/git/commits/1fac7d63d4ccaf4daa5a4503a6e7df1b61305822"
+      }
+    },
+    {
+      "name": "@sleinity/template-react@2.0.1",
+      "object": {
+        "sha": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+        "type": "commit",
+        "url": "https://api.github.com/repos/Sleinity/template-tool/git/commits/1fac7d63d4ccaf4daa5a4503a6e7df1b61305822"
+      }
+    }
+  ]
+}

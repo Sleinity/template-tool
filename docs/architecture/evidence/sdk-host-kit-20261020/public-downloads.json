@@ -1,0 +1,31 @@
+{
+  "status": "pass",
+  "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.1",
+  "workflowRun": 39407405667,
+  "sdkSourceRevision": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+  "deliveryRevision": "05d199486f643b6cee6d9f3b9479eb7e1830159b",
+  "originalAssetsPreserved": 54,
+  "assetCount": 57,
+  "allSdkAndPackageTagsPreserved": true,
+  "temporaryBranchAllowanceRemoved": true,
+  "downloads": [
+    {
+      "file": "HOST-KIT-MANIFEST.json",
+      "bytes": 8031,
+      "sha256": "d46f002243a401332824663c412f2e4dd6fa3c805b14ad3d65713272091786c4",
+      "anonymous": true
+    },
+    {
+      "file": "HOST-KIT-SHA256SUMS",
+      "bytes": 187,
+      "sha256": "24963fef6fdbe4cb7716723ec86a112d65b388ae863a5b3722e10e8f30cba0ce",
+      "anonymous": true
+    },
+    {
+      "file": "template-sdk-2.0.1-host-kit.zip",
+      "bytes": 1053541,
+      "sha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9",
+      "anonymous": true
+    }
+  ]
+}

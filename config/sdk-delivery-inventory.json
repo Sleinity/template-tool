@@ -248,6 +248,16 @@
       "source": "docs/sdk/history/sdk-v1.0.0/README.md",
       "file": "SDK-1.0-HISTORY.md",
       "classification": "historical"
+    },
+    {
+      "source": "docs/architecture/sdk-host-kit-delivery.md",
+      "file": "HOST-KIT-DELIVERY.md",
+      "classification": "publication-preparation"
+    },
+    {
+      "source": "docs/sdk/CHANGELOG.md",
+      "file": "SDK-CHANGELOG.md",
+      "classification": "current"
     }
   ],
   "generatedFiles": [

@@ -76,7 +76,7 @@ export function CompleteHost({ adapters, fontRegistry }: { adapters?: StarterAda
   };
   return <main className="starter-host">
     <h1>Template SDK · editing host</h1>
-    <p>One source opens a single template. Multiple sources open a Family. SDK 2.0.0 · exporter 0.6.1 · canonical schema 2.2.</p>
+    <p>One source opens a single template. Multiple sources open a Family. SDK V2 · exporter 0.6.1 · canonical schema 2.2.</p>
     <label>Load V2 JSON or exporter ZIPs <input aria-label="Load V2 JSON or exporter ZIPs" type="file" multiple accept=".zip,.json" disabled={busy} onChange={event=>{
       const files=Array.from(event.target.files??[]);event.target.value="";if(!files.length)return;
       pending?.dispose();setError(null);setPending(new Preparation(files,fontRegistry));

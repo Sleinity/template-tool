@@ -1,0 +1,48 @@
+{
+  "status": "pass",
+  "schemaVersion": "sdk-host-kit-acceptance-v1",
+  "manager": "pnpm",
+  "node": "v24.19.0",
+  "platform": "darwin",
+  "browser": "149.0.7827.55",
+  "kitSha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9",
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "name": "@sleinity/template-core",
+      "version": "2.0.1",
+      "bytes": 487031,
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "name": "@sleinity/template-browser",
+      "version": "2.0.1",
+      "bytes": 278997,
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "name": "@sleinity/template-react",
+      "version": "2.0.1",
+      "bytes": 213161,
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    }
+  ],
+  "sourceRevision": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+  "deliveryRevision": "05d199486f643b6cee6d9f3b9479eb7e1830159b",
+  "runId": null,
+  "checks": [
+    "unmodified-extracted-kit-install-and-build",
+    "existing-app-public-entry-typecheck",
+    "single-portable-zip-staged-import-fonts-and-preview",
+    "single-edit-reset",
+    "single-suggested-and-restricted-choices-reset",
+    "single-save-reload-recovery-and-offline-fresh-after-app-load",
+    "single-current-png",
+    "family-shared-suggested-and-restricted-choices-switch-reset",
+    "family-three-designs-shared-edit-switch-and-reset",
+    "family-save-reload-recovery-current-png-and-cleanup"
+  ],
+  "evidence": "automated exact extracted application; portable functional fixtures; test-only observation in temporary build; no source/font pixel certification"
+}

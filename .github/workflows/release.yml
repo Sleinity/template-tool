@@ -12,6 +12,24 @@ on:
         default: false
         type: boolean
 
+      refresh_host_kit:
+        description: "Add the complete host kit to published SDK 2.0.1; preserve legacy downloads"
+        required: false
+        default: false
+        type: boolean
+
+      compact_host_kit:
+        description: "Remove redundant 2.0.1 attachments and replace delivery metadata; old links break"
+        required: false
+        default: false
+        type: boolean
+
+      update_host_kit_changelog:
+        description: "Include consolidated CHANGELOG.md in the kit and as the seventh release file"
+        required: false
+        default: false
+        type: boolean
+
 permissions:
   actions: read
   contents: write
@@ -25,6 +43,8 @@ jobs:
     environment: private-sdk-release
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.9.0
@@ -59,18 +79,41 @@ jobs:
         if: always()
         run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
 
+  host-kit-refresh:
+    if: github.event_name == 'workflow_dispatch' && inputs.refresh_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.compact_host_kit != true && inputs.update_host_kit_changelog != true
+    uses: ./.github/workflows/host-kit-refresh.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+  host-kit-compaction:
+    if: github.event_name == 'workflow_dispatch' && inputs.compact_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true && inputs.update_host_kit_changelog != true
+    uses: ./.github/workflows/compact-sdk-2-0-1.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+  host-kit-changelog:
+    if: github.event_name == 'workflow_dispatch' && inputs.update_host_kit_changelog == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true
+    uses: ./.github/workflows/host-kit-changelog.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
   handoff:
     needs: publish
     if: >-
       always() &&
       (
         (github.event_name == 'push' && needs.publish.result == 'success') ||
-        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true)
+        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true && inputs.update_host_kit_changelog != true)
       )
     runs-on: ubuntu-latest
     environment: private-sdk-release
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: pnpm/action-setup@v4
         with:
           version: 11.9.0
@@ -153,18 +196,19 @@ jobs:
           test "$SDK_AUTHORIZED_USE" = "Sleinity-owned applications"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create SDK release and upload integration handoff
+      - name: Build the public host kit from the accepted internal bundle
         run: |
-          release_asset_paths="$(node scripts/release-delivery/cli.mjs upload-paths release-artifacts)"
-          mapfile -t release_assets <<< "$release_asset_paths"
+          source_revision="$(git rev-parse "${SDK_RELEASE_TAG}^{commit}")"
+          node scripts/release-delivery/host-kit.mjs generate release-artifacts public-release-artifacts --source-revision "$source_revision" --delivery-revision "$GITHUB_SHA"
+          node scripts/release-delivery/host-kit.mjs verify public-release-artifacts
+          for manager in npm pnpm; do
+            node scripts/host-starter/verify-kit.mjs --delivery public-release-artifacts --manager "$manager"
+          done
+      - name: Create SDK release and publish seven verified downloads
+        run: |
           gh release view "$SDK_RELEASE_TAG" >/dev/null 2>&1 ||
-            gh release create "$SDK_RELEASE_TAG" \
-              --verify-tag \
-              --title "$SDK_RELEASE_TITLE" \
-              --notes "Public SDK ${SDK_VERSION} assets derived from GitHub Packages. UNLICENSED; authorized for Sleinity-owned applications only."
-          gh release edit "$SDK_RELEASE_TAG" \
-            --notes "Public SDK ${SDK_VERSION} assets derived from GitHub Packages. UNLICENSED; authorized for Sleinity-owned applications only. See SDK-RUNTIME-HANDOFF.md for checksums and integration instructions."
-          gh release upload "$SDK_RELEASE_TAG" "${release_assets[@]}" --clobber
+            gh release create "$SDK_RELEASE_TAG" --verify-tag --draft --title "$SDK_RELEASE_TITLE" --notes "Preparing verified SDK host kit."
+          node scripts/release-delivery/publication.mjs publish public-release-artifacts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Remove decrypted release test fixtures

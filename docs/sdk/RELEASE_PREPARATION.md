@@ -33,3 +33,7 @@ Before tagging, verify the guarded publication preparation path reproduces the c
 Bind the protected release jobs to the current certification run and approved
 frozen manifest using the [release environment setup](GITHUB_SETUP.md). Exact
 browser fixtures are authenticated test inputs, never public delivery assets.
+
+## Public host-kit delivery
+
+The complete v1 delivery remains the internal acceptance bundle. The [host-kit delivery contract](../architecture/sdk-host-kit-delivery.md) defines the seven-asset public projection, including the consolidated changelog, curated offline guides, exact extracted-kit checks and non-overwriting publisher. The explicitly approved 2.0.1 compaction removes surplus legacy attachments after verified backup and replaces delivery metadata, preserving the accepted kit, SDK archives and all SDK/package tags. Its protected workflow uses portable exact-kit acceptance and never republishes packages. The separately requested changelog update changes only kit documentation and delivery metadata, adding `CHANGELOG.md` as the seventh download while retaining all SDK archives and tags. Future SDK publication still requires all existing certification gates before the public projection is accepted and uploaded.
