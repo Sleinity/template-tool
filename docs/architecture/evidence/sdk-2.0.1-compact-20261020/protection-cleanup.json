@@ -1,0 +1,34 @@
+{
+  "workflowRun": 39413816011,
+  "workflowExitCode": 0,
+  "removedPolicyId": 63698188,
+  "cleanupExitCode": 0,
+  "cleanupError": "",
+  "remainingPolicies": [
+    {
+      "id": 63005594,
+      "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k2MzAwNTU5NA==",
+      "name": "main",
+      "type": "branch"
+    },
+    {
+      "id": 63005593,
+      "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k2MzAwNTU5Mw==",
+      "name": "sdk-v1.0.0",
+      "type": "tag"
+    },
+    {
+      "id": 63250157,
+      "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k2MzI1MDE1Nw==",
+      "name": "sdk-v2.0.0",
+      "type": "tag"
+    },
+    {
+      "id": 63588761,
+      "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k2MzU4ODc2MQ==",
+      "name": "sdk-v2.0.1",
+      "type": "tag"
+    }
+  ],
+  "requiredReviewProtectionUnchanged": true
+}

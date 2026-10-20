@@ -1,0 +1,78 @@
+{
+  "status": "pass",
+  "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.1",
+  "workflowRun": 39413816011,
+  "uploadedAssetCount": 6,
+  "githubSourceArchiveCount": 2,
+  "displayedAssetCount": 8,
+  "removedRedundantAttachments": 51,
+  "replacedMetadataFiles": 2,
+  "unchangedKitAndSdkArchives": [
+    {
+      "id": 658865644,
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "id": 658865642,
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "id": 658865643,
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    },
+    {
+      "id": 658996165,
+      "file": "template-sdk-2.0.1-host-kit.zip",
+      "sha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9"
+    }
+  ],
+  "sdkAndPackageTagsPreserved": true,
+  "originalEnvironmentProtectionsRestored": true,
+  "downloads": [
+    {
+      "file": "SDK-DELIVERY-MANIFEST.json",
+      "id": 659116854,
+      "bytes": 8150,
+      "sha256": "54b5d2e2bcca93e6d57a05976f5352386d98bdfc2a8e530d2d2cce62b64d1326",
+      "anonymous": true
+    },
+    {
+      "file": "SHA256SUMS",
+      "id": 659116912,
+      "bytes": 492,
+      "sha256": "dccef161e9e83d583044f49812891b11cc1aa20bca8e25315a3be014fffaa797",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "id": 658865644,
+      "bytes": 278997,
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "id": 658865642,
+      "bytes": 487031,
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820",
+      "anonymous": true
+    },
+    {
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "id": 658865643,
+      "bytes": 213161,
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012",
+      "anonymous": true
+    },
+    {
+      "file": "template-sdk-2.0.1-host-kit.zip",
+      "id": 658996165,
+      "bytes": 1053541,
+      "sha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9",
+      "anonymous": true
+    }
+  ]
+}
