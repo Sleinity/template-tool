@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "sdk-2.0.1-publication-v1",
+  "status": "published-and-verified",
+  "version": "2.0.1",
+  "sourceCommit": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+  "tag": "sdk-v2.0.1",
+  "releaseUrl": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.1",
+  "publishedAt": "2026-10-20T09:29:44Z",
+  "verifiedAt": "2026-10-20T09:30:38.793942+00:00",
+  "approval": "Explicit human approval of the 2.0.1-only template-independent functional patch release and publication; protected deployment approved without removing its review gate.",
+  "preflightRun": {
+    "id": 39272209989,
+    "conclusion": "success"
+  },
+  "publicationRun": {
+    "id": 39274464666,
+    "conclusion": "success",
+    "url": "https://github.com/Sleinity/template-tool/actions/runs/39274464666",
+    "jobs": [
+      {
+        "name": "verify",
+        "conclusion": "success"
+      },
+      {
+        "name": "publish",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "packageVersions": [
+    {
+      "package": "@sleinity/template-core",
+      "version": "2.0.1",
+      "id": 1414355209,
+      "createdAt": "2026-10-20T09:26:14Z"
+    },
+    {
+      "package": "@sleinity/template-browser",
+      "version": "2.0.1",
+      "id": 1414355344,
+      "createdAt": "2026-10-20T09:26:16Z"
+    },
+    {
+      "package": "@sleinity/template-react",
+      "version": "2.0.1",
+      "id": 1414355460,
+      "createdAt": "2026-10-20T09:26:17Z"
+    }
+  ],
+  "tags": {
+    "sdk-v2.0.1": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+    "@sleinity/template-core@2.0.1": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+    "@sleinity/template-browser@2.0.1": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+    "@sleinity/template-react@2.0.1": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822"
+  },
+  "archives": [
+    {
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "name": "@sleinity/template-core",
+      "version": "2.0.1",
+      "bytes": 487031,
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "name": "@sleinity/template-browser",
+      "version": "2.0.1",
+      "bytes": 278997,
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "name": "@sleinity/template-react",
+      "version": "2.0.1",
+      "bytes": 213161,
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    }
+  ],
+  "coreDeclaration": {
+    "bytes": 105096,
+    "sha256": "dd5c66826747210ec52e39d662b0487f61e1926be05dc8602d812fac9ded6263"
+  },
+  "delivery": {
+    "mode": "release",
+    "provenance": "registry-download",
+    "assetCount": 54,
+    "manifestSha256": "d2c7aa6c46fc7af1528b6f4e0c7da2601b812665547542168f8137ffbd404d30",
+    "allAssetDigestsAndSizesMatchManifest": true,
+    "anonymousDownloads": [
+      "SDK-DELIVERY-MANIFEST.json",
+      "sleinity-template-core-2.0.1.tgz",
+      "sleinity-template-browser-2.0.1.tgz",
+      "sleinity-template-react-2.0.1.tgz",
+      "SDK-HOST-STARTER.zip",
+      "SHA256SUMS",
+      "SDK-2.0.1-RELEASE-NOTES.md"
+    ],
+    "anonymousChecksumsPassed": true
+  },
+  "functionalAcceptance": {
+    "architectureCheckpoints": 50,
+    "choiceCheckpoints": 88,
+    "installedManagers": [
+      "npm",
+      "pnpm"
+    ],
+    "sameArchiveBytesPassedOn": [
+      "linux",
+      "darwin"
+    ],
+    "linuxNode": "v22.23.3",
+    "macOSNode": "v24.19.0",
+    "publisherRehearsal": "npm publish supplied-archive --dry-run --ignore-scripts",
+    "sourceFidelityCertification": false,
+    "privateTemplateFixtureRequired": false
+  },
+  "limitations": [
+    "Functional field-rule/package regression release; no new source-pixel certification.",
+    "GitHub job annotations about action runtime deprecation and upcoming ubuntu-latest migration are advisory; all required jobs passed."
+  ]
+}

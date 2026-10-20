@@ -15,3 +15,9 @@ Downloaded registry tarballs must match the accepted archive SHA-256 values. Reg
 The publisher concurrency follow-up from [SDK 2.0.0](sdk-release-automation.md) is addressed for this bounded path by publishing verified immutable archives. The older full-release Changesets path remains unchanged and retains its separately documented follow-up.
 
 Acceptance reports are retained by the patch workflow and remain separate from source-fidelity evidence. The delivery manifest's packing status stays `not-yet-verified`; successful functional reports and registry byte verification supply their own scoped evidence.
+
+## Published and verified — 2026-10-20
+
+[SDK 2.0.1 is public](https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.1), with all three registry versions and package tags at `1fac7d63d4ccaf4daa5a4503a6e7df1b61305822`. [The publication receipt](evidence/sdk-2.0.1-publication-20261020/publication.json) records the successful protected [release run](https://github.com/Sleinity/template-tool/actions/runs/39274464666), 54 inventory-matched asset digests, anonymous package/starter/notes downloads and checksums, and the unchanged protected Core declaration.
+
+The same archive hashes passed npm/pnpm installed-host acceptance on [Linux](evidence/sdk-2.0.1-publication-20261020/linux-archive-acceptance.json) and [macOS](evidence/sdk-2.0.1-publication-20261020/macos-archive-acceptance.json). The source tag remains immutable; this evidence-only follow-up does not alter published package or delivery bytes. Functional field-rule acceptance passed all 50 architecture and 88 choice checkpoints. No new source-pixel certification is claimed.

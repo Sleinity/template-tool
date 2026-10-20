@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "sdk-2.0.1-functional-patch-v1",
+  "status": "pass",
+  "version": "2.0.1",
+  "sourceCommit": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+  "sourceDirty": false,
+  "ci": {
+    "runId": "39274464666"
+  },
+  "archives": [
+    {
+      "name": "@sleinity/template-core",
+      "file": "sleinity-template-core-2.0.1.tgz",
+      "sha256": "4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "name": "@sleinity/template-browser",
+      "file": "sleinity-template-browser-2.0.1.tgz",
+      "sha256": "624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "name": "@sleinity/template-react",
+      "file": "sleinity-template-react-2.0.1.tgz",
+      "sha256": "94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    }
+  ],
+  "node": "v22.23.3",
+  "platform": "linux",
+  "rows": [
+    {
+      "manager": "npm",
+      "name": "consumer",
+      "elapsedMs": 14308,
+      "logSha256": "055aee16f1aa42012a7ad63029bc9700013c43d0aff21e3dd838a2c696695e3c"
+    },
+    {
+      "manager": "npm",
+      "name": "fonts",
+      "elapsedMs": 37281,
+      "logSha256": "00eb57c28f8d96d6e3be27d285c62b9a75c18071825ee2c04a592e04c798d959"
+    },
+    {
+      "manager": "npm",
+      "name": "storage",
+      "elapsedMs": 7963,
+      "logSha256": "87956daf46471f28656c9176c1c7dd772e38ed4e389faf4d495990ee1c36eb6f"
+    },
+    {
+      "manager": "pnpm",
+      "name": "consumer",
+      "elapsedMs": 7087,
+      "logSha256": "055aee16f1aa42012a7ad63029bc9700013c43d0aff21e3dd838a2c696695e3c"
+    },
+    {
+      "manager": "pnpm",
+      "name": "fonts",
+      "elapsedMs": 36950,
+      "logSha256": "00eb57c28f8d96d6e3be27d285c62b9a75c18071825ee2c04a592e04c798d959"
+    },
+    {
+      "manager": "pnpm",
+      "name": "storage",
+      "elapsedMs": 7528,
+      "logSha256": "481a8b2e8e8f3192d01e8c4e5101e1dc528ee952262ed7b2dd404265e543be1a"
+    }
+  ],
+  "sourceFidelityCertification": false,
+  "publisherRehearsal": "npm publish supplied-archive --dry-run --ignore-scripts"
+}
