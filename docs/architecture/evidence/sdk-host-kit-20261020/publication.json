@@ -1,0 +1,351 @@
+{
+  "status": "pass",
+  "tag": "sdk-v2.0.1",
+  "url": "https://github.com/Sleinity/template-tool/releases/tag/sdk-v2.0.1",
+  "preservedAssets": [
+    {
+      "id": 658865716,
+      "name": "AGENT-INTEGRATION-PROMPTS.md",
+      "size": 5509,
+      "digest": "sha256:7cd3ab115824076616eeb07e7235ac5d46489ff2201f4faa0764befe8f1d3ec7"
+    },
+    {
+      "id": 658865865,
+      "name": "CompleteHost.tsx",
+      "size": 15634,
+      "digest": "sha256:34c8c7a44407b4e7fc905e01161f1a6fa1604f6489669e468236651a1e937aca"
+    },
+    {
+      "id": 658865751,
+      "name": "CONSUMER-COMPATIBILITY.md",
+      "size": 4636,
+      "digest": "sha256:83f70e8a7614049d506d51e2951f639e36a847c6bbdb32c15d02c743c1aac086"
+    },
+    {
+      "id": 658865879,
+      "name": "CORE-SHA256SUMS",
+      "size": 99,
+      "digest": "sha256:def9c3a8c3ef089a688aa18ad36d6b55f5952f2501574c95c7aa94774e01d465"
+    },
+    {
+      "id": 658865793,
+      "name": "FAMILY-EXAMPLE-V2.md",
+      "size": 1103,
+      "digest": "sha256:f874a5fd5c883f9f41e0703c79a485e2b71dbf28cf391df36009086364ebb289"
+    },
+    {
+      "id": 658865769,
+      "name": "FIELD-RULES-BROWSER-SESSION.md",
+      "size": 7886,
+      "digest": "sha256:bb74470d76ddec79b20b8e7975426dcf3726b19aa3b713b9fc033ab0caae3d1a"
+    },
+    {
+      "id": 658865776,
+      "name": "FIELD-RULES-STUDIO-AND-HOSTS.md",
+      "size": 16243,
+      "digest": "sha256:f9b5f4bfafc606959bb466fc46deac1cb526f994e520f01a3eaa71d390cc3525"
+    },
+    {
+      "id": 658865791,
+      "name": "fieldHostLifecycle.ts",
+      "size": 14172,
+      "digest": "sha256:444f4ef18bdbb55bbb186a82dc5d4e445836540cc660f4df2b9e7094a52a0681"
+    },
+    {
+      "id": 658865783,
+      "name": "FieldRulesV2Host.tsx",
+      "size": 9443,
+      "digest": "sha256:305823d120457af832b2b7ed139cbdc21fe3c86fbd229309ae4d3c0ed1024f51"
+    },
+    {
+      "id": 658865760,
+      "name": "GITHUB-SETUP.md",
+      "size": 3672,
+      "digest": "sha256:30fd661df5e2b62e379dd5499390c80d4a0c3262eb94fe269f542a303b9446e5"
+    },
+    {
+      "id": 658865792,
+      "name": "MINIMAL-RENDERER-V2.md",
+      "size": 391,
+      "digest": "sha256:912021f3a01c7f413fe4f9c1a968264b38f18ed268022020eb2e777cf3590107"
+    },
+    {
+      "id": 658865840,
+      "name": "SDK-0.2-TO-0.7-HISTORICAL.md",
+      "size": 6925,
+      "digest": "sha256:d1c0101e0635af0ec4f8b8fc1c42bacfd1f37f8e65b83b3c38227f8e0fd6130e"
+    },
+    {
+      "id": 658865831,
+      "name": "SDK-0.4-MIGRATION.md",
+      "size": 1802,
+      "digest": "sha256:abfdf131472b357fdd7bbda2f5ef8115e4d9daa7623bf3ca33a63ac17b11b09e"
+    },
+    {
+      "id": 658865828,
+      "name": "SDK-0.4.1-MIGRATION.md",
+      "size": 1570,
+      "digest": "sha256:b49feb5e2cb57c4be455bbba655bcf04b744760ef5cd9c5fbed4c21bbd4d1a29"
+    },
+    {
+      "id": 658865822,
+      "name": "SDK-0.4.2-MIGRATION.md",
+      "size": 1110,
+      "digest": "sha256:bd06a0dbdc71527ac00ea2b21c5397868c54e1536e661156452067ebae871d24"
+    },
+    {
+      "id": 658865816,
+      "name": "SDK-0.5-MIGRATION.md",
+      "size": 1675,
+      "digest": "sha256:8eb831c3c72302c80ac3d038b8b200537fd9d01bb1504607b00228a8b2badc24"
+    },
+    {
+      "id": 658865811,
+      "name": "SDK-0.6-MIGRATION.md",
+      "size": 5128,
+      "digest": "sha256:ef9d670cafc8190a6d12cbf8e4a87e82cb3fea455288f0d32cad4f884116df88"
+    },
+    {
+      "id": 658865809,
+      "name": "SDK-0.7-MIGRATION.md",
+      "size": 3199,
+      "digest": "sha256:546d568bb27f4cd8248b0f4957f10796a0dd756eeaf9c4191abac33a22bbea9e"
+    },
+    {
+      "id": 658865807,
+      "name": "SDK-0.8-MIGRATION.md",
+      "size": 4816,
+      "digest": "sha256:1dbccd78e809a2c46c8cfccfddc44176ca98c1dbd6e47866ab8eb38955a40855"
+    },
+    {
+      "id": 658865869,
+      "name": "SDK-1.0-HISTORY.md",
+      "size": 550,
+      "digest": "sha256:d6449027ed3634d5fafed8a6d35c1a454654315c249ea1ff2d0c976fc4cecfc1"
+    },
+    {
+      "id": 658865698,
+      "name": "SDK-1.0-MIGRATION.md",
+      "size": 2685,
+      "digest": "sha256:6e718e9d7684fc04e3ca73004574b04e4c2ced491e1509eff40a7d94e60f5c26"
+    },
+    {
+      "id": 658865688,
+      "name": "SDK-1.0-RELEASE-NOTES.md",
+      "size": 2201,
+      "digest": "sha256:dc7f69e4382d3151a896203d7cbc0b138287c305beecd6cc74e90b63727cfff5"
+    },
+    {
+      "id": 658865684,
+      "name": "SDK-2.0-MIGRATION.md",
+      "size": 2775,
+      "digest": "sha256:074213d558e6f9d77100d211794af0620fa581e1eca16d1ec2dd10acee457a82"
+    },
+    {
+      "id": 658865679,
+      "name": "SDK-2.0-RELEASE-NOTES.md",
+      "size": 2301,
+      "digest": "sha256:11cb45492ec35a5fa56e7609ce83d4ad917d791931bb9a95bb9112cc1654233f"
+    },
+    {
+      "id": 658865690,
+      "name": "SDK-2.0.1-RELEASE-NOTES.md",
+      "size": 866,
+      "digest": "sha256:4cd010fdcbf3437a2a31ec39131f55d28530c1c82fba4de27c923a230c0d6076"
+    },
+    {
+      "id": 658865850,
+      "name": "SDK-API-GUIDE.md",
+      "size": 2335,
+      "digest": "sha256:01f45fdf7e25b6f15d7faf516d0d247f5129bbc2f941c28209a8e6da46c50eec"
+    },
+    {
+      "id": 658865710,
+      "name": "SDK-CAPABILITIES.md",
+      "size": 3752,
+      "digest": "sha256:20d6ff1b895a5583b170a820b9836f93d6aa6baaae046c77d3efd8d5bd27c013"
+    },
+    {
+      "id": 658865730,
+      "name": "SDK-CORE-HANDOFF.md",
+      "size": 1567,
+      "digest": "sha256:ecc7c8878b444b8dc7db61d25f193c34802bb1fd51d11bfd769d1d66f7f00ff8"
+    },
+    {
+      "id": 658865884,
+      "name": "SDK-DELIVERY-MANIFEST.json",
+      "size": 47455,
+      "digest": "sha256:d2c7aa6c46fc7af1528b6f4e0c7da2601b812665547542168f8137ffbd404d30"
+    },
+    {
+      "id": 658865797,
+      "name": "sdk-entry-points.json",
+      "size": 3736,
+      "digest": "sha256:bbf955ee6f35e5d5c0fdd17abbae04949fce720fbcbedbf137cb5a120f3ea7af"
+    },
+    {
+      "id": 658865849,
+      "name": "SDK-FEATURES.md",
+      "size": 5268,
+      "digest": "sha256:452c80c92f64016dfbb32a54d7c4447543096dde2e0e98b67a59c80436c37587"
+    },
+    {
+      "id": 658865854,
+      "name": "SDK-HISTORY.md",
+      "size": 1293,
+      "digest": "sha256:2a6bfd4b281fea5de6647dca2439a927ce1a8c45154537eab3e25c336167b1ec"
+    },
+    {
+      "id": 658865848,
+      "name": "SDK-HOST-IMPLEMENTATION.md",
+      "size": 4852,
+      "digest": "sha256:25a31b3569a3f46986661e31f1a3cc798f06a3a8ced7282dc7e65f0b1c5d47c2"
+    },
+    {
+      "id": 658865663,
+      "name": "SDK-HOST-LIFECYCLE.md",
+      "size": 4443,
+      "digest": "sha256:518321935e76273d67fb2dd85b3186bcbecd92eea0cd4763b3317906793343e4"
+    },
+    {
+      "id": 658865641,
+      "name": "SDK-HOST-STARTER.zip",
+      "size": 20474,
+      "digest": "sha256:2b67437c1623ee515e9f566a0f62afd48bf35dfef433470ca3b4e2ddf2e79e5f"
+    },
+    {
+      "id": 658865707,
+      "name": "SDK-INSTALLATION.md",
+      "size": 1597,
+      "digest": "sha256:5b6c99d55e62f824faefb5db9bda5122e5406182245c7e1b5feff959c211708e"
+    },
+    {
+      "id": 658865681,
+      "name": "SDK-OPERATION-OUTCOMES.md",
+      "size": 3810,
+      "digest": "sha256:2e2abe0f1d872f0c5a06a3fb0e120b19911a06cfb02651c31e1919efdc6b5e22"
+    },
+    {
+      "id": 658865805,
+      "name": "sdk-public-api.json",
+      "size": 55416,
+      "digest": "sha256:165dafac2395b35927e60d0149ae5e7817c9e9757c32f2e7d4a8f107c13ac0ef"
+    },
+    {
+      "id": 658865845,
+      "name": "SDK-QUICKSTART.md",
+      "size": 3462,
+      "digest": "sha256:7809e5d2f49d7fe8d3f7926cfb0e08538919f9a988c05d84ca74107c32010dbc"
+    },
+    {
+      "id": 658865725,
+      "name": "SDK-README.md",
+      "size": 2488,
+      "digest": "sha256:20369ad8189715efbcd589f772cf235dcbb7691f770da8017ba0aa167b22e26a"
+    },
+    {
+      "id": 658865721,
+      "name": "SDK-RELEASE-PREPARATION.md",
+      "size": 5133,
+      "digest": "sha256:2ba93771864a9457ec196819a4156bcb3c35c76b72c30a2dfb573a834807c89e"
+    },
+    {
+      "id": 658865737,
+      "name": "SDK-RUNTIME-HANDOFF.md",
+      "size": 2927,
+      "digest": "sha256:79e4931b3adee6d336f988284a25a8af27397bf811e4815978940404025cd842"
+    },
+    {
+      "id": 658865752,
+      "name": "SDK-TROUBLESHOOTING.md",
+      "size": 2671,
+      "digest": "sha256:54f9cadeadd265538ebfe312456ceeae98873142f5ce47e498aa065286a40129"
+    },
+    {
+      "id": 658865631,
+      "name": "SDK-V2-INTEGRATION.md",
+      "size": 20517,
+      "digest": "sha256:abeff4bef6196fba0af27ca3e78ec8321704e0888a44dc97c0a602f839c96e67"
+    },
+    {
+      "id": 658865880,
+      "name": "SHA256SUMS",
+      "size": 388,
+      "digest": "sha256:72d6b660f5c4db45cf0c73663628c56592fc57c8b548d081a430477d8d5465e8"
+    },
+    {
+      "id": 658865644,
+      "name": "sleinity-template-browser-2.0.1.tgz",
+      "size": 278997,
+      "digest": "sha256:624ede7ce9e56e9e265b2c354d9c329f70cc36f3844af9a5b817319b5201c0ea"
+    },
+    {
+      "id": 658865642,
+      "name": "sleinity-template-core-2.0.1.tgz",
+      "size": 487031,
+      "digest": "sha256:4ff080021c8204d8feef7e2299a3429e2764ae84895c7a385ad1ca8775181820"
+    },
+    {
+      "id": 658865643,
+      "name": "sleinity-template-react-2.0.1.tgz",
+      "size": 213161,
+      "digest": "sha256:94813cfa2ae15987113594340a370a12a63870747cfab60e78ff71f37729e012"
+    },
+    {
+      "id": 658865867,
+      "name": "starterPersistence.ts",
+      "size": 9997,
+      "digest": "sha256:83e6c95d83ca68204e59d85daf7deac58898b2435919b0b1db6fe25fa04e7ae9"
+    },
+    {
+      "id": 658865863,
+      "name": "STUDIO-REDESIGN-HANDOFF.md",
+      "size": 1742,
+      "digest": "sha256:27d933161dbcb8dc572cd7c8049668bd2d737799197753db018ca7fd69a24a02"
+    },
+    {
+      "id": 658865754,
+      "name": "STUDIO-REFERENCE.md",
+      "size": 7341,
+      "digest": "sha256:48f1de7e514f09f22f7fe0f220aeefe191991147bcceb8767560809e3787e353"
+    },
+    {
+      "id": 658865746,
+      "name": "TEMPLATE-IMPORT-WIZARD.md",
+      "size": 10677,
+      "digest": "sha256:2806fd09194d9ef790e4a6ed80d1621448a03139c36d4c166f2b91a7f3f583b9"
+    },
+    {
+      "id": 658865777,
+      "name": "TEMPLATE-RECOVERY.md",
+      "size": 7247,
+      "digest": "sha256:ec4783aa7f502e494ce80633db03adbe07cc1314eebb4cc954c4c783be328503"
+    },
+    {
+      "id": 658865781,
+      "name": "V2-EXAMPLE.md",
+      "size": 1309,
+      "digest": "sha256:11fe9abaf0dd6fe21b4baf377f08de7c6e6471603eb648f6c4637f82d9715c5a"
+    }
+  ],
+  "addedOrReused": [
+    {
+      "file": "template-sdk-2.0.1-host-kit.zip",
+      "bytes": 1053541,
+      "sha256": "2f50c7b85caf7b08e5e8a54692c935e2d9237564efff549eaa51099df81dcce9"
+    },
+    {
+      "file": "HOST-KIT-MANIFEST.json",
+      "bytes": 8031,
+      "sha256": "d46f002243a401332824663c412f2e4dd6fa3c805b14ad3d65713272091786c4"
+    },
+    {
+      "file": "HOST-KIT-SHA256SUMS",
+      "bytes": 187,
+      "sha256": "24963fef6fdbe4cb7716723ec86a112d65b388ae863a5b3722e10e8f30cba0ce"
+    }
+  ],
+  "sourceRevision": "1fac7d63d4ccaf4daa5a4503a6e7df1b61305822",
+  "deliveryRevision": "05d199486f643b6cee6d9f3b9479eb7e1830159b",
+  "runId": "39407405667"
+}
