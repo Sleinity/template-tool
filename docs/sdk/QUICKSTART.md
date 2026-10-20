@@ -6,19 +6,18 @@ Audience: Bas and other React/TypeScript host implementers. No SDK repository ch
 
 ## Obtain one delivery
 
-Use the approved SDK 2.0.1 delivery when released. Before publication, use the explicitly identified local candidate supplied by the SDK maintainer. The published 1.0.0 release has a different contract; do not substitute its archives.
+Use the published SDK 2.0.1 host kit. Its README provides the runnable-example and existing-application paths; vendor/ already contains all three SDK archives. The published 1.0.0 release has a different contract; do not substitute its archives.
 
-Obtain all three `sleinity-template-*-2.0.1.tgz` archives, `SHA256SUMS`, the delivery manifest and `SDK-HOST-STARTER.zip`. Verify delivery hashes before use. Unzip the starter into a new application directory and put the three archives in its `vendor/` directory. Its dependencies and pnpm overrides already use these relative files.
+Download [the complete host kit](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/template-sdk-2.0.1-host-kit.zip) and [its checksums](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/HOST-KIT-SHA256SUMS). Verify the ZIP hash before extraction. Extract into an empty application directory; no SDK archive copies are needed.
 
 ```sh
-# In the directory containing the supplied package archives:
-shasum -a 256 -c SHA256SUMS
-# In the extracted starter:
+# In the extracted host kit:
 npm install
 npm run dev
+npm run build
 ```
 
-For pnpm use `pnpm install` and `pnpm dev` instead. Choose one manager and commit its lockfile. The starter includes React 19, TypeScript, Vite, source, styles and configuration. See [installation](INSTALLATION.md) for adapting an existing application.
+For pnpm use `pnpm install`, `pnpm dev` and `pnpm build` instead. Choose one manager and commit its lockfile. The kit includes React 19, TypeScript, Vite, source, styles, all three SDK archives and offline guides. Installation downloads public application dependencies. For an existing application, follow the kit README's **Integrate into an existing app** path for dependency mappings and pnpm overrides. The older standalone starter requires separate archives and remains available for compatibility.
 
 ## First successful workflow
 

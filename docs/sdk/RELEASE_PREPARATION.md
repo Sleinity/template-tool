@@ -33,3 +33,7 @@ Before tagging, verify the guarded publication preparation path reproduces the c
 Bind the protected release jobs to the current certification run and approved
 frozen manifest using the [release environment setup](GITHUB_SETUP.md). Exact
 browser fixtures are authenticated test inputs, never public delivery assets.
+
+## Public host-kit delivery
+
+The complete v1 delivery remains the internal acceptance bundle. The [host-kit delivery contract](../architecture/sdk-host-kit-delivery.md) defines the six-asset public projection, curated offline guides, exact extracted-kit checks and non-overwriting publisher. Existing 2.0.1 assets are retained byte-for-byte; a protected delivery-only workflow adds the kit and its separate manifest/checksums without republishing packages or moving tags. Future SDK publication still requires all existing certification gates before the public projection is accepted and uploaded.

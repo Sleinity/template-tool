@@ -1,6 +1,6 @@
 # Template SDK 2.0.1
 
-Build a React/TypeScript template editor for a Sleinity-owned application. Start with the complete host starter; the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
+Build a React/TypeScript template editor for a Sleinity-owned application. Start with the [complete host kit](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/template-sdk-2.0.1-host-kit.zip); the SDK supplies canonical editing, resources, validation and rendering while your application supplies its UI and storage policy.
 
 <!-- delivery-context:start -->
 This describes the **SDK 2.0.1 contract**. A version label, packing or local certification does not establish publication. Verify delivery provenance and use one verified archive set.
@@ -34,7 +34,7 @@ This describes the **SDK 2.0.1 contract**. A version label, packing or local cer
 
 ## Release and history
 
-[2.0.1 bugfix notes](SDK_2_0_1_RELEASE_NOTES.md) describe the versioned patch candidate.
+[2.0.1 bugfix notes](SDK_2_0_1_RELEASE_NOTES.md) describe the published bugfix release.
 
 [Release notes](SDK_2_0_1_RELEASE_NOTES.md) ([2.0.0 notes](SDK_2_0_RELEASE_NOTES.md)), [breaking changes](SDK_2_0_MIGRATION.md), [release preparation](RELEASE_PREPARATION.md), [runtime handoff](RUNTIME_HANDOFF.md) and [historical index](HISTORY.md).
 

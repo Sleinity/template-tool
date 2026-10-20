@@ -2,7 +2,7 @@
 
 <!-- delivery-context:start -->
 This guide describes the current source contract. The fixed-train workspace packages are
-2.0.1, an unpublished candidate pending cross-platform certification. Published
+2.0.1, a published bugfix release with functional archive acceptance. Published
 1.0.0 and earlier archives describe different supported host contracts. Verify archive hashes and delivery
 provenance. [Installation](INSTALLATION.md), [release preparation](RELEASE_PREPARATION.md)
 and [2.0 migration](SDK_2_0_MIGRATION.md) distinguish those states.
