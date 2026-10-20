@@ -12,11 +12,13 @@ The extracted kit is the canonical example application, with exact SDK tarballs 
 
 ## Compatibility and refresh
 
-The existing 2.0.1 release keeps all 54 original asset IDs, names, hashes and URLs, its v1 manifest/checksums, and all SDK/package tags. Add only the kit, `HOST-KIT-MANIFEST.json` and `HOST-KIT-SHA256SUMS`; the additive upload inventory has three files. Its manifest covers the added kit, not a replacement of the old delivery. The release description leads with the kit and retains original bugfix notes.
+The initial 2.0.1 host-kit refresh added three files while retaining the original 54 downloads. The user subsequently explicitly approved removing the 51 surplus attachments, breaking their old direct links, and replacing the two legacy metadata files. The canonical 2.0.1 layout is now the same six-file standard projection as future releases. The tested kit ZIP, all three SDK tarballs, SDK/package tags and package versions remain unchanged.
 
-The `host-kit-refresh.yml` workflow runs through `private-sdk-release` and can also be invoked using the existing release workflow's `refresh_host_kit` input. It reads already-published release archives and binds their bytes to the old manifest, rebuilds only documentation/example packaging, accepts the exact resulting ZIP with npm and pnpm, then publishes the additive files. It never publishes an npm package, creates/moves a tag or requests private source fixtures.
+The bounded `compact-sdk-2-0-1.yml` workflow retains the protected environment and required reviewer. It backs up and hash-verifies all original assets, uploads the backups to a 90-day CI artifact before mutation, and accepts the exact unchanged kit with npm and pnpm. Only the two delivery metadata files may be replaced. It verifies all six downloads before switching the release body and removing explicitly known obsolete attachments. Unknown or modified attachments fail closed. Partial cleanup can resume using the known historical inventory; existing SDK/kit files are never replaced. The backed-up original bytes can be restored if needed.
 
-Publication preflights every filename before the first upload, rejects conflicting bytes, reuses identical files on retry, verifies uploaded download bytes, and updates the release body last. Original asset identities and tag objects must remain unchanged. The standard path cannot refresh a flat legacy release.
+The historical additive workflow remains separate. Its strict legacy v1 prerequisite prevents it from accidentally refreshing the compact release. The standard publisher continues to reject mixed legacy inventories and conflicting bytes. Neither path republishes packages or creates/moves tags. Source and delivery revisions inside the kit continue to identify the original accepted bytes; the cleanup receipt records its separate migration revision.
+
+Invoke the bounded cleanup through the release workflow's mutually exclusive `compact_host_kit` input. Every publication still requires current workflow-run acceptance receipts. Required-review protection is retained; any specifically approved temporary branch allowance must be removed after completion.
 
 ## Verification
 

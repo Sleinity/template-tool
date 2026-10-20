@@ -8,7 +8,7 @@ Audience: Bas and other React/TypeScript host implementers. No SDK repository ch
 
 Use the published SDK 2.0.1 host kit. Its README provides the runnable-example and existing-application paths; vendor/ already contains all three SDK archives. The published 1.0.0 release has a different contract; do not substitute its archives.
 
-Download [the complete host kit](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/template-sdk-2.0.1-host-kit.zip) and [its checksums](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/HOST-KIT-SHA256SUMS). Verify the ZIP hash before extraction. Extract into an empty application directory; no SDK archive copies are needed.
+Download [the complete host kit](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/template-sdk-2.0.1-host-kit.zip) and [its checksums](https://github.com/Sleinity/template-tool/releases/download/sdk-v2.0.1/SHA256SUMS). Verify the ZIP hash before extraction. Extract into an empty application directory; no SDK archive copies are needed.
 
 ```sh
 # In the extracted host kit:
@@ -17,7 +17,7 @@ npm run dev
 npm run build
 ```
 
-For pnpm use `pnpm install`, `pnpm dev` and `pnpm build` instead. Choose one manager and commit its lockfile. The kit includes React 19, TypeScript, Vite, source, styles, all three SDK archives and offline guides. Installation downloads public application dependencies. For an existing application, follow the kit README's **Integrate into an existing app** path for dependency mappings and pnpm overrides. The older standalone starter requires separate archives and remains available for compatibility.
+For pnpm use `pnpm install`, `pnpm dev` and `pnpm build` instead. Choose one manager and commit its lockfile. The kit includes React 19, TypeScript, Vite, source, styles, all three SDK archives and offline guides. Installation downloads public application dependencies. For an existing application, follow the kit README's **Integrate into an existing app** path for dependency mappings and pnpm overrides. The older standalone starter and individual documentation attachments are retired; use the complete kit.
 
 ## First successful workflow
 

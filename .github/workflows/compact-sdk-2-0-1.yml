@@ -1,0 +1,64 @@
+name: Compact SDK 2.0.1 release assets
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-host-kit-2.0.1
+  cancel-in-progress: false
+
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: private-sdk-release
+    permissions:
+      contents: write
+    env:
+      TEMPLATE_PACKAGE_FIXTURE_DIR: /tmp/host-kit-no-private-fixtures
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.9.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.3
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node --test scripts/release-delivery/*.test.mjs
+      - name: Back up published assets and prepare the compact projection
+        run: node scripts/release-delivery/compact.mjs prepare "$RUNNER_TEMP/host-kit-compact"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Retain verified original assets before any removal
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-2.0.1-before-compaction-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/host-kit-compact/backup/
+            ${{ runner.temp }}/host-kit-compact/COMPACT-BASELINE.json
+          retention-days: 90
+          if-no-files-found: error
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Accept the exact unchanged kit with both managers
+        run: |
+          for manager in npm pnpm; do
+            node scripts/host-starter/verify-kit.mjs --delivery "$RUNNER_TEMP/host-kit-compact/public" --manager "$manager"
+          done
+      - name: Apply the explicitly approved 2.0.1 cleanup
+        run: node scripts/release-delivery/compact.mjs publish "$RUNNER_TEMP/host-kit-compact"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sdk-2.0.1-compaction-${{ github.run_id }}
+          path: ${{ runner.temp }}/host-kit-compact/
+          retention-days: 90
+          if-no-files-found: warn

@@ -18,6 +18,12 @@ on:
         default: false
         type: boolean
 
+      compact_host_kit:
+        description: "Remove redundant 2.0.1 attachments and replace delivery metadata; old links break"
+        required: false
+        default: false
+        type: boolean
+
 permissions:
   actions: read
   contents: write
@@ -68,8 +74,15 @@ jobs:
         run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
 
   host-kit-refresh:
-    if: github.event_name == 'workflow_dispatch' && inputs.refresh_host_kit == true && inputs.prepare_runtime_handoff != true
+    if: github.event_name == 'workflow_dispatch' && inputs.refresh_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.compact_host_kit != true
     uses: ./.github/workflows/host-kit-refresh.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+  host-kit-compaction:
+    if: github.event_name == 'workflow_dispatch' && inputs.compact_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true
+    uses: ./.github/workflows/compact-sdk-2-0-1.yml
     secrets: inherit
     permissions:
       contents: write
@@ -80,7 +93,7 @@ jobs:
       always() &&
       (
         (github.event_name == 'push' && needs.publish.result == 'success') ||
-        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.refresh_host_kit != true)
+        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true)
       )
     runs-on: ubuntu-latest
     environment: private-sdk-release
