@@ -24,6 +24,12 @@ on:
         default: false
         type: boolean
 
+      update_host_kit_changelog:
+        description: "Include consolidated CHANGELOG.md in the kit and as the seventh release file"
+        required: false
+        default: false
+        type: boolean
+
 permissions:
   actions: read
   contents: write
@@ -74,15 +80,22 @@ jobs:
         run: rm -rf "$RUNNER_TEMP/sdk-fixtures"
 
   host-kit-refresh:
-    if: github.event_name == 'workflow_dispatch' && inputs.refresh_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.compact_host_kit != true
+    if: github.event_name == 'workflow_dispatch' && inputs.refresh_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.compact_host_kit != true && inputs.update_host_kit_changelog != true
     uses: ./.github/workflows/host-kit-refresh.yml
     secrets: inherit
     permissions:
       contents: write
 
   host-kit-compaction:
-    if: github.event_name == 'workflow_dispatch' && inputs.compact_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true
+    if: github.event_name == 'workflow_dispatch' && inputs.compact_host_kit == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true && inputs.update_host_kit_changelog != true
     uses: ./.github/workflows/compact-sdk-2-0-1.yml
+    secrets: inherit
+    permissions:
+      contents: write
+
+  host-kit-changelog:
+    if: github.event_name == 'workflow_dispatch' && inputs.update_host_kit_changelog == true && inputs.prepare_runtime_handoff != true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true
+    uses: ./.github/workflows/host-kit-changelog.yml
     secrets: inherit
     permissions:
       contents: write
@@ -93,7 +106,7 @@ jobs:
       always() &&
       (
         (github.event_name == 'push' && needs.publish.result == 'success') ||
-        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true)
+        (github.event_name == 'workflow_dispatch' && inputs.prepare_runtime_handoff == true && inputs.refresh_host_kit != true && inputs.compact_host_kit != true && inputs.update_host_kit_changelog != true)
       )
     runs-on: ubuntu-latest
     environment: private-sdk-release
@@ -191,7 +204,7 @@ jobs:
           for manager in npm pnpm; do
             node scripts/host-starter/verify-kit.mjs --delivery public-release-artifacts --manager "$manager"
           done
-      - name: Create SDK release and publish six verified downloads
+      - name: Create SDK release and publish seven verified downloads
         run: |
           gh release view "$SDK_RELEASE_TAG" >/dev/null 2>&1 ||
             gh release create "$SDK_RELEASE_TAG" --verify-tag --draft --title "$SDK_RELEASE_TITLE" --notes "Preparing verified SDK host kit."

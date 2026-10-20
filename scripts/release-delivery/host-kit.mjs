@@ -11,6 +11,7 @@ import { markdownLinks, splitTarget, validateBundleLinks } from './markdown.mjs'
 export const repository = 'https://github.com/Sleinity/template-tool';
 // Explicit host-facing selection; the remaining inventory stays in version-pinned source.
 export const hostDocuments = {
+  'SDK-CHANGELOG.md': 'CHANGELOG.md',
   'SDK-V2-INTEGRATION.md': 'docs/guides/integration.md',
   'SDK-HOST-IMPLEMENTATION.md': 'docs/guides/host-implementation.md',
   'SDK-HOST-LIFECYCLE.md': 'docs/reference/lifecycle.md',
@@ -38,6 +39,9 @@ export const publicNames = (version, additive = false) => ({
 });
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const record = (file, bytes) => ({ file, bytes: bytes.length, sha256: sha256(bytes) });
+export function publicUploadFiles(archives, names, additive, hasChangelog) {
+  return [names.kit, ...(additive ? [] : archives.map(a => a.file)), names.manifest, names.sums, ...(hasChangelog ? ['CHANGELOG.md'] : [])];
+}
 export function safeKitPath(file) {
   assert(typeof file === 'string' && file.length && !/[\\\x00-\x1f:]/.test(file) && !file.startsWith('/') && !file.split('/').some(s => !s || s === '.' || s === '..'), `Unsafe kit path: ${file}`);
   return file;
@@ -107,6 +111,7 @@ Use the example's [CompleteHost](src/CompleteHost.tsx), [import lifecycle](src/f
 
 ## Documentation
 
+- [Consolidated changelog](CHANGELOG.md): SDK history, breaking changes and release fixes.
 - Guides: [quickstart](docs/guides/quickstart.md), [installation](docs/guides/installation.md), [integration](docs/guides/integration.md), [implementation](docs/guides/host-implementation.md).
 - Reference: [features](docs/reference/features.md), [API](docs/reference/api.md), [lifecycle](docs/reference/lifecycle.md), [operation outcomes](docs/reference/operation-outcomes.md), [field rules](docs/reference/field-rules.md), [field configuration](docs/reference/field-configuration.md), [recovery](docs/reference/recovery.md), [troubleshooting](docs/reference/troubleshooting.md), [compatibility](docs/reference/compatibility.md).
 - Migration: [SDK 2.0](docs/migration/sdk-2.0.md), [2.0.1 bugfix notes](docs/migration/sdk-2.0.1.md).
@@ -214,11 +219,12 @@ export async function generatePublicDelivery(internal, output, { root = process.
   const bytes = Buffer.from(zipSync(Object.fromEntries(entries.map(([file, data]) => [file, [data, { mtime: new Date(2020, 0, 1) }]])), { level: 9 }));
   const kit = { ...record(names.kit, bytes), entries: entries.map(([file, data]) => record(file, data)) };
   const manifest = { schemaVersion: 'sdk-public-delivery-v2', version, layout: additive ? 'additive' : 'standard', sourceRevision, deliveryRevision, archives: accepted.archives, kit,
-    uploadFiles: additive ? [names.kit, names.manifest, names.sums] : [names.kit, ...accepted.archives.map(a => a.file), names.manifest, names.sums] };
+    uploadFiles: publicUploadFiles(accepted.archives, names, additive, Boolean(files['CHANGELOG.md'])) };
   await mkdir(output, { recursive: true }); await writeFile(path.join(output, names.kit), bytes);
+  if (files['CHANGELOG.md']) await writeFile(path.join(output, 'CHANGELOG.md'), files['CHANGELOG.md']);
   if (!additive) for (const a of accepted.archives) await copyFile(path.join(internal, a.file), path.join(output, a.file));
   const manifestBytes = Buffer.from(json(manifest)); await writeFile(path.join(output, names.manifest), manifestBytes);
-  await writeFile(path.join(output, names.sums), [...(additive ? [] : accepted.archives), kit, record(names.manifest, manifestBytes)].map(a => `${a.sha256}  ${a.file}\n`).join(''));
+  await writeFile(path.join(output, names.sums), [...(additive ? [] : accepted.archives), kit, record(names.manifest, manifestBytes), ...(files['CHANGELOG.md'] ? [record('CHANGELOG.md', files['CHANGELOG.md'])] : [])].map(a => `${a.sha256}  ${a.file}\n`).join(''));
   await verifyPublicDelivery(output, { additive });
   return manifest;
 }
@@ -230,7 +236,13 @@ export async function verifyPublicDelivery(directory, { additive = false } = {})
   for (const revision of [manifest.sourceRevision, manifest.deliveryRevision]) assert(/^[a-f0-9]{40}$/.test(revision));
   const names = publicNames(manifest.version, additive); assert.equal(manifest.kit.file, names.kit);
   assert.deepEqual(manifest.archives.map(a => a.name), ['@sleinity/template-core', '@sleinity/template-browser', '@sleinity/template-react']);
-  assert.deepEqual(manifest.uploadFiles, additive ? [names.kit, names.manifest, names.sums] : [names.kit, ...manifest.archives.map(a => a.file), names.manifest, names.sums]);
+  const changelogEntry = manifest.kit.entries.find(a => a.file === 'CHANGELOG.md');
+  assert.deepEqual(manifest.uploadFiles, publicUploadFiles(manifest.archives, names, additive, Boolean(changelogEntry)));
+  if (changelogEntry) {
+    const text = await readFile(path.join(directory, 'CHANGELOG.md'));
+    assert.deepEqual(record('CHANGELOG.md', text), changelogEntry);
+    assert(text.toString().includes(`## ${manifest.version}\n`), 'Changelog must cover this SDK release');
+  }
   const bytes = await readFile(path.join(directory, names.kit)); assert.deepEqual(record(names.kit, bytes), (({ entries, ...r }) => r)(manifest.kit));
   const files = unpackKit(bytes), actual = Object.entries(files).sort(([a], [b]) => a.localeCompare(b, 'en')).map(([file, data]) => record(file, data));
   assert.deepEqual(actual, manifest.kit.entries, 'Kit contents differ from public manifest');
@@ -249,7 +261,7 @@ export async function verifyPublicDelivery(directory, { additive = false } = {})
     const metadata = JSON.parse(Buffer.from(files['DELIVERY.json']).toString());
     assert.equal(metadata.version, manifest.version); assert.equal(metadata.sourceRevision, manifest.sourceRevision); assert.equal(metadata.deliveryRevision, manifest.deliveryRevision); assert.deepEqual(metadata.archives, manifest.archives);
     assert.equal(Buffer.from(files['SHA256SUMS']).toString(), manifest.archives.map(a => `${a.sha256}  vendor/${a.file}\n`).join(''));
-    const sums = [...(additive ? [] : manifest.archives), manifest.kit, record(names.manifest, manifestBytes)].map(a => `${a.sha256}  ${a.file}\n`).join('');
+    const sums = [...(additive ? [] : manifest.archives), manifest.kit, record(names.manifest, manifestBytes), ...(changelogEntry ? [changelogEntry] : [])].map(a => `${a.sha256}  ${a.file}\n`).join('');
     assert.equal(await readFile(path.join(directory, names.sums), 'utf8'), sums, 'Incomplete or modified public checksums');
     return { manifest, files: Object.keys(files), kitSha256: sha256(bytes) };
   } finally { await rm(temporary, { recursive: true, force: true }); }
@@ -260,7 +272,7 @@ export function releaseBody(manifest, previous = '') {
   return `<!-- host-kit:start -->
 # Template SDK ${manifest.version}
 
-**[Download the complete host kit](${url}${manifest.kit.file})** · [Checksums](${url}${publicNames(manifest.version, manifest.layout === 'additive').sums})
+**[Download the complete host kit](${url}${manifest.kit.file})** · [Checksums](${url}${publicNames(manifest.version, manifest.layout === 'additive').sums})${manifest.uploadFiles?.includes('CHANGELOG.md') ? ` · [Changelog](${url}CHANGELOG.md)` : ''}
 
 Includes Core, Browser and React packages, a runnable React/TypeScript example, and organized offline documentation.
 

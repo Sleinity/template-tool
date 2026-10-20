@@ -16,6 +16,8 @@ This describes the **SDK 2.0.1 contract**. A version label, packing or local cer
 
 ## Start here
 
+[Consolidated changelog](CHANGELOG.md) covers recorded SDK releases and compatibility changes.
+
 1. [Install and run the starter](QUICKSTART.md).
 2. [Follow the complete host workflow](HOST_IMPLEMENTATION.md).
 3. [Choose features and understand limits](FEATURES.md).

@@ -20,9 +20,9 @@ async function fixture(fn) {
     await fn({ root, archives, internal, output, manifest });
   } finally { await rm(root, { recursive: true, force: true }); }
 }
-test('six public downloads contain a complete vendored application and curated offline references', () => fixture(async ({ output, manifest }) => {
-  const verified = await verifyPublicDelivery(output); assert.equal(manifest.uploadFiles.length, 6);
-  assert(manifest.uploadFiles.every(f => !/\.md$|\.tsx?$/.test(f)));
+test('seven public downloads contain the consolidated changelog and complete vendored application', () => fixture(async ({ output, manifest }) => {
+  const verified = await verifyPublicDelivery(output); assert.equal(manifest.uploadFiles.length, 7);
+  assert(manifest.uploadFiles.every(f => f === 'CHANGELOG.md' || !/\.md$|\.tsx?$/.test(f)));
   const files = unpackKit(await readFile(path.join(output, manifest.kit.file)));
   for (const a of manifest.archives) assert.equal(sha256(files['vendor/' + a.file]), a.sha256);
   for (const file of ['README.md', 'src/CompleteHost.tsx', 'docs/reference/recovery.md', 'docs/reference/api.md', 'docs/guides/installation.md', 'docs/agents/integration-prompts.md']) assert(files[file], file);
@@ -34,7 +34,7 @@ test('six public downloads contain a complete vendored application and curated o
 }));
 test('additive layout leaves the original manifest/checksums/archives outside its upload set', () => fixture(async ({ internal, root, manifest }) => {
   const output = path.join(root, 'additive'); const added = await generatePublicDelivery(internal, output, { sourceRevision: revision, deliveryRevision, additive: true });
-  assert.deepEqual(added.uploadFiles, [manifest.kit.file, 'HOST-KIT-MANIFEST.json', 'HOST-KIT-SHA256SUMS']);
+  assert.deepEqual(added.uploadFiles, [manifest.kit.file, 'HOST-KIT-MANIFEST.json', 'HOST-KIT-SHA256SUMS', 'CHANGELOG.md']);
   assert.equal(added.kit.sha256, manifest.kit.sha256); await verifyPublicDelivery(output, { additive: true });
 }));
 test('kit generation is deterministic including across builder time zones', () => fixture(async ({ internal, root, manifest }) => {
@@ -46,7 +46,7 @@ test('kit generation is deterministic including across builder time zones', () =
   }
 }));
 test('tampered public archives, manifests, checksums and missing kit fail closed', () => fixture(async ({ output, manifest }) => {
-  for (const name of [manifest.archives[0].file, 'SDK-DELIVERY-MANIFEST.json', 'SHA256SUMS', manifest.kit.file]) {
+  for (const name of [manifest.archives[0].file, 'SDK-DELIVERY-MANIFEST.json', 'SHA256SUMS', 'CHANGELOG.md', manifest.kit.file]) {
     const file = path.join(output, name), bytes = await readFile(file); await writeFile(file, Buffer.concat([bytes, Buffer.from('tampered')]));
     await assert.rejects(verifyPublicDelivery(output)); await writeFile(file, bytes);
   }
